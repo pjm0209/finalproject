@@ -2,98 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="inc/top.jsp"%>
 
-<style>
-button#add-newBoard-button {
-	color: white;
-	padding: 4px 25px;
-	border-radius: 5px;
-	border: none;
-	float: right;
-}
-
-.board-head-div {
-	width: 100%;
-	height: max-content;
-	border-bottom: 1px solid #d8dce5;
-	padding-right: 30px;
-	padding-left: 30px;
-	padding-bottom: 7px;
-}
-
-.board-side-body {
-	height: 85%;
-	border-right: 1px solid #d8dce5;
-	display: inline-block;
-	width: 220px;
-}
-
-.board-head-div h2 {
-	display: inline-block;
-	font-weight: bold;
-	margin: 0;
-}
-
-.board-side-div-title {
-	padding: 20px 10px 15px 20px;
-	border-bottom: 1px solid #d8dce5;
-}
-
-.board-side-div-title h6 {
-	display: inline-block;
-	margin-right: 48px;
-	margin-bottom: 0;
-}
-
-h1.h3.mb-4.text-gray-800 {
-	display: inline;
-}
-
-.board-group {
-	overflow: auto;
-}
-
-.board-side-boardItem {
-	width: 100%;
-	cursor: pointer;
-	margin: 5px;
-	border-radius: 5px;
-	padding: 0;
-}
-
-.board-name {
-	display: inline-block;
-	width: 83%;
-	padding: 10px 15px 10px 30px;
-}
-
-.board-body {
-	display: inline;
-	float: right;
-	width: 1462px;
-}
-
-div#board-title {
-	height: 66px;
-	padding: 20px;
-	border-bottom: 1px solid #d8dce5;
-}
-
-div#board-title h5 {
-	font-weight: bold;
-	color: black;
-	display: inline-block;
-}
-
-button#board-write-button {
-	float: right;
-	border: 0;
-	border-radius: 5px;
-	padding: 6px 41px;
-	margin-top: -6px;
-	margin-right: 9px;
-	color: white;
-}
-</style>
 
 <!-- Begin Page Content -->
 <!-- Page Heading -->
@@ -143,12 +51,16 @@ button#board-write-button {
 		<div class="board-head">
 			<div class="board-search-result">
 				<span class="search-count"></span>
+				<div class="input-group mb-3">
+				 	 <input type="text" class="form-control" placeholder="검색어를 입력하세요" aria-label="Recipient's username" aria-describedby="button-addon2" id="board-search-area">
+				 	 <button class="btn btn-outline-secondary" type="button" id="button-addon2">검색</button>
+				</div>
 			</div>
 		</div>
 		<table class="table">
 			<thead>
 				<tr>
-					<th scope="col">#</th>
+					<th scope="col"><input type="checkbox" id="check-All" class="board-checkbox"></th>
 					<th scope="col">제목</th>
 					<th scope="col">작성일</th>
 					<th scope="col">작성자</th>
@@ -157,21 +69,21 @@ button#board-write-button {
 			</thead>
 			<tbody>
 				<tr>
-					<th scope="row">1</th>
+					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
 					<td>Mark</td>
 					<td>Otto</td>
 					<td>@mdo</td>
 					<td>@mdo</td>
 				</tr>
 				<tr>
-					<th scope="row">2</th>
+					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
 					<td>Jacob</td>
 					<td>Thornton</td>
 					<td>@fat</td>
 					<td>@fat</td>
 				</tr>
 				<tr>
-					<th scope="row">3</th>
+					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
 					<td colspan="2">Larry the Bird</td>
 					<td>@twitter</td>
 				</tr>
