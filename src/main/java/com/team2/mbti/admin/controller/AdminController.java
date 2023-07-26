@@ -11,7 +11,7 @@ public class AdminController {
 
 	@GetMapping("/index")
 	public String index_get(Model model) {
-		model.addAttribute("title", "메인페이지");
+		model.addAttribute("title", "관리자 페이지");
 		
 		return "admin/index";
 	}

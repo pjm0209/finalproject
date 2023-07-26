@@ -22,8 +22,8 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="<c:url value='/admin-css-js/css/sb-admin-2.min.css'/>" rel="stylesheet">
-
+    <link href="<c:url value='/admin-css-js/css/sb-admin-2.css'/>" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsde">
 </head>
 
 <body id="page-top">
@@ -32,7 +32,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav bg-gradient-purple sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<c:url value='/admin/index'/>">
