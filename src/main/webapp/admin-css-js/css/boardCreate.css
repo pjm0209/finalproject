@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+h2#boardCreate-title {
+	font-weight: bold;
+	display: inline-block;
+}
+
+.boardCreate-head {
+	border-bottom: 1px solid #d8dce5;
+	padding: 0px 20px 10px 32px;
+}
+
+.boardCreate-head input {
+	border: 0;
+	border-radius: 5px;
+	padding: 5px 20px 5px 20px;
+}
+
+.board-create-head-button {
+	width: max-content;
+	display: inline-block;
+	float: right;
+	margin-right: 15px;
+}
+
+input#save-boardCreate {
+	margin-left: 10px;
+}

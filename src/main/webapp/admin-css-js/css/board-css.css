@@ -66,7 +66,7 @@ h1.h3.mb-4.text-gray-800 {
 .board-body {
 	display: inline;
 	float: right;
-	width: 1462px;
+	width: 1440px;
 }
 
 div#board-title {
@@ -92,14 +92,38 @@ button#board-write-button {
 }
 
 input[type="checkbox"].board-checkbox {
-    width: 20px;
-    height: 20px;
-    background: url("../img/checkbox_off.svg") no-repeat center center;
-    background: 100%;
+	width: 20px;
+	height: 20px;
+	background: url("../img/checkbox_off.svg") no-repeat center center;
+	background: 100%;
 }
 
 input[type="checkbox"]:checked.board-checkbox {
-    width: 20px;
-    height: 20px;
-    background: url("../img/checkbox_on.svg") no-repeat center center;
+	width: 20px;
+	height: 20px;
+	background: url("../img/checkbox_on.svg") no-repeat center center;
+}
+
+div#board-search-div {
+	display: flex;
+	justify-content: flex-end;
+	padding: 18px 27px 5px 20px;
+}
+
+input#board-search-area {
+	flex: none;
+	width: 300px;
+}
+
+th.board-title {
+    width: 60%;
+    text-align: center;
+}
+
+select#board-search-select {
+    margin-right: 30px;
+    height: 40px;
+    margin-bottom: 0;
+    border: 1px solid #d8dce5;
+    border-radius: 6px;
 }
