@@ -2,13 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="inc/top.jsp"%>
 
-
 <!-- Begin Page Content -->
 <!-- Page Heading -->
 <div class="board-head-div">
 	<h2 class="text-gray-800">게시판</h2>
 	<button type="button" class="bg-gradient-primary"
-		id="add-newBoard-button">새 게시판 추가</button>
+		id="add-newBoard-button" onclick="location.href='boardCreate'">새 게시판 추가</button>
 </div>
 <div class="board-side-body">
 	<div class="board-side-div-title">

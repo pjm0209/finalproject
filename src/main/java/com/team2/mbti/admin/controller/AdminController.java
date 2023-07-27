@@ -22,6 +22,12 @@ public class AdminController {
 		
 		return "admin/board";
 	}
+	@GetMapping("/boardCreate")
+	public String boardCreate_get(Model model) {
+		model.addAttribute("title", "게시판 관리");
+		
+		return "admin/boardCreate";
+	}
 
 	@GetMapping("/login")
 	public String login_get() {
