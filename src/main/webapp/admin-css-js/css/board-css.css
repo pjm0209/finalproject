@@ -107,7 +107,7 @@ input[type="checkbox"]:checked.board-checkbox {
 div#board-search-div {
 	display: flex;
 	justify-content: flex-end;
-	padding: 18px 15px 5px 20px;
+	padding: 18px 27px 5px 20px;
 }
 
 input#board-search-area {
