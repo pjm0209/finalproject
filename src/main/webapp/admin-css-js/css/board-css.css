@@ -92,14 +92,25 @@ button#board-write-button {
 }
 
 input[type="checkbox"].board-checkbox {
-    width: 20px;
-    height: 20px;
-    background: url("../img/checkbox_off.svg") no-repeat center center;
-    background: 100%;
+	width: 20px;
+	height: 20px;
+	background: url("../img/checkbox_off.svg") no-repeat center center;
+	background: 100%;
 }
 
 input[type="checkbox"]:checked.board-checkbox {
-    width: 20px;
-    height: 20px;
-    background: url("../img/checkbox_on.svg") no-repeat center center;
+	width: 20px;
+	height: 20px;
+	background: url("../img/checkbox_on.svg") no-repeat center center;
+}
+
+div#board-search-div {
+	display: flex;
+	justify-content: flex-end;
+	padding: 18px 15px 5px 20px;
+}
+
+input#board-search-area {
+	flex: none;
+	width: 300px;
 }

@@ -51,7 +51,7 @@
 		<div class="board-head">
 			<div class="board-search-result">
 				<span class="search-count"></span>
-				<div class="input-group mb-3">
+				<div class="input-group mb-3" id="board-search-div">
 				 	 <input type="text" class="form-control" placeholder="검색어를 입력하세요" aria-label="Recipient's username" aria-describedby="button-addon2" id="board-search-area">
 				 	 <button class="btn btn-outline-secondary" type="button" id="button-addon2">검색</button>
 				</div>
