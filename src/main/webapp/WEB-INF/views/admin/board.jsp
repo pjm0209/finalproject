@@ -21,19 +21,19 @@
 	<div class="board-group">
 		<div id="board-group-list" class="nav">
 			<div class="board-side-boardItem">
-				<div class="board-name">
+				<div class="board-name" name="notice" value="notice">
 					<span>공지사항</span>
 				</div>
 				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
 			</div>
 			<div class="board-side-boardItem">
-				<div class="board-name">
+				<div class="board-name" name="QnA" value="QnA">
 					<span>QnA</span>
 				</div>
 				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
 			</div>
 			<div class="board-side-boardItem">
-				<div class="board-name">
+				<div class="board-name" name="FAQ" value="FAQ">
 					<span>FAQ</span>
 				</div>
 				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
@@ -51,19 +51,24 @@
 			<div class="board-search-result">
 				<span class="search-count"></span>
 				<div class="input-group mb-3" id="board-search-div">
-				 	 <input type="text" class="form-control" placeholder="검색어를 입력하세요" aria-label="Recipient's username" aria-describedby="button-addon2" id="board-search-area">
-				 	 <button class="btn btn-outline-secondary" type="button" id="button-addon2">검색</button>
+					<select class="form-select form-select-lg" aria-label=".form-select-lg example" name="searchcondition" id="board-search-select">					  	
+					  	<option value="1">제목</option>
+					  	<option value="2">내용</option>
+					  	<option value="3">작성자</option>
+					</select>
+				 	<input type="text" class="form-control" placeholder="검색어를 입력하세요" aria-label="Recipient's username" aria-describedby="button-addon2" id="board-search-area">
+				 	<button class="btn btn-outline-secondary" type="button" id="button-addon2">검색</button>
 				</div>
 			</div>
 		</div>
 		<table class="table">
 			<thead>
-				<tr>
+				<tr class="board-table-colum">
 					<th scope="col"><input type="checkbox" id="check-All" class="board-checkbox"></th>
-					<th scope="col">제목</th>
-					<th scope="col">작성일</th>
-					<th scope="col">작성자</th>
-					<th scope="col">조회수</th>
+					<th scope="col" class="board-title">제목</th>
+					<th scope="col" class="board-regdate">작성일</th>
+					<th scope="col" class="board-writer">작성자</th>
+					<th scope="col" class="board-readcount">조회수</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -83,14 +88,64 @@
 				</tr>
 				<tr>
 					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td colspan="2">Larry the Bird</td>
-					<td>@twitter</td>
+					<td>Mark</td>
+					<td>Otto</td>
+					<td>@mdo</td>
+					<td>@mdo</td>
+				</tr>
+				<tr>
+					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
+					<td>Jacob</td>
+					<td>Thornton</td>
+					<td>@fat</td>
+					<td>@fat</td>
+				</tr>
+				<tr>
+					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
+					<td>Mark</td>
+					<td>Otto</td>
+					<td>@mdo</td>
+					<td>@mdo</td>
+				</tr>
+				<tr>
+					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
+					<td>Jacob</td>
+					<td>Thornton</td>
+					<td>@fat</td>
+					<td>@fat</td>
+				</tr>
+				<tr>
+					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
+					<td>Mark</td>
+					<td>Otto</td>
+					<td>@mdo</td>
+					<td>@mdo</td>
+				</tr>
+				<tr>
+					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
+					<td>Jacob</td>
+					<td>Thornton</td>
+					<td>@fat</td>
+					<td>@fat</td>
+				</tr>
+				<tr>
+					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
+					<td>Mark</td>
+					<td>Otto</td>
+					<td>@mdo</td>
+					<td>@mdo</td>
+				</tr>
+				<tr>
+					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
+					<td>Jacob</td>
+					<td>Thornton</td>
+					<td>@fat</td>
+					<td>@fat</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
 </div>
-
 </div>
 <!-- End of Main Content -->
 
