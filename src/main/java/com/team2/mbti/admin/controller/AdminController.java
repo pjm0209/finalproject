@@ -20,13 +20,13 @@ public class AdminController {
 	public String board_get(Model model) {
 		model.addAttribute("title", "게시판 관리");
 		
-		return "admin/board";
+		return "admin/board/board";
 	}
 	@GetMapping("/boardCreate")
 	public String boardCreate_get(Model model) {
 		model.addAttribute("title", "게시판 관리");
 		
-		return "admin/boardCreate";
+		return "admin/board/boardCreate";
 	}
 
 	@GetMapping("/login")

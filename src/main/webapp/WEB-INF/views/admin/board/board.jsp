@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="inc/top.jsp"%>
+<%@ include file="../inc/top.jsp"%>
 
 <!-- Begin Page Content -->
 <!-- Page Heading -->
@@ -149,4 +149,4 @@
 </div>
 <!-- End of Main Content -->
 
-<%@ include file="inc/bottom.jsp"%>
+<%@ include file="../inc/bottom.jsp"%>
