@@ -26,3 +26,29 @@ h2#boardCreate-title {
 input#save-boardCreate {
 	margin-left: 10px;
 }
+
+.board-generalSetting {
+    border: 1px solid #e1e1e1;
+    background: white;
+    border-radius: 5px;
+    width: 60%;
+    margin-top: 30px;
+}
+
+.boardCreate-body {display: flex;justify-content: space-evenly;width: 100%;}
+
+div.general-head h3 {
+    display: inline-block;
+    font-weight: bold;
+    color: black;
+    font-size: 17px;
+    margin: 13px 20px 10px 20px;
+}
+
+span.general-head {
+    padding-left: 50px;
+}
+
+div.general-head {
+    border-bottom: 1px solid #e1e1e1;
+}
