@@ -52,3 +52,9 @@ span.general-head {
 div.general-head {
     border-bottom: 1px solid #e1e1e1;
 }
+
+div.general-body dt {
+    font-size: 14px;
+    color: black;
+    margin: 15px 20px 40px 20px;
+}
