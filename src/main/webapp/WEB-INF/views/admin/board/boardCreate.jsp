@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="inc/top.jsp"%>
+<%@ include file="../inc/top.jsp"%>
 
 <!-- Begin Page Content -->
 <div class="board-create">
@@ -12,11 +12,24 @@
 			<input type="submit" class="bg-gradient-primary" id="save-boardCreate" value="저장">
 		</div>
 	</div>
-
+	<div class="boardCreate-body">
+		<div class="board-generalSetting">
+			<div class="general-head">
+				<h3>기본 설정</h3>
+				<span class="general-head">게시판 노출 시 표시되는 정보입니다.</span>
+			</div>
+			<div calss="general-body">
+				<dt></dt>
+				<dd>
+					<div class="input_group.v2"></div>
+				</dd>
+			</div>
+		</div>
+	</div>
 </div>
 <!-- /.container-fluid -->
 
 </div>
 <!-- End of Main Content -->
 
-<%@ include file="inc/bottom.jsp"%>
+<%@ include file="../inc/bottom.jsp"%>
