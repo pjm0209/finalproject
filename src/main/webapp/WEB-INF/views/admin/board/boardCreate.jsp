@@ -40,7 +40,7 @@
 			<div class="boardCreate-setting-body">
 				<dt>
 					<span>파일첨부</span>
-					<span class="i_tooltip" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="하나당 20MB이하의 첨부 파일만 업로드 가능합니다."></span>
+					<span class="i_tooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="하나당 20MB이하의 첨부 파일만 업로드 가능합니다."></span>
 				</dt>
 			</div>
 		</div>
@@ -51,5 +51,8 @@
 
 </div>
 <!-- End of Main Content -->
+<script type="text/javascript">
+	
+</script>
 
 <%@ include file="../inc/bottom.jsp"%>

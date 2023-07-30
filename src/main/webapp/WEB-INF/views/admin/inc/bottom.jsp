@@ -59,6 +59,7 @@
     <!-- Page level custom scripts -->
     <script src="<c:url value='/admin-css-js/js/demo/chart-area-demo.js'/>"></script>
     <script src="<c:url value='/admin-css-js/js/demo/chart-pie-demo.js'/>"></script>
+    <script src="<c:url value='/admin-css-js/js/boardCreate.js'/>"></script>
 
 </body>
 </html>
