@@ -14,6 +14,7 @@ h2#boardCreate-title {
 	border: 0;
 	border-radius: 5px;
 	padding: 5px 20px 5px 20px;
+	color: white;
 }
 
 .board-create-head-button {
@@ -34,7 +35,6 @@ input#save-boardCreate {
 	flex-direction: column;
 	align-items: center;
 }
-
 
 div.boardCreate-setting {
 	border: 1px solid #e1e1e1;
@@ -60,21 +60,21 @@ span.setting-head {
 	padding-left: 50px;
 }
 
-div.general-body dt {
-	font-size: 14px;
-	color: black;
-	float: left;
-	width: 190px;
-	padding: 17px 0;
-}
-
 .boardCreate-body dd {
 	margin-left: 190px;
 	padding: 10px 22px 10px 0;
 }
 
-.general-body {
+.boardCreate-setting-body {
 	padding: 20px 30px;
+}
+
+div.boardCreate-setting-body dt {
+	font-size: 14px;
+	color: black;
+	float: left;
+	width: 190px;
+	padding: 17px 0;
 }
 
 div.input_group v2 input {
@@ -107,4 +107,14 @@ textarea#board_desc {
     width: 98%;
     resize: none;
     padding: 5px 5px;
+}
+
+.i_tooltip {
+	background: url('../img/i_help.svg') no-repeat center center;
+	width: 15px;
+	height: 15px;
+	background-size: 15px;
+	display: inline-block;
+	opacity: 1;
+	margin-left: 3px;
 }
