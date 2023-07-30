@@ -118,3 +118,36 @@ textarea#board_desc {
 	opacity: 1;
 	margin-left: 3px;
 }
+
+.checkbox_group {
+    display: inline-block;
+}
+
+.checkbox_group input {
+    display: none;
+}
+
+.checkbox_group > .use_off {
+    border-right: 1px solid #2c8bcb;
+    border-radius: 3px 0 0 3px;
+}
+
+.checkbox_group > .use_on {
+    border: 1px solid #2c8bcb;
+    border-radius: 0 3px 3px 0;
+}
+
+.checkbox_group > span.on {
+    background: #2c8bcb;
+    color: white;
+}
+
+.checkbox_group > span {
+    min-width: 120px;
+    display: inline-block;
+    padding: 6px 0;
+    float: left;
+    cursor: pointer;
+    border: 1px solid #2c8bcb;
+    text-align: center;    
+}
