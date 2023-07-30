@@ -1,15 +1,11 @@
-(function() {
-	$('.checkbox_group > .use_off').click(function(){
-		alert("zz");
-		console.log("확인");
+$(function() {
+	$('.checkbox_group > .use_off').on("click", function(){
 		$('.checkbox_group > input[type=checkbox]').val('N');
 		$(this).next().attr('class', 'use_on');
 		$(this).attr('class', 'use_off on');
 	});
 	
-	$('.checkbox_group > .use_on').click(function(){
-		alert("zz");
-		console.log("확인");
+	$('.checkbox_group > .use_on').on("click", function(){
 		$('.checkbox_group > input[type=checkbox]').val('Y');
 		$(this).prev().attr('class', 'use_off');
 		$(this).attr('class', 'use_on on');

@@ -22,10 +22,11 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
+    <script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>
     <link href="<c:url value='/admin-css-js/css/sb-admin-2.css'/>" rel="stylesheet">
     <link href="<c:url value='/admin-css-js/css/board-css.css'/>" rel="stylesheet" type="text/css">
     <link href="<c:url value='/admin-css-js/css/boardCreate.css'/>" rel="stylesheet" type="text/css">
-	<link rel="stylesheet" href="https://cdn.jsde">
+	
 </head>
 
 <body id="page-top">
