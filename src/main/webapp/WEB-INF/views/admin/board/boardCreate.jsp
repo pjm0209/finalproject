@@ -13,22 +13,38 @@
 		</div>
 	</div>
 	<div class="boardCreate-body">
-		<div class="board-generalSetting">
-			<div class="general-head">
+		<!-- 기본설정 시작 -->
+		<div class="boardCreate-setting">
+			<div class="boardCreate-setting-head">
 				<h3>기본 설정</h3>
-				<span class="general-head">게시판 노출 시 표시되는 정보입니다.</span>
+				<span class="setting-head">게시판 노출 시 표시되는 정보입니다.</span>
 			</div>
-			<div class="general-body">
+			<div class="boardCreate-setting-body">
 				<dt>게시판명</dt>
 				<dd>
-					<div class="input_group.v2"></div>
+					<div class="input_group v2"><input type="text" name="board_name" id="board_name" maxlength="50"></div>
 				</dd>
 				<dt>게시판 설명</dt>
 				<dd>
-					<div class="input_group.v2"></div>
+					<div class="input_group v2"><textarea id="board_desc" name="baord_desc" maxlength="300"></textarea></div>
 				</dd>
 			</div>
 		</div>
+		<!-- 기본설정 끝 -->
+		<!-- 기능설정 시작 -->
+		<div class="boardCreate-setting">
+			<div class="boardCreate-setting-head">
+				<h3>기능 설정</h3>
+				<span class="setting-head">글쓰기 사용 기능에 대한 설정입니다.</span>
+			</div>
+			<div class="boardCreate-setting-body">
+				<dt>
+					<span>파일첨부</span>
+					<span class="i_tooltip" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="하나당 20MB이하의 첨부 파일만 업로드 가능합니다."></span>
+				</dt>
+			</div>
+		</div>
+		<!-- 기능설정 끝 -->
 	</div>
 </div>
 <!-- /.container-fluid -->
