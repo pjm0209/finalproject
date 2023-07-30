@@ -21,11 +21,11 @@
 			<div class="general-body">
 				<dt>게시판명</dt>
 				<dd>
-					<div class="input_group.v2"></div>
+					<div class="input_group v2"><input type="text" name="board_name" id="board_name" maxlength="50"></div>
 				</dd>
 				<dt>게시판 설명</dt>
 				<dd>
-					<div class="input_group.v2"></div>
+					<div class="input_group v2"><textarea id="board_desc" name="baord_desc" maxlength="300"></textarea></div>
 				</dd>
 			</div>
 		</div>
