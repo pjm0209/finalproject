@@ -18,8 +18,12 @@
 				<h3>기본 설정</h3>
 				<span class="general-head">게시판 노출 시 표시되는 정보입니다.</span>
 			</div>
-			<div calss="general-body">
-				<dt></dt>
+			<div class="general-body">
+				<dt>게시판명</dt>
+				<dd>
+					<div class="input_group.v2"></div>
+				</dd>
+				<dt>게시판 설명</dt>
 				<dd>
 					<div class="input_group.v2"></div>
 				</dd>
