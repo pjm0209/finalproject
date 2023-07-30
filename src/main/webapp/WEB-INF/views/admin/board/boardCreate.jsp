@@ -13,10 +13,11 @@
 		</div>
 	</div>
 	<div class="boardCreate-body">
-		<div class="board-generalSetting">
-			<div class="general-head">
+		<!-- 기본설정 시작 -->
+		<div class="boardCreate-setting">
+			<div class="boardCreate-setting-head">
 				<h3>기본 설정</h3>
-				<span class="general-head">게시판 노출 시 표시되는 정보입니다.</span>
+				<span class="setting-head">게시판 노출 시 표시되는 정보입니다.</span>
 			</div>
 			<div class="general-body">
 				<dt>게시판명</dt>
@@ -29,6 +30,15 @@
 				</dd>
 			</div>
 		</div>
+		<!-- 기본설정 끝 -->
+		<!-- 기능설정 시작 -->
+		<div class="boardCreate-setting">
+			<div class="boardCreate-setting-head">
+				<h3>기능 설정</h3>
+				<span class="setting-head">글쓰기 사용 기능에 대한 설정입니다.</span>
+			</div>
+		</div>
+		<!-- 기능설정 끝 -->
 	</div>
 </div>
 <!-- /.container-fluid -->
