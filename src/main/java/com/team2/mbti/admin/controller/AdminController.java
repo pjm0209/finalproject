@@ -15,19 +15,6 @@ public class AdminController {
 		
 		return "admin/index";
 	}
-	
-	@GetMapping("/board")
-	public String board_get(Model model) {
-		model.addAttribute("title", "게시판 관리");
-		
-		return "admin/board/board";
-	}
-	@GetMapping("/boardCreate")
-	public String boardCreate_get(Model model) {
-		model.addAttribute("title", "게시판 관리");
-		
-		return "admin/board/boardCreate";
-	}
 
 	@GetMapping("/login")
 	public String login_get() {
