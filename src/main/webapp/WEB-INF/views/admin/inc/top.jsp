@@ -25,7 +25,7 @@
     <link href="<c:url value='/admin-css-js/css/sb-admin-2.css'/>" rel="stylesheet">
     <link href="<c:url value='/admin-css-js/css/board-css.css'/>" rel="stylesheet" type="text/css">
     <link href="<c:url value='/admin-css-js/css/boardCreate.css'/>" rel="stylesheet" type="text/css">
-	<link rel="stylesheet" href="https://cdn.jsde">
+	
 </head>
 
 <body id="page-top">
@@ -107,7 +107,7 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="<c:url value='/admin/board'/>">
+                <a class="nav-link" href="<c:url value='/admin/board/board'/>">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>게시판</span></a>
             </li>
@@ -117,7 +117,7 @@
                     <span>회원 관리</span></a>
             </li>
              <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="<c:url value='/admin/mbti/mbti'/>">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>MBTI 관리</span></a>
             </li>
