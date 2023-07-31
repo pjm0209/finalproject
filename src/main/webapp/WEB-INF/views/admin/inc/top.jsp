@@ -117,7 +117,7 @@
                     <span>회원 관리</span></a>
             </li>
              <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="<c:url value='/admin/mbti/mbti'/>">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>MBTI 관리</span></a>
             </li>
