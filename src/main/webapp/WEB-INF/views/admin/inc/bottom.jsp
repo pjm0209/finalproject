@@ -53,6 +53,7 @@
     <!-- Custom scripts for all pages-->
     <script src="<c:url value='/admin-css-js/js/sb-admin-2.min.js'/>"></script>
     <script src="<c:url value='/admin-css-js/js/boardCreate.js'/>"></script>
+    <script src="<c:url value='/admin-css-js/js/board.js'/>"></script>
 
     <!-- Page level plugins -->
     <script src="<c:url value='/admin-css-js/vendor/chart.js/Chart.min.js'/>"></script>
