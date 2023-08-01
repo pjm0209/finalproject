@@ -64,9 +64,9 @@ h1.h3.mb-4.text-gray-800 {
 }
 
 .board-body {
-	display: inline;
+	display: inline-block;
 	float: right;
-	width: 1440px;
+	width: 86%;
 }
 
 div#board-title {
