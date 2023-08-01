@@ -125,7 +125,7 @@
                     <span>MBTI 관리</span></a>
             </li>
              <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="<c:url value='/admin/education/list'/>">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>교육관리</span></a>
             </li>
