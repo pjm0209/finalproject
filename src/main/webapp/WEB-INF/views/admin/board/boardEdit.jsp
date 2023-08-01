@@ -47,7 +47,7 @@
 		<button class="bg-gradient-secondary" id="board-write-button">저장</button>
 	</div>
 	<div class="board">
-		<div class="boardEdit-general">
+		<!-- 기본설정 시작 -->
 			<div class="boardCreate-setting">
 				<div class="boardCreate-setting-head">
 					<h3>기본 설정</h3>
@@ -64,15 +64,50 @@
 					</dd>
 				</div>
 			</div>
-			<div class="boardEdit-general-body">
+			<!-- 기본설정 끝 -->
+			<!-- 기능설정 시작 -->
+			<div class="boardCreate-setting">
+				<div class="boardCreate-setting-head">
+					<h3>기능 설정</h3>
+					<span class="setting-head">글쓰기 사용 기능에 대한 설정입니다.</span>
+				</div>
+				<div class="boardCreate-setting-body">
+					<dt>
+						<span>댓글사용</span>					
+					</dt>
+					<dd>
+						<div class="checkbox_group" name="use_comment">
+							<input type="checkbox" id="use_comment" name="use_comment" value="N">
+							<span class="use_off on">사용안함</span>
+							<span class="use_on">사용함</span>
+						</div>
+					</dd>
+					
+					<dt>
+						<span>비밀글사용</span>					
+					</dt>
+					<dd>
+						<div class="checkbox_group" name="use_secret">
+							<input type="checkbox" id="use_secret" name="use_secret" value="N">
+							<span class="use_off on">사용안함</span>
+							<span class="use_on">사용함</span>
+						</div>
+					</dd>
+					
+					<dt>
+						<span>파일첨부</span>
+						<span class="i_tooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="하나당 20MB이하의 첨부 파일만 업로드 가능합니다."></span>
+					</dt>
+					<dd>
+						<div class="checkbox_group" name="use_file">
+							<input type="checkbox" id="use_file" name="use_file" value="N">
+							<span class="use_off on">사용안함</span>
+							<span class="use_on">사용함</span>
+						</div>
+					</dd>
+				</div>
 			</div>
-		</div>
-		<div class="boardEdit-func">
-			<div class="boardEdit-func-head"> 
-			</div>
-			<div class="boardEdit-func-body">
-			</div>
-		</div>
+			<!-- 기능설정 끝 -->
 	</div>
 </div>
 </div>
