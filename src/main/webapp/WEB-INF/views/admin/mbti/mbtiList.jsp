@@ -2,16 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
 
-<script type="text/javascript">
-	$(function(){
-		$('div[name=mbtiList]').click(function(){
-			location.href="<c:url value='/admin/mbti/mbtiList'/>";
-		});
-		$('div[name=mbtiManage]').click(function(){
-			location.href="<c:url value='/admin/mbti/mbti'/>";
-		});
-	});
-</script>
 <!-- Begin Page Content -->
 <!-- Page Heading -->
 <div class="head-div">

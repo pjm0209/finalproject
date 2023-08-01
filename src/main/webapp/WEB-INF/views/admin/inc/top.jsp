@@ -27,8 +27,7 @@
     <link href="<c:url value='/admin-css-js/css/sb-admin-2.css'/>" rel="stylesheet">
     <link href="<c:url value='/admin-css-js/css/board-css.css'/>" rel="stylesheet" type="text/css">
     <link href="<c:url value='/admin-css-js/css/boardCreate.css'/>" rel="stylesheet" type="text/css">
-	
-	<script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+
 	
 </head>
 
