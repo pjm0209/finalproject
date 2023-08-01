@@ -44,13 +44,35 @@
 <div class="board-body">
 	<div id="board-title">
 		<h5>공지사항</h5>
-		<button class="bg-gradient-secondary" id="board-write-button">글쓰기</button>
+		<button class="bg-gradient-secondary" id="board-write-button">저장</button>
 	</div>
 	<div class="board">
-		<div class="board-head">
-			
+		<div class="boardEdit-general">
+			<div class="boardCreate-setting">
+				<div class="boardCreate-setting-head">
+					<h3>기본 설정</h3>
+					<span class="setting-head">게시판 노출 시 표시되는 정보입니다.</span>
+				</div>
+				<div class="boardCreate-setting-body">
+					<dt>게시판명</dt>
+					<dd>
+						<div class="input_group v2"><input type="text" name="board_name" id="board_name" maxlength="50"></div>
+					</dd>
+					<dt>게시판 설명</dt>
+					<dd>
+						<div class="input_group v2"><textarea id="board_desc" name="baord_desc" maxlength="300"></textarea></div>
+					</dd>
+				</div>
+			</div>
+			<div class="boardEdit-general-body">
+			</div>
 		</div>
-		
+		<div class="boardEdit-func">
+			<div class="boardEdit-func-head"> 
+			</div>
+			<div class="boardEdit-func-body">
+			</div>
+		</div>
 	</div>
 </div>
 </div>
