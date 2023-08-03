@@ -8,7 +8,11 @@
 </div>
 <div class="side-body">
 	<div class="side-div-title">
+<<<<<<< HEAD:src/main/webapp/WEB-INF/views/admin/manager/memberList.jsp
 		<h6>회원 관리 </h6>
+=======
+		<h6>회원 관리</h6>
+>>>>>>> 14be3541d76c7f3e27a022c751b935168c1e064c:src/main/webapp/WEB-INF/views/admin/member/memberList.jsp
 		<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
 			fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
   			<path fill-rule="evenodd"
@@ -19,7 +23,11 @@
 		<div id="group-list" class="nav">	
 			<div class="board-side-boardItem">
 				<div class="board-name" name="notice" value="notice" onclick="showRegisteredMembers()">
+<<<<<<< HEAD:src/main/webapp/WEB-INF/views/admin/manager/memberList.jsp
 					<span>회원 리스트</span>
+=======
+					<span>회원 조회</span>
+>>>>>>> 14be3541d76c7f3e27a022c751b935168c1e064c:src/main/webapp/WEB-INF/views/admin/member/memberList.jsp
 				</div>
 				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
 			</div>
