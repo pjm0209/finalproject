@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<<<<<<< HEAD
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>     
+<!DOCTYPE html>
+<html lang="ko">
 <article class="simpleForm">
 	<form name="frmLogin" method="post"	action="<c:url value='/login/memberLogin'/>">
 		<fieldset>
@@ -26,13 +28,6 @@
 		</fieldset>
 	</form>
 </article>  
-    
-=======
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-    
-<!DOCTYPE html>
-<html lang="ko">
-
 <head>
 
     <meta charset="utf-8">
@@ -132,4 +127,3 @@
 </body>
 
 </html>
->>>>>>> 14be3541d76c7f3e27a022c751b935168c1e064c

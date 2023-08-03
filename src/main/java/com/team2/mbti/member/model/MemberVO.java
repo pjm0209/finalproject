@@ -14,9 +14,9 @@ public class MemberVO {
 	private String email;
 	private String zipcode;
 	private String address;
-	private String address_detail;
+	private String addressDetail;
 	private Timestamp regdate;
 	private String activatable;
 	private Timestamp outdate;
-	private int mati_no;
+	private int mbtiNo;
 }
