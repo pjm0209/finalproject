@@ -1,15 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
-
 <!-- Begin Page Content -->
 <!-- Page Heading -->
 <div class="head-div">
-	<h2 class="text-gray-800">회원</h2>
+	<h2 class="text-gray-800">회원 관리</h2>
+	<button type="button" class="bg-gradient-primary"
+		id="add-newBoard-button" onclick="location.href='boardCreate'">회원 추가</button>
 </div>
 <div class="side-body">
 	<div class="side-div-title">
-		<h6>회원 </h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<h6>회원 리스트</h6>
 		<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
 			fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
   			<path fill-rule="evenodd"
@@ -17,24 +18,27 @@
 		</svg>
 	</div>
 	<div class="group">
-		<div id="board-group-list" class="nav">
-			<div class="side-boardItem">
-				<div class="board-name" name="memberList" value="memberList">
-					<span>회원 목록</span>
+		<div id="group-list" class="nav">
+			<div class="board-side-boardItem">
+				<div class="board-name" name="notice" value="notice">
+					<span>가입대기 현황</span>
 				</div>
+				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
 			</div>
-			<div class="side-boardItem">
-				<div class="board-name" name="memberManage" value="memberManage">
-					<span>회원 관리</span>
+			<div class="board-side-boardItem">
+				<div class="board-name" name="QnA" value="QnA">
+					<span>탈퇴 회원 리스트</span>
 				</div>
+				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
 			</div>
 		</div>
 	</div>
 </div>
-<div style="width: 1405px;float: right;display: inline;">
+<div class="board-body">
 	<div id="board-title">
-		<h5>회원 목록</h5>
-		<button class="bg-gradient-secondary" id="board-write-button">글쓰기</button>
+		<h5>교육 리스트</h5>
+		<button class="bg-gradient-secondary" id="board-write-button">수정</button>
+		<button class="bg-gradient-secondary" id="board-write-button">삭제</button>
 	</div>
 	<div class="board">
 		<div class="board-head">
@@ -42,9 +46,8 @@
 				<span class="search-count"></span>
 				<div class="input-group mb-3" id="board-search-div">
 					<select class="form-select form-select-lg" aria-label=".form-select-lg example" name="searchcondition" id="board-search-select">					  	
-					  	<option value="1">문제 유형</option>
-					  	<option value="2">질문지</option>
-					  	<option value="3">등록자</option>
+					  	<option value="1">이름</option>
+					  	<option value="2">아이디</option>
 					</select>
 				 	<input type="text" class="form-control" placeholder="검색어를 입력하세요" aria-label="Recipient's username" aria-describedby="button-addon2" id="board-search-area">
 				 	<button class="btn btn-outline-secondary" type="button" id="button-addon2">검색</button>
@@ -55,82 +58,26 @@
 			<thead>
 				<tr class="board-table-colum">
 					<th scope="col"><input type="checkbox" id="check-All" class="board-checkbox"></th>
-					<th scope="col" class="board-writer">번호</th>
-					<th scope="col" class="board-writer">문제 유형</th>
-					<th scope="col" class="board-title">제목</th>
-					<th scope="col" class="board-regdate">작성일</th>
+					<th scope="col" class="board-no">번호</th>
+					<th scope="col" class="board-userid">아이디</th>
+					<th scope="col" class="board-name">이름</th>
+					<th scope="col" class="board-regdate">가입일</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
 					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
 					<td>1</td>
-					<td>F</td>
-					<td>Otto</td>
-					<td>@mdo</td>
+					<td>ezen11</td>
+					<td>이젠</td>
+					<td>2023.08.03</td>
 				</tr>
 				<tr>
 					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>1</td>
-					<td>F</td>
-					<td>Thornton</td>
-					<td>@fat</td>
-				</tr>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>1</td>
-					<td>F</td>
-					<td>Otto</td>
-					<td>@mdo</td>
-				</tr>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>1</td>
-					<td>M</td>
-					<td>Thornton</td>
-					<td>@fat</td>
-				</tr>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>1</td>
-					<td>M</td>
-					<td>Otto</td>
-					<td>@mdo</td>
-				</tr>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>1</td>
-					<td>M</td>
-					<td>Thornton</td>
-					<td>@fat</td>
-				</tr>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>1</td>
-					<td>P</td>
-					<td>Otto</td>
-					<td>@mdo</td>
-				</tr>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>1</td>
-					<td>P</td>
-					<td>Thornton</td>
-					<td>@fat</td>
-				</tr>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>1</td>
-					<td>P</td>
-					<td>Otto</td>
-					<td>@mdo</td>
-				</tr>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>1</td>
-					<td>P</td>
-					<td>Thornton</td>
-					<td>@fat</td>
+					<td>2</td>
+					<td>free45</td>
+					<td>프리</td>
+					<td>2023.08.03</td>
 				</tr>
 			</tbody>
 		</table>

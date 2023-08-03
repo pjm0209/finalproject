@@ -10,16 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MbtiController {
 	private static final Logger logger = LoggerFactory.getLogger(MbtiController.class);
 	
-	@RequestMapping("/mbtiList")
+	@RequestMapping("/mbti")
 	public String mbtiList() {
 		logger.info("mbti 목록 페이지");
-		
-		return "admin/mbti/mbtiList";
-	}
-	
-	@RequestMapping("/mbti")
-	public String mbti() {
-		logger.info("mbti 관리 페이지");
 		
 		return "admin/mbti/mbti";
 	}
