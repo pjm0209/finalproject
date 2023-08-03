@@ -25,7 +25,7 @@
 
     <!-- Custom styles for this template-->
     <link href="<c:url value='/admin-css-js/css/sb-admin-2.css'/>" rel="stylesheet">
-    <link href="<c:url value='/admin-css-js/css/board-css.css'/>" rel="stylesheet" type="text/css">
+    <link href="<c:url value='/admin-css-js/css/board.css'/>" rel="stylesheet" type="text/css">
     <link href="<c:url value='/admin-css-js/css/boardCreate.css'/>" rel="stylesheet" type="text/css">
 
 	
