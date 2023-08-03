@@ -21,20 +21,23 @@
 	<div class="group">
 		<div id="board-group-list" class="nav">
 			<div class="board-side-boardItem">
-				<div class="board-name" name="notice" value="notice">
+				<div class="board-name">
 					<span>공지사항</span>
+					<input type="hidden" name="notice" value="notice">
 				</div>
 				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
 			</div>
 			<div class="board-side-boardItem">
-				<div class="board-name" name="QnA" value="QnA">
+				<div class="board-name">
 					<span>QnA</span>
+					<input type="hidden" name="qna" value="qna">
 				</div>
 				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
 			</div>
 			<div class="board-side-boardItem">
-				<div class="board-name" name="FAQ" value="FAQ">
+				<div class="board-name">
 					<span>FAQ</span>
+					<input type="hidden" name="faq" value="faq">
 				</div>
 				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
 			</div>
@@ -66,82 +69,28 @@
 				<tr class="board-table-colum">
 					<th scope="col"><input type="checkbox" id="check-All" class="board-checkbox"></th>
 					<th scope="col" class="board-title">제목</th>
-					<th scope="col" class="board-regdate">작성일</th>
-					<th scope="col" class="board-writer">작성자</th>
+					<th scope="col" class="board-regdate">작성자</th>
+					<th scope="col" class="board-writer">작성일</th>
 					<th scope="col" class="board-readcount">조회수</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>Mark</td>
-					<td>Otto</td>
-					<td>@mdo</td>
-					<td>@mdo</td>
-				</tr>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>Jacob</td>
-					<td>Thornton</td>
-					<td>@fat</td>
-					<td>@fat</td>
-				</tr>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>Mark</td>
-					<td>Otto</td>
-					<td>@mdo</td>
-					<td>@mdo</td>
-				</tr>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>Jacob</td>
-					<td>Thornton</td>
-					<td>@fat</td>
-					<td>@fat</td>
-				</tr>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>Mark</td>
-					<td>Otto</td>
-					<td>@mdo</td>
-					<td>@mdo</td>
-				</tr>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>Jacob</td>
-					<td>Thornton</td>
-					<td>@fat</td>
-					<td>@fat</td>
-				</tr>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>Mark</td>
-					<td>Otto</td>
-					<td>@mdo</td>
-					<td>@mdo</td>
-				</tr>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>Jacob</td>
-					<td>Thornton</td>
-					<td>@fat</td>
-					<td>@fat</td>
-				</tr>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>Mark</td>
-					<td>Otto</td>
-					<td>@mdo</td>
-					<td>@mdo</td>
-				</tr>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>Jacob</td>
-					<td>Thornton</td>
-					<td>@fat</td>
-					<td>@fat</td>
-				</tr>
+				<c:if test="${empty boardList }">
+					<tr>
+						<td colspan="4" style="text-align: center;">등록된 게시글이 없습니다.</td>
+					</tr>
+				</c:if>
+				<c:if test="${!empty boardList }">
+					<c:forEach var="map" items="${boardList }">
+						<tr>
+							<th scope="row"><input type="checkbox" class="board-checkbox"></th>
+							<td>${map['BOARDTITLE']}</td>
+							<td>${map['NAME'] }</td>
+							<td>${map['BOARDREGDATE'] }</td>
+							<td>${map['BOARDREADCOUNT'] }</td>
+						</tr>
+					</c:forEach>
+				</c:if>		
 			</tbody>
 		</table>
 	</div>
