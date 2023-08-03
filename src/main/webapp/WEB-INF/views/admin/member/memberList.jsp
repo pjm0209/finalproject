@@ -21,13 +21,13 @@
 		<div id="group-list" class="nav">
 			<div class="board-side-boardItem">
 				<div class="board-name" name="notice" value="notice">
-					<span>회원 목록</span>
+					<span>가입대기 현황</span>
 				</div>
 				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
 			</div>
 			<div class="board-side-boardItem">
 				<div class="board-name" name="QnA" value="QnA">
-					<span>회원 관리</span>
+					<span>탈퇴 회원 리스트</span>
 				</div>
 				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
 			</div>
@@ -58,23 +58,27 @@
 			<thead>
 				<tr class="board-table-colum">
 					<th scope="col"><input type="checkbox" id="check-All" class="board-checkbox"></th>
-					<th scope="col" class="board-title">회원 저보</th>
-					<th scope="col" class="board-regdate"></th>
-					<th scope="col" class="board-writer">신청일</th>
-					<th scope="col" class="board-writer">교육비</th>
-					<th scope="col" class="board-readcount">교육장</th>
+					<th scope="col" class="board-no">번호</th>
+					<th scope="col" class="board-userid">아이디</th>
+					<th scope="col" class="board-name">이름</th>
+					<th scope="col" class="board-regdate">가입일</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
 					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>MBTI와 진로</td>
-					<td>2023.10.05</td>
-					<td>2023.08.30~</td>
-					<td>5만원</td>
-					<td>강남점</td>
+					<td>1</td>
+					<td>ezen11</td>
+					<td>이젠</td>
+					<td>2023.08.03</td>
 				</tr>
-				
+				<tr>
+					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
+					<td>2</td>
+					<td>free45</td>
+					<td>프리</td>
+					<td>2023.08.03</td>
+				</tr>
 			</tbody>
 		</table>
 	</div>
