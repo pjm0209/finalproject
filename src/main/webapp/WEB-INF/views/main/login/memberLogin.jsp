@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <article class="simpleForm">
-	<form name="frmLogin" method="post"	action="<c:url value='/login/login'/>">
+	<form name="frmLogin" method="post"	action="<c:url value='/login/memberLogin'/>">
 		<fieldset>
 			<legend>로그인</legend>
 			<div>
@@ -25,4 +24,5 @@
 			</div>
 		</fieldset>
 	</form>
-</article>
+</article>  
+    
