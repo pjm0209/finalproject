@@ -6,10 +6,8 @@
 <!-- Page Heading -->
 <div class="head-div">
 	<h2 class="text-gray-800">게시판</h2>
-	<div class="board-head-button">
-		<input type="button" class="bg-gradient-secondary" onclick="location.href='<c:url value="/admin/board/board"/>'" value="취소">
-		<input type="submit" class="bg-gradient-primary" id="save-boardCreate" value="저장">
-	</div>
+	<button type="button" class="bg-gradient-primary"
+		id="add-newBoard-button" onclick="location.href='boardCreate'">새 게시판 추가</button>
 </div>
 <div class="side-body">
 	<div class="side-div-title">
@@ -47,7 +45,10 @@
 	<form>
 		<div id="board-title">
 			<h5>공지사항</h5>
-			<button class="bg-gradient-secondary" id="board-write-button">저장</button>
+			<div class="board-head-button">
+				<input type="button" class="bg-gradient-secondary" onclick="location.href='<c:url value="/admin/board/board"/>'" value="취소">
+				<input type="submit" class="bg-gradient-primary" id="save-boardCreate" value="저장">
+			</div>
 		</div>
 		<div class="board">
 			<!-- 기본설정 시작 -->
@@ -74,8 +75,7 @@
 						<dt>내용</dt>
 						<dd>
 							<div>
-								<textarea></textarea>
-								
+								<textarea id="p_content"></textarea>								
 							</div>
 						</dd>
 						<dt>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.team2.mbti.board.model.BoardDAO">
+ 	<sql id="searchWhere">
+		<where>
+			<if test="searchKeyword!=null and searchKeyword!=''">
+				${searchCondition} like '%' || #{searchKeyword} || '%'
+			</if>
+		</where>
+	</sql> 
+	
+	<select id="selectAllNotice" parameterType="searchVo"
+		resultType="map">
+		select * from (
+			select rownum as RNUM, A.* from	(
+				select * from noticeview
+				<include refid="searchWhere"></include>
+				order by notice_no
+			)A
+		)
+		<![CDATA[
+		where RNUM> #{firstRecordIndex} 
+		and RNUM<=#{firstRecordIndex} + #{recordCountPerPage}]]>
+	</select>
+	
+	<select id="getTotalRecordNotice" parameterType="searchVo"
+		resultType="int">
+		select count(*) from notice
+		<include refid="searchWhere"></include>
+	</select>
+	
+	<select id="selectAllFaq" parameterType="searchVo"
+		resultType="map">
+		select * from (
+			select rownum as RNUM, A.* from	(
+				select * from faqview
+				<include refid="searchWhere"></include>
+				order by faq_no
+			)A
+		)
+		<![CDATA[
+		where RNUM> #{firstRecordIndex} 
+		and RNUM<=#{firstRecordIndex} + #{recordCountPerPage}]]>
+	</select>
+	
+ 	<select id="getTotalRecordFaq" parameterType="searchVo"
+		resultType="int">
+		select count(*) from faq
+		<include refid="searchWhere"></include>
+	</select> 
+
+ 	<select id="selectAll" parameterType="searchVo"
+		resultType="map">
+		select * from (
+			select rownum as RNUM, A.* from	(
+				select * from boardview
+				<include refid="searchWhere"></include>
+				order by board_group_no desc, board_sort
+			)A
+		)
+		<![CDATA[
+		where RNUM> #{firstRecordIndex} 
+		and RNUM<=#{firstRecordIndex} + #{recordCountPerPage}]]>
+	</select>
+
+	 <select id="getTotalRecord" parameterType="searchVo"
+		resultType="int">
+		select count(*) from board
+		<include refid="searchWhere"></include>
+	</select>
+</mapper>
