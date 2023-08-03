@@ -47,9 +47,9 @@
 				<span class="search-count"></span>
 				<div class="input-group mb-3" id="board-search-div">
 					<select class="form-select form-select-lg" aria-label=".form-select-lg example" name="searchcondition" id="board-search-select">					  	
-					  	<option value="1">제목</option>
-					  	<option value="2">내용</option>
-					  	<option value="3">작성자</option>
+					  	<option value="1">프로그램</option>
+					  	<option value="2">강사명</option>
+					  	<option value="3">교육장</option>
 					</select>
 				 	<input type="text" class="form-control" placeholder="검색어를 입력하세요" aria-label="Recipient's username" aria-describedby="button-addon2" id="board-search-area">
 				 	<button class="btn btn-outline-secondary" type="button" id="button-addon2">검색</button>
@@ -61,6 +61,7 @@
 				<tr class="board-table-colum">
 					<th scope="col"><input type="checkbox" id="check-All" class="board-checkbox"></th>
 					<th scope="col" class="board-title">프로그램</th>
+					<th scope="col" class="board-regdate">강사명</th>
 					<th scope="col" class="board-regdate">교육일</th>
 					<th scope="col" class="board-writer">신청일</th>
 					<th scope="col" class="board-writer">교육비</th>
@@ -71,6 +72,7 @@
 				<tr>
 					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
 					<td>MBTI와 진로</td>
+					<td>박정민</td>
 					<td>2023.10.05</td>
 					<td>2023.08.30~</td>
 					<td>5만원</td>
