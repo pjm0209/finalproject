@@ -26,4 +26,12 @@ public class BookController {
 		return "admin/book/bookList";
 	}
 	
+	@RequestMapping("/admin/book/bookInventory")
+	public String bookInventory(Model model) {
+		logger.info("책관리 페이지 - 책 재고 관리 페이지입니다.");
+		
+		model.addAttribute("title", "책 재고관리 페이지");
+		
+		return "admin/book/bookInventory";
+	}
 }//
