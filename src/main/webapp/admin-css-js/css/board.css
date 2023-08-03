@@ -238,3 +238,54 @@ label.resp_checkbox > input[type="checkbox"] {
     vertical-align: sub;
     margin-right: 5px;
 }
+
+input[type="file"] {
+    width: 270px;    
+}
+
+.file_list button {
+    border: 1px solid #e1e1e1;
+    border-radius: 3px;
+}
+
+.file_input input[type=text] {
+    border: none;
+    outline-width: 0;
+}
+
+.file_input {
+	display: inline-block;
+	margin-bottom: 10px;
+}
+
+.file_input input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+}
+
+.file_input label {
+    display: inline-block;
+    padding: 5px 20px;
+    vertical-align: middle;
+    cursor: pointer;
+    margin-left: 10px;
+    border-radius: 5px;
+    border: 1px solid #e1e1e1;
+    height: 28px;
+    background: #f1f1f1;
+    color: black;
+    margin-top: 10px;
+}
+
+.file_input input[type=text] {
+    display: inline-block;
+    padding: 0 10px;
+    vertical-align: middle;
+    border: 1px solid #dddddd;
+    width: 59%;
+    color: #999999;
+}
