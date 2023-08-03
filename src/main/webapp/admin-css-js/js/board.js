@@ -3,9 +3,19 @@ $(function(){
 	var contextPath = "/mbti";
 	
 	$('.board-side-icon').click(function(){
-		location.href = contextPath + "/admin/board/boardEdit";
+		const boardType = $('.board-name span').next().val();
+		location.href = contextPath + "/admin/board/boardEdit?boardType=" + boardType;
 	});
+	
+	 CKEDITOR.replace('p_content'
+        , {height: 500                                                  
+         }, {
+     		filebrowserUploadUrl : contextPath + "/admin/book/ckImageUpload"
+     	}); 						
+     					
 });
+
+CKEDITOR.editorConfig=function( config ){ config.resize_enabled=false;};
 
 /*글쓰기 첨부파일 함수*/
 

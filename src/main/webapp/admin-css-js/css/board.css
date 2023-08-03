@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+body {
+	overflow: auto;
+}
+
 button#add-newBoard-button {
 	color: white;
 	padding: 4px 25px;
@@ -172,7 +176,7 @@ select#board-search-select {
 }
 
 /*게시판 글쓰기 css*/
-.head-div input {
+#board-title input {
 	border: 0;
 	border-radius: 5px;
 	padding: 5px 20px 5px 20px;
@@ -269,7 +273,7 @@ input[type="file"] {
 
 .file_input label {
     display: inline-block;
-    padding: 5px 20px;
+    padding: 1px 20px;
     vertical-align: middle;
     cursor: pointer;
     margin-left: 10px;
