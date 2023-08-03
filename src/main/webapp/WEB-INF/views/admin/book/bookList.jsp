@@ -7,11 +7,11 @@
 <div class="head-div">
 	<h2 class="text-gray-800">판매 상품 관리</h2>
 	<button type="button" class="bg-gradient-primary"
-		id="add-newBoard-button" onclick="location.href='boardCreate'">새 게시판 추가</button>
+		id="add-newBoard-button" onclick="location.href='boardCreate'">무슨버튼일까</button>
 </div>
 <div class="side-body">
 	<div class="side-div-title">
-		<h6>게시판 리스트</h6>
+		<h6>상품 관리</h6>
 		<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
 			fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
   			<path fill-rule="evenodd"
@@ -22,19 +22,19 @@
 		<div id="board-group-list" class="nav">
 			<div class="board-side-boardItem">
 				<div class="board-name" name="notice" value="notice">
-					<span></span>
+					<span>상품 리스트</span>
 				</div>
 				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
 			</div>
 			<div class="board-side-boardItem">
 				<div class="board-name" name="QnA" value="QnA">
-					<span>QnA</span>
+					<span>상품 재고관리</span>
 				</div>
 				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
 			</div>
 			<div class="board-side-boardItem">
 				<div class="board-name" name="FAQ" value="FAQ">
-					<span>FAQ</span>
+					<span>매출 현황	</span>
 				</div>
 				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
 			</div>
@@ -44,7 +44,7 @@
 <div class="board-body">
 	<div id="board-title">
 		<h5>공지사항</h5>
-		<button class="bg-gradient-secondary" id="board-write-button">글쓰기</button>
+		<button class="bg-gradient-secondary" id="board-write-button">새 상품 등록</button>
 	</div>
 	<div class="board">
 		<div class="board-head">
@@ -79,69 +79,7 @@
 					<td>@mdo</td>
 					<td>@mdo</td>
 				</tr>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>Jacob</td>
-					<td>Thornton</td>
-					<td>@fat</td>
-					<td>@fat</td>
-				</tr>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>Mark</td>
-					<td>Otto</td>
-					<td>@mdo</td>
-					<td>@mdo</td>
-				</tr>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>Jacob</td>
-					<td>Thornton</td>
-					<td>@fat</td>
-					<td>@fat</td>
-				</tr>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>Mark</td>
-					<td>Otto</td>
-					<td>@mdo</td>
-					<td>@mdo</td>
-				</tr>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>Jacob</td>
-					<td>Thornton</td>
-					<td>@fat</td>
-					<td>@fat</td>
-				</tr>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>Mark</td>
-					<td>Otto</td>
-					<td>@mdo</td>
-					<td>@mdo</td>
-				</tr>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>Jacob</td>
-					<td>Thornton</td>
-					<td>@fat</td>
-					<td>@fat</td>
-				</tr>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>Mark</td>
-					<td>Otto</td>
-					<td>@mdo</td>
-					<td>@mdo</td>
-				</tr>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>Jacob</td>
-					<td>Thornton</td>
-					<td>@fat</td>
-					<td>@fat</td>
-				</tr>
+				
 			</tbody>
 		</table>
 	</div>
