@@ -2,16 +2,28 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
 
+<style>
+button.mbti-button{
+	background-color: #c87fdf;
+    background-size: cover;
+	float: right;
+    border:1px solid black;
+	border-radius: 5px;
+	padding: 6px 41px;
+	margin-top: -6px;
+	margin-right: 9px;
+	color: white;
+}
+</style>
+
 <!-- Begin Page Content -->
 <!-- Page Heading -->
 <div class="head-div">
-	<h2 class="text-gray-800">게시판</h2>
-	<button type="button" class="bg-gradient-primary"
-		id="add-newBoard-button" onclick="location.href='boardCreate'">새 게시판 추가</button>
+	<h2 class="text-gray-800">MBTI</h2>
 </div>
 <div class="side-body">
 	<div class="side-div-title">
-		<h6>게시판 리스트</h6>
+		<h6>MBTI </h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
 			fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
   			<path fill-rule="evenodd"
@@ -20,31 +32,20 @@
 	</div>
 	<div class="group">
 		<div id="board-group-list" class="nav">
-			<div class="board-side-boardItem">
-				<div class="board-name" name="notice" value="notice">
-					<span>공지사항</span>
+			<div class="side-boardItem">
+				<div class="board-name" name="mbti" value="mbti">
+					<span>MBTI 관리</span>
 				</div>
-				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
-			</div>
-			<div class="board-side-boardItem">
-				<div class="board-name" name="QnA" value="QnA">
-					<span>QnA</span>
-				</div>
-				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
-			</div>
-			<div class="board-side-boardItem">
-				<div class="board-name" name="FAQ" value="FAQ">
-					<span>FAQ</span>
-				</div>
-				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
 			</div>
 		</div>
 	</div>
 </div>
-<div class="board-body">
+<div style="width: 1405px;float: right;display: inline;">
 	<div id="board-title">
-		<h5>공지사항</h5>
-		<button class="bg-gradient-secondary" id="board-write-button">글쓰기</button>
+		<h5>MBTI 관리</h5>
+		<button class="mbti-button" id="mbti-write-button">질문지 등록</button>
+		<button class="mbti-button" id="mbti-edit-button">질문지 수정</button>
+		<button class="mbti-button" id="mbti-delete-button">질문지 삭제</button>
 	</div>
 	<div class="board">
 		<div class="board-head">
@@ -52,9 +53,9 @@
 				<span class="search-count"></span>
 				<div class="input-group mb-3" id="board-search-div">
 					<select class="form-select form-select-lg" aria-label=".form-select-lg example" name="searchcondition" id="board-search-select">					  	
-					  	<option value="1">제목</option>
-					  	<option value="2">내용</option>
-					  	<option value="3">작성자</option>
+					  	<option value="1">문제 유형</option>
+					  	<option value="2">질문지</option>
+					  	<option value="3">등록자</option>
 					</select>
 				 	<input type="text" class="form-control" placeholder="검색어를 입력하세요" aria-label="Recipient's username" aria-describedby="button-addon2" id="board-search-area">
 				 	<button class="btn btn-outline-secondary" type="button" id="button-addon2">검색</button>
@@ -65,88 +66,39 @@
 			<thead>
 				<tr class="board-table-colum">
 					<th scope="col"><input type="checkbox" id="check-All" class="board-checkbox"></th>
+					<th scope="col" class="board-writer">번호</th>
+					<th scope="col" class="board-writer">문제 유형</th>
 					<th scope="col" class="board-title">제목</th>
-					<th scope="col" class="board-regdate">작성일</th>
-					<th scope="col" class="board-writer">작성자</th>
-					<th scope="col" class="board-readcount">조회수</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>Mark</td>
-					<td>Otto</td>
-					<td>@mdo</td>
-					<td>@mdo</td>
-				</tr>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>Jacob</td>
-					<td>Thornton</td>
-					<td>@fat</td>
-					<td>@fat</td>
-				</tr>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>Mark</td>
-					<td>Otto</td>
-					<td>@mdo</td>
-					<td>@mdo</td>
-				</tr>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>Jacob</td>
-					<td>Thornton</td>
-					<td>@fat</td>
-					<td>@fat</td>
-				</tr>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>Mark</td>
-					<td>Otto</td>
-					<td>@mdo</td>
-					<td>@mdo</td>
-				</tr>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>Jacob</td>
-					<td>Thornton</td>
-					<td>@fat</td>
-					<td>@fat</td>
-				</tr>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>Mark</td>
-					<td>Otto</td>
-					<td>@mdo</td>
-					<td>@mdo</td>
-				</tr>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>Jacob</td>
-					<td>Thornton</td>
-					<td>@fat</td>
-					<td>@fat</td>
-				</tr>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>Mark</td>
-					<td>Otto</td>
-					<td>@mdo</td>
-					<td>@mdo</td>
-				</tr>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>Jacob</td>
-					<td>Thornton</td>
-					<td>@fat</td>
-					<td>@fat</td>
-				</tr>
+				<c:forEach var="mbtiSurveyVo" items="${list}">
+					<c:set var="questionType" value="${mbtiSurveyVo.questionTypeNo}"/>
+					<tr>
+						<th scope="row"><input type="checkbox" class="board-checkbox check" value="${mbtiSurveyVo.mbtiServeyNo}"></th>
+						<td>${mbtiSurveyVo.mbtiServeyNo}</td>
+						<td>
+							<c:choose>
+								<c:when test="${questionType == '1'}">F</c:when>
+								<c:when test="${questionType == '2'}">P</c:when>
+								<c:when test="${questionType == '3'}">M</c:when>
+							</c:choose>
+						</td>
+						<td>
+							<c:if test="${fn:length(mbtiSurveyVo.question) > 50}">
+								${fn:substring(mbtiSurveyVo.question,0,50)}...
+							</c:if>
+							<c:if test="${fn:length(mbtiSurveyVo.question) <= 50}">
+								${mbtiSurveyVo.question}
+							</c:if>
+						</td>
+					</tr>
+				</c:forEach>
 			</tbody>
 		</table>
 	</div>
 </div>
-</div>
+
 <!-- End of Main Content -->
 
 <%@ include file="../inc/bottom.jsp"%>
