@@ -54,11 +54,11 @@ public class MbtiController {
 	public String mbtiWrite_post(@ModelAttribute MbtiSurveyVO mbtiSurveyVo, Model model){
 		logger.info("mbti 질문 등록 처리, 파라미터 mbtiSurveyVo={}",mbtiSurveyVo);
 		
+		String msg="mbti 질문 등록 실패",url="/admin/mbti/mbtiWrite";
 		if(mbtiSurveyVo.getMbtiServeyNo()==0) {
 			int cnt=mbtiSurveyService.insertMbtiSurvey(mbtiSurveyVo);
 			logger.info("mbti 질문 등록 결과 cnt={}",cnt);
 			
-			String msg="mbti 질문 등록 실패",url="/admin/mbti/mbtiWrite";
 			if(cnt>0) {
 				msg="MBTI 질문이 등록되었습니다.";
 				url="/admin/mbti/mbti";
@@ -67,15 +67,17 @@ public class MbtiController {
 			int cnt=mbtiSurveyService.updateMbtiSurvey(mbtiSurveyVo);
 			logger.info("mbti 질문 수정 결과 cnt={}",cnt);
 			
-			String msg="mbti 질문 수정 실패",url="/admin/mbti/mbtiWrite";
 			if(cnt>0) {
 				msg="MBTI 질문이 수정되었습니다.";
 				url="/admin/mbti/mbti";
+			}else {
+				msg="mbti 질문 수정 실패";
+				url="/admin/mbti/mbtiWrite";
 			}
 		}
 		
-		model.addAttribute("msg", model);
-		model.addAttribute("url", model);
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
 		
 		return "common/message";
 	}
