@@ -41,8 +41,8 @@
 		</div>
 	</div>
 </div>
-<form>
-	<div class="board-body">
+<div class="board-body">
+	<form>
 		<div id="board-title">
 			<h5>공지사항</h5>
 			<button class="bg-gradient-secondary" id="board-write-button">저장</button>
@@ -57,7 +57,7 @@
 					<div class="boardEdit-setting-body">
 						<dt>게시판명</dt>
 						<dd>
-							<div class="input_group v2"><input type="text" name="board_name" id="board_name" maxlength="50"></div>
+							<div class="input_group v2"><input type="text" readonly="readonly" value="공지사항" name="board_name" id="board_name" maxlength="50"></div>
 						</dd>
 						<dt>게시판 설명</dt>
 						<dd>
@@ -65,7 +65,7 @@
 						</dd>
 					</div>
 				</div>
-				<!-- 기본설정 끝 -->
+				<!-- 기본설정 끝 --> 
 				<!-- 기능설정 시작 -->
 				<div class="boardEdit-setting">
 					<div class="boardEdit-setting-head">
@@ -110,8 +110,8 @@
 				</div>
 				<!-- 기능설정 끝 -->
 		</div>
-	</div>
-</form>
+	</form>
+</div>
 </div>
 <!-- End of Main Content -->
 

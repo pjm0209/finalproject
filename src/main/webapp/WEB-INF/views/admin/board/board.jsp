@@ -44,7 +44,7 @@
 <div class="board-body">
 	<div id="board-title">
 		<h5>공지사항</h5>
-		<button class="bg-gradient-secondary" id="board-write-button">글쓰기</button>
+		<button class="bg-gradient-secondary" id="board-write-button" onclick="location.href='boardWrite'">글쓰기</button>
 	</div>
 	<div class="board">
 		<div class="board-head">

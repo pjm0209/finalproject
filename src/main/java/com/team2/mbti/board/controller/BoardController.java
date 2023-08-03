@@ -38,4 +38,13 @@ public class BoardController {
 		
 		return "admin/board/boardEdit";
 	}
+	
+	@GetMapping("/boardWrite")
+	public String boardWrite_get(Model model) {
+		logger.info("게시판 글쓰기 화면 보여주기");
+		
+		model.addAttribute("title", "게시판 글쓰기");
+		
+		return "admin/board/boardWrite";
+	}
 }
