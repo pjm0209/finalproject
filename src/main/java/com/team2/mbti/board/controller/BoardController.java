@@ -29,4 +29,22 @@ public class BoardController {
 		
 		return "admin/board/boardCreate";
 	}		
+	
+	@GetMapping("/boardEdit")
+	public String boardEdit_get(Model model) {
+		logger.info("게시판 수정 화면 보여주기");
+		
+		model.addAttribute("title", "게시판 수정");
+		
+		return "admin/board/boardEdit";
+	}
+	
+	@GetMapping("/boardWrite")
+	public String boardWrite_get(Model model) {
+		logger.info("게시판 글쓰기 화면 보여주기");
+		
+		model.addAttribute("title", "게시판 글쓰기");
+		
+		return "admin/board/boardWrite";
+	}
 }
