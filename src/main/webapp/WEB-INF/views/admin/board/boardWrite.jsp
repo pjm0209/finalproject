@@ -62,6 +62,7 @@
 							</select>
 							<label class="resp_checkbox">
 								<input type="checkbox" name="boardTop" value="Y">
+								게시판 최상단 고정
 							</label>
 						</dd>
 						<dt>제목</dt>

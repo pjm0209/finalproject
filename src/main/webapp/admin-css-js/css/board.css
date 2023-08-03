@@ -226,3 +226,15 @@ input#board-wirte-title {
     height: 38px;
     padding-left: 10px;
 }
+
+label.resp_checkbox {
+    font-weight: 400;
+    color: black;
+}
+
+label.resp_checkbox > input[type="checkbox"] {
+    width: 21px;
+    height: 21px;
+    vertical-align: sub;
+    margin-right: 5px;
+}
