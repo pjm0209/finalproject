@@ -132,3 +132,97 @@ select#board-search-select {
     width: 200px;
     cursor: pointer;
 }
+
+/*게시판 수정 css*/
+.boardEdit-setting-head h3 {
+    display: inline-block;
+    font-weight: bold;
+    color: black;
+    font-size: 17px;
+    margin: 13px 73px 10px 20px;
+}
+
+.boardEdit-setting {
+    border: 1px solid #e1e1e1;
+    background: white;
+    border-radius: 5px;
+    width: 98%;
+    margin-top: 30px;
+}
+
+.boardEdit-setting-head {
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.boardEdit-setting-body {
+    padding: 20px 30px;
+}
+
+.boardEdit-setting-body dt {
+    font-size: 14px;
+    color: black;
+    float: left;
+    width: 190px;
+    padding: 17px 0;
+}
+
+.boardEdit-setting-body dd {
+    margin-left: 190px;
+    padding: 10px 22px 10px 0;
+}
+
+/*게시판 글쓰기 css*/
+.head-div input {
+	border: 0;
+	border-radius: 5px;
+	padding: 5px 20px 5px 20px;
+	color: white;	
+}
+
+select#select_board {
+    width: 390px;
+    line-height: 43px;
+    margin-right: 5px;
+    height: 40px;
+    border-radius: 3px;
+    padding: 0 9px;
+    border: 1px solid #d7dde4;
+}
+
+.boardWrite {
+    border: 1px solid #e1e1e1;
+    background: white;
+    border-radius: 5px;
+    width: 98%;
+    margin-top: 30px;
+}
+
+.boardWrite-head {
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.boardWrite-body {
+    padding: 20px 30px;
+}
+
+.boardWrite-body dt {
+    font-size: 14px;
+    color: black;
+    float: left;
+    width: 190px;
+    padding: 17px 0;
+}
+
+.boardWrite-body dd {
+    margin-left: 190px;
+    padding: 10px 22px 10px 0;
+    width: 60%;
+}
+
+input#board-wirte-title {
+    width: 100%;
+    border: 0;
+    outline-width: 0;
+    height: 38px;
+    padding-left: 10px;
+}

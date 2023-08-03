@@ -17,7 +17,7 @@ h2#boardCreate-title {
 	color: white;
 }
 
-.board-create-head-button {
+.board-head-button {
 	width: max-content;
 	display: inline-block;
 	float: right;
