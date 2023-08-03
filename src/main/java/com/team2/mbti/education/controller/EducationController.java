@@ -21,4 +21,14 @@ public class EducationController {
 		return "admin/education/list";
 		
 	}
+	
+	@GetMapping("/applicantList")
+	public String appliList_get(Model model) {
+		logger.info("신청자 조회 페이지 보여주기");
+		
+		model.addAttribute("title", "신청자 조회");
+		
+		return "admin/education/applicantList";
+		
+	}
 }

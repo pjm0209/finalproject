@@ -58,7 +58,7 @@
 			<thead>
 				<tr class="board-table-colum">
 					<th scope="col"><input type="checkbox" id="check-All" class="board-checkbox"></th>
-					<th scope="col" class="board-title">신청자</th>
+					<th scope="col" class="board-regdate">신청자</th>
 					<th scope="col" class="board-title">프로그램</th>
 					<th scope="col" class="board-regdate">강사명</th>
 					<th scope="col" class="board-regdate">교육일</th>
