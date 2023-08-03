@@ -129,7 +129,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="<c:url value='/admin/book/bookList'/>">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>책 관리</span></a>
+                    <span>판매 상품 관리</span></a>
             </li>
 
             <!-- Nav Item - Utilities Collapse Menu -->
