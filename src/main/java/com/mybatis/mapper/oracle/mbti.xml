@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team2.mbti.mbtisurvey.model.MbtiSurveyDAO">
+	<insert id="insertMbtiSurvey" parameterType="mbtiSurveyVo">
+		<selectKey keyProperty="no" order="BEFORE" resultType="int">
+			select mbti_survey_seq.nextval from dual
+		</selectKey>
+		insert into mbti_survey
+		values(#{no},#{questionTypeNo},#{questionCategoryNo},#{question})
+	</insert>
+	
+	<select id="selectAllMbtiSurvey" resultType="mbtiSurveyVo">
+		select * from mbti_survey order by mbti_servey_no
+	</select>
+	
+	<select id="selectByNoMbtiSurvey" resultType="mbtiSurveyVo">
+		select * from mbti_survey where mbti_servey_no=#{mbtiServeyNo}
+	</select>
+	
+	<update id="updateMbtiSurvey" parameterType="mbtiSurveyVo">
+		update mbti_survey
+		set question_type_no=#{questionTypeNo}, question_category_no=#{questionCategoryNo}, question=#{question}
+		where mbti_servey_no=#{mbtiServeyNo}
+	</update>
+</mapper>

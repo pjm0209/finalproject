@@ -6,10 +6,8 @@
 <!-- Page Heading -->
 <div class="head-div">
 	<h2 class="text-gray-800">게시판</h2>
-	<div class="board-head-button">
-		<input type="button" class="bg-gradient-secondary" onclick="location.href='<c:url value="/admin/board/board"/>'" value="취소">
-		<input type="submit" class="bg-gradient-primary" id="save-boardCreate" value="저장">
-	</div>
+	<button type="button" class="bg-gradient-primary"
+		id="add-newBoard-button" onclick="location.href='boardCreate'">새 게시판 추가</button>
 </div>
 <div class="side-body">
 	<div class="side-div-title">
@@ -47,7 +45,10 @@
 	<form>
 		<div id="board-title">
 			<h5>공지사항</h5>
-			<button class="bg-gradient-secondary" id="board-write-button">저장</button>
+			<div class="board-head-button">
+				<input type="button" class="bg-gradient-secondary" onclick="location.href='<c:url value="/admin/board/board"/>'" value="취소">
+				<input type="submit" class="bg-gradient-primary" id="save-boardCreate" value="저장">
+			</div>
 		</div>
 		<div class="board">
 			<!-- 기본설정 시작 -->
@@ -68,23 +69,42 @@
 						<dt>제목</dt>
 						<dd>
 							<div class="input_group v2 board-write-title">
-								<input type="text" name="title" id="board-wirte-title" maxlength="50">
+								<input type="text" name="title" id="board-wirte-title" maxlength="50" placeholder="제목을 입력해주세요.">
 							</div>
 						</dd>
 						<dt>내용</dt>
 						<dd>
 							<div>
-								<textarea></textarea>
-								
+								<textarea id="p_content"></textarea>								
 							</div>
 						</dd>
-						<dt>파일첨부</dt>
+						<dt>
+							<span>파일첨부</span>
+							<span class="i_tooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="하나당 20MB이하의 첨부 파일만 업로드 가능합니다."></span>
+						</dt>
 						<dd>
+							<div class="file_list">
+				                <div>
+				                    <div class="file_input">
+				                        <input type="text" readonly />
+				                        <label> 첨부파일
+				                            <input type="file" name="files" onchange="selectFile(this);" />
+				                        </label>
+				                    </div>
+				                    <button type="button" onclick="removeFile(this);" class="btns del_btn"><span>삭제</span></button>
+				                    <button type="button" onclick="addFile();" class="btns fn_add_btn"><span>파일 추가</span></button>
+				                </div>
+				            </div>
+						</dd>
 							
 						</dd>
 						<dt>비밀글 여부</dt>
 						<dd>
-							
+							<div class="checkbox_group" name="use_file">
+								<input type="checkbox" id="use_file" name="use_file" value="N">
+								<span class="use_off on">사용안함</span>
+								<span class="use_on">사용함</span>
+							</div>
 						</dd>
 					</div>
 				</div>
