@@ -2,39 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
 <!-- Begin Page Content -->
-<script>
-  function showRegisteredMembers() {
-    var memberList = [
-      { id: "karina", name: "카리나", regdate: "2023.08.03" },
-      { id: "winter", name: "윈터", regdate: "2023.08.03" },
-      { id: "hongeunchae", name: "홍은채", regdate: "2023.08.03" },
-      { id: "ohhyewon", name: "오혜원", regdate: "2023.08.03" },
-      { id: "kimchaewon", name: "김채원", regdate: "2023.08.03" },
-    ];
-
-    var tableBody = document.getElementById("board-table-body");
-    tableBody.innerHTML = ""; 
-
-    for (var i = 0; i < memberList.length; i++) {
-      var row = document.createElement("tr");
-      row.innerHTML = `
-        <th scope="row"><input type="checkbox" class="board-checkbox"></th>
-        <td>${i + 1}</td>
-        <td>${memberList[i].id}</td>
-        <td>${memberList[i].name}</td>
-        <td>${memberList[i].regdate}</td>
-      `;
-      tableBody.appendChild(row);
-    }
-  }
-</script>
 <!-- Page Heading -->
 <div class="head-div">
-	<h2 class="text-gray-800">회원 관리</h2>
+	<h2 class="text-gray-800">회원</h2>
 </div>
 <div class="side-body">
 	<div class="side-div-title">
-		<h6>회원 리스트</h6>
+		<h6>회원 관리</h6>
 		<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
 			fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
   			<path fill-rule="evenodd"
@@ -45,13 +19,7 @@
 		<div id="group-list" class="nav">	
 			<div class="board-side-boardItem">
 				<div class="board-name" name="notice" value="notice" onclick="showRegisteredMembers()">
-					<span>가입 회원 조회</span>
-				</div>
-				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
-			</div>
-			<div class="board-side-boardItem">
-				<div class="board-name" name="QnA" value="QnA">
-					<span>탈퇴 회원 조회</span>
+					<span>회원 조회</span>
 				</div>
 				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
 			</div>
@@ -61,8 +29,6 @@
 <div class="board-body">
 	<div id="board-title">
 		<h5>회원 리스트</h5>
-		<button class="bg-gradient-secondary" id="board-write-button">수정</button>
-		<button class="bg-gradient-secondary" id="board-write-button">삭제</button>
 	</div>
 	<div class="board">
 		<div class="board-head">
