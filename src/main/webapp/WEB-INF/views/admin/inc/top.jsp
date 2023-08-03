@@ -25,10 +25,10 @@
 
     <!-- Custom styles for this template-->
     <link href="<c:url value='/admin-css-js/css/sb-admin-2.css'/>" rel="stylesheet">
-    <link href="<c:url value='/admin-css-js/css/board-css.css'/>" rel="stylesheet" type="text/css">
+    <link href="<c:url value='/admin-css-js/css/board.css'/>" rel="stylesheet" type="text/css">
     <link href="<c:url value='/admin-css-js/css/boardCreate.css'/>" rel="stylesheet" type="text/css">
-
-	
+	<script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/resources/ckeditor/ckeditor.js'/>"></script>	
 </head>
 
 <body id="page-top">
@@ -115,7 +115,7 @@
                     <span>게시판</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="<c:url value='/admin/member/memberList'/>">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>회원 관리</span></a>
             </li>
@@ -132,7 +132,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="<c:url value='/admin/book/bookList'/>">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>책 관리</span></a>
+                    <span>판매 상품 관리</span></a>
             </li>
 
             <!-- Nav Item - Utilities Collapse Menu -->

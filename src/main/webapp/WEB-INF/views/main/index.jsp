@@ -16,7 +16,7 @@
   <meta content="" name="keywords">
   
 
-  <!-- Favicons -->
+  <!-- Favicons --ㅎ
   <link href="${path }/assets/img/favicon.png" rel="icon">
   <link href="${path }/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
@@ -83,6 +83,7 @@
           </li>
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
           <li><a class="getstarted scrollto" href="#about">Get Started</a></li>
+          <li><a class="nav-link scrollto" href="<c:url value='/main/login'/>">로그인</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->

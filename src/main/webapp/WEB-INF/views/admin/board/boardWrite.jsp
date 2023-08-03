@@ -45,60 +45,60 @@
 	<form>
 		<div id="board-title">
 			<h5>공지사항</h5>
-			<button class="bg-gradient-secondary" id="board-write-button">저장</button>
+			<div class="board-head-button">
+				<input type="button" class="bg-gradient-secondary" onclick="location.href='<c:url value="/admin/board/board"/>'" value="취소">
+				<input type="submit" class="bg-gradient-primary" id="save-boardCreate" value="저장">
+			</div>
 		</div>
 		<div class="board">
 			<!-- 기본설정 시작 -->
-				<div class="boardEdit-setting">
-					<div class="boardEdit-setting-head">
-						<h3>기본 설정</h3>
-						<span class="setting-head">게시판 노출 시 표시되는 정보입니다.</span>
-					</div>
-					<div class="boardEdit-setting-body">
-						<dt>게시판명</dt>
+				<div class="boardWrite">
+					<div class="boardWrite-body">
+						<dt>게시판</dt>
 						<dd>
-							<div class="input_group v2"><input type="text" readonly="readonly" value="공지사항" name="board_name" id="board_name" maxlength="50"></div>
+							<select id="select_board" name="select_board">
+								<option value="notice">공지사항</option>
+								<option value="faq">자주묻는질문</option>
+								<option value="qna">1:1 문의</option>
+							</select>
+							<label class="resp_checkbox">
+								<input type="checkbox" name="boardTop" value="Y">
+								게시판 최상단 고정
+							</label>
 						</dd>
-						<dt>게시판 설명</dt>
+						<dt>제목</dt>
 						<dd>
-							<div class="input_group v2"><textarea id="board_desc" name="baord_desc" maxlength="300"></textarea></div>
-						</dd>
-					</div>
-				</div>
-				<!-- 기본설정 끝 --> 
-				<!-- 기능설정 시작 -->
-				<div class="boardEdit-setting">
-					<div class="boardEdit-setting-head">
-						<h3>기능 설정</h3>
-						<span class="setting-head">글쓰기 사용 기능에 대한 설정입니다.</span>
-					</div>
-					<div class="boardEdit-setting-body">
-						<dt>
-							<span>댓글사용</span>					
-						</dt>
-						<dd>
-							<div class="checkbox_group" name="use_comment">
-								<input type="checkbox" id="use_comment" name="use_comment" value="N">
-								<span class="use_off on">사용안함</span>
-								<span class="use_on">사용함</span>
+							<div class="input_group v2 board-write-title">
+								<input type="text" name="title" id="board-wirte-title" maxlength="50" placeholder="제목을 입력해주세요.">
 							</div>
 						</dd>
-						
-						<dt>
-							<span>비밀글사용</span>					
-						</dt>
+						<dt>내용</dt>
 						<dd>
-							<div class="checkbox_group" name="use_secret">
-								<input type="checkbox" id="use_secret" name="use_secret" value="N">
-								<span class="use_off on">사용안함</span>
-								<span class="use_on">사용함</span>
+							<div>
+								<textarea id="p_content"></textarea>								
 							</div>
 						</dd>
-						
 						<dt>
 							<span>파일첨부</span>
 							<span class="i_tooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="하나당 20MB이하의 첨부 파일만 업로드 가능합니다."></span>
 						</dt>
+						<dd>
+							<div class="file_list">
+				                <div>
+				                    <div class="file_input">
+				                        <input type="text" readonly />
+				                        <label> 첨부파일
+				                            <input type="file" name="files" onchange="selectFile(this);" />
+				                        </label>
+				                    </div>
+				                    <button type="button" onclick="removeFile(this);" class="btns del_btn"><span>삭제</span></button>
+				                    <button type="button" onclick="addFile();" class="btns fn_add_btn"><span>파일 추가</span></button>
+				                </div>
+				            </div>
+						</dd>
+							
+						</dd>
+						<dt>비밀글 여부</dt>
 						<dd>
 							<div class="checkbox_group" name="use_file">
 								<input type="checkbox" id="use_file" name="use_file" value="N">
@@ -108,7 +108,8 @@
 						</dd>
 					</div>
 				</div>
-				<!-- 기능설정 끝 -->
+				<!-- 기본설정 끝 --> 
+				
 		</div>
 	</form>
 </div>

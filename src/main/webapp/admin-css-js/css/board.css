@@ -1,0 +1,295 @@
+@charset "UTF-8";
+
+body {
+	overflow: auto;
+}
+
+button#add-newBoard-button {
+	color: white;
+	padding: 4px 25px;
+	border-radius: 5px;
+	border: none;
+	float: right;
+}
+
+.head-div {
+	width: 100%;
+	height: max-content;
+	border-bottom: 1px solid #d8dce5;
+	padding-right: 30px;
+	padding-left: 30px;
+	padding-bottom: 7px;
+}
+
+.side-body {
+	height: 85%;
+	border-right: 1px solid #d8dce5;
+	display: inline-block;
+	width: 220px;
+}
+
+.head-div h2 {
+	display: inline-block;
+	font-weight: bold;
+	margin: 0;
+}
+
+.side-div-title {
+	padding: 20px 10px 15px 20px;
+	border-bottom: 1px solid #d8dce5;
+}
+
+.side-div-title h6 {
+	display: inline-block;
+	margin-right: 48px;
+	margin-bottom: 0;
+}
+
+h1.h3.mb-4.text-gray-800 {
+	display: inline;
+}
+
+.group {
+	overflow: auto;
+}
+
+.side-boardItem {
+	width: 100%;
+	cursor: pointer;
+	margin: 5px;
+	border-radius: 5px;
+	padding: 0;
+}
+
+.board-name {
+	display: inline-block;
+	width: 83%;
+	padding: 10px 15px 10px 30px;
+}
+
+.board-body {
+	display: inline-block;
+	float: right;
+	width: 86%;
+}
+
+div#board-title {
+	height: 66px;
+	padding: 20px;
+	border-bottom: 1px solid #d8dce5;
+}
+
+div#board-title h5 {
+	font-weight: bold;
+	color: black;
+	display: inline-block;
+}
+
+button#board-write-button {
+	float: right;
+	border: 0;
+	border-radius: 5px;
+	padding: 6px 41px;
+	margin-top: -6px;
+	margin-right: 9px;
+	color: white;
+}
+
+input[type="checkbox"].board-checkbox {
+	width: 20px;
+	height: 20px;
+	background: url("../img/checkbox_off.svg") no-repeat center center;
+	background: 100%;
+}
+
+input[type="checkbox"]:checked.board-checkbox {
+	width: 20px;
+	height: 20px;
+	background: url("../img/checkbox_on.svg") no-repeat center center;
+}
+
+div#board-search-div {
+	display: flex;
+	justify-content: flex-end;
+	padding: 18px 27px 5px 20px;
+}
+
+input#board-search-area {
+	flex: none;
+	width: 300px;
+}
+
+th.board-title {
+    width: 60%;
+    text-align: center;
+}
+
+select#board-search-select {
+    margin-right: 30px;
+    height: 40px;
+    margin-bottom: 0;
+    border: 1px solid #d8dce5;
+    border-radius: 6px;
+}
+
+.board-side-boardItem {
+    width: 200px;
+    cursor: pointer;
+}
+
+/*게시판 수정 css*/
+.boardEdit-setting-head h3 {
+    display: inline-block;
+    font-weight: bold;
+    color: black;
+    font-size: 17px;
+    margin: 13px 73px 10px 20px;
+}
+
+.boardEdit-setting {
+    border: 1px solid #e1e1e1;
+    background: white;
+    border-radius: 5px;
+    width: 98%;
+    margin-top: 30px;
+}
+
+.boardEdit-setting-head {
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.boardEdit-setting-body {
+    padding: 20px 30px;
+}
+
+.boardEdit-setting-body dt {
+    font-size: 14px;
+    color: black;
+    float: left;
+    width: 190px;
+    padding: 17px 0;
+}
+
+.boardEdit-setting-body dd {
+    margin-left: 190px;
+    padding: 10px 22px 10px 0;
+}
+
+/*게시판 글쓰기 css*/
+#board-title input {
+	border: 0;
+	border-radius: 5px;
+	padding: 5px 20px 5px 20px;
+	color: white;	
+}
+
+select#select_board {
+    width: 390px;
+    line-height: 43px;
+    margin-right: 5px;
+    height: 40px;
+    border-radius: 3px;
+    padding: 0 9px;
+    border: 1px solid #d7dde4;
+}
+
+.boardWrite {
+    border: 1px solid #e1e1e1;
+    background: white;
+    border-radius: 5px;
+    width: 98%;
+    margin-top: 30px;
+}
+
+.boardWrite-head {
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.boardWrite-body {
+    padding: 20px 30px;
+}
+
+.boardWrite-body dt {
+    font-size: 14px;
+    color: black;
+    float: left;
+    width: 190px;
+    padding: 17px 0;
+}
+
+.boardWrite-body dd {
+    margin-left: 190px;
+    padding: 10px 22px 10px 0;
+    width: 60%;
+}
+
+input#board-wirte-title {
+    width: 100%;
+    border: 0;
+    outline-width: 0;
+    height: 38px;
+    padding-left: 10px;
+}
+
+label.resp_checkbox {
+    font-weight: 400;
+    color: black;
+}
+
+label.resp_checkbox > input[type="checkbox"] {
+    width: 21px;
+    height: 21px;
+    vertical-align: sub;
+    margin-right: 5px;
+}
+
+input[type="file"] {
+    width: 270px;    
+}
+
+.file_list button {
+    border: 1px solid #e1e1e1;
+    border-radius: 3px;
+}
+
+.file_input input[type=text] {
+    border: none;
+    outline-width: 0;
+}
+
+.file_input {
+	display: inline-block;
+	margin-bottom: 10px;
+}
+
+.file_input input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+}
+
+.file_input label {
+    display: inline-block;
+    padding: 1px 20px;
+    vertical-align: middle;
+    cursor: pointer;
+    margin-left: 10px;
+    border-radius: 5px;
+    border: 1px solid #e1e1e1;
+    height: 28px;
+    background: #f1f1f1;
+    color: black;
+    margin-top: 10px;
+}
+
+.file_input input[type=text] {
+    display: inline-block;
+    padding: 0 10px;
+    vertical-align: middle;
+    border: 1px solid #dddddd;
+    width: 59%;
+    color: #999999;
+}
