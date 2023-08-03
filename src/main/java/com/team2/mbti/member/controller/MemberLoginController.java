@@ -22,29 +22,29 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MemberLoginController {
 	private static final Logger logger=LoggerFactory.getLogger(MemberLoginController.class);
-
+	
 	private final MemberService memberService;
 	
-	@GetMapping("/main")
+	@GetMapping("/login")
 	public String login() {
-		logger.info("회원 로그인 화면");
+		logger.info("로그인 화면");
 		
-		return "login/memberLogin";
+		return "main/login/memberLogin";
 	}
 	
-	@PostMapping("/main")
+	@PostMapping("/login")
 	public String login_post(@RequestParam String userid, @RequestParam String pwd,
 			@RequestParam(required = false) String chkSave,
 			HttpServletRequest request, HttpServletResponse response, 
 			Model model) {
-		
+
 		logger.info("로그인 처리, 파라미터 userid={}, pwd={}, chkSave={}", 
 				userid, pwd, chkSave);
-		
+
 		int result=memberService.loginCheck(userid, pwd);
 		logger.info("로그인 처리 결과, result={}", result);
 		
-		String msg="로그인 처리 실패", url="/login/login";
+		String msg="로그인 처리 실패", url="/main/login";
 		if(result==MemberService.LOGIN_OK) {
 			msg=userid + "님 로그인되었습니다.";
 			url="/";
@@ -54,11 +54,11 @@ public class MemberLoginController {
 			
 			Cookie ck = new Cookie("ck_userid", userid);
 			ck.setPath("/");
-			if(chkSave!=null) { 
+			if(chkSave!=null) {
 				ck.setMaxAge(1000*24*60*60); 
 				response.addCookie(ck);
 			}else {
-				ck.setMaxAge(0);
+				ck.setMaxAge(0); 
 				response.addCookie(ck);
 			}
 		}else if(result==MemberService.PWD_DISAGREE) {
@@ -66,10 +66,10 @@ public class MemberLoginController {
 		}else if(result==MemberService.USERID_NONE) {
 			msg="해당 아이디가 존재하지 않습니다.";			
 		}
-		
+
 		model.addAttribute("msg", msg);
 		model.addAttribute("url", url);
-		
+
 		return "common/message";
 	}
 	
@@ -81,4 +81,12 @@ public class MemberLoginController {
 		
 		return "redirect:/";
 	}
+	
 }
+
+
+
+
+
+
+
