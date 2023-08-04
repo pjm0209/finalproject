@@ -11,11 +11,11 @@ public interface ConstUtil {
 	
 	//자료실 파일 저장 경로
 	String FILE_UPLOAD_PATH = "pds_upload";
-	String FILE_UPLOAD_PATH_TEST = "C:\\lecture\\workspace_list\\sp_ws\\spherb\\src\\main\\webapp\\pds_upload";
+	String FILE_UPLOAD_PATH_TEST = "C:\\finalproject\\finalproject\\src\\main\\webapp\\uploadFile";
 	
 	//관리자 페이지 - 상품 등록시 상품이미지 저장 경로
 	String IMAGE_FILE_UPLOAD_PATH = "pd_images";
-	String IMAGE_FILE_UPLOAD_PATH_TEST = "C:\\lecture\\workspace_list\\sp_ws\\spherb\\src\\main\\webapp\\pd_images";
+	String IMAGE_FILE_UPLOAD_PATH_TEST = "C:\\finalproject\\finalproject\\src\\main\\webapp\\uploadFile";
 	
 	//자료실 업로드인지, 상품 등록시 업로드인지 구분값
 	int UPLOAD_FILE_FLAG = 1; //자료실 업로드
