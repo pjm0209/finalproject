@@ -131,8 +131,18 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<c:url value='/admin/book/bookList'/>">
-                    <i class="fas fa-fw fa-cog"></i>
+                    <i class="fas fa-gift"></i>
                     <span>판매 상품 관리</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<c:url value='/admin/order/orderList'/>">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>주문 관리</span></a>
+            </li>
+             <li class="nav-item">
+                <a class="nav-link" href="<c:url value='/admin/order/orderCancleList'/>">
+                    <i class="fas fa-window-close"></i>
+                    <span>주문 취소 관리</span></a>
             </li>
 
             <!-- Nav Item - Utilities Collapse Menu -->
