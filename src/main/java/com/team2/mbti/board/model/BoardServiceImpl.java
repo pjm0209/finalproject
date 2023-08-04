@@ -43,4 +43,9 @@ public class BoardServiceImpl implements BoardService {
 	public int getTotalRecordFaq(SearchVO vo) {
 		return boardDao.getTotalRecordFaq(vo);
 	}
+
+	@Override
+	public List<BoardFormVO> selectAllBoard() {
+		return boardDao.selectAllBoard();
+	}
 }
