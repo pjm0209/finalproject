@@ -15,6 +15,7 @@ button.mbti-button{
 	color: white;
 }
 </style>
+
 <!-- Begin Page Content -->
 <!-- Page Heading -->
 <div class="head-div">
@@ -43,6 +44,7 @@ button.mbti-button{
 	<div id="board-title">
 		<h5>MBTI 관리</h5>
 		<button class="mbti-button" id="mbti-write-button">질문지 등록</button>
+		<button class="mbti-button" id="mbti-edit-button">질문지 수정</button>
 		<button class="mbti-button" id="mbti-delete-button">질문지 삭제</button>
 	</div>
 	<div class="board">
@@ -67,85 +69,36 @@ button.mbti-button{
 					<th scope="col" class="board-writer">번호</th>
 					<th scope="col" class="board-writer">문제 유형</th>
 					<th scope="col" class="board-title">제목</th>
-					<th scope="col" class="board-regdate">작성일</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox check"></th>
-					<td>1</td>
-					<td>F</td>
-					<td>Otto</td>
-					<td>@mdo</td>
-				</tr>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox check"></th>
-					<td>1</td>
-					<td>F</td>
-					<td>Thornton</td>
-					<td>@fat</td>
-				</tr>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox check"></th>
-					<td>1</td>
-					<td>F</td>
-					<td>Otto</td>
-					<td>@mdo</td>
-				</tr>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox check"></th>
-					<td>1</td>
-					<td>M</td>
-					<td>Thornton</td>
-					<td>@fat</td>
-				</tr>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox check"></th>
-					<td>1</td>
-					<td>M</td>
-					<td>Otto</td>
-					<td>@mdo</td>
-				</tr>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox check"></th>
-					<td>1</td>
-					<td>M</td>
-					<td>Thornton</td>
-					<td>@fat</td>
-				</tr>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox check"></th>
-					<td>1</td>
-					<td>P</td>
-					<td>Otto</td>
-					<td>@mdo</td>
-				</tr>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox check"></th>
-					<td>1</td>
-					<td>P</td>
-					<td>Thornton</td>
-					<td>@fat</td>
-				</tr>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox check"></th>
-					<td>1</td>
-					<td>P</td>
-					<td>Otto</td>
-					<td>@mdo</td>
-				</tr>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox check"></th>
-					<td>1</td>
-					<td>P</td>
-					<td>Thornton</td>
-					<td>@fat</td>
-				</tr>
+				<c:forEach var="mbtiSurveyVo" items="${list}">
+					<c:set var="questionType" value="${mbtiSurveyVo.questionTypeNo}"/>
+					<tr>
+						<th scope="row"><input type="checkbox" class="board-checkbox check" value="${mbtiSurveyVo.mbtiServeyNo}"></th>
+						<td>${mbtiSurveyVo.mbtiServeyNo}</td>
+						<td>
+							<c:choose>
+								<c:when test="${questionType == '1'}">F</c:when>
+								<c:when test="${questionType == '2'}">P</c:when>
+								<c:when test="${questionType == '3'}">M</c:when>
+							</c:choose>
+						</td>
+						<td>
+							<c:if test="${fn:length(mbtiSurveyVo.question) > 50}">
+								${fn:substring(mbtiSurveyVo.question,0,50)}...
+							</c:if>
+							<c:if test="${fn:length(mbtiSurveyVo.question) <= 50}">
+								${mbtiSurveyVo.question}
+							</c:if>
+						</td>
+					</tr>
+				</c:forEach>
 			</tbody>
 		</table>
 	</div>
 </div>
-</div>
+
 <!-- End of Main Content -->
 
 <%@ include file="../inc/bottom.jsp"%>

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.team2.mbti.board.model.BoardFormVO;
 import com.team2.mbti.board.model.BoardService;
 import com.team2.mbti.board.model.BoardVO;
 import com.team2.mbti.common.ConstUtil;
@@ -27,6 +28,16 @@ public class BoardController {
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 	
 	private final BoardService boardService;
+	
+	@GetMapping("/boardHeadSide")
+	public String boardHeadSide() {
+		logger.info("게시판 사이드바");
+		
+		List<BoardFormVO> list = boardService.selectAllBoard();
+		logger.info("게시판 종류 전체조회 결과: list: {}", list);
+		
+		return "admin/board/boardHeadSide";
+	}
 	
 	@GetMapping("/board")
 	public String board_get(@RequestParam(defaultValue = "notice") String boardType, @ModelAttribute SearchVO vo, Model model) {

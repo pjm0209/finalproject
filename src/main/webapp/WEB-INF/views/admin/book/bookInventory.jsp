@@ -41,7 +41,7 @@
 </div>
 <div class="board-body">
 	<div id="board-title">
-		<h5>상품 리스트</h5>
+		<h5>상품 재고 관리</h5>
 		<button class="bg-gradient-secondary" id="board-write-button">새 상품 등록</button>
 	</div>
 	<!--  -->
@@ -154,7 +154,7 @@
 					<th scope="col" class="board-writer">상품이미지</th>
 					<th scope="col" class="board-readcount">카테고리</th>
 					<th scope="col" class="board-readcount">판매가</th>
-					<th scope="col" class="board-readcount">판매수</th>
+					<th scope="col" class="board-readcount">재고</th>
 					<th scope="col" class="board-readcount">등록일</th>
 					<th scope="col" class="board-readcount">관리</th>
 				</tr>
@@ -167,13 +167,10 @@
 					<td>상품이미지</td>
 					<td>책 > 검사</td>
 					<td>10,000원</td>
-					<td>1</td>
+					<td><input class="form-control" name="i_pr_stock" type="number" value="1" style="min-width: 100px;"></td>
 					<td>regdate</td>
 					<td>
-						<a class="btn btn-info btn-xs" href="/productsub/fo/0/36/productview.sd" target="_blank" title="상품보기"><i class="fas fa-eye"></i></a>
-						<button class="btn btn-info btn-xs" onclick="" type="button" title="복사"><i class="fas fa-copy"></i></button>
-						<button class="btn btn-warning btn-xs" onclick="" type="button" title="수정"><i class="fas fa-edit"></i></button>
-						<button class="btn btn-danger btn-xs" onclick="" type="button" title="삭제"><i class="fas fa-trash"></i></button>
+						<button class="btn btn-warning btn-xs" onclick="" type="button" title="재고저장"><i class="fas fa-edit"></i></button>
 					</td>
 				</tr>
 				
