@@ -21,14 +21,18 @@
 	<div class="group">
 		<div id="group-list" class="nav">
 			<div class="board-side-boardItem">
-				<div class="board-name" name="notice" value="notice">
-					<span>신청자 조회</span>
+				<div class="board-name">
+					<a class="applicantList-link" href="<c:url value='/admin/education/applicantList'/>">
+						<span>신청자 조회</span>
+					</a>
 				</div>
 				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
 			</div>
 			<div class="board-side-boardItem">
-				<div class="board-name" name="QnA" value="QnA">
-					<span>교육장 위치</span>
+				<div class="board-name">
+					<a class="applicantList-link" href="<c:url value='/admin/education/applicantList'/>">
+						<span>교육장 위치</span>
+					</a>
 				</div>
 				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
 			</div>
