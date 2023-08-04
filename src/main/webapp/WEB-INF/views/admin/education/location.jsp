@@ -7,7 +7,7 @@
 <div class="head-div">
 	<h2 class="text-gray-800">교육 관리</h2>
 	<button type="button" class="bg-gradient-primary"
-		id="add-newBoard-button" onclick="location.href='boardCreate'">교육 추가</button>
+		id="add-newBoard-button" onclick="location.href='boardCreate'">교육장 추가</button>
 </div>
 <div class="side-body">
 	<div class="side-div-title">
@@ -21,7 +21,7 @@
 	<div class="group">
 		<div id="group-list" class="nav">
 			<div class="board-side-boardItem">
-				<div class="board-name">
+				<div class="board-name" name="notice" value="notice">
 					<a class="applicantList-link" href="<c:url value='/admin/education/applicantList'/>">
 						<span>신청자 관리</span>
 					</a>
@@ -29,8 +29,8 @@
 				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
 			</div>
 			<div class="board-side-boardItem">
-				<div class="board-name">
-					<a class="applicantList-link" href="<c:url value='/admin/education/applicantList'/>">
+				<div class="board-name" name="QnA" value="QnA">
+					<a class="applicantList-link" href="<c:url value='/admin/education/location'/>">
 						<span>교육장 관리</span>
 					</a>
 				</div>
@@ -41,8 +41,8 @@
 </div>
 <div class="board-body">
 	<div id="board-title">
-		<h5>교육 리스트</h5>
-		<button class="bg-gradient-secondary" id="board-write-button">수정</button>
+		<h5>교육장 관리</h5>
+		<button class="bg-gradient-secondary" id="board-write-button">추가</button>
 		<button class="bg-gradient-secondary" id="board-write-button">삭제</button>
 	</div>
 	<div class="board">
@@ -51,9 +51,9 @@
 				<span class="search-count"></span>
 				<div class="input-group mb-3" id="board-search-div">
 					<select class="form-select form-select-lg" aria-label=".form-select-lg example" name="searchcondition" id="board-search-select">					  	
-					  	<option value="1">교육 이름</option>
-					  	<option value="2">강사명</option>
-					  	<option value="3">교육장</option>
+					  	<option value="1">교육장</option>
+					  	<option value="2">주소</option>
+					  	<option value="3">전화번호</option>
 					</select>
 				 	<input type="text" class="form-control" placeholder="검색어를 입력하세요" aria-label="Recipient's username" aria-describedby="button-addon2" id="board-search-area">
 				 	<button class="btn btn-outline-secondary" type="button" id="button-addon2">검색</button>
@@ -65,24 +65,20 @@
 				<tr class="board-table-colum">
 					<th scope="col"><input type="checkbox" id="check-All" class="board-checkbox"></th>
 					<th scope="col" class="board-regdate">번호</th>
-					<th scope="col" class="board-title">교육 이름</th>
-					<th scope="col" class="board-regdate">강사명</th>
-					<th scope="col" class="board-regdate">교육 기간</th>
-					<th scope="col" class="board-writer">인원수</th>
-					<th scope="col" class="board-writer">교육비</th>
-					<th scope="col" class="board-readcount">교육장</th>
+					<th scope="col" class="board-regdate">교육장</th>
+					<th scope="col" class="board-regdate">우편번호</th>
+					<th scope="col" class="board-title">주소</th>
+					<th scope="col" class="board-writer">전화번호</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
 					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
 					<td>1</td>
-					<td>MBTI와 진로</td>
-					<td>박정민</td>
-					<td>2023.10.05</td>
-					<td>30</td>
-					<td>5만원</td>
 					<td>강남점</td>
+					<td>06611</td>
+					<td>서울 서초구 서초대로77길 55 에이프로스퀘어 3층</td>
+					<td>02-532-6509</td>
 				</tr>
 				
 			</tbody>
