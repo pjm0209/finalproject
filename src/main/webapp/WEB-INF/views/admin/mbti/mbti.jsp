@@ -15,7 +15,6 @@ button.mbti-button{
 	color: white;
 }
 </style>
-
 <!-- Begin Page Content -->
 <!-- Page Heading -->
 <div class="head-div">
@@ -71,30 +70,34 @@ button.mbti-button{
 					<th scope="col" class="board-title">제목</th>
 				</tr>
 			</thead>
-			<tbody>
-				<c:forEach var="mbtiSurveyVo" items="${list}">
-					<c:set var="questionType" value="${mbtiSurveyVo.questionTypeNo}"/>
-					<tr>
-						<th scope="row"><input type="checkbox" class="board-checkbox check" value="${mbtiSurveyVo.mbtiServeyNo}"></th>
-						<td>${mbtiSurveyVo.mbtiServeyNo}</td>
-						<td>
-							<c:choose>
-								<c:when test="${questionType == '1'}">F</c:when>
-								<c:when test="${questionType == '2'}">P</c:when>
-								<c:when test="${questionType == '3'}">M</c:when>
-							</c:choose>
-						</td>
-						<td>
-							<c:if test="${fn:length(mbtiSurveyVo.question) > 50}">
-								${fn:substring(mbtiSurveyVo.question,0,50)}...
-							</c:if>
-							<c:if test="${fn:length(mbtiSurveyVo.question) <= 50}">
-								${mbtiSurveyVo.question}
-							</c:if>
-						</td>
-					</tr>
-				</c:forEach>
-			</tbody>
+			<form name="frmDelete" method="post">
+				<c:set var="idx" value="0"/>
+				<tbody>
+					<c:forEach var="mbtiSurveyVo" items="${list}">
+						<c:set var="questionType" value="${mbtiSurveyVo.questionTypeNo}"/>
+						<tr>
+							<th scope="row"><input type="checkbox" name="surveyItems[${idx}].mbtiServeyNo" class="board-checkbox check" value="${mbtiSurveyVo.mbtiServeyNo}"></th>
+							<td>${mbtiSurveyVo.mbtiServeyNo}</td>
+							<td>
+								<c:choose>
+									<c:when test="${questionType == '1'}">F</c:when>
+									<c:when test="${questionType == '2'}">P</c:when>
+									<c:when test="${questionType == '3'}">M</c:when>
+								</c:choose>
+							</td>
+							<td>
+								<c:if test="${fn:length(mbtiSurveyVo.question) > 50}">
+									${fn:substring(mbtiSurveyVo.question,0,50)}...
+								</c:if>
+								<c:if test="${fn:length(mbtiSurveyVo.question) <= 50}">
+									${mbtiSurveyVo.question}
+								</c:if>
+							</td>
+						</tr>
+						<c:set var="idx" value="${idx+1}"/>
+					</c:forEach>
+				</tbody>
+			</form>
 		</table>
 	</div>
 </div>

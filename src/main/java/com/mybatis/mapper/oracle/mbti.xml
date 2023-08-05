@@ -20,7 +20,12 @@
 	
 	<update id="updateMbtiSurvey" parameterType="mbtiSurveyVo">
 		update mbti_survey
-		set question_type_no=#{questionTypeNo}, question_category_no=#{questionCategoryNo}, question=#{question}
-		where mbti_servey_no=#{mbtiServeyNo}
+		set question_type_no = #{questionTypeNo}, question_category_no = #{questionCategoryNo}, question = #{question}
+		where mbti_servey_no = #{mbtiServeyNo}
 	</update>
+	
+	<delete id="deleteMbtiSurvey" parameterType="mbtiSurveyVo">
+		delete from mbti_survey
+		where mbti_servey_no = #{mbtiServeyNo}
+	</delete>
 </mapper>

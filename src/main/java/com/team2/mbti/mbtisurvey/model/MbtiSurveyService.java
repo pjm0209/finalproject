@@ -7,4 +7,5 @@ public interface MbtiSurveyService {
 	int insertMbtiSurvey(MbtiSurveyVO vo);
 	MbtiSurveyVO selectByNoMbtiSurvey(int mbtiServeyNo);
 	int updateMbtiSurvey(MbtiSurveyVO vo);
+	int deleteMultiMbtiSurvey(List<MbtiSurveyVO> list);
 }
