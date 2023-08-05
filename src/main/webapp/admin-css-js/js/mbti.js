@@ -24,6 +24,7 @@
 				alert('수정할 질문을 체크하세요');
 				return;
 			}
+			var result=$('input[type=checkbox]:checked').val();
 			open(contextPath+"/admin/mbti/mbtiWrite?mbtiServeyNo="+result,'mbtiWrite','width=800,height=800,top=50,left=500');
 		});
 		
