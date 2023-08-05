@@ -49,17 +49,20 @@ button.mbti-button{
 	<div class="board">
 		<div class="board-head">
 			<div class="board-search-result">
-				<span class="search-count"></span>
+				<form name="frmSearch" method="post" action="<c:url value='/admin/mbti/mbti'/>">
 				<div class="input-group mb-3" id="board-search-div">
 					<select class="form-select form-select-lg" name="searchCondition" aria-label=".form-select-lg example" id="board-search-select">					  	
-					  	<option value="questionTypeNo">문제 유형</option>
-					  	<option value="question">질문지</option>
+					  	<option value="question_type_no" <c:if test="${param.searchCondition=='question_type_no'}"> selected="selected" </c:if> >문제 유형</option>
+					  	<option value="question" <c:if test="${param.searchCondition=='question'}"> selected="selected" </c:if>>질문지</option>
 					</select>
-				 	<input type="text"  class="form-control" name="searchKeyword" placeholder="검색어를 입력하세요" aria-label="Recipient's username" aria-describedby="button-addon2" id="board-search-area">
-				 	<button class="btn btn-outline-secondary" type="button" id="button-addon2">검색</button>
+				 	<input type="text"  class="form-control" name="searchKeyword" placeholder="검색어를 입력하세요"
+				 		aria-label="Recipient's username" aria-describedby="button-addon2" id="board-search-area" value="${param.searchKeyword}">
+				 	<button class="btn btn-outline-secondary" type="submit" id="button-addon2">검색</button>
 				</div>
+				</form>
 			</div>
 		</div>
+		<form name="frmDelete" method="post">
 		<table class="table">
 			<thead>
 				<tr class="board-table-colum">
@@ -69,40 +72,60 @@ button.mbti-button{
 					<th scope="col" class="mbti-title">질문지</th>
 				</tr>
 			</thead>
-			<form name="frmDelete" method="post">
-				<c:set var="idx" value="0"/>
-				<tbody>
-					<c:forEach var="mbtiSurveyVo" items="${list}">
-						<c:set var="questionType" value="${mbtiSurveyVo.questionTypeNo}"/>
-						<tr>
-							<th scope="row"><input type="checkbox" name="surveyItems[${idx}].mbtiServeyNo" class="board-checkbox check" value="${mbtiSurveyVo.mbtiServeyNo}"></th>
-							<td>${mbtiSurveyVo.mbtiServeyNo}</td>
-							<td>
-								<c:choose>
-									<c:when test="${questionType == '1'}">F</c:when>
-									<c:when test="${questionType == '2'}">P</c:when>
-									<c:when test="${questionType == '3'}">M</c:when>
-								</c:choose>
-							</td>
-							<td>
-								<c:if test="${fn:length(mbtiSurveyVo.question) > 50}">
-									${fn:substring(mbtiSurveyVo.question,0,50)}...
-								</c:if>
-								<c:if test="${fn:length(mbtiSurveyVo.question) <= 50}">
-									${mbtiSurveyVo.question}
-								</c:if>
-							</td>
-						</tr>
-						<c:set var="idx" value="${idx+1}"/>
-					</c:forEach>
-					<c:forEach var="i" begin="${firstPage}" end="${lastPage}">
-						<c:if test="${i==currentPage}">
-							<span></span>
-						</c:if>
-					</c:forEach>
-				</tbody>
-			</form>
+			<c:set var="idx" value="0"/>
+			<tbody>
+				<c:forEach var="mbtiSurveyVo" items="${list}">
+					<c:set var="questionType" value="${mbtiSurveyVo.questionTypeNo}"/>
+					<tr>
+						<th scope="row"><input type="checkbox" name="surveyItems[${idx}].mbtiServeyNo" class="board-checkbox check" value="${mbtiSurveyVo.mbtiServeyNo}"></th>
+						<td>${mbtiSurveyVo.mbtiServeyNo}</td>
+						<td>
+							<c:choose>
+								<c:when test="${questionType == '1'}">F</c:when>
+								<c:when test="${questionType == '2'}">P</c:when>
+								<c:when test="${questionType == '3'}">M</c:when>
+							</c:choose>
+						</td>
+						<td>
+							<c:if test="${fn:length(mbtiSurveyVo.question) > 50}">
+								${fn:substring(mbtiSurveyVo.question,0,50)}...
+							</c:if>
+							<c:if test="${fn:length(mbtiSurveyVo.question) <= 50}">
+								${mbtiSurveyVo.question}
+							</c:if>
+						</td>
+					</tr>
+					<c:set var="idx" value="${idx+1}"/>
+				</c:forEach>
+			</tbody>
 		</table>
+		<div style="width: 10%;text-align: center;margin: 0 auto;">
+			<ul class="pagination">
+				<c:if test="${pagingInfo.firstPage > 1 }">
+				    <li class="page-item">
+				      <a class="page-link" href="#" aria-label="Previous">
+				        <span aria-hidden="true">&laquo;</span>
+				      </a>
+				    </li>
+				</c:if>
+				<c:forEach var="i" begin="${pagingInfo.firstPage}" end="${pagingInfo.lastPage}">
+					<c:if test="${i==pagingInfo.currentPage}">
+						<li class="page-item"><a class="page-link" href="<c:url value='/admin/mbti/mbti?currentPage=${i}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">${i}</a></li>
+					</c:if>
+					<c:if test="${i!=pagingInfo.currentPage}">
+						<li class="page-item"><a class="page-link" href="<c:url value='/admin/mbti/mbti?currentPage=${i}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">[${i}]</a></li>
+					</c:if>
+				</c:forEach>
+				<c:if test="${pagingInfo.lastPage < pagingInfo.totalPage}">
+				    <li class="page-item">
+				      <a class="page-link" href="#" aria-label="Next">
+				        <span aria-hidden="true">&raquo;</span>
+				      </a>
+				    </li>
+				</c:if>
+			</ul>
+		</div>
+		</form>
 	</div>
 </div>
 
