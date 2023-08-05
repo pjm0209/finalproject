@@ -10,4 +10,5 @@ public interface MbtiSurveyDAO {
 	int insertMbtiSurvey(MbtiSurveyVO vo);
 	MbtiSurveyVO selectByNoMbtiSurvey(int mbtiServeyNo);
 	int updateMbtiSurvey(MbtiSurveyVO vo);
+	int deleteMbtiSurvey(MbtiSurveyVO vo);
 }

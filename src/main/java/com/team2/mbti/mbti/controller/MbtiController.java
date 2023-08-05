@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.team2.mbti.mbtisurvey.model.MbtiSurveyListVO;
 import com.team2.mbti.mbtisurvey.model.MbtiSurveyService;
 import com.team2.mbti.mbtisurvey.model.MbtiSurveyVO;
 
@@ -74,6 +75,26 @@ public class MbtiController {
 				msg="mbti 질문 수정 실패";
 				url="/admin/mbti/mbtiWrite";
 			}
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
+	}
+	
+	@RequestMapping("/mbtiDelete")
+	public String mbtiDelete(@ModelAttribute MbtiSurveyListVO surveyListVo,Model model) {
+		logger.info("선택한 질문지 삭제 처리, 파라미터 surveyListVo=",surveyListVo);
+		
+		List<MbtiSurveyVO> list=surveyListVo.getSurveyItems();
+		
+		int cnt=mbtiSurveyService.deleteMultiMbtiSurvey(list);
+		String msg="",url="/admin/mbti/mbti";
+		if(cnt>0) {
+			msg="선택한 질문들을 삭제하였습니다.";
+		}else {
+			msg="선택한 질문을 삭제하는 도중 에러가 발생했습니다.";
 		}
 		
 		model.addAttribute("msg", msg);
