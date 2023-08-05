@@ -4,6 +4,7 @@
 
 <!-- Begin Page Content -->
 <!-- Page Heading -->
+<link href="<c:url value='/admin-css-js/css/book-order.css'/>" rel="stylesheet" type="text/css">
 <div class="head-div">
 	<h2 class="text-gray-800">판매 상품 관리</h2>
 </div>
@@ -19,19 +20,19 @@
 	<div class="group">
 		<div id="board-group-list" class="nav">
 			<div class="board-side-boardItem">
-				<div class="board-name" name="notice" value="notice">
-					<span>상품 리스트</span>
+				<div class="board-name" name="bookList" value="bookList">
+					<span><a href="<c:url value='/admin/book/bookList'/>">상품 리스트</a></span>
 				</div>
 				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
 			</div>
 			<div class="board-side-boardItem">
-				<div class="board-name" name="QnA" value="QnA">
-					<span>상품 재고관리</span>
+				<div class="board-name" name="QTY" value="QTY">
+					<span><a href="<c:url value='/admin/book/bookInventory'/>">상품 재고관리</a></span>
 				</div>
 				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
 			</div>
 			<div class="board-side-boardItem">
-				<div class="board-name" name="FAQ" value="FAQ">
+				<div class="board-name" name="SALES" value="SALES">
 					<span>매출 현황</span>
 				</div>
 				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
@@ -48,28 +49,30 @@
 	
 	<div>
 		<div>
-			<h2>상품 검색</h2>
+			<h2>재고 검색</h2>
 		</div>
-		<div>
-			<div>
+		<form name="serach" method="post" action="<c:url value='/admin/book/bookList'/>">
+		<div class="flex">
+		
+			<div class="box">
 				<label>상품카테고리</label>
-				<div>
-					<div>
-						<div>
+				
+					<div class="flex_ca">
+						
 							<select class="form-select" aria-label="Default select example">
 								<option value="">선택</option>
 							</select>
-						</div>
-						<div>
+						
+					
 							<select class="form-select" aria-label="Default select example">
 								<option value="">선택</option>
 							</select>
-						</div>
+					
 						
 					</div>
-				</div>
+				
 			</div>
-			<div class="form-group">
+			<div class="form-group box">
 				<label>상품코드</label>
 				<div>
 					<input class="" id="" name="" placeholder="상품코드" type="text" value="">
@@ -78,12 +81,15 @@
 				<div>
 					<input placeholder="상품명" type="text" value="">
 				</div>											
-				<label>제조사</label>
-				<div>
-					<input placeholder="제조사" type="text" value="">
-				</div>
+				
 			</div>
-			<div>
+				<div class="box">
+					<label>제조사</label>
+						<div>
+							<input placeholder="제조사" type="text" value="">
+						</div>
+				</div>
+			<div class="box">
 				<label>사용여부</label>
 				<div>
 					<label>
@@ -97,9 +103,9 @@
 					</label>
 				</div>
 			</div>
-			<div>
+			<div class="box">
 				<label>등록일</label>
-				<div>
+				<div class="register">
 					<input class="" id="" name="" placeholder="등록일" type="text" value="">
 				</div>
 				<div>
@@ -107,8 +113,9 @@
 				</div>
 			</div>
 			<div>
+				<div class="box num_01">
 				<label>정렬</label>
-				<div>
+			
 					<select class="" id="" name="">
 						<option value="" selected="selected">선택</option>
 						<option value="">상품명 오름차순</option>
@@ -123,8 +130,9 @@
 						<option value="">판매수 내림차순</option>
 					</select>
 				</div>
+				<div class="box num_01">
 				<label>게시글 수</label>
-				<div>
+				
 					<select>
 						<option value="5">5</option>
 						<option value="10" selected="selected">10</option>
@@ -135,13 +143,13 @@
 				</div>
 			</div>
 
-			<div>
+			<div class="btn">
 				<button onclick="" type="button" title="검색">검색</button>
 			</div>
 
 		</div>
-	</div>
-
+		</form>
+</div>
 	<!--  -->
 	<div class="board">
 		

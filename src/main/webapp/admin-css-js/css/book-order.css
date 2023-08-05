@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+
+.board-body .flex>div {display: flex; margin-bottom:15px;}
+/*.board-body{float:none;}*/
+.board-body  .box>label  {margin-right:15px; width:200px; text-align: right;}
+.flex div label~div label {margin-right:15px;}
+.board-body .flex_ca {display: flex; justify-content: space-between; width:45%; }
+.board-body .flex_ca select {width:48%;}
+.board-body  .flex .register{margin-right:15px;}
+.board-body  .box.num_01{width:48%;}
+.board-body  .box.num_01 select{width:60%;}
+.board-body .box.num_01:nth-child(2) label {width:70px;}
+.board-body .box.num_01:nth-child(2) select{width:11.5%;}
+.board-body  .flex {margin-bottom:25px;}
+.board-body  .flex .btn { width: 95%; margin: 0 auto;}
+.board-body  .flex .btn button{width: 100%;
+    height: 45px;
+    background: #cb8cdf;
+    border-radius: 5px;
+    color: white;
+    border: 0;
+    font-size: 1vw;
+    font-weight: bold;}
+  .board-body  th.board-title {width:10%;}
+    
