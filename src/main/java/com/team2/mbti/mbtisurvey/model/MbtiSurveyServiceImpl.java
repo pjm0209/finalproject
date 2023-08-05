@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
+import com.team2.mbti.common.SearchVO;
+
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -14,8 +16,8 @@ public class MbtiSurveyServiceImpl implements MbtiSurveyService{
 	private final MbtiSurveyDAO mbtiSurveyDao;
 
 	@Override
-	public List<MbtiSurveyVO> selectAllMbtiSurvey() {
-		return mbtiSurveyDao.selectAllMbtiSurvey();
+	public List<MbtiSurveyVO> selectAllMbtiSurvey(SearchVO vo) {
+		return mbtiSurveyDao.selectAllMbtiSurvey(vo);
 	}
 
 	@Override
@@ -49,6 +51,11 @@ public class MbtiSurveyServiceImpl implements MbtiSurveyService{
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return cnt;
+	}
+
+	@Override
+	public int getTotalRecordMbti(SearchVO searchVo) {
+		return mbtiSurveyDao.getTotalRecordMbti(searchVo);
 	}
 	
 }

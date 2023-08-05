@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.team2.mbti.common.ConstUtil;
+import com.team2.mbti.common.PaginationInfo;
+import com.team2.mbti.common.SearchVO;
 import com.team2.mbti.mbtisurvey.model.MbtiSurveyListVO;
 import com.team2.mbti.mbtisurvey.model.MbtiSurveyService;
 import com.team2.mbti.mbtisurvey.model.MbtiSurveyVO;
@@ -27,13 +30,25 @@ public class MbtiController {
 	private final MbtiSurveyService mbtiSurveyService;
 	
 	@RequestMapping("/mbti")
-	public String mbti(Model model) {
-		logger.info("mbti 목록 페이지");
+	public String mbti(@ModelAttribute SearchVO searchVo, Model model) {
+		logger.info("mbti 목록 페이지, 파라미터 searchVo={}",searchVo);
 		
-		List<MbtiSurveyVO> list=mbtiSurveyService.selectAllMbtiSurvey();
+		PaginationInfo pagingInfo = new PaginationInfo();
+		pagingInfo.setBlockSize(ConstUtil.BLOCK_SIZE);
+		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
+		pagingInfo.setRecordCountPerPage(ConstUtil.MBTI_RECORD_COUNT);
+		
+		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		searchVo.setRecordCountPerPage(ConstUtil.MBTI_RECORD_COUNT);
+		
+		List<MbtiSurveyVO> list=mbtiSurveyService.selectAllMbtiSurvey(searchVo);
 		logger.info("mbti 목록 결과 list.size={}",list.size());
+		int totalRecord=mbtiSurveyService.getTotalRecordMbti(searchVo);
+		logger.info("mbti 전체 검색 결과 totalRecord={}",totalRecord);
+		pagingInfo.setTotalRecord(totalRecord);
 		
 		model.addAttribute("list", list);
+		model.addAttribute("pagingInfo", pagingInfo);
 		
 		return "admin/mbti/mbti";
 	}
