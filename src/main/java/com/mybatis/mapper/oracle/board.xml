@@ -75,4 +75,13 @@
 		select * from board_form
 		order by board_form_no
 	</select>
+	
+	<insert id="insertBoardForm" parameterType="boardFormVo">
+		<selectKey keyProperty="boardFormNo" order="BEFORE" resultType="int">
+			select board_form_seq.nextval from dual
+		</selectKey>
+		
+		insert into board_form(board_form_no, board_form_name, board_form_intro, board_file_add_flag, comment_flag, board_flag, first_admin_Id)
+		values(#{boardFormNo}, #{boardFormName}, #{boardFormIntro}, #{boardFileAddFlag}, #{commentFlag}, #{boardFlag}, #{firstAdminId})
+	</insert>
 </mapper>

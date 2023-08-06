@@ -13,4 +13,6 @@ public interface BoardService {
 	int getTotalRecordNotice(SearchVO vo);
 	int getTotalRecordFaq(SearchVO vo);
 	List<BoardFormVO> selectAllBoard();
+	
+	int insertBoardForm(BoardFormVO vo);
 }

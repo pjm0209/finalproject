@@ -74,38 +74,41 @@
 					</div>
 					<div class="boardEdit-setting-body">
 						<dt>
-							<span>댓글사용</span>					
-						</dt>
-						<dd>
-							<div class="checkbox_group" name="use_comment">
-								<input type="checkbox" id="use_comment" name="use_comment" value="N">
-								<span class="use_off on">사용안함</span>
-								<span class="use_on">사용함</span>
-							</div>
-						</dd>
-						
-						<dt>
-							<span>비밀글사용</span>					
-						</dt>
-						<dd>
-							<div class="checkbox_group" name="use_secret">
-								<input type="checkbox" id="use_secret" name="use_secret" value="N">
-								<span class="use_off on">사용안함</span>
-								<span class="use_on">사용함</span>
-							</div>
-						</dd>
-						
-						<dt>
-							<span>파일첨부</span>
-							<span class="i_tooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="하나당 20MB이하의 첨부 파일만 업로드 가능합니다."></span>
-						</dt>
-						<dd>
-							<div class="checkbox_group" name="use_file">
-								<input type="checkbox" id="use_file" name="use_file" value="N">
-								<span class="use_off on">사용안함</span>
-								<span class="use_on">사용함</span>
-							</div>
-						</dd>
+						<span>댓글사용</span>					
+					</dt>
+					<dd>
+						<div class="checkbox_group">
+							<input type="checkbox" id="commentFlag">
+							<span class="use_off on">사용안함</span>
+							<span class="use_on">사용함</span>
+							<input type="hidden" name="commentFlag" value="N">
+						</div>
+					</dd>
+					
+					<dt>
+						<span>파일첨부</span>
+						<span class="i_tooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="하나당 20MB이하의 첨부 파일만 업로드 가능합니다."></span>
+					</dt>
+					<dd>
+						<div class="checkbox_group">
+							<input type="checkbox" id="boardFileAddFlag">
+							<span class="use_off on">사용안함</span>
+							<span class="use_on">사용함</span>
+							<input type="hidden" name="boardFileAddFlag" value="N">
+						</div>
+					</dd>
+					
+					<dt>
+						<span>게시판 사용</span>
+					</dt>
+					<dd>
+						<div class="checkbox_group">
+							<input type="checkbox" id="boardFlag">
+							<span class="use_off on">사용안함</span>
+							<span class="use_on">사용함</span>
+							<input type="hidden" name="boardFlag" value="N">
+						</div>
+					</dd>
 					</div>
 				</div>
 				<!-- 기능설정 끝 -->
