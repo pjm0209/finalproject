@@ -31,11 +31,13 @@ public class BoardController {
 	private final BoardService boardService;
 	
 	@GetMapping("/boardHeadSide")
-	public String boardHeadSide() {
+	public String boardHeadSide(Model model) {
 		logger.info("게시판 사이드바");
 		
 		List<BoardFormVO> list = boardService.selectAllBoard();
 		logger.info("게시판 종류 전체조회 결과: list: {}", list);
+		
+		model.addAttribute("boardList", list);		
 		
 		return "admin/board/boardHeadSide";
 	}
@@ -95,10 +97,22 @@ public class BoardController {
 	}		
 	
 	@PostMapping("/boardCreate")
-	public String boardCreate_post(@ModelAttribute BoardFormVO vo) {
+	public String boardCreate_post(@ModelAttribute BoardFormVO vo, Model model) {
 		logger.info("게시판 만들기 처리 파라미터 vo: {}", vo);
 		
-		return "admin/board/board";
+		int cnt = boardService.insertBoardForm(vo);
+		logger.info("게시판 만들기 처리 결과 cnt: {}", cnt);
+		
+		String msg = "게시판 만들기가 실패하였습니다.", url = "/admin/board/boardCreate";
+		if(cnt > 0) {
+			msg= "게시판 만들기 성공";
+			url = "/admin/board/board";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
 	}
 	
 	@GetMapping("/boardEdit")

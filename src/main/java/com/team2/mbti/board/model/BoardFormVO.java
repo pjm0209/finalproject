@@ -11,10 +11,9 @@ public class BoardFormVO {
 	private String boardFormIntro;
 	private String boardFileAddFlag;
 	private String commentFlag;
-	private int boardFileCount;
-	private long boardFileSize;
 	private String boardFlag;
 	private String firstAdminId;
+	private Timestamp firstRegdate;
 	private String lastEditAdminId;
 	private Timestamp lastRegdate;
 }

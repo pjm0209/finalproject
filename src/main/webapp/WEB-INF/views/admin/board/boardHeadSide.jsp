@@ -40,8 +40,8 @@
 				</div>
 				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
 			</div>
-			<c:if test="${!empty list}">
-				<c:forEach var="vo" items="${list }">
+			<c:if test="${!empty boardList}">
+				<c:forEach var="vo" items="${boardList }">
 					<div class="board-side-boardItem">
 						<div class="board-name">
 							<span>${vo.boardFormName }</span>
