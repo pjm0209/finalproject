@@ -15,4 +15,5 @@ public interface BoardService {
 	List<BoardFormVO> selectAllBoard();
 	
 	int insertBoardForm(BoardFormVO vo);
+	int insertBoard(BoardVO vo);
 }

@@ -6,7 +6,7 @@
 <c:import url="/admin/board/boardHeadSide"></c:import>
 <div class="board-body">
 	<div id="board-title">
-		<h5>공지사항</h5>
+		<h5></h5>
 		<button class="bg-gradient-secondary" id="board-write-button" onclick="location.href='boardWrite'">글쓰기</button>
 	</div>
 	<div class="board">
@@ -44,10 +44,10 @@
 					<c:forEach var="map" items="${boardList }">
 						<tr>
 							<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-							<td>${map['BOARDTITLE']}</td>
+							<td><a href="/admin/board/boardDetail?board_no=${map['BOARD_NO'] }">${map['BOARD_TITLE']}</a></td>
 							<td>${map['NAME'] }</td>
-							<td>${map['BOARDREGDATE'] }</td>
-							<td>${map['BOARDREADCOUNT'] }</td>
+							<td>${map['BOARD_REGDATE'] }</td>
+							<td>${map['BOARD_READCOUNT'] }</td>
 						</tr>
 					</c:forEach>
 				</c:if>		
@@ -57,5 +57,7 @@
 </div>
 </div>
 <!-- End of Main Content -->
+
+<script src="<c:url value='/admin-css-js/js/board.js'/>"></script>
 
 <%@ include file="../inc/bottom.jsp"%>

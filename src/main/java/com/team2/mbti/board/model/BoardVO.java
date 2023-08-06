@@ -2,12 +2,14 @@ package com.team2.mbti.board.model;
 
 import java.sql.Timestamp;
 
+import com.team2.mbti.common.SearchVO;
+
 import lombok.Data;
 
 @Data
-public class BoardVO {
+public class BoardVO extends SearchVO {
 	private int boardNo;
-	private int boardFromNo;
+	private int boardFormNo;
 	private String boardTitle;
 	private String boardBody;
 	private int no;
