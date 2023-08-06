@@ -19,6 +19,7 @@ button.mbti-button{
 <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
 <script type="text/javascript" src="<c:url value='/resources/ckeditor/ckeditor.js'/>"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<script type="text/javascript" src="<c:url value='/admin-css-js/js/mbti.js'/>"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
@@ -61,8 +62,8 @@ $(function(){
 		<c:if test="${!empty vo}">
 			<input type="hidden" name="mbtiServeyNo" value="${vo.mbtiServeyNo}">
 		</c:if>
-		<button class="mbti-button" type="submit" id="mbti-write-button">${str}</button>
-		<button class="mbti-button" id="mbti-delete-button">취소</button>
+		<button class="mbti-button" type="submit" id="mbti-button">${str}</button>
+		<button class="mbti-button" type="button" id="mbti-close-button" onclick="self.close()">닫기</button>
 	</div>
 </form>
 </body>

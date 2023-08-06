@@ -24,11 +24,21 @@ public class EducationController {
 	
 	@GetMapping("/applicantList")
 	public String appliList_get(Model model) {
-		logger.info("신청자 조회 페이지 보여주기");
+		logger.info("신청자 관리 페이지 보여주기");
 		
 		model.addAttribute("title", "신청자 조회");
 		
 		return "admin/education/applicantList";
+		
+	}
+	
+	@GetMapping("/location")
+	public String location_get(Model model) {
+		logger.info("교육장 관리 페이지 보여주기");
+		
+		model.addAttribute("title", "교육장 관리");
+		
+		return "admin/education/location";
 		
 	}
 }
