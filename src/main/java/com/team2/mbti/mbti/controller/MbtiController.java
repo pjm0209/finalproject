@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.team2.mbti.common.ConstUtil;
+import com.team2.mbti.common.PaginationInfo;
+import com.team2.mbti.common.SearchVO;
+import com.team2.mbti.mbtisurvey.model.MbtiSurveyListVO;
 import com.team2.mbti.mbtisurvey.model.MbtiSurveyService;
 import com.team2.mbti.mbtisurvey.model.MbtiSurveyVO;
 
@@ -26,13 +30,38 @@ public class MbtiController {
 	private final MbtiSurveyService mbtiSurveyService;
 	
 	@RequestMapping("/mbti")
-	public String mbti(Model model) {
-		logger.info("mbti 목록 페이지");
+	public String mbti(@ModelAttribute SearchVO searchVo, Model model) {
+		logger.info("mbti 목록 페이지, 파라미터 searchVo={}",searchVo);
+		String condition=searchVo.getSearchCondition();
+		String keyword=searchVo.getSearchKeyword();
+		logger.info("condition={},keyword={},keyword.toUpperCase()={}",condition,keyword,keyword.toUpperCase());
+		if(condition.equals("question_type_no")) {
+			if(keyword.equalsIgnoreCase("F")) {
+				searchVo.setSearchKeyword("1");
+			}else if(keyword.equalsIgnoreCase("P")) {
+				searchVo.setSearchKeyword("2");
+			}else if(keyword.equalsIgnoreCase("M")) {
+				searchVo.setSearchKeyword("3");
+			}
+		}
 		
-		List<MbtiSurveyVO> list=mbtiSurveyService.selectAllMbtiSurvey();
+		PaginationInfo pagingInfo = new PaginationInfo();
+		pagingInfo.setBlockSize(ConstUtil.BLOCK_SIZE);
+		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
+		pagingInfo.setRecordCountPerPage(ConstUtil.MBTI_RECORD_COUNT);
+		
+		searchVo.setBlockSize(ConstUtil.BLOCK_SIZE);
+		searchVo.setRecordCountPerPage(ConstUtil.MBTI_RECORD_COUNT);
+		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		
+		List<MbtiSurveyVO> list=mbtiSurveyService.selectAllMbtiSurvey(searchVo);
 		logger.info("mbti 목록 결과 list.size={}",list.size());
+		int totalRecord=mbtiSurveyService.getTotalRecordMbti(searchVo);
+		logger.info("mbti 전체 검색 결과 totalRecord={}",totalRecord);
+		pagingInfo.setTotalRecord(totalRecord);
 		
 		model.addAttribute("list", list);
+		model.addAttribute("pagingInfo", pagingInfo);
 		
 		return "admin/mbti/mbti";
 	}
@@ -54,28 +83,55 @@ public class MbtiController {
 	public String mbtiWrite_post(@ModelAttribute MbtiSurveyVO mbtiSurveyVo, Model model){
 		logger.info("mbti 질문 등록 처리, 파라미터 mbtiSurveyVo={}",mbtiSurveyVo);
 		
+		String msg="mbti 질문 등록 실패",url="/admin/mbti/mbtiWrite";
+		boolean closePopup=false;
 		if(mbtiSurveyVo.getMbtiServeyNo()==0) {
 			int cnt=mbtiSurveyService.insertMbtiSurvey(mbtiSurveyVo);
 			logger.info("mbti 질문 등록 결과 cnt={}",cnt);
 			
-			String msg="mbti 질문 등록 실패",url="/admin/mbti/mbtiWrite";
 			if(cnt>0) {
 				msg="MBTI 질문이 등록되었습니다.";
 				url="/admin/mbti/mbti";
+				
+				closePopup=true;
 			}
 		}else {
 			int cnt=mbtiSurveyService.updateMbtiSurvey(mbtiSurveyVo);
 			logger.info("mbti 질문 수정 결과 cnt={}",cnt);
 			
-			String msg="mbti 질문 수정 실패",url="/admin/mbti/mbtiWrite";
 			if(cnt>0) {
 				msg="MBTI 질문이 수정되었습니다.";
 				url="/admin/mbti/mbti";
+				closePopup=true;
+			}else {
+				msg="mbti 질문 수정 실패";
+				url="/admin/mbti/mbtiWrite";
 			}
 		}
 		
-		model.addAttribute("msg", model);
-		model.addAttribute("url", model);
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		model.addAttribute("closePopup", closePopup);
+		
+		return "common/message";
+	}
+	
+	@RequestMapping("/mbtiDelete")
+	public String mbtiDelete(@ModelAttribute MbtiSurveyListVO surveyListVo,Model model) {
+		logger.info("선택한 질문지 삭제 처리, 파라미터 surveyListVo=",surveyListVo);
+		
+		List<MbtiSurveyVO> list=surveyListVo.getSurveyItems();
+		
+		int cnt=mbtiSurveyService.deleteMultiMbtiSurvey(list);
+		String msg="",url="/admin/mbti/mbti";
+		if(cnt>0) {
+			msg="선택한 질문들을 삭제하였습니다.";
+		}else {
+			msg="선택한 질문을 삭제하는 도중 에러가 발생했습니다.";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
 		
 		return "common/message";
 	}

@@ -1,0 +1,12 @@
+@charset "UTF-8";
+.mbti-writer{
+	width: 130px;
+}
+th.mbti-title {
+    width: 70%;
+    text-align: center;
+}
+
+tr>td:last-child{
+	padding-left: 5%;
+}

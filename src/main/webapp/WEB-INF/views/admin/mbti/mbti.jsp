@@ -15,7 +15,6 @@ button.mbti-button{
 	color: white;
 }
 </style>
-
 <!-- Begin Page Content -->
 <!-- Page Heading -->
 <div class="head-div">
@@ -40,7 +39,7 @@ button.mbti-button{
 		</div>
 	</div>
 </div>
-<div style="width: 1405px;float: right;display: inline;">
+<div class="board-body">
 	<div id="board-title">
 		<h5>MBTI 관리</h5>
 		<button class="mbti-button" id="mbti-write-button">질문지 등록</button>
@@ -50,32 +49,35 @@ button.mbti-button{
 	<div class="board">
 		<div class="board-head">
 			<div class="board-search-result">
-				<span class="search-count"></span>
+				<form name="frmSearch" method="post" action="<c:url value='/admin/mbti/mbti'/>">
 				<div class="input-group mb-3" id="board-search-div">
-					<select class="form-select form-select-lg" aria-label=".form-select-lg example" name="searchcondition" id="board-search-select">					  	
-					  	<option value="1">문제 유형</option>
-					  	<option value="2">질문지</option>
-					  	<option value="3">등록자</option>
+					<select class="form-select form-select-lg" name="searchCondition" aria-label=".form-select-lg example" id="board-search-select">					  	
+					  	<option value="question_type_no" <c:if test="${param.searchCondition=='question_type_no'}"> selected="selected" </c:if> >문제 유형</option>
+					  	<option value="question" <c:if test="${param.searchCondition=='question'}"> selected="selected" </c:if>>질문지</option>
 					</select>
-				 	<input type="text" class="form-control" placeholder="검색어를 입력하세요" aria-label="Recipient's username" aria-describedby="button-addon2" id="board-search-area">
-				 	<button class="btn btn-outline-secondary" type="button" id="button-addon2">검색</button>
+				 	<input type="text"  class="form-control" name="searchKeyword" placeholder="검색어를 입력하세요"
+				 		aria-label="Recipient's username" aria-describedby="button-addon2" id="board-search-area" value="${param.searchKeyword}">
+				 	<button class="btn btn-outline-secondary" type="submit" id="button-addon2">검색</button>
 				</div>
+				</form>
 			</div>
 		</div>
+		<form name="frmDelete" method="post">
 		<table class="table">
 			<thead>
 				<tr class="board-table-colum">
 					<th scope="col"><input type="checkbox" id="check-All" class="board-checkbox"></th>
-					<th scope="col" class="board-writer">번호</th>
-					<th scope="col" class="board-writer">문제 유형</th>
-					<th scope="col" class="board-title">제목</th>
+					<th scope="col" class="mbti-writer">번호</th>
+					<th scope="col" class="mbti-writer">문제 유형</th>
+					<th scope="col" class="mbti-title">질문지</th>
 				</tr>
 			</thead>
+			<c:set var="idx" value="0"/>
 			<tbody>
 				<c:forEach var="mbtiSurveyVo" items="${list}">
 					<c:set var="questionType" value="${mbtiSurveyVo.questionTypeNo}"/>
 					<tr>
-						<th scope="row"><input type="checkbox" class="board-checkbox check" value="${mbtiSurveyVo.mbtiServeyNo}"></th>
+						<th scope="row"><input type="checkbox" name="surveyItems[${idx}].mbtiServeyNo" class="board-checkbox check" value="${mbtiSurveyVo.mbtiServeyNo}"></th>
 						<td>${mbtiSurveyVo.mbtiServeyNo}</td>
 						<td>
 							<c:choose>
@@ -93,9 +95,37 @@ button.mbti-button{
 							</c:if>
 						</td>
 					</tr>
+					<c:set var="idx" value="${idx+1}"/>
 				</c:forEach>
 			</tbody>
 		</table>
+		<div style="width: 10%;text-align: center;margin: 0 auto;">
+			<ul class="pagination">
+				<c:if test="${pagingInfo.firstPage > 1 }">
+				    <li class="page-item">
+				      <a class="page-link" href="#" aria-label="Previous">
+				        <span aria-hidden="true">&laquo;</span>
+				      </a>
+				    </li>
+				</c:if>
+				<c:forEach var="i" begin="${pagingInfo.firstPage}" end="${pagingInfo.lastPage}">
+					<c:if test="${i==pagingInfo.currentPage}">
+						<li class="page-item"><a class="page-link" href="<c:url value='/admin/mbti/mbti?currentPage=${i}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">${i}</a></li>
+					</c:if>
+					<c:if test="${i!=pagingInfo.currentPage}">
+						<li class="page-item"><a class="page-link" href="<c:url value='/admin/mbti/mbti?currentPage=${i}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">[${i}]</a></li>
+					</c:if>
+				</c:forEach>
+				<c:if test="${pagingInfo.lastPage < pagingInfo.totalPage}">
+				    <li class="page-item">
+				      <a class="page-link" href="#" aria-label="Next">
+				        <span aria-hidden="true">&raquo;</span>
+				      </a>
+				    </li>
+				</c:if>
+			</ul>
+		</div>
+		</form>
 	</div>
 </div>
 
