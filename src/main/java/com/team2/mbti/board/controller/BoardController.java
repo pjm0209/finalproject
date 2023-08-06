@@ -43,7 +43,7 @@ public class BoardController {
 	}
 	
 	@GetMapping("/board")
-	public String board_get(@RequestParam(defaultValue = "notice") String boardType, @ModelAttribute SearchVO vo, Model model) {
+	public String board_get(@RequestParam(defaultValue = "1") int boardFormNo, @ModelAttribute BoardVO vo, Model model) {
 		logger.info("게시판 관리 화면 보여주기");
 		
 		PaginationInfo pagingInfo = new PaginationInfo();
@@ -57,19 +57,25 @@ public class BoardController {
 
 		List<Map<String, Object>> list = null;
 		
-		if(boardType.equals("notice")) {
+		String board = "";
+		
+		if(boardFormNo == 1) {
 			list = boardService.selectAllNotice(vo);
 			
 			int totalRecord = boardService.getTotalRecordNotice(vo);
 			logger.info("공지사항 목록 전체 조회 - totalRecord: {}", totalRecord);
 			pagingInfo.setTotalRecord(totalRecord);
-		} else if (boardType.equals("faq")) {
+			
+			board = "공지사항";
+		} else if (boardFormNo == 2) {
 			list = boardService.selectAllFaq(vo);
 			
 			int totalRecord = boardService.getTotalRecordFaq(vo);
 			logger.info("FAQ 목록 전체 조회 - totalRecord: {}", totalRecord);
 			pagingInfo.setTotalRecord(totalRecord);
-		} else if (boardType.equals("qna")) {
+			
+			board = "FAQ";
+		} else if (boardFormNo == 3) {
 			
 		} else {
 			list = boardService.selectAll(vo);
@@ -77,7 +83,7 @@ public class BoardController {
 			
 			int totalRecord = boardService.getTotalRecord(vo);
 			logger.info("글 목록 전체 조회 - totalRecord: {}", totalRecord);
-			pagingInfo.setTotalRecord(totalRecord);
+			pagingInfo.setTotalRecord(totalRecord);					
 		}		
 		
 		model.addAttribute("title", "게시판 관리");
@@ -131,5 +137,24 @@ public class BoardController {
 		model.addAttribute("title", "게시판 글쓰기");
 		
 		return "admin/board/boardWrite";
+	}
+	
+	@PostMapping("/boardWrite")
+	public String boardWrite_post(@ModelAttribute BoardVO vo, Model model) {
+		logger.info("게시판 글쓰기 처리");
+		
+		int cnt = boardService.insertBoard(vo);
+		logger.info("게시판 글쓰기 처리 결과 cnt: {}", cnt);
+		
+		String msg = "글 등록 실패!", url = "/admin/board/boardWrite";
+		if(cnt > 0) {
+			msg = "글쓰기 성공!";
+			url = "/admin/board/board";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
 	}
 }
