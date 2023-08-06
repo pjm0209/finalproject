@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -92,6 +93,13 @@ public class BoardController {
 		
 		return "admin/board/boardCreate";
 	}		
+	
+	@PostMapping("/boardCreate")
+	public String boardCreate_post(@ModelAttribute BoardFormVO vo) {
+		logger.info("게시판 만들기 처리 파라미터 vo: {}", vo);
+		
+		return "admin/board/board";
+	}
 	
 	@GetMapping("/boardEdit")
 	public String boardEdit_get(Model model) {

@@ -12,7 +12,7 @@
 			<input type="submit" class="bg-gradient-primary" id="save-boardCreate" value="저장">
 		</div>
 	</div>
-	<form name="boardCreate-frm" method="post" action="<c:url value='/admin/boardCreate'/>">
+	<form name="boardCreate-frm" method="post" action="<c:url value='/admin/board/boardCreate'/>">
 		<div class="boardCreate-body">
 			<!-- 기본설정 시작 -->
 			<div class="boardCreate-setting">
