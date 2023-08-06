@@ -93,13 +93,13 @@
 				<label>사용여부</label>
 				<div>
 					<label>
-						<input name="" placeholder="사용여부" type="radio" value="" checked="checked">전체
+						<input name="" placeholder="사용여부" type="checkbox" value="" checked="checked" >전체
 					</label>
 					<label>
-						<input name="" placeholder="사용여부" type="radio" value="Y">사용
+						<input name="" placeholder="사용여부" type="checkbox" value="Y">사용
 					</label>
 					<label>
-						<input name="" placeholder="사용여부" type="radio" value="N">미사용
+						<input name="" placeholder="사용여부" type="checkbox" value="N">미사용
 					</label>
 				</div>
 			</div>
@@ -189,6 +189,7 @@
 			</tbody>
 		</table>
 	</div>
+</div>
 </div>
 <!-- End of Main Content -->
 <%@ include file="../inc/bottom.jsp"%>

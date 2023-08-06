@@ -208,5 +208,6 @@
 		</table>
 	</div>
 </div>
+</div>
 <!-- End of Main Content -->
 <%@ include file="../inc/bottom.jsp"%>
