@@ -7,99 +7,36 @@
 <div class="head-div">
 	<h2 class="text-gray-800">판매 상품 주문 관리</h2>
 </div>
-<div class="side-body">
-	<div class="side-div-title">
-		<h6>주문 관리</h6>
-		<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
-			fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
-  			<path fill-rule="evenodd"
-				d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
-		</svg>
-	</div>
-	<div class="group">
-		<div id="board-group-list" class="nav">
-			<div class="board-side-boardItem">
-				<div class="board-name" name="bookList" value="bookList">
-					<span><a href="<c:url value='/admin/book/bookList'/>">전체 주문 내역</a></span>
-				</div>
-				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
-			</div>
-			<div class="board-side-boardItem">
-				<div class="board-name" name="QTY" value="QTY">
-					<span><a href="<c:url value='/admin/book/bookInventory'/>">입금 대기</a></span>
-				</div>
-				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
-			</div>
-			<div class="board-side-boardItem">
-				<div class="board-name" name="BASKET" value="BASKET">
-					<span><a href="<c:url value='/admin/book/bookBasket'/>">결재 완료</a></span>
-				</div>
-				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
-			</div>
-			<div class="board-side-boardItem">
-				<div class="board-name" name="SALES" value="SALES">
-					<span>배송 준비</span>
-				</div>
-				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
-			</div>
-			<div class="board-side-boardItem">
-				<div class="board-name" name="SALES" value="SALES">
-					<span>배송중</span>
-				</div>
-				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
-			</div>
-			<div class="board-side-boardItem">
-				<div class="board-name" name="SALES" value="SALES">
-					<span>배송 완료</span>
-				</div>
-				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
-			</div>
-			<div class="board-side-boardItem">
-				<div class="board-name" name="SALES" value="SALES">
-					<span>구매 확정</span>
-				</div>
-				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
-			</div>
-			<div class="board-side-boardItem">
-				<div class="board-name" name="SALES" value="SALES">
-					<span>장바구니 관리</span>
-				</div>
-				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
-			</div>
-		</div>
-	</div>
-</div>
+<%@ include file="../order/orderSideBody.jsp"%>
 <div class="board-body">
 	<div id="board-title">
-		<h5>고객 장바구니 관리</h5>
-		<button class="bg-gradient-secondary" id="board-write-button">새 상품 등록</button>
+		<h5>장바구니 관리</h5>
 	</div>
 	<!--  -->
 	
 	<div>
-		<div>
+		<form name="serach" method="post" action="<c:url value='/admin/book/bookList'/>">
+			<div class="flex shadow-sm p-3 mb-5 bg-body rounded" style="margin: 10px 0px;background: white;">
 			<h2>장바구니 검색</h2>
-		</div>
-		<div>
-			<div>
+			<div class="box">
 				<label>상품카테고리</label>
-				<div>
-					<div>
-						<div>
+				
+					<div class="flex_ca">
+						
 							<select class="form-select" aria-label="Default select example">
 								<option value="">선택</option>
 							</select>
-						</div>
-						<div>
+						
+					
 							<select class="form-select" aria-label="Default select example">
 								<option value="">선택</option>
 							</select>
-						</div>
+					
 						
 					</div>
-				</div>
+				
 			</div>
-			<div class="form-group">
+			<div class="form-group box">
 				<label>상품코드</label>
 				<div>
 					<input class="" id="" name="" placeholder="상품코드" type="text" value="">
@@ -108,37 +45,41 @@
 				<div>
 					<input placeholder="상품명" type="text" value="">
 				</div>											
-				<label>제조사</label>
-				<div>
-					<input placeholder="제조사" type="text" value="">
-				</div>
+				
 			</div>
-			<div>
+				<div class="box">
+					<label>제조사</label>
+						<div>
+							<input placeholder="제조사" type="text" value="">
+						</div>
+				</div>
+			<div class="box">
 				<label>사용여부</label>
 				<div>
 					<label>
-						<input name="" placeholder="사용여부" type="radio" value="" checked="checked">전체
+						<input name="" placeholder="사용여부" type="checkbox" value="" checked="checked" >전체
 					</label>
 					<label>
-						<input name="" placeholder="사용여부" type="radio" value="Y">사용
+						<input name="" placeholder="사용여부" type="checkbox" value="Y">사용
 					</label>
 					<label>
-						<input name="" placeholder="사용여부" type="radio" value="N">미사용
+						<input name="" placeholder="사용여부" type="checkbox" value="N">미사용
 					</label>
 				</div>
 			</div>
-			<div>
+			<div class="box">
 				<label>등록일</label>
-				<div>
+				<div class="register">
 					<input class="" id="" name="" placeholder="등록일" type="text" value="">
 				</div>
 				<div>
-					<input class="" id="" name="" placeholder="등록일" type="text" value="">
+					<input class="" id="" name="" placeholder="등록일(종료일)" type="text" value="">
 				</div>
 			</div>
 			<div>
+				<div class="box num_01">
 				<label>정렬</label>
-				<div>
+			
 					<select class="" id="" name="">
 						<option value="" selected="selected">선택</option>
 						<option value="">상품명 오름차순</option>
@@ -153,8 +94,9 @@
 						<option value="">판매수 내림차순</option>
 					</select>
 				</div>
+				<div class="box num_01">
 				<label>게시글 수</label>
-				<div>
+				
 					<select>
 						<option value="5">5</option>
 						<option value="10" selected="selected">10</option>
@@ -165,15 +107,16 @@
 				</div>
 			</div>
 
-			<div>
+			<div class="btn">
 				<button onclick="" type="button" title="검색">검색</button>
 			</div>
 
 		</div>
+		</form>
 	</div>
 
 	<!--  -->
-	<div class="board">
+	<div class="board shadow-sm p-3 mb-5 bg-body rounded" style="margin: 10px 0px;background: white;">
 		
 		<table class="table">
 			<thead>
