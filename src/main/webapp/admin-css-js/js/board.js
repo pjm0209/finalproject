@@ -7,12 +7,23 @@ $(function(){
 		location.href = contextPath + "/admin/board/boardEdit?boardType=" + boardType;
 	});
 	
-	 CKEDITOR.replace('p_content'
-        , {height: 500                                                  
-         }, {
-     		filebrowserUploadUrl : contextPath + "/admin/book/ckImageUpload"
-     	}); 						
-     					
+	 CKEDITOR.replace("p_content", {
+						uploadUrl: contextPath + "/imageUpload",	//드래그 앤 드롭					
+						filebrowserUploadUrl:  contextPath + "/imageUpload", //파일은 이 경로로 업로드
+						height : 500
+					});					
+     
+     $('.checkbox_group > .use_off').on("click", function(){
+		$(this).nextAll('input[type=hidden]').val('N');
+		$(this).next().attr('class', 'use_on');
+		$(this).attr('class', 'use_off on');
+	});
+	
+	$('.checkbox_group > .use_on').on("click", function(){
+		$(this).nextAll('input[type=hidden]').val('Y');
+		$(this).prev().attr('class', 'use_off');
+		$(this).attr('class', 'use_on on');
+	});	
 });
 
 CKEDITOR.editorConfig=function( config ){ config.resize_enabled=false;};
@@ -33,7 +44,7 @@ function selectFile(element) {
 
     // 2. 파일 크기가 20MB를 초과하는 경우
     const fileSize = Math.floor(file.size / 1024 / 1024);
-    if (fileSize > 10) {
+    if (fileSize > 20) {
         alert('20MB 이하의 파일로 업로드해 주세요.');
         filename.value = '';
         element.value = '';
@@ -71,3 +82,6 @@ function removeFile(element) {
     }
     element.parentElement.remove();
 }
+
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));

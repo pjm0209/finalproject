@@ -42,8 +42,10 @@
 	</div>
 </div>
 <div class="board-body">
-	<form>
+	<form name="boardWriteForm" method="post" enctype="multipart/form-data" action="<c:url value='/admin/board/boardWrite'/>">
 		<div id="board-title">
+		<input type="hidden" name="boardFormNo" value="4">
+		<input type="hidden" name="no" value="1">
 			<h5>공지사항</h5>
 			<div class="board-head-button">
 				<input type="button" class="bg-gradient-secondary" onclick="location.href='<c:url value="/admin/board/board"/>'" value="취소">
@@ -69,13 +71,13 @@
 						<dt>제목</dt>
 						<dd>
 							<div class="input_group v2 board-write-title">
-								<input type="text" name="title" id="board-wirte-title" maxlength="50" placeholder="제목을 입력해주세요.">
+								<input type="text" name="boardTitle" id="board-wirte-title" maxlength="50" placeholder="제목을 입력해주세요.">
 							</div>
 						</dd>
 						<dt>내용</dt>
 						<dd>
 							<div>
-								<textarea id="p_content"></textarea>								
+								<textarea id="p_content" name="boardBody"></textarea>								
 							</div>
 						</dd>
 						<dt>
@@ -115,5 +117,7 @@
 </div>
 </div>
 <!-- End of Main Content -->
+
+<script src="<c:url value='/admin-css-js/js/board.js'/>"></script>
 
 <%@ include file="../inc/bottom.jsp"%>

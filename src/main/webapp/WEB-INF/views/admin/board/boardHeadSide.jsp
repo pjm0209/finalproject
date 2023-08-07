@@ -21,22 +21,28 @@
 		<div id="board-group-list" class="nav">
 			<div class="board-side-boardItem">
 				<div class="board-name">
-					<span>공지사항</span>
-					<input type="hidden" name="notice" value="notice">
+					<a href="<c:url value='/admin/board/board?boardFormNo=1'/>">
+						<span>공지사항</span>
+					</a>
+					<input type="hidden" name="notice" value="1">
 				</div>
 				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
 			</div>
 			<div class="board-side-boardItem">
 				<div class="board-name">
-					<span>QnA</span>
-					<input type="hidden" name="qna" value="qna">
+					<a href="<c:url value='/admin/board/board?boardFormNo=2'/>">
+						<span>QnA</span>
+					</a>
+					<input type="hidden" name="qna" value="2">
 				</div>
 				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
 			</div>
 			<div class="board-side-boardItem">
 				<div class="board-name">
-					<span>FAQ</span>
-					<input type="hidden" name="faq" value="faq">
+					<a href="<c:url value='/admin/board/board?boardFormNo=3'/>">
+						<span>FAQ</span>
+					</a>
+					<input type="hidden" name="faq" value="3">
 				</div>
 				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
 			</div>
@@ -44,8 +50,9 @@
 				<c:forEach var="vo" items="${boardList }">
 					<div class="board-side-boardItem">
 						<div class="board-name">
-							<span>${vo.boardFormName }</span>
-							<input type="hidden" name="boardFormNo" value="boardFormNo">
+							<a href="<c:url value='/admin/board/board?boardFormNo=${vo.boardFormNo }'/>">
+								<span>${vo.boardFormName }</span>
+							</a>
 						</div>
 						<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
 					</div>
