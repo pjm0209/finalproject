@@ -18,7 +18,6 @@ import com.team2.mbti.board.model.BoardService;
 import com.team2.mbti.board.model.BoardVO;
 import com.team2.mbti.common.ConstUtil;
 import com.team2.mbti.common.PaginationInfo;
-import com.team2.mbti.common.SearchVO;
 
 import lombok.RequiredArgsConstructor;
 
