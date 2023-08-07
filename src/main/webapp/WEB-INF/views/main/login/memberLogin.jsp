@@ -1,33 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>     
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+    
 <!DOCTYPE html>
 <html lang="ko">
-<article class="simpleForm">
-	<form name="frmLogin" method="post"	action="<c:url value='/login/memberLogin'/>">
-		<fieldset>
-			<legend>로그인</legend>
-			<div>
-				<label for="userid" class="label">아이디</label>
-				<input type="text" name="userid" id="userid" 
-					value="${cookie.ck_userid.value }">
-			</div>
-			<div>
-				<label for="pwd" class="label">비밀번호</label>
-				<input type="password" name="pwd" id="pwd">
-			</div>
-			<div class="align_center">
-				<input type="submit" id="lg_submit" value="로그인">
-				<input type="checkbox" name="chkSave" id="chkSave"
-					<c:if test="${!empty cookie.ck_userid }">
-						checked="checked"
-					</c:if>
-				>
-				<label for="chkSave">아이디 저장하기</label>
-			</div>
-		</fieldset>
-	</form>
-</article>  
+
 <head>
 
     <meta charset="utf-8">
@@ -36,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - MemberLogin</title>
+    <title>SB Admin 2 - Login</title>
 
     <!-- Custom fonts for this template-->
     <link href="<c:url value='/admin-css-js/vendor/fontawesome-free/css/all.min.css'/>" rel="stylesheet" type="text/css">
@@ -62,11 +39,10 @@
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Login</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                     </div>
                                     <form class="user">
                                         <div class="form-group">
@@ -81,26 +57,27 @@
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
                                                 <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                <label class="custom-control-label" for="customCheck">아이디 저장</label>
+                                                <label class="custom-control-label" for="customCheck">Remember
+                                                    Me</label>
                                             </div>
                                         </div>
-                                        <a href="<c:url value='/main/index'/>" class="btn btn-primary btn-user btn-block">
-                                            로그인
+                                        <a href="<c:url value='/admin/index'/>" class="btn btn-primary btn-user btn-block">
+                                            Login
                                         </a>
                                         <hr>
-                                        <a href="<c:url value='/main/index'/>" class="btn btn-google btn-user btn-block">
-                                            <i class="fab fa-google fa-fw"></i> 구글 로그인
+                                        <a href="<c:url value='/admin/index'/>" class="btn btn-google btn-user btn-block">
+                                            <i class="fab fa-google fa-fw"></i> Login with Google
                                         </a>
-                                        <a href="<c:url value='/main/index'/>" class="btn btn-facebook btn-user btn-block">
-                                            <i class="fab fa-facebook-f fa-fw"></i> 페이스북 로그인
+                                        <a href="<c:url value='/admin/index'/>" class="btn btn-facebook btn-user btn-block">
+                                            <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
                                         </a>
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="<c:url value='/admin/forgot-password'/>">아이디 / 비밀번호 찾기</a>
-                                    </div>                                    
+                                        <a class="small" href="<c:url value='/admin/forgot-password'/>">Forgot Password?</a>
+                                    </div>
                                     <div class="text-center">
-                                        <a class="small" href="<c:url value='/admin/register'/>">회원 가입</a>
+                                        <a class="small" href="<c:url value='/admin/register'/>">Create an Account!</a>
                                     </div>
                                 </div>
                             </div>
