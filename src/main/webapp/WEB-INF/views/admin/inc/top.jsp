@@ -112,7 +112,7 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="<c:url value='/admin/board/board'/>">
+                <a class="nav-link" href="<c:url value='/admin/board/board?boardFormNo=1'/>">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>게시판</span></a>
             </li>

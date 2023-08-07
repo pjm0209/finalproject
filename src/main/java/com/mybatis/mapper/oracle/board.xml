@@ -6,50 +6,10 @@
  	<sql id="searchWhere">
 		<where>
 			<if test="searchKeyword!=null and searchKeyword!=''">
-				${searchCondition} like '%' || #{searchKeyword} || '%'
+				${searchCondition} like '%' || #{searchKeyword} || '%' 
 			</if>
 		</where>
 	</sql> 
-	
-	<select id="selectAllNotice" parameterType="searchVo"
-		resultType="map">
-		select * from (
-			select rownum as RNUM, A.* from	(
-				select * from noticeview
-				<include refid="searchWhere"></include>
-				order by notice_no
-			)A
-		)
-		<![CDATA[
-		where RNUM> #{firstRecordIndex} 
-		and RNUM<=#{firstRecordIndex} + #{recordCountPerPage}]]>
-	</select>
-	
-	<select id="getTotalRecordNotice" parameterType="searchVo"
-		resultType="int">
-		select count(*) from notice
-		<include refid="searchWhere"></include>
-	</select>
-	
-	<select id="selectAllFaq" parameterType="searchVo"
-		resultType="map">
-		select * from (
-			select rownum as RNUM, A.* from	(
-				select * from faqview
-				<include refid="searchWhere"></include>
-				order by faq_no
-			)A
-		)
-		<![CDATA[
-		where RNUM> #{firstRecordIndex} 
-		and RNUM<=#{firstRecordIndex} + #{recordCountPerPage}]]>
-	</select>
-	
- 	<select id="getTotalRecordFaq" parameterType="searchVo"
-		resultType="int">
-		select count(*) from faq
-		<include refid="searchWhere"></include>
-	</select> 
 
  	<select id="selectAll" parameterType="searchVo"
 		resultType="map">
@@ -69,6 +29,11 @@
 		resultType="int">
 		select count(*) from board
 		<include refid="searchWhere"></include>
+	</select>
+	
+	<select id="selectBoardName" parameterType="int" resultType="String">
+		select board_form_name from board_form
+		where board_form_no = #{boardFormNo}
 	</select>
 	
 	<select id="selectAllBoard" resultType="boardFormVo">

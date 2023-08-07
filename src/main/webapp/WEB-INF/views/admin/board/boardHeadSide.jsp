@@ -19,33 +19,6 @@
 	</div>
 	<div class="group">
 		<div id="board-group-list" class="nav">
-			<div class="board-side-boardItem">
-				<div class="board-name">
-					<a href="<c:url value='/admin/board/board?boardFormNo=1'/>">
-						<span>공지사항</span>
-					</a>
-					<input type="hidden" name="notice" value="1">
-				</div>
-				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
-			</div>
-			<div class="board-side-boardItem">
-				<div class="board-name">
-					<a href="<c:url value='/admin/board/board?boardFormNo=2'/>">
-						<span>QnA</span>
-					</a>
-					<input type="hidden" name="qna" value="2">
-				</div>
-				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
-			</div>
-			<div class="board-side-boardItem">
-				<div class="board-name">
-					<a href="<c:url value='/admin/board/board?boardFormNo=3'/>">
-						<span>FAQ</span>
-					</a>
-					<input type="hidden" name="faq" value="3">
-				</div>
-				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
-			</div>
 			<c:if test="${!empty boardList}">
 				<c:forEach var="vo" items="${boardList }">
 					<div class="board-side-boardItem">
