@@ -6,8 +6,8 @@
 <c:import url="/admin/board/boardHeadSide"></c:import>
 <div class="board-body">
 	<div id="board-title">
-		<h5></h5>
-		<button class="bg-gradient-secondary" id="board-write-button" onclick="location.href='boardWrite'">글쓰기</button>
+		<h5>${board }</h5>
+		<button class="bg-gradient-secondary" id="board-write-button" onclick="location.href='boardWrite?boardFormNo=${param.boardFormNo}'">글쓰기</button>
 	</div>
 	<div class="board">
 		<div class="board-head">
@@ -46,7 +46,7 @@
 							<th scope="row"><input type="checkbox" class="board-checkbox"></th>
 							<td><a href="/admin/board/boardDetail?board_no=${map['BOARD_NO'] }">${map['BOARD_TITLE']}</a></td>
 							<td>${map['NAME'] }</td>
-							<td>${map['BOARD_REGDATE'] }</td>
+							<td><fmt:formatDate value="${map['BOARD_REGDATE'] }" pattern="yyyy-MM-dd"/> </td>
 							<td>${map['BOARD_READCOUNT'] }</td>
 						</tr>
 					</c:forEach>

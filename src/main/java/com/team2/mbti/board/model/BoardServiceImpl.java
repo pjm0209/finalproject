@@ -18,32 +18,17 @@ public class BoardServiceImpl implements BoardService {
 	public List<Map<String, Object>> selectAll(SearchVO vo) {
 		return boardDao.selectAll(vo);
 	}
-	
-	@Override
-	public List<Map<String, Object>> selectAllNotice(SearchVO vo) {
-		return boardDao.selectAllNotice(vo);
-	}
-	
-	@Override
-	public List<Map<String, Object>> selectAllFaq(SearchVO vo) {
-		return boardDao.selectAllFaq(vo);
-	}
 
 	@Override
 	public int getTotalRecord(SearchVO vo) {
 		return boardDao.getTotalRecord(vo);
 	}
-
+	
 	@Override
-	public int getTotalRecordNotice(SearchVO vo) {
-		return boardDao.getTotalRecordNotice(vo);
+	public String selectBoardName(int boardFormNo) {
+		return boardDao.selectBoardName(boardFormNo);
 	}
-
-	@Override
-	public int getTotalRecordFaq(SearchVO vo) {
-		return boardDao.getTotalRecordFaq(vo);
-	}
-
+	
 	@Override
 	public List<BoardFormVO> selectAllBoard() {
 		return boardDao.selectAllBoard();
