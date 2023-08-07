@@ -162,7 +162,7 @@
 								<tr>
 									<th style="text-align: center;vertical-align: middle;">배송지</th>
 									<td>
-										<input type="button" class="form-control btn btn-info" onclick="getZipcode();" value="우편번호 검색"><br>
+										<input type="button" class="form-control btn btn-info" onclick="getZipcode();" value="우편번호 검색" style="background: #cb8cdf; border: 0px; margin: 5px 0px;color: white;"><br>
 										<input type="text" class="form-control" placeholder="우편번호" name="odma_zipcode" id="odma_zipcode" value="06271" readonly="readonly">
 										<input type="text" class="form-control" placeholder="기본주소" name="odma_addr1" id="odma_addr1" value="서울 강남구 강남대로 242" readonly="readonly" style="margin-top: 5px;">
 										<input type="text" class="form-control" placeholder="상세주소" name="odma_addr2" value="5" style="margin-top: 5px;">
@@ -200,7 +200,7 @@
 								<tr>
 									<th style="text-align: center;vertical-align: middle;">송장번호</th>
 									<td class="form-inline">
-										<input class="form-control" id="odm_delinum" name="odm_delinum" type="text" value="">
+										<input class="form-control" id="odm_delinum" name="odm_delinum" type="text" value="" style="margin-left: 18px;">
 										
 									</td>
 								</tr>

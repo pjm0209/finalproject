@@ -2,8 +2,8 @@
 	pageEncoding="UTF-8"%>
 
 		<form name="serach" method="post" action="<c:url value='/admin/book/bookList'/>">
-		<div class="flex">
-		
+		<div class="flex shadow-sm p-3 mb-5 bg-body rounded" style="margin: 10px 0px;background: white;">
+			<h2>상품 검색</h2>
 			<div class="box">
 				<label>상품카테고리</label>
 				
