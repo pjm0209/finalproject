@@ -203,14 +203,16 @@
 					<td>결제완료</td>
 					<td>sysdate</td>
 					<td>배송준비할까??</td>
+					<td><button class="btn btn-warning btn-xs" onclick="" type="button" title="수정"><i class="fas fa-edit"></i></button></td>
 					<td>
-						<button class="btn btn-warning btn-xs" onclick="" type="button" title="재고저장"><i class="fas fa-edit"></i></button>
+						<button class="btn btn-warning btn-xs" onclick="location.href='orderDetail'" type="button" title="재고저장"><i class="fas fa-edit"></i></button>
 					</td>
 				</tr>
 				
 			</tbody>
 		</table>
 	</div>
+</div>
 </div>
 <!-- End of Main Content -->
 <%@ include file="../inc/bottom.jsp"%>
