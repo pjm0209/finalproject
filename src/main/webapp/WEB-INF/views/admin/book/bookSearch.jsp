@@ -1,23 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="../inc/top.jsp"%>
 
-<!-- Begin Page Content -->
-<!-- Page Heading -->
-<div class="head-div">
-	<h2 class="text-gray-800">판매 상품 주문 관리</h2>
-</div>
-<%@ include file="../order/orderSideBody.jsp"%>
-<div class="board-body">
-	<div id="board-title">
-		<h5>장바구니 관리</h5>
-	</div>
-	<!--  -->
-	
-	<div>
 		<form name="serach" method="post" action="<c:url value='/admin/book/bookList'/>">
-			<div class="flex shadow-sm p-3 mb-5 bg-body rounded" style="margin: 10px 0px;background: white;">
-			<h2>장바구니 검색</h2>
+		<div class="flex shadow-sm p-3 mb-5 bg-body rounded" style="margin: 10px 0px;background: white;">
+			<h2>상품 검색</h2>
 			<div class="box">
 				<label>상품카테고리</label>
 				
@@ -114,43 +100,3 @@
 		</div>
 		</form>
 	</div>
-
-	<!--  -->
-	<div class="board shadow-sm p-3 mb-5 bg-body rounded" style="margin: 10px 0px;background: white;">
-		
-		<table class="table">
-			<thead>
-				<tr class="board-table-colum">
-					<th scope="col"><input type="checkbox" id="check-All" class="board-checkbox"></th>
-					<th scope="col" class="board-title">상품코드</th>
-					<th scope="col" class="board-regdate">상품명</th>
-					<th scope="col" class="board-writer">상품이미지</th>
-					<th scope="col" class="board-readcount">카테고리</th>
-					<th scope="col" class="board-readcount">판매가</th>
-					<th scope="col" class="board-readcount">재고</th>
-					<th scope="col" class="board-readcount">등록일</th>
-					<th scope="col" class="board-readcount">관리</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>코드</td>
-					<td>상품명</td>
-					<td>상품이미지</td>
-					<td>책 > 검사</td>
-					<td>10,000원</td>
-					<td><input class="form-control" name="i_pr_stock" type="number" value="1" style="min-width: 100px;"></td>
-					<td>regdate</td>
-					<td>
-						<button class="btn btn-warning btn-xs" onclick="" type="button" title="재고저장"><i class="fas fa-edit"></i></button>
-					</td>
-				</tr>
-				
-			</tbody>
-		</table>
-	</div>
-</div>
-</div>
-<!-- End of Main Content -->
-<%@ include file="../inc/bottom.jsp"%>

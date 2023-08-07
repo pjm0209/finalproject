@@ -29,6 +29,7 @@
 <div class="board-body">
 	<div id="board-title">
 		<h5>회원 리스트</h5>
+			<button class="bg-gradient-secondary" id="board-write-button">탈퇴</button>
 	</div>
 	<div class="board">
 		<div class="board-head">
@@ -44,6 +45,7 @@
 				</div>
 			</div>
 		</div>
+		<form name="frmDelete" method="post">
 		<table class="table">
 			<thead>
 				<tr class="board-table-colum">
@@ -92,6 +94,33 @@
 				</tr>								
 			</tbody>
 		</table>
+		<div style="width: 10%;text-align: center;margin: 0 auto;">
+			<ul class="pagination">
+				<c:if test="${pagingInfo.firstPage > 1 }">
+				    <li class="page-item">
+				      <a class="page-link" href="#" aria-label="Previous">
+				        <span aria-hidden="true">&laquo;</span>
+				      </a>
+				    </li>
+				</c:if>
+				<c:forEach var="i" begin="${pagingInfo.firstPage}" end="${pagingInfo.lastPage}">
+					<c:if test="${i==pagingInfo.currentPage}">
+						<li class="page-item"><a class="page-link" href="<c:url value='/admin/mbti/member/memberList?currentPage=${i}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">${i}</a></li>
+					</c:if>
+					<c:if test="${i!=pagingInfo.currentPage}">
+						<li class="page-item"><a class="page-link" href="<c:url value='/admin/mbti/member/memberList?currentPage=${i}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">[${i}]</a></li>
+					</c:if>
+				</c:forEach>
+				<c:if test="${pagingInfo.lastPage < pagingInfo.totalPage}">
+				    <li class="page-item">
+				      <a class="page-link" href="#" aria-label="Next">
+				        <span aria-hidden="true">&raquo;</span>
+				      </a>
+				    </li>
+				</c:if>
+			</ul>
+		</div>
+		</form>	
 	</div>
 </div>
 <!-- End of Main Content -->

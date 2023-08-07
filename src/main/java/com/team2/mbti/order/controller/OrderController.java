@@ -34,4 +34,22 @@ public class OrderController {
 		return "admin/order/orderList";
 	}
 	
+	@RequestMapping("/admin/order/orderCancleList")
+	public String orderCancleList(Model model) {
+		logger.info("주문관리 페이지 - 주문 취소 리스트 페이지입니다.");
+		
+		model.addAttribute("title", "주문 취소 리스트 페이지");
+		
+		return "admin/order/orderCancleList";
+	}
+	
+	@RequestMapping("/admin/order/orderDetail")
+	public String orderDetail(Model model) {
+		logger.info("주문관리 페이지 - 주문 상세보기 페이지입니다.");
+		
+		model.addAttribute("title", "주문 상세보기 페이지");
+		
+		return "admin/order/orderDetail";
+	}
+	
 }
