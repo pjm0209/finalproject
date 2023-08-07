@@ -8,6 +8,8 @@
 <link href="<c:url value='/admin-css-js/css/book-order.css'/>" rel="stylesheet" type="text/css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
+<script src="../admin-css-js/js/book.js"></script>
 
 
 <div class="head-div">
@@ -132,7 +134,9 @@
 					<script>
 						$(function () {
 							CKEDITOR.replace('contents', {
-								filebrowserUploadUrl : '${pageContext.request.contextPath}/adm/fileupload.do'
+								uploadUrl: "/mbti/bookImageUpload",	//드래그 앤 드롭	
+								filebrowserUploadUrl : '/mbti/bookImageUpload',
+								height : 500
 							});
 						});
 					</script>

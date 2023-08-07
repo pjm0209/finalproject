@@ -239,6 +239,19 @@
 					</div>
 					</div>
 					
+					<!--  -->
+					<div class="dropend">
+					  <button type="button" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+					    Dropend
+					  </button>
+					  <ul class="dropdown-menu">
+					    <!-- Dropdown menu links -->
+					    <li><button class="dropdown-item" type="button">Action</button></li>
+   						<li><button class="dropdown-item" type="button">Another action</button></li>
+    					<li><button class="dropdown-item" type="button">Something else here</button></li>
+					  </ul>
+					</div>
+					<!--  -->
 					
 				</div>
 				

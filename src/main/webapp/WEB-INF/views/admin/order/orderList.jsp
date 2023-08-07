@@ -5,7 +5,7 @@
 <!-- Begin Page Content -->
 <!-- Page Heading -->
 <div class="head-div">
-	<h2 class="text-gray-800">판매 상품 주문 관리</h2>
+	<h2 class="text-gray-800">상품 주문 관리</h2>
 </div>
 <!--  -->
 <%@ include file="../order/orderSideBody.jsp"%>
@@ -48,7 +48,6 @@
 					<td>결제완료</td>
 					<td>sysdate</td>
 					<td>배송준비할까??</td>
-					<td><button class="btn btn-warning btn-xs" onclick="" type="button" title="수정"><i class="fas fa-edit"></i></button></td>
 					<td>
 						<button class="btn btn-warning btn-xs" onclick="location.href='orderDetail'" type="button" title="재고저장"><i class="fas fa-edit"></i></button>
 					</td>

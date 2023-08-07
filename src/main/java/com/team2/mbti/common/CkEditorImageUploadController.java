@@ -76,4 +76,54 @@ public class CkEditorImageUploadController {
 		}
 		return null;
 	}
+	
+	@RequestMapping("/bookImageUpload")
+	public String bookImageUpload(HttpServletRequest request, HttpServletResponse response, MultipartHttpServletRequest multiFile) throws Exception {
+		JsonObject json = new JsonObject();
+		PrintWriter printWriter = null;
+		OutputStream out = null;
+		MultipartFile file = multiFile.getFile("upload");
+		if(file != null) {
+			if(file.getSize() > 0 && StringUtils.isNotBlank(file.getName())) {
+				if(file.getContentType().toLowerCase().startsWith("image/")) {
+					try {
+						String fileName = file.getName();
+						byte[] bytes;
+						bytes = file.getBytes();
+						String uploadPath = request.getServletContext().getRealPath("/bookImageUpload/");
+						File uploadFile = new File(uploadPath);
+						if(!uploadFile.exists()) {
+							uploadFile.mkdirs();
+						}
+						
+						fileName = UUID.randomUUID().toString();
+						uploadPath = uploadPath + "/" + fileName;
+						out = new FileOutputStream(new File(uploadPath));
+						out.write(bytes);
+						
+						printWriter = response.getWriter();
+						response.setContentType("text/html");
+						
+						String fileUrl = request.getContextPath() + "/bookImageUpload/" + fileName;
+						
+						json.addProperty("uploaded", 1);
+						json.addProperty("fileName", fileName);
+						json.addProperty("url", fileUrl);
+						
+						printWriter.println(json);
+					} catch (IOException e) {
+						e.printStackTrace();
+					} finally {
+						if(out != null) {
+							out.close();
+						}
+						if(printWriter != null) {
+							printWriter.close();
+						}
+					}
+				} 
+			}
+		}
+		return null;
+	}
 }
