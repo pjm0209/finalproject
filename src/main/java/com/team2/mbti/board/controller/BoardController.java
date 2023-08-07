@@ -41,9 +41,9 @@ public class BoardController {
 		return "admin/board/boardHeadSide";
 	}
 	
-	@GetMapping("/board")
-	public String board_get(@RequestParam(defaultValue = "1") int boardFormNo, @ModelAttribute BoardVO vo, Model model) {
-		logger.info("게시판 관리 화면 보여주기");
+	@RequestMapping("/board")
+	public String board_get(@RequestParam int boardFormNo, @ModelAttribute BoardVO vo, Model model) {
+		logger.info("게시판 관리 화면 보여주기 파라미터 boardFormNo: {}, vo: {}", boardFormNo, vo);
 		
 		PaginationInfo pagingInfo = new PaginationInfo();
 		pagingInfo.setBlockSize(ConstUtil.BLOCK_SIZE);
@@ -56,38 +56,20 @@ public class BoardController {
 
 		List<Map<String, Object>> list = null;
 		
-		String board = "";
+		String board = boardService.selectBoardName(boardFormNo);
+		logger.info("게시판 이름 검색결과 board: {}", board);
 		
-		if(boardFormNo == 1) {
-			list = boardService.selectAllNotice(vo);
-			
-			int totalRecord = boardService.getTotalRecordNotice(vo);
-			logger.info("공지사항 목록 전체 조회 - totalRecord: {}", totalRecord);
-			pagingInfo.setTotalRecord(totalRecord);
-			
-			board = "공지사항";
-		} else if (boardFormNo == 2) {
-			list = boardService.selectAllFaq(vo);
-			
-			int totalRecord = boardService.getTotalRecordFaq(vo);
-			logger.info("FAQ 목록 전체 조회 - totalRecord: {}", totalRecord);
-			pagingInfo.setTotalRecord(totalRecord);
-			
-			board = "FAQ";
-		} else if (boardFormNo == 3) {
-			
-		} else {
-			list = boardService.selectAll(vo);
-			logger.info("게시판 전체조회 결과: list.size: {}", list.size());
-			
-			int totalRecord = boardService.getTotalRecord(vo);
-			logger.info("글 목록 전체 조회 - totalRecord: {}", totalRecord);
-			pagingInfo.setTotalRecord(totalRecord);					
-		}		
+		list = boardService.selectAll(vo);
+		logger.info("게시판 전체조회 결과: list.size: {}", list.size());
+		
+		int totalRecord = boardService.getTotalRecord(vo);
+		logger.info("글 목록 전체 조회 - totalRecord: {}", totalRecord);
+		pagingInfo.setTotalRecord(totalRecord);						
 		
 		model.addAttribute("title", "게시판 관리");
 		model.addAttribute("boardList", list);
 		model.addAttribute("pagingInfo", pagingInfo);
+		model.addAttribute("board", board);
 		
 		return "admin/board/board";
 	}
@@ -130,9 +112,13 @@ public class BoardController {
 	}
 	
 	@GetMapping("/boardWrite")
-	public String boardWrite_get(Model model) {
+	public String boardWrite_get(@RequestParam int boardFormNo, Model model) {
 		logger.info("게시판 글쓰기 화면 보여주기");
 		
+		List<BoardFormVO> list = boardService.selectAllBoard();
+		logger.info("게시판 종류 전체조회 결과: list: {}", list);
+		
+		model.addAttribute("boardList", list);			
 		model.addAttribute("title", "게시판 글쓰기");
 		
 		return "admin/board/boardWrite";
