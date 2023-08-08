@@ -119,11 +119,6 @@ input#board-search-area {
 	width: 300px;
 }
 
-th.board-title {
-    width: 60%;
-    text-align: center;
-}
-
 select#board-search-select {
     margin-right: 30px;
     height: 40px;
@@ -135,6 +130,26 @@ select#board-search-select {
 .board-side-boardItem {
     width: 200px;
     cursor: pointer;
+}
+
+th.board-title {
+    width: 60%;
+}
+
+th.board-readcount {
+    width: 90px;
+}
+
+th.board-writer {
+    width: 200px;
+}
+
+th.board-regdate {
+    width: 200px;
+}
+
+tr.board-table-colum th {
+    text-align: center;
 }
 
 /*게시판 수정 css*/
