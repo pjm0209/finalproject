@@ -23,7 +23,7 @@ public class MemberLoginController {
 	public String login() {
 		logger.info("로그인 화면");
 		
-		return "main/login/memberLogin";
+		return "main/member/memberLogin";
 	}
 	
 	@RequestMapping("/logout")
@@ -34,6 +34,14 @@ public class MemberLoginController {
 		
 		return "redirect:/";
 	}
+	
+	@RequestMapping("/member/memberRegister")
+	public String register() {
+		logger.info("회원가입 화면");
+				
+		return "main/member/memberRegister";
+	}
+	
 	
 }
 

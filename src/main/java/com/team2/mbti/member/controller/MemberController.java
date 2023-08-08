@@ -23,6 +23,7 @@ public class MemberController {
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	private final MemberService memberService;
 	
+	//admin
 	@RequestMapping("/memberList")
 	public String memberList(@ModelAttribute SearchVO vo,@RequestParam(required = false) String searchCondition,
 			Model model) {
@@ -45,12 +46,14 @@ public class MemberController {
 		return "admin/member/memberList";
 	}
 	
+	//메인
 	@RequestMapping("/memberRegister")
 	public String register() {
 		logger.info("회원 가입 페이지 보여주기");
 
 		return "member/memberRegister";
 	}
+
 	
 	
 }

@@ -54,25 +54,28 @@
 <div class="divForm">
 <form name="frm1" method="post" action="<c:url value='/main/member/register'/>">
 <fieldset>
-	<legend>회원 가입</legend>
+	<h1>회원 가입</h1>
     <div>        
-        <label for="name">성명</label>
-        <input type="text" name="name" id="name" style="ime-mode:active">
+        <label for="name">이름</label>
+        <input type="text" name="name" id="name">
     </div>
+    
     <div>
-        <label for="userid">회원ID</label>
-        <input type="text" name="userid" id="userid"
-        		style="ime-mode:inactive">&nbsp;
+        <label for="userid">아이디</label>
+        <input type="text" name="userid" id="userid">      		
         <input type="button" value="중복확인" id="btnChkId" title="새창열림">
     </div>
+    
     <div>
         <label for="pwd">비밀번호</label>
         <input type="Password" name="pwd" id="pwd">
     </div>
+    
     <div>
         <label for="pwd2">비밀번호 확인</label>
         <input type="Password" name="pwd2" id="pwd2">
     </div>
+    
     <div>
         <label for="zipcode">주소</label>
         <input type="text" name="zipcode" id="zipcode" ReadOnly  
@@ -83,6 +86,7 @@
         <span class="sp1">&nbsp;</span>
         <input type="text" name="addressDetail" title="상세주소"  class="width_350">
     </div>
+    
     <div>
         <label for="hp1">핸드폰</label>&nbsp;<select name="hp1" id="hp1" title="휴대폰 앞자리">
             <option value="010">010</option>
@@ -91,16 +95,15 @@
             <option value="017">017</option>
             <option value="018">018</option>
             <option value="019">019</option>
-       	</select>
-        -
+       	</select>&nbsp;-        
         <input type="text" name="hp2" id="hp2" maxlength="4" title="휴대폰 가운데자리"
-        	class="width_80">-
+        	class="width_80">&nbsp;-
         <input type="text" name="hp3" id="hp3" maxlength="4" title="휴대폰 뒷자리"
         	class="width_80">
     </div>
     <div>
         <label for="email1">이메일 주소</label>
-        <input type="text" name="email1"  id="email1" title="이메일주소 앞자리">@
+        <input type="text" name="email1"  id="email1" title="이메일주소 앞자리">&nbsp;@
         <select name="email2" id="email2"  title="이메일주소 뒷자리">
             <option value="naver.com">naver.com</option>
             <option value="hanmail.net">hanmail.net</option>
@@ -114,10 +117,7 @@
     <div class="center">
          <input type="submit" id="wr_submit" value="회원가입">
     </div>
-</fieldset>
-
-    <input type ="text" name="chkId" id="chkId">
-        
+</fieldset>    
 </form>
 </div>
 </article>

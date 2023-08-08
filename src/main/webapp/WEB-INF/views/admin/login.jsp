@@ -30,7 +30,7 @@ body {
 
 .wrapper > h2 {
     font-size: 30px;
-    color: #6A24FE;
+    color: #a653ec;
     margin-bottom: 30px;
     text-align: center;
 }
@@ -51,9 +51,9 @@ body {
 }
 
 #login-form > input[type="submit"] {
-    color: #fff;
+    color: #ece6cc;
     font-size: 20px;
-    background-color: #6A24FE;
+    background-color: #660099;
     margin-top: 20px;
     cursor: pointer;
 }

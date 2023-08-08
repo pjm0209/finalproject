@@ -13,4 +13,5 @@ public interface MemberDAO {
 	int getTotalRecordMember(SearchVO searchVo);
 	MemberVO selectByNoMember(int no);
 
+
 }
