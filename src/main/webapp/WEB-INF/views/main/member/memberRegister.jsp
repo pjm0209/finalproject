@@ -17,10 +17,7 @@ h1 {
 	font-size: 30px;
     text-align: center;
     font-weight: bold;
-}
-
-.wrapper {
-    padding: 10px;
+    background: #ffcf00; 
 }
 
 html {
@@ -57,15 +54,14 @@ div {
 
 .userid input{
 	width:30%;
-	
 }
 
 .password input{
-	width:55%;
+	width:63%;
 }
 
 .passwordCheck input{
-	width:55%;
+	width:63%;
 }
 
 .tel input{
@@ -83,12 +79,7 @@ div {
 }
 
 .address input{
-	width:55%;
-}
-
-.signUp button{
-  width: 200px;
-  height: 50px;
+	width:55%;	
 }
 
 .error{
@@ -96,6 +87,28 @@ div {
     height: 20px;
     color:red;
     font-weight: 700;
+}
+
+.member_register{
+	margin-left:30px;
+}
+
+.member_register button{
+	font-size:12px;
+	font-weight:bold;
+	width:70px;
+	height:30px;
+}
+
+.signUp{
+	text-align: center;	
+}
+
+.signUp button{
+  	width: 200px;
+ 	height: 50px;
+	background-color:#ffcf00;
+	font-weight:bold;	
 }
 </style>
 
@@ -144,7 +157,7 @@ div {
 
 </head>
 <body>
-	<h1>회원가입</h1>
+	<h1>회원가입</h1><br>
 <form name="frm1" method="post" action="<c:url value='/main/member/register'/>">
 	<div class="member_register">
 		<span>이름 *</span>
@@ -188,19 +201,19 @@ div {
 		
 		<span>전화번호 *</span>
 		<div class="tel">
-			<input type="text" id="tel" placeholder="휴대폰번호 입력('-'제외 11자리 입력)">
+			<input type="text" id="tel" placeholder="휴대폰번호 입력 ('-') 제외 11자리 입력)">
 			<div class="error" id="emailError"></div>
 		</div>		
 					
 		<span>주소 *</span>				
 		<div class="address" id="address">
 			<input type="text" id="address" placeholder="주소를 입력해주세요">
-			<button id="btnAddress" value="우편번호 검색">우편번호 검색</button>		
+			<button id="btnAddress" value="주소 검색">주소 검색</button>		
 			<input type="text" id="address" placeholder="상세주소">
 		</div>		
 		
-        <div class="signUp">
-            <button id="signUpButton"">가입하기</button>
+        <div class="signUp"><br>
+            <button id="signUpButton">가입하기</button>
         </div>				
 	</div>
 </form>
