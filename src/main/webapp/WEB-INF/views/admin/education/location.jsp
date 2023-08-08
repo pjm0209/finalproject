@@ -2,12 +2,40 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
 
+<style>
+button#location-write-button {
+	float:  right;
+	border: 0;
+	border-radius: 5px;
+	padding: 6px 41px;
+	margin-top: -6px;
+	margin-right: 9px;
+	color: white;
+}
+
+button#location-delete-button {
+	float:  right;
+	border: 0;
+	border-radius: 5px;
+	padding: 6px 41px;
+	margin-top: -6px;
+	margin-right: 9px;
+	color: white;
+}
+
+.location-button {
+	background-color: #858796;
+    background-image: linear-gradient(180deg, #858796 10%, #60616f 100%);
+    background-size: cover;
+}
+</style>
+
 <!-- Begin Page Content -->
 <!-- Page Heading -->
 <div class="head-div">
 	<h2 class="text-gray-800">교육 관리</h2>
 	<button type="button" class="bg-gradient-primary"
-		id="add-newBoard-button" onclick="location.href='boardCreate'">교육장 추가</button>
+		id="add-newBoard-button" onclick="location.href='locationCreate'">교육장 추가</button>
 </div>
 <div class="side-body">
 	<div class="side-div-title">
@@ -42,24 +70,26 @@
 <div class="board-body">
 	<div id="board-title">
 		<h5>교육장 관리</h5>
-		<button class="bg-gradient-secondary" id="board-write-button">추가</button>
-		<button class="bg-gradient-secondary" id="board-write-button">삭제</button>
+		<button class="location-button" id="location-write-button">추가</button>
+		<button class="location-button" id="location-delete-button">삭제</button>
 	</div>
 	<div class="board">
 		<div class="board-head">
 			<div class="board-search-result">
-				<span class="search-count"></span>
+				<form name="frmSearch" method="post" action="<c:url value='/admin/education/location'/>">
 				<div class="input-group mb-3" id="board-search-div">
 					<select class="form-select form-select-lg" aria-label=".form-select-lg example" name="searchcondition" id="board-search-select">					  	
-					  	<option value="1">교육장</option>
-					  	<option value="2">주소</option>
-					  	<option value="3">전화번호</option>
+					  	<option value="ep_name" <c:if test="${param.searchCondition=='ep_name'}"> selected="selected" </c:if>>교육장</option>
+					  	<option value="ep_address" <c:if test="${param.searchCondition=='ep_address'}"> selected="selected" </c:if>>주소</option>
+					  	<option value="ep_tel" <c:if test="${param.searchCondition=='ep_tel'}"> selected="selected" </c:if>>전화번호</option>
 					</select>
-				 	<input type="text" class="form-control" placeholder="검색어를 입력하세요" aria-label="Recipient's username" aria-describedby="button-addon2" id="board-search-area">
-				 	<button class="btn btn-outline-secondary" type="button" id="button-addon2">검색</button>
+				 	<input type="text" class="form-control" name="searchKeyword" placeholder="검색어를 입력하세요" aria-label="Recipient's username" aria-describedby="button-addon2" id="board-search-area" value="${param.searchKeyword}">
+				 	<button class="btn btn-outline-secondary" type="submit" id="button-addon2">검색</button>
 				</div>
+				</form>
 			</div>
 		</div>
+		<form name="frmDelete" method="post">
 		<table class="table">
 			<thead>
 				<tr class="board-table-colum">
@@ -71,19 +101,48 @@
 					<th scope="col" class="board-writer">전화번호</th>
 				</tr>
 			</thead>
+			<c:set var="idx" value="0"/>
 			<tbody>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>1</td>
-					<td>강남점</td>
-					<td>06611</td>
-					<td>서울 서초구 서초대로77길 55 에이프로스퀘어 3층</td>
-					<td>02-532-6509</td>
-				</tr>
-				
+				<c:forEach var="educationVo" items="${list}">
+					<c:set var="educationPlace" value="${educationVo.epNo}"/>
+					<tr>
+						<th scope="row"><input type="checkbox" class="board-checkbox" vlaue="${educationVo.epNo }"></th>
+						<td>${educationVo.epNo }</td>
+						<td>${educationVo.epName }</td>
+						<td>${educationVo.epZipcode }</td>
+						<td>${educationVo.epAddress }</td>
+						<td>${educationVo.epTel }</td>
+					</tr>
+				</c:forEach>
 			</tbody>
 		</table>
-	</div>
+		<div style="width: 10%;text-align: center;margin: 0 auto;">
+			<ul class="pagination">
+				<c:if test="${pagingInfo.firstPage > 1 }">
+				    <li class="page-item">
+				      <a class="page-link" href="#" aria-label="Previous">
+				        <span aria-hidden="true">&laquo;</span>
+				      </a>
+				    </li>
+				</c:if>
+				<c:forEach var="i" begin="${pagingInfo.firstPage}" end="${pagingInfo.lastPage}">
+					<c:if test="${i==pagingInfo.currentPage}">
+						<li class="page-item"><a class="page-link" href="<c:url value='/admin/education/location?currentPage=${i}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">${i}</a></li>
+					</c:if>
+					<c:if test="${i!=pagingInfo.currentPage}">
+						<li class="page-item"><a class="page-link" href="<c:url value='/admin/education/location?currentPage=${i}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">[${i}]</a></li>
+					</c:if>
+				</c:forEach>
+				<c:if test="${pagingInfo.lastPage < pagingInfo.totalPage}">
+				    <li class="page-item">
+				      <a class="page-link" href="#" aria-label="Next">
+				        <span aria-hidden="true">&raquo;</span>
+				      </a>
+				    </li>
+				</c:if>
+			</ul>
+		</div>
+		</form>
 </div>
 </div>
 <!-- End of Main Content -->
