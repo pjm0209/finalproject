@@ -8,9 +8,9 @@
 <div class="board-body">
 	<form name="boardWriteForm" method="post" enctype="multipart/form-data" action="<c:url value='/admin/board/boardWrite'/>">
 		<div id="board-title">
-		<input type="hidden" name="boardFormNo" value="4">
-		<input type="hidden" name="no" value="1">
-			<h5>공지사항</h5>
+		<input type="hidden" name="boardFormNo" value="${param.boardFormNo }">
+		<input type="hidden" name="no" value="3">
+			<h5>${board }</h5>
 			<div class="board-head-button">
 				<input type="button" class="bg-gradient-secondary" onclick="location.href='<c:url value="/admin/board/board?boardFormNo=1"/>'" value="취소">
 				<input type="submit" class="bg-gradient-primary" id="save-boardCreate" value="저장">
@@ -24,7 +24,7 @@
 						<dd>
 							<select id="select_board" name="select_board">
 								<c:forEach var="vo" items="${boardList }">
-									<option value="${vo.boardFormNo }">${vo.boardFormName }</option>
+									<option value="${vo.boardFormNo }" <c:if test="${vo.boardFormNo == param.boardFormNo }"> selected = "selected"</c:if>>${vo.boardFormName }</option>
 								</c:forEach>
 							</select>
 							<label class="resp_checkbox">

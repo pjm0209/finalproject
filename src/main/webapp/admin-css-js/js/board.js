@@ -43,6 +43,10 @@ $(function(){
 	});
 });
 
+function pageFunc(curPage) {
+	$('input[name="currentPage"]').val(curPage);
+	$('form[name="paginForm"]').submit();
+}
 
 /*글쓰기 첨부파일 함수*/
 

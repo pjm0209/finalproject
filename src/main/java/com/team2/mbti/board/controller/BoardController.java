@@ -59,6 +59,9 @@ public class BoardController {
 		String board = boardService.selectBoardName(boardFormNo);
 		logger.info("게시판 이름 검색결과 board: {}", board);
 		
+		List<BoardFormVO> boardList = boardService.selectAllBoard();
+		logger.info("게시판 종류 전체조회 결과: boardList: {}", boardList);
+		
 		list = boardService.selectAll(vo);
 		logger.info("게시판 전체조회 결과: list.size: {}", list.size());
 		
@@ -67,7 +70,8 @@ public class BoardController {
 		pagingInfo.setTotalRecord(totalRecord);						
 		
 		model.addAttribute("title", "게시판 관리");
-		model.addAttribute("boardList", list);
+		model.addAttribute("list", list);
+		model.addAttribute("boardList", boardList);
 		model.addAttribute("pagingInfo", pagingInfo);
 		model.addAttribute("board", board);
 		
@@ -141,28 +145,23 @@ public class BoardController {
 		List<BoardFormVO> list = boardService.selectAllBoard();
 		logger.info("게시판 종류 전체조회 결과: list: {}", list);
 		
+		String board = boardService.selectBoardName(boardFormNo);
+		logger.info("게시판 이름 검색결과 board: {}", board);
+		
 		model.addAttribute("boardList", list);			
 		model.addAttribute("title", "게시판 글쓰기");
+		model.addAttribute("board", board);
 		
 		return "admin/board/boardWrite";
 	}
 	
 	@PostMapping("/boardWrite")
-	public String boardWrite_post(@ModelAttribute BoardVO vo, Model model) {
-		logger.info("게시판 글쓰기 처리");
+	public String boardWrite_post(@ModelAttribute BoardVO vo) {
+		logger.info("게시판 글쓰기 처리 파라미터 vo: {}", vo);
 		
 		int cnt = boardService.insertBoard(vo);
 		logger.info("게시판 글쓰기 처리 결과 cnt: {}", cnt);
 		
-		String msg = "글 등록 실패!", url = "/admin/board/boardWrite";
-		if(cnt > 0) {
-			msg = "글쓰기 성공!";
-			url = "/admin/board/board";
-		}
-		
-		model.addAttribute("msg", msg);
-		model.addAttribute("url", url);
-		
-		return "common/message";
+		return "admin/board/board?boardFormNo=" + vo.getBoardFormNo();
 	}
 }

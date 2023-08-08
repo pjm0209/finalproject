@@ -6,12 +6,16 @@
  	<sql id="searchWhere">
 		<where>
 			<if test="searchKeyword!=null and searchKeyword!=''">
-				${searchCondition} like '%' || #{searchKeyword} || '%' 
+				${searchCondition} like '%' || #{searchKeyword} || '%'
+				and board_form_no = #{boardFormNo}
+			</if>
+			<if test="searchKeyword==null or searchKeyword == ''">
+				board_form_no = #{boardFormNo}
 			</if>
 		</where>
 	</sql> 
 
- 	<select id="selectAll" parameterType="searchVo"
+ 	<select id="selectAll" parameterType="boardVo"
 		resultType="map">
 		select * from (
 			select rownum as RNUM, A.* from	(
@@ -27,7 +31,7 @@
 
 	 <select id="getTotalRecord" parameterType="searchVo"
 		resultType="int">
-		select count(*) from board
+		select count(*) from boardview
 		<include refid="searchWhere"></include>
 	</select>
 	
