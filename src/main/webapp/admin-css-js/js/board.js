@@ -3,15 +3,17 @@ $(function(){
 	var contextPath = "/mbti";
 	
 	$('.board-side-icon').click(function(){
-		const boardType = $('.board-name span').next().val();
-		location.href = contextPath + "/admin/board/boardEdit?boardType=" + boardType;
+		const boardFormNo = $(this).prev().find('input[type=hidden]').val();
+		location.href = contextPath + "/admin/board/boardEdit?boardFormNo=" + boardFormNo;
 	});
 	
 	 CKEDITOR.replace("p_content", {
 						uploadUrl: contextPath + "/imageUpload",	//드래그 앤 드롭					
 						filebrowserUploadUrl:  contextPath + "/imageUpload", //파일은 이 경로로 업로드
 						height : 500
-					});					
+					});		
+	
+	CKEDITOR.editorConfig=function( config ){ config.resize_enabled=false;};								
      
      $('.checkbox_group > .use_off').on("click", function(){
 		$(this).nextAll('input[type=hidden]').val('N');
@@ -24,9 +26,23 @@ $(function(){
 		$(this).prev().attr('class', 'use_off');
 		$(this).attr('class', 'use_on on');
 	});	
+	
+	$(".checkbox_group").each(function(){
+		var boardEditSet = $(this).find('.boardVal').val();
+		console.log(boardEditSet);
+		
+		if(boardEditSet == "Y") {
+			$(this).find('.boardSet').val('Y');
+			$(this).find('span.use_off').prop('class', 'use_off');
+			$(this).find('span.use_on').prop('class', 'use_on on');
+		} else {
+			$(this).find('.boardSet').val('N');
+			$(this).find('span.use_off').prop('class', 'use_off on');
+			$(this).find('span.use_on').prop('class', 'use_on');
+		}
+	});
 });
 
-CKEDITOR.editorConfig=function( config ){ config.resize_enabled=false;};
 
 /*글쓰기 첨부파일 함수*/
 

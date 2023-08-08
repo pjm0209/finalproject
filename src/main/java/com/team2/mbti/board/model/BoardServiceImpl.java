@@ -43,4 +43,14 @@ public class BoardServiceImpl implements BoardService {
 	public int insertBoard(BoardVO vo) {
 		return boardDao.insertBoard(vo);
 	}
+
+	@Override
+	public BoardFormVO selectBoardSet(int boardFormNo) {
+		return boardDao.selectBoardSet(boardFormNo);
+	}
+
+	@Override
+	public int updateBoardSet(BoardFormVO vo) {
+		return boardDao.updateBoardSet(vo);
+	}
 }
