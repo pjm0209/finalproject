@@ -208,11 +208,11 @@ a.google span{
                     </div>
                 </form>
                     <div class="form-link">
-                        <a href="#" class="forgot-id">아이디 찾기</a>
+                        <a href="<c:url value='/main/member/forgot-id'/>" class="forgot-id">아이디 찾기</a>
                     </div>   
                     
                     <div class="form-link">
-                        <a href="#" class="forgot-password">비밀번호 찾기</a>
+                        <a href="<c:url value='/main/member/forgot-pwd'/>" class="forgot-password">비밀번호 찾기</a>
                     </div>                
 
                 <div class="form-link">

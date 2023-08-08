@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Insert title here</title>
+<title>비밀번호 찾기 페이지</title>
 </head>
 <body>
-<h1>비밀번호찾기</h1>
+<h1>비밀번호 찾기</h1>
 
 </body>
 </html>

@@ -42,6 +42,20 @@ public class MemberLoginController {
 		return "main/member/memberRegister";
 	}
 	
+	@RequestMapping("/member/forgot-id")
+	public String forgot_id() {
+		logger.info("아이디 찾기 화면");
+		
+		return "main/member/forgot-id";
+	}
+	
+	@RequestMapping("/member/forgot-pwd")
+	public String forgot_pwd() {
+		logger.info("비밀번호 찾기 화면");
+		
+		return "main/member/forgot-pwd";
+	}
+	
 	
 }
 

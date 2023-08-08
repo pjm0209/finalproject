@@ -1,123 +1,208 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<script type="text/javascript" src="<c:url value='/js/member.js'/>"></script>
-<script type="text/javascript">	
-	$(function() {
-		$("#wr_submit").click(function() {
-			if ($('#name').val().length < 1) {
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>회원가입 페이지</title>
+
+<style>
+*{
+	margin: 0px;
+	box-sizing: border-box;
+	font-size:15px;
+}
+
+h1 {
+	font-size: 30px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.wrapper {
+    padding: 10px;
+}
+
+html {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+body {
+    width: 30%;
+    border: 1px solid black;
+}
+
+input{
+	font-size: 15px;
+    border: 1px solid black;
+    border-radius: 3px;
+    line-height: 35px;
+    
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+div {
+    padding-top: 3px;
+    padding-bottom: 8px;
+}
+
+.name input{
+	width:30%;
+}
+
+.userid input{
+	width:30%;
+	
+}
+
+.password input{
+	width:55%;
+}
+
+.passwordCheck input{
+	width:55%;
+}
+
+.tel input{
+	width:55%;
+}
+
+.email input{
+	width:30%;
+}
+
+#email2 {
+  width: 30%;
+  height: 40px;
+  font-size: 15px; 
+}
+
+.address input{
+	width:55%;
+}
+
+.signUp button{
+  width: 200px;
+  height: 50px;
+}
+
+.error{
+    font-size: 1px;
+    height: 20px;
+    color:red;
+    font-weight: 700;
+}
+</style>
+
+<script type="text/javascript">
+	$(function(){
+		$('#signUpButton').click(function(){
+			if($('#name').val().length < 1){
 				alert("이름을 입력하세요");
 				$('#name').focus();				
-				return false;
+				return false;				
 			}
+			
 			if (!validate_userid($('#userid').val())) {
 				alert("아이디는 영문, 숫자, _(밑줄문자)만 가능합니다");
 				$('#userid').focus();
 				return false;
 			}
-			if ($('#pwd').val().length < 1) {
-				alert("비밀번호를 입력하세요");
-				$('#pwd').focus();
-				return false;
-			}
-			if ($('#pwd').val() != $('#pwd2').val()) {
-				alert("비밀번호가 일치하지 않습니다.확인하세요");
-				$("#pwd2").focus();
-				return false;
-			}
 			
-			if (!validate_hp($("#hp2").val())
-					|| !validate_hp($("#hp3").val())) {
-				alert("전화번호는 숫자만 가능합니다");
-				$("#hp2").focus();
-				return false;
-			}
-			
-			if($('#chkId').val()!='Y'){
+			if($('#btnChkId').val()!='Y'){
 		         alert('아이디 중복확인을 해주세요.');
 		         $('#btnChkId').focus();
 		         return false;
 		    }
-		});
+			
+			if ($('#password').val().length < 1) {
+				alert("비밀번호를 입력하세요");
+				$('#password').focus();
+				return false;
+			}
+			
+			if ($('#password').val() != $('#pwd2').val()) {
+				alert("비밀번호가 일치하지 않습니다.확인하세요");
+				$("#password").focus();
+				return false;
+			}
+			
+			if (!validate_hp($("#tel").val().length < 1)					
+				alert("전화번호는 숫자만 가능합니다");
+				$("#tel").focus();
+				return false;
+			}					
+		});		
 	});
-
+}
 </script>
 
-<style type="text/css">
-	.width_80{
-		width:80px;
-	}
-	.width_350{
-		width:350px;
-	}	
-</style>
-<article>
-<div class="divForm">
+</head>
+<body>
+	<h1>회원가입</h1>
 <form name="frm1" method="post" action="<c:url value='/main/member/register'/>">
-<fieldset>
-	<h1>회원 가입</h1>
-    <div>        
-        <label for="name">이름</label>
-        <input type="text" name="name" id="name">
-    </div>
-    
-    <div>
-        <label for="userid">아이디</label>
-        <input type="text" name="userid" id="userid">      		
-        <input type="button" value="중복확인" id="btnChkId" title="새창열림">
-    </div>
-    
-    <div>
-        <label for="pwd">비밀번호</label>
-        <input type="Password" name="pwd" id="pwd">
-    </div>
-    
-    <div>
-        <label for="pwd2">비밀번호 확인</label>
-        <input type="Password" name="pwd2" id="pwd2">
-    </div>
-    
-    <div>
-        <label for="zipcode">주소</label>
-        <input type="text" name="zipcode" id="zipcode" ReadOnly  
-        	title="우편번호" class="width_80">
-        <input type="Button" value="우편번호 찾기" id="btnZipcode" title="새창열림"><br />
-        <span class="sp1">&nbsp;</span>
-        <input type="text" name="address" ReadOnly title="주소"  class="width_350"><br />
-        <span class="sp1">&nbsp;</span>
-        <input type="text" name="addressDetail" title="상세주소"  class="width_350">
-    </div>
-    
-    <div>
-        <label for="hp1">핸드폰</label>&nbsp;<select name="hp1" id="hp1" title="휴대폰 앞자리">
-            <option value="010">010</option>
-            <option value="011">011</option>
-            <option value="016">016</option>
-            <option value="017">017</option>
-            <option value="018">018</option>
-            <option value="019">019</option>
-       	</select>&nbsp;-        
-        <input type="text" name="hp2" id="hp2" maxlength="4" title="휴대폰 가운데자리"
-        	class="width_80">&nbsp;-
-        <input type="text" name="hp3" id="hp3" maxlength="4" title="휴대폰 뒷자리"
-        	class="width_80">
-    </div>
-    <div>
-        <label for="email1">이메일 주소</label>
-        <input type="text" name="email1"  id="email1" title="이메일주소 앞자리">&nbsp;@
-        <select name="email2" id="email2"  title="이메일주소 뒷자리">
-            <option value="naver.com">naver.com</option>
-            <option value="hanmail.net">hanmail.net</option>
-            <option value="nate.com">nate.com</option>
-            <option value="gmail.com">gmail.com</option>
-            <option value="etc">직접입력</option>
-        </select>
-        <input type="text" name="email3" id="email3" title="직접입력인 경우 이메일주소 뒷자리"
-        	style="visibility:hidden;">
-    </div>
-    <div class="center">
-         <input type="submit" id="wr_submit" value="회원가입">
-    </div>
-</fieldset>    
+	<div class="member_register">
+		<span>이름 *</span>
+		<div class="name">
+			<input type="text" id="name" placeholder="이름을 입력하세요">					
+			<div class="error" id="nameError"></div>
+		</div>	
+		<span>아이디 *</span>
+		<div class="userid">
+			<input type="text" id="userid" placeholder="아이디 입력(6~20자)">
+			<button id="btnChkId" value="중복 확인">중복 확인</button>			
+			<div class="error" id="useridError"></div>
+		</div>
+		
+		<span>비밀번호 *</span>
+		<div class="password">
+			<input type="password" id="password1" placeholder="비밀번호 입력(문자,숫자,특수문자 포함 8~20자)">
+			<div class="error" id="pwdError"></div>
+		</div>
+		
+		<span>비밀번호 확인 *</span>
+		<div class="passwordCheck">
+			<input type="password" id="password2" placeholder="비밀번호 재입력">
+			<div class="error" id="passwordError"></div>
+		</div>
+		
+		<span>이메일 *</span>
+		<div class="email">
+			<input type="text" id="email1" placeholder="이메일 주소">&nbsp;@
+				<select name="email2" id="email2">
+					<option value="naver.com">naver.com</option>
+					<option value="nate.com">nate.com</option>
+					<option value="daum.com">daum.com</option>
+					<option value="gmail.com">gmail.com</option>
+					<option value="google.com">google.com</option>
+					<option value="etc">직접입력</option>			
+				</select>			
+			<input type="text" id="email3" style="visibility:hidden;">
+			<div class="error" id="emailError"></div>
+		</div>
+		
+		<span>전화번호 *</span>
+		<div class="tel">
+			<input type="text" id="tel" placeholder="휴대폰번호 입력('-'제외 11자리 입력)">
+			<div class="error" id="emailError"></div>
+		</div>		
+					
+		<span>주소 *</span>				
+		<div class="address" id="address">
+			<input type="text" id="address" placeholder="주소를 입력해주세요">
+			<button id="btnAddress" value="우편번호 검색">우편번호 검색</button>		
+			<input type="text" id="address" placeholder="상세주소">
+		</div>		
+		
+        <div class="signUp">
+            <button id="signUpButton"">가입하기</button>
+        </div>				
+	</div>
 </form>
-</div>
-</article>
+</body>
+</html>
