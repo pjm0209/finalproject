@@ -73,4 +73,15 @@
 		set board_form_intro = #{boardFormIntro}, board_file_add_flag = #{boardFileAddFlag}, comment_flag = #{commentFlag}, board_flag = #{boardFlag}, last_edit_admin_id = #{lastEditAdminId}, last_regdate = sysdate
 		where board_form_no = #{boardFormNo}
 	</update>
+	
+	<select id="selectBoardByNo" parameterType="int" resultType="map">
+		select * from boardview
+		where board_no = #{boardNo}
+	</select>
+	
+	<update id="addReadCount" parameterType="int">
+		update board
+		set board_readcount = board_readcount + 1
+		where board_no = #{boardNo}
+	</update>
 </mapper>

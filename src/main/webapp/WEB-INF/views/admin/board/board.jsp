@@ -85,7 +85,7 @@
 					<c:forEach var="map" items="${list }">
 						<tr>
 							<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-							<td class="board-title"><a href="/admin/board/boardDetail?board_no=${map['BOARD_NO'] }">${map['BOARD_TITLE']}</a></td>
+							<td class="board-title"><a href="<c:url value='/admin/board/boardDetail?boardNo=${map["BOARD_NO"] }'/>">${map['BOARD_TITLE']}</a></td>
 							<td class="board-regdate">${map['NAME'] }</td>
 							<td class="board-writer"><fmt:formatDate value="${map['BOARD_REGDATE'] }" pattern="yyyy-MM-dd"/> </td>
 							<td class="board-readcount">${map['BOARD_READCOUNT'] }</td>

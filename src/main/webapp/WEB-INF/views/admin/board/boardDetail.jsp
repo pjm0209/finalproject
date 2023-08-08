@@ -7,21 +7,19 @@
 <c:import url="/admin/board/boardHeadSide"></c:import>
 <div class="board-body">
 	<input type="hidden" name="lastEditAdminId" value="admin">
-	<input type="hidden" name="boardFormNo" value="${param.boardFormNo }">
+	<input type="hidden" name="boardNo" value="${param.boardNo }">
 	<div id="board-title">
-		<h5>${vo.boardFormName }</h5>
-		<div class="board-head-button">
-			<input type="button" class="bg-gradient-secondary" onclick="location.href='<c:url value="/admin/board/board?boardFormNo=1"/>'" value="취소">			
-			<input type="submit" class="bg-gradient-primary" id="save-boardWrite" value="저장">
-		</div>
+		<h5>${map['BOARD_FORM_NAME'] }</h5>
+
 	</div>
 	<div class="board">
 		<!-- 기본설정 시작 -->
-			<div class="">
-				
+			<div class="board-title">
+				<h2>${map['BOARD_TITLE'] }</h2>
 			</div>
-			<!-- 기본설정 끝 --> 
-			
+			<div class="board-content">
+				${map['BOARD_BODY'] }
+			</div>
 	</div>
 </div>
 </div>
