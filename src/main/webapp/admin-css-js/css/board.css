@@ -132,8 +132,8 @@ select#board-search-select {
     cursor: pointer;
 }
 
-th.board-title {
-    width: 60%;
+th.board-title { 
+    width: 60% !important;
 }
 
 th.board-readcount {
@@ -150,6 +150,23 @@ th.board-regdate {
 
 tr.board-table-colum th {
     text-align: center;
+}
+
+tbody tr td, th {
+	text-align: center;
+}
+
+tbody tr td.board-title {
+	text-align: left;
+}
+
+.boardPaging {
+	display: flex;
+    justify-content: space-around;
+}
+
+tr td.board-readcount {
+	padding-left: 0;
 }
 
 /*게시판 수정 css*/
