@@ -2,4 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.team2.mbti.admin.model.AdminDAO"></mapper>
+<mapper namespace="com.team2.mbti.admin.model.AdminDAO">
+	<select id="selectAdmin" resultType="map">
+		select * from admin
+		order by admin_no
+	</select>
+</mapper>
+
+
+
+
