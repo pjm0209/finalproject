@@ -45,5 +45,12 @@ public class MemberController {
 		return "admin/member/memberList";
 	}
 	
+	@RequestMapping("/memberRegister")
+	public String register() {
+		logger.info("회원 가입 페이지 보여주기");
+
+		return "member/memberRegister";
+	}
+	
 	
 }
