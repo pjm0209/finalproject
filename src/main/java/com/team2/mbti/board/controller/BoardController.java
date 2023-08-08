@@ -164,4 +164,19 @@ public class BoardController {
 		
 		return "admin/board/board?boardFormNo=" + vo.getBoardFormNo();
 	}
+	
+	@GetMapping("/boardDetail")
+	public String boardDetail_get(@RequestParam int boardNo, Model model) {
+		logger.info("게시글 상세보기 화면처리 파라미터 boardFormNo: {}", boardNo);
+		
+		Map<String, Object> map = boardService.selectBoardByNo(boardNo);
+		int cnt = boardService.addReadCount(boardNo);
+		logger.info("게시글 조회 결과 map: {}", map);
+		logger.info("조회수 증가 결과 cnt: {}", cnt);
+		
+		model.addAttribute("title", "게시글 상세보기");
+		model.addAttribute("map", map);
+		
+		return "admin/board/boardDetail";
+	}
 }

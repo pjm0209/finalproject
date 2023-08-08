@@ -21,4 +21,7 @@ public interface BoardDAO {
 	
 	BoardFormVO selectBoardSet(int boardFormNo);
 	int updateBoardSet(BoardFormVO vo);
+	
+	Map<String, Object> selectBoardByNo(int boardNo);
+	int addReadCount(int boardNo);
 }
