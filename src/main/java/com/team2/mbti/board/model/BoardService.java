@@ -15,4 +15,7 @@ public interface BoardService {
 	
 	int insertBoardForm(BoardFormVO vo);
 	int insertBoard(BoardVO vo);
+	
+	BoardFormVO selectBoardSet(int boardFormNo);
+	int updateBoardSet(BoardFormVO vo);
 }

@@ -103,12 +103,35 @@ public class BoardController {
 	}
 	
 	@GetMapping("/boardEdit")
-	public String boardEdit_get(Model model) {
-		logger.info("게시판 수정 화면 보여주기");
+	public String boardEdit_get(@RequestParam int boardFormNo, Model model) {
+		logger.info("게시판 수정 화면 보여주기 파라미터 boardFormNo: {}", boardFormNo);
 		
+		BoardFormVO vo = boardService.selectBoardSet(boardFormNo);
+		logger.info("게시판 설정 불러오기 결과 vo: {}", vo);
+				
 		model.addAttribute("title", "게시판 수정");
+		model.addAttribute("vo", vo);
 		
 		return "admin/board/boardEdit";
+	}
+	
+	@PostMapping("/boardEdit")
+	public String boardEdit_post(@ModelAttribute BoardFormVO vo, Model model) {
+		logger.info("게시판 수정 처리 파라미터 vo: {}", vo);
+		
+		int cnt = boardService.updateBoardSet(vo);
+		logger.info("게시판 수정 처리 결과 cnt: {}", cnt);
+		
+		String msg = "게시판 수정 실패!", url = "/admin/board/boardEdit?boardFormNo=" + vo.getBoardFormNo();
+		if(cnt > 0) {
+			msg = "게시판 수정 성공!";
+			url = "/admin/board/board?boardFormNo=" + vo.getBoardFormNo();
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
 	}
 	
 	@GetMapping("/boardWrite")

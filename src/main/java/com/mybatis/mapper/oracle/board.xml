@@ -58,4 +58,15 @@
 		insert into board(board_no, board_form_no, board_title, board_body, no)
 		values(#{boardNo}, #{boardFormNo}, #{boardTitle}, #{boardBody}, #{no})
 	</insert>
+	
+	<select id="selectBoardSet" parameterType="int" resultType="boardFormVo">
+		select * from board_form
+		where board_form_no = #{boardFormNo}
+	</select>
+	
+	<update id="updateBoardSet" parameterType="boardFormVo">
+		update board_form
+		set board_form_intro = #{boardFormIntro}, board_file_add_flag = #{boardFileAddFlag}, comment_flag = #{commentFlag}, board_flag = #{boardFlag}, last_edit_admin_id = #{lastEditAdminId}, last_regdate = sysdate
+		where board_form_no = #{boardFormNo}
+	</update>
 </mapper>

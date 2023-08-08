@@ -6,11 +6,15 @@
 <!-- Page Heading -->
 <c:import url="/admin/board/boardHeadSide"></c:import>
 <div class="board-body">
-	<form>
+	<form name="boardSetEdit" method="post" action="<c:url value='/admin/board/boardEdit'/>">
+		<input type="hidden" name="lastEditAdminId" value="admin">
+		<input type="hidden" name="boardFormNo" value="${param.boardFormNo }">
 		<div id="board-title">
-			<h5>공지사항</h5>
-			<input type="button" class="bg-gradient-secondary" onclick="location.href='<c:url value="/admin/board/board?boardFormNo=1"/>'" value="취소">
-			<button class="bg-gradient-secondary" id="board-write-button">저장</button>
+			<h5>${vo.boardFormName }</h5>
+			<div class="board-head-button">
+				<input type="button" class="bg-gradient-secondary" onclick="location.href='<c:url value="/admin/board/board?boardFormNo=1"/>'" value="취소">			
+				<input type="submit" class="bg-gradient-primary" id="save-boardWrite" value="저장">
+			</div>
 		</div>
 		<div class="board">
 			<!-- 기본설정 시작 -->
@@ -22,11 +26,11 @@
 					<div class="boardEdit-setting-body">
 						<dt>게시판명</dt>
 						<dd>
-							<div class="input_group v2"><input type="text" readonly="readonly" value="공지사항" name="board_name" id="board_name" maxlength="50"></div>
+							<div class="input_group v2"><input type="text" readonly="readonly" value="${vo.boardFormName }" name="boardFormName" id="board_name" maxlength="50"></div>
 						</dd>
 						<dt>게시판 설명</dt>
 						<dd>
-							<div class="input_group v2"><textarea id="board_desc" name="baord_desc" maxlength="300"></textarea></div>
+							<div class="input_group v2"><textarea id="board_desc" name="boardFormIntro" maxlength="300">${vo.boardFormIntro }</textarea></div>
 						</dd>
 					</div>
 				</div>
@@ -43,10 +47,11 @@
 					</dt>
 					<dd>
 						<div class="checkbox_group">
+							<input type="hidden" value="${vo.commentFlag }" class="boardVal">
 							<input type="checkbox" id="commentFlag">
 							<span class="use_off on">사용안함</span>
 							<span class="use_on">사용함</span>
-							<input type="hidden" name="commentFlag" value="N">
+							<input type="hidden" name="commentFlag" value="N" class="boardSet">
 						</div>
 					</dd>
 					
@@ -56,10 +61,11 @@
 					</dt>
 					<dd>
 						<div class="checkbox_group">
+							<input type="hidden" value="${vo.boardFileAddFlag }" class="boardVal">
 							<input type="checkbox" id="boardFileAddFlag">
 							<span class="use_off on">사용안함</span>
 							<span class="use_on">사용함</span>
-							<input type="hidden" name="boardFileAddFlag" value="N">
+							<input type="hidden" name="boardFileAddFlag" value="N" class="boardSet">
 						</div>
 					</dd>
 					
@@ -68,10 +74,11 @@
 					</dt>
 					<dd>
 						<div class="checkbox_group">
+							<input type="hidden" value="${vo.boardFlag }" class="boardVal">
 							<input type="checkbox" id="boardFlag">
 							<span class="use_off on">사용안함</span>
 							<span class="use_on">사용함</span>
-							<input type="hidden" name="boardFlag" value="N">
+							<input type="hidden" name="boardFlag" value="N" class="boardSet">
 						</div>
 					</dd>
 					</div>
@@ -82,5 +89,6 @@
 </div>
 </div>
 <!-- End of Main Content -->
+<script src="<c:url value='/admin-css-js/js/board.js'/>"></script>
 
 <%@ include file="../inc/bottom.jsp"%>
