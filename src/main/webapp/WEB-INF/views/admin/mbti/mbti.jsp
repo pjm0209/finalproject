@@ -49,7 +49,7 @@ button.mbti-button{
 	<div class="board">
 		<div class="board-head">
 			<div class="board-search-result">
-				<form name="frmSearch" method="post" action="<c:url value='/admin/mbti/mbti'/>">
+				<form name="frmSearch" method="post" action="<c:url value='/admin/member/memberList'/>">
 				<div class="input-group mb-3" id="board-search-div">
 					<select class="form-select form-select-lg" name="searchCondition" aria-label=".form-select-lg example" id="board-search-select">					  	
 					  	<option value="question_type_no" <c:if test="${param.searchCondition=='question_type_no'}"> selected="selected" </c:if> >문제 유형</option>

@@ -92,11 +92,17 @@ body {
         <h2>관리자 로그인</h2>
         <form method="post" action="" id="login-form">
             <input type="text" name="userName" placeholder="아이디">
+            
             <input type="password" name="userPassword" placeholder="비밀번호">
+            
             <label for="remember-check">
                 <input type="checkbox" id="remember-check">&nbsp; 아이디 저장하기
             </label>
             <input type="submit" value="Login" id="login-button">
+            
+            <div class="text-center">
+              <a class="small" href="<c:url value='/admin/register'/>">회원가입</a>
+           </div>           
         </form>
     </div>
 </body>

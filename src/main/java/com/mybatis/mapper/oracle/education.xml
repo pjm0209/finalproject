@@ -3,5 +3,75 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.team2.mbti.education.model.EducationDAO">
-
+	<!-- location -->
+	<insert id="insertLocation" parameterType="educationVo">
+		<selectKey keyProperty="epNo" order="BEFORE" resultType="int">
+			select education_place_seq.nextval from dual
+		</selectKey>
+		insert into education_place(ep_no, ep_name, ep_zipcode, ep_address, ep_latitude, ep_longitude, ep_tel)
+		values(#{epNo},#{epName},#{epZipcode},#{epAddress},#{epLatitude},#{epLongitude},#{epTel})
+	</insert>
+	
+	<sql id="searchLocation">
+		<where>
+			<if test="searchKeyword!=null and searchKeyword!=''">
+	        	${searchCondition} like '%' || #{searchKeyword} || '%'
+	        </if>
+        </where>
+	</sql>
+	
+	<select id="selectAllLocation" parameterType="searchVo" resultType="educationVo">
+		select * from
+		(
+		    select rownum RNUM,a.* from
+		    (
+		        select * from education_place 
+		        <include refid="searchLocation"></include>
+		        order by ep_no
+		    )a
+		)
+		<![CDATA[
+		where RNUM > #{firstRecordIndex} and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}]]>
+	</select>
+	
+	<select id="getTotalRecordLocation" parameterType="searchVo" resultType="int">
+		select count(*) from education_place
+		<include refid="searchLocation"></include> 
+	</select>
+	
+	<!-- list -->
+	<insert id="insertEducation" parameterType="educationVo">
+		<selectKey keyProperty="eduNo" order="BEFORE" resultType="int">
+			select mbti_education_seq.nextval from dual
+		</selectKey>
+		insert into mbti_education(edu_no, edu_name, edu_com, edu_teacher, edu_price, ep_no)
+		values(#{eduNo},#{eduName},#{eduCom},#{eduTeacher},#{eduPrice},#{epNo})
+	</insert>
+	
+	<sql id="searchEducation">
+		<where>
+			<if test="searchKeyword!=null and searchKeyword!=''">
+	        	${searchCondition} like '%' || #{searchKeyword} || '%'
+	        </if>
+        </where>
+	</sql>
+	
+	<select id="selectAllEducation" parameterType="searchVo" resultType="educationVo">
+		select * from
+		(
+		    select rownum RNUM,a.* from
+		    (
+		        select * from mbti_education 
+		        <include refid="searchEducation"></include>
+		        order by edu_no
+		    )a
+		)
+		<![CDATA[
+		where RNUM > #{firstRecordIndex} and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}]]>
+	</select>
+	
+	<select id="getTotalRecordEducation" parameterType="searchVo" resultType="int">
+		select count(*) from mbti_education
+		<include refid="searchEducation"></include> 
+	</select>
 </mapper>

@@ -30,7 +30,6 @@
 				alert("전화번호는 숫자만 가능합니다");
 				$("#hp2").focus();
 				return false;
-				//event.preventDefault();
 			}
 			
 			if($('#chkId').val()!='Y'){
