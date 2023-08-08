@@ -34,7 +34,6 @@ public class AdminController {
 	@GetMapping("/register")
 	public String register_get(Model model) {
 		
-		
 		return "admin/register";
 	}
 
