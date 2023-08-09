@@ -15,7 +15,8 @@
 	<div class="board">
 		<!-- 기본설정 시작 -->
 			<div class="board-title">
-				<h2>${map['BOARD_TITLE'] }</h2>
+				<p>${map['BOARD_TITLE'] }</p>
+				<p>${map['NAME'] } (${map['USERID'] })</p><span><fmt:formatDate value="${map['BOARD_REGDATE'] }" pattern="yyyy-MM-dd ss:mm:SS"/> 조회수 ${map['BOARD_READCOUNT'] } </span>
 			</div>
 			<div class="board-content">
 				${map['BOARD_BODY'] }
