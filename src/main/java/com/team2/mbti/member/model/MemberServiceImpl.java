@@ -1,6 +1,10 @@
 package com.team2.mbti.member.model;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
+
+import com.team2.mbti.common.SearchVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -15,50 +19,18 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int selectCheckId(String userid) {
-		int count = memberDao.selectCheckId(userid);
-
-		int result=0;
-		if(count>0) {
-			result = MemberService.EXIST_ID;			
-		}else {
-			result = MemberService.NONE_EXIST_ID;			
-		}
-
-		return result;
+	public List<MemberVO> selectAllMember(SearchVO vo) {
+		return memberDao.selectAllMember(vo);
 	}
 
 	@Override
-	public int loginCheck(String userid, String pwd) {
-		String dbPwd=memberDao.selectPwd(userid);
-
-		int result=0;
-		if(dbPwd==null || dbPwd.isEmpty()) {
-			result=MemberService.USERID_NONE;
-		}else {
-			if(dbPwd.equals(pwd)) {
-				result=MemberService.LOGIN_OK;				
-			}else {
-				result=MemberService.PWD_DISAGREE;
-			}
-		}
-
-		return result;
+	public int getTotalRecordMember(SearchVO searchVo) {
+		return memberDao.getTotalRecordMember(searchVo);
 	}
 
 	@Override
-	public MemberVO selectByUserid(String userid) {
-		return memberDao.selectByUserid(userid);
-	}
-
-	@Override
-	public int updateMember(MemberVO vo) {
-		return memberDao.updateMember(vo);
-	}
-
-	@Override
-	public int updateMemberOut(String userid) {
-		return memberDao.updateMemberOut(userid);
+	public MemberVO selectByNoMember(int no) {
+		return memberDao.selectByNoMember(no);
 	}
 
 

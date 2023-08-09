@@ -1,14 +1,20 @@
 package com.team2.mbti.admin.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import lombok.RequiredArgsConstructor;
+
 @Controller
 @RequestMapping("/admin")
+@RequiredArgsConstructor
 public class AdminController {
-
+	private static final Logger logger=LoggerFactory.getLogger(AdminController.class);
+		
 	@GetMapping("/index")
 	public String index_get(Model model) {
 		model.addAttribute("title", "관리자 페이지");
@@ -23,7 +29,6 @@ public class AdminController {
 
 	@GetMapping("/register")
 	public String register_get(Model model) {
-		
 		
 		return "admin/register";
 	}
