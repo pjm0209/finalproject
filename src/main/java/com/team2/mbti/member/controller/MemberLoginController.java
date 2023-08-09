@@ -73,4 +73,11 @@ public class MemberLoginController {
 		//4
 		return result;
 	}
+	
+	@RequestMapping("/member/zipcodeTest")
+	public String zipcodeTests() {
+		logger.info("주소검색 페이지 화면");
+		
+		return "main/member/zipcodeTest";
+	}
 }
