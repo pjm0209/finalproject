@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.team2.mbti.board.model.BoardFormVO;
 import com.team2.mbti.board.model.BoardService;
 import com.team2.mbti.board.model.BoardVO;
+import com.team2.mbti.board.model.CommentsVO;
 import com.team2.mbti.common.ConstUtil;
 import com.team2.mbti.common.PaginationInfo;
 
@@ -171,11 +172,14 @@ public class BoardController {
 		
 		Map<String, Object> map = boardService.selectBoardByNo(boardNo);
 		int cnt = boardService.addReadCount(boardNo);
+		List<CommentsVO> commentList = boardService.selectComment(boardNo);
 		logger.info("게시글 조회 결과 map: {}", map);
 		logger.info("조회수 증가 결과 cnt: {}", cnt);
+		logger.info("게시글 댓글 조회 결과 commentList.size: {}", commentList);
 		
 		model.addAttribute("title", "게시글 상세보기");
 		model.addAttribute("map", map);
+		model.addAttribute("commentList", commentList);
 		
 		return "admin/board/boardDetail";
 	}
