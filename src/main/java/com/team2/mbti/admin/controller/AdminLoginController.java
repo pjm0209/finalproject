@@ -1,1 +1,0 @@
-package com.team2.mbti.admin.controller;
