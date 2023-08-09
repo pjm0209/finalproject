@@ -329,3 +329,7 @@ input[type="file"] {
     width: 59%;
     color: #999999;
 }
+
+.fn_add_btn {
+	margin-left: 10px;
+}
