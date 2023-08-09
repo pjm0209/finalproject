@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -111,20 +112,60 @@ div {
 	font-weight:bold;	
 }
 </style>
-
+<script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>
 <script type="text/javascript">
+
+function validate_userid(uid) {
+	console.log(uid);
+	var pattern = new RegExp(/^[a-zA-Z0-9_]+$/g);
+	return pattern.test(uid);
+	/*
+	정규식 /^[a-zA-Z0-9_]+$/g
+	a에서 z 사이의 문자, A~Z사이의 문자, 0 에서 9사이의 숫자나 _로 시작하거나 끝나야 한다는 의미
+	닫기 대괄호(]) 뒤의 + 기호는 이 패턴이 한 번 또는 그 이상 반복된다는 의미	 */
+}
+
+function validate_hp(ph) {
+	var pattern = new RegExp(/^[0-9]*$/g);
+	return pattern.test(ph); //정규식과 일치하면 true
+	/* 정규식 /^[0-9]*$/g
+	0 에서 9사이의 숫자로 시작하거나 끝나야 한다는 의미 (^는 시작, $는 끝을 의미)
+	닫기 대괄호(]) 뒤의 * 기호는 0번 이상 반복		 */
+}
+
 	$(function(){
+		$('#btnChkId').click(function(){
+			if (!validate_userid($('#userid').val())) {
+				alert("아이디는 영문, 숫자, _(밑줄문자)만 가능합니다");
+				$('#userid').focus();
+				return false;
+			}
+			
+			$.ajax({
+				url:"<c:url value='/main/member/checkId'/>",
+				type: "get",
+				data: "userid=" + $('#userid').val(),
+				dataType: 'json',
+				success:function(res){
+					console.log(res);
+					if(res==1){
+						$('#useridError').html("이미 존재하는 아이디입니다.");						
+					} else if(res == 2) {
+						$('#useridError').html("사용가능한 아이디입니다.");
+						$('#useridError').css('color', 'blue');
+					}
+				},
+				error:function(xhr, status, error){
+					alert(status+" : " + error);
+				}						
+			});
+		});
+		
 		$('#signUpButton').click(function(){
 			if($('#name').val().length < 1){
 				alert("이름을 입력하세요");
 				$('#name').focus();				
 				return false;				
-			}
-			
-			if (!validate_userid($('#userid').val())) {
-				alert("아이디는 영문, 숫자, _(밑줄문자)만 가능합니다");
-				$('#userid').focus();
-				return false;
 			}
 			
 			if($('#btnChkId').val()!='Y'){
@@ -145,20 +186,21 @@ div {
 				return false;
 			}
 			
-			if (!validate_hp($("#tel").val().length < 1)					
+			if (!validate_hp($("#tel").val().length < 1))	{
+				
 				alert("전화번호는 숫자만 가능합니다");
 				$("#tel").focus();
 				return false;
-			}					
+			}
+
 		});		
 	});
-}
 </script>
 
 </head>
 <body>
 	<h1>회원가입</h1><br>
-<form name="frm1" method="post" action="<c:url value='/main/member/register'/>">
+<form name="frm1" method="post" action="<c:url value='/main/member/memberRegister'/>">
 	<div class="member_register">
 		<span>이름 *</span>
 		<div class="name">
@@ -166,10 +208,10 @@ div {
 			<div class="error" id="nameError"></div>
 		</div>	
 		<span>아이디 *</span>
-		<div class="userid">
+		<div class="userid">		
 			<input type="text" id="userid" placeholder="아이디 입력(6~20자)">
-			<button id="btnChkId" value="중복 확인">중복 확인</button>			
-			<div class="error" id="useridError"></div>
+			<button id="btnChkId" value="중복 확인" type="button">중복 확인</button>			
+			<span class="error" id="useridError">*중복확인을 해주세요</span>
 		</div>
 		
 		<span>비밀번호 *</span>
@@ -209,7 +251,7 @@ div {
 		<div class="address" id="address">
 			<input type="text" id="address" placeholder="주소를 입력해주세요">
 			<button id="btnAddress" value="주소 검색">주소 검색</button>		
-			<input type="text" id="address" placeholder="상세주소">
+			<input type="text" id="addressDetail" placeholder="상세주소">	
 		</div>		
 		
         <div class="signUp"><br>
