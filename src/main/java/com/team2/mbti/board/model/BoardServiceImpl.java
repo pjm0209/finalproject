@@ -63,4 +63,9 @@ public class BoardServiceImpl implements BoardService {
 	public int addReadCount(int boardNo) {
 		return boardDao.addReadCount(boardNo);
 	}
+
+	@Override
+	public List<CommentsVO> selectComment(int boardNo) {
+		return boardDao.selectComment(boardNo);
+	}
 }

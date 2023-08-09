@@ -15,11 +15,22 @@
 	<div class="board">
 		<!-- 기본설정 시작 -->
 			<div class="board-title">
-				<h2>${map['BOARD_TITLE'] }</h2>
+				<p class="board-title-name">${map['BOARD_TITLE'] }</p>
+				<span class="board-write-user-userId">${map['NAME'] } (${map['USERID'] })</span>
+				<span class="board-regdate-readcount"><fmt:formatDate value="${map['BOARD_REGDATE'] }" pattern="yyyy-MM-dd HH:mm:ss"/> 조회수 ${map['BOARD_READCOUNT'] } </span>
 			</div>
 			<div class="board-content">
 				${map['BOARD_BODY'] }
 			</div>
+			
+			<p class="board-comment-count">댓글   ${fn:length(commentList) }</p>
+			<form name="commentFrm">
+				<p class="board-comment-user">관리자 (admin)</p>
+				<div class="textarea-group">
+					<textarea id="comment-area"></textarea>
+					<input type="button" value="답글등록" id="comment-submit">
+				</div>
+			</form>
 	</div>
 </div>
 </div>
