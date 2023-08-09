@@ -178,6 +178,9 @@ a.google span{
     color: #232836;
 }
 </style>
+  
+<script type="text/javascript">
+</script>
                        
 </head>
 <body>
@@ -188,25 +191,29 @@ a.google span{
                 <form action="#">
                     <div class="field input-field">
                         <input type="id" placeholder="아이디" class="input">
+                        
                     </div>
 
                     <div class="field input-field">
-                        <input type="password" placeholder="비밀번호" class="password">
+                        <input type="password" placeholder="비밀번호" class="password">                    
                         <i class='bx bx-hide eye-icon'></i>
-                    </div>
+                    </div><br>
                     
-                    <div class="form-link">
-                        <a href="#" class="forgot-id">아이디 찾기</a>
-                    </div>   
-                    
-                    <div class="form-link">
-                        <a href="#" class="forgot-password">비밀번호 찾기</a>
-                    </div>
-
+                    <label for="remember-check">
+                		<input type="checkbox" id="remember-check">&nbsp; 아이디 저장하기
+            		</label>
+                  
                     <div class="field button-field">
                         <button>로그인</button>
                     </div>
                 </form>
+                    <div class="form-link">
+                        <a href="<c:url value='/main/member/forgot-id'/>" class="forgot-id">아이디 찾기</a>
+                    </div>   
+                    
+                    <div class="form-link">
+                        <a href="<c:url value='/main/member/forgot-pwd'/>" class="forgot-password">비밀번호 찾기</a>
+                    </div>                
 
                 <div class="form-link">
                     <span>계정이 없으신가요? <a href="<c:url value='/main/member/memberRegister'/>">회원가입</a></span>          
@@ -218,7 +225,7 @@ a.google span{
             <div class="media-options">
                 <a href="#" class="field facebook">
                     <i class='bx bxl-facebook facebook-icon'></i>
-                    <span>페이스북 로그인</span>
+                    <span>카카오 로그인 API 사용예정</span>
                 </a>
             </div>
         </div>

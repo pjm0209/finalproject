@@ -87,6 +87,7 @@
 </div>
 <!-- End of Main Content -->
 
+<script src="<c:url value='/admin-css-js/js/board.js'/>"></script>
 <script src="<c:url value='/admin-css-js/js/boardCreate.js'/>"></script>    
 
 <%@ include file="../inc/bottom.jsp"%>

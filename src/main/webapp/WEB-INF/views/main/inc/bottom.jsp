@@ -1,26 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    </section><!-- End Contact Us Section -->
-
-  </main><!-- End #main -->
-
   <!-- ======= Footer ======= -->
   <footer id="footer">
-
-    <div class="footer-newsletter">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-6">
-            <h4>Join Our Newsletter</h4>
-            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
-            <form action="" method="post">
-              <input type="email" name="email"><input type="submit" value="Subscribe">
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <div class="footer-top">
       <div class="container">
         <div class="row">
@@ -74,6 +55,7 @@
       </div>
     </div>
 
+
     <div class="container py-4">
       <div class="copyright">
         &copy; Copyright <strong><span>Ninestars</span></strong>. All Rights Reserved
@@ -90,6 +72,8 @@
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
+  <script type="text/javascript" src="<c:url value='/admin-css-js/js/mbti.js'/>"></script>
+	
   <!-- Vendor JS Files -->
   <script src="${path }/assets/vendor/aos/aos.js"></script>
   <script src="${path }/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
