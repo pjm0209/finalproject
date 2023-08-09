@@ -339,11 +339,13 @@ div.board-title {
     padding: 22px;
     border-bottom: 1px solid black;
     margin-bottom: 20px;
+    padding-bottom: 15px;
 }
 
 p.board-title-name {
     color: black;
     font-size: 21px;
+    margin-bottom: 4px;
 }
 
 span.board-write-user-userId {
