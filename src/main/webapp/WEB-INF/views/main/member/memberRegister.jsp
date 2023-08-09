@@ -14,7 +14,7 @@
 }
 
 h1 {
-	font-size: 30px;
+	font-size: 20px;
     text-align: center;
     font-weight: bold;
     background: #ff7f00;     
@@ -223,7 +223,7 @@ function validate_hp(ph) {
 
 </head>
 <body>
-	<h1>회원가입</h1><br>
+	<h1>step2 : 개인정보 입력</h1><br>
 <form name="frm1" method="post" action="<c:url value='/main/member/memberRegister'/>">
 	<div class="member_register">
 		<span>이름 *</span>
@@ -279,7 +279,7 @@ function validate_hp(ph) {
 		</div>		
 		
         <div class="signUp"><br>
-            <button id="signUpButton">가입하기</button>
+            <button id="signUpButton">회원가입</button>
         </div>				
 	</div>
 </form>

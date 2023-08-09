@@ -38,6 +38,13 @@ public class MemberLoginController {
 		return "redirect:/";
 	}
 	
+	@RequestMapping("/member/agreement")
+	public String agreement() {
+		logger.info("약관동의 화면");
+		
+		return "main/member/agreement";
+	}
+	
 	@RequestMapping("/member/memberRegister")
 	public String register() {
 		logger.info("회원가입 화면");
