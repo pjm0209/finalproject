@@ -133,3 +133,6 @@ section.mbti{
     border: none;
     z-index: 1;
 }
+.test_btn_style.active{
+	background-color: #663dff;
+}
