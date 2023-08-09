@@ -24,6 +24,7 @@ public class MainMbtiController {
 		logger.info("mbti 검사 페이지, 파라미터 questionTypeNo={}",questionTypeNo);
 		
 		
+		
 		return "main/mbti/question";
 	}
 }
