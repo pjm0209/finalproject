@@ -6,7 +6,7 @@ import lombok.Data;
 public class AdminVO {
 	private int adminNo;
 	private String adminId;
-	private String adminUser;
+	private String adminPwd;
 	private String adminEmail;
 	private String adminTel;
 

@@ -43,4 +43,24 @@ public class BoardServiceImpl implements BoardService {
 	public int insertBoard(BoardVO vo) {
 		return boardDao.insertBoard(vo);
 	}
+
+	@Override
+	public BoardFormVO selectBoardSet(int boardFormNo) {
+		return boardDao.selectBoardSet(boardFormNo);
+	}
+
+	@Override
+	public int updateBoardSet(BoardFormVO vo) {
+		return boardDao.updateBoardSet(vo);
+	}
+
+	@Override
+	public Map<String, Object> selectBoardByNo(int boardNo) {
+		return boardDao.selectBoardByNo(boardNo);
+	}
+
+	@Override
+	public int addReadCount(int boardNo) {
+		return boardDao.addReadCount(boardNo);
+	}
 }
