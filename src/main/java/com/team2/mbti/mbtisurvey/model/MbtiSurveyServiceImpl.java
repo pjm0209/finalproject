@@ -57,5 +57,10 @@ public class MbtiSurveyServiceImpl implements MbtiSurveyService{
 	public int getTotalRecordMbti(SearchVO searchVo) {
 		return mbtiSurveyDao.getTotalRecordMbti(searchVo);
 	}
+
+	@Override
+	public List<MbtiSurveyVO> selectByQuestionTypeNoMbtiSurvey(int questionTypeNo) {
+		return mbtiSurveyDao.selectByQuestionTypeNoMbtiSurvey(questionTypeNo);
+	}
 	
 }
