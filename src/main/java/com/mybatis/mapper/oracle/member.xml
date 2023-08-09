@@ -44,6 +44,12 @@
 	<select id="selectByNoMember" resultType="memberVo">
 		select * from member where no=#{no}
 	</select>
+	
+		<select id="selectCheckId" parameterType="string"
+		resultType="int">
+		select count(*) from member
+		where userid=#{userid}
+	</select>
 		
 
 </mapper>
