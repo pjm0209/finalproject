@@ -162,7 +162,7 @@ public class BoardController {
 		int cnt = boardService.insertBoard(vo);
 		logger.info("게시판 글쓰기 처리 결과 cnt: {}", cnt);
 		
-		return "admin/board/board?boardFormNo=" + vo.getBoardFormNo();
+		return "redirect:/admin/board/board?boardFormNo=" + vo.getBoardFormNo();
 	}
 	
 	@GetMapping("/boardDetail")
