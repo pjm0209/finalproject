@@ -7,13 +7,18 @@ import com.team2.mbti.common.SearchVO;
 
 public interface BoardService {
 	List<Map<String, Object>> selectAll(SearchVO vo);
-	List<Map<String, Object>> selectAllNotice(SearchVO vo);
-	List<Map<String, Object>> selectAllFaq(SearchVO vo);
 	int getTotalRecord(SearchVO vo);
-	int getTotalRecordNotice(SearchVO vo);
-	int getTotalRecordFaq(SearchVO vo);
+	
+	String selectBoardName(int boardFormNo);
+	
 	List<BoardFormVO> selectAllBoard();
 	
 	int insertBoardForm(BoardFormVO vo);
 	int insertBoard(BoardVO vo);
+	
+	BoardFormVO selectBoardSet(int boardFormNo);
+	int updateBoardSet(BoardFormVO vo);
+	
+	Map<String, Object> selectBoardByNo(int boardNo);
+	int addReadCount(int boardNo);
 }

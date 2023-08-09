@@ -4,48 +4,17 @@
 
 <!-- Begin Page Content -->
 <!-- Page Heading -->
-<div class="head-div">
-	<h2 class="text-gray-800">게시판</h2>
-	<button type="button" class="bg-gradient-primary"
-		id="add-newBoard-button" onclick="location.href='boardCreate'">새 게시판 추가</button>
-</div>
-<div class="side-body">
-	<div class="side-div-title">
-		<h6>게시판 리스트</h6>
-		<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
-			fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
-  			<path fill-rule="evenodd"
-				d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
-		</svg>
-	</div>
-	<div class="group">
-		<div id="board-group-list" class="nav">
-			<div class="board-side-boardItem">
-				<div class="board-name" name="notice" value="notice">
-					<span>공지사항</span>
-				</div>
-				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
-			</div>
-			<div class="board-side-boardItem">
-				<div class="board-name" name="QnA" value="QnA">
-					<span>QnA</span>
-				</div>
-				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
-			</div>
-			<div class="board-side-boardItem">
-				<div class="board-name" name="FAQ" value="FAQ">
-					<span>FAQ</span>
-				</div>
-				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
-			</div>
-		</div>
-	</div>
-</div>
+<c:import url="/admin/board/boardHeadSide"></c:import>
 <div class="board-body">
-	<form>
+	<form name="boardSetEdit" method="post" action="<c:url value='/admin/board/boardEdit'/>">
+		<input type="hidden" name="lastEditAdminId" value="admin">
+		<input type="hidden" name="boardFormNo" value="${param.boardFormNo }">
 		<div id="board-title">
-			<h5>공지사항</h5>
-			<button class="bg-gradient-secondary" id="board-write-button">저장</button>
+			<h5>${vo.boardFormName }</h5>
+			<div class="board-head-button">
+				<input type="button" class="bg-gradient-secondary" onclick="location.href='<c:url value="/admin/board/board?boardFormNo=1"/>'" value="취소">			
+				<input type="submit" class="bg-gradient-primary" id="save-boardWrite" value="저장">
+			</div>
 		</div>
 		<div class="board">
 			<!-- 기본설정 시작 -->
@@ -57,11 +26,11 @@
 					<div class="boardEdit-setting-body">
 						<dt>게시판명</dt>
 						<dd>
-							<div class="input_group v2"><input type="text" readonly="readonly" value="공지사항" name="board_name" id="board_name" maxlength="50"></div>
+							<div class="input_group v2"><input type="text" readonly="readonly" value="${vo.boardFormName }" name="boardFormName" id="board_name" maxlength="50"></div>
 						</dd>
 						<dt>게시판 설명</dt>
 						<dd>
-							<div class="input_group v2"><textarea id="board_desc" name="baord_desc" maxlength="300"></textarea></div>
+							<div class="input_group v2"><textarea id="board_desc" name="boardFormIntro" maxlength="300">${vo.boardFormIntro }</textarea></div>
 						</dd>
 					</div>
 				</div>
@@ -78,10 +47,11 @@
 					</dt>
 					<dd>
 						<div class="checkbox_group">
+							<input type="hidden" value="${vo.commentFlag }" class="boardVal">
 							<input type="checkbox" id="commentFlag">
 							<span class="use_off on">사용안함</span>
 							<span class="use_on">사용함</span>
-							<input type="hidden" name="commentFlag" value="N">
+							<input type="hidden" name="commentFlag" value="N" class="boardSet">
 						</div>
 					</dd>
 					
@@ -91,10 +61,11 @@
 					</dt>
 					<dd>
 						<div class="checkbox_group">
+							<input type="hidden" value="${vo.boardFileAddFlag }" class="boardVal">
 							<input type="checkbox" id="boardFileAddFlag">
 							<span class="use_off on">사용안함</span>
 							<span class="use_on">사용함</span>
-							<input type="hidden" name="boardFileAddFlag" value="N">
+							<input type="hidden" name="boardFileAddFlag" value="N" class="boardSet">
 						</div>
 					</dd>
 					
@@ -103,10 +74,11 @@
 					</dt>
 					<dd>
 						<div class="checkbox_group">
+							<input type="hidden" value="${vo.boardFlag }" class="boardVal">
 							<input type="checkbox" id="boardFlag">
 							<span class="use_off on">사용안함</span>
 							<span class="use_on">사용함</span>
-							<input type="hidden" name="boardFlag" value="N">
+							<input type="hidden" name="boardFlag" value="N" class="boardSet">
 						</div>
 					</dd>
 					</div>
@@ -117,5 +89,6 @@
 </div>
 </div>
 <!-- End of Main Content -->
+<script src="<c:url value='/admin-css-js/js/board.js'/>"></script>
 
 <%@ include file="../inc/bottom.jsp"%>

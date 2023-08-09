@@ -41,9 +41,9 @@ public class BoardController {
 		return "admin/board/boardHeadSide";
 	}
 	
-	@GetMapping("/board")
-	public String board_get(@RequestParam(defaultValue = "1") int boardFormNo, @ModelAttribute BoardVO vo, Model model) {
-		logger.info("게시판 관리 화면 보여주기");
+	@RequestMapping("/board")
+	public String board_get(@RequestParam int boardFormNo, @ModelAttribute BoardVO vo, Model model) {
+		logger.info("게시판 관리 화면 보여주기 파라미터 boardFormNo: {}, vo: {}", boardFormNo, vo);
 		
 		PaginationInfo pagingInfo = new PaginationInfo();
 		pagingInfo.setBlockSize(ConstUtil.BLOCK_SIZE);
@@ -56,38 +56,24 @@ public class BoardController {
 
 		List<Map<String, Object>> list = null;
 		
-		String board = "";
+		String board = boardService.selectBoardName(boardFormNo);
+		logger.info("게시판 이름 검색결과 board: {}", board);
 		
-		if(boardFormNo == 1) {
-			list = boardService.selectAllNotice(vo);
-			
-			int totalRecord = boardService.getTotalRecordNotice(vo);
-			logger.info("공지사항 목록 전체 조회 - totalRecord: {}", totalRecord);
-			pagingInfo.setTotalRecord(totalRecord);
-			
-			board = "공지사항";
-		} else if (boardFormNo == 2) {
-			list = boardService.selectAllFaq(vo);
-			
-			int totalRecord = boardService.getTotalRecordFaq(vo);
-			logger.info("FAQ 목록 전체 조회 - totalRecord: {}", totalRecord);
-			pagingInfo.setTotalRecord(totalRecord);
-			
-			board = "FAQ";
-		} else if (boardFormNo == 3) {
-			
-		} else {
-			list = boardService.selectAll(vo);
-			logger.info("게시판 전체조회 결과: list.size: {}", list.size());
-			
-			int totalRecord = boardService.getTotalRecord(vo);
-			logger.info("글 목록 전체 조회 - totalRecord: {}", totalRecord);
-			pagingInfo.setTotalRecord(totalRecord);					
-		}		
+		List<BoardFormVO> boardList = boardService.selectAllBoard();
+		logger.info("게시판 종류 전체조회 결과: boardList: {}", boardList);
+		
+		list = boardService.selectAll(vo);
+		logger.info("게시판 전체조회 결과: list.size: {}", list.size());
+		
+		int totalRecord = boardService.getTotalRecord(vo);
+		logger.info("글 목록 전체 조회 - totalRecord: {}", totalRecord);
+		pagingInfo.setTotalRecord(totalRecord);						
 		
 		model.addAttribute("title", "게시판 관리");
-		model.addAttribute("boardList", list);
+		model.addAttribute("list", list);
+		model.addAttribute("boardList", boardList);
 		model.addAttribute("pagingInfo", pagingInfo);
+		model.addAttribute("board", board);
 		
 		return "admin/board/board";
 	}
@@ -121,39 +107,76 @@ public class BoardController {
 	}
 	
 	@GetMapping("/boardEdit")
-	public String boardEdit_get(Model model) {
-		logger.info("게시판 수정 화면 보여주기");
+	public String boardEdit_get(@RequestParam int boardFormNo, Model model) {
+		logger.info("게시판 수정 화면 보여주기 파라미터 boardFormNo: {}", boardFormNo);
 		
+		BoardFormVO vo = boardService.selectBoardSet(boardFormNo);
+		logger.info("게시판 설정 불러오기 결과 vo: {}", vo);
+				
 		model.addAttribute("title", "게시판 수정");
+		model.addAttribute("vo", vo);
 		
 		return "admin/board/boardEdit";
 	}
 	
-	@GetMapping("/boardWrite")
-	public String boardWrite_get(Model model) {
-		logger.info("게시판 글쓰기 화면 보여주기");
+	@PostMapping("/boardEdit")
+	public String boardEdit_post(@ModelAttribute BoardFormVO vo, Model model) {
+		logger.info("게시판 수정 처리 파라미터 vo: {}", vo);
 		
-		model.addAttribute("title", "게시판 글쓰기");
+		int cnt = boardService.updateBoardSet(vo);
+		logger.info("게시판 수정 처리 결과 cnt: {}", cnt);
 		
-		return "admin/board/boardWrite";
-	}
-	
-	@PostMapping("/boardWrite")
-	public String boardWrite_post(@ModelAttribute BoardVO vo, Model model) {
-		logger.info("게시판 글쓰기 처리");
-		
-		int cnt = boardService.insertBoard(vo);
-		logger.info("게시판 글쓰기 처리 결과 cnt: {}", cnt);
-		
-		String msg = "글 등록 실패!", url = "/admin/board/boardWrite";
+		String msg = "게시판 수정 실패!", url = "/admin/board/boardEdit?boardFormNo=" + vo.getBoardFormNo();
 		if(cnt > 0) {
-			msg = "글쓰기 성공!";
-			url = "/admin/board/board";
+			msg = "게시판 수정 성공!";
+			url = "/admin/board/board?boardFormNo=" + vo.getBoardFormNo();
 		}
 		
 		model.addAttribute("msg", msg);
 		model.addAttribute("url", url);
 		
 		return "common/message";
+	}
+	
+	@GetMapping("/boardWrite")
+	public String boardWrite_get(@RequestParam int boardFormNo, Model model) {
+		logger.info("게시판 글쓰기 화면 보여주기");
+		
+		List<BoardFormVO> list = boardService.selectAllBoard();
+		logger.info("게시판 종류 전체조회 결과: list: {}", list);
+		
+		String board = boardService.selectBoardName(boardFormNo);
+		logger.info("게시판 이름 검색결과 board: {}", board);
+		
+		model.addAttribute("boardList", list);			
+		model.addAttribute("title", "게시판 글쓰기");
+		model.addAttribute("board", board);
+		
+		return "admin/board/boardWrite";
+	}
+	
+	@PostMapping("/boardWrite")
+	public String boardWrite_post(@ModelAttribute BoardVO vo) {
+		logger.info("게시판 글쓰기 처리 파라미터 vo: {}", vo);
+		
+		int cnt = boardService.insertBoard(vo);
+		logger.info("게시판 글쓰기 처리 결과 cnt: {}", cnt);
+		
+		return "redirect:/admin/board/board?boardFormNo=" + vo.getBoardFormNo();
+	}
+	
+	@GetMapping("/boardDetail")
+	public String boardDetail_get(@RequestParam int boardNo, Model model) {
+		logger.info("게시글 상세보기 화면처리 파라미터 boardFormNo: {}", boardNo);
+		
+		Map<String, Object> map = boardService.selectBoardByNo(boardNo);
+		int cnt = boardService.addReadCount(boardNo);
+		logger.info("게시글 조회 결과 map: {}", map);
+		logger.info("조회수 증가 결과 cnt: {}", cnt);
+		
+		model.addAttribute("title", "게시글 상세보기");
+		model.addAttribute("map", map);
+		
+		return "admin/board/boardDetail";
 	}
 }

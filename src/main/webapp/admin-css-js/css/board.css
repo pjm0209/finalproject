@@ -119,11 +119,6 @@ input#board-search-area {
 	width: 300px;
 }
 
-th.board-title {
-    width: 60%;
-    text-align: center;
-}
-
 select#board-search-select {
     margin-right: 30px;
     height: 40px;
@@ -135,6 +130,43 @@ select#board-search-select {
 .board-side-boardItem {
     width: 200px;
     cursor: pointer;
+}
+
+th.board-title { 
+    width: 60% !important;
+}
+
+th.board-readcount {
+    width: 90px;
+}
+
+th.board-writer {
+    width: 200px;
+}
+
+th.board-regdate {
+    width: 200px;
+}
+
+tr.board-table-colum th {
+    text-align: center;
+}
+
+tbody tr td, th {
+	text-align: center;
+}
+
+tbody tr td.board-title {
+	text-align: left;
+}
+
+.boardPaging {
+	display: flex;
+    justify-content: space-around;
+}
+
+tr td.board-readcount {
+	padding-left: 0;
 }
 
 /*게시판 수정 css*/
@@ -152,6 +184,10 @@ select#board-search-select {
     border-radius: 5px;
     width: 98%;
     margin-top: 30px;
+}
+
+#save-boardCreate {
+	margin-left: 10px;
 }
 
 .boardEdit-setting-head {
@@ -292,4 +328,8 @@ input[type="file"] {
     border: 1px solid #dddddd;
     width: 59%;
     color: #999999;
+}
+
+.fn_add_btn {
+	margin-left: 10px;
 }
