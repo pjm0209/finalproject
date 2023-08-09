@@ -2,19 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
 
-<style>
-button.mbti-button{
-	background-color: #c87fdf;
-    background-size: cover;
-	float: right;
-    border:1px solid black;
-	border-radius: 5px;
-	padding: 6px 41px;
-	margin-top: -6px;
-	margin-right: 9px;
-	color: white;
-}
-</style>
 <!-- Begin Page Content -->
 <!-- Page Heading -->
 <div class="head-div">
