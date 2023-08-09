@@ -1,24 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>  
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>회원가입 페이지</title>
-
 <style>
-*{
+*{	
 	margin: 0px;
-	box-sizing: border-box;
-	font-size:15px;
+	box-sizing: border-box;	
+	font-size:15px;	
 }
 
 h1 {
 	font-size: 30px;
     text-align: center;
     font-weight: bold;
-    background: #ff7f00; 
+    background: #ff7f00;     
 }
 
 html {
@@ -29,9 +28,9 @@ html {
     padding-bottom: 20px;
 }
 
-body {
+body {	
     width: 30%;
-    border: 1px solid black;
+    border: 3px solid #ff7f00;    
 }
 
 input{
@@ -236,7 +235,7 @@ function validate_hp(ph) {
 		<div class="userid">		
 			<input type="text" id="userid" placeholder="아이디 입력(6~20자)">
 			<button id="btnChkId" value="중복 확인" type="button">중복 확인</button>			
-			<span class="error" id="useridError">*중복확인을 해주세요</span>
+			<span class="error" id="useridError" style=font-size:15px;>*중복확인을 해주세요</span>
 		</div>
 		
 		<span>비밀번호 *</span>
@@ -248,7 +247,7 @@ function validate_hp(ph) {
 		<span>비밀번호 확인 *</span>
 		<div class="passwordCheck">
 			<input type="password" id="password2" placeholder="비밀번호 재입력">
-			<div class="error" id="passwordError"></div>
+			<div class="error" id="passwordError" style=font-size:15px;></div>
 		</div>
 		
 		<span>이메일 *</span>
