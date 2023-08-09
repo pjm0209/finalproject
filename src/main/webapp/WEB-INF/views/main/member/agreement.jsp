@@ -16,7 +16,7 @@
 <iframe src="<c:url value='/inc2/provision.html'/>" width="700px" height="300px"></iframe>
 <br>
 <div style="width:700px">
-	<form name="frmAgree" method="post" action="<c:url value='/member/register'/>">
+	<form name="frmAgree" method="post" action="<c:url value='/member/memberRegister'/>">
 		<fieldset>
 		    <legend style="visibility:hidden;">회원 약관</legend> 
 		      <div style="text-align:right">			

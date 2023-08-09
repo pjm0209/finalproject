@@ -72,6 +72,8 @@
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
+  <script type="text/javascript" src="<c:url value='/admin-css-js/js/mbti.js'/>"></script>
+	
   <!-- Vendor JS Files -->
   <script src="${path }/assets/vendor/aos/aos.js"></script>
   <script src="${path }/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
