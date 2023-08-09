@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -11,10 +13,9 @@
 	<c:set var="path" value="${pageContext.request.contextPath }"/>
 
   <link href="${path }/images/감사콩로아콘.png" rel="shortcut icon" type="image/x-icon">
-  <title>이젠 MBTI</title>
+  <title>ESSENTIAL MBTI</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
-  
 
   <!-- Favicons --ㅎ
   <link href="${path }/assets/img/favicon.png" rel="icon">
@@ -52,19 +53,19 @@
     <div class="container d-flex align-items-center justify-content-between">
 
       <div class="logo">
-        <h1 class="text-light"><a href="${path }/main/index"><span>이젠 MBTI</span></a></h1>
+        <h1 class="text-light"><a href="${path }/main/index"><span>ESSENTIAL MBTI</span></a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto active" href="<c:url value='/main/index'/>">메인</a></li>
           <li><a class="nav-link scrollto" href="#about">About Us</a></li>
-          <li><a class="nav-link scrollto" href="#services">Services</a></li>
-          <li><a class="nav-link scrollto" href="#portfolio">Portfolio</a></li>
-          <li><a class="nav-link scrollto" href="#team">Team</a></li>
-          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
+          <li><a class="nav-link scrollto" href="#services">책</a></li>
+          <li><a class="nav-link scrollto" href="#portfolio">MBTI 교육</a></li>
+          <li><a class="nav-link scrollto" href="<c:url value='/main/mbti'/>">MBTI 검사</a></li>
+          <li class="dropdown"><a href="#"><span>커뮤니티</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="#">Drop Down 1</a></li>
               <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
@@ -81,7 +82,7 @@
               <li><a href="#">Drop Down 4</a></li>
             </ul>
           </li>
-          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+          <li><a class="nav-link scrollto" href="<c:url value='/main/myPage'/>">마이페이지</a></li>
           <li><a class="getstarted scrollto" href="#about">Get Started</a></li>
           <li><a class="nav-link scrollto" href="<c:url value='/main/login'/>">로그인</a></li>
         </ul>

@@ -504,4 +504,9 @@
           </div>
         </div>
       </div>
+  </section><!-- End Contact Us Section -->
+
+  </main><!-- End #main -->
+
+
 <%@ include file="inc/bottom.jsp" %>
