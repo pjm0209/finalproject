@@ -365,6 +365,7 @@ textarea#comment-area {
     border-right: 0;
     color: #333;
     font-size: 14px;
+    outline: 0;
 }
 
 input#comment-submit {
