@@ -18,7 +18,7 @@ h1 {
 	font-size: 30px;
     text-align: center;
     font-weight: bold;
-    background: #ffcf00; 
+    background: #ff7f00; 
 }
 
 html {
@@ -108,7 +108,7 @@ div {
 .signUp button{
   	width: 200px;
  	height: 50px;
-	background-color:#ffcf00;
+	background-color:#f89b00;
 	font-weight:bold;	
 }
 </style>
@@ -119,18 +119,11 @@ function validate_userid(uid) {
 	console.log(uid);
 	var pattern = new RegExp(/^[a-zA-Z0-9_]+$/g);
 	return pattern.test(uid);
-	/*
-	정규식 /^[a-zA-Z0-9_]+$/g
-	a에서 z 사이의 문자, A~Z사이의 문자, 0 에서 9사이의 숫자나 _로 시작하거나 끝나야 한다는 의미
-	닫기 대괄호(]) 뒤의 + 기호는 이 패턴이 한 번 또는 그 이상 반복된다는 의미	 */
 }
 
 function validate_hp(ph) {
 	var pattern = new RegExp(/^[0-9]*$/g);
-	return pattern.test(ph); //정규식과 일치하면 true
-	/* 정규식 /^[0-9]*$/g
-	0 에서 9사이의 숫자로 시작하거나 끝나야 한다는 의미 (^는 시작, $는 끝을 의미)
-	닫기 대괄호(]) 뒤의 * 기호는 0번 이상 반복		 */
+	return pattern.test(ph); 
 }
 
 	$(function(){
@@ -153,6 +146,7 @@ function validate_hp(ph) {
 					} else if(res == 2) {
 						$('#useridError').html("사용가능한 아이디입니다.");
 						$('#useridError').css('color', 'blue');
+						$('#btnChkId').val('Y'); 
 					}
 				},
 				error:function(xhr, status, error){
@@ -161,6 +155,18 @@ function validate_hp(ph) {
 			});
 		});
 		
+		$('#password2').keyup(function() {
+		    var password1 = $('#password1').val();
+		    var password2 = $(this).val();
+		    var passwordError = $('#passwordError');
+
+		    if (password1 !== password2) {
+		        passwordError.html("비밀번호가 일치하지 않습니다. 확인하세요");
+		    } else {
+		        passwordError.html("일치합니다");
+		    }
+		});		
+					
 		$('#signUpButton').click(function(){
 			if($('#name').val().length < 1){
 				alert("이름을 입력하세요");
@@ -174,26 +180,45 @@ function validate_hp(ph) {
 		         return false;
 		    }
 			
-			if ($('#password').val().length < 1) {
+			if ($('#password1').val().length < 1) {
 				alert("비밀번호를 입력하세요");
-				$('#password').focus();
+				$('#password1').focus();
 				return false;
 			}
 			
-			if ($('#password').val() != $('#pwd2').val()) {
-				alert("비밀번호가 일치하지 않습니다.확인하세요");
-				$("#password").focus();
-				return false;
-			}
-			
-			if (!validate_hp($("#tel").val().length < 1))	{
-				
-				alert("전화번호는 숫자만 가능합니다");
-				$("#tel").focus();
-				return false;
-			}
-
-		});		
+	        var password1 = $("#password1").val();
+	        if (password1.length < 8 || password1.length > 20 ||
+	            !/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]+$/.test(password1)) {
+	            $('#passwordError').html("비밀번호는 문자, 숫자, 특수문자를 포함한 8~20자여야 합니다");
+	            $("#password1").focus();
+	            return false;
+	        } else {
+	            $('#passwordError').html("");
+	        }
+	        	        			     
+	        var telNumber = $("#tel").val();
+	        if (!validate_hp(telNumber)) {
+	            alert("전화번호는 숫자만 가능합니다");
+	            $("#tel").focus();
+	            return false;
+	        }
+	        
+	        if (telNumber.length !== 11) {
+	            alert("전화번호는 11자리로 입력해주세요");
+	            $("#tel").focus();
+	            return false;
+	        }			
+		});	
+		
+		$(function(){
+		    $('#email2').change(function() {
+		        if ($(this).val() === 'etc') {
+		            $('#email3').css('visibility', 'visible');
+		        } else {
+		            $('#email3').css('visibility', 'hidden');
+		        }
+		    });
+		});	
 	});
 </script>
 
