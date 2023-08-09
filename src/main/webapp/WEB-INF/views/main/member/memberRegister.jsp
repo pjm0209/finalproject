@@ -13,8 +13,8 @@
 	font-size:15px;	
 }
 
-h1 {
-	font-size: 30px;
+h3 {
+	font-size: 20px;
     text-align: center;
     font-weight: bold;
     background: #ff7f00;     
@@ -162,7 +162,7 @@ function validate_hp(ph) {
 		    if (password1 !== password2) {
 		        passwordError.html("비밀번호가 일치하지 않습니다. 확인하세요");
 		    } else {
-		        passwordError.html("일치합니다");
+		        passwordError.html("비밀번호가 일치합니다");
 		    }
 		});		
 					
@@ -172,6 +172,12 @@ function validate_hp(ph) {
 				$('#name').focus();				
 				return false;				
 			}
+			
+	        if ($('#userid').val().length < 1) {
+	            alert("아이디를 입력하세요");
+	            $('#userid').focus();
+	            return false;
+	        }
 			
 			if($('#btnChkId').val()!='Y'){
 		         alert('아이디 중복확인을 해주세요.');
@@ -194,6 +200,12 @@ function validate_hp(ph) {
 	        } else {
 	            $('#passwordError').html("");
 	        }
+	        
+	        if ($('#email1').val().length < 1) {
+	            alert("이메일을 입력하세요");
+	            $('#email1').focus();
+	            return false;
+	        }
 	        	        			     
 	        var telNumber = $("#tel").val();
 	        if (!validate_hp(telNumber)) {
@@ -206,7 +218,13 @@ function validate_hp(ph) {
 	            alert("전화번호는 11자리로 입력해주세요");
 	            $("#tel").focus();
 	            return false;
-	        }			
+	        }
+	        
+	        if ($('#address').val().length < 1) {
+	            alert("주소를 입력하세요");
+	            $('#address').focus();
+	            return false;
+	        }
 		});	
 		
 		$(function(){
@@ -218,12 +236,17 @@ function validate_hp(ph) {
 		        }
 		    });
 		});	
+		
+	    $('#btnAddress').click(function() {
+	        var addressSearchURL = '<c:url value="/main/member/zipcodeTest"/>';
+	        window.open(addressSearchURL, 'AddressSearch', 'width=550,height=600');
+	    });
 	});
 </script>
 
 </head>
 <body>
-	<h1>회원가입</h1><br>
+	<h3>회원가입</h3><br>	
 <form name="frm1" method="post" action="<c:url value='/main/member/memberRegister'/>">
 	<div class="member_register">
 		<span>이름 *</span>
@@ -279,7 +302,7 @@ function validate_hp(ph) {
 		</div>		
 		
         <div class="signUp"><br>
-            <button id="signUpButton">가입하기</button>
+            <button id="signUpButton">회원가입</button>
         </div>				
 	</div>
 </form>

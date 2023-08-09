@@ -34,6 +34,9 @@
 				order by no 
 			)A
 		)
+		<![CDATA[
+		where RNUM > #{firstRecordIndex} 
+		and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}]]>
 	</select>
 	
 	<select id="getTotalRecordMember" parameterType="searchVo" resultType="int">
