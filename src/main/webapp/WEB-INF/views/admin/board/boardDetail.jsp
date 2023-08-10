@@ -24,6 +24,11 @@
 			<span class="board-regdate-readcount"><fmt:formatDate value="${map['BOARD_REGDATE'] }" pattern="yyyy-MM-dd HH:mm:ss"/> 조회수 ${map['BOARD_READCOUNT'] } </span>
 		</div>
 		<div class="board-content">
+			<div class="filebox">
+				<ul>
+					<li><i class="bi bi-dropbox"></i></li>
+				</ul>
+			</div>
 			${map['BOARD_BODY'] }
 		</div>
 		

@@ -26,4 +26,8 @@ public interface BoardDAO {
 	int addReadCount(int boardNo);
 	
 	List<CommentsVO> selectComment(int boardNo);
+	
+	int insertFile(BoardFileVO fileVo);
+	
+	List<BoardFileVO> selectFileList(int boardNo);
 }

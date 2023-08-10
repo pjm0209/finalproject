@@ -1,3 +1,4 @@
+var fileIndex = 0;
 
 $(function(){
 	var contextPath = "/mbti";
@@ -82,9 +83,9 @@ function addFile() {
     fileDiv.innerHTML =`
         <div class="file_input">
             <input type="text" readonly />
-            <label> 첨부파일
-                <input type="file" name="files" onchange="selectFile(this);" />
-            </label>
+            <label> 첨부파일` +
+                '<input type="file" name="files' + ++fileIndex + '"onchange="selectFile(this);" />' +
+             `</label>
         </div>
         <button type="button" onclick="removeFile(this);" class="btns del_btn"><span>삭제</span></button>
     `;
