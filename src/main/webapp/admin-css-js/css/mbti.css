@@ -1,4 +1,17 @@
 @charset "UTF-8";
+section#mbti{
+	margin: 0 auto;
+	width: 100%;
+	height: 1000px;
+}
+#mbti-title{
+	width: 100%;
+	height: 1300px;
+	text-align: center;
+	background-image: url("../../images/mbti1.png");
+	background-size: 100% 70%;
+	background-repeat: no-repeat;
+}
 .mbti-writer{
 	width: 130px;
 }
@@ -9,4 +22,117 @@ th.mbti-title {
 
 tr>td:last-child{
 	padding-left: 5%;
+}
+
+button.mbti-button{
+	background-color: #c87fdf;
+	float: right;
+    border:0;
+	border-radius: 5px;
+	padding: 6px 41px;
+	margin-top: -6px;
+	margin-right: 9px;
+	color: white;
+}
+button.mbti-button2{
+	background-color: #eb5d1e;
+	height: 100px;
+	width:  300px;
+	font-size: 30px;
+	font-weight: bold;
+    border:0;
+	border-radius: 100px;
+	padding: 6px 41px;
+	margin-top: 450px;
+	margin-right: 9px;
+	color: white;
+}
+section.mbti{
+	width: 100%;
+}
+.mbti-survey{
+	width: 100%;
+	height: 100%;
+	background-image: url("../../images/mbti_bg.jpg");
+	background-size: 100%;
+}
+.mbti-survey p{
+	font-size: 26px;
+    line-height: 145%;
+    color: #fff;
+    margin-bottom: 10px;
+    padding-left: 30px;
+    font-weight: bold;
+}
+.mbti-survey p span{
+    color: #003fae;
+    font-family: 'GmarketSansBold';
+    font-size: 30px;
+}
+.mbti-survey>div{
+	max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+    padding-top: 250px;
+    position: relative;
+}
+.mbti-survey p:nth-of-type(1){
+	 position: relative;
+}
+.mbti-survey p:nth-of-type(2){
+	 position: relative;
+}
+.mbti-survey p:nth-of-type(3){
+	 position: relative;
+}
+.mbti-survey p:nth-of-type(1)::after{
+	position: absolute;
+    left: 0;
+    content: "1.";
+    top: 0;
+}
+.mbti-survey p:nth-of-type(2)::after{
+	position: absolute;
+    left: 0;
+    content: "2.";
+    top: 0;
+}
+.mbti-survey p:nth-of-type(3)::after{
+	position: absolute;
+    left: 0;
+    content: "3.";
+    top: 0;
+}
+.mbti-survey h2{
+    font-size: 50px;
+    color: #fff;
+    line-height: 135%;
+    font-family: 'GmarketSansBold';
+}
+.mbti-survey h2:last-of-type{
+	margin-bottom: 50px;
+	position: absolute;
+    right: 6%;
+    top: 50%;
+}
+.test_btn_style{
+	width: 380px;
+    height: 71px;
+    color: #fff;
+    text-align: center;
+    background-color: #fe6400;
+    border: none;
+    border-radius: 10px;
+    font-size: 26px;
+    margin-top: 30px;
+    cursor: pointer;
+    box-shadow: inset 2px 2px 2px 0px rgba(255,255,255,.5), 7px 7px 20px 0px rgba(0,0,0,.1), 4px 4px 5px 0px rgba(0,0,0,.1);
+    outline: none;
+    transition: all 0.8s;
+    position: relative;
+    border: none;
+    z-index: 1;
+}
+.test_btn_style.active{
+	background-color: #663dff;
 }

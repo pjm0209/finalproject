@@ -98,11 +98,7 @@ body {
             <label for="remember-check">
                 <input type="checkbox" id="remember-check">&nbsp; 아이디 저장하기
             </label>
-            <input type="submit" value="Login" id="login-button">
-            
-            <div class="text-center">
-              <a class="small" href="<c:url value='/admin/register'/>">회원가입</a>
-           </div>           
+            <input type="submit" value="Login" id="login-button">                    
         </form>
     </div>
 </body>

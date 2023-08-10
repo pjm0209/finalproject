@@ -12,6 +12,11 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 	<c:set var="path" value="${pageContext.request.contextPath }"/>
 
+  <!-- Custom fonts for this template-->
+  <link href="<c:url value='/admin-css-js/vendor/fontawesome-free/css/all.min.css'/>" rel="stylesheet" type="text/css">
+  <link
+      href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+      rel="stylesheet">
   <link href="${path }/images/감사콩로아콘.png" rel="shortcut icon" type="image/x-icon">
   <title>ESSENTIAL MBTI</title>
   <meta content="" name="description">
@@ -25,13 +30,22 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i" rel="stylesheet">
 
 
-  <!-- Vendor CSS Files -->
+<!-- Vendor CSS Files -->
   <link href="${path }/assets/vendor/aos/aos.css" rel="stylesheet">
   <link href="${path }/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="${path }/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="${path }/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
   <link href="${path }/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="${path }/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  
+	<!-- Custom styles for this template-->
+	<link href="<c:url value='/admin-css-js/css/sb-admin-2.css'/>" rel="stylesheet">
+	<link href="<c:url value='/admin-css-js/css/mbti.css'/>" rel="stylesheet">
+	<link href="<c:url value='/admin-css-js/css/board.css'/>" rel="stylesheet" type="text/css">
+	<link href="<c:url value='/admin-css-js/css/boardCreate.css'/>" rel="stylesheet" type="text/css">
+	<link href="<c:url value='/admin-css-js/css/book-order.css'/>" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/resources/ckeditor/ckeditor.js'/>"></script>	
 
 
   <!-- Template Main CSS File -->
@@ -64,7 +78,7 @@
           <li><a class="nav-link scrollto" href="#about">About Us</a></li>
           <li><a class="nav-link scrollto" href="#services">책</a></li>
           <li><a class="nav-link scrollto" href="#portfolio">MBTI 교육</a></li>
-          <li><a class="nav-link scrollto" href="<c:url value='/main/mbti'/>">MBTI 검사</a></li>
+          <li><a class="nav-link scrollto" href="<c:url value='/main/mbti/'/>">MBTI 검사</a></li>
           <li class="dropdown"><a href="#"><span>커뮤니티</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="#">Drop Down 1</a></li>

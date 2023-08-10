@@ -21,4 +21,6 @@ public interface BoardService {
 	
 	Map<String, Object> selectBoardByNo(int boardNo);
 	int addReadCount(int boardNo);
+	
+	List<CommentsVO> selectComment(int boardNo);
 }

@@ -35,7 +35,6 @@ $(function(){
 <c:if test="${!empty vo}">
 	<c:set var="str" value="수정"/>
 </c:if>
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<form name="frmMbtiWrite" method="post" action="<c:url value='/admin/mbti/mbtiWrite'/>">
 		<div style="height:650px;width: 750px;margin-left: 25px;margin-top: 30px;">
 			<h1>질문지 등록</h1><br>
@@ -67,7 +66,6 @@ $(function(){
 			<button class="mbti-button" type="button" id="mbti-close-button" onclick="self.close()">닫기</button>
 		</div>
 	</form>
-</div>
 
 </body>
 </html>

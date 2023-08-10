@@ -333,3 +333,67 @@ input[type="file"] {
 .fn_add_btn {
 	margin-left: 10px;
 }
+
+/*게시판 상세보기*/
+div.board-title {
+    padding: 22px;
+    border-bottom: 1px solid black;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+}
+
+p.board-title-name {
+    color: black;
+    font-size: 21px;
+    margin-bottom: 4px;
+}
+
+span.board-write-user-userId {
+    color: black;
+    margin-right: 14px;
+}
+
+.textarea-group {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+textarea#comment-area {
+    width: calc(100% - 100px);
+    height: 80px;
+    border: 1px solid #d3d3d3;
+    resize: none;
+    padding: 5px 9px;
+    border-right: 0;
+    color: #333;
+    font-size: 14px;
+    outline: 0;
+}
+
+input#comment-submit {
+    width: 100px;
+    border: 1px solid #d3d3d3;
+    background: #FFF;
+    font-size: 13px;
+}
+
+p.board-comment-user {
+    color: #333;
+    font-size: 14px;
+}
+
+p.board-comment-count {
+    color: #333;
+    padding: 20px;
+    margin: 0;
+    border-bottom: 1px solid black;
+    font-size: 14px;
+}
+
+form[name=commentFrm] {
+    padding: 20px;
+}
+
+div.board {
+	overflow: auto;
+}
