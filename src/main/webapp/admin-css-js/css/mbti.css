@@ -3,7 +3,6 @@ section#mbti{
 	margin: 0 auto;
 	width: 100%;
 	height: 1000px;
-	text-align: center;
 }
 #mbti-title{
 	width: 100%;
@@ -16,12 +15,12 @@ section#mbti{
 .mbti-writer{
 	width: 130px;
 }
-th.mbti-title {
+#mbtitb th.mbti-title {
     width: 70%;
     text-align: center;
 }
 
-tr>td:last-child{
+#mbtitb tr>td:last-child{
 	padding-left: 5%;
 }
 
@@ -47,4 +46,187 @@ button.mbti-button2{
 	margin-top: 450px;
 	margin-right: 9px;
 	color: white;
+}
+section#mbtiSurvey{
+	width: 100%;
+	height: 3000px;
+}
+.mbti-survey{
+	width: 100%;
+	height: 1000px;
+	background-image: url("../../images/mbti_bg.jpg");
+	background-size: 100%;
+	background-repeat: no-repeat;
+	margin-bottom: 100px;
+}
+.mbti-survey p{
+	font-size: 26px;
+    line-height: 145%;
+    color: #fff;
+    margin-bottom: 10px;
+    padding-left: 30px;
+    font-weight: bold;
+}
+.mbti-survey p span{
+    color: #003fae;
+    font-family: 'GmarketSansBold';
+    font-size: 30px;
+}
+.mbti-survey>div{
+	max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+    padding-top: 250px;
+    position: relative;
+}
+.mbti-survey p:nth-of-type(1){
+	 position: relative;
+}
+.mbti-survey p:nth-of-type(2){
+	 position: relative;
+}
+.mbti-survey p:nth-of-type(3){
+	 position: relative;
+}
+.mbti-survey p:nth-of-type(1)::after{
+	position: absolute;
+    left: 0;
+    content: "1.";
+    top: 0;
+}
+.mbti-survey p:nth-of-type(2)::after{
+	position: absolute;
+    left: 0;
+    content: "2.";
+    top: 0;
+}
+.mbti-survey p:nth-of-type(3)::after{
+	position: absolute;
+    left: 0;
+    content: "3.";
+    top: 0;
+}
+.mbti-survey h2{
+    font-size: 50px;
+    color: #fff;
+    line-height: 135%;
+    font-family: 'GmarketSansBold';
+}
+.mbti-survey h2:last-of-type{
+	margin-bottom: 50px;
+	position: absolute;
+    right: 6%;
+    top: 50%;
+}
+.test_btn_style{
+	width: 380px;
+    height: 71px;
+    color: #fff;
+    text-align: center;
+    background-color: #fe6400;
+    border: none;
+    border-radius: 10px;
+    font-size: 26px;
+    margin-top: 30px;
+    cursor: pointer;
+    box-shadow: inset 2px 2px 2px 0px rgba(255,255,255,.5), 7px 7px 20px 0px rgba(0,0,0,.1), 4px 4px 5px 0px rgba(0,0,0,.1);
+    outline: none;
+    transition: all 0.8s;
+    position: relative;
+    border: none;
+    z-index: 1;
+}
+.test_btn_style.active{
+	background-color: #663dff;
+}
+.MBTI_test{
+    border-top: 5px solid #296bd7;
+}
+
+.MBTI_test, .MBTI_test2, .MBTI_test3, .MBTI_test4, .MBTI_test5, .MBTI_test6, .MBTI_test7, .MBTI_test8, .MBTI_test9 {
+    margin: 0 auto;
+    max-width: 1400px;
+    width: 100%;
+    background-color: #fff;
+}
+
+.statement{
+    border-bottom: 1px solid #eeeeee;
+    opacity: 0.2;
+    transition: opacity 0.5s;
+    overflow: hidden;
+    line-height: 95px;
+    padding: 45px 25px;
+    text-align: center;
+	height: auto;
+}
+
+.statement.active {
+    opacity: 1;
+}
+
+.statement .question {
+    color: #296bd7;
+    font-size: 26px;
+    text-align: center;
+}
+.statement .question h3{
+	font-size: 26px;
+    font-family: 'GmarketSansMedium';
+}
+.statement .answer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    float: right;
+    height: 93px;
+}
+.statement .option{
+	display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    max-width: 600px;
+    box-sizing: border-box;
+    margin: 0 auto;
+}
+.statement .answer::before {
+    position: absolute;
+    left: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+    content: "전혀 그렇지 않다";
+    font-size: 24px;
+    color: #ff4e4e;
+}
+.statement.active .options{
+	position: relative;
+}
+.statement.active .options::after {
+	    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 90%;
+    height: 2px;
+    margin-top: -1px;
+    content: "";
+    z-index: 1;
+    box-sizing: border-box;
+    width: calc(100% - 400px);
+    text-align: center;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.statement .answer::after {
+    position: absolute;
+    right: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+    content: "매우 그렇다";
+    font-size: 24px;
+    color: #06f;
+}
+.statement.active .options label {
+    z-index: 2;
 }

@@ -11,4 +11,6 @@ public interface MbtiSurveyService {
 	int updateMbtiSurvey(MbtiSurveyVO vo);
 	int deleteMultiMbtiSurvey(List<MbtiSurveyVO> list);
 	int getTotalRecordMbti(SearchVO searchVo);
+	
+	List<MbtiSurveyVO> selectByQuestionTypeNoMbtiSurvey(int questionTypeNo);
 }

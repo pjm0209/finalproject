@@ -216,7 +216,7 @@ a.google span{
                     </div>                
 
                 <div class="form-link">
-                    <span>계정이 없으신가요? <a href="<c:url value='/main/member/memberRegister'/>">회원가입</a></span>          
+                    <span>계정이 없으신가요? <a href="<c:url value='/main/member/agreement'/>">회원가입</a></span>          
                 </div>
             </div>
 

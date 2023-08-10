@@ -49,4 +49,8 @@
 		delete from mbti_survey
 		where mbti_servey_no = #{mbtiServeyNo}
 	</delete>
+	
+	<select id="selectByQuestionTypeNoMbtiSurvey" parameterType="int" resultType="mbtiSurveyVo">
+		select * from mbti_survey where question_type_no=#{questionTypeNo}
+	</select>
 </mapper>
