@@ -12,4 +12,8 @@ public interface EducationService {
 	int insertEducation(EducationVO vo);
 	List<EducationVO> selectAllEducation(SearchVO searchVo);
 	int getTotalRecordEducation(SearchVO searchVo);
+	
+	int insertTeacher(EducationVO vo);
+	List<EducationVO> selectAllTeacher(SearchVO searchVo);
+	int getTotalRecordTeacher(SearchVO searchVo);
 }

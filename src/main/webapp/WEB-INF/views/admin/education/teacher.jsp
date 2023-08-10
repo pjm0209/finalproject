@@ -3,7 +3,7 @@
 <%@ include file="../inc/top.jsp"%>
 
 <style>
-button#location-write-button {
+button#education-edit-button {
 	float:  right;
 	border: 0;
 	border-radius: 5px;
@@ -13,7 +13,7 @@ button#location-write-button {
 	color: white;
 }
 
-button#location-delete-button {
+button#education-delete-button {
 	float:  right;
 	border: 0;
 	border-radius: 5px;
@@ -23,7 +23,7 @@ button#location-delete-button {
 	color: white;
 }
 
-.location-button {
+.education-button {
 	background-color: #858796;
     background-image: linear-gradient(180deg, #858796 10%, #60616f 100%);
     background-size: cover;
@@ -35,11 +35,11 @@ button#location-delete-button {
 <div class="head-div">
 	<h2 class="text-gray-800">교육 관리</h2>
 	<button type="button" class="bg-gradient-primary"
-		id="add-newBoard-button" onclick="location.href='locationCreate'">교육장 추가</button>
+		id="add-newBoard-button" onclick="location.href='educationCreate'">강사 추가</button>
 </div>
 <div class="side-body">
 	<div class="side-div-title">
-		<h6>교육 리스트</h6>
+		<h6>교육</h6>
 		<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
 			fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
   			<path fill-rule="evenodd"
@@ -85,24 +85,23 @@ button#location-delete-button {
 </div>
 <div class="board-body">
 	<div id="board-title">
-		<h5>교육장 관리</h5>
-		<button class="location-button" id="location-write-button">추가</button>
-		<button class="location-button" id="location-delete-button">삭제</button>
+		<h5>강사 관리</h5>
+		<button class="education-button" id="education-edit-button">수정</button>
+		<button class="education-button" id="education-delete-button">삭제</button>
 	</div>
 	<div class="board">
 		<div class="board-head">
 			<div class="board-search-result">
-				<form name="frmSearch" method="post" action="<c:url value='/admin/education/location'/>">
+				<form name="frmSearch" method="post" action="<c:url value='/admin/education/list'/>">
 				<div class="input-group mb-3" id="board-search-div">
 					<select class="form-select form-select-lg" aria-label=".form-select-lg example" name="searchcondition" id="board-search-select">					  	
-					  	<option value="ep_name" <c:if test="${param.searchCondition=='ep_name'}"> selected="selected" </c:if>>교육장</option>
-					  	<option value="ep_address" <c:if test="${param.searchCondition=='ep_address'}"> selected="selected" </c:if>>주소</option>
-					  	<option value="ep_tel" <c:if test="${param.searchCondition=='ep_tel'}"> selected="selected" </c:if>>전화번호</option>
+					  	<option value="edu_name" <c:if test="${param.searchCondition=='edu_tea_name'}"> selected="selected" </c:if>>이름</option>
+					  	<option value="edu_teacher" <c:if test="${param.searchCondition=='edu_tea_id'}"> selected="selected" </c:if>>아이디</option>
+					  	<option value="ep_no" <c:if test="${param.searchCondition=='edu_tea_tel'}"> selected="selected" </c:if>>전화번호</option>
 					</select>
 				 	<input type="text" class="form-control" name="searchKeyword" placeholder="검색어를 입력하세요" aria-label="Recipient's username" aria-describedby="button-addon2" id="board-search-area" value="${param.searchKeyword}">
 				 	<button class="btn btn-outline-secondary" type="submit" id="button-addon2">검색</button>
 				</div>
-				</form>
 			</div>
 		</div>
 		<form name="frmDelete" method="post">
@@ -111,28 +110,30 @@ button#location-delete-button {
 				<tr class="board-table-colum">
 					<th scope="col"><input type="checkbox" id="check-All" class="board-checkbox"></th>
 					<th scope="col">번호</th>
-					<th scope="col">교육장</th>
-					<th scope="col">우편번호</th>
-					<th scope="col">주소</th>
+					<th scope="col">이름</th>
+					<th scope="col">아이디</th>
+					<th scope="col">비밀번호</th>
+					<th scope="col">이메일</th>
 					<th scope="col">전화번호</th>
 				</tr>
 			</thead>
 			<c:set var="idx" value="0"/>
 			<tbody>
 				<c:forEach var="educationVo" items="${list}">
-					<c:set var="educationPlace" value="${educationVo.epNo}"/>
+					<c:set var="educationPlace" value="${educationVo.eduTeaNo}"/>
 					<tr>
-						<th scope="row"><input type="checkbox" class="board-checkbox" vlaue="${educationVo.epNo }"></th>
-						<td>${educationVo.epNo }</td>
-						<td>${educationVo.epName }</td>
-						<td>${educationVo.epZipcode }</td>
-						<td>${educationVo.epAddress }</td>
-						<td>${educationVo.epTel }</td>
+						<th scope="row"><input type="checkbox" class="board-checkbox" vlaue="${educationVo.eduNo }"></th>
+						<td>${educationVo.eduTeaNo }</td>
+						<td>${educationVo.eduTeaName }</td>
+						<td>${educationVo.eduTeaId }</td>
+						<td>${educationVo.eduTeaPwd }</td>
+						<td>${educationVo.eduTeaEmail }</td>
+						<td>${educationVo.eduTeaTel }</td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
-		<nav class="boardPaging" aria-label="Page navigation example">
+	<nav class="boardPaging" aria-label="Page navigation example">
 			<ul class="pagination">
 				<c:if test="${pagingInfo.firstPage > 1 }">
 				    <li class="page-item">
