@@ -144,7 +144,7 @@
                        <span>주문 및 주문취소 관리</span>
 				  </a>
 				  <ul class="dropdown-menu shadow-sm p-3 mb-5 bg-body rounded">
-				    <li><a class="nav-link dropdown-item fw-bold" href="<c:url value='/admin/order/orderList'/>"
+				    <li><a class="nav-link dropdown-item fw-bold" href="<c:url value='/admin/order/orderList?flag=order'/>"
 				    	style="color:black;"><i class="bi bi-cart-check"></i>주문 관리</a></li>
 				    <li><a class="nav-link dropdown-item fw-bold" href="<c:url value='/admin/order/orderCancleList?flag=orderCancle'/>"
 				    	style="color:black;">주문 취소 관리</a></li>

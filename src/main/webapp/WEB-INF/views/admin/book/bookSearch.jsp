@@ -56,10 +56,10 @@
 			<div class="box">
 				<label>등록일</label>
 				<div class="register">
-					<input class="" id="" name="" placeholder="등록일" type="text" value="">
+					<input class="" id="" name="" placeholder="등록일" type="date" value="">
 				</div>
 				<div>
-					<input class="" id="" name="" placeholder="등록일(종료일)" type="text" value="">
+					<input class="" id="" name="" placeholder="등록일(종료일)" type="date" value="">
 				</div>
 			</div>
 			<div>
