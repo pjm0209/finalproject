@@ -34,6 +34,9 @@
 				order by no 
 			)A
 		)
+		<![CDATA[
+		where RNUM > #{firstRecordIndex} 
+		and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}]]>
 	</select>
 	
 	<select id="getTotalRecordMember" parameterType="searchVo" resultType="int">
@@ -43,6 +46,12 @@
 
 	<select id="selectByNoMember" resultType="memberVo">
 		select * from member where no=#{no}
+	</select>
+	
+		<select id="selectCheckId" parameterType="string"
+		resultType="int">
+		select count(*) from member
+		where userid=#{userid}
 	</select>
 		
 

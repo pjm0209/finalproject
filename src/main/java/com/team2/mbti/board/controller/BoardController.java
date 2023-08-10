@@ -1,5 +1,7 @@
 package com.team2.mbti.board.controller;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -13,12 +15,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.team2.mbti.board.model.BoardFileVO;
 import com.team2.mbti.board.model.BoardFormVO;
 import com.team2.mbti.board.model.BoardService;
 import com.team2.mbti.board.model.BoardVO;
+import com.team2.mbti.board.model.CommentsVO;
 import com.team2.mbti.common.ConstUtil;
+import com.team2.mbti.common.FileUploadUtil;
 import com.team2.mbti.common.PaginationInfo;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -28,6 +34,7 @@ public class BoardController {
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 	
 	private final BoardService boardService;
+	private final FileUploadUtil fileUploadUtil;
 	
 	@GetMapping("/boardHeadSide")
 	public String boardHeadSide(Model model) {
@@ -97,7 +104,7 @@ public class BoardController {
 		String msg = "게시판 만들기가 실패하였습니다.", url = "/admin/board/boardCreate";
 		if(cnt > 0) {
 			msg= "게시판 만들기 성공";
-			url = "/admin/board/board";
+			url = "/admin/board/board?boardFormNo=" + vo.getBoardFormNo();
 		}
 		
 		model.addAttribute("msg", msg);
@@ -156,13 +163,26 @@ public class BoardController {
 	}
 	
 	@PostMapping("/boardWrite")
-	public String boardWrite_post(@ModelAttribute BoardVO vo) {
+	public String boardWrite_post(@ModelAttribute BoardVO vo, HttpServletRequest request) {
 		logger.info("게시판 글쓰기 처리 파라미터 vo: {}", vo);
+		
+		List<Map<String, Object>> fileList = new ArrayList<>();
+		
+		try {
+			fileList = fileUploadUtil.fileupload(request, ConstUtil.UPLOAD_FILE_FLAG);
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		int cnt = boardService.insertBoard(vo);
 		logger.info("게시판 글쓰기 처리 결과 cnt: {}", cnt);
 		
-		return "admin/board/board?boardFormNo=" + vo.getBoardFormNo();
+		int fileCnt = boardService.insertFile(fileList, vo.getBoardNo());
+		logger.info("게시판 파일 업로드 처리 결과 fileCnt: {}", fileCnt);
+		
+		return "redirect:/admin/board/board?boardFormNo=" + vo.getBoardFormNo();
 	}
 	
 	@GetMapping("/boardDetail")
@@ -171,11 +191,18 @@ public class BoardController {
 		
 		Map<String, Object> map = boardService.selectBoardByNo(boardNo);
 		int cnt = boardService.addReadCount(boardNo);
+		List<CommentsVO> commentList = boardService.selectComment(boardNo);
+		List<BoardFileVO> fileList = boardService.selectFileList(boardNo);
+		
 		logger.info("게시글 조회 결과 map: {}", map);
 		logger.info("조회수 증가 결과 cnt: {}", cnt);
+		logger.info("게시글 댓글 조회 결과 commentList.size: {}", commentList);
+		logger.info("게시글 파일 리스트 조회결과 fileList: {}", fileList);
 		
 		model.addAttribute("title", "게시글 상세보기");
 		model.addAttribute("map", map);
+		model.addAttribute("commentList", commentList);
+		model.addAttribute("fileList", fileList);
 		
 		return "admin/board/boardDetail";
 	}

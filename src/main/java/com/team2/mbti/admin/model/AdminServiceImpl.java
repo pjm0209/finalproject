@@ -8,9 +8,4 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AdminServiceImpl implements AdminService {
 
-
-	@Override
-	public int adminLoginCheck(String userid, String pwd) {
-		return 0;
-	}
 }

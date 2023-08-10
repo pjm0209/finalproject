@@ -2,19 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
 
-<style>
-button.mbti-button{
-	background-color: #c87fdf;
-    background-size: cover;
-	float: right;
-    border:1px solid black;
-	border-radius: 5px;
-	padding: 6px 41px;
-	margin-top: -6px;
-	margin-right: 9px;
-	color: white;
-}
-</style>
 <!-- Begin Page Content -->
 <!-- Page Heading -->
 <div class="head-div">
@@ -63,7 +50,7 @@ button.mbti-button{
 			</div>
 		</div>
 		<form name="frmDelete" method="post">
-		<table class="table">
+		<table class="table" id="mbtitb">
 			<thead>
 				<tr class="board-table-colum">
 					<th scope="col"><input type="checkbox" id="check-All" class="board-checkbox"></th>
@@ -110,10 +97,10 @@ button.mbti-button{
 				</c:if>
 				<c:forEach var="i" begin="${pagingInfo.firstPage}" end="${pagingInfo.lastPage}">
 					<c:if test="${i==pagingInfo.currentPage}">
-						<li class="page-item"><a class="page-link" href="<c:url value='/admin/mbti/mbti?currentPage=${i}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">${i}</a></li>
+						<li class="page-item active"><a class="page-link" href="<c:url value='/admin/mbti/mbti?currentPage=${i}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">${i}</a></li>
 					</c:if>
 					<c:if test="${i!=pagingInfo.currentPage}">
-						<li class="page-item"><a class="page-link" href="<c:url value='/admin/mbti/mbti?currentPage=${i}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">[${i}]</a></li>
+						<li class="page-item"><a class="page-link" href="<c:url value='/admin/mbti/mbti?currentPage=${i}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">${i}</a></li>
 					</c:if>
 				</c:forEach>
 				<c:if test="${pagingInfo.lastPage < pagingInfo.totalPage}">

@@ -59,8 +59,8 @@
 			select board_seq.nextval from dual
 		</selectKey>
 
-		insert into board(board_no, board_form_no, board_title, board_body, no)
-		values(#{boardNo}, #{boardFormNo}, #{boardTitle}, #{boardBody}, #{no})
+		insert into board(board_no, board_form_no, board_title, board_body, no, board_group_no)
+		values(#{boardNo}, #{boardFormNo}, #{boardTitle}, #{boardBody}, #{no}, #{boardNo})
 	</insert>
 	
 	<select id="selectBoardSet" parameterType="int" resultType="boardFormVo">
@@ -84,4 +84,22 @@
 		set board_readcount = board_readcount + 1
 		where board_no = #{boardNo}
 	</update>
+	
+	<select id="selectComment" parameterType="int" resultType="commentsVo">
+		select * from comments
+		where board_no = #{boardNo}
+	</select>
+	
+	<insert id="insertFile" parameterType="boardFileVo">
+		<selectKey keyProperty="fileNo" order="BEFORE" resultType="int">
+			select board_file_seq.nextval from dual
+		</selectKey>
+		
+		insert into board_file
+		values(#{fileNo}, #{boardNo}, #{fileName}, #{fileSize}, #{originalFileName})
+	</insert>
+	
+	<select id="selectFileList" parameterType="int" resultType="boardFileVo">
+		select * from board_file where board_no = #{boardNo}
+	</select>
 </mapper>

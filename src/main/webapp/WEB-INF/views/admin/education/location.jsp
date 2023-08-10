@@ -48,8 +48,16 @@ button#location-delete-button {
 	</div>
 	<div class="group">
 		<div id="group-list" class="nav">
+		<div class="board-side-boardItem">
+				<div class="board-name">
+					<a class="applicantList-link" href="<c:url value='/admin/education/list'/>">
+						<span>교육 리스트</span>
+					</a>
+				</div>
+				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
+			</div>
 			<div class="board-side-boardItem">
-				<div class="board-name" name="notice" value="notice">
+				<div class="board-name">
 					<a class="applicantList-link" href="<c:url value='/admin/education/applicantList'/>">
 						<span>신청자 관리</span>
 					</a>
@@ -57,7 +65,15 @@ button#location-delete-button {
 				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
 			</div>
 			<div class="board-side-boardItem">
-				<div class="board-name" name="QnA" value="QnA">
+				<div class="board-name">
+					<a class="applicantList-link" href="<c:url value='/admin/education/teacher'/>">
+						<span>강사 관리</span>
+					</a>
+				</div>
+				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
+			</div>
+			<div class="board-side-boardItem">
+				<div class="board-name">
 					<a class="applicantList-link" href="<c:url value='/admin/education/location'/>">
 						<span>교육장 관리</span>
 					</a>
@@ -94,11 +110,11 @@ button#location-delete-button {
 			<thead>
 				<tr class="board-table-colum">
 					<th scope="col"><input type="checkbox" id="check-All" class="board-checkbox"></th>
-					<th scope="col" class="board-regdate">번호</th>
-					<th scope="col" class="board-regdate">교육장</th>
-					<th scope="col" class="board-regdate">우편번호</th>
-					<th scope="col" class="board-title">주소</th>
-					<th scope="col" class="board-writer">전화번호</th>
+					<th scope="col">번호</th>
+					<th scope="col">교육장</th>
+					<th scope="col">우편번호</th>
+					<th scope="col">주소</th>
+					<th scope="col">전화번호</th>
 				</tr>
 			</thead>
 			<c:set var="idx" value="0"/>
@@ -116,33 +132,33 @@ button#location-delete-button {
 				</c:forEach>
 			</tbody>
 		</table>
-		<div style="width: 10%;text-align: center;margin: 0 auto;">
+		<nav class="boardPaging" aria-label="Page navigation example">
 			<ul class="pagination">
 				<c:if test="${pagingInfo.firstPage > 1 }">
 				    <li class="page-item">
-				      <a class="page-link" href="#" aria-label="Previous">
+				     <a class="page-link" href="#" onclick="pageFunc(${pagingInfo.fistPage - 1})" aria-label="Previous">
 				        <span aria-hidden="true">&laquo;</span>
 				      </a>
 				    </li>
 				</c:if>
 				<c:forEach var="i" begin="${pagingInfo.firstPage}" end="${pagingInfo.lastPage}">
 					<c:if test="${i==pagingInfo.currentPage}">
-						<li class="page-item"><a class="page-link" href="<c:url value='/admin/education/location?currentPage=${i}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">${i}</a></li>
+						<li class="page-item active"><a class="page-link"  href="#">${i }</a></li>	
 					</c:if>
 					<c:if test="${i!=pagingInfo.currentPage}">
-						<li class="page-item"><a class="page-link" href="<c:url value='/admin/education/location?currentPage=${i}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">[${i}]</a></li>
+						<li class="page-item"><a class="page-link" href="#" onclick="pageFunc(${i})">${i }</a></li>	
 					</c:if>
 				</c:forEach>
 				<c:if test="${pagingInfo.lastPage < pagingInfo.totalPage}">
 				    <li class="page-item">
-				      <a class="page-link" href="#" aria-label="Next">
+				      <a class="page-link" href="#" aria-label="Next" onclick="pageFunc(${pagingInfo.lastPage + 1})">
 				        <span aria-hidden="true">&raquo;</span>
 				      </a>
 				    </li>
 				</c:if>
 			</ul>
-		</div>
-		</form>
+		</nav>
+	</div>
 </div>
 </div>
 <!-- End of Main Content -->
