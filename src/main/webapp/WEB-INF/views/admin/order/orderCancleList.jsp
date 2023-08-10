@@ -11,9 +11,6 @@
 <div class="board-body">
 	<div id="board-title">
 		<c:choose> 
-			<c:when test="${param.orderFlag eq 'moneyNotYet'}">
-				<h5>입금 대기 관리</h5>
-			</c:when> 
 			<c:when test="${param.orderFlag eq 'orderCancleDone'}">
 				<h5>취소 완료 관리</h5>
 			</c:when> 

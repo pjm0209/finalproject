@@ -2,13 +2,13 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 		<form name="serach" method="post"
-			<c:if test="${param.flag eq 'BASKET'}">
-				action="<c:url value='/admin/order/bookBasket'/>"
+			<c:if test="${param.flag eq 'orderCancle'}">
+				action="<c:url value='/admin/order/orderCancleList?flag=orderCancle'/>"
 			</c:if>
 			<c:if test="${param.flag eq 'order'}">
-				action="<c:url value='/admin/book/bookList'/>"
+				action="<c:url value='/admin/order/orderList?flag=order'/>"
 			</c:if>
-			<c:if test="${param.flag == 'orderCancle'}">
+			<c:if test="${param.flag == 'BASKET'}">
 				action="<c:url value='/admin/order/bookBasket?flag=BASKET'/>"
 			</c:if>
 		>

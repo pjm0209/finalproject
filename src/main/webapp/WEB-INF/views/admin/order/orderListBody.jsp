@@ -41,9 +41,35 @@
 				<td>삼성카드</td>
 				<td>결제완료</td>
 				<td>sysdate</td>
-				<td>배송준비할까??</td>
 				<td>
-					<button class="btn btn-warning btn-xs" onclick="location.href='orderDetail?orderNo=${vo.orderNo}'" type="button" title="재고저장"><i class="fas fa-edit"></i></button>
+					<c:choose> 
+						<c:when test="${param.orderFlag eq 'moneyNotYet'}">
+							<a class="green" href="#">결제 완료</a><br>
+							<a class="red" href="#">주문 취소</a>
+						</c:when> 
+						<c:when test="${param.orderFlag eq 'moneyDone'}">
+							<a class="green" href="#">배송 준비</a><br>
+							<a class="red" href="#">주문 취소</a>
+						</c:when> 
+						<c:when test="${param.orderFlag eq 'shippingNotYet'}">
+							<a class="green" href="#">배송 중</a><br>
+							<a class="red" href="#">주문 취소</a>
+						</c:when> 
+						<c:when test="${param.orderFlag eq 'shipping'}">
+							<a class="green" href="#">배송 완료</a><br>
+							<a class="red" href="#">주문 취소</a>
+						</c:when> 
+						<c:when test="${param.orderFlag eq 'shippingDone'}">
+							<a class="green" href="#">구매 확정</a><br>
+							<a class="red" href="#">주문 취소</a>
+						</c:when> 
+						<c:otherwise>
+							&nbsp;
+						</c:otherwise> 
+					</c:choose>
+				</td>
+				<td>
+					<button class="btn btn-warning btn-xs" onclick="location.href='orderDetail?orderNo=${vo.orderNo}?orderFlag=${param.orderFlag}'" type="button" title="재고저장"><i class="fas fa-edit"></i></button>
 				</td>
 			</tr>
 			
