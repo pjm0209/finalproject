@@ -9,6 +9,7 @@ public class EducationVO {
 	private String eduCom;
 	private String eduTeacher;
 	private int eduPrice;
+	private int eduPeopleNumber;
 	
 	//education_place
 	private int epNo;
@@ -22,5 +23,13 @@ public class EducationVO {
 	//education_application
 	private int eduAppNo;
 	private int no;
+	
+	//education_teacher
+	private int eduTeaNo;
+	private String eduTeaName;
+	private String eduTeaId;
+	private String eduTeaPwd;
+	private String eduTeaEmail;
+	private String eduTeaTel;
 	
 }
