@@ -419,6 +419,7 @@ div.board {
 div.boardFile button {
 	background: white;
 	border: 0;
+	padding-right: 108px;
 }
 
 i.bi.bi-dropbox {

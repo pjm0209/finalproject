@@ -42,6 +42,16 @@ $(function(){
 			$(this).find('span.use_on').prop('class', 'use_on');
 		}
 	});
+	
+	$('#check-All').click(function(){
+		$('.board-checkbox').prop('checked', this.checked);
+	});
+	
+	$('.file-list').hide();
+	
+	$('.boardFile button').click(function(){
+		$('.file-list').slideDown();
+	});
 });
 
 function pageFunc(curPage) {

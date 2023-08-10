@@ -65,35 +65,39 @@
 				</form>
 			</div>
 		</div>
-		<table class="table">
-			<thead>
-				<tr class="board-table-colum">
-					<th scope="col"><input type="checkbox" id="check-All" class="board-checkbox"></th>
-					<th scope="col" class="board-title">제목</th>
-					<th scope="col" class="board-regdate">작성자</th>
-					<th scope="col" class="board-writer">작성일</th>
-					<th scope="col" class="board-readcount">조회수</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:if test="${empty list }">
-					<tr>
-						<td colspan="4" style="text-align: center;">등록된 게시글이 없습니다.</td>
+		<form name="boardFrm" action="post" action="<c:url value='/admin/board/boardListDel'/>">
+			<table class="table board-table">
+				<thead>
+					<tr class="board-table-colum">
+						<th scope="col"><input type="checkbox" id="check-All" class="board-checkbox"></th>
+						<th scope="col" class="board-title">제목</th>
+						<th scope="col" class="board-regdate">작성자</th>
+						<th scope="col" class="board-writer">작성일</th>
+						<th scope="col" class="board-readcount">조회수</th>
 					</tr>
-				</c:if>
-				<c:if test="${!empty list }">
-					<c:forEach var="map" items="${list }">
+				</thead>			
+				<tbody>
+					<c:if test="${empty list }">
 						<tr>
-							<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-							<td class="board-title"><a href="<c:url value='/admin/board/boardDetail?boardNo=${map["BOARD_NO"] }'/>">${map['BOARD_TITLE']}</a></td>
-							<td class="board-regdate">${map['NAME'] }</td>
-							<td class="board-writer"><fmt:formatDate value="${map['BOARD_REGDATE'] }" pattern="yyyy-MM-dd"/> </td>
-							<td class="board-readcount">${map['BOARD_READCOUNT'] }</td>
+							<td colspan="4" style="text-align: center;">등록된 게시글이 없습니다.</td>
 						</tr>
-					</c:forEach>
-				</c:if>		
-			</tbody>
-		</table>
+					</c:if>
+					<c:if test="${!empty list }">
+						<c:set var="idx" value="0"/>
+						<c:forEach var="map" items="${list }">
+							<tr>
+								<th scope="row"><input type="checkbox" class="board-checkbox" name="boardItems[${idx }].boardNo" value="${map['BOARD_NO'] }"></th>
+								<td class="board-title"><a href="<c:url value='/admin/board/boardDetail?boardNo=${map["BOARD_NO"] }'/>">${map['BOARD_TITLE']}</a></td>
+								<td class="board-regdate">${map['NAME'] }</td>
+								<td class="board-writer"><fmt:formatDate value="${map['BOARD_REGDATE'] }" pattern="yyyy-MM-dd"/> </td>
+								<td class="board-readcount">${map['BOARD_READCOUNT'] }</td>
+							</tr>
+							<c:set var="idx" value="${idx + 1 }"/>
+						</c:forEach>
+					</c:if>		
+				</tbody>
+			</table>
+		</form>
 		<nav class="boardPaging" aria-label="Page navigation example">
 		  <ul class="pagination">
 		  	<c:if test="${pagingInfo.firstPage > 1 }">
