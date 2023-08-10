@@ -53,6 +53,11 @@
 		select count(*) from member
 		where userid=#{userid}
 	</select>
+	
+	<delete id="deleteMember" parameterType="int">
+		delete from member
+		where no=#{no}
+	</delete>
 		
 
 </mapper>
