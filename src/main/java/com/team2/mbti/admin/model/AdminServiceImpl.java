@@ -1,7 +1,10 @@
 package com.team2.mbti.admin.model;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
+import com.team2.mbti.common.SearchVO;
 import com.team2.mbti.member.model.MemberService;
 
 import lombok.RequiredArgsConstructor;
@@ -41,6 +44,16 @@ public class AdminServiceImpl implements AdminService {
 		}
 
 		return result;
+	}
+
+	@Override
+	public List<AdminVO> selectAllManager(SearchVO vo) {
+		return adminDao.selectAllManager(vo);
+	}
+
+	@Override
+	public int getTotalRecordManager(SearchVO searchVo) {
+		return adminDao.getTotalRecordManager(searchVo);
 	}
 	
 }
