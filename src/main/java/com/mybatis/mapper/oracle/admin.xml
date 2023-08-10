@@ -8,6 +8,18 @@
 		order by admin_no
 	</select>
 	
+	<select id="checkAdminId" parameterType="String" resultType="int">
+		select count(*) from admin
+		where admin_Id=#{adminId}
+	</select>
+	
+	<select id="selectAdminPwd" parameterType="string" resultType="string">
+		select admin_Pwd from admin
+		where admin_Id=#{adminId}
+	</select>	
+	
+
+	
 	
 </mapper>
 
