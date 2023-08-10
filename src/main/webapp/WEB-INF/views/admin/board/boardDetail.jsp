@@ -32,7 +32,19 @@
 				<button type="button"><i class="bi bi-dropbox"></i> 첨부파일</button>
 				<ul class="file-list">
 					<c:forEach var="vo" items="${fileList }">
-						<li><a href="#">${vo.originalFileName }</a></li>
+						<c:choose>
+					        <c:when test="${fn:length(vo.originalFileName) gt 19}">
+					        <a href="#">
+					        <c:out value="${fn:substring(vo.originalFileName, 0, 18)}">...
+					        </c:out>
+					        </a><br>
+					        </c:when>
+					        <c:otherwise><a href="#">
+					        <c:out value="${vo.originalFileName}">
+					        </c:out>
+					        </a><br>
+					        </c:otherwise>
+						</c:choose>
 					</c:forEach>
 				</ul>
 			</div>
