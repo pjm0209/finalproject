@@ -33,16 +33,17 @@
 				<ul class="file-list">
 					<c:forEach var="vo" items="${fileList }">
 						<c:choose>
-					        <c:when test="${fn:length(vo.originalFileName) gt 19}">
-					        <a href="#">
-					        <c:out value="${fn:substring(vo.originalFileName, 0, 18)}">...
-					        </c:out>
-					        </a><br>
+					        <c:when test="${fn:length(vo.originalFileName) > 13}">
+					        	<a href="#" data-toggle="tooltip" data-html="true" title="${vo.originalFileName }">
+							        <c:out value="${fn:substring(vo.originalFileName, 0, 12)}">
+							        </c:out>...
+						        </a><br>
 					        </c:when>
-					        <c:otherwise><a href="#">
-					        <c:out value="${vo.originalFileName}">
-					        </c:out>
-					        </a><br>
+					        <c:otherwise>
+					        	<a href="#" data-bs-toggle="tooltip" data-bs-title="${vo.originalFileName }">
+							        <c:out value="${vo.originalFileName}">
+							        </c:out>
+						        </a><br>
 					        </c:otherwise>
 						</c:choose>
 					</c:forEach>
