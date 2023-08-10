@@ -42,6 +42,21 @@ $(function(){
 			$(this).find('span.use_on').prop('class', 'use_on');
 		}
 	});
+	
+	/*게시글 목록 전체선택 체크박스*/
+	$('#check-All').click(function(){
+		$('.board-checkbox').prop('checked', this.checked);
+	});
+	
+	/*게시글 상세보기 첨부파일 슬라이드 효과*/
+	$('.file-list').hide();
+	
+	$('.boardFile button').click(function(){
+		$('.file-list').slideToggle(500);
+	});
+	
+	const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+	const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
 });
 
 function pageFunc(curPage) {
@@ -104,5 +119,5 @@ function removeFile(element) {
     element.parentElement.remove();
 }
 
-const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
-const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+/*const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));*/
