@@ -36,6 +36,7 @@ public class FileUploadUtil {
 		while(iter.hasNext()) {
 			String key=iter.next();
 			MultipartFile tempFile = fileMap.get(key);//업로드된 파일을 임시파일 형태로 제공
+			
 			if(!tempFile.isEmpty()) { //파일이 업로드된 경우
 				long fileSize = tempFile.getSize(); //파일 크기
 				String originName = tempFile.getOriginalFilename(); //변경전 파일명
@@ -47,7 +48,7 @@ public class FileUploadUtil {
 				String uploadPath = getUploadPath(request, pathFlag);
 				File file = new File(uploadPath, fileName);
 				tempFile.transferTo(file);
-				
+
 				//업로드 파일 정보 저장
 				Map<String, Object> resultMap = new HashMap<>();
 				resultMap.put("fileName", fileName);
