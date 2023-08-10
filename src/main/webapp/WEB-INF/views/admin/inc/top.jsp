@@ -24,13 +24,13 @@
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
-    <!-- Custom styles for this template-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <!-- Custom styles for this template-->    
     <link href="<c:url value='/admin-css-js/css/sb-admin-2.css'/>" rel="stylesheet">
     <link href="<c:url value='/admin-css-js/css/mbti.css'/>" rel="stylesheet">
     <link href="<c:url value='/admin-css-js/css/board.css'/>" rel="stylesheet" type="text/css">
     <link href="<c:url value='/admin-css-js/css/boardCreate.css'/>" rel="stylesheet" type="text/css">
-    <link href="<c:url value='/admin-css-js/css/book-order.css'/>" rel="stylesheet" type="text/css">
+    <link href="<c:url value='/admin-css-js/css/book-order.css'/>" rel="stylesheet" type="text/css">  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">  
 	<script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>
 	<script type="text/javascript" src="<c:url value='/resources/ckeditor/ckeditor.js'/>"></script>	
 </head>
