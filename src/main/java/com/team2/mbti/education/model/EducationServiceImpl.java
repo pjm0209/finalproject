@@ -43,4 +43,19 @@ public class EducationServiceImpl implements EducationService{
 		return educationDao.getTotalRecordEducation(searchVo);
 	}
 
+	@Override
+	public int insertTeacher(EducationVO vo) {
+		return educationDao.insertTeacher(vo);
+	}
+
+	@Override
+	public List<EducationVO> selectAllTeacher(SearchVO searchVo) {
+		return educationDao.selectAllTeacher(searchVo);
+	}
+
+	@Override
+	public int getTotalRecordTeacher(SearchVO searchVo) {
+		return educationDao.getTotalRecordTeacher(searchVo);
+	}
+
 }
