@@ -14,4 +14,6 @@ public interface MbtiSurveyDAO {
 	int updateMbtiSurvey(MbtiSurveyVO vo);
 	int deleteMbtiSurvey(MbtiSurveyVO vo);
 	int getTotalRecordMbti(SearchVO searchVo);
+	
+	List<MbtiSurveyVO> selectByQuestionTypeNoMbtiSurvey(int questionTypeNo);
 }
