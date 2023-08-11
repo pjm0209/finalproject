@@ -78,7 +78,7 @@ public class AdminLoginController {
 	public String logout(HttpSession session) {
 		logger.info("로그아웃");
 		
-		session.setAttribute("adminId", "");	
+		session.setAttribute("adminId","");
 		
 		return "redirect:/admin/login";
 				
