@@ -12,20 +12,21 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/admin/order")
 public class OrderController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(BookController.class); 
 	
-	@RequestMapping("/admin/order/bookBasket")
-	public String bookList(Model model) {
-		logger.info("주문관리 페이지 - 장바구니 리스트 페이지입니다.");
+	@RequestMapping("/bookBasket")
+	public String bookBasket(Model model) {
+		logger.info("책관리 페이지 - 책 장바구니 관리 페이지입니다.");
 		
-		model.addAttribute("title", "장바구니 페이지");
+		model.addAttribute("title", "책 장바구니 페이지");
 		
 		return "admin/order/bookBasket";
 	}
 	
-	@RequestMapping("/admin/order/orderList")
+	@RequestMapping("/orderList")
 	public String orderList(Model model) {
 		logger.info("주문관리 페이지 - 주문 리스트 페이지입니다.");
 		
@@ -34,7 +35,7 @@ public class OrderController {
 		return "admin/order/orderList";
 	}
 	
-	@RequestMapping("/admin/order/orderCancleList")
+	@RequestMapping("/orderCancleList")
 	public String orderCancleList(Model model) {
 		logger.info("주문관리 페이지 - 주문 취소 리스트 페이지입니다.");
 		
@@ -43,7 +44,7 @@ public class OrderController {
 		return "admin/order/orderCancleList";
 	}
 	
-	@RequestMapping("/admin/order/orderDetail")
+	@RequestMapping("/orderDetail")
 	public String orderDetail(Model model) {
 		logger.info("주문관리 페이지 - 주문 상세보기 페이지입니다.");
 		

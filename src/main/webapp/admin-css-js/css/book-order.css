@@ -1,6 +1,5 @@
 @charset "UTF-8";
 
-
 .board-body .flex>div {display: flex; margin-bottom:15px;}
 /*.board-body{float:none;}*/
 .board-body  .box>label  {margin-right:15px; width:200px; text-align: right;}
@@ -22,7 +21,12 @@
     border: 0;
     font-size: 1vw;
     font-weight: bold;}
-.board-body  th.board-title {width:10%;}
+/*.board-body  th.board-title {width:10%;}*/
+.board-body .book-checkbox {
+	width: 20px;
+    height: 20px;	
+}
+
 
 /**/
 .bookContent>div{display: flex; padding-bottom:15px;}
@@ -52,4 +56,13 @@
 .x_panel h2{
 	color:gray;
 	font-size: large;
+}
+
+
+/**/
+.red{
+	color: darkred;
+}
+.green{
+	color: green;
 }
