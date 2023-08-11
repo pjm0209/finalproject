@@ -56,10 +56,12 @@
 		
 		<c:if test="${map['COMMENT_FLAG'] == 'Y' }">
 			<p class="board-comment-count">댓글 ${fn:length(commentList) }</p>
-			<form name="commentFrm">
-				<p class="board-comment-user">관리자 (admin)</p>
+			<form name="commentFrm" action="post">
+				<p class="board-comment-user">관리자 (${sessionScope.adminId })</p>
 				<div class="textarea-group">
-					<textarea id="comment-area"></textarea>
+					<textarea id="comment-area" name="commentsBody"></textarea>
+					<input type="hidden" value="${map['BOARD_NO'] }" name="boardNo">
+					<input type="hidden" value="${sessionScope.adminId }" name="">
 					<input type="button" value="답글등록" id="comment-submit">
 				</div>
 			</form>
