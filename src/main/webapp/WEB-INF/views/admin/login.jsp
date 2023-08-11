@@ -90,19 +90,16 @@ body {
 <body>
     <div class="wrapper">
         <h2>관리자 로그인</h2>
-        <form method="post" action="" id="login-form">
-            <input type="text" name="userName" placeholder="아이디">
-            
-            <input type="password" name="userPassword" placeholder="비밀번호">
-            
+        <form method="post" action="" id="login-form" action="<c:url value='/admin/login'/>">        	
+            <input type="text" name="adminId" placeholder="아이디를 입력하세요." value="${cookie.ck_adminId.value }">            
+            <input type="password" name="adminPwd" placeholder="비밀번호를 입력하세요.">            
             <label for="remember-check">
-                <input type="checkbox" id="remember-check">&nbsp; 아이디 저장하기
-            </label>
-            <input type="submit" value="Login" id="login-button">
-            
-            <div class="text-center">
-              <a class="small" href="<c:url value='/admin/register'/>">회원가입</a>
-           </div>           
+                <input type="checkbox" name="chkSave" id="chkSave">&nbsp; 아이디 저장하기
+                <c:if test="${!empty cookie.ck_adminId }">
+                	
+                </c:if>               
+            </label>            
+            <input type="submit" value="Login" id="login-button">                    
         </form>
     </div>
 </body>

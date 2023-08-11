@@ -120,39 +120,40 @@ input#board-search-area {
 }
 
 select#board-search-select {
-    margin-right: 30px;
-    height: 40px;
-    margin-bottom: 0;
-    border: 1px solid #d8dce5;
-    border-radius: 6px;
+	margin-right: 30px;
+	height: 40px;
+	margin-bottom: 0;
+	border: 1px solid #d8dce5;
+	border-radius: 6px;
 }
 
 .board-side-boardItem {
-    width: 200px;
-    cursor: pointer;
+	width: 200px;
+	cursor: pointer;
 }
 
-th.board-title { 
-    width: 60% !important;
+th.board-title {
+	width: 60% !important;
 }
 
 th.board-readcount {
-    width: 90px;
+	width: 90px;
 }
 
 th.board-writer {
-    width: 200px;
+	width: 200px;
 }
 
 th.board-regdate {
-    width: 200px;
+	width: 200px;
 }
 
 tr.board-table-colum th {
-    text-align: center;
+	text-align: center;
 }
 
-tbody tr td, th {
+tbody tr td,
+th {
 	text-align: center;
 }
 
@@ -162,7 +163,7 @@ tbody tr td.board-title {
 
 .boardPaging {
 	display: flex;
-    justify-content: space-around;
+	justify-content: space-around;
 }
 
 tr td.board-readcount {
@@ -171,19 +172,19 @@ tr td.board-readcount {
 
 /*게시판 수정 css*/
 .boardEdit-setting-head h3 {
-    display: inline-block;
-    font-weight: bold;
-    color: black;
-    font-size: 17px;
-    margin: 13px 73px 10px 20px;
+	display: inline-block;
+	font-weight: bold;
+	color: black;
+	font-size: 17px;
+	margin: 13px 73px 10px 20px;
 }
 
 .boardEdit-setting {
-    border: 1px solid #e1e1e1;
-    background: white;
-    border-radius: 5px;
-    width: 98%;
-    margin-top: 30px;
+	border: 1px solid #e1e1e1;
+	background: white;
+	border-radius: 5px;
+	width: 98%;
+	margin-top: 30px;
 }
 
 #save-boardCreate {
@@ -191,24 +192,24 @@ tr td.board-readcount {
 }
 
 .boardEdit-setting-head {
-    border-bottom: 1px solid #e1e1e1;
+	border-bottom: 1px solid #e1e1e1;
 }
 
 .boardEdit-setting-body {
-    padding: 20px 30px;
+	padding: 20px 30px;
 }
 
 .boardEdit-setting-body dt {
-    font-size: 14px;
-    color: black;
-    float: left;
-    width: 190px;
-    padding: 17px 0;
+	font-size: 14px;
+	color: black;
+	float: left;
+	width: 190px;
+	padding: 17px 0;
 }
 
 .boardEdit-setting-body dd {
-    margin-left: 190px;
-    padding: 10px 22px 10px 0;
+	margin-left: 190px;
+	padding: 10px 22px 10px 0;
 }
 
 /*게시판 글쓰기 css*/
@@ -216,81 +217,81 @@ tr td.board-readcount {
 	border: 0;
 	border-radius: 5px;
 	padding: 5px 20px 5px 20px;
-	color: white;	
+	color: white;
 }
 
 select#select_board {
-    width: 390px;
-    line-height: 43px;
-    margin-right: 5px;
-    height: 40px;
-    border-radius: 3px;
-    padding: 0 9px;
-    border: 1px solid #d7dde4;
+	width: 390px;
+	line-height: 43px;
+	margin-right: 5px;
+	height: 40px;
+	border-radius: 3px;
+	padding: 0 9px;
+	border: 1px solid #d7dde4;
 }
 
 .boardWrite {
-    border: 1px solid #e1e1e1;
-    background: white;
-    border-radius: 5px;
-    width: 98%;
-    margin-top: 30px;
+	border: 1px solid #e1e1e1;
+	background: white;
+	border-radius: 5px;
+	width: 98%;
+	margin-top: 30px;
 }
 
 .boardWrite-head {
-    border-bottom: 1px solid #e1e1e1;
+	border-bottom: 1px solid #e1e1e1;
 }
 
 .boardWrite-body {
-    padding: 20px 30px;
+	padding: 20px 30px;
 }
 
 .boardWrite-body dt {
-    font-size: 14px;
-    color: black;
-    float: left;
-    width: 190px;
-    padding: 17px 0;
+	font-size: 14px;
+	color: black;
+	float: left;
+	width: 190px;
+	padding: 17px 0;
 }
 
 .boardWrite-body dd {
-    margin-left: 190px;
-    padding: 10px 22px 10px 0;
-    width: 60%;
+	margin-left: 190px;
+	padding: 10px 22px 10px 0;
+	width: 60%;
 }
 
 input#board-wirte-title {
-    width: 100%;
-    border: 0;
-    outline-width: 0;
-    height: 38px;
-    padding-left: 10px;
+	width: 100%;
+	border: 0;
+	outline-width: 0;
+	height: 38px;
+	padding-left: 10px;
 }
 
 label.resp_checkbox {
-    font-weight: 400;
-    color: black;
+	font-weight: 400;
+	color: black;
 }
 
-label.resp_checkbox > input[type="checkbox"] {
-    width: 21px;
-    height: 21px;
-    vertical-align: sub;
-    margin-right: 5px;
+label.resp_checkbox>input[type="checkbox"] {
+	width: 21px;
+	height: 21px;
+	vertical-align: sub;
+	margin-right: 5px;
 }
 
 input[type="file"] {
-    width: 270px;    
+	width: 270px;
 }
 
 .file_list button {
-    border: 1px solid #e1e1e1;
-    border-radius: 3px;
+	border: 1px solid #e1e1e1;
+	border-radius: 3px;
 }
 
 .file_input input[type=text] {
-    border: none;
-    outline-width: 0;
+	border: none;
+	outline-width: 0;
 }
 
 .file_input {
@@ -299,37 +300,134 @@ input[type="file"] {
 }
 
 .file_input input[type="file"] {
-    position: absolute;
-    width: 0;
-    height: 0;
-    padding: 0;
-    overflow: hidden;
-    border: 0;
+	position: absolute;
+	width: 0;
+	height: 0;
+	padding: 0;
+	overflow: hidden;
+	border: 0;
 }
 
 .file_input label {
-    display: inline-block;
-    padding: 1px 20px;
-    vertical-align: middle;
-    cursor: pointer;
-    margin-left: 10px;
-    border-radius: 5px;
-    border: 1px solid #e1e1e1;
-    height: 28px;
-    background: #f1f1f1;
-    color: black;
-    margin-top: 10px;
+	display: inline-block;
+	padding: 1px 20px;
+	vertical-align: middle;
+	cursor: pointer;
+	margin-left: 10px;
+	border-radius: 5px;
+	border: 1px solid #e1e1e1;
+	height: 28px;
+	background: #f1f1f1;
+	color: black;
+	margin-top: 10px;
 }
 
 .file_input input[type=text] {
-    display: inline-block;
-    padding: 0 10px;
-    vertical-align: middle;
-    border: 1px solid #dddddd;
-    width: 59%;
-    color: #999999;
+	display: inline-block;
+	padding: 0 10px;
+	vertical-align: middle;
+	border: 1px solid #dddddd;
+	width: 59%;
+	color: #999999;
 }
 
 .fn_add_btn {
 	margin-left: 10px;
+}
+
+/*게시판 상세보기*/
+div.board-title {
+	padding: 22px;
+	border-bottom: 1px solid black;
+	margin-bottom: 20px;
+	padding-bottom: 15px;
+}
+
+p.board-title-name {
+	color: black;
+	font-size: 21px;
+	margin-bottom: 4px;
+}
+
+span.board-write-user-userId {
+	color: black;
+	margin-right: 14px;
+}
+
+.textarea-group {
+	display: flex;
+	justify-content: space-evenly;
+}
+
+textarea#comment-area {
+	width: calc(100% - 100px);
+	height: 80px;
+	border: 1px solid #d3d3d3;
+	resize: none;
+	padding: 5px 9px;
+	border-right: 0;
+	color: #333;
+	font-size: 14px;
+	outline: 0;
+}
+
+input#comment-submit {
+	width: 100px;
+	border: 1px solid #d3d3d3;
+	background: #FFF;
+	font-size: 13px;
+}
+
+p.board-comment-user {
+	color: #333;
+	font-size: 14px;
+}
+
+p.board-comment-count {
+	color: #333;
+	padding: 20px;
+	margin: 0;
+	border-bottom: 1px solid black;
+	font-size: 14px;
+}
+
+form[name=commentFrm] {
+	padding: 20px;
+}
+
+div.board {
+	overflow: auto;
+	background: white;
+	margin-top: 15px;
+	margin-right: 15px;
+	border-radius: 10px;
+	padding: 10px;
+	padding-top: 0;
+}
+
+.board-content {
+	min-height: 400px;
+}
+
+.boardFile {
+	display: inline-block;
+	float: right;
+	background: white;
+	font-size: 13px;
+}
+
+div.boardFile button {
+	background: white;
+	border: 0;
+	padding-right: 108px;
+}
+
+i.bi.bi-dropbox {
+	margin-right: 5px;
+}
+
+ul.file-list {
+	list-style-type: none;
+	margin: 0;
+	padding: 5px;
 }

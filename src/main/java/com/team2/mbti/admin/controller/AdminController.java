@@ -22,11 +22,6 @@ public class AdminController {
 		return "admin/index";
 	}
 
-	@GetMapping("/login")
-	public String login_get() {
-		return "admin/login";
-	}
-
 	@GetMapping("/register")
 	public String register_get(Model model) {
 		
@@ -91,4 +86,12 @@ public class AdminController {
 	public String utilities_other_get() {
 		return "admin/utilities-other";
 	}
+	
+	@GetMapping("/member/memberDelete")
+	public String memberDelet() {
+		logger.info("회원 탈퇴 화면");
+		return "/admin/member/memberDelete";
+	}
+	
+	
 }

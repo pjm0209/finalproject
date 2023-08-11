@@ -63,4 +63,32 @@ public class BoardServiceImpl implements BoardService {
 	public int addReadCount(int boardNo) {
 		return boardDao.addReadCount(boardNo);
 	}
+
+	@Override
+	public List<CommentsVO> selectComment(int boardNo) {
+		return boardDao.selectComment(boardNo);
+	}
+
+	@Override
+	public int insertFile(List<Map<String, Object>> fileList, int boardNo) {
+		int result = 0;
+		
+		for(Map<String, Object> map : fileList) {
+			BoardFileVO vo = new BoardFileVO();
+			
+			vo.setFileName((String)map.get("fileName"));
+			vo.setOriginalFileName((String) map.get("originalFileName"));
+			vo.setFileSize((long) map.get("fileSize"));
+			vo.setBoardNo(boardNo);
+			
+			result = boardDao.insertFile(vo);
+		}
+		
+		return result;
+	}
+
+	@Override
+	public List<BoardFileVO> selectFileList(int boardNo) {
+		return boardDao.selectFileList(boardNo);
+	}
 }

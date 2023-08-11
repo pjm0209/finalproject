@@ -3,6 +3,18 @@
 <%@ include file="../inc/top.jsp"%>
 <!-- Begin Page Content -->
 <!-- Page Heading -->
+<script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>
+<script type="text/javascript">
+	$(function(){
+		$('#board-write-button').click(function(){
+			if(confirm("선택한 회원을 삭제하시겠습니까?")){
+				var contextpath = "/mbti";
+				location.href=contextpath+"/admin/member/memberList";
+			}
+			
+		});	
+	});
+</script>
 <div class="head-div">
 	<h2 class="text-gray-800">회원</h2>
 </div>

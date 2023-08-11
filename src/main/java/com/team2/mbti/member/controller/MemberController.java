@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.team2.mbti.common.ConstUtil;
+import com.team2.mbti.common.PaginationInfo;
 import com.team2.mbti.common.SearchVO;
 import com.team2.mbti.member.model.MemberService;
 import com.team2.mbti.member.model.MemberVO;
@@ -21,6 +23,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MemberController {
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
+	
 	private final MemberService memberService;
 
 	@RequestMapping("/memberList")
@@ -28,12 +31,23 @@ public class MemberController {
 			Model model) {
 		logger.info("회원 목록 페이지, 파라미터 vo={}, condition={}", vo, searchCondition);
 		
-		List<MemberVO> list = memberService.selectAllMember(vo);
+		PaginationInfo pagingInfo = new PaginationInfo();
+		pagingInfo.setBlockSize(ConstUtil.BLOCK_SIZE);
+		pagingInfo.setCurrentPage(vo.getCurrentPage());
+		pagingInfo.setRecordCountPerPage(ConstUtil.MBTI_RECORD_COUNT);
 		
+		vo.setBlockSize(ConstUtil.BLOCK_SIZE);
+		vo.setRecordCountPerPage(ConstUtil.MBTI_RECORD_COUNT);
+		vo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		
+		List<MemberVO> list = memberService.selectAllMember(vo);
 		logger.info("회원 목록 결과 list.size={}", list.size());
-		model.addAttribute("list", list);
 		int totalRecord=memberService.getTotalRecordMember(vo);
 		logger.info("회원 전체 검색 결과 totalRecord={}",totalRecord);
+		pagingInfo.setTotalRecord(totalRecord);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("pagingInfo", pagingInfo);
 		
 		return "admin/member/memberList";
 	}
@@ -44,5 +58,6 @@ public class MemberController {
 		
 		return "admin/member/memberList";
 	}
+		
 	
 }
