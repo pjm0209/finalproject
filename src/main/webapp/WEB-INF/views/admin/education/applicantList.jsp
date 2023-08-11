@@ -24,7 +24,6 @@
 						<span>교육 리스트</span>
 					</a>
 				</div>
-				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
 			</div>
 			<div class="board-side-boardItem">
 				<div class="board-name">
@@ -32,7 +31,6 @@
 						<span>신청자 관리</span>
 					</a>
 				</div>
-				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
 			</div>
 			<div class="board-side-boardItem">
 				<div class="board-name">
@@ -40,7 +38,6 @@
 						<span>강사 관리</span>
 					</a>
 				</div>
-				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
 			</div>
 			<div class="board-side-boardItem">
 				<div class="board-name">
@@ -48,7 +45,6 @@
 						<span>교육장 관리</span>
 					</a>
 				</div>
-				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
 			</div>
 		</div>
 	</div>
