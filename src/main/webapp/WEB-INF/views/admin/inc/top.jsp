@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    
 	<link href="<c:url value='/images/신나로아콘.png'/>" rel="shortcut icon" type="image/x-icon">
     <title>${title }</title>
 
@@ -113,11 +113,6 @@
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link" href="<c:url value='/admin/manager/managerList'/>">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>관리자 관리</span></a>
-            </li>                        
             <li class="nav-item">
                 <a class="nav-link" href="<c:url value='/admin/board/board?boardFormNo=1'/>">
                     <i class="fas fa-fw fa-cog"></i>
