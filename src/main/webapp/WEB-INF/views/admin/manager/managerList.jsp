@@ -29,7 +29,7 @@
 <div class="board-body">
 	<div id="board-title">
 		<h5>회원 리스트</h5>
-			<button class="bg-gradient-secondary" id="board-write-button">탈퇴</button>
+			<button class="bg-gradient-secondary" id="board-write-button">관리자 추가</button>
 	</div>
 	<div class="member">
 		<div class="member-head">
