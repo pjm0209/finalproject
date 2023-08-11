@@ -46,13 +46,12 @@
 	<script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="<c:url value='/admin-css-js/js/mbti.js'/>"></script>
 	
-    <!-- Bootstrap core JavaScript-->
-    <script src="<c:url value='/admin-css-js/vendor/jquery/jquery.min.js'/>"></script>
+    <!-- Bootstrap core JavaScript-->     
     <script src="<c:url value='/admin-css-js/vendor/bootstrap/js/bootstrap.bundle.min.js'/>"></script>
 
     <!-- Core plugin JavaScript-->
     <script src="<c:url value='/admin-css-js/vendor/jquery-easing/jquery.easing.min.js'/>"></script>
-
+	
     <!-- Custom scripts for all pages-->
     <script src="<c:url value='/admin-css-js/js/sb-admin-2.min.js'/>"></script>
 
@@ -64,4 +63,5 @@
     <script src="<c:url value='/admin-css-js/js/demo/chart-pie-demo.js'/>"></script>
 
 </body>
+
 </html>

@@ -20,9 +20,6 @@ section#mbti{
     text-align: center;
 }
 
-#mbtitb tr>td:last-child{
-	padding-left: 5%;
-}
 
 button.mbti-button{
 	background-color: #c87fdf;
@@ -230,3 +227,4 @@ section#mbtiSurvey{
 .statement.active .options label {
     z-index: 2;
 }
+>>>>>>> branch 'main' of https://github.com/pjm0209/finalproject.git

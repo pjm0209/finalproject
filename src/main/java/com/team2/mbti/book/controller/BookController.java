@@ -38,15 +38,6 @@ public class BookController {
 		return "admin/book/bookInventory";
 	}
 	
-	@RequestMapping("/bookBasket")
-	public String bookBasket(Model model) {
-		logger.info("책관리 페이지 - 책 장바구니 관리 페이지입니다.");
-		
-		model.addAttribute("title", "책 장바구니 페이지");
-		
-		return "admin/book/bookBasket";
-	}
-	
 	@GetMapping("/bookRegister")
 	public String bookRegister_get(Model model) {
 		logger.info("책관리 페이지 - 책 상품 등록 페이지입니다.");
@@ -69,4 +60,14 @@ public class BookController {
 		//4
 		return "redirect:/admin/book/bookList";
 	}
+	
+	@RequestMapping("/bookSummingUp")
+	public String bookSummingUp(Model model) {
+		logger.info("책관리 페이지 - 책 매출현황 페이지입니다.");
+		
+		model.addAttribute("title", "책 매출현황 페이지");
+		
+		return "admin/book/bookSummingUp";
+	}
+
 }//
