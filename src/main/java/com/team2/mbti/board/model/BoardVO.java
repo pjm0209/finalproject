@@ -21,4 +21,5 @@ public class BoardVO extends SearchVO {
 	private int boardSort;
 	private String boardDelFlag;
 	private int mbtiNo;
+	private String adminNo;
 }

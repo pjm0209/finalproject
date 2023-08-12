@@ -28,25 +28,44 @@
 				조회수 ${map['BOARD_READCOUNT'] } </span>
 		</div>
 		<div class="board-content">
-			<div class="boardFile">
+			<c:if test="${!empty fileList }">
+				<div class="boardFile">
 				<button type="button"><i class="bi bi-dropbox"></i> 첨부파일</button>
 				<ul class="file-list">
 					<c:forEach var="vo" items="${fileList }">
-						<li><a href="#">${vo.originalFileName }</a></li>
+						<c:choose>
+					        <c:when test="${fn:length(vo.originalFileName) > 13}">
+					        	<a href="#" data-toggle="tooltip" data-html="true" title="${vo.originalFileName }">
+							        <c:out value="${fn:substring(vo.originalFileName, 0, 12)}">
+							        </c:out>...
+						        </a><br>
+					        </c:when>
+					        <c:otherwise>
+					        	<a href="#" data-bs-toggle="tooltip" data-bs-title="${vo.originalFileName }">
+							        <c:out value="${vo.originalFileName}">
+							        </c:out>
+						        </a><br>
+					        </c:otherwise>
+						</c:choose>
 					</c:forEach>
 				</ul>
-			</div>
+				</div>
+			</c:if>
 			${map['BOARD_BODY'] }			
 		</div>
-
-		<p class="board-comment-count">댓글 ${fn:length(commentList) }</p>
-		<form name="commentFrm">
-			<p class="board-comment-user">관리자 (admin)</p>
-			<div class="textarea-group">
-				<textarea id="comment-area"></textarea>
-				<input type="button" value="답글등록" id="comment-submit">
-			</div>
-		</form>
+		
+		<c:if test="${map['COMMENT_FLAG'] == 'Y' }">
+			<p class="board-comment-count">댓글 ${fn:length(commentList) }</p>
+			<form name="commentFrm" action="post">
+				<p class="board-comment-user">관리자 (${sessionScope.adminId })</p>
+				<div class="textarea-group">
+					<textarea id="comment-area" name="commentsBody"></textarea>
+					<input type="hidden" value="${map['BOARD_NO'] }" name="boardNo">
+					<input type="hidden" value="${sessionScope.adminId }" name="">
+					<input type="button" value="답글등록" id="comment-submit">
+				</div>
+			</form>
+		</c:if>
 	</div>
 </div>
 </div>

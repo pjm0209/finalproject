@@ -190,12 +190,12 @@ a.google span{
                 <header>회원 로그인</header>
                 <form action="#">
                     <div class="field input-field">
-                        <input type="id" placeholder="아이디" class="input">
+                        <input type="id" placeholder="아이디를 입력하세요." class="input">
                         
                     </div>
 
                     <div class="field input-field">
-                        <input type="password" placeholder="비밀번호" class="password">                    
+                        <input type="password" placeholder="비밀번호를 입력하세요." class="password">                    
                         <i class='bx bx-hide eye-icon'></i>
                     </div><br>
                     
@@ -220,14 +220,6 @@ a.google span{
                 </div>
             </div>
 
-            <div class="line"></div>
-
-            <div class="media-options">
-                <a href="#" class="field facebook">
-                    <i class='bx bxl-facebook facebook-icon'></i>
-                    <span>카카오 로그인 API 사용예정</span>
-                </a>
-            </div>
         </div>
     </section>
     </body>

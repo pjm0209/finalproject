@@ -8,7 +8,45 @@
 		order by admin_no
 	</select>
 	
+	<select id="checkAdminId" parameterType="String" resultType="int">
+		select count(*) from admin
+		where admin_Id=#{adminId}
+	</select>
 	
+	<select id="selectAdminPwd" parameterType="string" resultType="string">
+		select admin_Pwd from admin
+		where admin_Id=#{adminId}
+	</select>	
+	
+	<sql id="searchManager">
+		<where>
+			<if test="searchKeyword!=null and searchKeyword!=''">
+				${searchCondition} like '%' || #{searchKeyword} || '%'
+			</if>
+		</where>
+	</sql>	
+
+	<select id="selectAllManager" parameterType="searchVo" resultType="adminVo">
+		select * 
+		from
+		(
+			select rownum as RNUM, A.*
+			 from
+			(
+				select * from admin
+				<include refid="searchManager"></include>
+				order by admin_no 
+			)A
+		)
+		<![CDATA[
+		where RNUM > #{firstRecordIndex} 
+		and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}]]>
+	</select>
+	
+	<select id="getTotalRecordManager" parameterType="searchVo" resultType="int">
+		select count(*) from admin
+		<include refid="searchManager"></include> 
+	</select>	
 </mapper>
 
 

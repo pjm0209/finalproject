@@ -8,8 +8,8 @@
 <div class="board-body">
 	<form name="boardWriteForm" method="post" enctype="multipart/form-data" action="<c:url value='/admin/board/boardWrite'/>">
 		<div id="board-title">
-		<input type="hidden" name="boardFormNo" value="${param.boardFormNo }">
-		<input type="hidden" name="no" value="3">
+		<input type="hidden" name="boardFormNo" value="${param.boardFormNo }">		
+		<input type="hidden" name="adminNo" value="${sessionScope.adminNo }">		
 			<h5>${board }</h5>
 			<div class="board-head-button">
 				<input type="button" class="bg-gradient-secondary" onclick="location.href='<c:url value="/admin/board/board?boardFormNo=1"/>'" value="취소">
@@ -61,8 +61,6 @@
 				                    <button type="button" onclick="addFile();" class="btns fn_add_btn"><span>파일 추가</span></button>
 				                </div>
 				            </div>
-						</dd>
-							
 						</dd>
 					</div>
 				</div>

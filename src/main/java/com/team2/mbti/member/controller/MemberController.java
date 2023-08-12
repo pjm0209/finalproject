@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.team2.mbti.common.ConstUtil;
 import com.team2.mbti.common.PaginationInfo;
 import com.team2.mbti.common.SearchVO;
-import com.team2.mbti.mbtisurvey.model.MbtiSurveyVO;
 import com.team2.mbti.member.model.MemberService;
 import com.team2.mbti.member.model.MemberVO;
 
@@ -59,5 +58,6 @@ public class MemberController {
 		
 		return "admin/member/memberList";
 	}
+		
 	
 }

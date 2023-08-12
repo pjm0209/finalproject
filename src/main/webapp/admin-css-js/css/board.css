@@ -407,6 +407,7 @@ div.board {
 
 .board-content {
 	min-height: 400px;
+	padding-left: 22px;
 }
 
 .boardFile {
@@ -419,6 +420,7 @@ div.board {
 div.boardFile button {
 	background: white;
 	border: 0;
+	padding-right: 108px;
 }
 
 i.bi.bi-dropbox {

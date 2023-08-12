@@ -37,7 +37,7 @@
                 <div class="modal-body">로그아웃할 준비가 되었으면 아래에 있는 "로그아웃"을 선택하세요</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
-                    <a class="btn btn-primary" href="<c:url value='/admin/login'/>">로그아웃</a>
+                    <a class="btn btn-primary" href="<c:url value='/admin/logout'/>">로그아웃</a>
                 </div>
             </div>
         </div>
@@ -46,8 +46,8 @@
 	<script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="<c:url value='/admin-css-js/js/mbti.js'/>"></script>
 	
-    <!-- Bootstrap core JavaScript-->    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>  
+    <!-- Bootstrap core JavaScript-->     
+    <script src="<c:url value='/admin-css-js/vendor/bootstrap/js/bootstrap.bundle.min.js'/>"></script>
 
     <!-- Core plugin JavaScript-->
     <script src="<c:url value='/admin-css-js/vendor/jquery-easing/jquery.easing.min.js'/>"></script>
