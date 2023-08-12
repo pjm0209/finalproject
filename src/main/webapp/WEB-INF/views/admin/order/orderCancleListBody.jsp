@@ -77,7 +77,7 @@
 				</c:choose>
 			</td>
 			<td>
-				<button class="btn btn-warning btn-xs" onclick="location.href='orderDetail?orderNo=${vo.orderNo}'" type="button" title="재고저장"><i class="fas fa-edit"></i></button>
+				<button class="btn btn-warning btn-xs" onclick="location.href='orderDetail?orderNo=${vo.orderNo}?orderFlag=${param.orderFlag}'" type="button" title="재고저장"><i class="fas fa-edit"></i></button>
 			</td>
 		</tr>
 		

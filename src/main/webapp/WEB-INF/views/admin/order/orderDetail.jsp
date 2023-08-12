@@ -231,7 +231,7 @@
 				<div class="form-group">
 					<div class=" text-right">
 						<button style="margin: 0px 5px;" type="button" class="btn btn-success" onclick=""><i class="fas fa-save"></i> 저장</button>
-						<button style="margin: 0px 5px;" type="button" class="btn btn-primary" onclick=""><i class="fas fa-list-ul"></i> 리스트</button>
+						<button style="margin: 0px 5px;" type="button" class="btn btn-primary" onclick="history.back()"><i class="fas fa-list-ul"></i> 리스트</button>
 					<div class=" text-right">
 						<button type="button" class="btn btn-success btn-sm" onclick="odmStatusUp( 'C1' )">결제완료</button>
 						<button type="button" class="btn btn-danger btn-sm" onclick="odmCancel( 'H2' )">주문취소</button>

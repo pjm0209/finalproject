@@ -1,0 +1,9 @@
+시작 - jsp
+ - controller(1,2,3,4 및 매핑하기 같은 큰 틀을 잡고)
+ - .xml
+ - dao
+ - daoimpl(@Repository)
+ - service
+ - serviceImpl(@Service)
+ - controller(완성하기)
+   끝 - jsp

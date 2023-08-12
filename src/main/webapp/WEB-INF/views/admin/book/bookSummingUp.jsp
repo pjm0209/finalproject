@@ -2,7 +2,20 @@
 	pageEncoding="UTF-8"%>
 
 <%@ include file="../inc/top.jsp"%>
+<link href="<c:url value='/admin-css-js/css/calendar.css'/>" rel="stylesheet">
+<script type="text/javascript" src="<c:url value='admin-css-js/js/calendar.js'/>"></script>
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
+<script>
 
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: 'dayGridMonth'
+        });
+        calendar.render();
+      });
+
+</script>
 <!-- Begin Page Content -->
 <!-- Page Heading -->
 
@@ -17,48 +30,45 @@
 <div class="board-body">
 	<div id="board-title">
 		<h5>매출 현황</h5>
+		<input type="button" class="bg-gradient-secondary" id="bt1" >
+		<input type="button" class="bg-gradient-secondary" id="bt2" >
 	</div>
-	
-	<div>
-		<div class="col-xl-4 col-lg-5">
-            <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">판매 상품별 비율</h6>
-                </div>
-                <!-- Card Body -->
-                <div class="card-body">
-                    <div class="chart-pie pt-4 pb-2">
-                    	<div class="chartjs-size-monitor">
-                    		<div class="chartjs-size-monitor-expand">
-                    			<div class=""></div>
-                    		</div>
-                    		<div class="chartjs-size-monitor-shrink">
-                    			<div class=""></div>
-                    		</div>
-                    	</div>
-                        <canvas id="myPieChart" width="1094" height="490" style="display: block; height: 245px; width: 547px;" class="chartjs-render-monitor">
-                        	
-                        </canvas>
-                    </div>
-                    <div class="mt-4 text-center small">
-                        <span class="mr-2">
-                            <i class="fas fa-circle text-primary">mbti검사지</i>
-                        </span>
-                        <span class="mr-2">
-                            <i class="fas fa-circle text-success">성인심리전문서적</i>
-                        </span>
-                        <span class="mr-2">
-                            <i class="fas fa-circle text-info">유아심리전문서적</i>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
+	<div class="shadow-sm p-3 mb-5 bg-body rounded" style="margin: 15px 0px;margin-right: 15px;">
+		<div>
+			<ul class="list-group list-group-horizontal">
+	            <li class="list-group-item">
+	                <dl class="info payment align-right">
+	                    <dt class="tit">
+	                        <i class="fas fa-fw fa-database greenF"></i>
+	                        <span class="greenF align-right">결제 금액</span> 
+	                    </dt>
+	                    <dd id="payment" class="	price"><span class="no">0</span><span class="unit">원</span></dd>
+	                </dl>
+	            </li>
+	            <li class="list-group-item">
+	                <dl class="info refund align-right">
+	                    <dt class="tit">
+	                        <i class="fas fa-fw fa-reply redF"></i>
+	                        <span class="redF align-right">환불 금액</span> 
+	                    </dt>
+	                    <dd id="refund" class="price"><span class="no">0</span><span class="unit">원</span></dd>
+	                </dl>
+	            </li>
+	            <li class="list-group-item">
+	                <dl class="info sales align-right">
+	                    <dt class="tit">
+	                        <i class="fas fa-fw fa-cubes blueF"></i>
+	                        <span class="blueF">매출액 </span>
+	                    </dt>
+	                    <dd id="sales" class="price"><span class="no">0</span><span class="unit">원</span></dd>
+	                </dl>
+	            </li>
+	        </ul>
+				<!-- Cloudflare Pages Analytics -->	
+			<div id='calendar'></div>
+				<!-- Cloudflare Pages Analytics -->
+		</div>
 	</div>
-	
-	
-	
 </div>
 </div>
 <!-- End of Main Content -->
