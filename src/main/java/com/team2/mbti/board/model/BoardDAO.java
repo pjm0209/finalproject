@@ -17,6 +17,7 @@ public interface BoardDAO {
 	List<BoardFormVO> selectAllBoard();
 	
 	int insertBoardForm(BoardFormVO vo);
+	int adminInsertBoard(BoardVO vo);
 	int insertBoard(BoardVO vo);
 	
 	BoardFormVO selectBoardSet(int boardFormNo);
