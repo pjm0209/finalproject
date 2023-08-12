@@ -18,6 +18,11 @@
 		where admin_Id=#{adminId}
 	</select>	
 	
+	<select id="selectAdminNo" parameterType="String" resultType="int">
+		select admin_No from admin
+		where admin_Id = #{adminId}
+	</select>
+	
 	<sql id="searchManager">
 		<where>
 			<if test="searchKeyword!=null and searchKeyword!=''">
