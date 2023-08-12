@@ -59,8 +59,8 @@
 			select board_seq.nextval from dual
 		</selectKey>
 
-		insert into board(board_no, board_form_no, board_title, board_body, no, board_group_no)
-		values(#{boardNo}, #{boardFormNo}, #{boardTitle}, #{boardBody}, #{no}, #{boardNo})
+		insert into board(board_no, board_form_no, board_title, board_body, no, board_group_no, admin_no)
+		values(#{boardNo}, #{boardFormNo}, #{boardTitle}, #{boardBody}, #{no}, #{boardNo}, #{admin_no})
 	</insert>
 	
 	<select id="selectBoardSet" parameterType="int" resultType="boardFormVo">
