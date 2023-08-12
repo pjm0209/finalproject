@@ -9,4 +9,5 @@ public interface AdminService {
 	int dupUserid(String userid);
 	List<AdminVO> selectAllManager(SearchVO vo);
 	int getTotalRecordManager(SearchVO searchVo);
+	int selectAdminNo(String adminId);
 }

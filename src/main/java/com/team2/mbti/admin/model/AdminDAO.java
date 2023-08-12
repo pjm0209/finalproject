@@ -12,5 +12,5 @@ public interface AdminDAO {
 	String selectAdminPwd(String adminId);
 	List<AdminVO> selectAllManager(SearchVO vo);
 	int getTotalRecordManager(SearchVO searchVo);
-
+	int selectAdminNo(String adminId);
 }

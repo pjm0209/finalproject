@@ -48,8 +48,11 @@ public class AdminLoginController {
 			msg=adminId + " 관리자님 로그인되었습니다.";
 			url="/admin/index";
 			
+			int adminNo = adminService.selectAdminNo(adminId);
+			
 			HttpSession session=request.getSession();
 			session.setAttribute("adminId", adminId);
+			session.setAttribute("adminNo", adminNo);
 			
 			request.getSession().setAttribute("adminId", adminId);
 			
@@ -79,9 +82,8 @@ public class AdminLoginController {
 		logger.info("로그아웃");
 		
 		session.setAttribute("adminId","");
+		session.setAttribute("adminNo", "");
 		
-		return "redirect:/admin/login";
-				
+		return "redirect:/admin/login";				
 	}
-
 }
