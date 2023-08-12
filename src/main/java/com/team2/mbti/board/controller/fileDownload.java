@@ -24,9 +24,7 @@ public class fileDownload extends AbstractView {
 			HttpServletResponse response) throws Exception {
 		
 		File file = (File) model.get("file");
-		logger.info("file: {}", file);
 		if(file == null || !file.exists() || !file.canRead()) {
-			logger.info("제발여기좀 그만 들어와!!");
 			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.print("<script>alert('파일이 존재하지 않거나 손상되었습니다.');history.back();</script>");
