@@ -188,7 +188,7 @@ a.google span{
         <div class="form login">
             <div class="form-content">
                 <header>회원 로그인</header>
-                <form action="#">
+                <form method="post" id="login-form" action="<c:url value='/main/member/memberLogin'/>">
                     <div class="field input-field">
                         <input type="id" placeholder="아이디를 입력하세요." class="input">
                         
@@ -204,8 +204,9 @@ a.google span{
             		</label>
                   
                     <div class="field button-field">
-                        <button>로그인</button>
+                        <input type="submit" value="Login" id="login-button">     
                     </div>
+                    
                 </form>
                     <div class="form-link">
                         <a href="<c:url value='/main/member/forgot-id'/>" class="forgot-id">아이디 찾기</a>
