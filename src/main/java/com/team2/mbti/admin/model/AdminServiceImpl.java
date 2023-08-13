@@ -59,5 +59,10 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public int selectAdminNo(String adminId) {
 		return adminDao.selectAdminNo(adminId);
+	}
+
+	@Override
+	public int insertManager(AdminVO vo) {	
+		return adminDao.insertManager(vo);
 	}	
 }

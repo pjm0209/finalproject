@@ -106,7 +106,7 @@ public class AdminController {
 	}
 	
 	@GetMapping("/manager/managerList")
-	public String managerList() {
+	public String manager() {
 		logger.info("관리자 관리 화면");
 		
 		return "admin/manager/managerList";					
@@ -138,11 +138,13 @@ public class AdminController {
 		return "admin/manager/managerList";
 	}
 	
-	@RequestMapping("/manager")
-	public String manager() {
-		logger.info("관리자 관리 페이지");
+	@RequestMapping("/manager/managerAdditional")
+	public String managerAdditional(Model model) {
 		
-		return "admin/manager/managerList";
-	}
+		logger.info("관리자 추가 화면 보여주기");
 		
+		model.addAttribute("manager", "관리자 추가하기");
+		
+		return "admin/manager/managerAdditional";
+	}	
 }
