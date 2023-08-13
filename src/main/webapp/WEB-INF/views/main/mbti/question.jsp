@@ -21,29 +21,19 @@
         <div class="statement active">
             <div class="question">
                 <h3>1. 나는 걱정이 많다. 남들은 잘 신경쓰지 않는 일도 미리 생각하고 염려한다.</h3>
-            </div>
-            <div class="answer"><br>
+            </div><br>
+            <div class="answer">
                 <div class="options">
-                    <label for="statement1_1" class=" ch_01 disagree max">
-                        <input type="radio" id="statement1_1" name="statement1">
-                        <span><i class="fas fa-check"></i></span>
-                    </label>
-                    <label for="statement1_2" class=" ch_02 disagree mid">
-                        <input type="radio" id="statement1_2" name="statement1">
-                        <span><i class="fas fa-check"></i></span>
-                    </label>
-                    <label for="statement1_3" class=" ch_03 natural">
-                        <input type="radio" id="statement1_3" name="statement1">
-                        <span><i class="fas fa-check"></i></span>
-                    </label>
-                    <label for="statement1_4" class=" ch_04 agree mid">
-                        <input type="radio" id="statement1_4" name="statement1">
-                        <span><i class="fas fa-check"></i></span>
-                    </label>
-                    <label for="statement1_5" class=" ch_05 agree max">
-                        <input type="radio" id="statement1_5" name="statement1">
-                        <span><i class="fas fa-check"></i></span>
-                    </label>
+                    <label for="statement1_1" class=" ch_01 disagree max">전혀 그렇지 않다</label>
+                    <label for="statement1_2" class=" ch_02 disagree mid">그렇지 않다</label>
+                    <label for="statement1_3" class=" ch_03 natural">보통</label>
+                    <label for="statement1_4" class=" ch_04 agree mid">그렇다</label>
+                    <label for="statement1_5" class=" ch_05 agree max">매우 그렇다</label><br>
+                    <input type="radio" id="statement1_1" name="statement1">
+                    <input type="radio" id="statement1_2" name="statement1">
+                    <input type="radio" id="statement1_3" name="statement1">
+                    <input type="radio" id="statement1_4" name="statement1">
+                    <input type="radio" id="statement1_5" name="statement1">
                 </div>
             </div>
         </div>

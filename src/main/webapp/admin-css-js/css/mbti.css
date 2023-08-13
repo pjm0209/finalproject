@@ -191,20 +191,27 @@ section#mbtiSurvey{
     box-sizing: border-box;
     margin: 0 auto;
 }
-.statement .answer::before {
-    position: absolute;
+.options span:last-of-type {
     left: 10%;
     top: 50%;
     transform: translateY(-50%);
-    content: "전혀 그렇지 않다";
     font-size: 24px;
     color: #ff4e4e;
 }
 .statement.active .options{
 	position: relative;
 }
+.options input[type=radio]:first-of-type{
+	width: 100px;
+	margin-right: 150px;
+}
+.options input[type=radio]:not(:first-of-type){
+	width: 100px;
+	margin-left: 30px;
+	margin-right: 100px;
+}
 .statement.active .options::after {
-	    position: absolute;
+	position: absolute;
     top: 50%;
     right: 0;
     width: 90%;
@@ -218,12 +225,11 @@ section#mbtiSurvey{
     left: 50%;
     transform: translateX(-50%);
 }
-.statement .answer::after {
-    position: absolute;
+.options label {
+	text-align: center;
+	margin-right: 140px;
     right: 10%;
     top: 50%;
-    transform: translateY(-50%);
-    content: "매우 그렇다";
     font-size: 24px;
     color: #06f;
 }
