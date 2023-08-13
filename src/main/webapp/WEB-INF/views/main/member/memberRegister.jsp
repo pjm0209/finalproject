@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>  
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="../inc/top.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +18,10 @@ h3 {
 	font-size: 20px;
     text-align: center;
     font-weight: bold;
-    background: #ff7f00;     
+    background: #ff7f00;
+    margin-top: 100px;
+	margin-botton:50px;
+	align-items: left;     
 }
 
 html {
@@ -84,7 +88,7 @@ div {
 
 .error{
     font-size: 1px;
-    height: 20px;
+    height: 10px;
     color:red;
     font-weight: 700;
 }
@@ -160,7 +164,7 @@ function validate_hp(ph) {
 		    var passwordError = $('#passwordError');
 
 		    if (password1 !== password2) {
-		        passwordError.html("비밀번호가 일치하지 않습니다. 확인하세요");
+		        passwordError.html("비밀번호가 일치하지 않습니다.");
 		    } else {
 		        passwordError.html("비밀번호가 일치합니다");
 		    }
@@ -271,7 +275,7 @@ function validate_hp(ph) {
 		<div class="passwordCheck">
 			<input type="password" id="password2" placeholder="비밀번호 재입력">
 			<div class="error" id="passwordError" style=font-size:15px;></div>
-		</div>
+		</div><br>
 		
 		<span>이메일 *</span>
 		<div class="email">

@@ -14,7 +14,7 @@ public interface BoardService {
 	List<BoardFormVO> selectAllBoard();
 	
 	int insertBoardForm(BoardFormVO vo);
-	int insertBoard(BoardVO vo);
+	int adminInsertBoard(BoardVO vo);
 	
 	BoardFormVO selectBoardSet(int boardFormNo);
 	int updateBoardSet(BoardFormVO vo);
@@ -23,4 +23,8 @@ public interface BoardService {
 	int addReadCount(int boardNo);
 	
 	List<CommentsVO> selectComment(int boardNo);
+	
+	int insertFile(List<Map<String, Object>> list, int boardNo);
+	
+	List<BoardFileVO> selectFileList(int boardNo);
 }

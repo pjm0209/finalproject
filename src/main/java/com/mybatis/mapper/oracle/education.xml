@@ -3,6 +3,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.team2.mbti.education.model.EducationDAO">
+
 	<!-- location -->
 	<insert id="insertLocation" parameterType="educationVo">
 		<selectKey keyProperty="epNo" order="BEFORE" resultType="int">
@@ -39,6 +40,7 @@
 		<include refid="searchLocation"></include> 
 	</select>
 	
+	
 	<!-- list -->
 	<insert id="insertEducation" parameterType="educationVo">
 		<selectKey keyProperty="eduNo" order="BEFORE" resultType="int">
@@ -73,5 +75,42 @@
 	<select id="getTotalRecordEducation" parameterType="searchVo" resultType="int">
 		select count(*) from mbti_education
 		<include refid="searchEducation"></include> 
+	</select>
+	
+	
+	<!-- teacher -->
+	<insert id="insertTeacher" parameterType="educationVo">
+		<selectKey keyProperty="eduTeaNo" order="BEFORE" resultType="int">
+			select education_teacher_seq.nextval from dual
+		</selectKey>
+		insert into education_teacher(edu_tea_no, edu_tea_name, edu_tea_id, edu_tea_pwd, edu_tea_email, edu_tea_tel)
+		values(#{eduTeaNo},#{eduTeaName},#{eduTeaId},#{eduTeaPwd},#{eduTeaEmail},#{epTeaTel})
+	</insert>
+	
+	<sql id="searchTeacher">
+		<where>
+			<if test="searchKeyword!=null and searchKeyword!=''">
+	        	${searchCondition} like '%' || #{searchKeyword} || '%'
+	        </if>
+        </where>
+	</sql>
+	
+	<select id="selectAllTeacher" parameterType="searchVo" resultType="educationVo">
+		select * from
+		(
+		    select rownum RNUM,a.* from
+		    (
+		        select * from education_teacher 
+		        <include refid="searchTeacher"></include>
+		        order by edu_tea_no
+		    )a
+		)
+		<![CDATA[
+		where RNUM > #{firstRecordIndex} and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}]]>
+	</select>
+	
+	<select id="getTotalRecordTeacher" parameterType="searchVo" resultType="int">
+		select count(*) from education_teacher
+		<include refid="searchTeacher"></include> 
 	</select>
 </mapper>

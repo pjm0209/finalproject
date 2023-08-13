@@ -16,7 +16,8 @@ public interface MemberService {
 	List<MemberVO> selectAllMember(SearchVO vo);
 	int getTotalRecordMember(SearchVO searchVo);
 	MemberVO selectByNoMember(int no);
-	int selectCheckId(String userid);
+	int selectCheckId(String userid);	
+	int deleteMember(int no);
 
 	
 

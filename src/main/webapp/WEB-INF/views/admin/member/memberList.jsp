@@ -3,6 +3,18 @@
 <%@ include file="../inc/top.jsp"%>
 <!-- Begin Page Content -->
 <!-- Page Heading -->
+<script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>
+<script type="text/javascript">
+	$(function(){
+		$('#board-write-button').click(function(){
+			if(confirm("선택한 회원을 삭제하시겠습니까?")){
+				var contextpath = "/mbti";
+				location.href=contextpath+"/admin/member/memberList";
+			}
+			
+		});	
+	});
+</script>
 <div class="head-div">
 	<h2 class="text-gray-800">회원</h2>
 </div>
@@ -80,13 +92,12 @@
 				      </a>
 				    </li>
 				</c:if>
-				
 				<c:forEach var="i" begin="${pagingInfo.firstPage}" end="${pagingInfo.lastPage}">
 					<c:if test="${i==pagingInfo.currentPage}">
-						<li class="page-item"><a class="page-link" href="<c:url value='/admin/mbti/member/memberList?currentPage=${i}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">${i}</a></li>
+						<li class="page-item active"><a class="page-link" href="<c:url value='/admin/mbti/member?currentPage=${i}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">${i}</a></li>
 					</c:if>
 					<c:if test="${i!=pagingInfo.currentPage}">
-						<li class="page-item"><a class="page-link" href="<c:url value='/admin/mbti/member/memberList?currentPage=${i}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">[${i}]</a></li>
+						<li class="page-item"><a class="page-link" href="<c:url value='/admin/mbti/mbti?currentPage=${i}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">${i}</a></li>
 					</c:if>
 				</c:forEach>
 				<c:if test="${pagingInfo.lastPage < pagingInfo.totalPage}">
@@ -98,7 +109,7 @@
 				</c:if>
 			</ul>
 		</div>
-		</form>	
+		</form>
 	</div>
 </div>
 <!-- End of Main Content -->

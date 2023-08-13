@@ -39,7 +39,7 @@ button#education-delete-button {
 </div>
 <div class="side-body">
 	<div class="side-div-title">
-		<h6>교육 리스트</h6>
+		<h6>교육</h6>
 		<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
 			fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
   			<path fill-rule="evenodd"
@@ -48,13 +48,26 @@ button#education-delete-button {
 	</div>
 	<div class="group">
 		<div id="group-list" class="nav">
+		<div class="board-side-boardItem">
+				<div class="board-name">
+					<a class="applicantList-link" href="<c:url value='/admin/education/list'/>">
+						<span>교육 리스트</span>
+					</a>
+				</div>
+			</div>
 			<div class="board-side-boardItem">
 				<div class="board-name">
 					<a class="applicantList-link" href="<c:url value='/admin/education/applicantList'/>">
 						<span>신청자 관리</span>
 					</a>
 				</div>
-				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
+			</div>
+			<div class="board-side-boardItem">
+				<div class="board-name">
+					<a class="applicantList-link" href="<c:url value='/admin/education/teacher'/>">
+						<span>강사 관리</span>
+					</a>
+				</div>
 			</div>
 			<div class="board-side-boardItem">
 				<div class="board-name">
@@ -62,7 +75,6 @@ button#education-delete-button {
 						<span>교육장 관리</span>
 					</a>
 				</div>
-				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
 			</div>
 		</div>
 	</div>
@@ -93,13 +105,13 @@ button#education-delete-button {
 			<thead>
 				<tr class="board-table-colum">
 					<th scope="col"><input type="checkbox" id="check-All" class="board-checkbox"></th>
-					<th scope="col" class="board-regdate">번호</th>
-					<th scope="col" class="board-title">교육 이름</th>
-					<th scope="col" class="board-regdate">강사명</th>
-					<th scope="col" class="board-regdate">교육 기간</th>
-					<th scope="col" class="board-writer">인원수</th>
-					<th scope="col" class="board-writer">교육비</th>
-					<th scope="col" class="board-readcount">교육장</th>
+					<th scope="col">번호</th>
+					<th scope="col">교육 이름</th>
+					<th scope="col">강사명</th>
+					<th scope="col">교육 기간</th>
+					<th scope="col">인원수</th>
+					<th scope="col">교육비</th>
+					<th scope="col">교육장</th>
 				</tr>
 			</thead>
 			<c:set var="idx" value="0"/>
@@ -110,42 +122,42 @@ button#education-delete-button {
 						<th scope="row"><input type="checkbox" class="board-checkbox" vlaue="${educationVo.eduNo }"></th>
 						<td>${educationVo.eduNo }</td>
 						<td>${educationVo.eduName }</td>
-						<td>${educationVo.eduTeacher }</td>
+						<td>${educationVo.eduTeaName }</td>
 						<td>${educationVo.eduCom }</td>
-						<td>30</td>
+						<td>${educationVo.eduPeopleNumber }</td>
 						<td>${educationVo.eduPrice }</td>
 						<td>${educationVo.epName }</td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
-	<div style="width: 10%;text-align: center;margin: 0 auto;">
+	<nav class="boardPaging" aria-label="Page navigation example">
 			<ul class="pagination">
 				<c:if test="${pagingInfo.firstPage > 1 }">
 				    <li class="page-item">
-				      <a class="page-link" href="#" aria-label="Previous">
+				     <a class="page-link" href="#" onclick="pageFunc(${pagingInfo.fistPage - 1})" aria-label="Previous">
 				        <span aria-hidden="true">&laquo;</span>
 				      </a>
 				    </li>
 				</c:if>
 				<c:forEach var="i" begin="${pagingInfo.firstPage}" end="${pagingInfo.lastPage}">
 					<c:if test="${i==pagingInfo.currentPage}">
-						<li class="page-item"><a class="page-link" href="<c:url value='/admin/education/list?currentPage=${i}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">${i}</a></li>
+						<li class="page-item active"><a class="page-link"  href="#">${i }</a></li>	
 					</c:if>
 					<c:if test="${i!=pagingInfo.currentPage}">
-						<li class="page-item"><a class="page-link" href="<c:url value='/admin/education/list?currentPage=${i}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">[${i}]</a></li>
+						<li class="page-item"><a class="page-link" href="#" onclick="pageFunc(${i})">${i }</a></li>	
 					</c:if>
 				</c:forEach>
 				<c:if test="${pagingInfo.lastPage < pagingInfo.totalPage}">
 				    <li class="page-item">
-				      <a class="page-link" href="#" aria-label="Next">
+				      <a class="page-link" href="#" aria-label="Next" onclick="pageFunc(${pagingInfo.lastPage + 1})">
 				        <span aria-hidden="true">&raquo;</span>
 				      </a>
 				    </li>
 				</c:if>
 			</ul>
-		</div>
-		</form>
+		</nav>
+	</div>
 </div>
 </div>
 <!-- End of Main Content -->

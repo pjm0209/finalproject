@@ -14,6 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+
 	<link href="<c:url value='/images/신나로아콘.png'/>" rel="shortcut icon" type="image/x-icon">
     <title>${title }</title>
 
@@ -23,12 +24,13 @@
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
-    <!-- Custom styles for this template-->
+    <!-- Custom styles for this template-->    
     <link href="<c:url value='/admin-css-js/css/sb-admin-2.css'/>" rel="stylesheet">
     <link href="<c:url value='/admin-css-js/css/mbti.css'/>" rel="stylesheet">
     <link href="<c:url value='/admin-css-js/css/board.css'/>" rel="stylesheet" type="text/css">
     <link href="<c:url value='/admin-css-js/css/boardCreate.css'/>" rel="stylesheet" type="text/css">
-    <link href="<c:url value='/admin-css-js/css/book-order.css'/>" rel="stylesheet" type="text/css">
+    <link href="<c:url value='/admin-css-js/css/book-order.css'/>" rel="stylesheet" type="text/css">  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">  
 	<script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>
 	<script type="text/javascript" src="<c:url value='/resources/ckeditor/ckeditor.js'/>"></script>	
 </head>
@@ -137,16 +139,29 @@
                     <span>판매 상품 관리</span></a>
             </li>
             <li class="nav-item">
+           		<div class="dropend">
+				  <a class="nav-link dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false" href="">
+				    <i class="fas fa-shopping-cart"></i>
+                       <span>주문 및 주문취소 관리</span>
+				  </a>
+				  <ul class="dropdown-menu shadow-sm p-3 mb-5 bg-body rounded">
+				    <li><a class="nav-link dropdown-item fw-bold" href="<c:url value='/admin/order/orderList?flag=order'/>"
+				    	style="color:black;"></i>주문 관리</a></li>
+				    <li><a class="nav-link dropdown-item fw-bold" href="<c:url value='/admin/order/orderCancleList?flag=orderCancle'/>"
+				    	style="color:black;">주문 취소 관리</a></li>
+				  </ul>
+				</div>
+			</li>
+            <%-- <li class="nav-item">
                 <a class="nav-link" href="<c:url value='/admin/order/orderList'/>">
                     <i class="fas fa-shopping-cart"></i>
                     <span>주문 관리</span></a>
             </li>
              <li class="nav-item">
-                <a class="nav-link" href="<c:url value='/admin/order/orderCancleList'/>">
+                <a class="nav-link" href="<c:url value='/admin/order/orderCancleList?flag=orderCancle'/>">
                     <i class="fas fa-window-close"></i>
                     <span>주문 취소 관리</span></a>
-            </li>
-
+            </li> --%>
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse-setting-Utilities"
@@ -398,7 +413,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">${sessionScope.adminId} 님	</span>
                                 <img class="img-profile rounded-circle"
                                     src="<c:url value='/admin-css-js/img/undraw_profile.svg'/>">
                             </a>
@@ -429,3 +444,4 @@
 
                 </nav>
                 <!-- End of Topbar -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
