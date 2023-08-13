@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <div class="side-body">
 	<div class="side-div-title">
 		<h6>상품 관리</h6>
@@ -11,22 +12,30 @@
 	</div>
 	<div class="group">
 		<div id="board-group-list" class="nav">
-			<div class="board-side-boardItem addIcon">
-				<div class="board-name one" name="bookList" value="bookList">
-					<span><a href="<c:url value='/admin/book/bookList'/>">상품 리스트</a></span>
+			<div class="board-side-boardItem">
+				<div class="board-name" name="bookList" value="bookList" onclick="change_div(event)">
+					<span><a href="<c:url value='/admin/book/bookList?bookFlag=bookList'/>">상품 리스트</a></span>
 				</div>
+				<c:if test="${param.bookFlag == 'bookList'}">
+					<span class="board-side-icon"><i class="fas fa-fw fa-check"></i></span>
+				</c:if>
 			</div>
-			<div class="board-side-boardItem addIcon">
-				<div class="board-name two" name="Inventory" value="Inventory">
+			<div class="board-side-boardItem">
+				<div class="board-name" name="Inventory" value="Inventory" onclick="change_div(event)">
 					<span><a href="<c:url value='/admin/book/bookList?bookFlag=Inventory'/>">상품 재고관리</a></span>
 				</div>
+				<c:if test="${param.bookFlag == 'Inventory'}">
+					<span class="board-side-icon"><i class="fas fa-fw fa-check"></i></span>
+				</c:if>
 			</div>	
-			<div class="board-side-boardItem addIcon">
-				<div class="board-name three" name="statistic" value="statistic">
+			<div class="board-side-boardItem">
+				<div class="board-name" name="statistic" value="statistic" onclick="change_div(event)">
 					<span><a href="<c:url value='/admin/book/bookSummingUp?bookFlag=statistic'/>">매출 현황</a></span>
 				</div>
+				<c:if test="${param.bookFlag == 'statistic'}">
+					<span class="board-side-icon"><i class="fas fa-fw fa-check"></i></span>
+				</c:if>
 			</div>
 		</div>
-		<input type="hidden" id="requestValue" value="${param.bookFlag}">
 	</div>
 </div>

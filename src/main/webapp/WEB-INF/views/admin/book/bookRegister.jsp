@@ -48,7 +48,7 @@
 			</div>
 	
 			
-			<div class="bookCode red">
+			<!-- <div class="bookCode red">
 				<label class="" for="inputCode">상품코드</label>
 				<div class="flex">
 					<div class="">
@@ -65,7 +65,7 @@
 				<div class="inputTitle">
 					<input class="form-control" id="bookTitle" name="bookTitle" placeholder="상품명" type="text">
 				</div>
-			</div>
+			</div> -->
 	
 			<div class="bookExplains">
 				<label class="" for="bookExplains">상품간단설명</label>
@@ -82,7 +82,7 @@
 			</div>
 	
 			<div class="bookImage">
-				<label class="" for="bookImage">상품이미지1(900x1080)</label>
+				<label class="" for="bookImage">상품이미지</label>
 				<div class="inputBookImage">
 					<input class="form-control" id="bookImage" name="bookImage" placeholder="상품이미지1(900x1080)" type="file" value="" accept="image/*">
 				</div>
