@@ -1,7 +1,9 @@
 package com.team2.mbti.board.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.team2.mbti.board.model.BoardFileVO;
 import com.team2.mbti.board.model.BoardFormVO;
@@ -176,13 +179,32 @@ public class BoardController {
 			e.printStackTrace();
 		}
 		
-		int cnt = boardService.insertBoard(vo);
+		int cnt = boardService.adminInsertBoard(vo);
 		logger.info("게시판 글쓰기 처리 결과 cnt: {}", cnt);
 		
 		int fileCnt = boardService.insertFile(fileList, vo.getBoardNo());
 		logger.info("게시판 파일 업로드 처리 결과 fileCnt: {}", fileCnt);
 		
 		return "redirect:/admin/board/board?boardFormNo=" + vo.getBoardFormNo();
+	}
+	
+	@GetMapping("/boardWriteEdit")
+	public String boardWriteEdit_get(@RequestParam int boardNo, Model model) {
+		logger.info("게시글 수정 화면 파라미터 boardNo: {}", boardNo);
+		
+		List<BoardFormVO> list = boardService.selectAllBoard();		
+		Map<String, Object> map = boardService.selectBoardByNo(boardNo);
+		List<BoardFileVO> fileList = boardService.selectFileList(boardNo);
+		
+		logger.info("게시글 조회 결과 map: {}", map);
+		logger.info("게시판 종류 전체조회 결과: list: {}", list);
+		
+		model.addAttribute("title", "게시글 수정");
+		model.addAttribute("map", map);
+		model.addAttribute("boardList", list);
+		logger.info("게시글 파일 리스트 조회결과 fileList: {}", fileList);
+		
+		return "admin/board/boardWrite";
 	}
 	
 	@GetMapping("/boardDetail")
@@ -205,5 +227,19 @@ public class BoardController {
 		model.addAttribute("fileList", fileList);
 		
 		return "admin/board/boardDetail";
+	}
+	
+	@GetMapping("/fileDown")
+	public ModelAndView fileDown(@RequestParam String fileName, HttpServletRequest request) {
+		logger.info("파일 다운로드처리 파라미터 fileName: {}", fileName);
+		
+		Map<String, Object> map = new HashMap<>();
+		String upPath = fileUploadUtil.getUploadPath(request, ConstUtil.UPLOAD_FILE_FLAG);
+		File file = new File(upPath, fileName);
+		map.put("file", file);
+		
+		ModelAndView mav = new ModelAndView("fileDownload", map);
+		
+		return mav;
 	}
 }

@@ -39,7 +39,7 @@ right join board b
 on Z.board_no = b.board_no
 join board_form bf
 on b.board_form_no = bf.board_form_no
-join member m
+LEFT join member m
 on b.no = m.no
 left join admin a
 on b.admin_no = a.admin_no

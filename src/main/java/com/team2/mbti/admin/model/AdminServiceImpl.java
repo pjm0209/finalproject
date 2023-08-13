@@ -55,5 +55,9 @@ public class AdminServiceImpl implements AdminService {
 	public int getTotalRecordManager(SearchVO searchVo) {
 		return adminDao.getTotalRecordManager(searchVo);
 	}
-	
+
+	@Override
+	public int selectAdminNo(String adminId) {
+		return adminDao.selectAdminNo(adminId);
+	}	
 }
