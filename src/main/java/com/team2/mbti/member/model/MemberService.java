@@ -18,6 +18,8 @@ public interface MemberService {
 	MemberVO selectByNoMember(int no);
 	int selectCheckId(String userid);	
 	int deleteMember(int no);
+	int loginCheck(String userid, String pwd);
+	int selectMemberNo(String userid);
 
 	
 
