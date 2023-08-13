@@ -188,6 +188,25 @@ public class BoardController {
 		return "redirect:/admin/board/board?boardFormNo=" + vo.getBoardFormNo();
 	}
 	
+	@GetMapping("/boardWriteEdit")
+	public String boardWriteEdit_get(@RequestParam int boardNo, Model model) {
+		logger.info("게시글 수정 화면 파라미터 boardNo: {}", boardNo);
+		
+		List<BoardFormVO> list = boardService.selectAllBoard();		
+		Map<String, Object> map = boardService.selectBoardByNo(boardNo);
+		List<BoardFileVO> fileList = boardService.selectFileList(boardNo);
+		
+		logger.info("게시글 조회 결과 map: {}", map);
+		logger.info("게시판 종류 전체조회 결과: list: {}", list);
+		
+		model.addAttribute("title", "게시글 수정");
+		model.addAttribute("map", map);
+		model.addAttribute("boardList", list);
+		logger.info("게시글 파일 리스트 조회결과 fileList: {}", fileList);
+		
+		return "admin/board/boardWrite";
+	}
+	
 	@GetMapping("/boardDetail")
 	public String boardDetail_get(@RequestParam int boardNo, Model model) {
 		logger.info("게시글 상세보기 화면처리 파라미터 boardFormNo: {}", boardNo);
