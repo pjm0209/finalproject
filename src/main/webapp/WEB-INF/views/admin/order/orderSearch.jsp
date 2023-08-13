@@ -15,46 +15,55 @@
 			<div class="flex shadow-sm p-3 mb-5 bg-body rounded" style="margin: 10px 0px;background: white;">
 			<h2>주문 검색</h2>
 			<c:if test="${param.flag != 'BASKET'}">
-				<div class="box">
-					<label>주문번호</label>
-						<div class="flex_ca">	
-								<input class="form-control" placeholder="주문번호">
+				<div class="box  flex box_search">
+				 		<div>
+							<label>주문번호</label>
+							<div class="flex_ca">	
+									<input class="form-control" placeholder="주문번호">
+							</div>
 						</div>
-					<label>PG번호</label>
-						<div class="flex_ca">	
-								<input class="form-control" placeholder="PG번호">
+						<div>
+								<label>PG번호</label>
+								<div class="flex_ca">	
+										<input class="form-control" placeholder="PG번호">
+								</div>
 						</div>
 				</div>
 			</c:if>
-			<div class="form-group box">
+			<div class="form-group box box_search">
 				<c:if test="${param.flag != 'BASKET'}">
-					<label>결제타입</label>
-					<div>
-						<select class="form-control" id="s_odm_status" name="s_odm_status">
-													<option value="">선택</option>
-													<option value="card">카드</option>
-													<option value="cash">현금</option>
-						</select>
+					<div class="flex">
+						<label>결제타입</label>
+						<div>
+							<select class="form-control" id="s_odm_status" name="s_odm_status">
+														<option value="">선택</option>
+														<option value="card">카드</option>
+														<option value="cash">현금</option>
+							</select>
+						</div>
 					</div>
+					<div class="flex">
 					<label>주문상태</label>
-					<div>
-						<select class="form-control" id="s_odm_status" name="s_odm_status">
-													<option value="">선택</option>
-													<option value="B1">입금대기</option>
-													<option value="C1">결제완료</option>
-													<option value="D1">배송준비</option>
-													<option value="E1">배송중</option>
-													<option value="F1">배송완료</option>
-													<option value="G1">구매확정</option>
-													<option value="H1">취소신청</option>
-													<option value="H2">취소완료</option>
-													<option value="I1">반품신청</option>
-													<option value="I2">반품완료</option>
-													<option value="J1">교환신청</option>
-													<option value="J2">교환완료</option>
-													<option value="K1">환불신청</option>
-													<option value="K2">환불완료</option>
-						</select>
+						<div>
+							<select class="form-control" id="s_odm_status" name="s_odm_status">
+														<option value="">선택</option>
+														<option value="B1">입금대기</option>
+														<option value="C1">결제완료</option>
+														<option value="D1">배송준비</option>
+														<option value="E1">배송중</option>
+														<option value="F1">배송완료</option>
+														<option value="G1">구매확정</option>
+														<option value="H1">취소신청</option>
+														<option value="H2">취소완료</option>
+														<option value="I1">반품신청</option>
+														<option value="I2">반품완료</option>
+														<option value="J1">교환신청</option>
+														<option value="J2">교환완료</option>
+														<option value="K1">환불신청</option>
+														<option value="K2">환불완료</option>
+							</select>
+							
+						</div>
 					</div>
 				</c:if>											
 			</div>
