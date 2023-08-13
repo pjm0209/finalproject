@@ -12,6 +12,14 @@ section#mbti{
 	background-size: 100% 70%;
 	background-repeat: no-repeat;
 }
+#frm-mbti2{
+	float: left;
+	margin-left: 600px;
+}
+#frm-mbti1{
+	float: left;
+	margin-left: 20px;
+}
 .mbti-writer{
 	width: 130px;
 }

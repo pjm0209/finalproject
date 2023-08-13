@@ -3,15 +3,24 @@
 <%@ include file="../inc/top.jsp" %>
 <script type="text/javascript">
 	$(function(){
-		$('.MBTI_test0').find('.statement').addClass('active');
+		$('.MBTI_test1').first().find('.statement').addClass('active');
+		
+		$('.MBTI_test2').hide();
+		$('.MBTI_test3').hide();
+		$('.MBTI_test4').hide();
+		$('.MBTI_test5').hide();
+		$('.MBTI_test6').hide();
 		$('input[type=radio]').click(function(){
 			$('*').removeClass('active');
 			$(this).parent().parent().parent().parent().next().find('.statement').addClass('active');
 			scrollToPosition($(window).scrollTop() + 400);
 		});
+		
+		$('.test_btn_style').click(function(){
+			scrollToPosition($(window).scrollTop() + 670);
+		});
         
         function scrollToPosition(position) {
-            // 지정된 스크롤 위치로 부드러운 스크롤 이동
             $('html, body').animate({
 				scrollTop: position
 			}, 500);
@@ -30,12 +39,20 @@
 			<p>무료 정밀검사로 성격유형에 맞는 <br><span>학과, 직업, 취미, 운동 등의 장.단점</span>을 알아보세요 !</p>
             <p>현재 감정상태를 기준으로 설문에 응해 주세요!</p>
             <p>소요시간은 10분 내외 입니다.</p>
-            <button class="test_btn_style">MBTI 정밀검사 시작하기</button> 
+            <button class="test_btn_style">
+            	<c:if test="${param.questionTypeNo==1}">
+            		MBTI 정식검사 시작하기
+            	</c:if>
+            	<c:if test="${param.questionTypeNo==2}">
+            		MBTI 간이검사 시작하기
+            	</c:if>
+            </button> 
 		</div>
 	</div>
 	<!--text1 -->
 	<c:set var="idx" value="1"/>
-	<c:set var="idx2" value="0"/>
+	<c:set var="idx2" value="1"/>
+	<hr class="MBTI_test0">
     <c:forEach var="mbtiSurveyVo" items="${list}">
 	    <div class="MBTI_test${idx2} puls">
 	        <div class="statement">
@@ -57,7 +74,7 @@
 	                </div>
 	            </div>
 	        </div>
-	        <c:if test="${idx==1 or idx%10==0}">
+	        <c:if test="${idx%10==0}">
 	        	<c:set var="idx2" value="${idx2+1}"/>
 	        </c:if>
 	        <c:set var="idx" value="${idx+1}"/>
