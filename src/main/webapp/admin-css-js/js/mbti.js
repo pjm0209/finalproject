@@ -5,6 +5,10 @@
 			location.href=contextPath+"/admin/mbti/mbti";
 		});
 		
+		$('div[name=mbtiStatistics]').click(function(){
+			location.href=contextPath+"/admin/mbti/mbtiStatistics";
+		});
+		
 		$('#check-All').click(function () {
     		const isChecked = $(this).prop('checked');
     		$('.check').prop('checked', isChecked);

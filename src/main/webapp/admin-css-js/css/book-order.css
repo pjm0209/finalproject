@@ -1,9 +1,9 @@
 @charset "UTF-8";
 
-
 .board-body .flex>div {display: flex; margin-bottom:15px;}
 /*.board-body{float:none;}*/
 .board-body  .box>label  {margin-right:15px; width:200px; text-align: right;}
+
 .flex div label~div label {margin-right:15px;}
 .board-body .flex_ca {display: flex; justify-content: space-between; width:45%; }
 .board-body .flex_ca select {width:48%;}
@@ -22,9 +22,14 @@
     border: 0;
     font-size: 1vw;
     font-weight: bold;}
-.board-body  th.board-title {width:10%;}
+/*.board-body  th.board-title {width:10%;}*/
+.board-body .book-checkbox {
+	width: 20px;
+    height: 20px;	
+}
 
-/**/
+
+/* 새상품등록*/
 .bookContent>div{display: flex; padding-bottom:15px;}
 .bookContent>div label{width:240px; text-align: right; padding-right:15px;}
 .bookContent>.category .c1 {margin-right:15px;}
@@ -53,3 +58,34 @@
 	color:gray;
 	font-size: large;
 }
+.inputBookFlag>.radio-inline{width:auto;}
+.divBtn {justify-content: center;}
+.divBtn button:nth-child(1){margin-right:10px;}
+
+/**/
+.red{
+	color: darkred;
+}
+.green{
+	color: green;
+}
+
+.gray{
+	/*background : #f8f9fc;*/
+	background: dimgray;
+}
+div #board-title{
+/* margin-left: -40px;*/
+}
+
+/*상품 주문검색*/
+
+.box_search>div{width:40%;}
+.board-body  .box_search>div>label  {margin-right:15px; width:200px; text-align: right;}
+.board-body  .box_search .flex{display: flex; margin-bottom:0;}
+.board-body  .box_search .flex label~div{width:45%;}
+.divName { margin-right: 20px;}
+
+
+
+

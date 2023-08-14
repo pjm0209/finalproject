@@ -12,11 +12,12 @@ public interface BoardDAO {
 	List<Map<String, Object>> selectAll(SearchVO vo);
 	int getTotalRecord(SearchVO vo);
 
-	String selectBoardName(int boardFormNo);
+	BoardFormVO selectBoard(int boardFormNo);
 	
 	List<BoardFormVO> selectAllBoard();
 	
 	int insertBoardForm(BoardFormVO vo);
+	int adminInsertBoard(BoardVO vo);
 	int insertBoard(BoardVO vo);
 	
 	BoardFormVO selectBoardSet(int boardFormNo);

@@ -14,6 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+
 	<link href="<c:url value='/images/신나로아콘.png'/>" rel="shortcut icon" type="image/x-icon">
     <title>${title }</title>
 
@@ -116,7 +117,12 @@
                 <a class="nav-link" href="<c:url value='/admin/board/board?boardFormNo=1'/>">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>게시판</span></a>
-            </li>
+            </li>            
+            <li class="nav-item">
+                <a class="nav-link" href="<c:url value='/admin/manager/managerList'/>">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>관리자 관리</span></a>
+            </li>                       
             <li class="nav-item">
                 <a class="nav-link" href="<c:url value='/admin/member/memberList'/>">
                     <i class="fas fa-fw fa-cog"></i>
@@ -133,21 +139,34 @@
                     <span>교육관리</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<c:url value='/admin/book/bookList'/>">
+                <a class="nav-link" href="<c:url value='/admin/book/bookList?bookFlag=bookList'/>">
                     <i class="fas fa-gift"></i>
                     <span>판매 상품 관리</span></a>
             </li>
             <li class="nav-item">
+           		<div class="dropend">
+				  <a class="nav-link dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false" href="">
+				    <i class="fas fa-shopping-cart"></i>
+                       <span>주문 및 주문취소 관리</span>
+				  </a>
+				  <ul class="dropdown-menu shadow-sm p-3 mb-5 bg-body rounded">
+				    <li><a class="nav-link dropdown-item fw-bold" href="<c:url value='/admin/order/orderList?flag=order'/>"
+				    	style="color:black;"></i>주문 관리</a></li>
+				    <li><a class="nav-link dropdown-item fw-bold" href="<c:url value='/admin/order/orderCancleList?flag=orderCancle'/>"
+				    	style="color:black;">주문 취소 관리</a></li>
+				  </ul>
+				</div>
+			</li>
+            <%-- <li class="nav-item">
                 <a class="nav-link" href="<c:url value='/admin/order/orderList'/>">
                     <i class="fas fa-shopping-cart"></i>
                     <span>주문 관리</span></a>
             </li>
              <li class="nav-item">
-                <a class="nav-link" href="<c:url value='/admin/order/orderCancleList'/>">
+                <a class="nav-link" href="<c:url value='/admin/order/orderCancleList?flag=orderCancle'/>">
                     <i class="fas fa-window-close"></i>
                     <span>주문 취소 관리</span></a>
-            </li>
-
+            </li> --%>
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse-setting-Utilities"
@@ -399,7 +418,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">${sessionScope.adminId} 님	</span>
                                 <img class="img-profile rounded-circle"
                                     src="<c:url value='/admin-css-js/img/undraw_profile.svg'/>">
                             </a>
@@ -430,3 +449,4 @@
 
                 </nav>
                 <!-- End of Topbar -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>

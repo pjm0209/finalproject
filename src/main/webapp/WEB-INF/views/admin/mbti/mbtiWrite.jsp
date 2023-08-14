@@ -37,7 +37,7 @@ $(function(){
 </c:if>
 	<form name="frmMbtiWrite" method="post" action="<c:url value='/admin/mbti/mbtiWrite'/>">
 		<div style="height:650px;width: 750px;margin-left: 25px;margin-top: 30px;">
-			<h1>질문지 등록</h1><br>
+			<h1>질문지 ${str}</h1><br>
 			<h5 style="float: left;">문제 유형</h5>
 			<select class="form-control" name="questionTypeNo" id="questionTypeNo" style="width: 300px;float: right;">
 				<option value="0">선택</option>

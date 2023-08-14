@@ -6,7 +6,6 @@
 <!-- Begin Page Content -->
 <!-- Page Heading -->
 <link href="<c:url value='/admin-css-js/css/book-order.css'/>" rel="stylesheet" type="text/css">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
 
 
@@ -100,18 +99,6 @@
 									<th style="text-align: center;">배송비</th>
 									<td>
 										3,000원
-									</td>
-								</tr>
-								<tr>
-									<th style="text-align: center;">사용 적립금</th>
-									<td>
-										원
-									</td>
-								</tr>
-								<tr>
-									<th style="text-align: center;">지급(예정) 적립금</th>
-									<td>
-										원
 									</td>
 								</tr>
 								<tr>
@@ -231,15 +218,13 @@
 
 				<div class="form-group">
 					<div class=" text-right">
-						<button style="margin: 0px 5px;" type="button" class="btn btn-success" onclick="dataUp()"><i class="fas fa-save"></i> 저장</button>
-						<button style="margin: 0px 5px;" type="button" class="btn btn-primary" onclick="dataList()"><i class="fas fa-list-ul"></i> 리스트</button>
+						<button style="margin: 0px 5px;" type="button" class="btn btn-success" onclick=""><i class="fas fa-save"></i> 저장</button>
+						<button style="margin: 0px 5px;" type="button" class="btn btn-primary" onclick="history.back()"><i class="fas fa-list-ul"></i> 리스트</button>
 					<div class=" text-right">
 						<button type="button" class="btn btn-success btn-sm" onclick="odmStatusUp( 'C1' )">결제완료</button>
 						<button type="button" class="btn btn-danger btn-sm" onclick="odmCancel( 'H2' )">주문취소</button>
 					</div>
 					</div>
-					
-					
 				</div>
 				
 			</form>
@@ -250,6 +235,5 @@
 
 
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 <!-- End of Main Content -->
 <%@ include file="../inc/bottom.jsp"%>

@@ -3,6 +3,7 @@ package com.team2.mbti.member.model;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.team2.mbti.common.SearchVO;
 
@@ -43,9 +44,34 @@ public class MemberServiceImpl implements MemberService {
 		}else {
 			result = MemberService.NONE_EXIST_ID;			
 		}
+		return result;
+	}
+
+	@Override
+	public int deleteMember(int no) {
+		return memberDao.deleteMember(no);
+	}
+
+	@Override
+	public int loginCheck(String userid, String pwd) {
+		int result=0;
+		String dbPwd= memberDao.selectMemberPwd(userid);
+		
+		if(dbPwd!=null && !dbPwd.isEmpty()) {
+			if(dbPwd.equals(pwd)) {
+				result=MemberService.LOGIN_OK;
+			}else {
+				result=MemberService.PWD_DISAGREE;
+			}
+		}else {
+			result=MemberService.USERID_NONE;
+		}
 
 		return result;
 	}
 
-
+	@Override
+	public int selectMemberNo(String userid) {		 
+		return memberDao.selectMemberNo(userid);
+	}
 }

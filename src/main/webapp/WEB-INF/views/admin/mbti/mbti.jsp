@@ -19,8 +19,11 @@
 	<div class="group">
 		<div id="board-group-list" class="nav">
 			<div class="side-boardItem">
-				<div class="board-name" name="mbti" value="mbti">
+				<div class="board-name" name="mbti">
 					<span>MBTI 관리</span>
+				</div>
+				<div class="board-name" name="mbtiStatistics">
+					<span>MBTI 유형별 통계</span>
 				</div>
 			</div>
 		</div>
@@ -36,7 +39,7 @@
 	<div class="board">
 		<div class="board-head">
 			<div class="board-search-result">
-				<form name="frmSearch" method="post" action="<c:url value='/admin/member/memberList'/>">
+				<form name="frmSearch" method="post" action="<c:url value='/admin/mbti/mbti'/>">
 				<div class="input-group mb-3" id="board-search-div">
 					<select class="form-select form-select-lg" name="searchCondition" aria-label=".form-select-lg example" id="board-search-select">					  	
 					  	<option value="question_type_no" <c:if test="${param.searchCondition=='question_type_no'}"> selected="selected" </c:if> >문제 유형</option>
@@ -73,13 +76,15 @@
 								<c:when test="${questionType == '3'}">M</c:when>
 							</c:choose>
 						</td>
-						<td>
-							<c:if test="${fn:length(mbtiSurveyVo.question) > 50}">
-								${fn:substring(mbtiSurveyVo.question,0,50)}...
-							</c:if>
-							<c:if test="${fn:length(mbtiSurveyVo.question) <= 50}">
-								${mbtiSurveyVo.question}
-							</c:if>
+						<td> 
+							<span style="float:left;margin-left: 50px;">
+								<c:if test="${fn:length(mbtiSurveyVo.question) > 70}">
+									${fn:substring(mbtiSurveyVo.question,0,50)}...
+								</c:if>
+								<c:if test="${fn:length(mbtiSurveyVo.question) <= 70}">
+									${mbtiSurveyVo.question}
+								</c:if>
+							</span>
 						</td>
 					</tr>
 					<c:set var="idx" value="${idx+1}"/>
@@ -115,7 +120,6 @@
 		</form>
 	</div>
 </div>
-
 <!-- End of Main Content -->
 
 <%@ include file="../inc/bottom.jsp"%>

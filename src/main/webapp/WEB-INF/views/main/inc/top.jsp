@@ -79,6 +79,7 @@
           <li><a class="nav-link scrollto" href="#services">책</a></li>
           <li><a class="nav-link scrollto" href="#portfolio">MBTI 교육</a></li>
           <li><a class="nav-link scrollto" href="<c:url value='/main/mbti/'/>">MBTI 검사</a></li>
+          <li><a class="nav-link scrollto" href="<c:url value='/main/book/bookmain'/>">도서/자료 구매</a></li>
           <li class="dropdown"><a href="#"><span>커뮤니티</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="#">Drop Down 1</a></li>
@@ -98,7 +99,7 @@
           </li>
           <li><a class="nav-link scrollto" href="<c:url value='/main/myPage'/>">마이페이지</a></li>
           <li><a class="getstarted scrollto" href="#about">Get Started</a></li>
-          <li><a class="nav-link scrollto" href="<c:url value='/main/login'/>">로그인</a></li>
+          <li><a class="nav-link scrollto" href="<c:url value='/main/member/memberLogin'/>">로그인</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->

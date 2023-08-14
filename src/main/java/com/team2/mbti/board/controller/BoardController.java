@@ -1,7 +1,9 @@
 package com.team2.mbti.board.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.team2.mbti.board.model.BoardFileVO;
 import com.team2.mbti.board.model.BoardFormVO;
@@ -63,8 +66,8 @@ public class BoardController {
 
 		List<Map<String, Object>> list = null;
 		
-		String board = boardService.selectBoardName(boardFormNo);
-		logger.info("게시판 이름 검색결과 board: {}", board);
+		BoardFormVO boardFormVo = boardService.selectBoard(boardFormNo);
+		logger.info("게시판 이름 검색결과 board: {}", boardFormVo);
 		
 		List<BoardFormVO> boardList = boardService.selectAllBoard();
 		logger.info("게시판 종류 전체조회 결과: boardList: {}", boardList);
@@ -80,7 +83,7 @@ public class BoardController {
 		model.addAttribute("list", list);
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("pagingInfo", pagingInfo);
-		model.addAttribute("board", board);
+		model.addAttribute("boardFormVo", boardFormVo);
 		
 		return "admin/board/board";
 	}
@@ -152,12 +155,12 @@ public class BoardController {
 		List<BoardFormVO> list = boardService.selectAllBoard();
 		logger.info("게시판 종류 전체조회 결과: list: {}", list);
 		
-		String board = boardService.selectBoardName(boardFormNo);
-		logger.info("게시판 이름 검색결과 board: {}", board);
+		BoardFormVO boardFormVo = boardService.selectBoard(boardFormNo);
+		logger.info("게시판 검색결과 boardFormVo: {}", boardFormVo);
 		
 		model.addAttribute("boardList", list);			
 		model.addAttribute("title", "게시판 글쓰기");
-		model.addAttribute("board", board);
+		model.addAttribute("boardFormVo", boardFormVo);
 		
 		return "admin/board/boardWrite";
 	}
@@ -176,7 +179,7 @@ public class BoardController {
 			e.printStackTrace();
 		}
 		
-		int cnt = boardService.insertBoard(vo);
+		int cnt = boardService.adminInsertBoard(vo);
 		logger.info("게시판 글쓰기 처리 결과 cnt: {}", cnt);
 		
 		int fileCnt = boardService.insertFile(fileList, vo.getBoardNo());
@@ -185,19 +188,48 @@ public class BoardController {
 		return "redirect:/admin/board/board?boardFormNo=" + vo.getBoardFormNo();
 	}
 	
+	@GetMapping("/boardWriteEdit")
+	public String boardWriteEdit_get(@RequestParam int boardNo, Model model) {
+		logger.info("게시글 수정 화면 파라미터 boardNo: {}", boardNo);
+		
+		List<BoardFormVO> list = boardService.selectAllBoard();		
+		Map<String, Object> map = boardService.selectBoardByNo(boardNo);
+		List<BoardFileVO> fileList = boardService.selectFileList(boardNo);
+		
+		logger.info("게시글 조회 결과 map: {}", map);
+		logger.info("게시판 종류 전체조회 결과: list: {}", list);
+		logger.info("게시글 파일 리스트 조회결과 fileList: {}", fileList);
+		
+		model.addAttribute("title", "게시글 수정");
+		model.addAttribute("map", map);
+		model.addAttribute("boardList", list);
+		model.addAttribute("fileList", fileList);
+		
+		return "admin/board/boardWrite";
+	}
+	
 	@GetMapping("/boardDetail")
 	public String boardDetail_get(@RequestParam int boardNo, Model model) {
 		logger.info("게시글 상세보기 화면처리 파라미터 boardFormNo: {}", boardNo);
 		
 		Map<String, Object> map = boardService.selectBoardByNo(boardNo);
 		int cnt = boardService.addReadCount(boardNo);
-		List<CommentsVO> commentList = boardService.selectComment(boardNo);
-		List<BoardFileVO> fileList = boardService.selectFileList(boardNo);
+		
+		List<CommentsVO> commentList = null;
+		List<BoardFileVO> fileList = null;
 		
 		logger.info("게시글 조회 결과 map: {}", map);
 		logger.info("조회수 증가 결과 cnt: {}", cnt);
-		logger.info("게시글 댓글 조회 결과 commentList.size: {}", commentList);
-		logger.info("게시글 파일 리스트 조회결과 fileList: {}", fileList);
+		
+		if(map.get("COMMENT_FLAG").equals("Y")) {
+			commentList = boardService.selectComment(boardNo);
+			logger.info("게시글 댓글 조회 결과 commentList.size: {}", commentList);
+		}
+		
+		if(map.get("BOARD_FILE_ADD_FLAG").equals("Y")) {
+			fileList = boardService.selectFileList(boardNo);
+			logger.info("게시글 파일 리스트 조회결과 fileList: {}", fileList);
+		}				
 		
 		model.addAttribute("title", "게시글 상세보기");
 		model.addAttribute("map", map);
@@ -205,5 +237,19 @@ public class BoardController {
 		model.addAttribute("fileList", fileList);
 		
 		return "admin/board/boardDetail";
+	}
+	
+	@GetMapping("/fileDown")
+	public ModelAndView fileDown(@RequestParam String fileName, HttpServletRequest request) {
+		logger.info("파일 다운로드처리 파라미터 fileName: {}", fileName);
+		
+		Map<String, Object> map = new HashMap<>();
+		String upPath = fileUploadUtil.getUploadPath(request, ConstUtil.UPLOAD_FILE_FLAG);
+		File file = new File(upPath, fileName);
+		map.put("file", file);
+		
+		ModelAndView mav = new ModelAndView("fileDownload", map);
+		
+		return mav;
 	}
 }

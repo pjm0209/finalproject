@@ -9,12 +9,12 @@ public interface BoardService {
 	List<Map<String, Object>> selectAll(SearchVO vo);
 	int getTotalRecord(SearchVO vo);
 	
-	String selectBoardName(int boardFormNo);
+	BoardFormVO selectBoard(int boardFormNo);
 	
 	List<BoardFormVO> selectAllBoard();
 	
 	int insertBoardForm(BoardFormVO vo);
-	int insertBoard(BoardVO vo);
+	int adminInsertBoard(BoardVO vo);
 	
 	BoardFormVO selectBoardSet(int boardFormNo);
 	int updateBoardSet(BoardFormVO vo);

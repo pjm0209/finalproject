@@ -407,6 +407,7 @@ div.board {
 
 .board-content {
 	min-height: 400px;
+	padding-left: 22px;
 }
 
 .boardFile {

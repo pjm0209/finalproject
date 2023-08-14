@@ -6,15 +6,16 @@
 <!-- Begin Page Content -->
 <!-- Page Heading -->
 <link href="<c:url value='/admin-css-js/css/book-order.css'/>" rel="stylesheet" type="text/css">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
+<script src="../admin-css-js/js/book.js"></script>
 
 
 <div class="head-div">
 	<h2 class="text-gray-800">판매 상품 등록</h2>
 </div>
 
-<form name="frmBookRegister" method="post" action="/admin/book/bookRegister">
+<form name="frmBookRegister" method="post" enctype="multipart/form-data" action="/admin/book/bookRegister">
 <!--  -->
 	<div class="wrap shadow-sm p-3 mb-5 bg-body rounded" style="margin: 15px 15px;background: white;">
 		<div class="x_title">
@@ -47,7 +48,7 @@
 			</div>
 	
 			
-			<div class="bookCode red">
+			<!-- <div class="bookCode red">
 				<label class="" for="inputCode">상품코드</label>
 				<div class="flex">
 					<div class="">
@@ -64,7 +65,7 @@
 				<div class="inputTitle">
 					<input class="form-control" id="bookTitle" name="bookTitle" placeholder="상품명" type="text">
 				</div>
-			</div>
+			</div> -->
 	
 			<div class="bookExplains">
 				<label class="" for="bookExplains">상품간단설명</label>
@@ -81,7 +82,7 @@
 			</div>
 	
 			<div class="bookImage">
-				<label class="" for="bookImage">상품이미지1(900x1080)</label>
+				<label class="" for="bookImage">상품이미지</label>
 				<div class="inputBookImage">
 					<input class="form-control" id="bookImage" name="bookImage" placeholder="상품이미지1(900x1080)" type="file" value="" accept="image/*">
 				</div>
@@ -117,9 +118,9 @@
 			</div>
 	
 			<div class="bookRegate">
-				<label class="" for="bookRegate">제조일</label>
+				<label class="" for="bookRegate">출간일</label>
 				<div class="inputBookRegdate">
-					<input class="form-control" id="bookRegate" name="bookRegate" placeholder="제조일" type="date" value="">
+					<input class="form-control" id="bookRegate" name="bookRegate" placeholder="출간일" type="date" value="">
 				</div>
 			</div>
 	
@@ -132,7 +133,9 @@
 					<script>
 						$(function () {
 							CKEDITOR.replace('contents', {
-								filebrowserUploadUrl : '${pageContext.request.contextPath}/adm/fileupload.do'
+								uploadUrl: "/mbti/bookImageUpload",	//드래그 앤 드롭	
+								filebrowserUploadUrl : '/mbti/bookImageUpload',
+								height : 500
 							});
 						});
 					</script>
@@ -164,6 +167,5 @@
 
 
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 <!-- End of Main Content -->
 <%@ include file="../inc/bottom.jsp"%>

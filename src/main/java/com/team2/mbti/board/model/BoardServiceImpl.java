@@ -25,8 +25,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
-	public String selectBoardName(int boardFormNo) {
-		return boardDao.selectBoardName(boardFormNo);
+	public BoardFormVO selectBoard(int boardFormNo) {
+		return boardDao.selectBoard(boardFormNo);
 	}
 	
 	@Override
@@ -40,8 +40,17 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int insertBoard(BoardVO vo) {
-		return boardDao.insertBoard(vo);
+	public int adminInsertBoard(BoardVO vo) {
+		int cnt = 0;
+		
+		if(vo.getAdminNo() != 0) {
+			cnt = boardDao.adminInsertBoard(vo);
+		} else {
+			vo.setNo((Integer) null);
+			cnt = boardDao.insertBoard(vo);
+		}
+		
+		return cnt;
 	}
 
 	@Override

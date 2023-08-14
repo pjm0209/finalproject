@@ -13,6 +13,9 @@ public interface MemberDAO {
 	int getTotalRecordMember(SearchVO searchVo);
 	MemberVO selectByNoMember(int no);
 	int selectCheckId(String userid);
-
+	String selectMemberPwd(String userid);
+	int selectMemberNo(String userid);
+	int deleteMember(int no);
+	
 
 }

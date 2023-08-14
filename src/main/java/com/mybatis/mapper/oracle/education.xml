@@ -3,7 +3,14 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.team2.mbti.education.model.EducationDAO">
-
+	<sql id="searchEducation">
+		<where>
+			<if test="searchKeyword!=null and searchKeyword!=''">
+	      		${searchCondition} like '%' || #{searchKeyword} || '%'
+	      	</if>
+      	</where>
+	</sql>
+	
 	<!-- location -->
 	<insert id="insertLocation" parameterType="educationVo">
 		<selectKey keyProperty="epNo" order="BEFORE" resultType="int">
@@ -13,21 +20,13 @@
 		values(#{epNo},#{epName},#{epZipcode},#{epAddress},#{epLatitude},#{epLongitude},#{epTel})
 	</insert>
 	
-	<sql id="searchLocation">
-		<where>
-			<if test="searchKeyword!=null and searchKeyword!=''">
-	        	${searchCondition} like '%' || #{searchKeyword} || '%'
-	        </if>
-        </where>
-	</sql>
-	
 	<select id="selectAllLocation" parameterType="searchVo" resultType="educationVo">
 		select * from
 		(
 		    select rownum RNUM,a.* from
 		    (
 		        select * from education_place 
-		        <include refid="searchLocation"></include>
+		        <include refid="searchEducation"></include>
 		        order by ep_no
 		    )a
 		)
@@ -37,7 +36,7 @@
 	
 	<select id="getTotalRecordLocation" parameterType="searchVo" resultType="int">
 		select count(*) from education_place
-		<include refid="searchLocation"></include> 
+		<include refid="searchEducation"></include> 
 	</select>
 	
 	
@@ -50,31 +49,28 @@
 		values(#{eduNo},#{eduName},#{eduCom},#{eduTeacher},#{eduPrice},#{epNo})
 	</insert>
 	
-	<sql id="searchEducation">
-		<where>
-			<if test="searchKeyword!=null and searchKeyword!=''">
-	        	${searchCondition} like '%' || #{searchKeyword} || '%'
-	        </if>
-        </where>
-	</sql>
-	
 	<select id="selectAllEducation" parameterType="searchVo" resultType="educationVo">
 		select * from
 		(
-		    select rownum RNUM,a.* from
+		    select rownum as RNUM, a.* from
 		    (
 		        select * from mbti_education 
 		        <include refid="searchEducation"></include>
-		        order by edu_no
+		        order by edu_no desc
 		    )a
 		)
 		<![CDATA[
-		where RNUM > #{firstRecordIndex} and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}]]>
+		where RNUM > #{firstRecordIndex} 
+		and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}]]>
 	</select>
 	
 	<select id="getTotalRecordEducation" parameterType="searchVo" resultType="int">
 		select count(*) from mbti_education
 		<include refid="searchEducation"></include> 
+	</select>
+	
+	<select id="selectByEduNo" parameterType="int" resultType="educationVo">
+		select * from education where eduNo=#{eduNo}
 	</select>
 	
 	
@@ -87,21 +83,13 @@
 		values(#{eduTeaNo},#{eduTeaName},#{eduTeaId},#{eduTeaPwd},#{eduTeaEmail},#{epTeaTel})
 	</insert>
 	
-	<sql id="searchTeacher">
-		<where>
-			<if test="searchKeyword!=null and searchKeyword!=''">
-	        	${searchCondition} like '%' || #{searchKeyword} || '%'
-	        </if>
-        </where>
-	</sql>
-	
 	<select id="selectAllTeacher" parameterType="searchVo" resultType="educationVo">
 		select * from
 		(
 		    select rownum RNUM,a.* from
 		    (
 		        select * from education_teacher 
-		        <include refid="searchTeacher"></include>
+		        <include refid="searchEducation"></include>
 		        order by edu_tea_no
 		    )a
 		)
@@ -111,6 +99,6 @@
 	
 	<select id="getTotalRecordTeacher" parameterType="searchVo" resultType="int">
 		select count(*) from education_teacher
-		<include refid="searchTeacher"></include> 
+		<include refid="searchEducation"></include> 
 	</select>
 </mapper>

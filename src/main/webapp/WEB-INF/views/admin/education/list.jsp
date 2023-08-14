@@ -80,6 +80,11 @@ button#education-delete-button {
 	</div>
 </div>
 <div class="board-body">
+	<form name="paginForm" method="post" action="<c:url value='/admin/education/list'/>">
+		<input type="hidden" name="searchCondition" value="${param.searchCondition }">
+		<input type="hidden" name="searchKeyword" value="${param.searchKeyword }">
+		<input type="hidden" name="currentPage">
+	</form>
 	<div id="board-title">
 		<h5>교육 리스트</h5>
 		<button class="education-button" id="education-edit-button">수정</button>
@@ -88,7 +93,7 @@ button#education-delete-button {
 	<div class="board">
 		<div class="board-head">
 			<div class="board-search-result">
-				<form name="frmSearch" method="post" action="<c:url value='/admin/education/list'/>">
+				<form name="searchForm" method="post" action="<c:url value='/admin/education/list'/>">
 				<div class="input-group mb-3" id="board-search-div">
 					<select class="form-select form-select-lg" aria-label=".form-select-lg example" name="searchcondition" id="board-search-select">					  	
 					  	<option value="edu_name" <c:if test="${param.searchCondition=='edu_name'}"> selected="selected" </c:if>>교육 이름</option>
