@@ -66,7 +66,7 @@
 							</dt>
 							<dd>
 								<div class="file_list">
-					                <c:if test="${empty fileList or empty param.boardNo }">
+					                <c:if test="${!empty param.boardFormNo}">
 					                	<div>
 						                    <div class="file_input">
 						                        <input type="text" readonly />
