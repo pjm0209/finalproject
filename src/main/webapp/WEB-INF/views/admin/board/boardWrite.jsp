@@ -66,27 +66,35 @@
 							</dt>
 							<dd>
 								<div class="file_list">
-					                <c:if test="${empty fileList }">
-					                    <div class="file_input">
-					                        <input type="text" readonly />
-					                        <label> 첨부파일
-					                            <input type="file" name="files" onchange="selectFile(this);" />
-					                        </label>
-					                    </div>
-					                    <button type="button" onclick="removeFile(this);" class="btns del_btn"><span>삭제</span></button>
-					                    <button type="button" onclick="addFile();" class="btns fn_add_btn"><span>파일 추가</span></button>
-						            </c:if>					            
-					                <c:if test="${!empty fileList }">
-					                	<c:forEach var="fileVo" items="${fileList }">
+					                <c:if test="${empty fileList or empty param.boardNo }">
+					                	<div>
 						                    <div class="file_input">
-						                        <input type="text" value="${fileVo.originalFileName }" readonly />
+						                        <input type="text" readonly />
 						                        <label> 첨부파일
 						                            <input type="file" name="files" onchange="selectFile(this);" />
 						                        </label>
 						                    </div>
 						                    <button type="button" onclick="removeFile(this);" class="btns del_btn"><span>삭제</span></button>
+						                    <button type="button" onclick="addFile();" class="btns fn_add_btn"><span>파일 추가</span></button>
+					                	</div>
+						            </c:if>					            
+					                <c:if test="${!empty fileList }">
+					                <c:set var="i" value="0"/>
+					                	<c:forEach var="fileVo" items="${fileList }">
+					                		<div>
+							                    <div class="file_input">
+							                        <input type="text" value="${fileVo.originalFileName }" readonly />
+							                        <label> 첨부파일
+							                            <input type="file" name="files" onchange="selectFile(this);" />
+							                        </label>
+							                    </div>
+							                    <button type="button" onclick="removeFile(this);" class="btns del_btn"><span>삭제</span></button>
+							                    <c:if test="${i == 0 }">
+									                <button type="button" onclick="addFile();" class="btns fn_add_btn"><span>파일 추가</span></button>
+							                    </c:if>
+							                    <c:set var="i" value="${i + 1 }"/>
+					                		</div>
 					                	</c:forEach>
-						                <button type="button" onclick="addFile();" class="btns fn_add_btn"><span>파일 추가</span></button>
 						            </c:if>					            
 				                </div>
 							</dd>

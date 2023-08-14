@@ -198,11 +198,12 @@ public class BoardController {
 		
 		logger.info("게시글 조회 결과 map: {}", map);
 		logger.info("게시판 종류 전체조회 결과: list: {}", list);
+		logger.info("게시글 파일 리스트 조회결과 fileList: {}", fileList);
 		
 		model.addAttribute("title", "게시글 수정");
 		model.addAttribute("map", map);
 		model.addAttribute("boardList", list);
-		logger.info("게시글 파일 리스트 조회결과 fileList: {}", fileList);
+		model.addAttribute("fileList", fileList);
 		
 		return "admin/board/boardWrite";
 	}
