@@ -24,7 +24,7 @@
 					<div class="board-side-boardItem">
 						<div class="board-name">
 							<input type="hidden" value="${vo.boardFormNo }">
-							<a href="<c:url value='/admin/board/board?boardFormNo=${vo.boardFormNo }'/>">
+							<a href="<c:url value='/board/board?boardFormNo=${vo.boardFormNo }'/>">
 								<span>${vo.boardFormName }</span>
 							</a>
 						</div>

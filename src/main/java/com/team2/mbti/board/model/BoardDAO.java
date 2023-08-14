@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.team2.mbti.comment.model.CommentVO;
 import com.team2.mbti.common.SearchVO;
 
 @Mapper
@@ -17,7 +18,6 @@ public interface BoardDAO {
 	List<BoardFormVO> selectAllBoard();
 	
 	int insertBoardForm(BoardFormVO vo);
-	int adminInsertBoard(BoardVO vo);
 	int insertBoard(BoardVO vo);
 	
 	BoardFormVO selectBoardSet(int boardFormNo);
@@ -26,9 +26,13 @@ public interface BoardDAO {
 	Map<String, Object> selectBoardByNo(int boardNo);
 	int addReadCount(int boardNo);
 	
-	List<CommentsVO> selectComment(int boardNo);
+	List<CommentVO> selectComment(int boardNo);
 	
 	int insertFile(BoardFileVO fileVo);
 	
 	List<BoardFileVO> selectFileList(int boardNo);
+	
+	int deleteFile(int fileNo);
+	
+	int updateBoard(BoardVO vo);
 }
