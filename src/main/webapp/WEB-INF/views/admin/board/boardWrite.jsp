@@ -20,7 +20,7 @@
 	<form name="boardWriteForm" method="post" enctype="multipart/form-data" action="<c:url value='${url }'/>">
 		<div id="board-title">
 		<input type="hidden" name="adminNo" value="${sessionScope.adminNo }">		
-			<h5>${board }</h5>
+			<h5>${boardFormVo.boardFormName }</h5>
 			<div class="board-head-button">
 				<input type="button" class="bg-gradient-secondary" onclick="location.href='<c:url value="/admin/board/board?boardFormNo=1"/>'" value="취소">
 				<input type="submit" class="bg-gradient-primary" id="save-boardCreate" <c:if test="${empty param.boardNo }"> value="저장" </c:if> <c:if test="${!empty param.boardNo }"> value="수정"</c:if>>
@@ -59,14 +59,15 @@
 								<textarea id="p_content" name="boardBody">${map['BOARD_BODY'] }</textarea>								
 							</div>
 						</dd>
-						<c:if test="${map['BOARD_FILE_ADD_FLAG'] == 'Y' }">
+						<c:if test="${map['BOARD_FILE_ADD_FLAG'] == 'Y' or boardFormVo.boardFileAddFlag == 'Y' }">
 							<dt>
 								<span>파일첨부</span>
 								<span class="i_tooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="하나당 20MB이하의 첨부 파일만 업로드 가능합니다."></span>
 							</dt>
 							<dd>
 								<div class="file_list">
-					                <c:if test="${empty fileList or empty param.boardNo }">
+									
+					                <c:if test="${empty fileList}">
 					                	<div>
 						                    <div class="file_input">
 						                        <input type="text" readonly />
