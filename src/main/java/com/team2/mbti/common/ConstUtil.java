@@ -4,6 +4,7 @@ public interface ConstUtil {
 	//게시판 페이징 처리 관련 상수
 	int RECORD_COUNT=5;
 	int MBTI_RECORD_COUNT=10;
+	int BOARD_RECORD_COUNT = 10;
 	public static final int BLOCK_SIZE=10;	//둘다 가능
 	
 	//파일 업로드 처리 관련 상수

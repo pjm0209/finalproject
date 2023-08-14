@@ -55,6 +55,31 @@ $(function(){
 		$('.file-list').slideToggle(500);
 	});
 	
+	/*파일수정 첨부파일 삭제*/
+	$('.btns.del_btn.edit').click(function() {
+			var fileName = $(this).prev('div.file_input').find('.fileName').val();
+			var fileNo = $(this).prev('div.file_input').find('.fileNo').val();
+			
+			if($(this).prev().find('.fileIdx').val() == '0') {
+				$(this).prev().find('.fileOriginName').val('');
+			} else {
+				$(this).parent('div').remove();				
+			}
+			
+			$.ajax({
+				url:"/mbti/admin/board/fileDel",
+				data:{fileName: fileName,
+					  fileNo: fileNo},
+				type:"GET",				
+				success:function(result) {
+					console.log("result: " + result);					
+				},
+				error:function(xhr, status, error) {
+					alert(status + ": " + error);
+				}
+			});
+		});
+	
 	const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
 	const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
 });
