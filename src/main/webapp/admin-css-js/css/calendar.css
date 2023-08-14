@@ -33,3 +33,12 @@ calendar {
 .align-left{
 	text-align:left;
 }
+
+.list-group {display: flex; max-width: 1100px; margin:0 auto;}
+.list-group>li{width:33.33%; padding: 25px 20px;}
+.list-group>li dl{    text-align: center; display: flex; justify-content: space-between; align-items: center; height: 100%; font-size: 1vw;
+}
+.list-group>li dl dd{margin-bottom:0;}
+
+
+

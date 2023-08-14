@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 		<form name="serach" method="post" action="<c:url value='/admin/book/bookList'/>">
 		<div class="flex shadow-sm p-3 mb-5 bg-body rounded" style="margin: 10px 0px;background: white;">
 			<h2>상품 검색</h2>
@@ -11,6 +10,7 @@
 						
 							<select class="form-select" aria-label="Default select example">
 								<option value="">선택</option>
+								<option value="">책</option>
 							</select>
 						
 					

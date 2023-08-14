@@ -30,10 +30,8 @@
 <div class="board-body">
 	<div id="board-title">
 		<h5>매출 현황</h5>
-		<input type="button" class="bg-gradient-secondary" id="bt1" >
-		<input type="button" class="bg-gradient-secondary" id="bt2" >
 	</div>
-	<div class="shadow-sm p-3 mb-5 bg-body rounded" style="margin: 15px 0px;margin-right: 15px;">
+	<div class="shadow-sm p-3 mb-5 bg-body rounded" style="margin: 15px 0px;margin-right: 15px;background: white">
 		<div>
 			<ul class="list-group list-group-horizontal">
 	            <li class="list-group-item">

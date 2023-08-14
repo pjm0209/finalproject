@@ -102,18 +102,6 @@
 									</td>
 								</tr>
 								<tr>
-									<th style="text-align: center;">사용 적립금</th>
-									<td>
-										원
-									</td>
-								</tr>
-								<tr>
-									<th style="text-align: center;">지급(예정) 적립금</th>
-									<td>
-										원
-									</td>
-								</tr>
-								<tr>
 									<th style="text-align: center;">결제금액</th>
 									<td>
 										33,000원
