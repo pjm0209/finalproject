@@ -117,7 +117,12 @@
                 <a class="nav-link" href="<c:url value='/admin/board/board?boardFormNo=1'/>">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>게시판</span></a>
-            </li>
+            </li>            
+            <li class="nav-item">
+                <a class="nav-link" href="<c:url value='/admin/manager/managerList'/>">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>관리자 관리</span></a>
+            </li>                       
             <li class="nav-item">
                 <a class="nav-link" href="<c:url value='/admin/member/memberList'/>">
                     <i class="fas fa-fw fa-cog"></i>
