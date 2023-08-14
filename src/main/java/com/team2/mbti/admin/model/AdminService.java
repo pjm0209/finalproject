@@ -10,4 +10,5 @@ public interface AdminService {
 	List<AdminVO> selectAllManager(SearchVO vo);
 	int getTotalRecordManager(SearchVO searchVo);
 	int selectAdminNo(String adminId);
+	int insertManager(AdminVO vo); //관리자 추가
 }

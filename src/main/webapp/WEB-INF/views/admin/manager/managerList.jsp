@@ -1,11 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
+<title>관리자 리스트 페이지</title>
+<style>
+button#add-newManager-button {
+	color: white;
+	padding: 4px 25px;
+	border-radius: 5px;
+	border: none;
+	float: right;
+}
+</style>
+
 <!-- Begin Page Content -->
 <!-- Page Heading -->
 <script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>
 <div class="head-div">
 	<h2 class="text-gray-800">관리자</h2>
+	<button type="button" class="bg-gradient-primary"
+		id="add-newManager-button" onclick="location.href='<c:url value="/admin/manager/managerAdditional"/>'">관리자 추가</button>	
 </div>
 <div class="side-body">
 	<div class="side-div-title">
@@ -28,8 +41,7 @@
 </div>
 <div class="board-body">
 	<div id="board-title">
-		<h5>회원 리스트</h5>
-			<button class="bg-gradient-secondary" id="board-write-button">관리자 추가</button>
+		<h5>관리자 리스트</h5>
 	</div>
 	<div class="member">
 		<div class="member-head">

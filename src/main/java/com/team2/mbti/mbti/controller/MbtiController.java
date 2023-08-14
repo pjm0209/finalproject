@@ -135,5 +135,12 @@ public class MbtiController {
 		
 		return "common/message";
 	}
+	
+	@RequestMapping("/mbtiStatistics")
+	public String mbtiStatistics() {
+		logger.info("mbti 유형별 통계 페이지");
+		
+		return "admin/mbti/mbtiStatistics";
+	}
 
 }

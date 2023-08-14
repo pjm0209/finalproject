@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.team2.mbti.board.model.BoardVO;
 import com.team2.mbti.common.SearchVO;
 
 @Mapper
@@ -13,4 +14,5 @@ public interface AdminDAO {
 	List<AdminVO> selectAllManager(SearchVO vo);
 	int getTotalRecordManager(SearchVO searchVo);
 	int selectAdminNo(String adminId);
+	int insertManager(AdminVO vo); //관리자 추가
 }

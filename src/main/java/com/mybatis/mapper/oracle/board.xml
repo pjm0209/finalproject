@@ -35,8 +35,8 @@
 		<include refid="searchWhere"></include>
 	</select>
 	
-	<select id="selectBoardName" parameterType="int" resultType="String">
-		select board_form_name from board_form
+	<select id="selectBoard" parameterType="int" resultType="boardFormVo">
+		select * from board_form
 		where board_form_no = #{boardFormNo}
 	</select>
 	

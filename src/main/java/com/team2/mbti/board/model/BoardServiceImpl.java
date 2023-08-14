@@ -25,8 +25,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
-	public String selectBoardName(int boardFormNo) {
-		return boardDao.selectBoardName(boardFormNo);
+	public BoardFormVO selectBoard(int boardFormNo) {
+		return boardDao.selectBoard(boardFormNo);
 	}
 	
 	@Override
