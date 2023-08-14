@@ -87,9 +87,32 @@
 						<c:forEach var="map" items="${list }">
 							<tr>
 								<th scope="row"><input type="checkbox" class="board-checkbox" name="boardItems[${idx }].boardNo" value="${map['BOARD_NO'] }"></th>
-								<td class="board-title"><a href="<c:url value='/admin/board/boardDetail?boardNo=${map["BOARD_NO"] }'/>">${map['BOARD_TITLE']}</a></td>
-								<td class="board-regdate">${map['NAME'] }</td>
-								<td class="board-writer"><fmt:formatDate value="${map['BOARD_REGDATE'] }" pattern="yyyy-MM-dd"/> </td>
+								<td class="board-title">
+									<c:if test="${map['BOARD_STEP'] > 0 }">
+										<c:forEach var="i" begin="0" end="${map['BOARD_STEP'] }">
+											&nbsp;
+										</c:forEach>
+										<i class="bi bi-arrow-return-right"></i>
+									</c:if>
+									<c:if test="${map['BOARD_DEL_FLAG'] != 'Y' }">
+										<c:if test="${map['FILECOUNT'] != 0 and map['BOARD_FILE_ADD_FLAG'] == 'Y'}">
+											<img alt="파일이미지" src="<c:url value='/images/file.gif'/>">
+										</c:if>
+										<a href="<c:url value='/admin/board/boardDetail?boardNo=${map["BOARD_NO"] }'/>"> ${map['BOARD_TITLE']}</a>	
+										<c:if test="${map['COMMENTCOUNT'] != 0 and map['COMMENT_FLAG'] == 'Y'}">
+											<span>[${map['COMMENTCOUNT'] }]</span>
+										</c:if>																
+									</c:if>
+								</td>
+								<td class="board-writer">
+									<c:if test="${!empty map['NAME'] }">
+										${map['NAME'] }
+									</c:if>
+									<c:if test="${empty map['NAME'] }">
+										${map['ADMIN_ID'] }
+									</c:if>
+								</td>
+								<td class="board-regdate"><fmt:formatDate value="${map['BOARD_REGDATE'] }" pattern="yyyy-MM-dd"/> </td>
 								<td class="board-readcount">${map['BOARD_READCOUNT'] }</td>
 							</tr>
 							<c:set var="idx" value="${idx + 1 }"/>

@@ -66,3 +66,11 @@
 .green{
 	color: green;
 }
+
+.gray{
+	/*background : #f8f9fc;*/
+	background: dimgray;
+}
+div #board-title{
+ margin-left: -40px;
+}

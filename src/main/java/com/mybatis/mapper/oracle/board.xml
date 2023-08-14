@@ -54,6 +54,15 @@
 		values(#{boardFormNo}, #{boardFormName}, #{boardFormIntro}, #{boardFileAddFlag}, #{commentFlag}, #{boardFlag}, #{firstAdminId})
 	</insert>
 	
+	<insert id="adminInsertBoard" parameterType="boardVo">
+		<selectKey keyProperty="boardNo" order="BEFORE" resultType="int">
+			select board_seq.nextval from dual
+		</selectKey>
+
+		insert into board(board_no, board_form_no, board_title, board_body, board_group_no, admin_no)
+		values(#{boardNo}, #{boardFormNo}, #{boardTitle}, #{boardBody}, #{boardNo}, #{adminNo})
+	</insert>
+	
 	<insert id="insertBoard" parameterType="boardVo">
 		<selectKey keyProperty="boardNo" order="BEFORE" resultType="int">
 			select board_seq.nextval from dual

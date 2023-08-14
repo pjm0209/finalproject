@@ -1,4 +1,4 @@
-package com.team2.mbti.main.mbti;
+package com.team2.mbti.main.mbti.controller;
 
 import java.util.List;
 
