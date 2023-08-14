@@ -31,7 +31,7 @@
 </div>
 <div class="board-body">
 	<div id="board-title">
-		<h5>MBTI 관리</h5>
+		<h5>MBTI 유형별 통계</h5>
 		<button class="mbti-button" id="mbti-write-button">질문지 등록</button>
 		<button class="mbti-button" id="mbti-edit-button">질문지 수정</button>
 		<button class="mbti-button" id="mbti-delete-button">질문지 삭제</button>
@@ -39,7 +39,7 @@
 	<div class="board">
 		<div class="board-head">
 			<div class="board-search-result">
-				<form name="frmSearch" method="post" action="<c:url value='/admin/mbti/mbti'/>">
+				<form name="frmSearch" method="post" action="<c:url value='/admin/member/memberList'/>">
 				<div class="input-group mb-3" id="board-search-div">
 					<select class="form-select form-select-lg" name="searchCondition" aria-label=".form-select-lg example" id="board-search-select">					  	
 					  	<option value="question_type_no" <c:if test="${param.searchCondition=='question_type_no'}"> selected="selected" </c:if> >문제 유형</option>
