@@ -44,7 +44,7 @@
 		<input type="hidden" name="currentPage">
 	</form>
 	<div id="board-title">
-		<h5>${board }</h5>
+		<h5>${boardFormVo.boardFormName }</h5>
 		<button class="bg-gradient-secondary" id="board-write-button" onclick="location.href='boardWrite?boardFormNo=${param.boardFormNo}'">글쓰기</button>
 	</div>
 	<div class="board">

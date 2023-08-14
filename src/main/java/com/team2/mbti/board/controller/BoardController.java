@@ -66,8 +66,8 @@ public class BoardController {
 
 		List<Map<String, Object>> list = null;
 		
-		String board = boardService.selectBoardName(boardFormNo);
-		logger.info("게시판 이름 검색결과 board: {}", board);
+		BoardFormVO boardFormVo = boardService.selectBoard(boardFormNo);
+		logger.info("게시판 이름 검색결과 board: {}", boardFormVo);
 		
 		List<BoardFormVO> boardList = boardService.selectAllBoard();
 		logger.info("게시판 종류 전체조회 결과: boardList: {}", boardList);
@@ -83,7 +83,7 @@ public class BoardController {
 		model.addAttribute("list", list);
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("pagingInfo", pagingInfo);
-		model.addAttribute("board", board);
+		model.addAttribute("boardFormVo", boardFormVo);
 		
 		return "admin/board/board";
 	}
@@ -155,12 +155,12 @@ public class BoardController {
 		List<BoardFormVO> list = boardService.selectAllBoard();
 		logger.info("게시판 종류 전체조회 결과: list: {}", list);
 		
-		String board = boardService.selectBoardName(boardFormNo);
-		logger.info("게시판 이름 검색결과 board: {}", board);
+		BoardFormVO boardFormVo = boardService.selectBoard(boardFormNo);
+		logger.info("게시판 검색결과 boardFormVo: {}", boardFormVo);
 		
 		model.addAttribute("boardList", list);			
 		model.addAttribute("title", "게시판 글쓰기");
-		model.addAttribute("board", board);
+		model.addAttribute("boardFormVo", boardFormVo);
 		
 		return "admin/board/boardWrite";
 	}
