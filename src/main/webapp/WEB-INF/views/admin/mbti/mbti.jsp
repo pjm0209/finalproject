@@ -50,7 +50,7 @@
 			</div>
 		</div>
 		<form name="frmDelete" method="post">
-		<table class="table">
+		<table class="table" id="mbtitb">
 			<thead>
 				<tr class="board-table-colum">
 					<th scope="col"><input type="checkbox" id="check-All" class="board-checkbox"></th>
