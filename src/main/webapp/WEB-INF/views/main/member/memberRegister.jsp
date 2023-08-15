@@ -4,7 +4,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <title>회원가입페이지 연습</title>
 <style>
 *{
@@ -108,6 +107,7 @@ button{
 }
 
 </style>
+
 
 <script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>
 <script type="text/javascript">
@@ -236,13 +236,11 @@ function validate_hp(ph) {
 		});	
 		
 	    $('#btnAddress').click(function() {
-	        var addressSearchURL = '<c:url value="/main/member/zipcodeTest"/>';
+	        var addressSearchURL = '<c:url value="/main/member/findZipcode"/>';
 	        window.open(addressSearchURL, 'AddressSearch', 'width=550,height=600');
 	    });
 	});
 </script>
-
-
 
 <link href="signup.css" rel="stylesheet" />
 <script src="signup.js"></script>
@@ -301,9 +299,10 @@ function validate_hp(ph) {
 					
 		<span>주소 *</span>				
 		<div class="address" id="address">
-			<input type="text" id="address" placeholder="주소를 입력해주세요">
-			<button id="btnAddress" value="주소 검색">주소 검색</button>		
-			<input type="text" id="addressDetail" placeholder="상세주소">	
+			<input type="text" id="PostalCode" placeholder="우편번호">
+			<input type="text" id="address" placeholder="주소를 검색해주세요">
+			<button id="btnAddress" value="우편번호 찾기">우편번호 찾기</button>	
+			<input type="text" id="addressDetail" placeholder="상세주소를 입력해주세요">	
 		</div>		
 		
         <div class="signUp"><br>
