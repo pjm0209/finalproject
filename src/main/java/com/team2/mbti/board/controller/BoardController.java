@@ -238,17 +238,11 @@ public class BoardController {
 		
 		Map<String, Object> map = boardService.selectBoardByNo(boardNo);
 		int cnt = boardService.addReadCount(boardNo);
-		
-		List<CommentVO> commentList = null;
+
 		List<BoardFileVO> fileList = null;
 		
 		logger.info("게시글 조회 결과 map: {}", map);
 		logger.info("조회수 증가 결과 cnt: {}", cnt);
-		
-		if(map.get("COMMENT_FLAG").equals("Y")) {
-			commentList = boardService.selectComment(boardNo);
-			logger.info("게시글 댓글 조회 결과 commentList.size: {}", commentList);
-		}
 		
 		if(map.get("BOARD_FILE_ADD_FLAG").equals("Y")) {
 			fileList = boardService.selectFileList(boardNo);
@@ -257,7 +251,6 @@ public class BoardController {
 		
 		model.addAttribute("title", "게시글 상세보기");
 		model.addAttribute("map", map);
-		model.addAttribute("commentList", commentList);
 		model.addAttribute("fileList", fileList);
 		
 		return "admin/board/boardDetail";

@@ -18,7 +18,7 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
-	public List<Map<String, Object>> selectCommentList() {
-		return commentDao.selectCommentList();
+	public List<Map<String, Object>> selectCommentList(int boardNo) {
+		return commentDao.selectCommentList(boardNo);
 	}
 }

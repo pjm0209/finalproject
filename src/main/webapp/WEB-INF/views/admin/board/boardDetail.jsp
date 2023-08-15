@@ -6,8 +6,9 @@
 <!-- Page Heading -->
 <c:import url="/board/admin/boardHeadSide"></c:import>
 <div class="board-body">
-	<input type="hidden" name="lastEditAdminId" value="admin"> <input
-		type="hidden" name="boardNo" value="${param.boardNo }">
+	<input type="hidden" name="lastEditAdminId" value="admin">
+	<input type="hidden" name="boardNo" value="${param.boardNo }">
+	<input type="hidden" class="board_comment_flag" value="${map['COMMENT_FLAG']}">
 	<div id="board-title">
 		<h5>${map['BOARD_FORM_NAME'] }</h5>
 		<div class="board-head-button">
@@ -57,13 +58,14 @@
 		</div>
 		
 		<c:if test="${map['COMMENT_FLAG'] == 'Y' }">
-			<p class="board-comment-count">댓글 ${fn:length(commentList) }</p>
+			<p class="board-comment-count"></p>
+			<div class="commentList"></div>
 			<form name="commentFrm" action="post">
 				<p class="board-comment-user">관리자 (${sessionScope.adminId })</p>
 				<div class="textarea-group">
 					<textarea id="comment-area" name="commentsBody"></textarea>
 					<input type="hidden" value="${map['BOARD_NO'] }" name="boardNo">
-					<input type="hidden" value="${sessionScope.adminId }" name="adminNo">
+					<input type="hidden" value="${sessionScope.adminNo }" name="adminNo">
 					<input type="button" value="답글등록" id="comment-submit">
 				</div>
 			</form>
@@ -73,15 +75,19 @@
 </div>
 <!-- End of Main Content -->
 <script type="text/javascript">
-	$(document).ready(function(){
+	$(document).ready(function(){	
+		if($('.board_comment_flag').val() == 'Y') {
+			commentsList($('input[name=boardNo]').val());
+		}
+		
 		$('#comment-submit').click(function() {
-			alert("test");
 			$.ajax({
-				url: "/mbti/comments/write",
-				data: $('form[name=commentFrm]').serializeArray(),
-				type: "POST",
-				success: function(result) {
-					console.log("댓글 등록처리: " + result);
+				url:"/mbti/comments/write",
+				data:$('form[name=commentFrm]').serialize(),
+				type:"POST",
+				success:function(res) {
+					console.log(res);
+					commentsList($('input[name=boardNo]').val());
 				},
 				error:function(xhr, status, error) {
 					alert(status + ": " + error);
@@ -89,6 +95,45 @@
 			});
 		});
 	});
+	
+	function commentsList(boardNo) {
+		$.ajax({
+			url:'/mbti/comments/list',
+			type:'GET',
+			data:{boardNo:boardNo},
+			datatype:'json',
+			success:function(result) {
+				comments(result);				
+			},
+			error:function(xhr, status, error) {
+				alert(status + ": " + error);
+			}
+		});
+	}
+	
+	function comments(comment) {
+		var str = "";
+		
+		for(var i = 0; i < comment.length; i++) {
+			var map = comment[i];			
+			var date = new Date(map.COMMENTS_REGDATE);
+			const regdate = new Date(date.getTime()).toISOString().split('T')[0] + " " + date.toTimeString().split(' ')[0];
+			
+			str += "<div class='comment-item'>";
+			
+			if(map.ADMIN_ID.length > 0) {
+				str += "<p class='comment-writer'>" + map.ADMIN_ID + "<span class='comment-write-regdate'>(" + regdate + ")</span></p>"			
+			} else {
+				str += "<p class='comment-writer'>" + map.NAME + "</p>"
+			}
+			str += "<p class='comment-body'>" + map.COMMENTS_BODY + "</p>"
+			
+			str += "</div>";
+		}
+		
+		$('div.commentList').html(str);
+		$('p.board-comment-count').html("댓글" + comment.length);
+	}
 </script>
 
 <script src="<c:url value='/admin-css-js/js/board.js'/>"></script>

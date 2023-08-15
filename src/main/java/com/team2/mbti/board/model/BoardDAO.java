@@ -26,8 +26,6 @@ public interface BoardDAO {
 	Map<String, Object> selectBoardByNo(int boardNo);
 	int addReadCount(int boardNo);
 	
-	List<CommentVO> selectComment(int boardNo);
-	
 	int insertFile(BoardFileVO fileVo);
 	
 	List<BoardFileVO> selectFileList(int boardNo);
