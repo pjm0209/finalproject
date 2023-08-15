@@ -118,7 +118,6 @@
 			}
 			str += "</div>";
 			str += "<p class='comment-body'>" + map.COMMENTS_BODY + "</p>";
-			str += "<p></p>";
 			
 			str += "</div>";
 		}

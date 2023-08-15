@@ -101,10 +101,9 @@ $(function(){
 		});
 	});
 	
-	$('.comment-more').click(function() {
-		alert("a");	
-		$(this).next().css('visibility', 'visible');
-	});				
+	$(document).on('click', '.comment-more', function() {		
+		$(this).next('.editDel').toggle().css('visibility', 'visible');
+	});
 	
 	const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
 	const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
