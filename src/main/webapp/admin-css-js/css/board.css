@@ -455,6 +455,7 @@ span.comment-write-regdate {
 
 p.comment-writer {
     font-weight: bold;
+    display: inline-block;
 }
 
 span.u_icon {
@@ -481,4 +482,38 @@ span.boardWriter-commentWrite {
     font-size: 11px;
     padding: 3px;
     border-radius: 30px 30px 30px 30px;
+}
+
+.commentEditOrDel {
+    display: inline-block;
+    float: right;
+}
+
+span.comment-more {
+    cursor: pointer;
+}
+
+commentEditOrDel div {
+    position: absolute;
+}
+
+.editDel {
+    position: absolute;
+    right: 80px;
+    top: auto;
+    background: white;
+    box-shadow: 0 1px 12px 0 rgba(0, 0, 0, .06);
+    border-radius: 6px;
+    padding: 8px 15px;
+    box-sizing: border-box;
+    z-index: 1;
+    max-height: 370px;
+    width: 100px;
+    visibility: hidden;
+}
+
+a.commentEdit {
+    display: block;
+    color: black;
+    line-height: 34px;
 }

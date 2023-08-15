@@ -85,22 +85,6 @@
 </div>
 <!-- End of Main Content -->
 <script type="text/javascript">
-	
-	function commentsList(boardNo) {
-		$.ajax({
-			url:'/mbti/comments/list',
-			type:'GET',
-			data:{boardNo:boardNo},
-			datatype:'json',
-			success:function(result) {
-				comments(result);				
-			},
-			error:function(xhr, status, error) {
-				alert(status + ": " + error);
-			}
-		});
-	}
-	
 	function comments(comment) {
 		var str = "";
 		var boardWriter = "";
@@ -121,17 +105,18 @@
 			
 			if(map.ADMIN_ID.length > 0) {
 				if(boardWriter === map.ADMIN_ID) {
-					str += "<p class='comment-writer'>" + map.ADMIN_ID + "<span class='boardWriter-commentWrite'>작성자</span><span class='comment-write-regdate'>(" + regdate + ")</span></p>";
+					str += "<p class='comment-writer'>" + map.ADMIN_ID + "<span class='boardWriter-commentWrite'>작성자</span><span class='comment-write-regdate'>(" + regdate + ")</span><div class='commentEditOrDel'><span class='comment-more'><i class='bi bi-three-dots-vertical'></i></span><div class='editDel'><a href='#' class='commentEdit'>수정</a><a href='#' class='commentDel'>삭제</a></div>";
 				} else {
-					str += "<p class='comment-writer'>" + map.ADMIN_ID + "<span class='comment-write-regdate'>(" + regdate + ")</span></p>";
+					str += "<p class='comment-writer'>" + map.ADMIN_ID + "<span class='comment-write-regdate'>(" + regdate + ")</span><div class='commentEditOrDel'><span class='comment-more'><i class='bi bi-three-dots-vertical'></i></span><div class='editDel'><a href='#' class='commentEdit'>수정</a><a href='#' class='commentDel'>삭제</a></div>";
 				}
 			} else {
 				if(boardWriter === map.NAME) {
-					str += "<p class='comment-writer'>" + map.NAME + "<span class='boardWriter-commentWrite'>작성자</span><span class='comment-write-regdate'>(" + regdate + ")</span></p>";
+					str += "<p class='comment-writer'>" + map.NAME + "<span class='boardWriter-commentWrite'>작성자</span><span class='comment-write-regdate'>(" + regdate + ")</span><span class='comment-more'><i class='bi bi-three-dots-vertical'></i></span><div class='editDel'><a href='#' class='commentEdit'>수정</a><a href='#' class='commentDel'>삭제</a></div>";
 				} else {
-					str += "<p class='comment-writer'>" + map.NAME + "</p>";					
+					str += "<p class='comment-writer'>" + map.NAME + "<span class='comment-write-regdate'>(" + regdate + ")</span><span class='comment-more'><i class='bi bi-three-dots-vertical'></i></span>";					
 				}
 			}
+			str += "</div>";
 			str += "<p class='comment-body'>" + map.COMMENTS_BODY + "</p>";
 			str += "<p></p>";
 			
