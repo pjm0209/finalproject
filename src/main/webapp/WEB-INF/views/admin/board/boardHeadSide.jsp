@@ -5,8 +5,7 @@
 <!-- Page Heading -->
 <div class="head-div">
 	<h2 class="text-gray-800">게시판</h2>
-	<button type="button" class="bg-gradient-primary"
-		id="add-newBoard-button" onclick="location.href='boardCreate'">새 게시판 추가</button>
+	<button type="button" class="bg-gradient-primary" id="add-newBoard-button" onclick="location.href='<c:url value="/board/admin/boardCreate"/>'">새 게시판 추가</button>
 </div>
 <div class="side-body">
 	<div class="side-div-title">
