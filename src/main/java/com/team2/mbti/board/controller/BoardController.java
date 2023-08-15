@@ -108,7 +108,7 @@ public class BoardController {
 		String msg = "게시판 만들기가 실패하였습니다.", url = "/board/admin/boardCreate";
 		if(cnt > 0) {
 			msg= "게시판 만들기 성공";
-			url = "/board/admin/board?boardFormNo=" + vo.getBoardFormNo();
+			url = "/board/board?boardFormNo=" + vo.getBoardFormNo();
 		}
 		
 		model.addAttribute("msg", msg);
@@ -186,7 +186,7 @@ public class BoardController {
 		int fileCnt = boardService.insertFile(fileList, vo.getBoardNo());
 		logger.info("게시판 파일 업로드 처리 결과 fileCnt: {}", fileCnt);
 		
-		return "redirect:/admin/board/board?boardFormNo=" + vo.getBoardFormNo();
+		return "redirect:/board/board?boardFormNo=" + vo.getBoardFormNo();
 	}
 	
 	@GetMapping("/boardWriteEdit")
@@ -229,20 +229,20 @@ public class BoardController {
 		int fileCnt = boardService.insertFile(fileList, vo.getBoardNo());
 		logger.info("게시판 파일 업로드 처리 결과 fileCnt: {}", fileCnt);
 		
-		return "redirect:/admin/board/board?boardFormNo=" + vo.getBoardFormNo();
+		return "redirect:/board/board?boardFormNo=" + vo.getBoardFormNo();
 	}
 	
 	@GetMapping("/boardDetail")
 	public String boardDetail_get(@RequestParam int boardNo, Model model) {
 		logger.info("게시글 상세보기 화면처리 파라미터 boardFormNo: {}", boardNo);
 		
-		Map<String, Object> map = boardService.selectBoardByNo(boardNo);
 		int cnt = boardService.addReadCount(boardNo);
+		Map<String, Object> map = boardService.selectBoardByNo(boardNo);
 
 		List<BoardFileVO> fileList = null;
 		
-		logger.info("게시글 조회 결과 map: {}", map);
 		logger.info("조회수 증가 결과 cnt: {}", cnt);
+		logger.info("게시글 조회 결과 map: {}", map);
 		
 		if(map.get("BOARD_FILE_ADD_FLAG").equals("Y")) {
 			fileList = boardService.selectFileList(boardNo);

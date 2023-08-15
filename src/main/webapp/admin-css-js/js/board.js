@@ -78,28 +78,32 @@ $(function(){
 	
 	/*파일수정 첨부파일 삭제*/
 	$('.btns.del_btn.edit').click(function() {
-			var fileName = $(this).prev('div.file_input').find('.fileName').val();
-			var fileNo = $(this).prev('div.file_input').find('.fileNo').val();
-			
-			if($(this).prev().find('.fileIdx').val() == '0') {
-				$(this).prev().find('.fileOriginName').val('');
-			} else {
-				$(this).parent('div').remove();				
+		var fileName = $(this).prev('div.file_input').find('.fileName').val();
+		var fileNo = $(this).prev('div.file_input').find('.fileNo').val();
+		
+		if($(this).prev().find('.fileIdx').val() == '0') {
+			$(this).prev().find('.fileOriginName').val('');
+		} else {
+			$(this).parent('div').remove();				
+		}
+		
+		$.ajax({
+			url:"/mbti/admin/board/fileDel",
+			data:{fileName: fileName,
+				  fileNo: fileNo},
+			type:"GET",				
+			success:function(result) {
+				console.log("result: " + result);					
+			},
+			error:function(xhr, status, error) {
+				alert(status + ": " + error);
 			}
-			
-			$.ajax({
-				url:"/mbti/admin/board/fileDel",
-				data:{fileName: fileName,
-					  fileNo: fileNo},
-				type:"GET",				
-				success:function(result) {
-					console.log("result: " + result);					
-				},
-				error:function(xhr, status, error) {
-					alert(status + ": " + error);
-				}
-			});
 		});
+	});
+	
+	$(document).on('click', '.comment-more', function() {		
+		$(this).next('.editDel').toggle().css('visibility', 'visible');
+	});
 	
 	const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
 	const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
@@ -108,6 +112,22 @@ $(function(){
 function pageFunc(curPage) {
 	$('input[name="currentPage"]').val(curPage);
 	$('form[name="paginForm"]').submit();
+}
+
+/*댓글리스트 불러오기 함수*/
+function commentsList(boardNo) {
+	$.ajax({
+		url:'/mbti/comments/list',
+		type:'GET',
+		data:{boardNo:boardNo},
+		datatype:'json',
+		success:function(result) {
+			comments(result);				
+		},
+		error:function(xhr, status, error) {
+			alert(status + ": " + error);
+		}
+	});
 }
 
 /*글쓰기 첨부파일 함수*/
