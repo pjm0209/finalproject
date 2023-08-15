@@ -106,11 +106,25 @@ public class MemberLoginController {
 		return "main/member/forgot-id";
 	}
 	
+	@RequestMapping("/member/findIdResult")
+	public String findIdResult() {
+		logger.info("아이디 찾기 결과 화면");
+		
+		return "main/member/findIdResult";
+	}
+		
 	@RequestMapping("/member/forgot-pwd")
 	public String forgot_pwd() {
 		logger.info("비밀번호 찾기 화면");
 		
 		return "main/member/forgot-pwd";
+	}
+	
+	@RequestMapping("/member/findPwdResult")
+	public String findPwdResult() {
+		logger.info("비밀번호 재설정 화면");
+		
+		return "main/member/findPwdResult";
 	}
 	
 	@ResponseBody

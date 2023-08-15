@@ -1,10 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>ºñ¹Ğ¹øÈ£ Ã£±â ÆäÀÌÁö</title>
+<title>ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸° í˜ì´ì§€</title>
 <style>
 *{
 	margin: 0px;
@@ -13,10 +12,10 @@
 }
 
 h1 {
-	font-size: 30px;
+	font-size: 50px;
     text-align: center;
     font-weight: bold;
-    background: #ffcf00; 
+    background: #ff7f00; 
 }
 
 html {
@@ -64,7 +63,7 @@ div {
 .findPassword button{
   	width: 200px;
  	height: 50px;
-	background-color:#ffcf00;
+	background-color:#ff7f00;
 	font-weight:bold;	
 }
 
@@ -77,26 +76,26 @@ form {
 
 </head>
 <body>
-<h1>ºñ¹Ğ¹øÈ£ Ã£±â</h1><br>
+<h1>PWD ì°¾ê¸°</h1><br>
 	<form name = "frm3" method="post" action="<c:url value='main/member/forgot-pwd'/>">	
 		<div class = "find_pwd">			
 				<div class="userid">
-				<label>¾ÆÀÌµğ : </label>
+				<label>ì•„ì´ë”” : </label>
 					<input type="text" id="userid">					
 				</div>	
 								
 				<div class="name">
-				<label>ÀÌ¸§ : </label>
+				<label>ì´ë¦„ : </label>
 					<input type="text" id="name">					
 				</div>	
-				
+							
 				<div class="email">
-				<label>ÀÌ¸ŞÀÏ : </label>
+				<label>ì´ë©”ì¼ : </label>
 					<input type="text" id="email">					
 				</div>	
 				
 				<div class="findPassword"><br>
-				<button id="findPasswordButton">ºñ¹Ğ¹øÈ£ Ã£±â</button>
+				<button id="findPasswordButton">ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸°</button>
 				</div>
 		</div>				
 	</form>

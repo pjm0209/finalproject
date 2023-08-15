@@ -1,27 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>  
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ include file="../inc/top.jsp" %>
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원가입 페이지</title>
+<title>회원가입페이지 연습</title>
 <style>
-*{	
-	margin: 0px;
-	box-sizing: border-box;	
-	font-size:15px;	
+*{
+	box-sizing: border-box;
+    font-size: 15px;
 }
 
-h3 {
-	font-size: 20px;
-    text-align: center;
-    font-weight: bold;
-    background: #ff7f00;
-    margin-top: 100px;
-	margin-botton:50px;
-	align-items: left;     
+.wrapper {
+    padding: 10px;
 }
 
 html {
@@ -32,17 +24,16 @@ html {
     padding-bottom: 20px;
 }
 
-body {	
-    width: 30%;
-    border: 3px solid #ff7f00;    
+body {
+    width: 45%;
+    border: 1px solid black;
 }
 
 input{
-	font-size: 15px;
     border: 1px solid black;
     border-radius: 3px;
     line-height: 35px;
-    
+    font-size: 12px;
     padding-left: 10px;
     padding-right: 10px;
 }
@@ -52,28 +43,29 @@ div {
     padding-bottom: 8px;
 }
 
-.name input{
-	width:30%;
+span{
+	font-size: 20px;
 }
 
-.userid input{
-	width:30%;
+.title {
+    text-align: center;
+    font-weight: 700;
 }
 
-.password input{
-	width:63%;
+.name input {
+    width: 300px;
 }
 
-.passwordCheck input{
-	width:63%;
+.password1 input {
+    width: 300px;
 }
 
-.tel input{
-	width:55%;
+.password2 input {
+    width: 300px;
 }
 
-.email input{
-	width:30%;
+.email1 input {
+    width: 300px;
 }
 
 #email2 {
@@ -82,39 +74,41 @@ div {
   font-size: 15px; 
 }
 
-.address input{
-	width:55%;	
+.tel input {
+    display: flex;
+    justify-content: space-between;
+    line-height: 45px;
+    width: 50%;
+}
+
+.address input {
+    width: 50%;
+}
+
+.addressDetail input {
+    width: 50%;
+}
+
+
+.signUp button {
+    width: 20%;
+    cursor:pointer;
+}
+
+button{
+    cursor: pointer;
+    height: 30px;
 }
 
 .error{
     font-size: 1px;
-    height: 10px;
+    height: 20px;
     color:red;
     font-weight: 700;
 }
 
-.member_register{
-	margin-left:30px;
-}
-
-.member_register button{
-	font-size:12px;
-	font-weight:bold;
-	width:70px;
-	height:30px;
-}
-
-.signUp{
-	text-align: center;	
-}
-
-.signUp button{
-  	width: 200px;
- 	height: 50px;
-	background-color:#f89b00;
-	font-weight:bold;	
-}
 </style>
+
 <script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>
 <script type="text/javascript">
 
@@ -248,16 +242,23 @@ function validate_hp(ph) {
 	});
 </script>
 
+
+
+<link href="signup.css" rel="stylesheet" />
+<script src="signup.js"></script>
 </head>
 <body>
-	<h3>회원가입</h3><br>	
-<form name="frm1" method="post" action="<c:url value='/main/member/memberRegister'/>">
-	<div class="member_register">
+	<div class="wrapper">
+		<div class="title">
+			<h1 style="font-size: 30px;">회원가입</h1>
+		</div>
+		
 		<span>이름 *</span>
-		<div class="name">
-			<input type="text" id="name" placeholder="이름을 입력하세요">					
-			<div class="error" id="nameError"></div>
-		</div>	
+		<div class="name">		
+	    	<input type="text" id="name" placeholder="이름을 입력하세요.">
+	    	<div class="error" id="nameError"></div>	    	
+		</div>
+		
 		<span>아이디 *</span>
 		<div class="userid">		
 			<input type="text" id="userid" placeholder="아이디 입력(6~20자)">
@@ -307,8 +308,8 @@ function validate_hp(ph) {
 		
         <div class="signUp"><br>
             <button id="signUpButton">회원가입</button>
-        </div>				
-	</div>
-</form>
+        </div>					
+		
+	</div>	
 </body>
 </html>
