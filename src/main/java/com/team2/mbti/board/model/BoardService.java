@@ -23,8 +23,6 @@ public interface BoardService {
 	Map<String, Object> selectBoardByNo(int boardNo);
 	int addReadCount(int boardNo);
 	
-	List<CommentVO> selectComment(int boardNo);
-	
 	int insertFile(List<Map<String, Object>> list, int boardNo);
 	
 	List<BoardFileVO> selectFileList(int boardNo);

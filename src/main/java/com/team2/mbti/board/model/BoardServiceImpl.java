@@ -64,12 +64,7 @@ public class BoardServiceImpl implements BoardService {
 	public int addReadCount(int boardNo) {
 		return boardDao.addReadCount(boardNo);
 	}
-
-	@Override
-	public List<CommentVO> selectComment(int boardNo) {
-		return boardDao.selectComment(boardNo);
-	}
-
+	
 	@Override
 	public int insertFile(List<Map<String, Object>> fileList, int boardNo) {
 		int result = 0;

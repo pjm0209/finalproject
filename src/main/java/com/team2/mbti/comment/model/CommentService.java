@@ -5,5 +5,5 @@ import java.util.Map;
 
 public interface CommentService {
 	int insertComments(CommentVO vo);
-	List<Map<String, Object>> selectCommentList();
+	List<Map<String, Object>> selectCommentList(int boardNo);
 }

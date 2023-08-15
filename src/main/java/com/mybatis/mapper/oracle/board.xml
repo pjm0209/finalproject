@@ -95,11 +95,6 @@
 		where board_no = #{boardNo}
 	</update>
 	
-	<select id="selectComment" parameterType="int" resultType="commentVo">
-		select * from comments
-		where board_no = #{boardNo}
-	</select>
-	
 	<insert id="insertFile" parameterType="boardFileVo">
 		<selectKey keyProperty="fileNo" order="BEFORE" resultType="int">
 			select board_file_seq.nextval from dual

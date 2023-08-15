@@ -5,16 +5,16 @@
 <mapper namespace="com.team2.mbti.comment.model.CommentDAO">
 	<sql id="insertType">
 		<if test="no != null and no != 0">
-			insert into comment(comments_No, board_No, no, comments_body, comments_group_no)
+			insert into comments(comments_No, board_No, no, comments_body, comments_group_no)
 			values(#{commentsNo}, #{boardNo}, #{no}, #{commentsBody}, #{commentsNo})
 		</if>
 		<if test="no == null or no == 0">
-			insert into comment(comments_No, board_No, comments_body, comments_group_no, admin_no)
+			insert into comments(comments_No, board_No, comments_body, comments_group_no, admin_no)
 			values(#{commentsNo}, #{boardNo}, #{commentsBody}, #{commentsNo}, #{adminNo})
 		</if>
 	</sql>
 	
-	<insert id="insertComments">
+	<insert id="insertComments" parameterType="commentVo">
 		<selectKey keyProperty="commentsNo" order="BEFORE" resultType="int">
 			select comments_seq.nextval from dual
 		</selectKey>
@@ -22,8 +22,9 @@
 		<include refid="insertType"></include>
 	</insert>
 	
-	<select id="selectCommentList" resultType="map">
+	<select id="selectCommentList" parameterType="int" resultType="map">
 		select * from commentsview
+		where board_no = #{boardNo}
 		order by comments_group_no desc, comments_sort
 	</select>
 </mapper>
