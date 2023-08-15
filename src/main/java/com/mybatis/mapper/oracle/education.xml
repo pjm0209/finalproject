@@ -77,6 +77,11 @@
 		<include refid="searchEducation"></include> 
 	</select>
 	
+	<delete id="deleteEducation" parameterType="educationVo">
+		delete from mbti_education
+		where edu_no = #{eduNo}
+	</delete>
+	
 	
 	<!-- teacher -->
 	<insert id="insertTeacher" parameterType="educationVo">

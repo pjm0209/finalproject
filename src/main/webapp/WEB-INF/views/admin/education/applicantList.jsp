@@ -9,7 +9,7 @@
 </div>
 <div class="side-body">
 	<div class="side-div-title">
-		<h6>교육 리스트</h6>
+		<h6>교육</h6>
 		<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
 			fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
   			<path fill-rule="evenodd"
@@ -18,28 +18,17 @@
 	</div>
 	<div class="group">
 		<div id="group-list" class="nav">
-<<<<<<< HEAD
 			<div class="board-side-boardItem">
-				<div class="board-name">
-					<a class="applicantList-link" href="<c:url value='/admin/education/applicantList'/>">
-						<span>신청자 조회</span>
-=======
-		<div class="board-side-boardItem">
 				<div class="board-name">
 					<a class="applicantList-link" href="<c:url value='/admin/education/list'/>">
 						<span>교육 리스트</span>
->>>>>>> branch 'main' of https://github.com/pjm0209/finalproject.git
 					</a>
 				</div>
 			</div>
 			<div class="board-side-boardItem">
 				<div class="board-name">
 					<a class="applicantList-link" href="<c:url value='/admin/education/applicantList'/>">
-<<<<<<< HEAD
-						<span>교육장 위치</span>
-=======
 						<span>신청자 관리</span>
->>>>>>> branch 'main' of https://github.com/pjm0209/finalproject.git
 					</a>
 				</div>
 			</div>
@@ -69,7 +58,7 @@
 	<div class="board">
 		<div class="board-head">
 			<div class="board-search-result">
-				<span class="search-count"></span>
+				<form name="frmSearch" method="post" action="<c:url value='/admin/education/applicantList'/>">
 				<div class="input-group mb-3" id="board-search-div">
 					<select class="form-select form-select-lg" aria-label=".form-select-lg example" name="searchcondition" id="board-search-select">					  	
 					  	<option value="1">신청자</option>
@@ -79,8 +68,10 @@
 				 	<input type="text" class="form-control" placeholder="검색어를 입력하세요" aria-label="Recipient's username" aria-describedby="button-addon2" id="board-search-area">
 				 	<button class="btn btn-outline-secondary" type="button" id="button-addon2">검색</button>
 				</div>
+				</form>
 			</div>
 		</div>
+		<form name="frmDelete" method="post">
 		<table class="table">
 			<thead>
 				<tr class="board-table-colum">
@@ -110,32 +101,33 @@
 				
 			</tbody>
 		</table>
-		<nav class="boardPaging" aria-label="Page navigation example">
+		<div style="width: 10%;text-align: center;margin: 0 auto;">
 			<ul class="pagination">
 				<c:if test="${pagingInfo.firstPage > 1 }">
 				    <li class="page-item">
-				     <a class="page-link" href="#" onclick="pageFunc(${pagingInfo.fistPage - 1})" aria-label="Previous">
+				      <a class="page-link" href="#" aria-label="Previous">
 				        <span aria-hidden="true">&laquo;</span>
 				      </a>
 				    </li>
 				</c:if>
 				<c:forEach var="i" begin="${pagingInfo.firstPage}" end="${pagingInfo.lastPage}">
 					<c:if test="${i==pagingInfo.currentPage}">
-						<li class="page-item active"><a class="page-link"  href="#">${i }</a></li>	
+						<li class="page-item active"><a class="page-link" href="<c:url value='/admin/education/applicantList?currentPage=${i}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">${i}</a></li>
 					</c:if>
 					<c:if test="${i!=pagingInfo.currentPage}">
-						<li class="page-item"><a class="page-link" href="#" onclick="pageFunc(${i})">${i }</a></li>	
+						<li class="page-item"><a class="page-link" href="<c:url value='/admin/education/applicantList?currentPage=${i}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">${i}</a></li>
 					</c:if>
 				</c:forEach>
 				<c:if test="${pagingInfo.lastPage < pagingInfo.totalPage}">
 				    <li class="page-item">
-				      <a class="page-link" href="#" aria-label="Next" onclick="pageFunc(${pagingInfo.lastPage + 1})">
+				      <a class="page-link" href="#" aria-label="Next">
 				        <span aria-hidden="true">&raquo;</span>
 				      </a>
 				    </li>
 				</c:if>
 			</ul>
-		</nav>
+		</div>
+		</form>
 	</div>
 </div>
 </div>
