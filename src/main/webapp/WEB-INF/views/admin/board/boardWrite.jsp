@@ -20,7 +20,9 @@
 	<form name="boardWriteForm" method="post" enctype="multipart/form-data" action="<c:url value='${url }'/>">
 		<div id="board-title">
 		<input type="hidden" name="adminNo" value="${sessionScope.adminNo }">
-		<input type="hidden" name="boardNo" value="${param.boardNo }">	
+		<c:if test="${!empty param.boardNo }">
+			<input type="hidden" name="boardNo" value="${param.boardNo }">
+		</c:if>	
 			<h5>${boardFormVo.boardFormName }</h5>
 			<div class="board-head-button">
 				<input type="submit" class="bg-gradient-primary" id="save-boardCreate" <c:if test="${empty param.boardNo }"> value="저장" </c:if> <c:if test="${!empty param.boardNo }"> value="수정"</c:if>>
@@ -66,7 +68,7 @@
 							</dt>
 							<dd>
 								<div class="file_list">
-					                <c:if test="${!empty param.boardFormNo}">
+					                <c:if test="${!empty param.boardFormNo or empty fileList}">
 					                	<div>
 						                    <div class="file_input">
 						                        <input type="text" readonly />
