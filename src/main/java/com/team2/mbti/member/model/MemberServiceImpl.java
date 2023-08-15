@@ -1,6 +1,11 @@
 package com.team2.mbti.member.model;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
+
+import com.team2.mbti.common.SearchVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -15,6 +20,21 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	public List<MemberVO> selectAllMember(SearchVO vo) {
+		return memberDao.selectAllMember(vo);
+	}
+
+	@Override
+	public int getTotalRecordMember(SearchVO searchVo) {
+		return memberDao.getTotalRecordMember(searchVo);
+	}
+
+	@Override
+	public MemberVO selectByNoMember(int no) {
+		return memberDao.selectByNoMember(no);
+	}
+
+	@Override
 	public int selectCheckId(String userid) {
 		int count = memberDao.selectCheckId(userid);
 
@@ -24,42 +44,34 @@ public class MemberServiceImpl implements MemberService {
 		}else {
 			result = MemberService.NONE_EXIST_ID;			
 		}
-
 		return result;
 	}
 
 	@Override
-	public int loginCheck(String userid, String pwd) {
-		String dbPwd=memberDao.selectPwd(userid);
+	public int deleteMember(int no) {
+		return memberDao.deleteMember(no);
+	}
 
+	@Override
+	public int loginCheck(String userid, String pwd) {
 		int result=0;
-		if(dbPwd==null || dbPwd.isEmpty()) {
-			result=MemberService.USERID_NONE;
-		}else {
+		String dbPwd= memberDao.selectMemberPwd(userid);
+		
+		if(dbPwd!=null && !dbPwd.isEmpty()) {
 			if(dbPwd.equals(pwd)) {
-				result=MemberService.LOGIN_OK;				
+				result=MemberService.LOGIN_OK;
 			}else {
 				result=MemberService.PWD_DISAGREE;
 			}
+		}else {
+			result=MemberService.USERID_NONE;
 		}
 
 		return result;
 	}
 
 	@Override
-	public MemberVO selectByUserid(String userid) {
-		return memberDao.selectByUserid(userid);
+	public int selectMemberNo(String userid) {		 
+		return memberDao.selectMemberNo(userid);
 	}
-
-	@Override
-	public int updateMember(MemberVO vo) {
-		return memberDao.updateMember(vo);
-	}
-
-	@Override
-	public int updateMemberOut(String userid) {
-		return memberDao.updateMemberOut(userid);
-	}
-
-
 }

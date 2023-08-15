@@ -1,0 +1,8 @@
+/**
+ * calendar.js
+ */
+
+$(function(){
+	
+});	
+

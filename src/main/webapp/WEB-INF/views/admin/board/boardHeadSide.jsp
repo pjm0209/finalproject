@@ -19,33 +19,14 @@
 	</div>
 	<div class="group">
 		<div id="board-group-list" class="nav">
-			<div class="board-side-boardItem">
-				<div class="board-name">
-					<span>공지사항</span>
-					<input type="hidden" name="notice" value="notice">
-				</div>
-				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
-			</div>
-			<div class="board-side-boardItem">
-				<div class="board-name">
-					<span>QnA</span>
-					<input type="hidden" name="qna" value="qna">
-				</div>
-				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
-			</div>
-			<div class="board-side-boardItem">
-				<div class="board-name">
-					<span>FAQ</span>
-					<input type="hidden" name="faq" value="faq">
-				</div>
-				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
-			</div>
-			<c:if test="${!empty list}">
-				<c:forEach var="vo" items="${list }">
+			<c:if test="${!empty boardList}">
+				<c:forEach var="vo" items="${boardList }">
 					<div class="board-side-boardItem">
 						<div class="board-name">
-							<span>${vo.boardFormName }</span>
-							<input type="hidden" name="boardFormNo" value="boardFormNo">
+							<input type="hidden" value="${vo.boardFormNo }">
+							<a href="<c:url value='/board/board?boardFormNo=${vo.boardFormNo }'/>">
+								<span>${vo.boardFormName }</span>
+							</a>
 						</div>
 						<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
 					</div>

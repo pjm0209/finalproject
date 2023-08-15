@@ -7,51 +7,26 @@
 		<where>
 			<if test="searchKeyword!=null and searchKeyword!=''">
 				${searchCondition} like '%' || #{searchKeyword} || '%'
+				and board_form_no = #{boardFormNo}
+			</if>
+			<if test="searchKeyword==null or searchKeyword == ''">
+				board_form_no = #{boardFormNo}
 			</if>
 		</where>
 	</sql> 
 	
-	<select id="selectAllNotice" parameterType="searchVo"
-		resultType="map">
-		select * from (
-			select rownum as RNUM, A.* from	(
-				select * from noticeview
-				<include refid="searchWhere"></include>
-				order by notice_no
-			)A
-		)
-		<![CDATA[
-		where RNUM> #{firstRecordIndex} 
-		and RNUM<=#{firstRecordIndex} + #{recordCountPerPage}]]>
-	</select>
-	
-	<select id="getTotalRecordNotice" parameterType="searchVo"
-		resultType="int">
-		select count(*) from notice
-		<include refid="searchWhere"></include>
-	</select>
-	
-	<select id="selectAllFaq" parameterType="searchVo"
-		resultType="map">
-		select * from (
-			select rownum as RNUM, A.* from	(
-				select * from faqview
-				<include refid="searchWhere"></include>
-				order by faq_no
-			)A
-		)
-		<![CDATA[
-		where RNUM> #{firstRecordIndex} 
-		and RNUM<=#{firstRecordIndex} + #{recordCountPerPage}]]>
-	</select>
-	
- 	<select id="getTotalRecordFaq" parameterType="searchVo"
-		resultType="int">
-		select count(*) from faq
-		<include refid="searchWhere"></include>
-	</select> 
+	<sql id="insertType">
+		<if test="no == 0 or no == null">
+			insert into board(board_no, board_form_no, board_title, board_body, board_group_no, admin_no)
+			values(#{boardNo}, #{boardFormNo}, #{boardTitle}, #{boardBody}, #{boardNo}, #{adminNo})
+		</if>
+		<if test="no != 0 and no != null">
+			insert into board(board_no, board_form_no, board_title, board_body, no, board_group_no)
+			values(#{boardNo}, #{boardFormNo}, #{boardTitle}, #{boardBody}, #{no}, #{boardNo})
+		</if>
+	</sql>
 
- 	<select id="selectAll" parameterType="searchVo"
+ 	<select id="selectAll" parameterType="boardVo"
 		resultType="map">
 		select * from (
 			select rownum as RNUM, A.* from	(
@@ -67,12 +42,80 @@
 
 	 <select id="getTotalRecord" parameterType="searchVo"
 		resultType="int">
-		select count(*) from board
+		select count(*) from boardview
 		<include refid="searchWhere"></include>
+	</select>
+	
+	<select id="selectBoard" parameterType="int" resultType="boardFormVo">
+		select * from board_form
+		where board_form_no = #{boardFormNo}
 	</select>
 	
 	<select id="selectAllBoard" resultType="boardFormVo">
 		select * from board_form
 		order by board_form_no
 	</select>
+	
+	<insert id="insertBoardForm" parameterType="boardFormVo">
+		<selectKey keyProperty="boardFormNo" order="BEFORE" resultType="int">
+			select board_form_seq.nextval from dual
+		</selectKey>
+		
+		insert into board_form(board_form_no, board_form_name, board_form_intro, board_file_add_flag, comment_flag, board_flag, first_admin_Id)
+		values(#{boardFormNo}, #{boardFormName}, #{boardFormIntro}, #{boardFileAddFlag}, #{commentFlag}, #{boardFlag}, #{firstAdminId})
+	</insert>
+	
+	<insert id="insertBoard" parameterType="boardVo">
+		<selectKey keyProperty="boardNo" order="BEFORE" resultType="int">
+			select board_seq.nextval from dual
+		</selectKey>
+
+		<include refid="insertType"></include>
+	</insert>
+	
+	<select id="selectBoardSet" parameterType="int" resultType="boardFormVo">
+		select * from board_form
+		where board_form_no = #{boardFormNo}
+	</select>
+	
+	<update id="updateBoardSet" parameterType="boardFormVo">
+		update board_form
+		set board_form_intro = #{boardFormIntro}, board_file_add_flag = #{boardFileAddFlag}, comment_flag = #{commentFlag}, board_flag = #{boardFlag}, last_edit_admin_id = #{lastEditAdminId}, last_regdate = sysdate
+		where board_form_no = #{boardFormNo}
+	</update>
+	
+	<select id="selectBoardByNo" parameterType="int" resultType="map">
+		select * from boardview
+		where board_no = #{boardNo}
+	</select>
+	
+	<update id="addReadCount" parameterType="int">
+		update board
+		set board_readcount = board_readcount + 1
+		where board_no = #{boardNo}
+	</update>
+	
+	<insert id="insertFile" parameterType="boardFileVo">
+		<selectKey keyProperty="fileNo" order="BEFORE" resultType="int">
+			select board_file_seq.nextval from dual
+		</selectKey>
+		
+		insert into board_file
+		values(#{fileNo}, #{boardNo}, #{fileName}, #{fileSize}, #{originalFileName})
+	</insert>
+	
+	<select id="selectFileList" parameterType="int" resultType="boardFileVo">
+		select * from board_file where board_no = #{boardNo}
+	</select>
+	
+	<delete id="deleteFile" parameterType="int">
+		delete from board_file
+		where file_no = #{fileNo}
+	</delete>
+	
+	<update id="updateBoard" parameterType="boardVo">
+		update board
+		set board_form_no = #{boardFormNo}, board_title = #{boardTitle}, board_body = #{boardBody}
+		where board_no = #{boardNo}
+	</update>
 </mapper>

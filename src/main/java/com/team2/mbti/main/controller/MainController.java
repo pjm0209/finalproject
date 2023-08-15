@@ -22,4 +22,14 @@ public class MainController {
 	public String inner_page_get() {
 		return "main/inner-page";
 	}
+	
+	@RequestMapping("/top")
+	public String test_top() {
+		return "main/inc/top";
+	}
+	
+	@RequestMapping("/bottom")
+	public String test_bottom() {
+		return "main/inc/bottom";
+	}
 }

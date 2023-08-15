@@ -3,6 +3,18 @@
 <%@ include file="../inc/top.jsp"%>
 <!-- Begin Page Content -->
 <!-- Page Heading -->
+<script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>
+<script type="text/javascript">
+	$(function(){
+		$('#board-write-button').click(function(){
+			if(confirm("선택한 회원을 삭제하시겠습니까?")){
+				var contextpath = "/mbti";
+				location.href=contextpath+"/admin/member/memberList";
+			}
+			
+		});	
+	});
+</script>
 <div class="head-div">
 	<h2 class="text-gray-800">회원</h2>
 </div>
@@ -21,7 +33,6 @@
 				<div class="board-name" name="notice" value="notice" onclick="showRegisteredMembers()">
 					<span>회원 리스트</span>
 				</div>
-				<span class="board-side-icon"><i class="fas fa-fw fa-cog"></i></span>
 			</div>
 		</div>
 	</div>
@@ -29,21 +40,24 @@
 <div class="board-body">
 	<div id="board-title">
 		<h5>회원 리스트</h5>
+			<button class="bg-gradient-secondary" id="board-write-button">탈퇴</button>
 	</div>
-	<div class="board">
-		<div class="board-head">
-			<div class="board-search-result">
-				<span class="search-count"></span>
-				<div class="input-group mb-3" id="board-search-div">
-					<select class="form-select form-select-lg" aria-label=".form-select-lg example" name="searchcondition" id="board-search-select">					  	
-					  	<option value="1">이름</option>
-					  	<option value="2">아이디</option>
+	<div class="member">
+		<div class="member-head">
+			<div class="member-search-result">
+				<form name="frm" method="post" action="<c:url value='/admin/member/memberList'/>">
+				<div class="input-group mb-3" id="member-search-div">
+					<select class="form-select form-select-lg" aria-label=".form-select-lg example" name="searchCondition" id="board-search-select">					  	
+					  	<option value="name"  <c:if test="${param.searchCondition=='name'}"> selected="selected" </c:if> >이름</option>
+					  	<option value="userid" <c:if test="${param.searchCondition=='userid'}"> selected="selected" </c:if>>아이디</option>
 					</select>
-				 	<input type="text" class="form-control" placeholder="검색어를 입력하세요" aria-label="Recipient's username" aria-describedby="button-addon2" id="board-search-area">
-				 	<button class="btn btn-outline-secondary" type="button" id="button-addon2">검색</button>
+				 	<input type="text" class="form-control" placeholder="검색어를 입력하세요" name="searchKeyword"
+				 	aria-label="Recipient's username" aria-describedby="button-addon2" id="board-search-area" value="${param.searchKeyword}">
+				 	<button class="btn btn-outline-secondary" type="submit" id="button-addon2">검색</button>
 				</div>
 			</div>
 		</div>
+		
 		<table class="table">
 			<thead>
 				<tr class="board-table-colum">
@@ -54,44 +68,48 @@
 					<th scope="col" class="board-regdate">가입일</th>
 				</tr>
 			</thead>
-						<tbody id="board-table-body">
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>1</td>
-					<td>karina</td>
-					<td>카리나</td>
-					<td>2023.08.03</td>
-				</tr>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>2</td>
-					<td>winter</td>
-					<td>윈터</td>
-					<td>2023.08.03</td>
-				</tr>
-				<tr>
-				<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>3</td>
-					<td>hongeunchae</td>
-					<td>홍은채</td>
-					<td>2023.08.03</td>
-				</tr>
-				<tr>
-				<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>4</td>
-					<td>ohhyewon</td>
-					<td>오혜원</td>
-					<td>2023.08.03</td>
-				</tr>
-				<tr>
-				<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>5</td>
-					<td>kimchaewon</td>
-					<td>김채원</td>
-					<td>2023.08.03</td>
-				</tr>								
+			<tbody id="board-table-body">
+				<c:forEach var="vo" items="${list}">
+					<tr>
+						<th scope="row"><input type="checkbox" class="board-checkbox"></th>
+						<td>${vo.no}</td>
+						<td>${vo.userid}</td>
+						<td>${vo.name}</td>
+						<td>
+							<fmt:formatDate value="${vo.regdate}" pattern="yyyy-MM-dd"/>
+						</td>
+					</tr>	
+	
+				</c:forEach>					
 			</tbody>
 		</table>
+		<div style="width: 10%;text-align: center;margin: 0 auto;">
+			<ul class="pagination">
+				<c:if test="${pagingInfo.firstPage > 1 }">
+				    <li class="page-item">
+				      <a class="page-link" href="#" aria-label="Previous">
+				        <span aria-hidden="true">&laquo;</span>
+				      </a>
+				    </li>
+				</c:if>
+				<c:forEach var="i" begin="${pagingInfo.firstPage}" end="${pagingInfo.lastPage}">
+					<c:if test="${i==pagingInfo.currentPage}">
+						<li class="page-item active"><a class="page-link" href="<c:url value='/admin/mbti/member?currentPage=${i}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">${i}</a></li>
+					</c:if>
+					<c:if test="${i!=pagingInfo.currentPage}">
+						<li class="page-item"><a class="page-link" href="<c:url value='/admin/mbti/mbti?currentPage=${i}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">${i}</a></li>
+					</c:if>
+				</c:forEach>
+				<c:if test="${pagingInfo.lastPage < pagingInfo.totalPage}">
+				    <li class="page-item">
+				      <a class="page-link" href="#" aria-label="Next">
+				        <span aria-hidden="true">&raquo;</span>
+				      </a>
+				    </li>
+				</c:if>
+			</ul>
+		</div>
+		</form>
 	</div>
 </div>
 <!-- End of Main Content -->

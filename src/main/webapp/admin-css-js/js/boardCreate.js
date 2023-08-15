@@ -1,12 +1,12 @@
 $(function() {
 	$('.checkbox_group > .use_off').on("click", function(){
-		$('.checkbox_group > input[type=checkbox]').val('N');
+		$(this).nextAll('input[type=hidden]').val('N');
 		$(this).next().attr('class', 'use_on');
 		$(this).attr('class', 'use_off on');
 	});
 	
 	$('.checkbox_group > .use_on').on("click", function(){
-		$('.checkbox_group > input[type=checkbox]').val('Y');
+		$(this).nextAll('input[type=hidden]').val('Y');
 		$(this).prev().attr('class', 'use_off');
 		$(this).attr('class', 'use_on on');
 	});

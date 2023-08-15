@@ -1,5 +1,9 @@
 package com.team2.mbti.member.model;
 
+import java.util.List;
+
+import com.team2.mbti.common.SearchVO;
+
 public interface MemberService {
 	int EXIST_ID=1; 
 	int NONE_EXIST_ID=2; 
@@ -9,10 +13,14 @@ public interface MemberService {
 	int USERID_NONE=3; 
 		
 	int insertMember(MemberVO vo);
-	int selectCheckId(String userid);
+	List<MemberVO> selectAllMember(SearchVO vo);
+	int getTotalRecordMember(SearchVO searchVo);
+	MemberVO selectByNoMember(int no);
+	int selectCheckId(String userid);	
+	int deleteMember(int no);
 	int loginCheck(String userid, String pwd);
-	MemberVO selectByUserid(String userid);
-	int updateMember(MemberVO vo);
-	int updateMemberOut(String userid);
+	int selectMemberNo(String userid);
+
+	
 
 }
