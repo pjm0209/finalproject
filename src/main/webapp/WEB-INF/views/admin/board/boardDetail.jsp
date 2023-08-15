@@ -9,6 +9,8 @@
 	<input type="hidden" name="lastEditAdminId" value="admin">
 	<input type="hidden" name="boardNo" value="${param.boardNo }">
 	<input type="hidden" class="board_comment_flag" value="${map['COMMENT_FLAG']}">
+	<input type="hidden" class="member-userId" value="${map['USERID'] }">
+	<input type="hidden" class="admin-adminId" value="${map['ADMIN_ID'] }">
 	<div id="board-title">
 		<h5>${map['BOARD_FORM_NAME'] }</h5>
 		<div class="board-head-button">
@@ -25,10 +27,13 @@
 		<!-- 기본설정 시작 -->
 		<div class="board-title">
 			<p class="board-title-name">${map['BOARD_TITLE'] }</p>
-			<span class="board-write-user-userId"><c:if test="${empty map['ADMIN_NO'] }">${map['NAME'] } (${map['USERID'] })</c:if><c:if test="${!empty map['ADMIN_NO'] }">${map['ADMIN_ID'] } (${map['ADMIN_ID'] })</c:if>
-				</span> <span class="board-regdate-readcount"><fmt:formatDate
-					value="${map['BOARD_REGDATE'] }" pattern="yyyy-MM-dd HH:mm:ss" />
-				조회수 ${map['BOARD_READCOUNT'] } </span>
+			<span class="board-write-user-userId">
+				<c:if test="${empty map['ADMIN_NO'] }">${map['NAME'] } (${map['USERID'] })</c:if>
+				<c:if test="${!empty map['ADMIN_NO'] }">${map['ADMIN_ID'] } (${map['ADMIN_ID'] })</c:if>
+			</span>
+			<span class="board-regdate-readcount">
+				<fmt:formatDate	value="${map['BOARD_REGDATE'] }" pattern="yyyy-MM-dd HH:mm:ss" /> 조회 ${map['BOARD_READCOUNT'] } 
+			</span>
 		</div>
 		<div class="board-content">
 			<c:if test="${!empty fileList }">
@@ -57,6 +62,11 @@
 			${map['BOARD_BODY'] }			
 		</div>
 		
+		<div class="board-like">
+			<span class="u_icon"></span>
+			<em class="u_txt">좋아요</em>
+			<em class="u_cnt">1</em>
+		</div>
 		<c:if test="${map['COMMENT_FLAG'] == 'Y' }">
 			<p class="board-comment-count"></p>
 			<div class="commentList"></div>
@@ -75,26 +85,6 @@
 </div>
 <!-- End of Main Content -->
 <script type="text/javascript">
-	$(document).ready(function(){	
-		if($('.board_comment_flag').val() == 'Y') {
-			commentsList($('input[name=boardNo]').val());
-		}
-		
-		$('#comment-submit').click(function() {
-			$.ajax({
-				url:"/mbti/comments/write",
-				data:$('form[name=commentFrm]').serialize(),
-				type:"POST",
-				success:function(res) {
-					console.log(res);
-					commentsList($('input[name=boardNo]').val());
-				},
-				error:function(xhr, status, error) {
-					alert(status + ": " + error);
-				}
-			});
-		});
-	});
 	
 	function commentsList(boardNo) {
 		$.ajax({
@@ -113,6 +103,14 @@
 	
 	function comments(comment) {
 		var str = "";
+		var boardWriter = "";
+		
+		if($('.member-userId').val().length < 1) {
+			boardWriter = $('.admin-adminId').val();
+		} else {
+			boardWriter = $('.member-userId').val();
+			
+		}
 		
 		for(var i = 0; i < comment.length; i++) {
 			var map = comment[i];			
@@ -122,17 +120,26 @@
 			str += "<div class='comment-item'>";
 			
 			if(map.ADMIN_ID.length > 0) {
-				str += "<p class='comment-writer'>" + map.ADMIN_ID + "<span class='comment-write-regdate'>(" + regdate + ")</span></p>"			
+				if(boardWriter === map.ADMIN_ID) {
+					str += "<p class='comment-writer'>" + map.ADMIN_ID + "<span class='boardWriter-commentWrite'>작성자</span><span class='comment-write-regdate'>(" + regdate + ")</span></p>";
+				} else {
+					str += "<p class='comment-writer'>" + map.ADMIN_ID + "<span class='comment-write-regdate'>(" + regdate + ")</span></p>";
+				}
 			} else {
-				str += "<p class='comment-writer'>" + map.NAME + "</p>"
+				if(boardWriter === map.NAME) {
+					str += "<p class='comment-writer'>" + map.NAME + "<span class='boardWriter-commentWrite'>작성자</span><span class='comment-write-regdate'>(" + regdate + ")</span></p>";
+				} else {
+					str += "<p class='comment-writer'>" + map.NAME + "</p>";					
+				}
 			}
-			str += "<p class='comment-body'>" + map.COMMENTS_BODY + "</p>"
+			str += "<p class='comment-body'>" + map.COMMENTS_BODY + "</p>";
+			str += "<p></p>";
 			
 			str += "</div>";
 		}
 		
 		$('div.commentList').html(str);
-		$('p.board-comment-count').html("댓글" + comment.length);
+		$('p.board-comment-count').html("<i class='bi bi-chat-square-dots'>&nbsp</i> 댓글" + comment.length);
 	}
 </script>
 

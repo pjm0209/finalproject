@@ -137,10 +137,10 @@ public class BoardController {
 		int cnt = boardService.updateBoardSet(vo);
 		logger.info("게시판 수정 처리 결과 cnt: {}", cnt);
 		
-		String msg = "게시판 수정 실패!", url = "/admin/board/boardEdit?boardFormNo=" + vo.getBoardFormNo();
+		String msg = "게시판 수정 실패!", url = "/board/admin/boardEdit?boardFormNo=" + vo.getBoardFormNo();
 		if(cnt > 0) {
 			msg = "게시판 수정 성공!";
-			url = "/admin/board/board?boardFormNo=" + vo.getBoardFormNo();
+			url = "/board/board?boardFormNo=" + vo.getBoardFormNo();
 		}
 		
 		model.addAttribute("msg", msg);
