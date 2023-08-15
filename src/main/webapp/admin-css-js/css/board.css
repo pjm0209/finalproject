@@ -387,8 +387,8 @@ p.board-comment-count {
 	color: #333;
 	padding: 20px;
 	margin: 0;
-	border-bottom: 1px solid black;
 	font-size: 14px;
+	display: inline-block;
 }
 
 form[name=commentFrm] {
@@ -434,8 +434,10 @@ ul.file-list {
 }
 
 .commentList {
-    margin: 10px 20px 15px 20px;
+    margin: 0px 20px 15px 20px;
     color: black;
+    padding-top: 10px;
+    border-top: 1px solid black;
 }
 
 .comment-item {
@@ -453,4 +455,30 @@ span.comment-write-regdate {
 
 p.comment-writer {
     font-weight: bold;
+}
+
+span.u_icon {
+	background: url(/mbti/images/ico-post-like-f-53535.svg) no-repeat;
+    background-size: cover;
+    width: 17px;
+    height: 17px;
+    display: inline-block;
+    margin: 0;
+}
+
+.board-like {
+    display: inline-block;
+    margin-left: 30px;
+    cursor: pointer;
+    font-size: 14px;
+    color: black;
+}
+
+span.boardWriter-commentWrite {
+    margin-left: 15px;
+    border: 1px solid red;
+    color: red;
+    font-size: 11px;
+    padding: 3px;
+    border-radius: 30px 30px 30px 30px;
 }

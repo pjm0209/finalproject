@@ -5,7 +5,7 @@ $(function(){
 	
 	$('.board-side-icon').click(function(){
 		const boardFormNo = $(this).prev().find('input[type=hidden]').val();
-		location.href = contextPath + "/admin/board/boardEdit?boardFormNo=" + boardFormNo;
+		location.href = contextPath + "/board/admin/boardEdit?boardFormNo=" + boardFormNo;
 	});
 	
 	 CKEDITOR.replace("p_content", {
@@ -53,6 +53,27 @@ $(function(){
 	
 	$('.boardFile button').click(function(){
 		$('.file-list').slideToggle(500);
+	});
+	
+	/*게시글 상세보기 페이지 댓글로딩*/
+	if($('.board_comment_flag').val() == 'Y') {
+			commentsList($('input[name=boardNo]').val());
+		}
+	
+	/*게시글 상세보기 댓글등록*/	
+	$('#comment-submit').click(function() {
+		$.ajax({
+			url:"/mbti/comments/write",
+			data:$('form[name=commentFrm]').serialize(),
+			type:"POST",
+			success:function(res) {
+				console.log(res);
+				commentsList($('input[name=boardNo]').val());
+			},
+			error:function(xhr, status, error) {
+				alert(status + ": " + error);
+			}
+		});
 	});
 	
 	/*파일수정 첨부파일 삭제*/
