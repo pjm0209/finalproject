@@ -14,7 +14,6 @@ public class EducationVO extends SearchVO {
 	private String eduTeacher;
 	private int eduPrice;
 	private int eduPeopleNumber;
-	private List<EducationVO> educationItems;
 	
 	//education_place
 	private int epNo;
