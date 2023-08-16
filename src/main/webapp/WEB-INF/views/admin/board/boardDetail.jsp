@@ -61,9 +61,10 @@
 		</div>
 		
 		<div class="board-like">
+			<input type="hidden" id="boardLike" value="">
 			<span class="u_icon"></span>
 			<em class="u_txt">좋아요</em>
-			<em class="u_cnt">1</em>
+			<em class="u_cnt"></em>
 		</div>
 		<c:if test="${map['COMMENT_FLAG'] == 'Y' }">
 			<p class="board-comment-count"></p>
@@ -110,7 +111,7 @@
 				} else {
 					str += "<p class='comment-writer'>" + map.ADMIN_ID + "<span class='comment-write-regdate'>(" + regdate + ")</span>" +
 					"<div class='commentEditOrDel'><span class='comment-more'><i class='bi bi-three-dots-vertical'></i></span>" + 
-					"<div class='editDel'><a href='#' class='commentEdit'>수정</a><a href='#' class='commentDel'>삭제</a></div>";
+					"<div class='editDel'><a href='#' class='commentDel'>삭제</a></div>";
 				}
 			} else {
 				if(boardWriter === map.NAME) {
@@ -119,8 +120,7 @@
 					"<i class='bi bi-three-dots-vertical'></i></span><div class='editDel'><a href='#' class='commentEdit'>수정</a>" +
 					"<a href='#' class='commentDel'>삭제</a></div>";
 				} else {
-					str += "<p class='comment-writer'>" + map.NAME + "<span class='comment-write-regdate'>(" + regdate + ")</span>" + 
-					"<span class='comment-more'><i class='bi bi-three-dots-vertical'></i></span>";					
+					str += "<p class='comment-writer'>" + map.NAME + "<span class='comment-write-regdate'>(" + regdate + ")</span>";					
 				}
 			}
 			str += "</div>";
