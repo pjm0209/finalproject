@@ -58,4 +58,9 @@ public class EducationServiceImpl implements EducationService{
 		return educationDao.getTotalRecordTeacher(searchVo);
 	}
 
+	@Override
+	public int deleteEducation(List<EducationVO> list) {
+		return educationDao.deleteEducation(list);
+	}
+
 }
