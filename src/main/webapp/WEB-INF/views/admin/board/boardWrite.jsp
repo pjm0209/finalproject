@@ -4,25 +4,27 @@
 
 <!-- Begin Page Content -->
 <!-- Page Heading -->
-<c:import url="/admin/board/boardHeadSide"></c:import>
+<c:import url="/board/admin/boardHeadSide"></c:import>
 
 <c:if test="${empty param.boardNo }">
-	<c:set var="url" value="/admin/board/boardWrite"/>
+	<c:set var="url" value="/board/boardWrite"/>
 	<c:set var="board" value="${board }"/>
 </c:if>
 
 <c:if test="${!empty param.boardNo }">
-	<c:set var="url" value="/admin/board/boardWriteEdit"/>
+	<c:set var="url" value="/board/boardWriteEdit"/>
 	<c:set var="board" value="${map['BOARD_FORM_NAME'] }"/>
 </c:if>
 
 <div class="board-body">
 	<form name="boardWriteForm" method="post" enctype="multipart/form-data" action="<c:url value='${url }'/>">
 		<div id="board-title">
-		<input type="hidden" name="adminNo" value="${sessionScope.adminNo }">		
+		<input type="hidden" name="adminNo" value="${sessionScope.adminNo }">
+		<c:if test="${!empty param.boardNo }">
+			<input type="hidden" name="boardNo" value="${param.boardNo }">
+		</c:if>	
 			<h5>${boardFormVo.boardFormName }</h5>
 			<div class="board-head-button">
-				<input type="button" class="bg-gradient-secondary" onclick="location.href='<c:url value="/admin/board/board?boardFormNo=1"/>'" value="취소">
 				<input type="submit" class="bg-gradient-primary" id="save-boardCreate" <c:if test="${empty param.boardNo }"> value="저장" </c:if> <c:if test="${!empty param.boardNo }"> value="수정"</c:if>>
 			</div>
 		</div>
@@ -66,8 +68,7 @@
 							</dt>
 							<dd>
 								<div class="file_list">
-									
-					                <c:if test="${empty fileList}">
+					                <c:if test="${!empty param.boardFormNo or empty fileList}">
 					                	<div>
 						                    <div class="file_input">
 						                        <input type="text" readonly />
@@ -84,12 +85,15 @@
 					                	<c:forEach var="fileVo" items="${fileList }">
 					                		<div>
 							                    <div class="file_input">
-							                        <input type="text" value="${fileVo.originalFileName }" readonly />
+							                        <input type="text" class="fileOriginName" value="${fileVo.originalFileName }" readonly />
+							                        <input type="hidden" class="fileName" value="${fileVo.fileName }">
+							                        <input type="hidden" class="fileNo" value="${fileVo.fileNo }">
+							                        <input type="hidden" class="fileIdx" value="${i }">
 							                        <label> 첨부파일
 							                            <input type="file" name="files" onchange="selectFile(this);" />
 							                        </label>
 							                    </div>
-							                    <button type="button" onclick="removeFile(this);" class="btns del_btn"><span>삭제</span></button>
+							                    <button type="button" class="btns del_btn edit"><span>삭제</span></button>							                    
 							                    <c:if test="${i == 0 }">
 									                <button type="button" onclick="addFile();" class="btns fn_add_btn"><span>파일 추가</span></button>
 							                    </c:if>
@@ -108,6 +112,11 @@
 </div>
 </div>
 <!-- End of Main Content -->
+<script type="text/javascript">
+	$(document).ready(function(){
+		
+	});
+</script>
 
 <script src="<c:url value='/admin-css-js/js/board.js'/>"></script>
 

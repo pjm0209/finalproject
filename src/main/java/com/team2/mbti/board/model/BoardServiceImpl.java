@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+import com.team2.mbti.comment.model.CommentVO;
 import com.team2.mbti.common.SearchVO;
 
 import lombok.RequiredArgsConstructor;
@@ -40,17 +41,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int adminInsertBoard(BoardVO vo) {
-		int cnt = 0;
-		
-		if(vo.getAdminNo() != 0) {
-			cnt = boardDao.adminInsertBoard(vo);
-		} else {
-			vo.setNo((Integer) null);
-			cnt = boardDao.insertBoard(vo);
-		}
-		
-		return cnt;
+	public int adminInsertBoard(BoardVO vo) {		
+		return boardDao.insertBoard(vo);
 	}
 
 	@Override
@@ -72,12 +64,7 @@ public class BoardServiceImpl implements BoardService {
 	public int addReadCount(int boardNo) {
 		return boardDao.addReadCount(boardNo);
 	}
-
-	@Override
-	public List<CommentsVO> selectComment(int boardNo) {
-		return boardDao.selectComment(boardNo);
-	}
-
+	
 	@Override
 	public int insertFile(List<Map<String, Object>> fileList, int boardNo) {
 		int result = 0;
@@ -99,5 +86,15 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<BoardFileVO> selectFileList(int boardNo) {
 		return boardDao.selectFileList(boardNo);
+	}
+
+	@Override
+	public int deleteFile(int fileNo) {
+		return boardDao.deleteFile(fileNo);
+	}
+
+	@Override
+	public int updateBoard(BoardVO vo) {
+		return boardDao.updateBoard(vo);
 	}
 }
