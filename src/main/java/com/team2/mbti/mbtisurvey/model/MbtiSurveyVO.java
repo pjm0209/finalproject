@@ -8,13 +8,13 @@ import lombok.Setter;
 @Getter
 @Setter
 public class MbtiSurveyVO extends SearchVO {
-	private int mbtiServeyNo;
+	private int mbtiSurveyNo;
 	private int questionTypeNo;
 	private int questionCategoryNo;
     private String question;
 	@Override
 	public String toString() {
-		return "MbtiSurveyVO [mbtiServeyNo=" + mbtiServeyNo + ", questionTypeNo=" + questionTypeNo
+		return "MbtiSurveyVO [mbtiSurveyNo=" + mbtiSurveyNo + ", questionTypeNo=" + questionTypeNo
 				+ ", questionCategoryNo=" + questionCategoryNo + ", question=" + question + ", toString()="
 				+ super.toString() + "]";
 	}

@@ -53,4 +53,5 @@
 	<select id="selectByQuestionTypeNoMbtiSurvey" parameterType="mbtiSurveyVo" resultType="mbtiSurveyVo">
 		select * from mbti_survey where question_type_no=#{questionTypeNo}
 	</select>
+	
 </mapper>

@@ -85,7 +85,7 @@ public class MbtiController {
 		
 		String msg="mbti 질문 등록 실패",url="/admin/mbti/mbtiWrite";
 		boolean closePopup=false;
-		if(mbtiSurveyVo.getMbtiServeyNo()==0) {
+		if(mbtiSurveyVo.getMbtiSurveyNo()==0) {
 			int cnt=mbtiSurveyService.insertMbtiSurvey(mbtiSurveyVo);
 			logger.info("mbti 질문 등록 결과 cnt={}",cnt);
 			
