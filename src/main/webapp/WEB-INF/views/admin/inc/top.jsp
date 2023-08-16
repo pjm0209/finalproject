@@ -33,6 +33,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">  
 	<script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>
 	<script type="text/javascript" src="<c:url value='/resources/ckeditor/ckeditor.js'/>"></script>	
+	<script type="text/javascript" src="<c:url value='/admin-css-js/js/education.js'/>"></script>	
 </head>
 
 <body id="page-top">

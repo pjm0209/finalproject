@@ -120,7 +120,7 @@ button#education-delete-button {
 				<c:forEach var="educationVo" items="${list}">
 					<c:set var="educationNo" value="${educationVo.eduNo}"/>
 					<tr>
-						<th scope="row"><input type="checkbox" class="board-checkbox" vlaue="${educationVo.eduNo }"></th>
+						<th scope="row"><input type="checkbox" class="board-checkbox" name="eduNo" value="${educationVo.eduNo }"></th>
 						<td>${educationVo.eduNo }</td>
 						<td>${educationVo.eduName }</td>
 						<td>${educationVo.eduTeaName }</td>
