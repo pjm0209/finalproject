@@ -39,7 +39,7 @@ button#location-delete-button {
 </div>
 <div class="side-body">
 	<div class="side-div-title">
-		<h6>교육 리스트</h6>
+		<h6>교육</h6>
 		<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
 			fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
   			<path fill-rule="evenodd"
@@ -102,7 +102,7 @@ button#location-delete-button {
 			</div>
 		</div>
 		<form name="frmDelete" method="post">
-		<table class="table">
+		<table class="table" id="educationtb">
 			<thead>
 				<tr class="board-table-colum">
 					<th scope="col"><input type="checkbox" id="check-All" class="board-checkbox"></th>
@@ -128,32 +128,33 @@ button#location-delete-button {
 				</c:forEach>
 			</tbody>
 		</table>
-		<nav class="boardPaging" aria-label="Page navigation example">
+		<div style="width: 10%;text-align: center;margin: 0 auto;">
 			<ul class="pagination">
 				<c:if test="${pagingInfo.firstPage > 1 }">
 				    <li class="page-item">
-				     <a class="page-link" href="#" onclick="pageFunc(${pagingInfo.fistPage - 1})" aria-label="Previous">
+				      <a class="page-link" href="#" aria-label="Previous">
 				        <span aria-hidden="true">&laquo;</span>
 				      </a>
 				    </li>
 				</c:if>
 				<c:forEach var="i" begin="${pagingInfo.firstPage}" end="${pagingInfo.lastPage}">
 					<c:if test="${i==pagingInfo.currentPage}">
-						<li class="page-item active"><a class="page-link"  href="#">${i }</a></li>	
+						<li class="page-item active"><a class="page-link" href="<c:url value='/admin/education/location?currentPage=${i}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">${i}</a></li>
 					</c:if>
 					<c:if test="${i!=pagingInfo.currentPage}">
-						<li class="page-item"><a class="page-link" href="#" onclick="pageFunc(${i})">${i }</a></li>	
+						<li class="page-item"><a class="page-link" href="<c:url value='/admin/education/location?currentPage=${i}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">${i}</a></li>
 					</c:if>
 				</c:forEach>
 				<c:if test="${pagingInfo.lastPage < pagingInfo.totalPage}">
 				    <li class="page-item">
-				      <a class="page-link" href="#" aria-label="Next" onclick="pageFunc(${pagingInfo.lastPage + 1})">
+				      <a class="page-link" href="#" aria-label="Next">
 				        <span aria-hidden="true">&raquo;</span>
 				      </a>
 				    </li>
 				</c:if>
 			</ul>
-		</nav>
+		</div>
+		</form>
 	</div>
 </div>
 </div>

@@ -1,15 +1,20 @@
 package com.team2.mbti.education.model;
 
+import java.util.List;
+
+import com.team2.mbti.common.SearchVO;
+
 import lombok.Data;
 
 @Data
-public class EducationVO {
+public class EducationVO extends SearchVO {
 	private int eduNo;
 	private String eduName;
 	private String eduCom;
 	private String eduTeacher;
 	private int eduPrice;
 	private int eduPeopleNumber;
+	private List<EducationVO> educationItems;
 	
 	//education_place
 	private int epNo;
