@@ -4,13 +4,11 @@
 <%@ include file="../inc/top.jsp"%>
 <link href="<c:url value='/admin-css-js/css/calendar.css'/>" rel="stylesheet">
 <script type="text/javascript" src="<c:url value='admin-css-js/js/calendar.js'/>"></script>
-<script type="text/javascript" src="<c:url value='/resources/fullcalendar-6.1.8/'/>"></script> 
 <script type="text/javascript" src="<c:url value='/resources/fullcalendar-6.1.8/dist/index.global.js'/>"></script>
 <script type="text/javascript" src="<c:url value='/resources/fullcalendar-6.1.8/packages/core/locales/ko.global.min.js'/>"></script>
 <script>
 
   $(function() {
-  	
     var calendarEl = document.getElementById('calendar');
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -23,31 +21,13 @@
       initialView: 'dayGridMonth',
   /*     initialDate: '2023-01-12', */
       locale: 'ko',
-      /* navLinks: true, // can click day/week names to navigate views */
-      selectable: true,
+     /*  navLinks: true, // can click day/week names to navigate views */
       selectMirror: true,
       select: function(arg) {
-    	  
-    	var _width = '650';
-    	var _height = '550';
-    	 
-    	// 팝업을 가운데 위치시키기 위해 아래와 같이 값 구하기
-    	var popupX = Math.ceil(( $(window).width() - (_width)*1.7 )/2);
-        var popupY = Math.ceil(( $(window).height() - _height*1.3 )/2); 
-		
-        var contextPath = "/mbti/admin/book";
-       /*  var title =
-        	window.open(contextPath+'/bookSummingUpPopup','팝업창',
-        			'location=no,status=no,menubar=no,width=600,height=500,location=yes,resizable=no,left='+popupX+',top='+popupY); */ 
-        			
+    	var title = alert('123');
         calendar.unselect()
       },
-      /* eventClick: function(arg) {
-        if (confirm('Are you sure you want to delete this event?')) {
-          arg.event.remove()
-        }
-      },
-      editable: true, */
+      editable: true,
       dayMaxEvents: true, // allow "more" link when too many events
       events: [
         {
@@ -110,10 +90,8 @@
 
     calendar.render();
     
-    $('#calendar div:nth-child(2) table tbody tr td div div table tbody tr td div').click(function(){
-    	$('#calendar div:nth-child(2) table tbody tr td div div table tbody tr td div').attr('data-bs-toggle', 'modal');
-    	$('#calendar div:nth-child(2) table tbody tr td div div table tbody tr td div').attr('data-bs-target', '#exampleModal');	
-    }); 
+    $('#calendar div:nth-child(2) table tbody tr td div div table tbody tr td div').attr('data-bs-toggle', 'modal');
+  	$('#calendar div:nth-child(2) table tbody tr td div div table tbody tr td div').attr('data-bs-target', '#exampleModal');
     
   });
 
@@ -140,6 +118,17 @@
 	
 	:root {
 	--fc-today-bg-color: #E5CCFF;
+	}
+	#modalTable th {
+		text-align: left;
+		padding-left: 30px;
+		border-right: 1px solid #eeeeee;
+		background: #f8f9fa;
+	}
+	#modalTable td {
+		padding-left: 30px;
+		text-align: right;
+		padding-right: 30px;
 	}
 </style>
 </head>
@@ -184,30 +173,64 @@
 	                    <dd id="sales" class="price"><span class="no">0</span><span class="unit">원</span></dd>
 	                </dl>
 	            </li>
-	            <li class="list-group-item">
-	            	<!-- Button trigger modal -->
-					<button id='bt1' type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-					  Launch demo modal
-					</button>
-					<!-- Modal -->
-					<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-					  <div class="modal-dialog">
-					    <div class="modal-content">
-					      <div class="modal-header">
-					        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-					        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-					      </div>
-					      <div class="modal-body">
-					        ...
-					      </div>
-					      <div class="modal-footer">
-					        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
-					      </div>
-					    </div>
-					  </div>
-					</div>
-	            </li>
-	        </ul>
+			</ul>
+           	<!-- Button trigger modal -->
+			<button id='bt1' type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+			style="display:none;">
+			  Launch demo modal
+			</button>
+			<!-- Modal -->
+			<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			  <div class="modal-dialog modal-dialog-centered">
+			    <div class="modal-content">
+			      <div class="modal-header" style="background-image: linear-gradient(316deg, #c87fdf 10%, #5a63cf 100%);">
+			      	<h3 id="modalLabel" style="margin-left: 170px;margin-bottom: -7px;color: white;">매출정보 ( ${date} )</h3>
+			      </div>
+			      <div class="modal-body">
+			      	<table class="table table-striped-columns" id="modalTable">
+					  <tbody class="table-group-divider">
+					    <tr>
+					      <th scope="row">상품 결제금액</th>
+					      <td>
+					      	<fmt:formatNumber value="${money}" pattern="#,###"/>원
+					      </td>
+					    </tr>
+					    <tr>
+					      <th scope="row">배송비 결제금액</th>
+					      <td>
+					      	<fmt:formatNumber value="${money}" pattern="#,###"/>원
+					      </td>
+					    </tr>
+					    <tr>
+					      <th scope="row">상품 환불금액</th>
+					      <td>
+					      	<fmt:formatNumber value="${money}" pattern="#,###"/>원
+					      </td>
+					    </tr>
+					     <tr>
+					      <th scope="row">배송비 환불금액</th>
+					      <td>
+					      	<fmt:formatNumber value="${money}" pattern="#,###"/>원
+					      </td>
+					    </tr>
+					     <tr>
+					      <th scope="row">매출액</th>
+					      <td>
+					      	<b>
+					      		<fmt:formatNumber value="1000000" pattern="#,###"/>
+					      	</b>원
+					      </td>
+					    </tr>
+					  </tbody>
+					</table>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" style="width: 100%;">닫기</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+	        <br><br>
 				<!-- Cloudflare Pages Analytics -->	
 			<div id='calendar'></div>
 				<!-- Cloudflare Pages Analytics -->
