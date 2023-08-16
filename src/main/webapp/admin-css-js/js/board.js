@@ -95,11 +95,23 @@ $(function(){
 		});
 	});
 	
+	/*게시글 상세페이지 댓글박스*/
 	$(document).on('click', '.comment-more', function() {		
 		$(this).next('.editDel').toggle().css('visibility', 'visible');
 	});
 	
-	likeCountSelect();
+	if($('#boardDetail').val() == 'boardDetail') {
+		likeCountSelect();
+		likeSelect();
+	}
+	
+	$('div.board-like').click(function() {		
+		if($('.u_icon').is('.like') === true) {
+			likeDel();
+		} else {
+			likeIns();
+		}		
+	});
 	
 	const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
 	const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
@@ -110,16 +122,76 @@ function pageFunc(curPage) {
 	$('form[name="paginForm"]').submit();
 }
 
+//좋아요 처리함수
+function likeIns() {
+	var boardNo = $('input[name=boardNo').val();
+	var adminNo = $('input[name=adminNo]').val();
+	
+	$.ajax({
+		url:contextPath + '/boardLike/likeIns',
+		type:'POST',
+		data:{boardNo:boardNo,
+			  adminNo:adminNo},
+		success:function(result) {			
+			$('.u_icon').addClass('like');
+			likeCountSelect();
+		},
+		error:function(xhr, status, error) {
+			alert(status + ": " + error);
+		}
+	});
+}
+
+//좋아요 취소
+function likeDel() {
+	var boardNo = $('input[name=boardNo').val();
+	var adminNo = $('input[name=adminNo]').val();
+	
+	$.ajax({
+		url:contextPath + '/boardLike/likeDel',
+		type:'POST',
+		data:{boardNo:boardNo,
+			  adminNo:adminNo},
+		success:function(result) {			
+			$('.u_icon').removeClass('like');
+			likeCountSelect();
+		},
+		error:function(xhr, status, error) {
+			alert(status + ": " + error);
+		}
+	});
+}
+
 /*좋아요 개수 검색함수*/
 function likeCountSelect() {
 	var boardNo = $('input[name=boardNo]').val();
-	
 	$.ajax({
 		url:contextPath + '/boardLike/count',
 		type:'GET',
 		data:{boardNo:boardNo},
 		success:function(result) {
 			$('.u_cnt').html(result);
+		},
+		error:function(xhr, status, error) {
+			alert(status + ": " + error);
+		}
+	});
+}
+
+/*좋아요 선택유무*/
+function likeSelect() {
+	var boardNo = $('input[name=boardNo]').val();
+	var adminNo = $('input[name=adminNo]').val();
+	
+	$.ajax({
+		url:contextPath + '/boardLike/like',
+		type:'POST',
+		data:{boardNo:boardNo,
+			  adminNo:adminNo},
+		success:function(result) {
+			if(result > 0) {
+				$('.u_icon').addClass('like');				
+			}
 		},
 		error:function(xhr, status, error) {
 			alert(status + ": " + error);
@@ -141,6 +213,13 @@ function commentsList(boardNo) {
 			alert(status + ": " + error);
 		}
 	});
+}
+
+//댓글 답글쓰기 함수
+function commentReply(element) {
+	$(element).parent().parent().after($('form[name=commentFrm]'));
+	$(element).parent().parent().css({'margin':'0', 'border-bottom':'0', 'margin-bottom':'-20px'});
+	
 }
 
 /*글쓰기 첨부파일 함수*/
