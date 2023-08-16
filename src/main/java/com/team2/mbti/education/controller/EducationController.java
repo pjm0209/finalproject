@@ -57,6 +57,29 @@ public class EducationController {
 		
 	}
 	
+	@RequestMapping("/eduDelete")
+	public String eduDelete(@ModelAttribute EducationVO vo, Model model) {
+		logger.info("교육 삭제 처리, 파라미터 vo={}", vo);
+		
+		List<EducationVO> list = vo.getEducationItems();
+		
+		int cnt = educationService.deleteEducation(list);
+		
+		String msg="", url="/admin/education/list";
+		if(cnt>0) {
+			msg="선택한 교육이 삭제되었습니다.";
+		}else {
+			msg="선택한 교육을 삭제하는 도중 에러가 발생하였습니다.";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
+		
+	}
+	
+	
 	@GetMapping("/applicantList")
 	public String appliList_get(Model model) {
 		logger.info("신청자 관리 페이지 보여주기");

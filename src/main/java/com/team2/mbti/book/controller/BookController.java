@@ -69,5 +69,14 @@ public class BookController {
 		
 		return "admin/book/bookSummingUp";
 	}
+	
+	@RequestMapping("/bookSummingUpPopup")
+	public String bookSummingUpPopup(Model model) {
+		logger.info("책관리 페이지 팝업창(자세히보기)");
+		
+		model.addAttribute("title", "책 매출현황 팝업창");
+		
+		return "admin/book/bookSummingUpPopup";
+	}
 
 }//
