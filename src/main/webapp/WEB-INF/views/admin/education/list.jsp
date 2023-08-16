@@ -48,7 +48,7 @@ button#education-delete-button {
 	</div>
 	<div class="group">
 		<div id="group-list" class="nav">
-		<div class="board-side-boardItem">
+			<div class="board-side-boardItem">
 				<div class="board-name">
 					<a class="applicantList-link" href="<c:url value='/admin/education/list'/>">
 						<span>교육 리스트</span>
@@ -80,11 +80,6 @@ button#education-delete-button {
 	</div>
 </div>
 <div class="board-body">
-	<form name="paginForm" method="post" action="<c:url value='/admin/education/list'/>">
-		<input type="hidden" name="searchCondition" value="${param.searchCondition }">
-		<input type="hidden" name="searchKeyword" value="${param.searchKeyword }">
-		<input type="hidden" name="currentPage">
-	</form>
 	<div id="board-title">
 		<h5>교육 리스트</h5>
 		<button class="education-button" id="education-edit-button">수정</button>
@@ -93,7 +88,7 @@ button#education-delete-button {
 	<div class="board">
 		<div class="board-head">
 			<div class="board-search-result">
-				<form name="searchForm" method="post" action="<c:url value='/admin/education/list'/>">
+				<form name="frmSearch" method="post" action="<c:url value='/admin/education/list'/>">
 				<div class="input-group mb-3" id="board-search-div">
 					<select class="form-select form-select-lg" aria-label=".form-select-lg example" name="searchcondition" id="board-search-select">					  	
 					  	<option value="edu_name" <c:if test="${param.searchCondition=='edu_name'}"> selected="selected" </c:if>>교육 이름</option>
@@ -103,10 +98,11 @@ button#education-delete-button {
 				 	<input type="text" class="form-control" name="searchKeyword" placeholder="검색어를 입력하세요" aria-label="Recipient's username" aria-describedby="button-addon2" id="board-search-area" value="${param.searchKeyword}">
 				 	<button class="btn btn-outline-secondary" type="submit" id="button-addon2">검색</button>
 				</div>
+				</form>
 			</div>
 		</div>
 		<form name="frmDelete" method="post">
-		<table class="table">
+		<table class="table" id="educationtb">
 			<thead>
 				<tr class="board-table-colum">
 					<th scope="col"><input type="checkbox" id="check-All" class="board-checkbox"></th>
@@ -122,7 +118,7 @@ button#education-delete-button {
 			<c:set var="idx" value="0"/>
 			<tbody>
 				<c:forEach var="educationVo" items="${list}">
-					<c:set var="educationPlace" value="${educationVo.eduNo}"/>
+					<c:set var="educationNo" value="${educationVo.eduNo}"/>
 					<tr>
 						<th scope="row"><input type="checkbox" class="board-checkbox" vlaue="${educationVo.eduNo }"></th>
 						<td>${educationVo.eduNo }</td>
@@ -136,32 +132,33 @@ button#education-delete-button {
 				</c:forEach>
 			</tbody>
 		</table>
-	<nav class="boardPaging" aria-label="Page navigation example">
+		<div style="width: 10%;text-align: center;margin: 0 auto;">
 			<ul class="pagination">
 				<c:if test="${pagingInfo.firstPage > 1 }">
 				    <li class="page-item">
-				     <a class="page-link" href="#" onclick="pageFunc(${pagingInfo.fistPage - 1})" aria-label="Previous">
+				      <a class="page-link" href="#" aria-label="Previous">
 				        <span aria-hidden="true">&laquo;</span>
 				      </a>
 				    </li>
 				</c:if>
 				<c:forEach var="i" begin="${pagingInfo.firstPage}" end="${pagingInfo.lastPage}">
 					<c:if test="${i==pagingInfo.currentPage}">
-						<li class="page-item active"><a class="page-link"  href="#">${i }</a></li>	
+						<li class="page-item active"><a class="page-link" href="<c:url value='/admin/education/list?currentPage=${i}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">${i}</a></li>
 					</c:if>
 					<c:if test="${i!=pagingInfo.currentPage}">
-						<li class="page-item"><a class="page-link" href="#" onclick="pageFunc(${i})">${i }</a></li>	
+						<li class="page-item"><a class="page-link" href="<c:url value='/admin/education/list?currentPage=${i}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">${i}</a></li>
 					</c:if>
 				</c:forEach>
 				<c:if test="${pagingInfo.lastPage < pagingInfo.totalPage}">
 				    <li class="page-item">
-				      <a class="page-link" href="#" aria-label="Next" onclick="pageFunc(${pagingInfo.lastPage + 1})">
+				      <a class="page-link" href="#" aria-label="Next">
 				        <span aria-hidden="true">&raquo;</span>
 				      </a>
 				    </li>
 				</c:if>
 			</ul>
-		</nav>
+		</div>
+		</form>
 	</div>
 </div>
 </div>

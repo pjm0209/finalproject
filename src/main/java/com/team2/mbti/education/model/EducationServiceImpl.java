@@ -59,8 +59,8 @@ public class EducationServiceImpl implements EducationService{
 	}
 
 	@Override
-	public EducationVO selectByEduNo(int eduNo) {
-		return educationDao.selectByEduNo(eduNo);
+	public int deleteEducation(List<EducationVO> list) {
+		return educationDao.deleteEducation(list);
 	}
 
 }

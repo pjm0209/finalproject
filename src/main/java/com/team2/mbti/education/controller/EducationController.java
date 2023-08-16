@@ -6,11 +6,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.team2.mbti.common.ConstUtil;
 import com.team2.mbti.common.PaginationInfo;
@@ -28,52 +26,56 @@ public class EducationController {
 	
 	private final EducationService educationService;
 	
-	@RequestMapping("/list")
+	@GetMapping("/list")
 	public String list_get(@ModelAttribute SearchVO searchVo, Model model) {
-		logger.info("교육 리스트 페이지 보여주기, 파라미터 searchVo={}", searchVo);
+		logger.info("교육 리스트 페이지 보여주기");
 		
 		PaginationInfo pagingInfo = new PaginationInfo();
+		List<EducationVO> list = null;
+		String condition=searchVo.getSearchCondition();
+		String keyword=searchVo.getSearchKeyword();
+		logger.info("condition={},keyword={}",condition,keyword);
+			
 		pagingInfo.setBlockSize(ConstUtil.BLOCK_SIZE);
 		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
-		pagingInfo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
+		pagingInfo.setRecordCountPerPage(ConstUtil.MBTI_RECORD_COUNT);
 		
-		searchVo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
+		searchVo.setBlockSize(ConstUtil.BLOCK_SIZE);
+		searchVo.setRecordCountPerPage(ConstUtil.MBTI_RECORD_COUNT);
 		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
 		
-		List<EducationVO> list = educationService.selectAllEducation(searchVo);
+		list = educationService.selectAllEducation(searchVo);
 		logger.info("교육 목록 결과 list.size={}", list.size());
-		int totalRecord = educationService.getTotalRecordLocation(searchVo);
-		logger.info("교육 전체 검색 결과 totalRecord={}", totalRecord);
+		int totalRecord=educationService.getTotalRecordLocation(searchVo);
+		logger.info("교육 전체 검색 결과 totalRecord={}",totalRecord);
 		pagingInfo.setTotalRecord(totalRecord);
 		
 		model.addAttribute("list", list);
 		model.addAttribute("pagingInfo", pagingInfo);
 		
 		return "admin/education/list";
-	}
-			
-	
-	@RequestMapping("/listDetail")
-	public String listDetail(@RequestParam(defaultValue = "0") int eduNo, ModelMap model) {
-		//1
-		logger.info("교육 상세보기 파라미터 no={}", eduNo);
 		
-		if(eduNo==0) {
-			model.addAttribute("msg", "잘못된 url");
-			model.addAttribute("url", "/education/list");
-			
-			return "common/message";
+	}
+	
+	@RequestMapping("/eduDelete")
+	public String eduDelete(@ModelAttribute EducationVO vo, Model model) {
+		logger.info("교육 삭제 처리, 파라미터 vo={}", vo);
+		
+		List<EducationVO> list = vo.getEducationItems();
+		
+		int cnt = educationService.deleteEducation(list);
+		
+		String msg="", url="/admin/education/list";
+		if(cnt>0) {
+			msg="선택한 교육이 삭제되었습니다.";
+		}else {
+			msg="선택한 교육을 삭제하는 도중 에러가 발생하였습니다.";
 		}
 		
-		//2
-		EducationVO vo = educationService.selectByEduNo(eduNo);
-		logger.info("교육 상세보기 결과 vo={}", vo);
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
 		
-		//3
-		model.addAttribute("vo", vo);
-		
-		//4
-		return "education/listDetail";
+		return "common/message";
 		
 	}
 	
