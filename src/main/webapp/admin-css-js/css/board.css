@@ -285,8 +285,12 @@ input[type="file"] {
 }
 
 .file_list button {
-	border: 1px solid #e1e1e1;
-	border-radius: 3px;
+	border: 0;
+	background: white;
+}
+
+i.bi.bi-plus-lg {
+	font-size: x-large;
 }
 
 .file_input input[type=text] {
@@ -317,7 +321,6 @@ input[type="file"] {
 	border-radius: 5px;
 	border: 1px solid #e1e1e1;
 	height: 28px;
-	background: #f1f1f1;
 	color: black;
 	margin-top: 10px;
 }
@@ -333,6 +336,10 @@ input[type="file"] {
 
 .fn_add_btn {
 	margin-left: 10px;
+}
+
+.bi.bi-x-lg {
+	cursor: pointer;
 }
 
 /*게시판 상세보기*/

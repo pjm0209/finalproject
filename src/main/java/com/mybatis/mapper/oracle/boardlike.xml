@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.team2.mbti.boardlike.model.BoardLikeDAO">
+	<sql id="adminUser">
+		<where>
+			<if test="adminNo != 0 and adminNo != null">
+				admin_no = #{adminNo}
+			</if>
+			<if test="adminNo == 0 or adminNo == null">
+				no = #{no}
+			</if>
+		</where>
+	</sql>
+
+	<insert id="insertUserLike" parameterType="boardLikeVo">
+		insert into board_like(no, board_no)
+		values(#{no}, #{boardNo});
+	</insert>
+	
+	<insert id="insertAdminLike" parameterType="boardLikeVo">
+		insert into board_like(admin_no, board_no)
+		values(#{adminNo}, #{boardNo});
+	</insert>
+	
+	<select id="selectLikeByBoardNo" parameterType="int" resultType="int">
+		select count(*) from board_like
+		where board_no = #{boardNo}
+	</select>
+	
+	<select id="selectLikeBoard" parameterType="boardLikeVo" resultType="int">
+		select count(*) from board_like
+		<include refid="adminUser"></include>
+	</select>
+	
+	<delete id="deleteBoardLike" parameterType="boardLikeVo">
+		delete from board_like
+		<include refid="adminUser"></include>
+	</delete>
+</mapper>

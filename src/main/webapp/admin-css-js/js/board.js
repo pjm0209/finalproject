@@ -1,7 +1,7 @@
 var fileIndex = 0;
+var contextPath = "/mbti";
 
 $(function(){
-	var contextPath = "/mbti";
 	
 	$('.board-side-icon').click(function(){
 		const boardFormNo = $(this).prev().find('input[type=hidden]').val();
@@ -63,7 +63,7 @@ $(function(){
 	/*게시글 상세보기 댓글등록*/	
 	$('#comment-submit').click(function() {
 		$.ajax({
-			url:"/mbti/comments/write",
+			url:contextPath + "/comments/write",
 			data:$('form[name=commentFrm]').serialize(),
 			type:"POST",
 			success:function(res) {
@@ -78,17 +78,11 @@ $(function(){
 	
 	/*파일수정 첨부파일 삭제*/
 	$('.btns.del_btn.edit').click(function() {
-		var fileName = $(this).prev('div.file_input').find('.fileName').val();
-		var fileNo = $(this).prev('div.file_input').find('.fileNo').val();
-		
-		if($(this).prev().find('.fileIdx').val() == '0') {
-			$(this).prev().find('.fileOriginName').val('');
-		} else {
-			$(this).parent('div').remove();				
-		}
+		var fileName = $(this).nextAll('.fileName').val();
+		var fileNo = $(this).nextAll('.fileNo').val();
 		
 		$.ajax({
-			url:"/mbti/admin/board/fileDel",
+			url:contextPath + "/board/fileDel",
 			data:{fileName: fileName,
 				  fileNo: fileNo},
 			type:"GET",				
@@ -105,6 +99,8 @@ $(function(){
 		$(this).next('.editDel').toggle().css('visibility', 'visible');
 	});
 	
+	likeCountSelect();
+	
 	const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
 	const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
 });
@@ -114,10 +110,27 @@ function pageFunc(curPage) {
 	$('form[name="paginForm"]').submit();
 }
 
+/*좋아요 개수 검색함수*/
+function likeCountSelect() {
+	var boardNo = $('input[name=boardNo]').val();
+	
+	$.ajax({
+		url:contextPath + '/boardLike/count',
+		type:'GET',
+		data:{boardNo:boardNo},
+		success:function(result) {
+			$('.u_cnt').html(result);
+		},
+		error:function(xhr, status, error) {
+			alert(status + ": " + error);
+		}
+	});
+}
+
 /*댓글리스트 불러오기 함수*/
 function commentsList(boardNo) {
 	$.ajax({
-		url:'/mbti/comments/list',
+		url:contextPath + '/comments/list',
 		type:'GET',
 		data:{boardNo:boardNo},
 		datatype:'json',
@@ -153,22 +166,25 @@ function selectFile(element) {
         return false;
     }
 
-    // 3. 파일명 지정
-    filename.value = file.name;
+    // 3. 파일명 지정   
+    $(element).parent().prev('.fileName').html(file.name + "&nbsp&nbsp");
+    
+    if($(element).parent().prev('.fileName').html().length > 0) {
+		$(element).parent().prev('.fileName').after('<span class="bi bi-x-lg" onclick="removeFile(this);" class="btns del_btn"></span>');
+	}
 }
-
 
 // 파일 추가
 function addFile() {
     const fileDiv = document.createElement('div');
     fileDiv.innerHTML =`
-        <div class="file_input">
-            <input type="text" readonly />
-            <label> 첨부파일` +
+        <div class="file_input">            
+            <span class="fileName"></span>
+	        
+            <label> <i class="bi bi-folder-plus"></i>` +
                 '<input type="file" name="files' + ++fileIndex + '"onchange="selectFile(this);" />' +
              `</label>
         </div>
-        <button type="button" onclick="removeFile(this);" class="btns del_btn"><span>삭제</span></button>
     `;
     document.querySelector('.file_list').appendChild(fileDiv);
 }
@@ -176,10 +192,12 @@ function addFile() {
 
 // 파일 삭제
 function removeFile(element) {
-    const fileAddBtn = element.nextElementSibling;
-    if (fileAddBtn) {
-        const inputs = element.previousElementSibling.querySelectorAll('input');
-        inputs.forEach(input => input.value = '')
+    const fileName = $(element).next().find('input[type=file]').attr('name');    
+    if (fileName == 'files') {
+		$(element).parent().find('input').val('');
+        $(element).prev().html('');
+        $(element).remove();
+        
         return false;
     }
     element.parentElement.remove();
