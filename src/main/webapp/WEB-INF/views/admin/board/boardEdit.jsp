@@ -4,15 +4,15 @@
 
 <!-- Begin Page Content -->
 <!-- Page Heading -->
-<c:import url="/admin/board/boardHeadSide"></c:import>
+<c:import url="/board/admin/boardHeadSide"></c:import>
 <div class="board-body">
-	<form name="boardSetEdit" method="post" action="<c:url value='/admin/board/boardEdit'/>">
+	<form name="boardSetEdit" method="post" action="<c:url value='/board/admin/boardEdit'/>">
 		<input type="hidden" name="lastEditAdminId" value="admin">
 		<input type="hidden" name="boardFormNo" value="${param.boardFormNo }">
 		<div id="board-title">
 			<h5>${vo.boardFormName }</h5>
 			<div class="board-head-button">
-				<input type="button" class="bg-gradient-secondary" onclick="location.href='<c:url value="/admin/board/board?boardFormNo=1"/>'" value="취소">			
+				<input type="button" class="bg-gradient-secondary" onclick="location.href='<c:url value="/board/board?boardFormNo=1"/>'" value="취소">			
 				<input type="submit" class="bg-gradient-primary" id="save-boardWrite" value="저장">
 			</div>
 		</div>

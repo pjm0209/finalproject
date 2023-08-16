@@ -12,7 +12,7 @@ public class BoardVO extends SearchVO {
 	private int boardFormNo;
 	private String boardTitle;
 	private String boardBody;
-	private int no;
+	private Integer no;
 	private Timestamp boardRegdate;
 	private int boardReadcount;
 	private int rcmdCount;

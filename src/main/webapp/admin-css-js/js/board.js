@@ -5,7 +5,7 @@ $(function(){
 	
 	$('.board-side-icon').click(function(){
 		const boardFormNo = $(this).prev().find('input[type=hidden]').val();
-		location.href = contextPath + "/admin/board/boardEdit?boardFormNo=" + boardFormNo;
+		location.href = contextPath + "/board/admin/boardEdit?boardFormNo=" + boardFormNo;
 	});
 	
 	 CKEDITOR.replace("p_content", {
@@ -55,6 +55,56 @@ $(function(){
 		$('.file-list').slideToggle(500);
 	});
 	
+	/*게시글 상세보기 페이지 댓글로딩*/
+	if($('.board_comment_flag').val() == 'Y') {
+			commentsList($('input[name=boardNo]').val());
+		}
+	
+	/*게시글 상세보기 댓글등록*/	
+	$('#comment-submit').click(function() {
+		$.ajax({
+			url:"/mbti/comments/write",
+			data:$('form[name=commentFrm]').serialize(),
+			type:"POST",
+			success:function(res) {
+				console.log(res);
+				commentsList($('input[name=boardNo]').val());
+			},
+			error:function(xhr, status, error) {
+				alert(status + ": " + error);
+			}
+		});
+	});
+	
+	/*파일수정 첨부파일 삭제*/
+	$('.btns.del_btn.edit').click(function() {
+		var fileName = $(this).prev('div.file_input').find('.fileName').val();
+		var fileNo = $(this).prev('div.file_input').find('.fileNo').val();
+		
+		if($(this).prev().find('.fileIdx').val() == '0') {
+			$(this).prev().find('.fileOriginName').val('');
+		} else {
+			$(this).parent('div').remove();				
+		}
+		
+		$.ajax({
+			url:"/mbti/admin/board/fileDel",
+			data:{fileName: fileName,
+				  fileNo: fileNo},
+			type:"GET",				
+			success:function(result) {
+				console.log("result: " + result);					
+			},
+			error:function(xhr, status, error) {
+				alert(status + ": " + error);
+			}
+		});
+	});
+	
+	$(document).on('click', '.comment-more', function() {		
+		$(this).next('.editDel').toggle().css('visibility', 'visible');
+	});
+	
 	const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
 	const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
 });
@@ -62,6 +112,22 @@ $(function(){
 function pageFunc(curPage) {
 	$('input[name="currentPage"]').val(curPage);
 	$('form[name="paginForm"]').submit();
+}
+
+/*댓글리스트 불러오기 함수*/
+function commentsList(boardNo) {
+	$.ajax({
+		url:'/mbti/comments/list',
+		type:'GET',
+		data:{boardNo:boardNo},
+		datatype:'json',
+		success:function(result) {
+			comments(result);				
+		},
+		error:function(xhr, status, error) {
+			alert(status + ": " + error);
+		}
+	});
 }
 
 /*글쓰기 첨부파일 함수*/

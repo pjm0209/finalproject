@@ -36,8 +36,11 @@ public class MainMbtiController {
 		
 		List<MbtiSurveyVO> list=mbtiSurveyService.selectByQuestionTypeNoMbtiSurvey(questionTypeNo);
 		logger.info("mbti 질문지 검색 결과 list.size()={}",list.size());
+		int num=(int)Math.ceil(list.size()/10);
+		logger.info("num={}",num);
 		
 		model.addAttribute("list", list);
+		model.addAttribute("num", num);
 		
 		return "main/mbti/question";
 	}

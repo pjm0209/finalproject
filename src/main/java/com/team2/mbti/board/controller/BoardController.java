@@ -16,13 +16,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.team2.mbti.board.model.BoardFileVO;
 import com.team2.mbti.board.model.BoardFormVO;
 import com.team2.mbti.board.model.BoardService;
 import com.team2.mbti.board.model.BoardVO;
-import com.team2.mbti.board.model.CommentsVO;
+import com.team2.mbti.comment.model.CommentVO;
 import com.team2.mbti.common.ConstUtil;
 import com.team2.mbti.common.FileUploadUtil;
 import com.team2.mbti.common.PaginationInfo;
@@ -31,7 +32,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 
 @Controller
-@RequestMapping("/admin/board")
+@RequestMapping("/board")
 @RequiredArgsConstructor
 public class BoardController {
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
@@ -39,7 +40,7 @@ public class BoardController {
 	private final BoardService boardService;
 	private final FileUploadUtil fileUploadUtil;
 	
-	@GetMapping("/boardHeadSide")
+	@GetMapping("/admin/boardHeadSide")
 	public String boardHeadSide(Model model) {
 		logger.info("게시판 사이드바");
 		
@@ -58,10 +59,10 @@ public class BoardController {
 		PaginationInfo pagingInfo = new PaginationInfo();
 		pagingInfo.setBlockSize(ConstUtil.BLOCK_SIZE);
 		pagingInfo.setCurrentPage(vo.getCurrentPage());
-		pagingInfo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
+		pagingInfo.setRecordCountPerPage(ConstUtil.BOARD_RECORD_COUNT);
 
 		//[2]SearchVo에 입력되지 않은 두 개의 변수에 값 셋팅
-		vo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
+		vo.setRecordCountPerPage(ConstUtil.BOARD_RECORD_COUNT);
 		vo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
 
 		List<Map<String, Object>> list = null;
@@ -88,7 +89,7 @@ public class BoardController {
 		return "admin/board/board";
 	}
 	
-	@GetMapping("/boardCreate")
+	@GetMapping("/admin/boardCreate")
 	public String boardCreate_get(Model model) {
 		logger.info("게시판 만들기 화면 보여주기");
 		
@@ -97,17 +98,17 @@ public class BoardController {
 		return "admin/board/boardCreate";
 	}		
 	
-	@PostMapping("/boardCreate")
+	@PostMapping("/admin/boardCreate")
 	public String boardCreate_post(@ModelAttribute BoardFormVO vo, Model model) {
 		logger.info("게시판 만들기 처리 파라미터 vo: {}", vo);
 		
 		int cnt = boardService.insertBoardForm(vo);
 		logger.info("게시판 만들기 처리 결과 cnt: {}", cnt);
 		
-		String msg = "게시판 만들기가 실패하였습니다.", url = "/admin/board/boardCreate";
+		String msg = "게시판 만들기가 실패하였습니다.", url = "/board/admin/boardCreate";
 		if(cnt > 0) {
 			msg= "게시판 만들기 성공";
-			url = "/admin/board/board?boardFormNo=" + vo.getBoardFormNo();
+			url = "/board/board?boardFormNo=" + vo.getBoardFormNo();
 		}
 		
 		model.addAttribute("msg", msg);
@@ -116,7 +117,7 @@ public class BoardController {
 		return "common/message";
 	}
 	
-	@GetMapping("/boardEdit")
+	@GetMapping("/admin/boardEdit")
 	public String boardEdit_get(@RequestParam int boardFormNo, Model model) {
 		logger.info("게시판 수정 화면 보여주기 파라미터 boardFormNo: {}", boardFormNo);
 		
@@ -129,17 +130,17 @@ public class BoardController {
 		return "admin/board/boardEdit";
 	}
 	
-	@PostMapping("/boardEdit")
+	@PostMapping("/admin/boardEdit")
 	public String boardEdit_post(@ModelAttribute BoardFormVO vo, Model model) {
 		logger.info("게시판 수정 처리 파라미터 vo: {}", vo);
 		
 		int cnt = boardService.updateBoardSet(vo);
 		logger.info("게시판 수정 처리 결과 cnt: {}", cnt);
 		
-		String msg = "게시판 수정 실패!", url = "/admin/board/boardEdit?boardFormNo=" + vo.getBoardFormNo();
+		String msg = "게시판 수정 실패!", url = "/board/admin/boardEdit?boardFormNo=" + vo.getBoardFormNo();
 		if(cnt > 0) {
 			msg = "게시판 수정 성공!";
-			url = "/admin/board/board?boardFormNo=" + vo.getBoardFormNo();
+			url = "/board/board?boardFormNo=" + vo.getBoardFormNo();
 		}
 		
 		model.addAttribute("msg", msg);
@@ -185,7 +186,7 @@ public class BoardController {
 		int fileCnt = boardService.insertFile(fileList, vo.getBoardNo());
 		logger.info("게시판 파일 업로드 처리 결과 fileCnt: {}", fileCnt);
 		
-		return "redirect:/admin/board/board?boardFormNo=" + vo.getBoardFormNo();
+		return "redirect:/board/board?boardFormNo=" + vo.getBoardFormNo();
 	}
 	
 	@GetMapping("/boardWriteEdit")
@@ -208,23 +209,40 @@ public class BoardController {
 		return "admin/board/boardWrite";
 	}
 	
+	@PostMapping("/boardWriteEdit")
+	public String boardWriteEdit_post(@ModelAttribute BoardVO vo, HttpServletRequest request) {
+		logger.info("게시글 수정처리 파라미터 vo: {}", vo);
+		
+		List<Map<String, Object>> fileList = new ArrayList<>();
+		
+		try {
+			fileList = fileUploadUtil.fileupload(request, ConstUtil.UPLOAD_FILE_FLAG);
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		int cnt = boardService.updateBoard(vo);
+		logger.info("게시글 수정처리 결과 cnt: {}", cnt);
+		
+		int fileCnt = boardService.insertFile(fileList, vo.getBoardNo());
+		logger.info("게시판 파일 업로드 처리 결과 fileCnt: {}", fileCnt);
+		
+		return "redirect:/board/board?boardFormNo=" + vo.getBoardFormNo();
+	}
+	
 	@GetMapping("/boardDetail")
 	public String boardDetail_get(@RequestParam int boardNo, Model model) {
 		logger.info("게시글 상세보기 화면처리 파라미터 boardFormNo: {}", boardNo);
 		
-		Map<String, Object> map = boardService.selectBoardByNo(boardNo);
 		int cnt = boardService.addReadCount(boardNo);
-		
-		List<CommentsVO> commentList = null;
+		Map<String, Object> map = boardService.selectBoardByNo(boardNo);
+
 		List<BoardFileVO> fileList = null;
 		
-		logger.info("게시글 조회 결과 map: {}", map);
 		logger.info("조회수 증가 결과 cnt: {}", cnt);
-		
-		if(map.get("COMMENT_FLAG").equals("Y")) {
-			commentList = boardService.selectComment(boardNo);
-			logger.info("게시글 댓글 조회 결과 commentList.size: {}", commentList);
-		}
+		logger.info("게시글 조회 결과 map: {}", map);
 		
 		if(map.get("BOARD_FILE_ADD_FLAG").equals("Y")) {
 			fileList = boardService.selectFileList(boardNo);
@@ -233,7 +251,6 @@ public class BoardController {
 		
 		model.addAttribute("title", "게시글 상세보기");
 		model.addAttribute("map", map);
-		model.addAttribute("commentList", commentList);
 		model.addAttribute("fileList", fileList);
 		
 		return "admin/board/boardDetail";
@@ -251,5 +268,28 @@ public class BoardController {
 		ModelAndView mav = new ModelAndView("fileDownload", map);
 		
 		return mav;
+	}	
+	
+	@ResponseBody
+	@GetMapping("/fileDel")
+	public boolean fileDel(@RequestParam(defaultValue = "0") int fileNo, @RequestParam String fileName, HttpServletRequest request) {
+		logger.info("파일 삭제 파라미터 fileNo: {}, fileName: {}", fileNo, fileName);
+		
+		boolean result = false;
+		if(fileNo != 0) {
+			int cnt = boardService.deleteFile(fileNo);
+			logger.info("파일 삭제 처리 결과 cnt: {}", cnt);
+			
+			if(cnt > 0) {
+				String filePath = fileUploadUtil.getUploadPath(request, ConstUtil.UPLOAD_FILE_FLAG);
+				File file = new File(filePath, fileName);
+				if(file.exists()) {
+					result = file.delete();
+					logger.info("삭제처리 - 파일삭제처리 결과 result: {}", result);
+				}
+			}
+		}
+		
+		return result;
 	}
 }
