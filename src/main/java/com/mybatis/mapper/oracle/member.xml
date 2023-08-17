@@ -58,6 +58,12 @@
 		delete from member
 		where no=#{no}
 	</delete>
+	
+	<select id="memberIdSearch" parameterType="map" resultType="string">
+		select userid from member
+		where name = #{name}
+		and email = #{email}
+	</select>
 		
 
 </mapper>

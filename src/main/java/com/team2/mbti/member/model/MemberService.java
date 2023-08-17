@@ -1,6 +1,7 @@
 package com.team2.mbti.member.model;
 
 import java.util.List;
+import java.util.Map;
 
 import com.team2.mbti.common.SearchVO;
 
@@ -20,7 +21,7 @@ public interface MemberService {
 	int deleteMember(int no);
 	int loginCheck(String userid, String pwd);
 	int selectMemberNo(String userid);
-
 	
+	String memberIdSearch(Map<String, Object> map);
 
 }

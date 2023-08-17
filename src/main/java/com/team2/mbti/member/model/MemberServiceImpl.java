@@ -1,6 +1,7 @@
 package com.team2.mbti.member.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -74,4 +75,13 @@ public class MemberServiceImpl implements MemberService {
 	public int selectMemberNo(String userid) {		 
 		return memberDao.selectMemberNo(userid);
 	}
+
+	@Override
+	public String memberIdSearch(Map<String, Object> map) {
+		return memberDao.memberIdSearch(map);
+	}
+	
+	
+
+
 }
