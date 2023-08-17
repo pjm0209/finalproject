@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="../inc/top.jsp" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -76,7 +77,8 @@ form {
 
 </head>
 <body>
-<h1>PWD 찾기</h1><br>
+<h1>비밀번호 찾기</h1><br>
+<div class="wrapper-forgot-pwd">
 	<form name = "frm3" method="post" action="<c:url value='main/member/forgot-pwd'/>">	
 		<div class = "find_pwd">			
 				<div class="userid">
@@ -99,6 +101,6 @@ form {
 				</div>
 		</div>				
 	</form>
-
+</div>
 </body>
 </html>

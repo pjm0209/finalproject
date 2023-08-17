@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp" %>
 <script type="text/javascript">
+
 	$(function(){
 		var idx=1;
 		
