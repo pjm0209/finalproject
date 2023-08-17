@@ -59,8 +59,8 @@ public class EducationServiceImpl implements EducationService{
 	}
 
 	@Override
-	public int deleteEducation(int eduNo) {
-		return educationDao.deleteEducation(eduNo);
+	public int deleteEducation(List<EducationVO> list) {
+		return educationDao.deleteEducation(list);
 	}
 
 	@Override
@@ -71,6 +71,11 @@ public class EducationServiceImpl implements EducationService{
 	@Override
 	public int deleteTeacher(int eduTeaNo) {
 		return educationDao.deleteTeacher(eduTeaNo);
+	}
+
+	@Override
+	public int deleteEducation(int eduNo) {
+		return educationDao.deleteEducation(eduNo);
 	}
 
 }

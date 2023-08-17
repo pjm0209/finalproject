@@ -16,6 +16,7 @@ public interface EducationDAO {
 	int insertEducation(EducationVO vo);
 	List<EducationVO> selectAllEducation(SearchVO searchVo);
 	int getTotalRecordEducation(SearchVO searchVo);
+	int deleteEducation(List<EducationVO> list);
 	int deleteEducation(int eduNo);
 	
 	int insertTeacher(EducationVO vo);

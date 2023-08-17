@@ -73,6 +73,12 @@
 		select count(*) from mbti_education
 		<include refid="searchEducation"></include> 
 	</select>
+
+	
+	<delete id="deleteEducation" parameterType="educationVo">
+		delete from mbti_education
+		where edu_no = #{eduNo}
+	</delete>
 	
 	<select id="selectByEduNo" parameterType="int" resultType="educationVo">
 		select * from education where eduNo=#{eduNo}

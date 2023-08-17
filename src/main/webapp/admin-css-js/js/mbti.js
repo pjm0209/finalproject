@@ -25,16 +25,16 @@
 			}
 			
 			if($('input[type=checkbox]:checked').length<1){
-				alert('수정할 질문을 체크하세요');
+				alert('수정할 질문을 선택하세요');
 				return;
 			}
 			var result=$('input[type=checkbox]:checked').val();
-			open(contextPath+"/admin/mbti/mbtiWrite?mbtiServeyNo="+result,'mbtiWrite','width=800,height=800,top=50,left=500');
+			open(contextPath+"/admin/mbti/mbtiWrite?mbtiSurveyNo="+result,'mbtiWrite','width=800,height=800,top=50,left=500');
 		});
 		
 		$('#mbti-delete-button').click(function(){
 			if($('input[type=checkbox]:checked').length<1){
-				alert('삭제할 질문을 체크하세요');
+				alert('삭제할 질문을 선택하세요');
 				return;
 			}
 			
@@ -57,4 +57,6 @@
 		},function(){
 			$(this).toggleClass("active").animate("fast");
 		});
+		
+		
 	});

@@ -22,10 +22,10 @@
 		});
 		
 		var bool=false;
-		var num=10;
+		var count=10;
 		$('#nextMbtiQuestion').click(function(){
-			if($('input[type=radio]:checked').length<num){
-				alert("정확한 성격유형을 위해서 모두 체크해 주셔야 합니다.");
+			if($('input[type=radio]:checked').length<count){
+				alert("정확한 성격유형을 위해서 모두 선택해 주셔야 합니다.");
 				bool=false;
 				return false;
 			}
@@ -45,7 +45,14 @@
 					}
 				}
 			}
-			num=num+10;
+			count=count+10;
+		});
+		$('#resultDivMbti').click(function(){
+			if($('input[type=radio]:checked').length<num){
+				alert("정확한 성격유형을 위해서 모두 체크해 주셔야 합니다.");
+				bool=false;
+				return false;
+			}
 		});
 		
 		$('.test_btn_style').click(function(){
@@ -55,7 +62,7 @@
         function scrollToPosition(position) {
             $('html, body').animate({
 				scrollTop: position
-			}, 500);
+			}, 1000);
         }
 	});
 </script>

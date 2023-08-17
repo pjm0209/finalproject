@@ -67,7 +67,7 @@ public class EducationController {
 		if(cnt>0) {
 			msg="선택한 교육이 삭제되었습니다.";
 		}else {
-			msg="선택한 교육을 삭제하는 도중 에러가 발생하였습니다.";
+			msg="선택한 교육울 삭제하는 도중 에러가 발생하였습니다.";
 		}
 		
 		model.addAttribute("msg", msg);

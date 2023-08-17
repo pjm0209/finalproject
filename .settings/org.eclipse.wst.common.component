@@ -49,9 +49,12 @@
         
         
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+<<<<<<< HEAD
                                 
         
         
+=======
+>>>>>>> branch 'main' of https://github.com/pjm0209/finalproject.git
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/target/generated-sources/annotations"/>
                                                                                 
         
