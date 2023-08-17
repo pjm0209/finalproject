@@ -61,9 +61,13 @@ public class EducationController {
 	public String eduDelete(@ModelAttribute EducationVO vo, Model model) {
 		logger.info("교육 삭제 처리, 파라미터 vo={}", vo);
 		
+<<<<<<< HEAD
 		List<EducationVO> list = vo.getEducationItems();
 		
 		int cnt = educationService.deleteEducation(list);
+=======
+		int cnt = educationService.deleteEducation(vo.getEduNo());
+>>>>>>> branch 'dami' of https://github.com/pjm0209/finalproject.git
 		
 		String msg="", url="/admin/education/list";
 		if(cnt>0) {
@@ -89,6 +93,7 @@ public class EducationController {
 		return "admin/education/applicantList";
 		
 	}
+	
 	
 	@GetMapping("/location")
 	public String location_get(@ModelAttribute SearchVO searchVo, Model model) {
@@ -118,7 +123,26 @@ public class EducationController {
 		model.addAttribute("pagingInfo", pagingInfo);
 		
 		return "admin/education/location";
+	}
+
+	
+	@RequestMapping("/locDelete")
+	public String locDelete(@ModelAttribute EducationVO vo, Model model) {
+		logger.info("교육장 삭제 처리, 파라미터 vo={}", vo);
 		
+		int cnt = educationService.deleteLocation(vo.getEpNo());
+		
+		String msg="", url="/admin/education/location";
+		if(cnt>0) {
+			msg="선택한 교육장이 삭제되었습니다.";
+		}else {
+			msg="선택한 교육장을 삭제하는 도중 에러가 발생하였습니다.";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
 	}
 	
 	
@@ -150,6 +174,27 @@ public class EducationController {
 		model.addAttribute("pagingInfo", pagingInfo);
 		
 		return "admin/education/teacher";
+		
+	}
+	
+	
+	@RequestMapping("/teaDelete")
+	public String teaDelete(@ModelAttribute EducationVO vo, Model model) {
+		logger.info("강사 삭제 처리, 파라미터 vo={}", vo);
+		
+		int cnt = educationService.deleteTeacher(vo.getEduTeaNo());
+		
+		String msg="", url="/admin/education/teacher";
+		if(cnt>0) {
+			msg="선택한 강사가 삭제되었습니다.";
+		}else {
+			msg="선택한 강사를 삭제하는 도중 에러가 발생하였습니다.";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
 		
 	}
 	
