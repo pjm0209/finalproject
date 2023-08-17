@@ -1,4 +1,7 @@
-package com.team2.mbti.member.controller;
+ package com.team2.mbti.member.controller;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -6,11 +9,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team2.mbti.member.model.MemberService;
+import com.team2.mbti.member.model.MemberVO;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -100,17 +105,24 @@ public class MemberLoginController {
 	}
 	
 	@RequestMapping("/member/forgot-id")
-	public String forgot_id() {
+	public String forgot_id(HttpServletRequest request, Model model, MemberVO membervo) {
 		logger.info("아이디 찾기 화면");
 		
 		return "main/member/forgot-id";
 	}
 	
 	@RequestMapping("/member/findIdResult")
-	public String findIdResult() {
+	public String findIdresult(@RequestBody Map<String, Object> requestMap) {		
 		logger.info("아이디 찾기 결과 화면");
 		
-		return "main/member/findIdResult";
+		String name = (String) requestMap.get("name");
+		String email = (String) requestMap.get("email");
+		 
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("name", name);
+        paramMap.put("email", email);
+	 	 
+		return "/member/findIdResult";
 	}
 		
 	@RequestMapping("/member/forgot-pwd")
@@ -122,10 +134,10 @@ public class MemberLoginController {
 	
 	@RequestMapping("/member/findPwdResult")
 	public String findPwdResult() {
-		logger.info("비밀번호 재설정 화면");
+		logger.info("비밀번호 찾기 결과 화면");
 		
 		return "main/member/findPwdResult";
-	}
+	}	
 	
 	@ResponseBody
 	@RequestMapping("/member/checkId")

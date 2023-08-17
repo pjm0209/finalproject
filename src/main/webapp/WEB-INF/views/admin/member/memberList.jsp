@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
-<!-- Begin Page Content -->
-<!-- Page Heading -->
 <script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>
 <script type="text/javascript">
 	$(function(){
@@ -15,8 +13,11 @@
 		});	
 	});
 </script>
+
+<!-- Begin Page Content -->
+<!-- Page Heading -->
 <div class="head-div">
-	<h2 class="text-gray-800">회원</h2>
+	<h2 class="text-gray-800">회원 관리</h2>
 </div>
 <div class="side-body">
 	<div class="side-div-title">
@@ -42,11 +43,12 @@
 		<h5>회원 리스트</h5>
 			<button class="bg-gradient-secondary" id="board-write-button">탈퇴</button>
 	</div>
-	<div class="member">
-		<div class="member-head">
-			<div class="member-search-result">
-				<form name="frm" method="post" action="<c:url value='/admin/member/memberList'/>">
-				<div class="input-group mb-3" id="member-search-div">
+	
+	<div class="board">
+		<div class="board-head">
+			<div class="board-search-result">
+				<form name="frmSearch" method="post" action="<c:url value='/admin/member/memberList'/>">
+				<div class="input-group mb-3" id="board-search-div">
 					<select class="form-select form-select-lg" aria-label=".form-select-lg example" name="searchCondition" id="board-search-select">					  	
 					  	<option value="name"  <c:if test="${param.searchCondition=='name'}"> selected="selected" </c:if> >이름</option>
 					  	<option value="userid" <c:if test="${param.searchCondition=='userid'}"> selected="selected" </c:if>>아이디</option>
@@ -58,6 +60,7 @@
 			</div>
 		</div>
 		
+		<form name="frmDelete" method="post">
 		<table class="table">
 			<thead>
 				<tr class="board-table-colum">
@@ -68,6 +71,7 @@
 					<th scope="col" class="board-regdate">가입일</th>
 				</tr>
 			</thead>
+			<c:set var="idx" value="0"/>
 			<tbody id="board-table-body">
 				<c:forEach var="vo" items="${list}">
 					<tr>
@@ -83,6 +87,7 @@
 				</c:forEach>					
 			</tbody>
 		</table>
+		
 		<div style="width: 10%;text-align: center;margin: 0 auto;">
 			<ul class="pagination">
 				<c:if test="${pagingInfo.firstPage > 1 }">
@@ -94,10 +99,10 @@
 				</c:if>
 				<c:forEach var="i" begin="${pagingInfo.firstPage}" end="${pagingInfo.lastPage}">
 					<c:if test="${i==pagingInfo.currentPage}">
-						<li class="page-item active"><a class="page-link" href="<c:url value='/admin/mbti/member?currentPage=${i}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">${i}</a></li>
+						<li class="page-item active"><a class="page-link" href="<c:url value='/admin/member/memberList?currentPage=${i}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">${i}</a></li>
 					</c:if>
 					<c:if test="${i!=pagingInfo.currentPage}">
-						<li class="page-item"><a class="page-link" href="<c:url value='/admin/mbti/mbti?currentPage=${i}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">${i}</a></li>
+						<li class="page-item"><a class="page-link" href="<c:url value='/admin/member/memberList?currentPage=${i}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">${i}</a></li>
 					</c:if>
 				</c:forEach>
 				<c:if test="${pagingInfo.lastPage < pagingInfo.totalPage}">

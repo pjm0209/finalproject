@@ -58,19 +58,12 @@ label{
 	margin-left: 20px;
 }
 
-.PhoneNumber button {
-	width: 50px;
-	height: 35px;
-	background-color: #ff7f00;
-	color: white;
-}
-
 .btnSearch {
     text-align: center;	
     justify-content: space-between; 
 }
 
-.btnSearch button{
+input[type="button"]{
   	width: 180px;
  	height: 50px;
 	background-color: #ff7f00;
@@ -87,9 +80,30 @@ form {
 
 <script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>
 <script type="text/javascript">
-	function
+    $(function() {
+        $('#check').click(function() {
+            var name = $('#name').val();
+            var email = $('#email').val();
 
-
+            if (name === '' && email === '') {
+                alert('이름과 이메일을 입력해주세요.');
+                return false;
+            } else if (name === '') {
+                alert('이름을 입력해주세요.');
+                return false;
+            } else if (email === '') {
+                alert('이메일을 입력해주세요.');z
+                return false;
+            }
+    	});
+           
+        $('#btnCancel').click(function(){
+            var confirmed = confirm("메인 화면으로 돌아가시겠습니까?");
+            if (confirmed) {
+                window.location.href = '<c:url value="/main/index"/>';
+            }
+        }); 
+    });
 </script>
 
 </head>
@@ -98,24 +112,18 @@ form {
 	<form name = "frm-forgot-id" method="post" action="<c:url value='main/member/forgot-id'/>">	
 		<div class = "findId">				
 				<div class="name">
-				<label>이름 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+				<label>이름 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 					<input type="text" id="name" placeholder="이름 입력">					
 				</div><br>	
 				
-				<div class="PhoneNumber">
-				<label>전화번호 : &nbsp;</label>
-					<input type="text" id="PhoneNumber" placeholder="휴대폰번호 입력 ('-') 제외 11자리 입력)">	
-					<button id="PhoneNumberButton" onclick="PhoneNumber_submit">인증</button>			
+				<div class="email">
+				<label>E-Mail : &nbsp;</label>
+					<input type="text" id="email" placeholder="이메일을 입력하세요">		
 				</div><br>
-				
-				<div class="AuthenticationNumber">
-				<label>인증번호 : &nbsp;</label>
-					<input type="text" id="AuthenticationNumber"  placeholder="인증번호 6자리 숫자 입력">					
-				</div><br>					
-				
+											
 				<div class="btnSearch"><br>
-					<button id="check">확인</button>
-					<button id="check">취소</button>					
+					<input type="button" id="btnCheck" value="확인">	
+					<input type="button" id="btnCancel" value="취소">					
 				</div>
 		</div>				
 	</form>    

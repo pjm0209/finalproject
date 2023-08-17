@@ -49,6 +49,7 @@ span{
 .title {
     text-align: center;
     font-weight: 700;
+    background: #ff7f00;
 }
 
 .name input {
@@ -88,9 +89,14 @@ span{
     width: 50%;
 }
 
+.signUp {
+    text-align: center; 
+    margin-top: 20px;
+}
 
 .signUp button {
-    width: 20%;
+    width: 30%;
+    height: 50px;
     cursor:pointer;
 }
 
@@ -105,7 +111,6 @@ button{
     color:red;
     font-weight: 700;
 }
-
 </style>
 
 
@@ -239,6 +244,7 @@ function validate_hp(ph) {
 	        var addressSearchURL = '<c:url value="/main/member/findZipcode"/>';
 	        window.open(addressSearchURL, 'AddressSearch', 'width=550,height=600');
 	    });
+	    
 	});
 </script>
 
@@ -301,7 +307,7 @@ function validate_hp(ph) {
 		<div class="address" id="address">
 			<input type="text" id="PostalCode" placeholder="우편번호">
 			<input type="text" id="address" placeholder="주소를 검색해주세요">
-			<button id="btnAddress" value="우편번호 찾기">우편번호 찾기</button>	
+			<input type="button" id="btnAddress" value="우편번호 찾기">	
 			<input type="text" id="addressDetail" placeholder="상세주소를 입력해주세요">	
 		</div>		
 		
