@@ -39,6 +39,11 @@
 		<include refid="searchEducation"></include> 
 	</select>
 	
+	<delete id="deleteLocation" parameterType="int" >
+		delete from education_place
+		where ep_no=#{epNo} 
+	</delete>
+	
 	
 	<!-- list -->
 	<insert id="insertEducation" parameterType="educationVo">
@@ -69,9 +74,19 @@
 		<include refid="searchEducation"></include> 
 	</select>
 	
+	<delete id="deleteEducation" parameterType="educationVo">
+		delete from mbti_education
+		where edu_no = #{eduNo}
+	</delete>
+	
 	<select id="selectByEduNo" parameterType="int" resultType="educationVo">
 		select * from education where eduNo=#{eduNo}
 	</select>
+	
+	<delete id="deleteEducation" parameterType="int" >
+		delete from mbti_education
+		where edu_no=#{eduNo} 
+	</delete>
 	
 	
 	<!-- teacher -->
@@ -101,4 +116,11 @@
 		select count(*) from education_teacher
 		<include refid="searchEducation"></include> 
 	</select>
+	
+	<delete id="deleteTeacher" parameterType="int" >
+		delete from education_teacher
+		where edu_tea_no=#{eduTeaNo} 
+	</delete>
+	
+	
 </mapper>

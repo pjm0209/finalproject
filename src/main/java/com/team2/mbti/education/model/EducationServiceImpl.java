@@ -63,4 +63,19 @@ public class EducationServiceImpl implements EducationService{
 		return educationDao.deleteEducation(list);
 	}
 
+	@Override
+	public int deleteLocation(int epNo) {
+		return educationDao.deleteLocation(epNo);
+	}
+
+	@Override
+	public int deleteTeacher(int eduTeaNo) {
+		return educationDao.deleteTeacher(eduTeaNo);
+	}
+
+	@Override
+	public int deleteEducation(int eduNo) {
+		return educationDao.deleteEducation(eduNo);
+	}
+
 }
