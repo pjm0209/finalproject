@@ -73,6 +73,7 @@
 		select count(*) from mbti_education
 		<include refid="searchEducation"></include> 
 	</select>
+
 	
 	<delete id="deleteEducation" parameterType="educationVo">
 		delete from mbti_education
