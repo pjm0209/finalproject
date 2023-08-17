@@ -68,34 +68,29 @@
 							</dt>
 							<dd>
 								<div class="file_list">
+					                <c:set var="i" value="0"/>
 					                <c:if test="${!empty param.boardFormNo or empty fileList}">
-					                	<div>
-						                    <div class="file_input">
-						                        <input type="text" readonly />
-						                        <label> 첨부파일
-						                            <input type="file" name="files" onchange="selectFile(this);" />
-						                        </label>
-						                    </div>
-						                    <button type="button" onclick="removeFile(this);" class="btns del_btn"><span>삭제</span></button>
-						                    <button type="button" onclick="addFile();" class="btns fn_add_btn"><span>파일 추가</span></button>
+					                	<div class="file_input">            
+								            <span class="fileName"></span>									        
+								            <label>
+								            	<i class="bi bi-folder-plus"></i>
+								                <input type="file" name="files" onchange="selectFile(this);" />
+								            </label>
+						                    <button type="button" onclick="addFile();" class="btns fn_add_btn"><span><i class="bi bi-plus-lg"></i></span></button>
 					                	</div>
 						            </c:if>					            
 					                <c:if test="${!empty fileList }">
-					                <c:set var="i" value="0"/>
 					                	<c:forEach var="fileVo" items="${fileList }">
 					                		<div>
 							                    <div class="file_input">
-							                        <input type="text" class="fileOriginName" value="${fileVo.originalFileName }" readonly />
-							                        <input type="hidden" class="fileName" value="${fileVo.fileName }">
+							                    	<span class="fileName">${fileVo.originalFileName }</span>	
+							                    	<span class="bi bi-x-lg btns del_btn edit" onclick="removeFile(this);"></span>
+							                    	<input type="hidden" class="fileName" value="${fileVo.fileName }">
 							                        <input type="hidden" class="fileNo" value="${fileVo.fileNo }">
 							                        <input type="hidden" class="fileIdx" value="${i }">
-							                        <label> 첨부파일
-							                            <input type="file" name="files" onchange="selectFile(this);" />
-							                        </label>
-							                    </div>
-							                    <button type="button" class="btns del_btn edit"><span>삭제</span></button>							                    
+							                    </div>							                    					                    
 							                    <c:if test="${i == 0 }">
-									                <button type="button" onclick="addFile();" class="btns fn_add_btn"><span>파일 추가</span></button>
+									                <button type="button" onclick="addFile();" class="btns fn_add_btn"><i class="bi bi-plus-lg"></i></button>
 							                    </c:if>
 							                    <c:set var="i" value="${i + 1 }"/>
 					                		</div>
@@ -112,11 +107,6 @@
 </div>
 </div>
 <!-- End of Main Content -->
-<script type="text/javascript">
-	$(document).ready(function(){
-		
-	});
-</script>
 
 <script src="<c:url value='/admin-css-js/js/board.js'/>"></script>
 

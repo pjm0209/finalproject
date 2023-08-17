@@ -67,8 +67,8 @@
 				<c:forEach var="mbtiSurveyVo" items="${list}">
 					<c:set var="questionType" value="${mbtiSurveyVo.questionTypeNo}"/>
 					<tr>
-						<th scope="row"><input type="checkbox" name="surveyItems[${idx}].mbtiServeyNo" class="board-checkbox check" value="${mbtiSurveyVo.mbtiServeyNo}"></th>
-						<td>${mbtiSurveyVo.mbtiServeyNo}</td>
+						<th scope="row"><input type="checkbox" name="surveyItems[${idx}].mbtiSurveyNo" class="board-checkbox check" value="${mbtiSurveyVo.mbtiSurveyNo}"></th>
+						<td>${mbtiSurveyVo.mbtiSurveyNo}</td>
 						<td>
 							<c:choose>
 								<c:when test="${questionType == '1'}">F</c:when>
