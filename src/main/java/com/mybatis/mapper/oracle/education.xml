@@ -74,11 +74,11 @@
 		<include refid="searchEducation"></include> 
 	</select>
 	
-<<<<<<< HEAD
 	<delete id="deleteEducation" parameterType="educationVo">
 		delete from mbti_education
 		where edu_no = #{eduNo}
-=======
+	</delete>
+	
 	<select id="selectByEduNo" parameterType="int" resultType="educationVo">
 		select * from education where eduNo=#{eduNo}
 	</select>
@@ -86,7 +86,6 @@
 	<delete id="deleteEducation" parameterType="int" >
 		delete from mbti_education
 		where edu_no=#{eduNo} 
->>>>>>> branch 'dami' of https://github.com/pjm0209/finalproject.git
 	</delete>
 	
 	

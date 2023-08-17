@@ -16,4 +16,5 @@ public class BoardFormVO {
 	private Timestamp firstRegdate;
 	private String lastEditAdminId;
 	private Timestamp lastRegdate;
+	private String boardSecretFlag;
 }
