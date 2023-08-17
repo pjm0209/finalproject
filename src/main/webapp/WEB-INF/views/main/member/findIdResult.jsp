@@ -6,11 +6,17 @@
 <title>아이디 찾기 결과 페이지</title>
 </head>
 <body>
-<h1>ID 찾기</h1>
-<p>요청하신 ID 찾기 결과입니다</p>
-<p>입력한 정보로 조회된 아이디는 입니다</p>
-<button id="">로그인</button>
-<button id="">비번찾기</button>
+    <div class="text-center">                                                               
+        <h1 class="h4 text-gray-900 mb-2">Please check your ID</h1><br><br>                 
+        <c:choose>                                                                          
+            <c:when test="${empty membervo}">                                                 
+                <p class="mb-4">조회결과가 없습니다.</p>                                        
+            </c:when>                                                                         
+            <c:otherwise>                                                                     
+                <p class="mb-4">${searchVO.me_id}</p>                                              
+            </c:otherwise>                                                                    
+        </c:choose>                                                                         
+    </div> 
 
 </body>
 </html>
