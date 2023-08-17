@@ -61,7 +61,13 @@ public class EducationController {
 	public String eduDelete(@ModelAttribute EducationVO vo, Model model) {
 		logger.info("교육 삭제 처리, 파라미터 vo={}", vo);
 		
+<<<<<<< HEAD
+		List<EducationVO> list = vo.getEducationItems();
+		
+		int cnt = educationService.deleteEducation(list);
+=======
 		int cnt = educationService.deleteEducation(vo.getEduNo());
+>>>>>>> branch 'dami' of https://github.com/pjm0209/finalproject.git
 		
 		String msg="", url="/admin/education/list";
 		if(cnt>0) {

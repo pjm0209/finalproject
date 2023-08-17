@@ -13,7 +13,11 @@ public interface EducationService {
 	int insertEducation(EducationVO vo);
 	List<EducationVO> selectAllEducation(SearchVO searchVo);
 	int getTotalRecordEducation(SearchVO searchVo);
+<<<<<<< HEAD
+	int deleteEducation(List<EducationVO> list);
+=======
 	int deleteEducation(int eduNo);
+>>>>>>> branch 'dami' of https://github.com/pjm0209/finalproject.git
 	
 	int insertTeacher(EducationVO vo);
 	List<EducationVO> selectAllTeacher(SearchVO searchVo);

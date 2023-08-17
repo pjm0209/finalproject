@@ -59,6 +59,10 @@ public class EducationServiceImpl implements EducationService{
 	}
 
 	@Override
+<<<<<<< HEAD
+	public int deleteEducation(List<EducationVO> list) {
+		return educationDao.deleteEducation(list);
+=======
 	public int deleteEducation(int eduNo) {
 		return educationDao.deleteEducation(eduNo);
 	}
@@ -71,6 +75,7 @@ public class EducationServiceImpl implements EducationService{
 	@Override
 	public int deleteTeacher(int eduTeaNo) {
 		return educationDao.deleteTeacher(eduTeaNo);
+>>>>>>> branch 'dami' of https://github.com/pjm0209/finalproject.git
 	}
 
 }
