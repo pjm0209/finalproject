@@ -117,5 +117,29 @@
 		where edu_tea_no=#{eduTeaNo} 
 	</delete>
 	
+	<!-- applicant -->
+	<select id="selectAllApplicant" parameterType="searchVo" resultType="educationVo">
+		select * from
+		(
+			select rownum RNUM, a.* from
+			(
+				select * from educationview
+				<include refid="searchEducation"></include>
+				order by edu_app_no
+			)a
+		)
+		<![CDATA[
+		where RNUM > #{firstRecordIndex} and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}]]>
+	</select>
+	
+	<select id="getTotalRecordApplicant" parameterType="searchVo" resultType="int">
+		select count(*) from educationview
+		<include refid="searchEducation"></include> 
+	</select>
+	
+	<delete id="deleteApplicant" parameterType="int" >
+		delete from education_application
+		where edu_app_no=#{eduAppNo} 
+	</delete>
 	
 </mapper>
