@@ -13,11 +13,12 @@
 	<input type="hidden" class="member-userId" value="${map['USERID'] }">
 	<input type="hidden" class="admin-adminId" value="${map['ADMIN_ID'] }">
 	<input type="hidden" class="session-adminId" value="${sessionScope.adminId }">
+	<input type="hidden" value="${sessionScope.adminNo }" name="adminNo">
 	<div id="board-title">
 		<h5>${map['BOARD_FORM_NAME'] }</h5>
 		<div class="board-head-button">
 			<input type="button" class="bg-gradient-secondary" onclick="location.href='<c:url value="/admin/board/board?boardFormNo=${map['BOARD_FORM_NO'] }"/>'"	value="목록">
-			<input type="button" class="bg-gradient-primary" id="del-board" value="삭제">
+			<input type="button" class="bg-gradient-primary" onclick="location.href='<c:url value="/admin/board/boardWriteDel?boardNo=${param.boardNo }&boardStep=${map['BOARD_STEP'] }&boardGroupNo=${map['BOARD_GROUP_NO'] }&boardFormNo=${map['BOARD_FORM_NO'] }"/>'" id="del-board" value="삭제">
 			<c:if test="${map['ADMIN_ID'] == sessionScope.adminId}"> 
 				<input type="button" class="bg-gradient-primary" onclick="location.href='<c:url value="/admin/board/boardWriteEdit?boardNo=${param.boardNo }"/>'" id="eidt-board" value="수정">
 			</c:if>
@@ -76,7 +77,7 @@
 				<div class="textarea-group">
 					<textarea id="comment-area" name="commentsBody"></textarea>
 					<input type="hidden" value="${map['BOARD_NO'] }" name="boardNo">
-					<input type="hidden" value="${sessionScope.adminNo }" name="adminNo">
+					<input type="hidden" value="${sessionScope.adminNo }" name="adminNo">					
 					<input type="button" value="답글등록" id="comment-submit">
 				</div>
 			</form>
@@ -109,24 +110,31 @@
 				if(boardWriter === map.ADMIN_ID) {
 					str += "<span class='boardWriter-commentWrite'>작성자</span>";
 				}
-				str += "<span class='comment-write-regdate'>(" + regdate + ")</span>" +
-				"<a class='comment-reply' onclick='commentReply(this)'>답글쓰기</a>" +
-				"<div class='commentEditOrDel'>" + 
+				str += "<span class='comment-write-regdate'>(" + regdate + ")</span>";
+				if(map.COMMENTS_STEP < 1) {
+					str += "<a class='comment-reply' onclick='commentReply(this)'>답글쓰기</a>";
+				}
+				str += "<div class='commentEditOrDel'>" + 
 				"<span class='comment-more'><i class='bi bi-three-dots-vertical'></i></span><div class='editDel'>";
 				if(user == map.ADMIN_ID) {
-					str += "<a href='#' class='commentEdit'>수정</a>";
+					str += "<a class='commentEdit'>수정</a>";
 				}
-				str += "<a href='#' class='commentDel'>삭제</a></div>";
+				str += "<a class='commentDel' onclick='commentDel(" + map.COMMENTS_NO + ", " + map.COMMENTS_STEP + ", " + map.COMMENTS_GROUP_NO + ", " + map.BOARD_NO + ")'>삭제</a>" +
+				"</div>";
 			} else {
 				str += "<p class='comment-writer'>" + map.NAME;
 				if(boardWriter === map.NAME) {
 					str += "<span class='boardWriter-commentWrite'>작성자</span>"; 
 				}
-				str += "<span class='comment-write-regdate'>(" + regdate + ")</span>" +
-				"<a class='comment-reply' onclick='commentReply(this)'>답글쓰기</a>" +
-				"<span class='comment-more'>" + 
-				"<i class='bi bi-three-dots-vertical'></i></span><div class='editDel'>" +
-				"<a href='#' class='commentEdit'>수정</a><a href='#' class='commentDel'>삭제</a></div>";
+				str += "<span class='comment-write-regdate'>(" + regdate + ")</span>";
+				if(map.COMMENTS_STEP < 1) {
+					str += "<a class='comment-reply' onclick='commentReply(this)'>답글쓰기</a>";
+				}
+				str += "<span class='comment-more'>" + 
+				"<i class='bi bi-three-dots-vertical'></i></span>" +
+				"<div class='editDel'>" +
+				"<a class='commentEdit'>수정</a><a class='commentDel' onclick='commentDel(" + map.COMMENTS_NO + ", " + map.COMMENTS_STEP + ", " + map.COMMENTS_GROUP_NO + ", " + map.BOARD_NO + ")'>삭제2</a>" +
+				"</div>";
 			}
 			str += "</div>";
 			str += "<p class='comment-body'>" + map.COMMENTS_BODY + "</p>";

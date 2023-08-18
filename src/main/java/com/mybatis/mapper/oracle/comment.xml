@@ -27,4 +27,14 @@
 		where board_no = #{boardNo}
 		order by comments_group_no desc, comments_sort
 	</select>
+	
+	<parameterMap type="map" id="commentDeleteProc">
+		<parameter property="commentsNo" javaType="string" jdbcType="VARCHAR" mode="IN"/>
+		<parameter property="commentsStep" javaType="string" jdbcType="VARCHAR" mode="IN"/>
+		<parameter property="commentsGroupNo" javaType="string" jdbcType="VARCHAR" mode="IN"/>
+	</parameterMap>
+	
+	<delete id="deleteComment" parameterMap="commentDeleteProc">
+		call DELETECOMMENTS(?, ?, ?)
+	</delete>
 </mapper>
