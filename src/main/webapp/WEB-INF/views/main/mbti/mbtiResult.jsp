@@ -18,7 +18,7 @@
 	</div>
 	<div class="defining">
 		<div>
-		pjm푸쉬
+
 		</div>
 	</div>
 	

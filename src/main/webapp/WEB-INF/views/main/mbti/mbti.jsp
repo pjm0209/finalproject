@@ -11,7 +11,7 @@
 			<input type="hidden" name="questionTypeNo" value="1"/>
 			<button type="submit" class="mbti-button2" id="mbti-precise-button">정식 검사</button>
 		</form>
-		pjm 푸쉬
+
 	</div>
 </section>
 <%@ include file="../inc/bottom.jsp"%>

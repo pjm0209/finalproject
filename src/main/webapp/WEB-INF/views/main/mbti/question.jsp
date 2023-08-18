@@ -2,7 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp" %>
 <script type="text/javascript">
-	$(function(){ pjm 푸쉬
+
+	$(function(){
 		var idx=1;
 		
 		$('#statement1_1').focus();
