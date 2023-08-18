@@ -33,6 +33,17 @@ button#manager-delete-button {
 <script type="text/javascript"></script>
 <script>
 	$(function(){
+        $('#add-newBoard-button').click(function(){
+            var popupWidth = 400;
+            var popupHeight = 400;
+            var leftPosition = (screen.width - popupWidth) / 2;
+            var topPosition = (screen.height - popupHeight) / 2;
+
+            var popupFeatures = 'width=' + popupWidth + ',height=' + popupHeight + ',left=' + leftPosition + ',top=' + topPosition;
+            
+            window.open('managerAdditional', '_blank', popupFeatures);
+        });
+	        
 		$('#board-write-button').click(function(){
 			if(confirm("선택한 관리자를 삭제하시겠습니까?")){
 				var contextpath = "/mbti";
@@ -48,7 +59,7 @@ button#manager-delete-button {
 <div class="head-div">
 	<h2 class="text-gray-800">관리자 관리</h2>
 	<button type="button" class="bg-gradient-primary"
-		id="add-newBoard-button" onclick="location.href='managerAdditional'">관리자 추가</button>
+		id="add-newBoard-button">관리자 추가</button>
 </div>
 <div class="side-body">
 	<div class="side-div-title">
@@ -82,9 +93,9 @@ button#manager-delete-button {
 				<form name="frmSearch" method="post" action="<c:url value='/admin/manager/managerList'/>">
 				<div class="input-group mb-3" id="board-search-div">
 					<select class="form-select form-select-lg" aria-label=".form-select-lg example" name="searchcondition" id="board-search-select">					  						  
-					  	<option value="admin_id" <c:if test="${param.searchCondition=='admin_id'}"> selected="selected" </c:if>>아이디</option>
-					  	<option value="admin_email" <c:if test="${param.searchCondition=='admin_email'}"> selected="selected" </c:if>>이메일</option>					  	
-					  	<option value="admin_tel" <c:if test="${param.searchCondition=='admin_tel'}"> selected="selected" </c:if>>전화번호</option>
+					  	<option value="admin_id" <c:if test="${param.searchCondition=='adminId'}"> selected="selected" </c:if>>아이디</option>
+					  	<option value="admin_email" <c:if test="${param.searchCondition=='adminEmail'}"> selected="selected" </c:if>>이메일</option>					  	
+					  	<option value="admin_tel" <c:if test="${param.searchCondition=='adminTel'}"> selected="selected" </c:if>>전화번호</option>
 					</select>
 				 	<input type="text" class="form-control" name="searchKeyword" placeholder="검색어를 입력하세요" aria-label="Recipient's username" aria-describedby="button-addon2" id="board-search-area" value="${param.searchKeyword}">
 				 	<button class="btn btn-outline-secondary" type="submit" id="button-addon2">검색</button>
@@ -97,50 +108,23 @@ button#manager-delete-button {
 			<thead>
 				<tr class="board-table-colum">
 					<th scope="col"><input type="checkbox" id="check-All" class="board-checkbox"></th>
-					<th scope="col">번호</th>					
-					<th scope="col">아이디</th>
-					<th scope="col">이메일</th>
-					<th scope="col">전화번호</th>
+					<th scope="col" class="number">번호</th>					
+					<th scope="col" class="adminId">아이디</th>
+					<th scope="col" class="adminEmail">이메일</th>
+					<th scope="col" class="adminTel">전화번호</th>
 				</tr>
 			</thead>
 			<c:set var="idx" value="0"/>
 			<tbody>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>1</td>
-					<td>admin</td>
-					<td>admin123@naver.com</td>
-					<td>010-1234-5678</td>
-				</tr>
-								<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>2</td>
-					<td>manager1</td>
-					<td>manager1@naver.com</td>
-					<td>010-5485-2436</td>
-				</tr>
-								<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>3</td>
-					<td>manager2</td>
-					<td>manager2@naver.com</td>
-					<td>010-4848-1855</td>
-				</tr>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>4</td>
-					<td>manager3</td>
-					<td>manager3@naver.com</td>
-					<td>010-5455-5189</td>
-				</tr>
-				
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>5</td>
-					<td>manager4</td>
-					<td>manager4@naver.com</td>
-					<td>010-6546-1550</td>
-				</tr>											
+				<c:forEach var="vo" items="${list}">
+					<tr>
+						<th scope="row"><input type="checkbox" class="board-checkbox"></th>
+						<td>${vo.adminNo}</td>
+						<td>${vo.adminId}</td>
+						<td>${vo.adminEmail}</td>
+						<td>${vo.adminTel}</td>
+					</tr>	
+				</c:forEach>						
 			</tbody>
 		</table>
 		<div style="width: 10%;text-align: center;margin: 0 auto;">

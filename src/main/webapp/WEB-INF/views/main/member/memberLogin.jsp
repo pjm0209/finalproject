@@ -179,22 +179,22 @@ function kakaoLogout() {
         <div class="form login">
             <div class="form-content">
                 <h1><img src="../../images/MBTI_Login.png"/></h1>
-                <form method="post" id="login-form" action="<c:url value='/main/member/memberLogin'/>">
+                <form method="post" id="memberLogin-form" action="<c:url value='/main/member/memberLogin'/>">
                     <div class="field input-field">
-                        <input type="text" placeholder="아이디를 입력하세요." class="input">                       
+                        <input type="text" name="userid" placeholder="아이디를 입력하세요." class="input">                       
                     </div>
 
                     <div class="field input-field">
-                        <input type="password" placeholder="비밀번호를 입력하세요." class="password">                    
+                        <input type="password" name="pwd" placeholder="비밀번호를 입력하세요." class="password">                    
                         <i class='bx bx-hide eye-icon'></i>
                     </div><br>
                     
                     <label for="remember-check">
-                		<input type="checkbox" id="remember-check">&nbsp; 아이디 저장하기
+                		<input type="checkbox" name="chkSave" id="remember-check">&nbsp; 아이디 저장하기
             		</label>
                   
                     <div class="field button-field">
-                        <input type="submit" value="Login" id="login-button">     
+                        <input type="submit" value="Login" id="memberLogin-button">     
                     </div>
                 </form>
                 
@@ -224,6 +224,6 @@ function kakaoLogout() {
 				</div>                   
             </div>
         </div>
-    </section>   
+    </section>  
 </body>
 </html>

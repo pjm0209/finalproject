@@ -39,7 +39,7 @@ public class MemberLoginController {
 	}
 	
 	@PostMapping("/member/memberLogin")
-	public String memberLogin_post(@RequestParam String userid, @RequestParam String pwd,
+	public String memberLogin_post(@RequestParam(required =  false) String userid, @RequestParam(required =  false) String pwd,
 			@RequestParam(required =  false) String chkSave, HttpServletRequest request, HttpServletResponse response, Model model) {
 		
 		logger.info("회원 로그인 처리, 파라미터 userid={}, pwd={}, chkSave={}", userid, pwd, chkSave);
@@ -52,7 +52,7 @@ public class MemberLoginController {
 			msg = userid + "회원님이 로그인되었습니다.";
 			url = "/main/index";
 			
-			int no = memberService.selectMemberNo(userid);
+			MemberVO no = memberService.selectByUserid(userid);
 			
 			HttpSession session = request.getSession();
 			session.setAttribute("userid", userid);

@@ -30,7 +30,7 @@ body {
 
 .wrapper > h2 {
     font-size: 30px;
-    color: #a653ec;
+    color: #eb5d1e;
     margin-bottom: 30px;
     text-align: center;
 }
@@ -53,7 +53,7 @@ body {
 #login-form > input[type="submit"] {
     color: #ece6cc;
     font-size: 20px;
-    background-color: #660099;
+    background-color: #eb5d1e;
     margin-top: 20px;
     cursor: pointer;
 }
@@ -90,7 +90,7 @@ body {
 <body>
     <div class="wrapper">
         <h2>관리자 로그인</h2>
-        <form method="post" action="" id="login-form" action="<c:url value='/admin/login'/>">        	
+        <form method="post" id="login-form" action="<c:url value='/admin/login'/>">        	
             <input type="text" name="adminId" placeholder="아이디를 입력하세요." value="${cookie.ck_adminId.value }">            
             <input type="password" name="adminPwd" placeholder="비밀번호를 입력하세요.">            
             <label for="remember-check">
