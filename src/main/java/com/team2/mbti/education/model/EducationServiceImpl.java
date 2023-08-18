@@ -59,11 +59,6 @@ public class EducationServiceImpl implements EducationService{
 	}
 
 	@Override
-	public int deleteEducation(List<EducationVO> list) {
-		return educationDao.deleteEducation(list);
-	}
-
-	@Override
 	public int deleteLocation(int epNo) {
 		return educationDao.deleteLocation(epNo);
 	}
@@ -76,6 +71,21 @@ public class EducationServiceImpl implements EducationService{
 	@Override
 	public int deleteEducation(int eduNo) {
 		return educationDao.deleteEducation(eduNo);
+	}
+
+	@Override
+	public List<EducationVO> selectAllApplicant(SearchVO searchVo) {
+		return educationDao.selectAllApplicant(searchVo);
+	}
+
+	@Override
+	public int getTotalRecordApplicant(SearchVO searchVo) {
+		return educationDao.getTotalRecordApplicant(searchVo);
+	}
+
+	@Override
+	public int deleteApplicant(int eduAppNo) {
+		return educationDao.deleteApplicant(eduAppNo);
 	}
 
 }

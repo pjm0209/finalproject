@@ -46,7 +46,7 @@ public class EducationController {
 		
 		list = educationService.selectAllEducation(searchVo);
 		logger.info("교육 목록 결과 list.size={}", list.size());
-		int totalRecord=educationService.getTotalRecordLocation(searchVo);
+		int totalRecord=educationService.getTotalRecordEducation(searchVo);
 		logger.info("교육 전체 검색 결과 totalRecord={}",totalRecord);
 		pagingInfo.setTotalRecord(totalRecord);
 		
@@ -79,12 +79,52 @@ public class EducationController {
 	
 	
 	@GetMapping("/applicantList")
-	public String appliList_get(Model model) {
-		logger.info("신청자 관리 페이지 보여주기");
+	public String appliList_get(@ModelAttribute SearchVO searchVo, Model model) {
+		logger.info("신청자 관리 페이지 보여주기, 파라미터 searchVo={}", searchVo);
 		
-		model.addAttribute("title", "신청자 조회");
+		PaginationInfo pagingInfo = new PaginationInfo();
+		List<EducationVO> list = null;
+		String condition=searchVo.getSearchCondition();
+		String keyword=searchVo.getSearchKeyword();
+		logger.info("condition={},keyword={}",condition,keyword);
+			
+		pagingInfo.setBlockSize(ConstUtil.BLOCK_SIZE);
+		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
+		pagingInfo.setRecordCountPerPage(ConstUtil.MBTI_RECORD_COUNT);
+		
+		searchVo.setBlockSize(ConstUtil.BLOCK_SIZE);
+		searchVo.setRecordCountPerPage(ConstUtil.MBTI_RECORD_COUNT);
+		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		
+		list = educationService.selectAllApplicant(searchVo);
+		logger.info("신청자 목록 결과 list.size={}", list.size());
+		int totalRecord=educationService.getTotalRecordApplicant(searchVo);
+		logger.info("신청자 전체 검색 결과 totalRecord={}",totalRecord);
+		pagingInfo.setTotalRecord(totalRecord);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("pagingInfo", pagingInfo);
 		
 		return "admin/education/applicantList";
+	}
+	
+	@RequestMapping("/appliDelete")
+	public String appliDelete(@ModelAttribute EducationVO vo, Model model) {
+		logger.info("신청자 거절 처리, 파라미터 vo={}", vo);
+		
+		int cnt = educationService.deleteApplicant(vo.getEduAppNo());
+		
+		String msg="", url="/admin/education/applicantList";
+		if(cnt>0) {
+			msg="선택한 신청자가 거절되었습니다.";
+		}else {
+			msg="선택한 신청자를 거절하는 도중 에러가 발생하였습니다.";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
 		
 	}
 	
