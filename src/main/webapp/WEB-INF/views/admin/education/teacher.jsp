@@ -160,5 +160,5 @@ button#teacher-delete-button {
 </div>
 </div>
 <!-- End of Main Content -->
-
+<script type="text/javascript" src="<c:url value='/admin-css-js/js/education.js'/>"></script>	
 <%@ include file="../inc/bottom.jsp"%>

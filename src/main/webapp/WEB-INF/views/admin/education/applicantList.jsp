@@ -2,6 +2,34 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
 
+<style>
+button#applicant-edit-button {
+	float:  right;
+	border: 0;
+	border-radius: 5px;
+	padding: 6px 41px;
+	margin-top: -6px;
+	margin-right: 9px;
+	color: white;
+}
+
+button#applicant-delete-button {
+	float:  right;
+	border: 0;
+	border-radius: 5px;
+	padding: 6px 41px;
+	margin-top: -6px;
+	margin-right: 9px;
+	color: white;
+}
+
+.applicant-button {
+	background-color: #858796;
+    background-image: linear-gradient(180deg, #858796 10%, #60616f 100%);
+    background-size: cover;
+}
+</style>
+
 <!-- Begin Page Content -->
 <!-- Page Heading -->
 <div class="head-div">
@@ -52,8 +80,8 @@
 <div class="board-body">
 	<div id="board-title">
 		<h5>신청자 관리</h5>
-		<button class="bg-gradient-secondary" id="board-write-button">승인</button>
-		<button class="bg-gradient-secondary" id="board-write-button">거절</button>
+		<button class="applicant-button" id="applicant-edit-button">승인</button>
+		<button class="applicant-button" id="applicant-delete-button">거절</button>
 	</div>
 	<div class="board">
 		<div class="board-head">
@@ -61,18 +89,18 @@
 				<form name="frmSearch" method="post" action="<c:url value='/admin/education/applicantList'/>">
 				<div class="input-group mb-3" id="board-search-div">
 					<select class="form-select form-select-lg" aria-label=".form-select-lg example" name="searchcondition" id="board-search-select">					  	
-					  	<option value="1">신청자</option>
-					  	<option value="2">교육 이름</option>
-					  	<option value="3">강사명</option>
+					  	<option value="ep_name" <c:if test="${param.searchCondition=='ep_name'}"> selected="selected" </c:if>>교육장</option>
+					  	<option value="ep_address" <c:if test="${param.searchCondition=='ep_address'}"> selected="selected" </c:if>>주소</option>
+					  	<option value="ep_tel" <c:if test="${param.searchCondition=='ep_tel'}"> selected="selected" </c:if>>전화번호</option>
 					</select>
-				 	<input type="text" class="form-control" placeholder="검색어를 입력하세요" aria-label="Recipient's username" aria-describedby="button-addon2" id="board-search-area">
-				 	<button class="btn btn-outline-secondary" type="button" id="button-addon2">검색</button>
+				 	<input type="text" class="form-control" name="searchKeyword" placeholder="검색어를 입력하세요" aria-label="Recipient's username" aria-describedby="button-addon2" id="board-search-area">
+				 	<button class="btn btn-outline-secondary" type="submit" id="button-addon2">검색</button>
 				</div>
 				</form>
 			</div>
 		</div>
 		<form name="frmDelete" method="post">
-		<table class="table">
+		<table class="table" id="educationtb">
 			<thead>
 				<tr class="board-table-colum">
 					<th scope="col"><input type="checkbox" id="check-All" class="board-checkbox"></th>
@@ -86,19 +114,22 @@
 					<th scope="col">교육장</th>
 				</tr>
 			</thead>
+			<c:set var="idx" value="0"/>
 			<tbody>
-				<tr>
-					<th scope="row"><input type="checkbox" class="board-checkbox"></th>
-					<td>1</td>
-					<td>황재구</td>
-					<td>MBTI와 진로</td>
-					<td>박정민</td>
-					<td>2023.10.05</td>
-					<td>30</td>
-					<td>5만원</td>
-					<td>강남점</td>
-				</tr>
-				
+				<c:forEach var="educationVo" items="${list}">
+					<c:set var="educationApplicant" value="${educationVo.eduAppNo}"/>
+					<tr>
+						<th scope="row"><input type="checkbox" class="board-checkbox" name="eduAppNo" value="${educationVo.eduAppNo }"></th>
+						<td>${educationVo.eduAppNo }</td>
+						<td>${educationVo.name }</td>
+						<td>${educationVo.eduName }</td>
+						<td>${educationVo.eduTeaName }</td>
+						<td>${educationVo.eduCom }</td>
+						<td>${educationVo.eduPeopleNumber }</td>
+						<td>${educationVo.eduPrice }</td>
+						<td>${educationVo.epName }</td>
+					</tr>
+				</c:forEach>
 			</tbody>
 		</table>
 		<div style="width: 10%;text-align: center;margin: 0 auto;">
@@ -132,5 +163,5 @@
 </div>
 </div>
 <!-- End of Main Content -->
-
+<script type="text/javascript" src="<c:url value='/admin-css-js/js/education.js'/>"></script>	
 <%@ include file="../inc/bottom.jsp"%>
