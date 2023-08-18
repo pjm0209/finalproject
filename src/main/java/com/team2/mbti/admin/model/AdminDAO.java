@@ -11,8 +11,9 @@ import com.team2.mbti.common.SearchVO;
 public interface AdminDAO {	
 	int checkAdminId(String adminId);
 	String selectAdminPwd(String adminId);
+	int selectAdminNo(String adminId);
+	
+	int insertManager(AdminVO vo);
 	List<AdminVO> selectAllManager(SearchVO vo);
 	int getTotalRecordManager(SearchVO searchVo);
-	int selectAdminNo(String adminId);
-	int insertManager(AdminVO vo); //관리자 추가
 }

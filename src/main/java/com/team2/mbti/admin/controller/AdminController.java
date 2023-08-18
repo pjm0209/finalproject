@@ -112,10 +112,10 @@ public class AdminController {
 		return "admin/manager/managerList";					
 	}	
 	
-	@RequestMapping("/managerList")
-	public String managerList(@ModelAttribute SearchVO vo,@RequestParam(required = false) String searchCondition,
+	@GetMapping("/managerList")
+	public String managerList(@ModelAttribute SearchVO vo, @RequestParam(required = false) String searchCondition,
 			Model model) {
-		logger.info("관리자 목록 페이지, 파라미터 vo={}, condition={}", vo, searchCondition);
+		logger.info("관리자 리스트 페이지, 파라미터 vo={}, condition={}", vo, searchCondition);
 		
 		PaginationInfo pagingInfo = new PaginationInfo();
 		pagingInfo.setBlockSize(ConstUtil.BLOCK_SIZE);
@@ -138,7 +138,8 @@ public class AdminController {
 		return "admin/manager/managerList";
 	}
 	
-	@RequestMapping("/manager/managerAdditional")
+	
+	@GetMapping("/manager/managerAdditional")
 	public String managerAdditional(Model model) {
 		
 		logger.info("관리자 추가 화면 보여주기");

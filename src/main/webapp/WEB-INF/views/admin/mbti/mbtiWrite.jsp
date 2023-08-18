@@ -60,7 +60,7 @@ $(function(){
 		</div>
 		<div style="width: 775px;text-align: center;">
 			<c:if test="${!empty vo}">
-				<input type="hidden" name="mbtiServeyNo" value="${vo.mbtiServeyNo}">
+				<input type="hidden" name="mbtiSurveyNo" value="${vo.mbtiSurveyNo}">
 			</c:if>
 			<button class="mbti-button" type="submit" id="mbti-button">${str}</button>
 			<button class="mbti-button" type="button" id="mbti-close-button" onclick="self.close()">닫기</button>

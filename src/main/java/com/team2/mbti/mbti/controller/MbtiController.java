@@ -67,11 +67,11 @@ public class MbtiController {
 	}
 	
 	@GetMapping("/mbtiWrite")
-	public String mbtiWrite_get(@RequestParam(required = false,defaultValue = "0") int mbtiServeyNo, Model model) {
+	public String mbtiWrite_get(@RequestParam(required = false,defaultValue = "0") int mbtiSurveyNo, Model model) {
 		logger.info("mbti 질문지 등록 페이지");
 		
-		if(mbtiServeyNo!=0) {
-			MbtiSurveyVO vo=mbtiSurveyService.selectByNoMbtiSurvey(mbtiServeyNo);
+		if(mbtiSurveyNo!=0) {
+			MbtiSurveyVO vo=mbtiSurveyService.selectByNoMbtiSurvey(mbtiSurveyNo);
 			
 			model.addAttribute("vo", vo);
 		}

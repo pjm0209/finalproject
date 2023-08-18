@@ -1,6 +1,7 @@
 package com.team2.mbti.member.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -17,5 +18,6 @@ public interface MemberDAO {
 	int selectMemberNo(String userid);
 	int deleteMember(int no);
 	
-
+	String memberIdSearch(Map<String, Object> map);
+		
 }
