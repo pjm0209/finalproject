@@ -41,7 +41,7 @@ public class MbtiSurveyServiceImpl implements MbtiSurveyService{
 		int cnt=0;
 		try {
 			for(MbtiSurveyVO vo : list) {
-				if(vo.getMbtiServeyNo()!=0) {
+				if(vo.getMbtiSurveyNo()!=0) {
 					cnt=mbtiSurveyDao.deleteMbtiSurvey(vo);
 				}
 			}
