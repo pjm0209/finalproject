@@ -5,7 +5,7 @@ $(function(){
 	
 	$('.board-side-icon').click(function(){
 		const boardFormNo = $(this).prev().find('input[type=hidden]').val();
-		location.href = contextPath + "/board/admin/boardEdit?boardFormNo=" + boardFormNo;
+		location.href = contextPath + "/admin/board/boardEdit?boardFormNo=" + boardFormNo;
 	});
 	
 	 CKEDITOR.replace("p_content", {
@@ -82,7 +82,7 @@ $(function(){
 		var fileNo = $(this).nextAll('.fileNo').val();
 		
 		$.ajax({
-			url:contextPath + "/board/fileDel",
+			url:contextPath + "/admin/board/fileDel",
 			data:{fileName: fileName,
 				  fileNo: fileNo},
 			type:"GET",				
