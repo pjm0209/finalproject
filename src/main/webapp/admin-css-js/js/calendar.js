@@ -2,7 +2,7 @@
  * calendar.js
  */
 
-function openModal(arg) {
+function openModal(info) {
 	 
 	$('#calendar a').attr("href", "#ex1");
 	$('#calendar a').attr("rel", "modal:open");
@@ -12,7 +12,7 @@ function openModal(arg) {
 	$('#calendar a').parent().parent().on('click', function() {
       $('#ex1').modal();
     });
-	$('#ex1').append(arg);
+	$('#ex1 #modalLabel').text(info.dateStr);
 	
 	
 }

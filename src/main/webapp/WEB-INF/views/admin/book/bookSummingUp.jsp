@@ -28,17 +28,16 @@ $(function() {
 		locale: 'ko',
 		/*  navLinks: true, // can click day/week names to navigate views */
 		selectable: true,
-		select: function(arg) {
+		select: function(info) {
 			/* calendar.unselect() */
-			var title = openModal(arg);
+			openModal(info);
 		},
-		eventClick: function(arg){
-			openModal(arg);
+		eventClick: function(){
+			openModal();
 		},
 		editable: true,
 		dayMaxEvents: true, // allow "more" link when too many events
 	    events: [
-	    	if()
 			{
 				title: '결 제 금 액 : ',
 				start: '2023-08-17',
