@@ -63,7 +63,7 @@
         function scrollToPosition(position) {
             $('html, body').animate({
 				scrollTop: position
-			}, 1000);
+			}, "fast");
         }
 	});
 </script>

@@ -37,4 +37,6 @@ public class EducationVO extends SearchVO {
 	private String eduTeaEmail;
 	private String eduTeaTel;
 	
+	private String name;
+	
 }
