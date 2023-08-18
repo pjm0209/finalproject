@@ -118,7 +118,7 @@ button#location-delete-button {
 				<c:forEach var="educationVo" items="${list}">
 					<c:set var="educationPlace" value="${educationVo.epNo}"/>
 					<tr>
-						<th scope="row"><input type="checkbox" class="board-checkbox" vlaue="${educationVo.epNo }"></th>
+						<th scope="row"><input type="checkbox" class="board-checkbox" name="epNo" value="${educationVo.epNo }"></th>
 						<td>${educationVo.epNo }</td>
 						<td>${educationVo.epName }</td>
 						<td>${educationVo.epZipcode }</td>

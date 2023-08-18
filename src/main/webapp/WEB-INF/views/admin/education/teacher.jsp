@@ -3,7 +3,7 @@
 <%@ include file="../inc/top.jsp"%>
 
 <style>
-button#education-edit-button {
+button#teacher-edit-button {
 	float:  right;
 	border: 0;
 	border-radius: 5px;
@@ -13,7 +13,7 @@ button#education-edit-button {
 	color: white;
 }
 
-button#education-delete-button {
+button#teacher-delete-button {
 	float:  right;
 	border: 0;
 	border-radius: 5px;
@@ -23,7 +23,7 @@ button#education-delete-button {
 	color: white;
 }
 
-.education-button {
+.teacher-button {
 	background-color: #858796;
     background-image: linear-gradient(180deg, #858796 10%, #60616f 100%);
     background-size: cover;
@@ -82,8 +82,8 @@ button#education-delete-button {
 <div class="board-body">
 	<div id="board-title">
 		<h5>강사 관리</h5>
-		<button class="education-button" id="education-edit-button">수정</button>
-		<button class="education-button" id="education-delete-button">삭제</button>
+		<button class="teacher-button" id="teacher-edit-button">수정</button>
+		<button class="teacher-button" id="teacher-delete-button">삭제</button>
 	</div>
 	<div class="board">
 		<div class="board-head">
@@ -118,7 +118,7 @@ button#education-delete-button {
 				<c:forEach var="educationVo" items="${list}">
 					<c:set var="educationPlace" value="${educationVo.eduTeaNo}"/>
 					<tr>
-						<th scope="row"><input type="checkbox" class="board-checkbox" vlaue="${educationVo.eduNo }"></th>
+						<th scope="row"><input type="checkbox" class="board-checkbox" name="eduTeaNo" value="${educationVo.eduNo }"></th>
 						<td>${educationVo.eduTeaNo }</td>
 						<td>${educationVo.eduTeaName }</td>
 						<td>${educationVo.eduTeaId }</td>

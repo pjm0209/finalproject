@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp" %>
 <script type="text/javascript">
+
 	$(function(){
 		var idx=1;
 		
@@ -22,15 +23,15 @@
 		});
 		
 		var bool=false;
+		var count=10;
 		$('#nextMbtiQuestion').click(function(){
-			$('input[name=statement'+idx+']').each(function(){
-				if(!this.checked){
-					alert("정확한 성격유형을 위해서 모두 체크해 주셔야 합니다.");
-					bool=false;
-					return false;
-				}
-			});
+			if($('input[type=radio]:checked').length<count){
+				alert("정확한 성격유형을 위해서 모두 선택해 주셔야 합니다.");
+				bool=false;
+				return false;
+			}
 			bool=true;
+			
 			if(idx!=${num}){
 				if(bool){
 					$('.MBTI_test'+idx).hide();
@@ -45,6 +46,14 @@
 					}
 				}
 			}
+			count=count+10;
+		});
+		$('#resultDivMbti').click(function(){
+			if($('input[type=radio]:checked').length<num){
+				alert("정확한 성격유형을 위해서 모두 체크해 주셔야 합니다.");
+				bool=false;
+				return false;
+			}
 		});
 		
 		$('.test_btn_style').click(function(){
@@ -54,7 +63,7 @@
         function scrollToPosition(position) {
             $('html, body').animate({
 				scrollTop: position
-			}, 500);
+			}, 1000);
         }
 	});
 </script>
@@ -81,41 +90,47 @@
 		</div>
 	</div>
 	<!--text1 -->
+	<c:set var="num" value="0"/>
 	<c:set var="idx" value="1"/>
 	<c:set var="idx2" value="1"/>
 	<hr class="MBTI_test0">
-    <c:forEach var="mbtiSurveyVo" items="${list}">
-	    <div class="MBTI_test${idx2} puls">
-	        <div class="statement">
-	            <div class="question">
-	                <h3>${idx}.&nbsp;${mbtiSurveyVo.question}</h3>
-	            </div><br>
-	            <div class="answer">
-	                <div class="options">
-	                	<input type="radio" id="statement${idx}_1" name="statement${idx}" value="0"/>
-	                    <label for="statement${idx}_1" class="ch_01 disagree max">전혀 그렇지 않다</label>
-	                    <input type="radio" id="statement${idx}_2" name="statement${idx}" value="1"/>
-	                    <label for="statement${idx}_2" class="ch_02 disagree mid">그렇지 않다</label>
-	                    <input type="radio" id="statement${idx}_3" name="statement${idx}" value="2"/>
-	                    <label for="statement${idx}_3" class="ch_03 natural">보통</label>
-	                    <input type="radio" id="statement${idx}_4" name="statement${idx}" value="3"/>
-	                    <label for="statement${idx}_4" class="ch_04 agree mid">그렇다</label>
-	                    <input type="radio" id="statement${idx}_5" name="statement${idx}" value="4"/>
-	                    <label for="statement${idx}_5" class="ch_05 agree max">매우 그렇다</label><br>
-	                </div>
-	            </div>
-	        </div>
-	        <c:if test="${idx%10==0}">
-	        	<c:set var="idx2" value="${idx2+1}"/>
-	        </c:if>
-	        <c:set var="idx" value="${idx+1}"/>
+	<form name="frmMbtiResult" method="post" action="<c:url value='/main/mbti/mbtiResult'/>">
+	    <c:forEach var="mbtiSurveyVo" items="${list}">
+		    <div class="MBTI_test${idx2} puls">
+		        <div class="statement">
+		            <div class="question">
+		                <h3>${idx}.&nbsp;${mbtiSurveyVo.question}</h3>
+		            </div><br>
+		            <div class="answer">
+		                <div class="options">
+		                	<input type="hidden" name="mbtiResultItem[${num}].mbtiSurveyNo" value="${mbtiSurveyVo.mbtiSurveyNo}" />
+		                	<input type="radio" id="statement${idx}_1" data-name="statement${idx}" name="mbtiResultItem[${num}].mbtiVal" value="0"/>
+		                    <label for="statement${idx}_1" class="ch_01 disagree max">전혀 그렇지 않다</label>
+		                    <input type="radio" id="statement${idx}_2" data-name="statement${idx}" name="mbtiResultItem[${num}].mbtiVal" value="1"/>
+		                    <label for="statement${idx}_2" class="ch_02 disagree mid">그렇지 않다</label>
+		                    <input type="radio" id="statement${idx}_3" data-name="statement${idx}" name="mbtiResultItem[${num}].mbtiVal" value="2"/>
+		                    <label for="statement${idx}_3" class="ch_03 natural">보통</label>
+		                    <input type="radio" id="statement${idx}_4" data-name="statement${idx}" name="mbtiResultItem[${num}].mbtiVal" value="3"/>
+		                    <label for="statement${idx}_4" class="ch_04 agree mid">그렇다</label>
+		                    <input type="radio" id="statement${idx}_5" data-name="statement${idx}" name="mbtiResultItem[${num}].mbtiVal" value="4"/>
+		                    <label for="statement${idx}_5" class="ch_05 agree max">매우 그렇다</label><br>
+		                </div>
+		            </div>
+		        </div>
+		        <c:if test="${idx%10==0}">
+		        	<c:set var="idx2" value="${idx2+1}"/>
+		        </c:if>
+		        <c:set var="idx" value="${idx+1}"/>
+		        <c:set var="num" value="${num+1}"/>
+		    </div>
+	    </c:forEach>
+	    
+	    <div id="nextDivMbti">
+	    	<button type="button" class="mbti-button3" id="nextMbtiQuestion">다음</button>
 	    </div>
-    </c:forEach>
-    <div id="nextDivMbti">
-    	<button class="mbti-button3" id="nextMbtiQuestion">다음</button>
-    </div>
-    <div id="resultDivMbti">
-    	<button class="mbti-button3" id="resultMbtiQuestion">검사결과</button>
-    </div>
+	    <div id="resultDivMbti">
+	    	<button type="submit" class="mbti-button3" id="resultMbtiQuestion">검사결과</button>
+	    </div>
+    </form>
 </section>
 <%@ include file="../inc/bottom.jsp" %>

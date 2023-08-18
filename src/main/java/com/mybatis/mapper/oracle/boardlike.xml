@@ -16,12 +16,12 @@
 
 	<insert id="insertUserLike" parameterType="boardLikeVo">
 		insert into board_like(no, board_no)
-		values(#{no}, #{boardNo});
+		values(#{no}, #{boardNo})
 	</insert>
 	
 	<insert id="insertAdminLike" parameterType="boardLikeVo">
 		insert into board_like(admin_no, board_no)
-		values(#{adminNo}, #{boardNo});
+		values(#{adminNo}, #{boardNo})
 	</insert>
 	
 	<select id="selectLikeByBoardNo" parameterType="int" resultType="int">
@@ -32,10 +32,12 @@
 	<select id="selectLikeBoard" parameterType="boardLikeVo" resultType="int">
 		select count(*) from board_like
 		<include refid="adminUser"></include>
+		and board_no = #{boardNo}
 	</select>
 	
 	<delete id="deleteBoardLike" parameterType="boardLikeVo">
 		delete from board_like
 		<include refid="adminUser"></include>
+		and board_no = #{boardNo}
 	</delete>
 </mapper>

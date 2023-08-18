@@ -10,7 +10,7 @@ import com.team2.mbti.common.SearchVO;
 public interface MbtiSurveyDAO {
 	List<MbtiSurveyVO> selectAllMbtiSurvey(SearchVO searchVo);
 	int insertMbtiSurvey(MbtiSurveyVO vo);
-	MbtiSurveyVO selectByNoMbtiSurvey(int mbtiServeyNo);
+	MbtiSurveyVO selectByNoMbtiSurvey(int mbtiSurveyNo);
 	int updateMbtiSurvey(MbtiSurveyVO vo);
 	int deleteMbtiSurvey(MbtiSurveyVO vo);
 	int getTotalRecordMbti(SearchVO searchVo);

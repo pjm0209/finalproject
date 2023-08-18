@@ -4,20 +4,22 @@
 
 <!-- Begin Page Content -->
 <!-- Page Heading -->
-<c:import url="/board/admin/boardHeadSide"></c:import>
+<c:import url="/admin/board/boardHeadSide"></c:import>
 <div class="board-body">
+	<input type="hidden" value="boardDetail" id="boardDetail">
 	<input type="hidden" name="lastEditAdminId" value="admin">
 	<input type="hidden" name="boardNo" value="${param.boardNo }">
 	<input type="hidden" class="board_comment_flag" value="${map['COMMENT_FLAG']}">
 	<input type="hidden" class="member-userId" value="${map['USERID'] }">
 	<input type="hidden" class="admin-adminId" value="${map['ADMIN_ID'] }">
+	<input type="hidden" class="session-adminId" value="${sessionScope.adminId }">
 	<div id="board-title">
 		<h5>${map['BOARD_FORM_NAME'] }</h5>
 		<div class="board-head-button">
-			<input type="button" class="bg-gradient-secondary" onclick="location.href='<c:url value="/board/board?boardFormNo=${map['BOARD_FORM_NO'] }"/>'"	value="목록">
+			<input type="button" class="bg-gradient-secondary" onclick="location.href='<c:url value="/admin/board/board?boardFormNo=${map['BOARD_FORM_NO'] }"/>'"	value="목록">
 			<input type="button" class="bg-gradient-primary" id="del-board" value="삭제">
 			<c:if test="${map['ADMIN_ID'] == sessionScope.adminId}"> 
-				<input type="button" class="bg-gradient-primary" onclick="location.href='<c:url value="/board/boardWriteEdit?boardNo=${param.boardNo }"/>'" id="eidt-board" value="수정">
+				<input type="button" class="bg-gradient-primary" onclick="location.href='<c:url value="/admin/board/boardWriteEdit?boardNo=${param.boardNo }"/>'" id="eidt-board" value="수정">
 			</c:if>
 		</div>
 	</div>
@@ -41,13 +43,13 @@
 					<c:forEach var="vo" items="${fileList }">
 						<c:choose>
 					        <c:when test="${fn:length(vo.originalFileName) > 13}">
-					        	<a href="<c:url value='/board/fileDown?fileName=${vo.fileName }'/>" data-toggle="tooltip" data-html="true" title="${vo.originalFileName }">
+					        	<a href="<c:url value='/admin/board/fileDown?fileName=${vo.fileName }'/>" data-toggle="tooltip" data-html="true" title="${vo.originalFileName }">
 							        <c:out value="${fn:substring(vo.originalFileName, 0, 12)}">
 							        </c:out>...
 						        </a><br>
 					        </c:when>
 					        <c:otherwise>
-					        	<a href="<c:url value='/board/fileDown?fileName=${vo.fileName }'/>" data-bs-toggle="tooltip" data-bs-title="${vo.originalFileName }">
+					        	<a href="<c:url value='/admin/board/fileDown?fileName=${vo.fileName }'/>" data-bs-toggle="tooltip" data-bs-title="${vo.originalFileName }">
 							        <c:out value="${vo.originalFileName}">
 							        </c:out>
 						        </a><br>
@@ -69,7 +71,7 @@
 		<c:if test="${map['COMMENT_FLAG'] == 'Y' }">
 			<p class="board-comment-count"></p>
 			<div class="commentList"></div>
-			<form name="commentFrm" action="post">
+			<form name="commentFrm" method="post">
 				<p class="board-comment-user">관리자 (${sessionScope.adminId })</p>
 				<div class="textarea-group">
 					<textarea id="comment-area" name="commentsBody"></textarea>
@@ -98,30 +100,33 @@
 		for(var i = 0; i < comment.length; i++) {
 			var map = comment[i];			
 			var date = new Date(map.COMMENTS_REGDATE);
+			var user = $('.session-adminId').val();
 			const regdate = new Date(date.getTime()).toISOString().split('T')[0] + " " + date.toTimeString().split(' ')[0];
 			
 			str += "<div class='comment-item'>";
-			
 			if(map.ADMIN_ID.length > 0) {
+				str += "<p class='comment-writer'>" + map.ADMIN_ID;
 				if(boardWriter === map.ADMIN_ID) {
-					str += "<p class='comment-writer'>" + map.ADMIN_ID + "<span class='boardWriter-commentWrite'>작성자</span>" +
-					"<span class='comment-write-regdate'>(" + regdate + ")</span><div class='commentEditOrDel'>" + 
-					"<span class='comment-more'><i class='bi bi-three-dots-vertical'></i></span><div class='editDel'>" + 
-					"<a href='#' class='commentEdit'>수정</a><a href='#' class='commentDel'>삭제</a></div>";
-				} else {
-					str += "<p class='comment-writer'>" + map.ADMIN_ID + "<span class='comment-write-regdate'>(" + regdate + ")</span>" +
-					"<div class='commentEditOrDel'><span class='comment-more'><i class='bi bi-three-dots-vertical'></i></span>" + 
-					"<div class='editDel'><a href='#' class='commentDel'>삭제</a></div>";
+					str += "<span class='boardWriter-commentWrite'>작성자</span>";
 				}
+				str += "<span class='comment-write-regdate'>(" + regdate + ")</span>" +
+				"<a class='comment-reply' onclick='commentReply(this)'>답글쓰기</a>" +
+				"<div class='commentEditOrDel'>" + 
+				"<span class='comment-more'><i class='bi bi-three-dots-vertical'></i></span><div class='editDel'>";
+				if(user == map.ADMIN_ID) {
+					str += "<a href='#' class='commentEdit'>수정</a>";
+				}
+				str += "<a href='#' class='commentDel'>삭제</a></div>";
 			} else {
+				str += "<p class='comment-writer'>" + map.NAME;
 				if(boardWriter === map.NAME) {
-					str += "<p class='comment-writer'>" + map.NAME + "<span class='boardWriter-commentWrite'>작성자</span>" + 
-					"<span class='comment-write-regdate'>(" + regdate + ")</span><span class='comment-more'>" + 
-					"<i class='bi bi-three-dots-vertical'></i></span><div class='editDel'><a href='#' class='commentEdit'>수정</a>" +
-					"<a href='#' class='commentDel'>삭제</a></div>";
-				} else {
-					str += "<p class='comment-writer'>" + map.NAME + "<span class='comment-write-regdate'>(" + regdate + ")</span>";					
+					str += "<span class='boardWriter-commentWrite'>작성자</span>"; 
 				}
+				str += "<span class='comment-write-regdate'>(" + regdate + ")</span>" +
+				"<a class='comment-reply' onclick='commentReply(this)'>답글쓰기</a>" +
+				"<span class='comment-more'>" + 
+				"<i class='bi bi-three-dots-vertical'></i></span><div class='editDel'>" +
+				"<a href='#' class='commentEdit'>수정</a><a href='#' class='commentDel'>삭제</a></div>";
 			}
 			str += "</div>";
 			str += "<p class='comment-body'>" + map.COMMENTS_BODY + "</p>";

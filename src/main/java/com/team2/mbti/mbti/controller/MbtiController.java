@@ -67,11 +67,11 @@ public class MbtiController {
 	}
 	
 	@GetMapping("/mbtiWrite")
-	public String mbtiWrite_get(@RequestParam(required = false,defaultValue = "0") int mbtiServeyNo, Model model) {
+	public String mbtiWrite_get(@RequestParam(required = false,defaultValue = "0") int mbtiSurveyNo, Model model) {
 		logger.info("mbti 질문지 등록 페이지");
 		
-		if(mbtiServeyNo!=0) {
-			MbtiSurveyVO vo=mbtiSurveyService.selectByNoMbtiSurvey(mbtiServeyNo);
+		if(mbtiSurveyNo!=0) {
+			MbtiSurveyVO vo=mbtiSurveyService.selectByNoMbtiSurvey(mbtiSurveyNo);
 			
 			model.addAttribute("vo", vo);
 		}
@@ -85,7 +85,7 @@ public class MbtiController {
 		
 		String msg="mbti 질문 등록 실패",url="/admin/mbti/mbtiWrite";
 		boolean closePopup=false;
-		if(mbtiSurveyVo.getMbtiServeyNo()==0) {
+		if(mbtiSurveyVo.getMbtiSurveyNo()==0) {
 			int cnt=mbtiSurveyService.insertMbtiSurvey(mbtiSurveyVo);
 			logger.info("mbti 질문 등록 결과 cnt={}",cnt);
 			
