@@ -4,7 +4,7 @@
 
 <!-- Begin Page Content -->
 <!-- Page Heading -->
-<c:import url="/board/admin/boardHeadSide"></c:import>
+<c:import url="/admin/board/boardHeadSide"></c:import>
 <div class="board-body">
 	<input type="hidden" value="boardDetail" id="boardDetail">
 	<input type="hidden" name="lastEditAdminId" value="admin">
@@ -16,10 +16,10 @@
 	<div id="board-title">
 		<h5>${map['BOARD_FORM_NAME'] }</h5>
 		<div class="board-head-button">
-			<input type="button" class="bg-gradient-secondary" onclick="location.href='<c:url value="/board/board?boardFormNo=${map['BOARD_FORM_NO'] }"/>'"	value="목록">
+			<input type="button" class="bg-gradient-secondary" onclick="location.href='<c:url value="/admin/board/board?boardFormNo=${map['BOARD_FORM_NO'] }"/>'"	value="목록">
 			<input type="button" class="bg-gradient-primary" id="del-board" value="삭제">
 			<c:if test="${map['ADMIN_ID'] == sessionScope.adminId}"> 
-				<input type="button" class="bg-gradient-primary" onclick="location.href='<c:url value="/board/boardWriteEdit?boardNo=${param.boardNo }"/>'" id="eidt-board" value="수정">
+				<input type="button" class="bg-gradient-primary" onclick="location.href='<c:url value="/admin/board/boardWriteEdit?boardNo=${param.boardNo }"/>'" id="eidt-board" value="수정">
 			</c:if>
 		</div>
 	</div>
@@ -43,13 +43,13 @@
 					<c:forEach var="vo" items="${fileList }">
 						<c:choose>
 					        <c:when test="${fn:length(vo.originalFileName) > 13}">
-					        	<a href="<c:url value='/board/fileDown?fileName=${vo.fileName }'/>" data-toggle="tooltip" data-html="true" title="${vo.originalFileName }">
+					        	<a href="<c:url value='/admin/board/fileDown?fileName=${vo.fileName }'/>" data-toggle="tooltip" data-html="true" title="${vo.originalFileName }">
 							        <c:out value="${fn:substring(vo.originalFileName, 0, 12)}">
 							        </c:out>...
 						        </a><br>
 					        </c:when>
 					        <c:otherwise>
-					        	<a href="<c:url value='/board/fileDown?fileName=${vo.fileName }'/>" data-bs-toggle="tooltip" data-bs-title="${vo.originalFileName }">
+					        	<a href="<c:url value='/admin/board/fileDown?fileName=${vo.fileName }'/>" data-bs-toggle="tooltip" data-bs-title="${vo.originalFileName }">
 							        <c:out value="${vo.originalFileName}">
 							        </c:out>
 						        </a><br>
