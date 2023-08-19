@@ -453,6 +453,13 @@ ul.file-list {
     padding: 0px 15px;
 }
 
+.comment-item.reply {
+	border-bottom: 1px solid #e1e1e1;
+    margin-bottom: 10px;
+    padding: 0px 15px;
+    padding-left: 70px;
+}
+
 span.comment-write-regdate {
     margin-left: 20px;
     font-size: 13px;
@@ -525,7 +532,7 @@ commentEditOrDel div {
     z-index: 1;
     max-height: 370px;
     width: 100px;
-    visibility: hidden;
+    /*visibility: hidden;*/
 }
 
 a.commentEdit {
@@ -548,4 +555,11 @@ a.comment-reply {
 
 .editDel a {
 	cursor: pointer;
+}
+
+#commentReply-submit {
+	width: 100px;
+	border: 1px solid #d3d3d3;
+	background: #FFF;
+	font-size: 13px;
 }

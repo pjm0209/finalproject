@@ -8,7 +8,7 @@ $(function(){
 		location.href = contextPath + "/admin/board/boardEdit?boardFormNo=" + boardFormNo;
 	});
 	
-	 CKEDITOR.replace("p_content", {
+	CKEDITOR.replace("p_content", {
 						uploadUrl: contextPath + "/imageUpload",	//드래그 앤 드롭					
 						filebrowserUploadUrl:  contextPath + "/imageUpload", //파일은 이 경로로 업로드
 						height : 500
@@ -21,13 +21,13 @@ $(function(){
 		$(this).next().attr('class', 'use_on');
 		$(this).attr('class', 'use_off on');
 	});
-	
+		
 	$('.checkbox_group > .use_on').on("click", function(){
 		$(this).nextAll('input[type=hidden]').val('Y');
 		$(this).prev().attr('class', 'use_off');
 		$(this).attr('class', 'use_on on');
 	});	
-	
+		
 	$(".checkbox_group").each(function(){
 		var boardEditSet = $(this).find('.boardVal').val();
 		console.log(boardEditSet);
@@ -57,12 +57,13 @@ $(function(){
 	
 	/*게시글 상세보기 페이지 댓글로딩*/
 	if($('.board_comment_flag').val() == 'Y') {
-			commentsList($('input[name=boardNo]').val());
-		}
+		commentsList($('input[name=boardNo]').val());
+	}
 	
 	/*게시글 상세보기 댓글등록*/	
 	$('#comment-submit').click(function() {
-		$.ajax({
+		alert("댓글");
+		/*$.ajax({
 			url:contextPath + "/comments/write",
 			data:$('form[name=commentFrm]').serialize(),
 			type:"POST",
@@ -70,6 +71,25 @@ $(function(){
 				console.log(res);
 				commentsList($('input[name=boardNo]').val());
 				$('#comment-area').val('');
+			},
+			error:function(xhr, status, error) {
+				alert(status + ": " + error);
+			}
+		});*/
+	});
+			
+	$('#commentReply-submit').click(function() {
+		alert("댓글답변");
+		//commentReplyWrite($('input[name=boardNo]').val());
+		$.ajax({
+			url:comtexcontextPath + "/comments/commentsReply",
+			data:$('form[name=commentFrm]').serialize(),
+			type:"POST",
+			success:function(result) {
+				console.log(result);
+				commentsList($('input[name=boardNo]').val());
+				$('#comment-area').val('');
+				commentFormMove();
 			},
 			error:function(xhr, status, error) {
 				alert(status + ": " + error);
@@ -94,30 +114,32 @@ $(function(){
 				alert(status + ": " + error);
 			}
 		});
-	});
+	});	
 	
-	/*게시글 상세페이지 댓글박스*/
-	$(document).on('click', '.comment-more', function() {	
-		alert('a');	
-		$(this).next('.editDel').toggle().css('visibility', 'visible');
-	});
-	
+	//게시글상세보기면 좋아요숫자, 좋아요 체크유무 검색
 	if($('#boardDetail').val() == 'boardDetail') {
 		likeCountSelect();
 		likeSelect();
 	}
 	
-	$('div.board-like').click(function() {		
+	//좋아요 클릭이벤트
+	$('div.board-like').click(function() {
 		if($('.u_icon').is('.like') === true) {
 			likeDel();
 		} else {
 			likeIns();
-		}		
+		}
 	});
 	
 	const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
 	const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
 });
+
+function commentMore(element) {
+	$(element).click(function() {
+		$(element).next('.editDel').toggle();
+	});
+}
 
 function pageFunc(curPage) {
 	$('input[name="currentPage"]').val(curPage);
@@ -228,7 +250,8 @@ function commentsList(boardNo) {
 		data:{boardNo:boardNo},
 		datatype:'json',
 		success:function(result) {
-			comments(result);				
+			comments(result);
+			$('.editDel').hide();		
 		},
 		error:function(xhr, status, error) {
 			alert(status + ": " + error);
@@ -236,14 +259,25 @@ function commentsList(boardNo) {
 	});
 }
 
-//댓글 답글쓰기 함수
+//댓글 폼 이동함수
+function commentFormMove() {
+	$('.commentList').after($('form[name=commentFrm]'));
+	$('.comment-item').each(function() {
+		$(this).removeClass('commentReply');
+	});
+	$('.comment-reply').html('답글쓰기');
+	
+	$('#commentReply-submit').attr('id', 'comment-submit');
+	$('input[name=commentsGroupNo]').val('');
+	$('#comment-area').next().prop('name', '');
+}
+
+//댓글 답글쓰기 폼 함수
 function commentReply(element) {
+	var commentsNo = $(element).next().val();
+	
 	if($(element).html() === '답글취소') {
-		$('.commentList').after($('form[name=commentFrm]'));
-		$('.comment-item').each(function() {
-			$(this).removeClass('commentReply');			
-		});
-		$(element).html('답글쓰기');
+		commentFormMove();
 	} else {
 		$('.comment-item').each(function() {
 			$(this).removeClass('commentReply');
@@ -251,8 +285,12 @@ function commentReply(element) {
 		});
 		$(element).parent().parent().after($('form[name=commentFrm]'));
 		$(element).parent().parent().addClass('commentReply');
-		$(element).html('답글취소');			
-	}	
+		$(element).html('답글취소');
+		
+		$('#comment-submit').attr('id', 'commentReply-submit');
+		$('#comment-area').next().prop('name', 'commentsGroupNo');
+		$('input[name=commentsGroupNo]').val(commentsNo);
+	}
 }
 
 /*글쓰기 첨부파일 함수*/
@@ -301,7 +339,6 @@ function addFile() {
     document.querySelector('.file_list').appendChild(fileDiv);
 }
 
-
 // 파일 삭제
 function removeFile(element) {
     const fileName = $(element).next().find('input[type=file]').attr('name');    
@@ -314,6 +351,3 @@ function removeFile(element) {
     }
     element.parentElement.remove();
 }
-
-/*const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
-const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));*/

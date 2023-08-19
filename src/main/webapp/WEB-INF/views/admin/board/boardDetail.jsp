@@ -76,8 +76,9 @@
 				<p class="board-comment-user">관리자 (${sessionScope.adminId })</p>
 				<div class="textarea-group">
 					<textarea id="comment-area" name="commentsBody"></textarea>
+					<input type="hidden">				
 					<input type="hidden" value="${map['BOARD_NO'] }" name="boardNo">
-					<input type="hidden" value="${sessionScope.adminNo }" name="adminNo">					
+					<input type="hidden" value="${sessionScope.adminNo }" name="adminNo">
 					<input type="button" value="답글등록" id="comment-submit">
 				</div>
 			</form>
@@ -104,7 +105,11 @@
 			var user = $('.session-adminId').val();
 			const regdate = new Date(date.getTime()).toISOString().split('T')[0] + " " + date.toTimeString().split(' ')[0];
 			
-			str += "<div class='comment-item'>";
+			if(map.COMMENTS_STEP < 1) {
+				str += "<div class='comment-item'>";
+			} else {
+				str += "<div class='comment-item reply'>";
+			}			
 			if(map.ADMIN_ID.length > 0) {
 				str += "<p class='comment-writer'>" + map.ADMIN_ID;
 				if(boardWriter === map.ADMIN_ID) {
@@ -113,9 +118,12 @@
 				str += "<span class='comment-write-regdate'>(" + regdate + ")</span>";
 				if(map.COMMENTS_STEP < 1) {
 					str += "<a class='comment-reply' onclick='commentReply(this)'>답글쓰기</a>";
+					str += "<input type='hidden' name='commentsNo' class='commentsNo' value='" + map.COMMENTS_NO + "'>";
 				}
 				str += "<div class='commentEditOrDel'>" + 
-				"<span class='comment-more'><i class='bi bi-three-dots-vertical'></i></span><div class='editDel'>";
+				"<span onclick='commentMore(this)' class='comment-more'>";
+				str += "<i class='bi bi-three-dots-vertical'></i></span>";
+				str += "<div class='editDel'>";
 				if(user == map.ADMIN_ID) {
 					str += "<a class='commentEdit'>수정</a>";
 				}
@@ -129,8 +137,9 @@
 				str += "<span class='comment-write-regdate'>(" + regdate + ")</span>";
 				if(map.COMMENTS_STEP < 1) {
 					str += "<a class='comment-reply' onclick='commentReply(this)'>답글쓰기</a>";
+					str += "<input type='hidden' name='commentsNo' class='commentsNo' value='" + map.COMMENTS_NO + "'>";
 				}
-				str += "<span class='comment-more'>" + 
+				str += "<span onclick='commentMore(this)' class='comment-more'>" + 
 				"<i class='bi bi-three-dots-vertical'></i></span>" +
 				"<div class='editDel'>" +
 				"<a class='commentEdit'>수정</a><a class='commentDel' onclick='commentDel(" + map.COMMENTS_NO + ", " + map.COMMENTS_STEP + ", " + map.COMMENTS_GROUP_NO + ", " + map.BOARD_NO + ")'>삭제2</a>" +

@@ -26,4 +26,9 @@ public class CommentServiceImpl implements CommentService {
 	public void deleteComment(Map<String, String> map) {
 		commentDao.deleteComment(map);
 	}
+
+	@Override
+	public int insertCommentReply(CommentVO vo) {
+		return commentDao.insertCommentReply(vo);
+	}
 }

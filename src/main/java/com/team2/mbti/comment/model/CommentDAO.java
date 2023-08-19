@@ -11,4 +11,6 @@ public interface CommentDAO {
 	List<Map<String, Object>> selectCommentList(int boardNo);
 	
 	void deleteComment(Map<String, String> map);
+	
+	int insertCommentReply(CommentVO vo);
 }
