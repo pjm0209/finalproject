@@ -3,14 +3,6 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.team2.mbti.member.model.MemberDAO">
-	<sql id="searchMember">
-		<where>
-			<if test="searchKeyword!=null and searchKeyword!=''">
-				${searchCondition} like '%' || #{searchKeyword} || '%'
-			</if>
-		</where>
-	</sql>
-
 	<insert id="insertMember" parameterType="memberVO">
 		<selectKey keyProperty="no" order="BEFORE" resultType="int">
 		select * member_seq.nextval from dual
@@ -21,6 +13,14 @@
 		values(#{no}, #{userid}, #{pwd}, #{name}, #{hp},n#{email}, #{zipcode}, #{address}, #{address_detail}
 		#{regdate}, #{activatable}, #{outdate}, #{mati_no})
 	</insert>
+
+	<sql id="searchMember">
+		<where>
+			<if test="searchKeyword!=null and searchKeyword!=''">
+				${searchCondition} like '%' || #{searchKeyword} || '%'
+			</if>
+		</where>
+	</sql>
 	
 	<select id="selectAllMember" parameterType="searchVo" resultType="memberVo">
 		select * 
@@ -43,15 +43,11 @@
 		select count(*) from member
 		<include refid="searchMember"></include> 
 	</select>
-
-	<select id="selectByNoMember" resultType="memberVo">
-		select * from member where no=#{no}
-	</select>
 	
-		<select id="selectCheckId" parameterType="string"
-		resultType="int">
-		select count(*) from member
-		where userid=#{userid}
+	<select id="memberIdSearch" parameterType="map" resultType="string">
+		select userid from member
+		where name = #{name}
+		and email = #{email}
 	</select>
 	
 	<delete id="deleteMember" parameterType="int">
@@ -59,11 +55,21 @@
 		where no=#{no}
 	</delete>
 	
-	<select id="memberIdSearch" parameterType="map" resultType="string">
-		select userid from member
-		where name = #{name}
-		and email = #{email}
+	<select id="selectPwd" parameterType="string" resultType="string">
+		select pwd from member
+		where userid=#{userid}
 	</select>
-		
+	
+	<select id="selectCheckId" parameterType="string"
+		resultType="int">
+		select count(*) from member
+		where userid=#{userid}
+	</select>
+	
+		<select id="selectByUserid" parameterType="string"
+		resultType="memberVo">
+		select * from member
+		where userid=#{userid}
+	</select>
 
 </mapper>

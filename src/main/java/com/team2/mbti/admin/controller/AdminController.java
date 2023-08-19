@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -106,13 +107,6 @@ public class AdminController {
 	}
 	
 	@GetMapping("/manager/managerList")
-	public String manager() {
-		logger.info("관리자 관리 화면");
-		
-		return "admin/manager/managerList";					
-	}	
-	
-	@GetMapping("/managerList")
 	public String managerList(@ModelAttribute SearchVO vo, @RequestParam(required = false) String searchCondition,
 			Model model) {
 		logger.info("관리자 리스트 페이지, 파라미터 vo={}, condition={}", vo, searchCondition);
@@ -140,7 +134,7 @@ public class AdminController {
 	
 	
 	@GetMapping("/manager/managerAdditional")
-	public String managerAdditional(Model model) {
+	public String managerAdditional_get(Model model) {
 		
 		logger.info("관리자 추가 화면 보여주기");
 		
@@ -148,4 +142,30 @@ public class AdminController {
 		
 		return "admin/manager/managerAdditional";
 	}	
+	
+	@PostMapping("/manager/managerAdditional")
+	public String managerAdditional_post(@ModelAttribute AdminVO adminvo, Model model) {
+		logger.info("관리자 추가 처리, 파라미터 adminvo={}", adminvo);
+		
+		String msg = "관리자 등록 실패", url="/admin/manager/managerAdditional";
+		boolean closePopup=false;
+		
+		if(adminvo.getAdminNo()==0) {
+			int cnt = adminService.insertManager(adminvo);
+			logger.info("관리자 질문 등록 결과 cnt={}",cnt);
+			
+			if(cnt > 0) {
+				msg = "관리자 등록되었습니다.";
+				url = "/admin/manager/managerAdditional";
+				
+				closePopup=true;
+			}
+		}
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		model.addAttribute("closePopup", closePopup);
+		
+		return "common/message";
+	}
+	
 }

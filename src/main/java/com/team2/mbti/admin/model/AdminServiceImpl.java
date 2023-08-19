@@ -1,6 +1,7 @@
 package com.team2.mbti.admin.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -62,7 +63,12 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public int insertManager(AdminVO vo) {	
-		return adminDao.insertManager(vo);
+	public int insertManager(AdminVO adminvo) {	
+		return adminDao.insertManager(adminvo);
+	}
+
+	@Override
+	public String adminIdSearch(Map<String, Object> map) {
+		return adminDao.adminIdSearch(map);
 	}	
 }
