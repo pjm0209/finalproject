@@ -15,7 +15,12 @@ public interface BoardService {
 	List<BoardFormVO> selectAllBoard();
 	
 	int insertBoardForm(BoardFormVO vo);
-	int adminInsertBoard(BoardVO vo);
+	int findBoard(int boardFormNo);
+	int boardFormDel(int boardFormNo);
+	
+	int adminInsertBoard(BoardVO vo);	
+	int updateBoard(BoardVO vo);
+	void deleteBoard(Map<String, String> map);
 	
 	BoardFormVO selectBoardSet(int boardFormNo);
 	int updateBoardSet(BoardFormVO vo);
@@ -28,6 +33,4 @@ public interface BoardService {
 	List<BoardFileVO> selectFileList(int boardNo);
 	
 	int deleteFile(int fileNo);
-	
-	int updateBoard(BoardVO vo);
 }

@@ -149,6 +149,29 @@ public class BoardController {
 		return "common/message";
 	}
 	
+	@RequestMapping("/boardFormDel")
+	public String boardFormDel(@RequestParam(defaultValue = "0") int boardFormNo, Model model) {
+		logger.info("게시판 삭제 파라미터 boardFormNo: {}", boardFormNo);
+		
+		int boardCount = boardService.findBoard(boardFormNo);
+		logger.info("게시판 게시글존재유무 확인 결과 boardCount: {}", boardCount);
+		
+		String msg = "게시글을 전부 삭제해야 삭제할 수 있습니다.", url = "/admin/board/boardEdit?boardFormNo=" + boardFormNo;
+		if(boardCount < 1) {
+			int cnt = boardService.boardFormDel(boardFormNo);
+			logger.info("게시판 삭제 처리결과 cnt: {}", cnt);
+			if(cnt > 0) {
+				msg = "게시판을 삭제했습니다";
+				url = "/admin/board/board?boardFormNo=1";
+			}
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
+	}
+	
 	@GetMapping("/boardWrite")
 	public String boardWrite_get(@RequestParam int boardFormNo, Model model) {
 		logger.info("게시판 글쓰기 화면 보여주기");
@@ -291,5 +314,40 @@ public class BoardController {
 		}
 		
 		return result;
+	}
+	
+	@RequestMapping("/boardWriteDel")
+	public String boardWriteDel(@RequestParam(defaultValue = "0") int boardNo, @RequestParam int boardStep,
+			@RequestParam int boardGroupNo, @RequestParam int boardFormNo, HttpServletRequest request, Model model) {
+		logger.info("게시글 삭제 파라미터 boardNo: {}, boardStep: {}, boardGroupNo: {}", boardNo, boardStep, boardGroupNo);
+		
+		Map<String, String> map = new HashMap<>();
+		
+		map.put("boardNo", boardNo + "");
+		map.put("boardStep", boardStep + "");
+		map.put("boardGroupNo", boardGroupNo + "");
+		
+		List<BoardFileVO> list = boardService.selectFileList(boardNo);
+		logger.info("게시글 첨부파일 조회결과 list: {}", list);
+		
+		String msg = "게시글을 삭제했습니다.", url = "/admin/board/board?boardFormNo=" + boardFormNo;
+		boardService.deleteBoard(map);
+		
+		for(int i = 0; i < list.size(); i++) {
+			BoardFileVO vo = list.get(i);
+			
+			String filePath = fileUploadUtil.getUploadPath(request, ConstUtil.UPLOAD_FILE_FLAG);
+			File file = new File(filePath, vo.getFileName());
+			
+			if(file.exists()) {
+				boolean result = file.delete();
+				logger.info("파일 삭제처리 결과 result: {}", result);
+			}
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
 	}
 }

@@ -69,6 +69,7 @@ $(function(){
 			success:function(res) {
 				console.log(res);
 				commentsList($('input[name=boardNo]').val());
+				$('#comment-area').val('');
 			},
 			error:function(xhr, status, error) {
 				alert(status + ": " + error);
@@ -96,7 +97,8 @@ $(function(){
 	});
 	
 	/*게시글 상세페이지 댓글박스*/
-	$(document).on('click', '.comment-more', function() {		
+	$(document).on('click', '.comment-more', function() {	
+		alert('a');	
 		$(this).next('.editDel').toggle().css('visibility', 'visible');
 	});
 	
@@ -120,6 +122,25 @@ $(function(){
 function pageFunc(curPage) {
 	$('input[name="currentPage"]').val(curPage);
 	$('form[name="paginForm"]').submit();
+}
+
+//댓글삭제함수
+function commentDel(commentsNo, commentsStep, commentsGroupNo, boardNo) {
+	alert(commentsNo + ", " + commentsStep + "," + commentsGroupNo + "," + boardNo);
+	$.ajax({
+		url:contextPath + '/comments/delete',
+		type:"POST",
+		data:{commentsNo:commentsNo,
+			  commentsStep:commentsStep,
+			  commentsGroupNo:commentsGroupNo},
+		success:function(result) {
+			console.log(result);
+			commentsList(boardNo);
+		},
+		error:function(xhr, status, error) {
+			alert(status + ": " + error);
+		}
+	});
 }
 
 //좋아요 처리함수
@@ -217,9 +238,21 @@ function commentsList(boardNo) {
 
 //댓글 답글쓰기 함수
 function commentReply(element) {
-	$(element).parent().parent().after($('form[name=commentFrm]'));
-	$(element).parent().parent().css({'margin':'0', 'border-bottom':'0', 'margin-bottom':'-20px'});
-	
+	if($(element).html() === '답글취소') {
+		$('.commentList').after($('form[name=commentFrm]'));
+		$('.comment-item').each(function() {
+			$(this).removeClass('commentReply');			
+		});
+		$(element).html('답글쓰기');
+	} else {
+		$('.comment-item').each(function() {
+			$(this).removeClass('commentReply');
+			$(this).find('.comment-reply').html('답글쓰기');
+		});
+		$(element).parent().parent().after($('form[name=commentFrm]'));
+		$(element).parent().parent().addClass('commentReply');
+		$(element).html('답글취소');			
+	}	
 }
 
 /*글쓰기 첨부파일 함수*/

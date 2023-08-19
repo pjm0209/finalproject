@@ -538,4 +538,14 @@ a.comment-reply {
     font-weight: normal;
     margin-left: 15px;
     font-size: 13px;
+    cursor: pointer;
+}
+
+.commentReply {
+	margin: 0px 0px -20px;
+    border-bottom: 0px;
+}
+
+.editDel a {
+	cursor: pointer;
 }

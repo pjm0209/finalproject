@@ -97,4 +97,19 @@ public class BoardServiceImpl implements BoardService {
 	public int updateBoard(BoardVO vo) {
 		return boardDao.updateBoard(vo);
 	}
+
+	@Override
+	public int boardFormDel(int boardFormNo) {
+		return boardDao.boardFormDel(boardFormNo);
+	}
+
+	@Override
+	public int findBoard(int boardFormNo) {
+		return boardDao.findBoard(boardFormNo);
+	}
+
+	@Override
+	public void deleteBoard(Map<String, String> map) {
+		boardDao.deleteBoard(map);
+	}
 }
