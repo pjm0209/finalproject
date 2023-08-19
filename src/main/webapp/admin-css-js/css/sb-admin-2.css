@@ -4761,7 +4761,7 @@ input[type="button"].btn-block {
   padding: 0.5rem 0.75rem;
   margin-left: -1px;
   line-height: 1.25;
-  color: #4e73df;
+  color: #858796;
   background-color: #fff;
   border: 1px solid #dddfeb;
 }
@@ -4794,8 +4794,8 @@ input[type="button"].btn-block {
 .page-item.active .page-link {
   z-index: 3;
   color: #fff;
-  background-color: #4e73df;
-  border-color: #4e73df;
+  background-color: #eb5d1e;
+  border-color: #eb5d1e;
 }
 
 .page-item.disabled .page-link {
@@ -9905,8 +9905,7 @@ a:focus {
 }
 
 .bg-gradient-purple {
-  background-color: #4e73df;
-  background-image: linear-gradient(180deg, #c87fdf  10%, #5a63cf 100%);
+  background-color: #eb5d1e;
   background-size: cover;
 }
 
@@ -10548,8 +10547,9 @@ a:focus {
     margin-right: 0.25rem;
   }
   .sidebar .nav-item .nav-link span {
-    font-size: 0.85rem;
+    font-size: 1rem;
     display: inline;
+    font-weight: bold;
   }
   .sidebar .nav-item .nav-link[data-toggle="collapse"]::after {
     width: 1rem;

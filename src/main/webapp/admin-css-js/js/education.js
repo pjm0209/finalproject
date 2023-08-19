@@ -39,5 +39,16 @@
 			}
 		});
 		
+		$('#applicant-delete-button').click(function(){
+			if($('input[type=checkbox]:checked').length<1){
+				alert('거절할 신청자를 선택하세요.');
+				return;
+			}
+			
+			if(confirm('선택한 신청자를 거절하시겠습니까?')){
+				$('form[name=frmDelete]').prop('action', contextPath+'/admin/education/appliDelete');
+				$('form[name=frmDelete]').submit();
+			}
+		});
 		
 	});

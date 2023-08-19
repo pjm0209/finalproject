@@ -7,7 +7,7 @@
 <div class="head-div">
 	<h2 class="text-gray-800">게시판</h2>
 	<button type="button" class="bg-gradient-primary"
-		id="add-newBoard-button" onclick="location.href='<c:url value="/board/admin/boardCreate"/>'">새 게시판 추가</button>
+		id="add-newBoard-button" onclick="location.href='<c:url value="/admin/board/boardCreate"/>'">새 게시판 추가</button>
 </div>
 <div class="side-body">
 	<div class="side-div-title">
@@ -25,7 +25,7 @@
 					<div class="board-side-boardItem">
 						<div class="board-name">
 							<input type="hidden" value="${vo.boardFormNo }">
-							<a href="<c:url value='/board/board?boardFormNo=${vo.boardFormNo }'/>">
+							<a href="<c:url value='/admin/board/board?boardFormNo=${vo.boardFormNo }'/>">
 								<span>${vo.boardFormName }</span>
 							</a>
 						</div>
@@ -37,7 +37,7 @@
 	</div>
 </div>
 <div class="board-body">
-	<form name="paginForm" method="post" action="<c:url value='/board/board'/>">
+	<form name="paginForm" method="post" action="<c:url value='/admin/board/board'/>">
 		<input type="hidden" name="boardFormNo" value="${param.boardFormNo }">
 		<input type="hidden" name="searchCondition" value="${param.searchCondition }">
 		<input type="hidden" name="searchKeyword" value="${param.searchKeyword }">
@@ -45,13 +45,13 @@
 	</form>
 	<div id="board-title">
 		<h5>${boardFormVo.boardFormName }</h5>
-		<button class="bg-gradient-secondary" id="board-write-button" onclick="location.href='boardWrite?boardFormNo=${param.boardFormNo}'">글쓰기</button>
+		<button class="bg-gradient-secondary" id="board-write-button" onclick="location.href='<c:url value="/admin/board/boardWrite?boardFormNo=${param.boardFormNo}"/>'">글쓰기</button>
 	</div>
 	<div class="board">
 		<div class="board-head">
 			<div class="board-search-result">
 				<span class="search-count"></span>
-				<form name="searchForm" method="post" action="<c:url value='/board/board'/>">
+				<form name="searchForm" method="post" action="<c:url value='/admin/board/board'/>">
 					<div class="input-group mb-3" id="board-search-div">
 						<input type="hidden" name="boardFormNo" value="${param.boardFormNo }">
 						<select class="form-select form-select-lg" aria-label=".form-select-lg example" id="board-search-select" name="searchCondition">					  	
@@ -65,7 +65,7 @@
 				</form>
 			</div>
 		</div>
-		<form name="boardFrm" action="post" action="<c:url value='/board/admin/boardListDel'/>">
+		<form name="boardFrm" action="post" action="<c:url value='/admin/board/boardListDel'/>">
 			<table class="table board-table">
 				<thead>
 					<tr class="board-table-colum">
@@ -98,7 +98,7 @@
 										<c:if test="${map['FILECOUNT'] != 0 and map['BOARD_FILE_ADD_FLAG'] == 'Y'}">
 											<img alt="파일이미지" src="<c:url value='/images/file.gif'/>">
 										</c:if>
-										<a href="<c:url value='/board/boardDetail?boardNo=${map["BOARD_NO"] }'/>"> ${map['BOARD_TITLE']}</a>	
+										<a href="<c:url value='/admin/board/boardDetail?boardNo=${map["BOARD_NO"] }'/>"> ${map['BOARD_TITLE']}</a>	
 										<c:if test="${map['COMMENTCOUNT'] != 0 and map['COMMENT_FLAG'] == 'Y'}">
 											<span>[${map['COMMENTCOUNT'] }]</span>
 										</c:if>																

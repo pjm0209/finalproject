@@ -5,22 +5,42 @@
 <script type="text/javascript" src="<c:url value='/admin-css-js/js/book.js'/>"></script>
 <script type="text/javascript">
 $(function(){
-	
-	$('#btDelMulti').click(function(){
+		
+	$('#delBtn').click(function(){
 		var cnt = $("table input[type='checkbox']:checked").length;
+		
 		//유효성 검사
 		if(cnt < 1) {
 			alert("삭제할 상품을 선택해주세요.");
 			return false;
 		} else {
-			$('form[name=frmList]').prop('action', "<c:url value='/admin/product/deleteMulti'/>");
+			/* $('form[name=frmList]').prop('action', "<c:url value='/admin/product/deleteMulti'/>"); */
+			if(confirm("삭제할까요?, " + cnt)) {
+				$('form[name=frmList]').submit();
+			} 
+		}
+	});
+	
+	$('#bookDeleteBtn').click(function(){
+		var cnt = $("table input[type='checkbox']:checked").length;
+		
+		//유효성 검사
+		if(cnt < 1) {
+			alert("삭제할 상품을 선택해주세요.");
+			return false;
+		} else {
+			/* $('form[name=frmList]').prop('action', "<c:url value='/admin/product/deleteMulti'/>"); */
+			if($('#check-All').is(':checked')){
+				cnt = cnt-1;
+			}
 			if(confirm("삭제할까요?, " + cnt)){
 				$('form[name=frmList]').submit();
 			} 
 		}
 	});
 	
-	var chkAll = $('input[name=chkAll]');
+	
+	var chkAll = $('#check-All');
 	var checkBox = $('tbody input[type=checkbox]');
 	
 	chkAll.click(function(){
@@ -28,7 +48,9 @@ $(function(){
 	});
 	
 	checkBox.click(function(){
-		if($("tbody input[type='checkbox']:checked").length == 5){
+		var perSrch = $('#perSrch option:selected').val();
+		
+		if($("tbody input[type='checkbox']:checked").length == perSrch){
 			chkAll.prop('checked', true);
 		} else {
 			chkAll.prop('checked', false);
@@ -68,8 +90,10 @@ $(function(){
 	<div id="board-title">
 		<c:if test="${param.bookFlag != 'Inventory'}">
 			<h5>상품 리스트</h5>
-			<button class="bg-gradient-secondary"
-				 id="board-write-button" onclick="location.href='bookRegister'">새 상품 등록</button>
+			<button class="bg-gradient-secondary book-button"
+				 id="bookRegisterBtn" onclick="location.href='bookRegister'">새 상품 등록</button>
+			<button class="bg-gradient-secondary book-button"  
+				 id="bookDeleteBtn" onclick="location.href='<c:url value='/admin/book/bookDelete'/>'">상품 삭제</button>
 		</c:if>
 		<c:if test="${param.bookFlag == 'Inventory'}">
 			<h5>상품 재고 관리</h5>
@@ -141,7 +165,38 @@ $(function(){
 							<a class="btn btn-info btn-xs" href="/productsub/fo/0/36/productview.sd" target="_blank" title="상품보기"><i class="fas fa-eye"></i></a>
 							<button class="btn btn-info btn-xs" onclick="location.href='bookRegister?bookNo=${vo.bookNo}'" type="button" title="복사"><i class="fas fa-copy"></i></button>
 							<button class="btn btn-primary btn-xs" onclick="location.href='bookRegister'" type="button" title="수정"><i class="fas fa-edit"></i></button>
-							<button class="btn btn-danger btn-xs" onclick="" type="button" title="삭제"><i class="fas fa-trash"></i></button>
+							<button class="btn btn-danger btn-xs" id="delBtn" type="button" title="삭제"><i class="fas fa-trash"></i></button>
+						</td>
+					</c:if>
+				</tr>
+				<tr>
+					<th scope="row"><input type="checkbox" class="book-checkbox"></th>
+					<td>코드</td>
+					<td>상품명</td>
+					<td>상품이미지</td>
+					<td>책 > 검사</td>
+					<td>10,000원</td>
+					<c:if test="${param.bookFlag != 'Inventory'}">
+						<td>1</td>						
+					</c:if>
+					<c:if test="${param.bookFlag == 'Inventory'}">
+						<td class="form-inline">
+							<input class="form-control" name="" type="number" value="1">
+						</td>
+					</c:if>
+					<td>Y or N</td>
+					<td>regdate</td>
+					<c:if test="${param.bookFlag == 'Inventory' }">
+						<td>
+							<button class="btn btn-info btn-xs blue" onclick="location.href='bookRegister?bookNo=${'#bookNo'}.val()'" type="button" title="재고저장"><i class="fas fa-save"></i></button>
+						</td>
+					</c:if>
+					<c:if test="${param.bookFlag != 'Inventory' }">
+						<td id="tdLast">
+							<a class="btn btn-info btn-xs" href="/productsub/fo/0/36/productview.sd" target="_blank" title="상품보기"><i class="fas fa-eye"></i></a>
+							<button class="btn btn-info btn-xs" onclick="location.href='bookRegister?bookNo=${vo.bookNo}'" type="button" title="복사"><i class="fas fa-copy"></i></button>
+							<button class="btn btn-primary btn-xs" onclick="location.href='bookRegister'" type="button" title="수정"><i class="fas fa-edit"></i></button>
+							<button class="btn btn-danger btn-xs" id="delBtn" type="button" title="삭제"><i class="fas fa-trash"></i></button>
 						</td>
 					</c:if>
 				</tr>

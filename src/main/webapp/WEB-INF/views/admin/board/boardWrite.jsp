@@ -4,15 +4,15 @@
 
 <!-- Begin Page Content -->
 <!-- Page Heading -->
-<c:import url="/board/admin/boardHeadSide"></c:import>
+<c:import url="/admin/board/boardHeadSide"></c:import>
 
 <c:if test="${empty param.boardNo }">
-	<c:set var="url" value="/board/boardWrite"/>
+	<c:set var="url" value="/admin/board/boardWrite"/>
 	<c:set var="board" value="${board }"/>
 </c:if>
 
 <c:if test="${!empty param.boardNo }">
-	<c:set var="url" value="/board/boardWriteEdit"/>
+	<c:set var="url" value="/admin/board/boardWriteEdit"/>
 	<c:set var="board" value="${map['BOARD_FORM_NAME'] }"/>
 </c:if>
 

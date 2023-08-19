@@ -32,7 +32,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 
 @Controller
-@RequestMapping("/board")
+@RequestMapping("/admin/board")
 @RequiredArgsConstructor
 public class BoardController {
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
@@ -40,7 +40,7 @@ public class BoardController {
 	private final BoardService boardService;
 	private final FileUploadUtil fileUploadUtil;
 	
-	@GetMapping("/admin/boardHeadSide")
+	@GetMapping("/boardHeadSide")
 	public String boardHeadSide(Model model) {
 		logger.info("게시판 사이드바");
 		
@@ -89,7 +89,7 @@ public class BoardController {
 		return "admin/board/board";
 	}
 	
-	@GetMapping("/admin/boardCreate")
+	@GetMapping("/boardCreate")
 	public String boardCreate_get(Model model) {
 		logger.info("게시판 만들기 화면 보여주기");
 		
@@ -98,17 +98,17 @@ public class BoardController {
 		return "admin/board/boardCreate";
 	}		
 	
-	@PostMapping("/admin/boardCreate")
+	@PostMapping("/boardCreate")
 	public String boardCreate_post(@ModelAttribute BoardFormVO vo, Model model) {
 		logger.info("게시판 만들기 처리 파라미터 vo: {}", vo);
 		
 		int cnt = boardService.insertBoardForm(vo);
 		logger.info("게시판 만들기 처리 결과 cnt: {}", cnt);
 		
-		String msg = "게시판 만들기가 실패하였습니다.", url = "/board/admin/boardCreate";
+		String msg = "게시판 만들기가 실패하였습니다.", url = "/admin/board/boardCreate";
 		if(cnt > 0) {
 			msg= "게시판 만들기 성공";
-			url = "/board/board?boardFormNo=" + vo.getBoardFormNo();
+			url = "/admin/board/board?boardFormNo=" + vo.getBoardFormNo();
 		}
 		
 		model.addAttribute("msg", msg);
@@ -117,7 +117,7 @@ public class BoardController {
 		return "common/message";
 	}
 	
-	@GetMapping("/admin/boardEdit")
+	@GetMapping("/boardEdit")
 	public String boardEdit_get(@RequestParam int boardFormNo, Model model) {
 		logger.info("게시판 수정 화면 보여주기 파라미터 boardFormNo: {}", boardFormNo);
 		
@@ -130,17 +130,17 @@ public class BoardController {
 		return "admin/board/boardEdit";
 	}
 	
-	@PostMapping("/admin/boardEdit")
+	@PostMapping("/boardEdit")
 	public String boardEdit_post(@ModelAttribute BoardFormVO vo, Model model) {
 		logger.info("게시판 수정 처리 파라미터 vo: {}", vo);
 		
 		int cnt = boardService.updateBoardSet(vo);
 		logger.info("게시판 수정 처리 결과 cnt: {}", cnt);
 		
-		String msg = "게시판 수정 실패!", url = "/board/admin/boardEdit?boardFormNo=" + vo.getBoardFormNo();
+		String msg = "게시판 수정 실패!", url = "/admin/board/boardEdit?boardFormNo=" + vo.getBoardFormNo();
 		if(cnt > 0) {
 			msg = "게시판 수정 성공!";
-			url = "/board/board?boardFormNo=" + vo.getBoardFormNo();
+			url = "/admin/board/board?boardFormNo=" + vo.getBoardFormNo();
 		}
 		
 		model.addAttribute("msg", msg);
@@ -186,7 +186,7 @@ public class BoardController {
 		int fileCnt = boardService.insertFile(fileList, vo.getBoardNo());
 		logger.info("게시판 파일 업로드 처리 결과 fileCnt: {}", fileCnt);
 		
-		return "redirect:/board/board?boardFormNo=" + vo.getBoardFormNo();
+		return "redirect:/admin/board/board?boardFormNo=" + vo.getBoardFormNo();
 	}
 	
 	@GetMapping("/boardWriteEdit")
@@ -229,7 +229,7 @@ public class BoardController {
 		int fileCnt = boardService.insertFile(fileList, vo.getBoardNo());
 		logger.info("게시판 파일 업로드 처리 결과 fileCnt: {}", fileCnt);
 		
-		return "redirect:/board/board?boardFormNo=" + vo.getBoardFormNo();
+		return "redirect:/admin/board/board?boardFormNo=" + vo.getBoardFormNo();
 	}
 	
 	@GetMapping("/boardDetail")

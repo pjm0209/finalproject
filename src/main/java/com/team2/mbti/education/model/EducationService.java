@@ -13,11 +13,14 @@ public interface EducationService {
 	int insertEducation(EducationVO vo);
 	List<EducationVO> selectAllEducation(SearchVO searchVo);
 	int getTotalRecordEducation(SearchVO searchVo);
-	int deleteEducation(List<EducationVO> list);
 	int deleteEducation(int eduNo);
 	
 	int insertTeacher(EducationVO vo);
 	List<EducationVO> selectAllTeacher(SearchVO searchVo);
 	int getTotalRecordTeacher(SearchVO searchVo);
 	int deleteTeacher(int eduTeaNo);
+	
+	List<EducationVO> selectAllApplicant(SearchVO searchVo);
+	int getTotalRecordApplicant(SearchVO searchVo);
+	int deleteApplicant(int eduAppNo);
 }

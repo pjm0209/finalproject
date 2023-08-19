@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.team2.mbti.book.model.BookService;
 
@@ -70,13 +71,12 @@ public class BookController {
 		return "admin/book/bookSummingUp";
 	}
 	
-	@RequestMapping("/bookSummingUpPopup")
-	public String bookSummingUpPopup(Model model) {
-		logger.info("책관리 페이지 팝업창(자세히보기)");
+	@RequestMapping("/bookDelete")
+	public String bookDelete(@RequestParam(defaultValue = "0")int bookNo , Model model) {
+		logger.info("책관리 페이지 - 책 상품 삭제하기, 파라미터 bookNo={}", bookNo);
 		
-		model.addAttribute("title", "책 매출현황 팝업창");
 		
-		return "admin/book/bookSummingUpPopup";
+		return "redirect:/admin/book/bookList";
 	}
 
 }//
