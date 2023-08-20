@@ -73,4 +73,15 @@ public class CommentController {
 		
 		return cnt;
 	}
+	
+	@ResponseBody
+	@RequestMapping("/commentsWriteEdit")
+	public int commentsWriteEdit(@ModelAttribute CommentVO vo) {
+		logger.info("댓글 수정 파라미터 vo: {}", vo);
+		
+		int cnt = commentService.updateComment(vo);
+		logger.info("댓글 수정처리 결과 cnt: {}", cnt);
+		
+		return cnt;
+	}
 }

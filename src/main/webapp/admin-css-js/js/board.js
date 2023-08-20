@@ -297,9 +297,58 @@ function commentReplyWrite() {
 	});
 }
 
+//댓글 수정처리 함수
+function commentWriteEdit() {
+	$.ajax({
+		url:contextPath + "/comments/commentsWriteEdit",
+		data:$('form[name=commentFrm]').serialize(),
+		type:"POST",
+		success:function(result) {
+			console.log(result);
+			commentsList($('input[name=boardNo]').val());
+			$('#comment-area').val('');
+			commentFormMove();
+		},
+		error:function(xhr, status, error) {
+			alert(status + ": " + error);
+		}
+	})
+}
+
+//댓글수정함수
+function commentEdit(element) {
+	$('.comment-item').each(function() {
+		$(this).removeClass('commentReply');
+		$(this).find('.comment-reply').html('답글쓰기');
+	});
+	
+	var commentBody = $(element).parents('.commentEditOrDel').next().html();
+	
+	$(element).parents('.commentEditOrDel').next().hide();
+	$(element).parents('.commentEditOrDel').after($('form[name=commentFrm]'));
+	$('#comment-submit').attr('onclick', 'commentWriteEdit()');
+	$('.editDel').hide();
+	$('.board-comment-user').hide();
+	$('#comment-area').val(commentBody);
+	$('#comment-area').next().attr('name', 'commentsNo');
+	$('#comment-area').next().val($(element).parents('.commentEditOrDel').prev().find('input[name=commentsNo]').val());
+	
+	$(element).attr('onclick', 'commentEditCancel(this)');
+	$(element).html('수정취소');
+}
+
+//댓글수정취소 함수
+function commentEditCancel(element) {
+	$('.commentList').after($('form[name=commentFrm]'));
+	$(element).parents('.commentEditOrDel').next().show();
+	$('.editDel').hide();
+	$('.board-comment-user').show();
+	$('#comment-area').val('');
+	$(element).html('수정');
+}
+
 //댓글삭제함수
-function commentDel(commentsNo, commentsStep, commentsGroupNo, boardNo) {
-	alert(commentsNo + ", " + commentsStep + "," + commentsGroupNo + "," + boardNo);
+function commentDel(commentsNo, commentsStep, commentsGroupNo, boardNo) {	
 	$.ajax({
 		url:contextPath + '/comments/delete',
 		type:"POST",

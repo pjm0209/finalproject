@@ -13,4 +13,5 @@ public interface CommentDAO {
 	void deleteComment(Map<String, String> map);
 	
 	int insertCommentReply(CommentVO vo);
+	int updateComment(CommentVO vo);
 }

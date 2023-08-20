@@ -133,7 +133,7 @@
 			if(commentCount % 10 == 0 && comment.length - commentCount >= 10) {
 				str += "<div class='accordion-item'>";
 				str += "<h2 class='accordion-header'>";
-				str += "<button class='accordion-button' type='button' data-bs-toggle='collapse' data-bs-target='#collapse" + accordianNo + "' aria-expanded='true' aria-controls='collapse" + accordianNo + "'>";
+				str += "<button class='accordion-button collapsed' type='button' data-bs-toggle='collapse' data-bs-target='#collapse" + accordianNo + "' aria-expanded='false' aria-controls='collapse" + accordianNo + "'>";
 				str += (commentCount + 1) + " ~ " + (commentCount + 10) + "번째까지 댓글";
 				str += "</button></h2>";
 				str += "<div id='collapse" + accordianNo + "' class='accordion-collapse collapse' data-bs-parent='#accordionExample'>";
@@ -155,14 +155,14 @@
 					str += "<span class='comment-write-regdate'>(" + regdate + ")</span>";
 					if(map.COMMENTS_STEP < 1) {
 						str += "<a class='comment-reply' onclick='commentReply(this)'>답글쓰기</a>";
-						str += "<input type='hidden' name='commentsNo' class='commentsNo' value='" + map.COMMENTS_NO + "'>";
 					}
+					str += "<input type='hidden' name='commentsNo' class='commentsNo' value='" + map.COMMENTS_NO + "'>";
 					str += "<div class='commentEditOrDel'>" + 
 					"<span onclick='commentMore(this)' class='comment-more'>";
 					str += "<i class='bi bi-three-dots-vertical'></i></span>";
 					str += "<div class='editDel'>";
 					if(user == map.ADMIN_ID) {
-						str += "<a class='commentEdit'>수정</a>";
+						str += "<a class='commentEdit' onclick='commentEdit(this)'>수정</a>";
 					}
 					str += "<a class='commentDel' onclick='commentDel(" + map.COMMENTS_NO + ", " + map.COMMENTS_STEP + ", " + map.COMMENTS_GROUP_NO + ", " + map.BOARD_NO + ")'>삭제</a>" +
 					"</div>";
@@ -174,12 +174,13 @@
 					str += "<span class='comment-write-regdate'>(" + regdate + ")</span>";
 					if(map.COMMENTS_STEP < 1) {
 						str += "<a class='comment-reply' onclick='commentReply(this)'>답글쓰기</a>";
-						str += "<input type='hidden' name='commentsNo' class='commentsNo' value='" + map.COMMENTS_NO + "'>";
 					}
+					str += "<input type='hidden' name='commentsNo' class='commentsNo' value='" + map.COMMENTS_NO + "'>";
 					str += "<span onclick='commentMore(this)' class='comment-more'>" + 
 					"<i class='bi bi-three-dots-vertical'></i></span>" +
 					"<div class='editDel'>" +
-					"<a class='commentEdit'>수정</a><a class='commentDel' onclick='commentDel(" + map.COMMENTS_NO + ", " + map.COMMENTS_STEP + ", " + map.COMMENTS_GROUP_NO + ", " + map.BOARD_NO + ")'>삭제</a>" +
+					"<a class='commentEdit' onclick='commentEdit(this)'>수정</a>";
+					str += "<a class='commentDel' onclick='commentDel(" + map.COMMENTS_NO + ", " + map.COMMENTS_STEP + ", " + map.COMMENTS_GROUP_NO + ", " + map.BOARD_NO + ")'>삭제</a>" +
 					"</div>";
 				}
 				str += "</div>";

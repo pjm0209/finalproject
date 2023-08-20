@@ -56,4 +56,10 @@
 		
 		<include refid="insertCommentReplyType"></include>
 	</insert>
+	
+	<update id="updateComment" parameterType="commentVo">
+		update comments
+		set comments_body = #{commentsBody}
+		where comments_no = #{commentsNo}
+	</update>
 </mapper>
