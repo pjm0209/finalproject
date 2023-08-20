@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -98,10 +99,31 @@ public class MemberLoginController {
 	}
 	
 	@RequestMapping("/member/memberRegister")
-	public String register() {
+	public String memberRegister() {
 		logger.info("회원가입 화면");
 				
 		return "main/member/memberRegister";
+	}
+	
+	@PostMapping("/member/memberRegister")
+	public String memberRegister_post(@ModelAttribute MemberVO membervo, HttpServletRequest request, Model model){
+		logger.info("회원가입 처리, 파라미터 membervo={}",membervo);
+				
+		int result = memberService.insertMember(membervo);
+		
+		logger.info("회원 가입 완료, result = {}",result);		
+		String msg = "회원 가입에 실패하였습니다.", url = "main/member/memberRegister";
+		
+		if(result > 0) {
+			msg = "회원 가입이 완료되었습니다.";
+			url = "main/index";
+		}
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		
+		return "common/message";
+	
 	}
 	
 	@RequestMapping("/member/forgot-id")

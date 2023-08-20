@@ -27,7 +27,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #4070f4;
+    background-color: #FFA500;
     column-gap: 30px;
 }
 .form{
@@ -134,47 +134,15 @@ form{
 
 </style>
   
-<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-<script>
-Kakao.init('134b854676688bdb6bb627d7da5de730'); //발급받은 키 중 javascript키를 사용해준다.
-console.log(Kakao.isInitialized()); // sdk초기화여부판단
-//카카오로그인
-function kakaoLogin() {
-    Kakao.Auth.login({
-      success: function (response) {
-        Kakao.API.request({
-          url: '/v2/user/me',
-          success: function (response) {
-        	  console.log(response)
-          },
-          fail: function (error) {
-            console.log(error)
-          },
-        })
-      },
-      fail: function (error) {
-        console.log(error)
-      },
-    })
-  }
-//카카오로그아웃  
-function kakaoLogout() {
-    if (Kakao.Auth.getAccessToken()) {
-      Kakao.API.request({
-        url: '/v1/user/unlink',
-        success: function (response) {
-        	console.log(response)
-        },
-        fail: function (error) {
-          console.log(error)
-        },
-      })
-      Kakao.Auth.setAccessToken(undefined)
-    }
-  }  
-</script>
+<script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>     
 <script type="text/javascript">
-</script>                   
+$(function(){
+    $('#memberRegister-button').click(function() {
+        window.location.href = '<c:url value="/main/member/agreement"/>';
+    }); 
+});  	    	
+</script>   
+                
 </head>
 <body>
     <section class="container forms">    
@@ -182,7 +150,7 @@ function kakaoLogout() {
             <div class="form-content">
                 <h1><img src="../../images/MBTI_Login.png"/></h1>
                 
-                <form method="post" id="memberLogin-form" action="<c:url value='/main/member/memberLogin'/>">
+                <form class="form-memberLogin" method="post" id="memberLogin-form" action="<c:url value='/main/member/memberLogin'/>">
                     <div class="field input-field">
                         <input type="text" name="userid" placeholder="아이디를 입력하세요." class="input">                       
                     </div>
@@ -205,7 +173,7 @@ function kakaoLogout() {
                     
                     <div class="field button-field">
                     	<span>계정이 없으신가요?</span>
-                        <input type="submit" value="회원가입" id="memberRegister-button">     
+                    	<input type="button" value="회원가입" id="memberRegister-button">  
                     </div>
                 </form>                 
             </div>
