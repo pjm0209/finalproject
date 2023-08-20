@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <section id="mbtiSurvey" class="mbtiSurvey">
 	<div class="mbti-result">
 		<div class="mbti-result-top">
@@ -12,6 +13,13 @@
 	<div class="personality">
 		<h2>성격 특징</h2>
 		<p>성격 내용</p>
+		<p>내 mbti는 ${resultMbti} 입니다.<br>
+		   ${fn:substring(resultMbti,0,1)}는 ${resultIE}%<br>
+		   ${fn:substring(resultMbti,1,2)}는 ${resultSN}%<br>
+		   ${fn:substring(resultMbti,2,3)}는 ${resultTF}%<br>
+		   ${fn:substring(resultMbti,3,4)}는 ${resultPJ}%<br>
+		</p>
+		
 	</div>
 	<div class="inner">
 		<h2>주요 특징</h2>

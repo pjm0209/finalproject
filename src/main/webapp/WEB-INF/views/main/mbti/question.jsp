@@ -105,15 +105,15 @@
 		                <div class="options">
 		                	<input type="hidden" name="mbtiResultItem[${num}].questionTypeNo" value="${mbtiSurveyVo.questionTypeNo}" />
 		                	<input type="hidden" name="mbtiResultItem[${num}].questionCategoryNo" value="${mbtiSurveyVo.questionCategoryNo}" />
-		                	<input type="radio" id="statement${idx}_1" data-name="statement${idx}" name="mbtiResultItem[${num}].mbtiVal" value="-2"/>
+		                	<input type="radio" id="statement${idx}_1" data-name="statement${idx}" name="mbtiResultItem[${num}].mbtiVal" value="0"/>
 		                    <label for="statement${idx}_1" class="ch_01 disagree max">전혀 그렇지 않다</label>
-		                    <input type="radio" id="statement${idx}_2" data-name="statement${idx}" name="mbtiResultItem[${num}].mbtiVal" value="-1"/>
+		                    <input type="radio" id="statement${idx}_2" data-name="statement${idx}" name="mbtiResultItem[${num}].mbtiVal" value="1"/>
 		                    <label for="statement${idx}_2" class="ch_02 disagree mid">그렇지 않다</label>
-		                    <input type="radio" id="statement${idx}_3" data-name="statement${idx}" name="mbtiResultItem[${num}].mbtiVal" value="0"/>
+		                    <input type="radio" id="statement${idx}_3" data-name="statement${idx}" name="mbtiResultItem[${num}].mbtiVal" value="2"/>
 		                    <label for="statement${idx}_3" class="ch_03 natural">보통</label>
-		                    <input type="radio" id="statement${idx}_4" data-name="statement${idx}" name="mbtiResultItem[${num}].mbtiVal" value="1"/>
+		                    <input type="radio" id="statement${idx}_4" data-name="statement${idx}" name="mbtiResultItem[${num}].mbtiVal" value="3"/>
 		                    <label for="statement${idx}_4" class="ch_04 agree mid">그렇다</label>
-		                    <input type="radio" id="statement${idx}_5" data-name="statement${idx}" name="mbtiResultItem[${num}].mbtiVal" value="2"/>
+		                    <input type="radio" id="statement${idx}_5" data-name="statement${idx}" name="mbtiResultItem[${num}].mbtiVal" value="4"/>
 		                    <label for="statement${idx}_5" class="ch_05 agree max">매우 그렇다</label><br>
 		                </div>
 		            </div>
