@@ -8,4 +8,6 @@ public interface CommentService {
 	List<Map<String, Object>> selectCommentList(int boardNo);
 	
 	void deleteComment(Map<String, String> map);
+	
+	int insertCommentReply(CommentVO vo);
 }

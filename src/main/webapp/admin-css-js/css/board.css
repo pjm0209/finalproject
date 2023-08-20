@@ -109,9 +109,9 @@ input[type="checkbox"]:checked.board-checkbox {
 }
 
 div#board-search-div {
-	display: flex;
-	justify-content: flex-end;
-	padding: 18px 27px 5px 20px;
+    display: flex;
+    justify-content: space-between;
+    padding: 18px 27px 5px 20px;
 }
 
 input#board-search-area {
@@ -402,11 +402,19 @@ form[name=commentFrm] {
 	padding: 20px;
 }
 
+.comment-item > span {
+    margin-top: 20px;
+    margin-left: 10px;
+    color: gray;
+    display: inline-block;
+}
+
 div.board {
 	overflow: auto;
 	background: white;
 	margin-top: 15px;
 	margin-right: 15px;
+	margin-bottom: 25px;
 	border-radius: 10px;
 	padding: 10px;
 	padding-top: 0;
@@ -415,6 +423,10 @@ div.board {
 .board-content {
 	min-height: 400px;
 	padding-left: 22px;
+}
+
+.board-head-Group2 {
+	display: flex;
 }
 
 .boardFile {
@@ -451,6 +463,14 @@ ul.file-list {
     border-bottom: 1px solid #e1e1e1;
     margin-bottom: 10px;
     padding: 0px 15px;
+    min-height: 80px;
+}
+
+.comment-item.reply {
+	border-bottom: 1px solid #e1e1e1;
+    margin-bottom: 10px;
+    padding: 0px 15px;
+    padding-left: 70px;
 }
 
 span.comment-write-regdate {
@@ -525,7 +545,6 @@ commentEditOrDel div {
     z-index: 1;
     max-height: 370px;
     width: 100px;
-    visibility: hidden;
 }
 
 a.commentEdit {
@@ -548,4 +567,11 @@ a.comment-reply {
 
 .editDel a {
 	cursor: pointer;
+}
+
+#commentReply-submit {
+	width: 100px;
+	border: 1px solid #d3d3d3;
+	background: #FFF;
+	font-size: 13px;
 }

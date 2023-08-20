@@ -1,5 +1,7 @@
 package com.team2.mbti.board.model;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -111,5 +113,40 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void deleteBoard(Map<String, String> map) {
 		boardDao.deleteBoard(map);
+	}
+
+	@Override
+	public List<String> selectBoardFileList(List<BoardVO> listVo) {
+		List<String> list = new ArrayList<>();
+		
+		for(BoardVO vo : listVo) {
+			List<BoardFileVO> fileList = boardDao.selectFileList(vo.getBoardNo());
+			
+			if(fileList != null) {
+				for(BoardFileVO fileVo : fileList) {
+					list.add(fileVo.getFileName());
+				}				
+			}
+		}
+		
+		return list;
+	}
+
+	@Override
+	public void deleteBoardMulti(List<BoardVO> listVo) {
+		for(BoardVO vo : listVo) {
+			Map<String, String> map = new HashMap<>();
+			
+			map.put("boardNo", vo.getBoardNo() + "");
+			map.put("boardGroupNo", vo.getBoardGroupNo() + "");
+			map.put("boardStep", vo.getBoardStep() + "");
+			
+			boardDao.deleteBoard(map);
+		}
+	}
+
+	@Override
+	public int insertBoardReply(BoardVO vo) {
+		return boardDao.insertBoardReply(vo);
 	}
 }

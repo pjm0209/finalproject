@@ -62,4 +62,15 @@ public class CommentController {
 		
 		return "삭제";
 	}
+	
+	@ResponseBody
+	@RequestMapping("/commentsReply")
+	public int commentsReply(@ModelAttribute CommentVO vo) {
+		logger.info("댓글 답글등록 파라미터 vo: {}", vo);
+		
+		int cnt = commentService.insertCommentReply(vo);
+		logger.info("댓글 답글 등록처리 결과 cnt: {}", cnt);
+		
+		return cnt;
+	}
 }

@@ -36,4 +36,6 @@ public interface BoardDAO {
 	List<BoardFileVO> selectFileList(int boardNo);
 	
 	int deleteFile(int fileNo);
+	
+	int insertBoardReply(BoardVO vo);
 }
