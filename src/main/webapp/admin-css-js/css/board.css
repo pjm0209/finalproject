@@ -402,6 +402,13 @@ form[name=commentFrm] {
 	padding: 20px;
 }
 
+.comment-item > span {
+    margin-top: 20px;
+    margin-left: 10px;
+    color: gray;
+    display: inline-block;
+}
+
 div.board {
 	overflow: auto;
 	background: white;
@@ -456,6 +463,7 @@ ul.file-list {
     border-bottom: 1px solid #e1e1e1;
     margin-bottom: 10px;
     padding: 0px 15px;
+    min-height: 80px;
 }
 
 .comment-item.reply {
@@ -537,7 +545,6 @@ commentEditOrDel div {
     z-index: 1;
     max-height: 370px;
     width: 100px;
-    /*visibility: hidden;*/
 }
 
 a.commentEdit {

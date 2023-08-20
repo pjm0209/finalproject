@@ -84,43 +84,6 @@ $(function(){
 		commentsList($('input[name=boardNo]').val());
 	}
 	
-	/*게시글 상세보기 댓글등록*/	
-	$('#comment-submit').click(function() {
-		alert("댓글");
-		/*$.ajax({
-			url:contextPath + "/comments/write",
-			data:$('form[name=commentFrm]').serialize(),
-			type:"POST",
-			success:function(res) {
-				console.log(res);
-				commentsList($('input[name=boardNo]').val());
-				$('#comment-area').val('');
-			},
-			error:function(xhr, status, error) {
-				alert(status + ": " + error);
-			}
-		});*/
-	});
-			
-	$('#commentReply-submit').click(function() {
-		alert("댓글답변");
-
-		$.ajax({
-			url:comtexcontextPath + "/comments/commentsReply",
-			data:$('form[name=commentFrm]').serialize(),
-			type:"POST",
-			success:function(result) {
-				console.log(result);
-				commentsList($('input[name=boardNo]').val());
-				$('#comment-area').val('');
-				commentFormMove();
-			},
-			error:function(xhr, status, error) {
-				alert(status + ": " + error);
-			}
-		});
-	});
-	
 	/*파일수정 첨부파일 삭제*/
 	$('.btns.del_btn.edit').click(function() {
 		var fileName = $(this).nextAll('.fileName').val();
@@ -159,34 +122,14 @@ $(function(){
 	const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
 });
 
-function commentMore(element) {
-	$(element).click(function() {
-		$(element).next('.editDel').toggle();
-	});
+//댓글 수정,삭제박스 열기함수
+function commentMore(element) {	
+	$(element).next('.editDel').toggle();
 }
 
 function pageFunc(curPage) {
 	$('input[name="currentPage"]').val(curPage);
 	$('form[name="paginForm"]').submit();
-}
-
-//댓글삭제함수
-function commentDel(commentsNo, commentsStep, commentsGroupNo, boardNo) {
-	alert(commentsNo + ", " + commentsStep + "," + commentsGroupNo + "," + boardNo);
-	$.ajax({
-		url:contextPath + '/comments/delete',
-		type:"POST",
-		data:{commentsNo:commentsNo,
-			  commentsStep:commentsStep,
-			  commentsGroupNo:commentsGroupNo},
-		success:function(result) {
-			console.log(result);
-			commentsList(boardNo);
-		},
-		error:function(xhr, status, error) {
-			alert(status + ": " + error);
-		}
-	});
 }
 
 //좋아요 처리함수
@@ -291,6 +234,7 @@ function commentFormMove() {
 	});
 	$('.comment-reply').html('답글쓰기');
 	
+	$('#commentReply-submit').attr('onclick', 'commentWrite()');
 	$('#commentReply-submit').attr('id', 'comment-submit');
 	$('input[name=commentsGroupNo]').val('');
 	$('#comment-area').next().prop('name', '');
@@ -312,9 +256,64 @@ function commentReply(element) {
 		$(element).html('답글취소');
 		
 		$('#comment-submit').attr('id', 'commentReply-submit');
+		$('#commentReply-submit').attr('onclick', 'commentReplyWrite()');
 		$('#comment-area').next().prop('name', 'commentsGroupNo');
 		$('input[name=commentsGroupNo]').val(commentsNo);
 	}
+}
+
+//댓글쓰기 처리함수
+function commentWrite() {
+	$.ajax({
+		url:contextPath + "/comments/write",
+		data:$('form[name=commentFrm]').serialize(),
+		type:"POST",
+		success:function(res) {
+			console.log(res);
+			commentsList($('input[name=boardNo]').val());
+			$('#comment-area').val('');
+		},
+		error:function(xhr, status, error) {
+			alert(status + ": " + error);
+		}
+	});
+}
+
+//댓글 답글쓰기 처리 함수
+function commentReplyWrite() {
+	$.ajax({
+		url:contextPath + "/comments/commentsReply",
+		data:$('form[name=commentFrm]').serialize(),
+		type:"POST",
+		success:function(result) {
+			console.log(result);
+			commentsList($('input[name=boardNo]').val());
+			$('#comment-area').val('');
+			commentFormMove();
+		},
+		error:function(xhr, status, error) {
+			alert(status + ": " + error);
+		}
+	});
+}
+
+//댓글삭제함수
+function commentDel(commentsNo, commentsStep, commentsGroupNo, boardNo) {
+	alert(commentsNo + ", " + commentsStep + "," + commentsGroupNo + "," + boardNo);
+	$.ajax({
+		url:contextPath + '/comments/delete',
+		type:"POST",
+		data:{commentsNo:commentsNo,
+			  commentsStep:commentsStep,
+			  commentsGroupNo:commentsGroupNo},
+		success:function(result) {
+			console.log(result);
+			commentsList(boardNo);
+		},
+		error:function(xhr, status, error) {
+			alert(status + ": " + error);
+		}
+	});
 }
 
 /*글쓰기 첨부파일 함수*/
