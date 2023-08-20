@@ -154,10 +154,4 @@ public class MemberLoginController {
 		return result;
 	}
 	
-	@RequestMapping("/member/findZipcode")
-	public String findZipcode() {
-		logger.info("우편번호 찾기 화면");
-		
-		return "main/member/findZipcode";
-	}
 }
