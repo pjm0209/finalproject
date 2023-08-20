@@ -10,4 +10,5 @@ public interface CommentService {
 	void deleteComment(Map<String, String> map);
 	
 	int insertCommentReply(CommentVO vo);
+	int updateComment(CommentVO vo);
 }

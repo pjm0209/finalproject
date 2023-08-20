@@ -31,4 +31,9 @@ public class CommentServiceImpl implements CommentService {
 	public int insertCommentReply(CommentVO vo) {
 		return commentDao.insertCommentReply(vo);
 	}
+
+	@Override
+	public int updateComment(CommentVO vo) {
+		return commentDao.updateComment(vo);
+	}
 }

@@ -85,6 +85,10 @@ div#board-title h5 {
 	display: inline-block;
 }
 
+button#button-addon2 {
+    width: 60px;
+}
+
 button#board-write-button {
 	float: right;
 	border: 0;
@@ -125,6 +129,7 @@ select#board-search-select {
 	margin-bottom: 0;
 	border: 1px solid #d8dce5;
 	border-radius: 6px;
+	width: 120px;
 }
 
 .board-side-boardItem {
@@ -461,7 +466,7 @@ ul.file-list {
 
 .comment-item {
     border-bottom: 1px solid #e1e1e1;
-    margin-bottom: 10px;
+    margin-top: 10px;
     padding: 0px 15px;
     min-height: 80px;
 }
@@ -574,4 +579,9 @@ a.comment-reply {
 	border: 1px solid #d3d3d3;
 	background: #FFF;
 	font-size: 13px;
+}
+
+.accordion-body {
+	padding: 0 20px;
+	padding-bottom: 0;
 }

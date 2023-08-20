@@ -36,7 +36,7 @@
 	<select id="selectCommentList" parameterType="int" resultType="map">
 		select * from commentsview
 		where board_no = #{boardNo}
-		order by comments_group_no desc, comments_sort
+		order by comments_group_no, comments_sort
 	</select>
 	
 	<parameterMap type="map" id="commentDeleteProc">
@@ -56,4 +56,10 @@
 		
 		<include refid="insertCommentReplyType"></include>
 	</insert>
+	
+	<update id="updateComment" parameterType="commentVo">
+		update comments
+		set comments_body = #{commentsBody}
+		where comments_no = #{commentsNo}
+	</update>
 </mapper>
