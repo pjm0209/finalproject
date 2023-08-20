@@ -1,8 +1,7 @@
 var fileIndex = 0;
 var contextPath = "/mbti";
 
-$(function(){
-	
+$(function(){	
 	$('.board-side-icon').click(function(){
 		const boardFormNo = $(this).prev().find('input[type=hidden]').val();
 		location.href = contextPath + "/admin/board/boardEdit?boardFormNo=" + boardFormNo;
@@ -15,13 +14,15 @@ $(function(){
 					});		
 	
 	CKEDITOR.editorConfig=function( config ){ config.resize_enabled=false;};								
-     
-     $('.checkbox_group > .use_off').on("click", function(){
+    
+    //게시판 설정 on, off 이벤트 
+    $('.checkbox_group > .use_off').on("click", function(){
 		$(this).nextAll('input[type=hidden]').val('N');
 		$(this).next().attr('class', 'use_on');
 		$(this).attr('class', 'use_off on');
 	});
-		
+	
+	//게시판 설정 on, off 이벤트	
 	$('.checkbox_group > .use_on').on("click", function(){
 		$(this).nextAll('input[type=hidden]').val('Y');
 		$(this).prev().attr('class', 'use_off');
@@ -46,6 +47,29 @@ $(function(){
 	/*게시글 목록 전체선택 체크박스*/
 	$('#check-All').click(function(){
 		$('.board-checkbox').prop('checked', this.checked);
+	});	
+	    
+    //다중게시글 삭제버튼 숨기기
+    $('#boardMultiDel').hide();
+    
+    //게시글 체크박스 체크유무 검사
+    $('.board-checkbox').click(function() {
+		var count = $('tbody input[type=checkbox]:checked').length;
+		
+		if(count > 0) {
+			$('#boardMultiDel').show();
+			$('span.boardDelCount').html(count + "건이 선택되었습니다.");
+		} else {
+			$('#boardMultiDel').hide();
+			$('span.boardDelCount').html("");
+		}
+	});
+    
+    //게시글 다중삭제 이벤트
+    $('#boardMultiDel').click(function() {
+		if(confirm("해당 게시글을 삭제하시겠습니까?")) {
+			$('form[name=boardFrm]').submit();
+		}
 	});
 	
 	/*게시글 상세보기 첨부파일 슬라이드 효과*/
@@ -80,7 +104,7 @@ $(function(){
 			
 	$('#commentReply-submit').click(function() {
 		alert("댓글답변");
-		//commentReplyWrite($('input[name=boardNo]').val());
+
 		$.ajax({
 			url:comtexcontextPath + "/comments/commentsReply",
 			data:$('form[name=commentFrm]').serialize(),

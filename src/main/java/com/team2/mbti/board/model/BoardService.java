@@ -33,4 +33,9 @@ public interface BoardService {
 	List<BoardFileVO> selectFileList(int boardNo);
 	
 	int deleteFile(int fileNo);
+	
+	List<String> selectBoardFileList(List<BoardVO> listVo);
+	void deleteBoardMulti(List<BoardVO> listVo);
+	
+	int insertBoardReply(BoardVO vo);
 }

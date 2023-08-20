@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.team2.mbti.board.model.BoardFileVO;
 import com.team2.mbti.board.model.BoardFormVO;
+import com.team2.mbti.board.model.BoardListVO;
 import com.team2.mbti.board.model.BoardService;
 import com.team2.mbti.board.model.BoardVO;
 import com.team2.mbti.comment.model.CommentVO;
@@ -173,8 +174,8 @@ public class BoardController {
 	}
 	
 	@GetMapping("/boardWrite")
-	public String boardWrite_get(@RequestParam int boardFormNo, Model model) {
-		logger.info("게시판 글쓰기 화면 보여주기");
+	public String boardWrite_get(@RequestParam int boardFormNo, @RequestParam String boardWriteType, Model model) {
+		logger.info("게시판 글쓰기 화면 보여주기 파라미터 boardFormNo: {}, boardWriteType: {}", boardFormNo, boardWriteType);
 		
 		List<BoardFormVO> list = boardService.selectAllBoard();
 		logger.info("게시판 종류 전체조회 결과: list: {}", list);
@@ -213,8 +214,8 @@ public class BoardController {
 	}
 	
 	@GetMapping("/boardWriteEdit")
-	public String boardWriteEdit_get(@RequestParam int boardNo, Model model) {
-		logger.info("게시글 수정 화면 파라미터 boardNo: {}", boardNo);
+	public String boardWriteEdit_get(@RequestParam int boardNo, @RequestParam String boardWriteType, Model model) {
+		logger.info("게시글 수정 화면 파라미터 boardNo: {}, boardWriteType: {}", boardNo, boardWriteType);
 		
 		List<BoardFormVO> list = boardService.selectAllBoard();		
 		Map<String, Object> map = boardService.selectBoardByNo(boardNo);
@@ -248,6 +249,46 @@ public class BoardController {
 		
 		int cnt = boardService.updateBoard(vo);
 		logger.info("게시글 수정처리 결과 cnt: {}", cnt);
+		
+		int fileCnt = boardService.insertFile(fileList, vo.getBoardNo());
+		logger.info("게시판 파일 업로드 처리 결과 fileCnt: {}", fileCnt);
+		
+		return "redirect:/admin/board/board?boardFormNo=" + vo.getBoardFormNo();
+	}
+	
+	@GetMapping("/boardWriteReply")
+	public String boardWriteReply_get(@RequestParam int boardNo, @RequestParam int boardFormNo, @RequestParam String boardWriteType, Model model) {
+		logger.info("게시글 답변 화면처리 파라미터 boardNo: {}, boardFromNo: {}, boardWriteType: {}", boardNo, boardFormNo, boardWriteType);
+		
+		List<BoardFormVO> list = boardService.selectAllBoard();		
+		Map<String, Object> map = boardService.selectBoardByNo(boardNo);
+		
+		logger.info("게시글 조회 결과 map: {}", map);
+		logger.info("게시판 종류 전체조회 결과: list: {}", list);
+		
+		model.addAttribute("map", map);
+		model.addAttribute("boardList", list);		
+		model.addAttribute("title", "게시글 답글쓰기");
+		
+		return "admin/board/boardWrite";
+	}
+	
+	@PostMapping("/boardWriteReply")
+	public String boardWriteReply_post(@ModelAttribute BoardVO vo, HttpServletRequest request) {
+		logger.info("게시글 답변 처리 파라미터 vo: {}", vo);
+		
+		List<Map<String, Object>> fileList = new ArrayList<>();
+		
+		try {
+			fileList = fileUploadUtil.fileupload(request, ConstUtil.UPLOAD_FILE_FLAG);
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		int cnt = boardService.insertBoardReply(vo);
+		logger.info("게시글 답변 처리결과 cnt: {}", cnt);
 		
 		int fileCnt = boardService.insertFile(fileList, vo.getBoardNo());
 		logger.info("게시판 파일 업로드 처리 결과 fileCnt: {}", fileCnt);
@@ -314,6 +355,30 @@ public class BoardController {
 		}
 		
 		return result;
+	}
+	
+	@RequestMapping("/boardListDel")
+	public String boardListDel(@ModelAttribute BoardListVO listVo, HttpServletRequest request) {
+		logger.info("게시글 다중삭제 파라미터 listVo: {}", listVo);
+		
+		List<BoardVO> list = listVo.getBoardItems();
+		
+		List<String> fileList = boardService.selectBoardFileList(list);
+		logger.info("파일리스트 fileList: {}", fileList);
+		
+		boardService.deleteBoardMulti(list);
+		
+		for(String fileName : fileList) {
+			String filePath = fileUploadUtil.getUploadPath(request, ConstUtil.UPLOAD_FILE_FLAG);
+			File file = new File(filePath, fileName);
+			if(file.exists()) {
+				boolean result = false;
+				result = file.delete();
+				logger.info("삭제처리 - 파일삭제처리 결과 result: {}", result);
+			}
+		}
+		
+		return "redirect:/admin/board/board?boardFormNo=" + list.get(0).getBoardFormNo();
 	}
 	
 	@RequestMapping("/boardWriteDel")

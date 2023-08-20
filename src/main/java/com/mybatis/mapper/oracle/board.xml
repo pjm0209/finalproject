@@ -15,7 +15,7 @@
 		</where>
 	</sql> 
 	
-	<sql id="insertType">
+	<sql id="insertBoardType">
 		<if test="no == 0 or no == null">
 			insert into board(board_no, board_form_no, board_title, board_body, board_group_no, admin_no)
 			values(#{boardNo}, #{boardFormNo}, #{boardTitle}, #{boardBody}, #{boardNo}, #{adminNo})
@@ -23,6 +23,17 @@
 		<if test="no != 0 and no != null">
 			insert into board(board_no, board_form_no, board_title, board_body, no, board_group_no)
 			values(#{boardNo}, #{boardFormNo}, #{boardTitle}, #{boardBody}, #{no}, #{boardNo})
+		</if>
+	</sql>
+	
+	<sql id="insertBoardReplyType">
+		<if test="no == 0 or no == null">
+			insert into board(board_no, board_form_no, board_title, board_body, board_group_no, board_step, board_sort, admin_no)
+			values(#{boardNo}, #{boardFormNo}, #{boardTitle}, #{boardBody}, #{boardGroupNo}, #{boardStep} + 1, #{boardSort} + 1, #{adminNo})
+		</if>
+		<if test="no != 0 and no != null">
+			insert into board(board_no, board_form_no, board_title, board_body, no, board_group_no, board_step, board_sort)
+			values(#{boardNo}, #{boardFormNo}, #{boardTitle}, #{boardBody}, #{no}, #{boardGroupNo}, #{boardStep} + 1, #{boardSort} + 1)
 		</if>
 	</sql>
 
@@ -80,7 +91,7 @@
 			select board_seq.nextval from dual
 		</selectKey>
 
-		<include refid="insertType"></include>
+		<include refid="insertBoardType"></include>
 	</insert>
 	
 	<select id="selectBoardSet" parameterType="int" resultType="boardFormVo">
@@ -138,4 +149,12 @@
 		set board_form_no = #{boardFormNo}, board_title = #{boardTitle}, board_body = #{boardBody}
 		where board_no = #{boardNo}
 	</update>
+	
+	<insert id="insertBoardReply" parameterType="boardVo">
+		<selectKey keyProperty="boardNo" order="BEFORE" resultType="int">
+			select board_seq.nextval from dual
+		</selectKey>
+		
+		<include refid="insertBoardReplyType"></include>
+	</insert>
 </mapper>
