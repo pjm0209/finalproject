@@ -10,5 +10,6 @@ public class MbtiResultVO {
 	private int no;
 	private int mbtiVal;
 	private Timestamp mbtiResultRegdate;
-	private int mbtiSurveyNo;
+	private int questionTypeNo;
+	private int questionCategoryNo;
 }
