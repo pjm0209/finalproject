@@ -142,7 +142,7 @@
 				str += "<span onclick='commentMore(this)' class='comment-more'>" + 
 				"<i class='bi bi-three-dots-vertical'></i></span>" +
 				"<div class='editDel'>" +
-				"<a class='commentEdit'>수정</a><a class='commentDel' onclick='commentDel(" + map.COMMENTS_NO + ", " + map.COMMENTS_STEP + ", " + map.COMMENTS_GROUP_NO + ", " + map.BOARD_NO + ")'>삭제2</a>" +
+				"<a class='commentEdit'>수정</a><a class='commentDel' onclick='commentDel(" + map.COMMENTS_NO + ", " + map.COMMENTS_STEP + ", " + map.COMMENTS_GROUP_NO + ", " + map.BOARD_NO + ")'>삭제</a>" +
 				"</div>";
 			}
 			str += "</div>";
