@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.team2.mbti.common.SearchVO;
+import com.team2.mbti.mbtiResult.model.MbtiResultVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -61,6 +62,16 @@ public class MbtiSurveyServiceImpl implements MbtiSurveyService{
 	@Override
 	public List<MbtiSurveyVO> selectByQuestionTypeNoMbtiSurvey(int questionTypeNo) {
 		return mbtiSurveyDao.selectByQuestionTypeNoMbtiSurvey(questionTypeNo);
+	}
+
+	@Override
+	public MbtiVO selectMbti(String mbtiType) {
+		return mbtiSurveyDao.selectMbti(mbtiType);
+	}
+
+	@Override
+	public int getTotalRecordMbtiByQuestionTypeNo(MbtiResultVO mbtiResultVo) {
+		return mbtiSurveyDao.getTotalRecordMbtiByQuestionTypeNo(mbtiResultVo);
 	}
 	
 }

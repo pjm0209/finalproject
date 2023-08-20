@@ -39,6 +39,11 @@
 		select * from mbti_survey where mbti_survey_no = #{mbtiSurveyNo}
 	</select>
 	
+	<select id="getTotalRecordMbtiByQuestionTypeNo" parameterType="mbtiResultVo" resultType="int">
+		select count(*) from mbti_survey
+		where question_type_no=#{questionTypeNo} and question_category_no=#{questionCategoryNo}
+	</select>
+	
 	<update id="updateMbtiSurvey" parameterType="mbtiSurveyVo">
 		update mbti_survey
 		set question_type_no = #{questionTypeNo}, question_category_no = #{questionCategoryNo}, question = #{question}
@@ -54,4 +59,8 @@
 		select * from mbti_survey where question_type_no=#{questionTypeNo}
 	</select>
 	
+	<select id="selectMbti" parameterType="string" resultType="mbtiVo">
+		select * from mbti
+		where mbti_type=#{mbtiType}
+	</select>
 </mapper>
