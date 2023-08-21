@@ -44,6 +44,23 @@ $(function(){
 		}
 	});
 	
+	//게시판생성 유효성검사
+	$('form[name=boardCreate-frm]').submit(function(){
+		if($('div.input_group.v2 > #board_name').val().length < 1) {
+			alert("게시판 이름을 입력해 주세요");
+			$('div.input_group.v2 > #board_name').focus();
+			event.preventDefault();
+		}
+	});
+	
+	$('#boardFormDel').click(function() {
+		var boardFormNo = $('input[name=boardFormNo]').val();
+		
+		if(confirm("정말로 삭제하시겠습니까?")) {
+			location.href = contextPath + "/admin/board/boardFormDel?boardFormNo=" + boardFormNo;
+		}
+	});
+	
 	/*게시글 목록 전체선택 체크박스*/
 	$('#check-All').click(function(){
 		$('.board-checkbox').prop('checked', this.checked);
@@ -72,6 +89,28 @@ $(function(){
 		}
 	});
 	
+	//게시글 저장버튼 검사
+	$('form[name=boardWriteForm]').submit(function(){
+		if($('#board-write-title').val().length < 1) {
+			alert("제목을 입력해주세요");
+			$('#board-write-title').focus();
+			
+			return false;			
+		}
+	});
+	
+	//게시판 삭제 확인메세지
+	$('#del-board').click(function() {
+		var boardFormNo = $('input[name=boardFormNo]').val();
+		var boardNo = $('input[name=boardNo]').val();
+		var boardGroupNo = $('input[name=boardGroupNo]').val();
+		var boardStep = $('input[name=boardStep]').val()
+		
+		if(confirm("정말로 삭제하시겠습니까?")) {
+			location.href=contextPath + "/admin/board/boardWriteDel?boardNo=" + boardNo + "&boardFormNo=" + boardFormNo + "&boardGroupNo=" + boardGroupNo + "&boardStep=" + boardStep;
+		}
+	});
+	
 	/*게시글 상세보기 첨부파일 슬라이드 효과*/
 	$('.file-list').hide();
 	
@@ -89,18 +128,20 @@ $(function(){
 		var fileName = $(this).nextAll('.fileName').val();
 		var fileNo = $(this).nextAll('.fileNo').val();
 		
-		$.ajax({
-			url:contextPath + "/admin/board/fileDel",
-			data:{fileName: fileName,
-				  fileNo: fileNo},
-			type:"GET",				
-			success:function(result) {
-				console.log("result: " + result);					
-			},
-			error:function(xhr, status, error) {
-				alert(status + ": " + error);
-			}
-		});
+		if(confirm("정말로 삭제하시겠습니까?")) {
+			$.ajax({
+				url:contextPath + "/admin/board/fileDel",
+				data:{fileName: fileName,
+					  fileNo: fileNo},
+				type:"GET",				
+				success:function(result) {
+					console.log("result: " + result);					
+				},
+				error:function(xhr, status, error) {
+					alert(status + ": " + error);
+				}
+			});
+		}
 	});	
 	
 	//게시글상세보기면 좋아요숫자, 좋아요 체크유무 검색
@@ -226,6 +267,105 @@ function commentsList(boardNo) {
 	});
 }
 
+//댓글리스트 세팅 함수
+function comments(comment) {		
+		var str = "";
+		var boardWriter = "";
+		var commentDelCount = 0;
+		var commentCount = 0;
+		var accordianNo = 0;
+		
+		if($('.member-userId').val().length < 1) {
+			boardWriter = $('.admin-adminId').val();
+		} else {
+			boardWriter = $('.member-userId').val();			
+		}
+		
+		str += "<div class='accordion' id='accordionExample'>";
+		
+		for(var i = 0; i < comment.length; i++) {
+			var map = comment[i];			
+			var date = new Date(map.COMMENTS_REGDATE);
+			var user = $('.session-adminId').val();
+			const regdate = new Date(date.getTime()).toISOString().split('T')[0] + " " + date.toTimeString().split(' ')[0];
+			
+			if(commentCount % 10 == 0 && comment.length - commentCount >= 10) {
+				str += "<div class='accordion-item'>";
+				str += "<h2 class='accordion-header'>";
+				str += "<button class='accordion-button collapsed' type='button' data-bs-toggle='collapse' data-bs-target='#collapse" + accordianNo + "' aria-expanded='false' aria-controls='collapse" + accordianNo + "'>";
+				str += (commentCount + 1) + " ~ " + (commentCount + 10) + "번째까지 댓글";
+				str += "</button></h2>";
+				str += "<div id='collapse" + accordianNo + "' class='accordion-collapse collapse' data-bs-parent='#accordionExample'>";
+				str += "<div class='accordion-body'>";
+				accordianNo = accordianNo + 1;
+			}
+			
+			if(map.COMMENTS_STEP < 1) {
+				str += "<div class='comment-item'>";
+			} else {
+				str += "<div class='comment-item reply'>";
+			}			
+			if(map.COMMENTS_DEL_FLAG === 'N') {
+				if(map.ADMIN_ID.length > 0) {
+					str += "<p class='comment-writer'>" + map.ADMIN_ID;
+					if(boardWriter === map.ADMIN_ID) {
+						str += "<span class='boardWriter-commentWrite'>작성자</span>";
+					}
+					str += "<span class='comment-write-regdate'>(" + regdate + ")</span>";
+					if(map.COMMENTS_STEP < 1) {
+						str += "<a class='comment-reply' onclick='commentReply(this)'>답글쓰기</a>";
+					}
+					str += "<input type='hidden' name='commentsNo' class='commentsNo' value='" + map.COMMENTS_NO + "'>";
+					str += "<div class='commentEditOrDel'>" + 
+					"<span onclick='commentMore(this)' class='comment-more'>";
+					str += "<i class='bi bi-three-dots-vertical'></i></span>";
+					str += "<div class='editDel'>";
+					if(user == map.ADMIN_ID) {
+						str += "<a class='commentEdit' onclick='commentEdit(this)'>수정</a>";
+					}
+					str += "<a class='commentDel' onclick='commentDel(" + map.COMMENTS_NO + ", " + map.COMMENTS_STEP + ", " + map.COMMENTS_GROUP_NO + ", " + map.BOARD_NO + ")'>삭제</a>" +
+					"</div>";
+				} else {
+					str += "<p class='comment-writer'>" + map.NAME;
+					if(boardWriter === map.NAME) {
+						str += "<span class='boardWriter-commentWrite'>작성자</span>"; 
+					}
+					str += "<span class='comment-write-regdate'>(" + regdate + ")</span>";
+					if(map.COMMENTS_STEP < 1) {
+						str += "<a class='comment-reply' onclick='commentReply(this)'>답글쓰기</a>";
+					}
+					str += "<input type='hidden' name='commentsNo' class='commentsNo' value='" + map.COMMENTS_NO + "'>";
+					str += "<span onclick='commentMore(this)' class='comment-more'>" + 
+					"<i class='bi bi-three-dots-vertical'></i></span>" +
+					"<div class='editDel'>" +
+					"<a class='commentEdit' onclick='commentEdit(this)'>수정</a>";
+					str += "<a class='commentDel' onclick='commentDel(" + map.COMMENTS_NO + ", " + map.COMMENTS_STEP + ", " + map.COMMENTS_GROUP_NO + ", " + map.BOARD_NO + ")'>삭제</a>" +
+					"</div>";
+				}
+				str += "</div>";
+				str += "<p class='comment-body'>" + map.COMMENTS_BODY + "</p>";				
+			} else {
+				str += "<span>삭제된 글입니다.</span>"
+				commentDelCount = commentDelCount + 1;
+			}
+			
+			str += "</div>";
+			
+			if(commentCount % 10 == 9 || commentCount == comment.length - 1) {
+				str += "</div></div></div>";
+			}
+			
+			if(map.COMMENTS_DEL_FLAG === 'N') {
+				commentCount = commentCount + 1;
+			}
+		} //for
+		
+		str += "</div>";
+		
+		$('div.commentList').html(str);
+		$('p.board-comment-count').html("<i class='bi bi-chat-square-dots'>&nbsp</i> 댓글" + (comment.length - commentDelCount));
+	}
+
 //댓글 폼 이동함수
 function commentFormMove() {
 	$('.commentList').after($('form[name=commentFrm]'));
@@ -264,6 +404,12 @@ function commentReply(element) {
 
 //댓글쓰기 처리함수
 function commentWrite() {
+	if($('#comment-area').val().length < 1) {
+		alert("내용을 입력해주세요!");
+		$('#comment-area').focus();
+		return false;
+	}
+	
 	$.ajax({
 		url:contextPath + "/comments/write",
 		data:$('form[name=commentFrm]').serialize(),
@@ -281,6 +427,12 @@ function commentWrite() {
 
 //댓글 답글쓰기 처리 함수
 function commentReplyWrite() {
+	if($('#comment-area').val().length < 1) {
+		alert("내용을 입력해주세요!");
+		$('#comment-area').focus();
+		return false;
+	}
+	
 	$.ajax({
 		url:contextPath + "/comments/commentsReply",
 		data:$('form[name=commentFrm]').serialize(),
@@ -299,6 +451,12 @@ function commentReplyWrite() {
 
 //댓글 수정처리 함수
 function commentWriteEdit() {
+	if($('#comment-area').val().length < 1) {
+		alert("내용을 입력해주세요!");
+		$('#comment-area').focus();
+		return false;
+	}
+	
 	$.ajax({
 		url:contextPath + "/comments/commentsWriteEdit",
 		data:$('form[name=commentFrm]').serialize(),
@@ -349,20 +507,22 @@ function commentEditCancel(element) {
 
 //댓글삭제함수
 function commentDel(commentsNo, commentsStep, commentsGroupNo, boardNo) {	
-	$.ajax({
-		url:contextPath + '/comments/delete',
-		type:"POST",
-		data:{commentsNo:commentsNo,
-			  commentsStep:commentsStep,
-			  commentsGroupNo:commentsGroupNo},
-		success:function(result) {
-			console.log(result);
-			commentsList(boardNo);
-		},
-		error:function(xhr, status, error) {
-			alert(status + ": " + error);
-		}
-	});
+	if(confirm("정말로 삭제하시겠습니까?")) {
+		$.ajax({
+			url:contextPath + '/comments/delete',
+			type:"POST",
+			data:{commentsNo:commentsNo,
+				  commentsStep:commentsStep,
+				  commentsGroupNo:commentsGroupNo},
+			success:function(result) {
+				console.log(result);
+				commentsList(boardNo);
+			},
+			error:function(xhr, status, error) {
+				alert(status + ": " + error);
+			}
+		});		
+	}	
 }
 
 /*글쓰기 첨부파일 함수*/

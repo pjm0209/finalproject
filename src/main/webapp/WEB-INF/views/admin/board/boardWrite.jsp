@@ -47,7 +47,7 @@
 				</c:if>
 			</h5>
 			<div class="board-head-button">
-				<input type="submit" class="bg-gradient-primary" id="save-boardCreate" value="${buttonType }">
+				<input type="submit" class="bg-gradient-primary" id="saveBoard" value="${buttonType }">
 			</div>
 		</div>
 		<div class="board">
@@ -74,7 +74,7 @@
 						<dt>제목</dt>
 						<dd>
 							<div class="input_group v2 board-write-title">
-								<input type="text" name="boardTitle" value="${map['BOARD_TITLE'] }" id="board-wirte-title" maxlength="50" placeholder="제목을 입력해주세요.">
+								<input type="text" name="boardTitle" value="${map['BOARD_TITLE'] }" id="board-write-title" maxlength="50" placeholder="제목을 입력해주세요.">
 							</div>
 						</dd>
 						<dt>내용</dt>
