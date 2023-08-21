@@ -3,7 +3,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.team2.mbti.comment.model.CommentDAO">
-	<sql id="insertType">
+	<sql id="insertCommentType">
 		<if test="no != null and no != 0">
 			insert into comments(comments_No, board_No, no, comments_body, comments_group_no)
 			values(#{commentsNo}, #{boardNo}, #{no}, #{commentsBody}, #{commentsNo})
@@ -14,17 +14,52 @@
 		</if>
 	</sql>
 	
+	<sql id="insertCommentReplyType">
+		<if test="no != null and no != 0">
+			insert into comments(comments_No, board_No, no, comments_body, comments_group_no, comments_step, comments_sort)
+			values(#{commentsNo}, #{boardNo}, #{no}, #{commentsBody}, #{commentsGroupNo}, #{commentsStep} + 1, #{commentsSort} + 1)
+		</if>
+		<if test="no == null or no == 0">
+			insert into comments(comments_No, board_No, comments_body, comments_group_no, comments_step, comments_sort, admin_no)
+			values(#{commentsNo}, #{boardNo}, #{commentsBody}, #{commentsGroupNo}, #{commentsStep} + 1, #{commentsSort} + 1, #{adminNo})
+		</if>
+	</sql>
+	
 	<insert id="insertComments" parameterType="commentVo">
 		<selectKey keyProperty="commentsNo" order="BEFORE" resultType="int">
 			select comments_seq.nextval from dual
 		</selectKey>
 		
-		<include refid="insertType"></include>
+		<include refid="insertCommentType"></include>
 	</insert>
 	
 	<select id="selectCommentList" parameterType="int" resultType="map">
 		select * from commentsview
 		where board_no = #{boardNo}
-		order by comments_group_no desc, comments_sort
+		order by comments_group_no, comments_sort
 	</select>
+	
+	<parameterMap type="map" id="commentDeleteProc">
+		<parameter property="commentsNo" javaType="string" jdbcType="VARCHAR" mode="IN"/>
+		<parameter property="commentsStep" javaType="string" jdbcType="VARCHAR" mode="IN"/>
+		<parameter property="commentsGroupNo" javaType="string" jdbcType="VARCHAR" mode="IN"/>
+	</parameterMap>
+	
+	<delete id="deleteComment" parameterMap="commentDeleteProc">
+		call DELETECOMMENTS(?, ?, ?)
+	</delete>
+	
+	<insert id="insertCommentReply" parameterType="commentVo">
+		<selectKey keyProperty="commentsNo" order="BEFORE" resultType="int">
+			select comments_seq.nextval from dual
+		</selectKey>
+		
+		<include refid="insertCommentReplyType"></include>
+	</insert>
+	
+	<update id="updateComment" parameterType="commentVo">
+		update comments
+		set comments_body = #{commentsBody}
+		where comments_no = #{commentsNo}
+	</update>
 </mapper>

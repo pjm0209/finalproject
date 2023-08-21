@@ -6,26 +6,48 @@
 <!-- Page Heading -->
 <c:import url="/admin/board/boardHeadSide"></c:import>
 
-<c:if test="${empty param.boardNo }">
+<c:if test="${param.boardWriteType == 'write' }">
 	<c:set var="url" value="/admin/board/boardWrite"/>
-	<c:set var="board" value="${board }"/>
+	<c:set var="board" value="${boardFormVo.boardFormName }"/>
+	<c:set var="buttonType" value="저장"/>
 </c:if>
 
-<c:if test="${!empty param.boardNo }">
+<c:if test="${param.boardWriteType == 'edit' }">
 	<c:set var="url" value="/admin/board/boardWriteEdit"/>
 	<c:set var="board" value="${map['BOARD_FORM_NAME'] }"/>
+	<c:set var="buttonType" value="수정"/>
+</c:if>
+
+<c:if test="${param.boardWriteType == 'reply' }">
+	<c:set var="url" value="/admin/board/boardWriteReply"/>
+	<c:set var="board" value="${map['BOARD_FORM_NAME'] }"/>
+	<c:set var="buttonType" value="저장"/>
 </c:if>
 
 <div class="board-body">
 	<form name="boardWriteForm" method="post" enctype="multipart/form-data" action="<c:url value='${url }'/>">
 		<div id="board-title">
 		<input type="hidden" name="adminNo" value="${sessionScope.adminNo }">
+		<c:if test="${param.boardWriteType == 'reply' }">
+			<input type="hidden" name="boardGroupNo" value="${map['BOARD_GROUP_NO'] }">
+			<input type="hidden" name="boardStep" value="${map['BOARD_STEP'] }">
+		</c:if>
 		<c:if test="${!empty param.boardNo }">
 			<input type="hidden" name="boardNo" value="${param.boardNo }">
 		</c:if>	
-			<h5>${boardFormVo.boardFormName }</h5>
+			<h5>
+				<c:if test="${param.boardWriteType == 'write' }">
+					${boardFormVo.boardFormName }
+				</c:if>
+				<c:if test="${param.boardWriteType == 'edit' }">
+					${board }
+				</c:if>
+				<c:if test="${param.boardWirteType == 'reply' }">
+					${board }
+				</c:if>
+			</h5>
 			<div class="board-head-button">
-				<input type="submit" class="bg-gradient-primary" id="save-boardCreate" <c:if test="${empty param.boardNo }"> value="저장" </c:if> <c:if test="${!empty param.boardNo }"> value="수정"</c:if>>
+				<input type="submit" class="bg-gradient-primary" id="saveBoard" value="${buttonType }">
 			</div>
 		</div>
 		<div class="board">
@@ -52,7 +74,7 @@
 						<dt>제목</dt>
 						<dd>
 							<div class="input_group v2 board-write-title">
-								<input type="text" name="boardTitle" value="${map['BOARD_TITLE'] }" id="board-wirte-title" maxlength="50" placeholder="제목을 입력해주세요.">
+								<input type="text" name="boardTitle" value="${map['BOARD_TITLE'] }" id="board-write-title" maxlength="50" placeholder="제목을 입력해주세요.">
 							</div>
 						</dd>
 						<dt>내용</dt>

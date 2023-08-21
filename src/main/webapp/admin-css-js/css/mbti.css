@@ -109,7 +109,6 @@ section#mbtiSurvey{
 	width: 100%;
 	height: 100px;
 	background-color: rgb(255, 128, 0);
-	
 }
 .inner2{
 	margin-top: 100px;
@@ -147,28 +146,35 @@ section#mbtiSurvey{
 	width: 1400px;
 	height: 1000px;
 	background-color:#fe9601;
+	padding: 30px;
+}
+.defining2 h2{ 
+	font-size: 50px;
+}
+.defining2 li{
+	font-size: 24px;
 }
 .defining2 #strength{
+	margin:0 auto;
 	padding-left: 50px;
 	padding-top: 50px;
-	width: 650px;
-	height: 960px;
+	width: 1300px;
+	height: 400px;
 	background-color: #fff;
- 	float: left;
  	border: 1px solid black;
  	margin-top: 20px;
- 	margin-left: 20px;
+ 	line-height: 50px;
 }
 .defining2 #weakness{
+	margin:0 auto;
 	padding-left: 50px;
 	padding-top: 50px;
-	width: 650px;
-	height: 960px;
+	width: 1300px;
+	height: 400px;
 	background-color: #fff;
-	float: right;
 	border: 1px solid black;
 	margin-top: 20px;
-	margin-right: 20px;
+	line-height: 50px;
 }
 #mbti-jop{
 	margin: 0 auto;
@@ -194,6 +200,7 @@ section#mbtiSurvey{
     background-color: rgb(255, 128, 0);
     color: #fff;
     border-radius: 100px;
+    font-weight: bold;
 }
 #mbti-compatibility{
 	margin: 0 auto;
@@ -219,6 +226,7 @@ section#mbtiSurvey{
     background-color: rgb(255, 128, 0);
     color: #fff;
     border-radius: 100px;
+    font-weight: bold;
 }
 #mbti-compatibility #best{
 	padding-left: 30px;
@@ -282,12 +290,12 @@ section#mbtiSurvey{
 	margin: 0 auto;
 	margin-top: 20px;
 	padding-top: 7px;
-	padding-left: 20px;
 	color: #fff;
 	width: 1200px;
 	height: 100px;
-	border: 1px solid black;
 	background-color: #fe9601;
+	border-radius: 20px;
+	text-align: center;
 }
 #mbti-jop .mbti-jop p{
 	font-size: 26px;

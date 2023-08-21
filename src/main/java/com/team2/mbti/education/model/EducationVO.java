@@ -13,6 +13,7 @@ public class EducationVO extends SearchVO {
 	private String eduCom;
 	private String eduTeacher;
 	private int eduPrice;
+	private int qty;
 	private int eduPeopleNumber;
 	private List<EducationVO> educationItems;
 	

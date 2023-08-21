@@ -1,120 +1,141 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
-<!DOCTYPE html>
-<html>
-<head>
-<title>회원가입페이지 연습</title>
 <style>
-*{
-	box-sizing: border-box;
-    font-size: 15px;
-}
-
-.wrapper {
-    padding: 10px;
-}
-
-html {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    padding-top: 20px;
-    padding-bottom: 20px;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    width: 45%;
-    border: 1px solid black;
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
 }
 
-input{
-    border: 1px solid black;
+.form-memberRegister {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-memberRegister h1 {
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+.form-register label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.div-register {
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.div-register input[type="text"] {
+  width: 80%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.div-register #memberId{
+  width: 60%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.div-register #btnChkId {
+    background-color: #eb5d1e;
+    color: white;
+    border: none;
     border-radius: 3px;
-    line-height: 35px;
-    font-size: 12px;
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
-div {
-    padding-top: 3px;
-    padding-bottom: 8px;
-}
-
-span{
-	font-size: 20px;
-}
-
-.title {
-    text-align: center;
-    font-weight: 700;
-    background: #ff7f00;
-}
-
-.name input {
-    width: 300px;
-}
-
-.password1 input {
-    width: 300px;
-}
-
-.password2 input {
-    width: 300px;
-}
-
-.email1 input {
-    width: 300px;
-}
-
-#email2 {
-  width: 30%;
-  height: 40px;
-  font-size: 15px; 
-}
-
-.tel input {
-    display: flex;
-    justify-content: space-between;
-    line-height: 45px;
-    width: 50%;
-}
-
-.address input {
-    width: 50%;
-}
-
-.addressDetail input {
-    width: 50%;
-}
-
-.signUp {
-    text-align: center; 
-    margin-top: 20px;
-}
-
-.signUp button {
-    width: 30%;
-    height: 50px;
-    cursor:pointer;
-}
-
-button{
     cursor: pointer;
-    height: 30px;
+    padding: 10px 15px;
 }
 
-.error{
-    font-size: 1px;
-    height: 20px;
-    color:red;
-    font-weight: 700;
+.div-register input[type="password"] {
+  width: 80%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+#memberEmail1{
+	width:30%;
+}
+
+#memberEmail2{
+	width:100px;
+	height:35px;
+}
+
+#memberEmail3{
+	width:150px;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.select-container {
+  display: flex;
+  align-items: center;
+}
+
+.select-container select {
+  flex: 1;
+  margin-right: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.div-register #btnZipcode{
+   background-color: #eb5d1e;
+   color: white;
+   border: none;
+   border-radius: 3px;
+   cursor: pointer;
+   padding: 10px 15px;
+}
+
+.div-register input[type="Button"] {
+  padding: 10px 20px;
+  background-color: #eb5d1e;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+#signUpButton {
+  display: block;
+  width: 50%;
+  height: 50px;
+  padding: 10px;
+  margin: 0 auto;
+  background-color: #eb5d1e;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
 }
 </style>
 
-
-<script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>
+<script type="text/javascript" src="<c:url value ='/js/member.js"'/>"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
 
 function validate_userid(uid) {
@@ -130,24 +151,27 @@ function validate_hp(ph) {
 
 	$(function(){
 		$('#btnChkId').click(function(){
+			
+			//아이디 조건
 			if (!validate_userid($('#userid').val())) {
 				alert("아이디는 영문, 숫자, _(밑줄문자)만 가능합니다");
-				$('#userid').focus();
+				$('#memberId').focus();
 				return false;
 			}
 			
 			$.ajax({
 				url:"<c:url value='/main/member/checkId'/>",
 				type: "get",
-				data: "userid=" + $('#userid').val(),
+				data: "userid=" + $('#memberId').val(),
 				dataType: 'json',
 				success:function(res){
 					console.log(res);
 					if(res==1){
-						$('#useridError').html("이미 존재하는 아이디입니다.");						
+						$('#idError').html("이미 존재하는 아이디입니다.");
+						$('#idError').css('color', 'red'); 
 					} else if(res == 2) {
-						$('#useridError').html("사용가능한 아이디입니다.");
-						$('#useridError').css('color', 'blue');
+						$('#idError').html("사용가능한 아이디입니다.");
+						$('#idError').css('color', 'blue');
 						$('#btnChkId').val('Y'); 
 					}
 				},
@@ -157,72 +181,84 @@ function validate_hp(ph) {
 			});
 		});
 		
-		$('#password2').keyup(function() {
-		    var password1 = $('#password1').val();
-		    var password2 = $(this).val();
-		    var passwordError = $('#passwordError');
+		//비밀번호 일치/불일치
+		$('#memberpwdCheck').keyup(function() {
+		    var memberPwd = $('#memberPwd').val();
+		    var memberpwdCheck = $(this).val();
+		    var pwdCheckError = $('#pwdCheckError');
 
-		    if (password1 !== password2) {
-		        passwordError.html("비밀번호가 일치하지 않습니다.");
+		    if (memberPwd !== memberpwdCheck) {
+		    	pwdCheckError.html("비밀번호가 일치하지 않습니다.");
 		    } else {
-		        passwordError.html("비밀번호가 일치합니다");
+		    	pwdCheckError.html("비밀번호가 일치합니다");
 		    }
 		});		
-					
+			
+		
 		$('#signUpButton').click(function(){
-			if($('#name').val().length < 1){
+			
+			//이름 입력
+			if($('#memberName').val().length < 1){
 				alert("이름을 입력하세요");
-				$('#name').focus();				
+				$('#memberName').focus();				
 				return false;				
 			}
 			
-	        if ($('#userid').val().length < 1) {
+			//아이디 입력
+	        if ($('#memberId').val().length < 1) {
 	            alert("아이디를 입력하세요");
-	            $('#userid').focus();
+	            $('#memberId').focus();
 	            return false;
 	        }
 			
+	        //아이디 중복확인
 			if($('#btnChkId').val()!='Y'){
 		         alert('아이디 중복확인을 해주세요.');
 		         $('#btnChkId').focus();
 		         return false;
 		    }
-			
-			if ($('#password1').val().length < 1) {
+	      
+			//비밀번호 입력
+			if ($('#memberPwd').val().length < 1) {
 				alert("비밀번호를 입력하세요");
-				$('#password1').focus();
+				$('#memberPwd').focus();
 				return false;
 			}
 			
-	        var password1 = $("#password1").val();
-	        if (password1.length < 8 || password1.length > 20 ||
-	            !/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]+$/.test(password1)) {
-	            $('#passwordError').html("비밀번호는 문자, 숫자, 특수문자를 포함한 8~20자여야 합니다");
-	            $("#password1").focus();
+			//비밀번호 조건
+	        var memberPwd = $("#memberPwd").val();
+	        if (memberPwd.length < 8 || memberPwd.length > 20 ||
+	            !/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]+$/.test(memberPwd)) {
+	            $('#pwdError').html("비밀번호는 문자, 숫자, 특수문자를 포함한 8~20자여야 합니다");
+	            $("#memberPwd").focus();
 	            return false;
 	        } else {
 	            $('#passwordError').html("");
 	        }
 	        
-	        if ($('#email1').val().length < 1) {
+	        //이메일 입력
+	        if ($('#memberEmail1').val().length < 1) {
 	            alert("이메일을 입력하세요");
-	            $('#email1').focus();
+	            $('#memberEmail1').focus();
 	            return false;
 	        }
-	        	        			     
-	        var telNumber = $("#tel").val();
+	        	 
+	        //전화번호 입력
+	        var telNumber = $("#memberTel").val();
 	        if (!validate_hp(telNumber)) {
 	            alert("전화번호는 숫자만 가능합니다");
-	            $("#tel").focus();
+	            $("#memberTel").focus();
 	            return false;
 	        }
 	        
-	        if (telNumber.length !== 11) {
-	            alert("전화번호는 11자리로 입력해주세요");
-	            $("#tel").focus();
+	        //전화번호 조건
+	        if (telNumber.length !== 13) {
+	            alert("전화번호는 "(-)" 포함 13자리로 입력해주세요");
+	            $("#memberTel").focus();
 	            return false;
 	        }
 	        
+	        //주소 입력
 	        if ($('#address').val().length < 1) {
 	            alert("주소를 입력하세요");
 	            $('#address').focus();
@@ -230,91 +266,86 @@ function validate_hp(ph) {
 	        }
 		});	
 		
+		//이메일 직접입력
 		$(function(){
-		    $('#email2').change(function() {
+		    $('#memberEmail2').change(function() {
 		        if ($(this).val() === 'etc') {
-		            $('#email3').css('visibility', 'visible');
+		            $('#memberEmail3').css('visibility', 'visible');
 		        } else {
-		            $('#email3').css('visibility', 'hidden');
+		            $('#memberEmail3').css('visibility', 'hidden');
 		        }
 		    });
-		});	
-		
-	    $('#btnAddress').click(function() {
-	        var addressSearchURL = '<c:url value="/main/member/findZipcode"/>';
-	        window.open(addressSearchURL, 'AddressSearch', 'width=550,height=600');
-	    });
-	    
+		});			 
 	});
 </script>
 
-<link href="signup.css" rel="stylesheet" />
-<script src="signup.js"></script>
-</head>
-<body>
-	<div class="wrapper">
-		<div class="title">
-			<h1 style="font-size: 30px;">회원가입</h1>
-		</div>
-		
-		<span>이름 *</span>
-		<div class="name">		
-	    	<input type="text" id="name" placeholder="이름을 입력하세요.">
+<div class="form-memberRegister">
+	<h1>MBTI&nbsp;&nbsp;회원가입</h1>
+	<form class="form-register" name="memberRegister" method="post" action="<c:url value='/main/member/memberReigster'/>">		
+		<label>이름</label>
+		<div class="div-register">		
+	    	<input type="text" class="name" id="memberName" name="registerName" placeholder="이름을 입력하세요.">
 	    	<div class="error" id="nameError"></div>	    	
 		</div>
 		
-		<span>아이디 *</span>
-		<div class="userid">		
-			<input type="text" id="userid" placeholder="아이디 입력(6~20자)">
+		<label>아이디</label>
+		<div class="div-register">		
+			<input type="text" class="id" id="memberId" name="registerId" placeholder="아이디 입력(6~20자)">&nbsp;
 			<button id="btnChkId" value="중복 확인" type="button">중복 확인</button>			
-			<span class="error" id="useridError" style=font-size:15px;>*중복확인을 해주세요</span>
+			<span class="error" id="idError"></span>
 		</div>
 		
-		<span>비밀번호 *</span>
-		<div class="password">
-			<input type="password" id="password1" placeholder="비밀번호 입력(문자,숫자,특수문자 포함 8~20자)">
+		<label>비밀번호</label>
+		<div class="div-register">
+			<input type="password" class="pwd" id="memberPwd" name="registerPwd" placeholder="비밀번호 입력(문자,숫자,특수문자 포함 8~20자)">
 			<div class="error" id="pwdError"></div>
 		</div>
 		
-		<span>비밀번호 확인 *</span>
-		<div class="passwordCheck">
-			<input type="password" id="password2" placeholder="비밀번호 재입력">
-			<div class="error" id="passwordError" style=font-size:15px;></div>
+		<label>비밀번호 확인</label>
+		<div class="div-register">
+			<input type="password" class="pwdCheck" id="memberpwdCheck" name="registerPwdCheck" placeholder="비밀번호 재입력">
+			<div class="error" id="pwdCheckError"></div>
 		</div><br>
 		
-		<span>이메일 *</span>
-		<div class="email">
-			<input type="text" id="email1" placeholder="이메일 주소">&nbsp;@
-				<select name="email2" id="email2">
+		<label>이메일</label>
+		<div class="div-register">
+			<input type="text" class="email" id="memberEmail1" name="registerEmail" placeholder="이메일 주소">&nbsp;@&nbsp;
+				<select name="email2" id="memberEmail2">
 					<option value="naver.com">naver.com</option>
 					<option value="nate.com">nate.com</option>
 					<option value="daum.com">daum.com</option>
 					<option value="gmail.com">gmail.com</option>
 					<option value="google.com">google.com</option>
-					<option value="etc">직접입력</option>			
-				</select>			
-			<input type="text" id="email3" style="visibility:hidden;">
+					<option value="etc">직접입력</option>
+				</select>&nbsp;
+			<input type="text" id="memberEmail3" style="visibility:hidden;">
 			<div class="error" id="emailError"></div>
 		</div>
 		
-		<span>전화번호 *</span>
-		<div class="tel">
-			<input type="text" id="tel" placeholder="휴대폰번호 입력 ('-') 제외 11자리 입력)">
-			<div class="error" id="emailError"></div>
+		<label>전화번호</label>
+		<div class="div-register">
+			<input type="text" class="tel" id="memberTel" name="registerTel" placeholder="휴대폰번호 입력 ('-')포함 13자리 입력)">
+			<div class="error" id="telError"></div>
 		</div>		
 					
-		<span>주소 *</span>				
-		<div class="address" id="address">
-			<input type="text" id="PostalCode" placeholder="우편번호">
-			<input type="text" id="address" placeholder="주소를 검색해주세요">
-			<input type="button" id="btnAddress" value="우편번호 찾기">	
-			<input type="text" id="addressDetail" placeholder="상세주소를 입력해주세요">	
+		<label>우편번호</label>			
+		<div class="div-register">
+			<input type="text" class="postalCode" id="memberPostalCode" name="registerPostalCode" placeholder="우편번호를 검색하세요">&nbsp;	
+			<input type="Button" value="우편번호 찾기" id="btnZipcode" title="새창열림" onclick="sample4_execDaumPostcode()">	
+		</div>
+		
+		<label>주소</label>
+		<div class="div-register">
+			<input type="text" class="address" id="memberAddress" name="registerAddress" placeholder="주소를 입력하세요">
+		</div>
+		
+		<label>상세주소</label>
+		<div class="div-register">
+			<input type="text" class="addressDetail" id="memberAddressDetail" name="registerAddressDetail" placeholder="상세주소를 입력하세요">
 		</div>		
-		
+						
         <div class="signUp"><br>
-            <button id="signUpButton">회원가입</button>
+            <button class="submit" id="signUpButton" >회원가입</button>
         </div>					
-		
-	</div>	
-</body>
-</html>
+	</form>		
+</div>	

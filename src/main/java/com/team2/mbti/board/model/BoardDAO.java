@@ -18,7 +18,12 @@ public interface BoardDAO {
 	List<BoardFormVO> selectAllBoard();
 	
 	int insertBoardForm(BoardFormVO vo);
-	int insertBoard(BoardVO vo);
+	int findBoard(int boardFormNo);
+	int boardFormDel(int boardFormNo);
+	
+	int insertBoard(BoardVO vo);	
+	int updateBoard(BoardVO vo);
+	void deleteBoard(Map<String, String> map);
 	
 	BoardFormVO selectBoardSet(int boardFormNo);
 	int updateBoardSet(BoardFormVO vo);
@@ -32,5 +37,5 @@ public interface BoardDAO {
 	
 	int deleteFile(int fileNo);
 	
-	int updateBoard(BoardVO vo);
+	int insertBoardReply(BoardVO vo);
 }

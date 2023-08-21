@@ -3,7 +3,46 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.team2.mbti.admin.model.AdminDAO">
-	<select id="selectAdmin" resultType="map">
+	<insert id="insertManager" parameterType="adminVo">
+		<selectKey keyProperty="adminNo" order="BEFORE" resultType="int">
+			select admin_seq.nextval from dual
+		</selectKey>
+		insert into admin(admin_no, admin_id, admin_pwd, admin_email, admin_tel)
+		values(admin_seq.nextval, #{adminId}, #{adminPwd}, #{adminEmail}, #{adminTel});
+	</insert>
+	
+	<sql id="searchManager">
+		<where>
+			<if test="searchKeyword!=null and searchKeyword!=''">
+				${searchCondition} like '%' || #{searchKeyword} || '%'
+			</if>
+		</where>
+	</sql>	
+	
+	<select id="selectAllManager" parameterType="searchVo" resultType="AdminVo">
+		select * 
+		from
+		(
+			select rownum as RNUM, A.*
+			from
+			(
+				select * from admin
+				<include refid="searchManager"/>
+				order by admin_no
+			) A
+		)
+		<![CDATA[
+		where RNUM > #{firstRecordIndex} 
+		and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}
+		]]>
+	</select>
+	
+	<select id="getTotalRecordManager" parameterType="searchVo" resultType="int">
+		select count(*) from admin
+		<include refid="searchManager"></include> 
+	</select>
+	
+		<select id="selectAdmin" resultType="map">
 		select * from admin
 		order by admin_no
 	</select>
@@ -21,37 +60,10 @@
 	<select id="selectAdminNo" parameterType="String" resultType="int">
 		select admin_No from admin
 		where admin_Id = #{adminId}
-	</select>
-	
-	<sql id="searchManager">
-		<where>
-			<if test="searchKeyword!=null and searchKeyword!=''">
-				${searchCondition} like '%' || #{searchKeyword} || '%'
-			</if>
-		</where>
-	</sql>	
-
-	<select id="selectAllManager" parameterType="searchVo" resultType="adminVo">
-		select * 
-		from
-		(
-			select rownum as RNUM, A.*
-			 from
-			(
-				select * from admin
-				<include refid="searchManager"></include>
-				order by admin_no 
-			)A
-		)
-		<![CDATA[
-		where RNUM > #{firstRecordIndex} 
-		and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}]]>
-	</select>
-	
-	<select id="getTotalRecordManager" parameterType="searchVo" resultType="int">
-		select count(*) from admin
-		<include refid="searchManager"></include> 
 	</select>	
+	
+	
+	
 </mapper>
 
 

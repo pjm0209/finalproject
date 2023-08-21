@@ -13,13 +13,20 @@
 	<input type="hidden" class="member-userId" value="${map['USERID'] }">
 	<input type="hidden" class="admin-adminId" value="${map['ADMIN_ID'] }">
 	<input type="hidden" class="session-adminId" value="${sessionScope.adminId }">
+	<input type="hidden" value="${sessionScope.adminNo }" name="adminNo">
+	<input type="hidden" value="${map['BOARD_STEP'] }" name="boardStep">
+	<input type="hidden" value="${map['BOARD_GROUP_NO'] }" name="boardGroupNo">
+	<input type="hidden" value="${map['BOARD_FORM_NO'] }" name="boardFormNo">
 	<div id="board-title">
 		<h5>${map['BOARD_FORM_NAME'] }</h5>
 		<div class="board-head-button">
-			<input type="button" class="bg-gradient-secondary" onclick="location.href='<c:url value="/admin/board/board?boardFormNo=${map['BOARD_FORM_NO'] }"/>'"	value="목록">
-			<input type="button" class="bg-gradient-primary" id="del-board" value="삭제">
+			<input type="button" class="bg-orange-primary" onclick="location.href='<c:url value="/admin/board/board?boardFormNo=${map['BOARD_FORM_NO'] }"/>'"	value="목록">
+			<input type="button" class="bg-gradient-secondary" id="del-board" value="삭제">
 			<c:if test="${map['ADMIN_ID'] == sessionScope.adminId}"> 
-				<input type="button" class="bg-gradient-primary" onclick="location.href='<c:url value="/admin/board/boardWriteEdit?boardNo=${param.boardNo }"/>'" id="eidt-board" value="수정">
+				<input type="button" class="bg-orange-primary" onclick="location.href='<c:url value="/admin/board/boardWriteEdit?boardNo=${param.boardNo }&boardWriteType=edit"/>'" id="eidt-board" value="수정">
+			</c:if>
+			<c:if test="${map['BOARD_STEP'] < 1 }">
+				<input type="button" class="bg-orange-primary" onclick="location.href='<c:url value="/admin/board/boardWriteReply?boardNo=${param.boardNo }&boardWriteType=reply&boardFormNo=${map['BOARD_FORM_NO'] }"/>'" id="eidt-board" value="답변">
 			</c:if>
 		</div>
 	</div>
@@ -75,69 +82,18 @@
 				<p class="board-comment-user">관리자 (${sessionScope.adminId })</p>
 				<div class="textarea-group">
 					<textarea id="comment-area" name="commentsBody"></textarea>
+					<input type="hidden">				
 					<input type="hidden" value="${map['BOARD_NO'] }" name="boardNo">
 					<input type="hidden" value="${sessionScope.adminNo }" name="adminNo">
-					<input type="button" value="답글등록" id="comment-submit">
+					<input type="button" value="답글등록" id="comment-submit" onclick="commentWrite()">
 				</div>
 			</form>
 		</c:if>
+	
 	</div>
 </div>
 </div>
 <!-- End of Main Content -->
-<script type="text/javascript">
-	function comments(comment) {
-		var str = "";
-		var boardWriter = "";
-		
-		if($('.member-userId').val().length < 1) {
-			boardWriter = $('.admin-adminId').val();
-		} else {
-			boardWriter = $('.member-userId').val();
-			
-		}
-		
-		for(var i = 0; i < comment.length; i++) {
-			var map = comment[i];			
-			var date = new Date(map.COMMENTS_REGDATE);
-			var user = $('.session-adminId').val();
-			const regdate = new Date(date.getTime()).toISOString().split('T')[0] + " " + date.toTimeString().split(' ')[0];
-			
-			str += "<div class='comment-item'>";
-			if(map.ADMIN_ID.length > 0) {
-				str += "<p class='comment-writer'>" + map.ADMIN_ID;
-				if(boardWriter === map.ADMIN_ID) {
-					str += "<span class='boardWriter-commentWrite'>작성자</span>";
-				}
-				str += "<span class='comment-write-regdate'>(" + regdate + ")</span>" +
-				"<a class='comment-reply' onclick='commentReply(this)'>답글쓰기</a>" +
-				"<div class='commentEditOrDel'>" + 
-				"<span class='comment-more'><i class='bi bi-three-dots-vertical'></i></span><div class='editDel'>";
-				if(user == map.ADMIN_ID) {
-					str += "<a href='#' class='commentEdit'>수정</a>";
-				}
-				str += "<a href='#' class='commentDel'>삭제</a></div>";
-			} else {
-				str += "<p class='comment-writer'>" + map.NAME;
-				if(boardWriter === map.NAME) {
-					str += "<span class='boardWriter-commentWrite'>작성자</span>"; 
-				}
-				str += "<span class='comment-write-regdate'>(" + regdate + ")</span>" +
-				"<a class='comment-reply' onclick='commentReply(this)'>답글쓰기</a>" +
-				"<span class='comment-more'>" + 
-				"<i class='bi bi-three-dots-vertical'></i></span><div class='editDel'>" +
-				"<a href='#' class='commentEdit'>수정</a><a href='#' class='commentDel'>삭제</a></div>";
-			}
-			str += "</div>";
-			str += "<p class='comment-body'>" + map.COMMENTS_BODY + "</p>";
-			
-			str += "</div>";
-		}
-		
-		$('div.commentList').html(str);
-		$('p.board-comment-count').html("<i class='bi bi-chat-square-dots'>&nbsp</i> 댓글" + comment.length);
-	}
-</script>
 
 <script src="<c:url value='/admin-css-js/js/board.js'/>"></script>
 <script src="<c:url value='/admin-css-js/vendor/bootstrap/js/bootstrap.bundle.min.js'/>"></script>

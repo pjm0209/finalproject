@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <section id="mbtiSurvey" class="mbtiSurvey">
 	<div class="mbti-result">
 		<div class="mbti-result-top">
@@ -12,6 +13,13 @@
 	<div class="personality">
 		<h2>성격 특징</h2>
 		<p>성격 내용</p>
+		<p>내 mbti는 ${resultMbti} 입니다.<br>
+		   ${fn:substring(resultMbti,0,1)}는 ${resultIE}%<br>
+		   ${fn:substring(resultMbti,1,2)}는 ${resultSN}%<br>
+		   ${fn:substring(resultMbti,2,3)}는 ${resultTF}%<br>
+		   ${fn:substring(resultMbti,3,4)}는 ${resultPJ}%<br>
+		</p>
+		
 	</div>
 	<div class="inner">
 		<h2>주요 특징</h2>
@@ -28,9 +36,19 @@
 	<div class="defining2">
 		<div id="strength">
 			<h2>강점</h2>
+			<ul>
+				<li>사람들과 원활하게 소통하고, 타인의 감정을 잘 이해합니다.</li>
+				<li>창의적이고 새로운 아이디어를 생각해내는 능력이 뛰어나며, 독창적인 해결책을 제시합니다.</li>
+				<li>긍정적이고 열정적인 에너지를 가지고 있어, 동기부여와 영감을 주는 역할을 합니다.</li>
+			</ul>
 		</div>
 		<div id="weakness">
 			<h2>약점</h2>
+			<ul>
+				<li>계획적인 일 처리보다는 즉흥적인 결정을 선호하는 경향이 있습니다.</li>
+				<li>일을 끝내기 전에 새로운 일에 흥미를 느끼고 전환하는 경향이 있어, 일의 완성도가 낮을 수 있습니다.</li>
+				<li>감정적으로 변덕스러울 때가 있어, 일관성을 유지하기 어려울 수 있습니다.</li>
+			</ul>
 		</div>
 	</div>
 	
