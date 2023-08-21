@@ -29,37 +29,28 @@ public class EducationController {
 	
 	private final EducationService educationService;
 	
-	@GetMapping("/eduWrite")
-	public String eduWrite_get(@RequestParam(required = false,defaultValue = "0") int eduNo, Model model) {
-		logger.info("교육 등록 팝업창 보여주기");
+	@GetMapping("/educationWrite")
+	public String eduWrite_get(Model model) {
+		logger.info("교육 등록 페이지");
 		
-		if(eduNo!=0) {
-			EducationVO vo = educationService.selectByNoEducation(eduNo);
-			model.addAttribute("vo", vo);
-		}
-		
-		/* List<EducationVO> list = educationService.selectTeacher();
-		model.addAttribute("list",list); */
+		model.addAttribute("title", "교육 추가");
 		
 		return "admin/education/educationWrite";
 	}
 	
-	@PostMapping("/eduWrite")
-	public String eduWrite_post(@ModelAttribute EducationVO educationVo, Model model){
-		logger.info("mbti 질문 등록 처리, 파라미터 educationVo={}", educationVo);
+	@PostMapping("/educationWrite")
+	public String eduWrite_post(@ModelAttribute EducationVO vo, Model model){
+		logger.info("교육 등록 처리, 파라미터 vo={}", vo);
 		
-		String msg="mbti 질문 등록 실패",url="/admin/education/educationWrite";
-		if(educationVo.getEduNo()==0) {
-			int cnt=educationService.insertEducation(educationVo);
-			logger.info("교육 등록 결과 cnt={}", cnt);
-			
-			if(cnt>0) {
-				msg="새 교육이 성공적으로 등록되었습니다.";
-				url="/admin/education/list";
-			}
-			
+		int cnt=educationService.insertEducation(vo);
+		logger.info("교육 등록 처리 결과 cnt={}", cnt);
+		
+		String msg="교육 등록에 실패하였습니다.",url="/admin/education/educationWrite";
+		if(cnt>0) {
+			msg="새 교육이 성공적으로 등록되었습니다.";
+			url="/admin/education/list?eduNo="+vo.getEduNo();
 		}else {
-			int cnt=educationService.updateEducation(educationVo);
+			cnt=educationService.updateEducation(vo);
 			logger.info("교육 수정 결과 cnt={}",cnt);
 			
 			if(cnt>0) {

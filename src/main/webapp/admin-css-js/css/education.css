@@ -125,13 +125,14 @@ div#edu-search-div {
 
 select#edu-search-select {
 	font-size: 16px;
-    margin-right: 30px;
+    margin-right: 20px;
     height: 40px;
     margin-bottom: 0;
     border: 1px solid #d8dce5;
     border-radius: 6px;
-    margin-left: 830px;
+    margin-left: 840px;
 }
+
 
 /* educationWrite */
 .education-write-head-button {
@@ -179,3 +180,56 @@ div.educationWrite-setting {
 	margin-top: 30px;
 }
 
+div.educationWrite-setting-head {
+	border-bottom: 1px solid #e1e1e1;
+}
+
+div.educationWrite-setting-head h3 {
+	display: inline-block;
+	font-weight: bold;
+	color: black;
+	font-size: 17px;
+	margin: 13px 73px 10px 20px;
+}
+
+span.setting-head {
+	padding-left: 50px;
+}
+
+.educationWrite-setting-body {
+	padding: 20px 30px;
+}
+
+.educationWrite-body dd {
+	margin-left: 190px;
+	padding: 10px 22px 10px 0;
+}
+
+div.educationWrite-setting-body dt {
+	font-size: 14px;
+	color: black;
+	float: left;
+	width: 190px;
+	padding: 17px 0;
+}
+
+div.input_group v2 input {
+	width: 100%;
+}
+
+.input_group.v2 {
+	border: 1px solid #d7dde4;
+	border-radius: 3px;	
+	width: 100%;
+	display: inline-block;
+	text-align: center;
+}
+
+input#board_name {
+	width: calc(100% - 20px);
+	vertical-align: middle;
+	outline-width: 0;
+	border: 0;
+	height: 38px;
+	text-align: left;
+}

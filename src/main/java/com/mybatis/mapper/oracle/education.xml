@@ -3,11 +3,15 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.team2.mbti.education.model.EducationDAO">
-	<sql id="searchEducation">
+	<sql id="searchWhere">
 		<where>
 			<if test="searchKeyword!=null and searchKeyword!=''">
 	      		${searchCondition} like '%' || #{searchKeyword} || '%'
+				and edu_no = #{eduNo}
 	      	</if>
+	      	<if test="searchKeyword==null or searchKeyword==''">
+				edu_no = #{eduNo}
+			</if>
       	</where>
 	</sql>
 	

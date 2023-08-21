@@ -1,6 +1,4 @@
 	$(function(){
-		var contextPath = "/mbti";
-		
 		$('#check-All').click(function () {
     		const isChecked = $(this).prop('checked');
     		$('.check').prop('checked', isChecked);
