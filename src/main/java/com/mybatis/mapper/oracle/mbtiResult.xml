@@ -6,7 +6,25 @@
 		<selectKey keyProperty="mbtiResultNo" order="BEFORE" resultType="int">
 			select mbti_result_seq.nextval from dual
 		</selectKey>
-		INSERT INTO MBTI_RESULT(MBTI_RESULT_NO,NO,MBTI_VAL,MBTI_SURVEY_NO)
-		VALUES(#{mbtiResultNo},#{no},#{mbtiVal},#{mbtiSurveyNo})
+		INSERT INTO MBTI_RESULT(MBTI_RESULT_NO, NO, MBTI_VAL, QUESTION_TYPE_NO, QUESTION_CATEGORY_NO)
+		VALUES(#{mbtiResultNo},#{no},#{mbtiVal},#{questionTypeNo},#{questionCategoryNo})
 	</insert>
+	
+	<delete id="deleteMbtiResultByQuestionTypeNo" parameterType="mbtiResultVo">
+		delete from mbti_result
+		where no=#{no} and question_type_no=#{questionTypeNo}
+	</delete>
+	
+	<select id="getMbtiResultCount" parameterType="mbtiResultVo" resultType="int">
+		select count(*) from mbti_result
+		where no=#{no} and question_type_no=#{questionTypeNo}
+	</select>
+	
+	<select id="getResultVal" parameterType="int" resultType="mbtiResultVo">
+		select question_type_no, question_category_no, sum(mbti_val) mbti_val from mbti_result
+		where no=#{no}
+		group by question_type_no, question_category_no
+		order by question_type_no, question_category_no
+	</select>
+	
 </mapper>

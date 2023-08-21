@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.team2.mbti.common.SearchVO;
+import com.team2.mbti.mbtiResult.model.MbtiResultVO;
 
 @Mapper
 public interface MbtiSurveyDAO {
@@ -16,4 +17,6 @@ public interface MbtiSurveyDAO {
 	int getTotalRecordMbti(SearchVO searchVo);
 	
 	List<MbtiSurveyVO> selectByQuestionTypeNoMbtiSurvey(int questionTypeNo);
+	MbtiVO selectMbti(String mbtiType);
+	int getTotalRecordMbtiByQuestionTypeNo(MbtiResultVO mbtiResultVo);
 }
