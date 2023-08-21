@@ -2,40 +2,13 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
 
-<style>
-button#location-write-button {
-	float:  right;
-	border: 0;
-	border-radius: 5px;
-	padding: 6px 41px;
-	margin-top: -6px;
-	margin-right: 9px;
-	color: white;
-}
-
-button#location-delete-button {
-	float:  right;
-	border: 0;
-	border-radius: 5px;
-	padding: 6px 41px;
-	margin-top: -6px;
-	margin-right: 9px;
-	color: white;
-}
-
-.location-button {
-	background-color: #858796;
-    background-image: linear-gradient(180deg, #858796 10%, #60616f 100%);
-    background-size: cover;
-}
-</style>
 
 <!-- Begin Page Content -->
 <!-- Page Heading -->
 <div class="head-div">
 	<h2 class="text-gray-800">교육 관리</h2>
-	<button type="button" class="bg-gradient-primary"
-		id="add-newBoard-button" onclick="location.href='locationCreate'">교육장 추가</button>
+	<button type="button" class="add-edu-button"
+		id="add-edu-button" onclick="location.href='locationCreate'">교육장 추가</button>
 </div>
 <div class="side-body">
 	<div class="side-div-title">
@@ -159,5 +132,4 @@ button#location-delete-button {
 </div>
 </div>
 <!-- End of Main Content -->
-<script type="text/javascript" src="<c:url value='/admin-css-js/js/education.js'/>"></script>	
 <%@ include file="../inc/bottom.jsp"%>

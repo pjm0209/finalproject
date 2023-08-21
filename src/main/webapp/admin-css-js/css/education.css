@@ -1,2 +1,113 @@
 @charset "UTF-8";
 
+button#education-edit-button {
+	float:  right;
+	border: 0;
+	border-radius: 5px;
+	padding: 6px 41px;
+	margin-top: -6px;
+	margin-right: 9px;
+	color: white;
+}
+
+button#education-delete-button {
+	float:  right;
+	border: 0;
+	border-radius: 5px;
+	padding: 6px 41px;
+	margin-top: -6px;
+	margin-right: 9px;
+	color: white;
+}
+
+.education-button {
+	background-color: #eb5d1e;
+    background-size: cover;
+}
+
+button#applicant-edit-button {
+	float:  right;
+	border: 0;
+	border-radius: 5px;
+	padding: 6px 41px;
+	margin-top: -6px;
+	margin-right: 9px;
+	color: white;
+}
+
+button#applicant-delete-button {
+	float:  right;
+	border: 0;
+	border-radius: 5px;
+	padding: 6px 41px;
+	margin-top: -6px;
+	margin-right: 9px;
+	color: white;
+}
+
+.applicant-button {
+	background-color: #eb5d1e;
+    background-size: cover;
+}
+
+button#location-write-button {
+	float:  right;
+	border: 0;
+	border-radius: 5px;
+	padding: 6px 41px;
+	margin-top: -6px;
+	margin-right: 9px;
+	color: white;
+}
+
+button#location-delete-button {
+	float:  right;
+	border: 0;
+	border-radius: 5px;
+	padding: 6px 41px;
+	margin-top: -6px;
+	margin-right: 9px;
+	color: white;
+}
+
+.location-button {
+	background-color: #eb5d1e;
+    background-size: cover;
+}
+
+button#teacher-edit-button {
+	float:  right;
+	border: 0;
+	border-radius: 5px;
+	padding: 6px 41px;
+	margin-top: -6px;
+	margin-right: 9px;
+	color: white;
+}
+
+button#teacher-delete-button {
+	float:  right;
+	border: 0;
+	border-radius: 5px;
+	padding: 6px 41px;
+	margin-top: -6px;
+	margin-right: 9px;
+	color: white;
+}
+
+.teacher-button {
+	background-color: #eb5d1e;
+    background-size: cover;
+}
+
+button#add-edu-button{
+	background-color: #eb5d1e;
+	float:  right;
+	border: 0;
+	border-radius: 5px;
+	padding: 6px 41px;
+	margin-top: -6px;
+	margin-right: 9px;
+	color: white;
+}
+
