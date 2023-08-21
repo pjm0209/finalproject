@@ -2,33 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
 
-<style>
-button#applicant-edit-button {
-	float:  right;
-	border: 0;
-	border-radius: 5px;
-	padding: 6px 41px;
-	margin-top: -6px;
-	margin-right: 9px;
-	color: white;
-}
-
-button#applicant-delete-button {
-	float:  right;
-	border: 0;
-	border-radius: 5px;
-	padding: 6px 41px;
-	margin-top: -6px;
-	margin-right: 9px;
-	color: white;
-}
-
-.applicant-button {
-	background-color: #858796;
-    background-image: linear-gradient(180deg, #858796 10%, #60616f 100%);
-    background-size: cover;
-}
-</style>
 
 <!-- Begin Page Content -->
 <!-- Page Heading -->
@@ -109,7 +82,8 @@ button#applicant-delete-button {
 					<th scope="col">교육 이름</th>
 					<th scope="col">강사명</th>
 					<th scope="col">교육 기간</th>
-					<th scope="col">인원수</th>
+					<th scope="col">현재 인원</th>
+					<th scope="col">최대 인원</th>
 					<th scope="col">교육비</th>
 					<th scope="col">교육장</th>
 				</tr>
@@ -125,6 +99,7 @@ button#applicant-delete-button {
 						<td>${educationVo.eduName }</td>
 						<td>${educationVo.eduTeaName }</td>
 						<td>${educationVo.eduCom }</td>
+						<td>${educationVo.qty }</td>
 						<td>${educationVo.eduPeopleNumber }</td>
 						<td>${educationVo.eduPrice }</td>
 						<td>${educationVo.epName }</td>
@@ -163,5 +138,4 @@ button#applicant-delete-button {
 </div>
 </div>
 <!-- End of Main Content -->
-<script type="text/javascript" src="<c:url value='/admin-css-js/js/education.js'/>"></script>	
 <%@ include file="../inc/bottom.jsp"%>
