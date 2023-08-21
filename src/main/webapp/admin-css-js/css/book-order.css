@@ -16,7 +16,7 @@
 .board-body  .flex .btn { width: 95%; margin: 0 auto;}
 .board-body  .flex .btn button{width: 100%;
     height: 45px;
-    background: #cb8cdf;
+    background: #eb5d1e;
     border-radius: 5px;
     color: white;
     border: 0;
@@ -44,7 +44,7 @@
 .bookContent>div .flex .chkBookNo button{
 	width: 100%;
 	height: 38px;
-    background: #cb8cdf;
+    background: #eb5d1e;
     border-radius: 5px;
     color: white;
     border: 0;
@@ -99,4 +99,7 @@ div #board-title{
     background-size: cover;
 }
 
+.zip{
+	background: #eb5d1e; border: 0px; margin: 5px 0px;color: white;
+}
 

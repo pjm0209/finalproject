@@ -18,6 +18,7 @@
 
 <script>
 
+
 $(function() {
 	var yearFisrtDay = new Date('2023-01-01');
 	var yearFisrtDay2 = yearFisrtDay.getFullYear() + "-"
@@ -27,7 +28,7 @@ $(function() {
 	var yearLastDay = new Date('2023-01-01');
 	var yearLastDay2 = yearLastDay.getFullYear() + "-"
 		+ ( (yearLastDay.getMonth() + 1) < 10 ? "0" + (yearLastDay.getMonth() + 1) : (yearLastDay.getMonth() + 1) )
-		+ "-" + ( yearLastDay.getDate() < 10 ? "0" + yearLastDay.getDate() : yearLastDay.getDate());
+		+ "-" + ( yearLastDay.getDate() < 10 ? "0" + yearLastDay.getDate() : yearLastDay.getDate()); 
 	
 	var calendarEl = document.getElementById('calendar');
 	var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -38,7 +39,7 @@ $(function() {
 			right: 'dayGridMonth,multiMonthYear'
 		},
 		initialView: 'dayGridMonth',
-		/*     initialDate: '2023-01-12', */
+		/*initialDate: '2023-01-12', */
 		locale: 'ko',
 		dateClick: function(info) {
 			console.log(info.dateStr);
@@ -57,7 +58,7 @@ $(function() {
 			var date = info.event.start;
 			var d = date.getFullYear() + "-"
 			+ ( (date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1) )
-			+ "-" + ( date.getDate() < 10 ? "0" + date.getDate() : date.getDate());
+			+ "-" + ( date.getDate() < 10 ? "0" + date.getDate() : date.getDate()); 
 			
 			$('#dateStr').val(d);
 			
@@ -69,18 +70,18 @@ $(function() {
 	    events: [
 		    	<% // 날짜 형식
 		    	// 날짜 형식
-		 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	
 		 		Calendar cal = Calendar.getInstance();
 		 		try {
-		 			cal.setTime(dateFormat.parse("2023-12-32"));
+		 			cal.setTime(sdf.parse("2023-12-32"));
 		 		} catch (ParseException e) {
 		 			e.printStackTrace();
 		 		}
 		 		/*
 		 		 * 종료날짜: 금일-1일 셋팅 실행 조건이 특정일로부터 금일의 하루전까지 출력 만약 현재날짜라면 cal.add(Calendar.DATE, 1); 해줘야 함
 		 		 */
-		 		String nowDay = dateFormat.format(cal.getTime());
+		 		String nowDay = sdf.format(cal.getTime());
 	
 		 		// 시작 날짜 셋팅
 		 		cal.set(2023, 0, 1);
@@ -89,11 +90,12 @@ $(function() {
 		 		String nextDay = "";
 	
 		 		while (!nowDay.equals(nextDay)) {
-		 			String resultDay = dateFormat.format(cal.getTime());
+		 			String resultDay = sdf.format(cal.getTime());
 		 			String dot = ",";
+		 			
 					if(resultDay.equals("2023-12-31")) {
-						dot = "";}%> 
-
+						dot = "";
+					}%> 
 	    		{
 					title: '결 제 금 액 : ',
 					start: "<%=resultDay%>",
@@ -117,7 +119,7 @@ $(function() {
 				}<%=dot%>
 			 <%
 				cal.add(Calendar.DATE, 1); // 하루하루 더해준다.
-	 			nextDay = dateFormat.format(cal.getTime()); // 비교를 위한 값 셋팅
+	 			nextDay = sdf.format(cal.getTime()); // 비교를 위한 값 셋팅
 			}%>
 		] 
 	});
@@ -126,30 +128,6 @@ $(function() {
 		
 });
 
-$.setDate = function(date) {
-	//endDay 기준으로 7일을 빼거나 1개월이나 3개월을 빼서 startDay에 셋팅
-	//var d = new Date(년, 월, 일);
-	//endDay를 Date형식으로 변환
-	//endDay(String)를 Date형식으로 변환
-	var str = date.split('-');
-
-	$('#startDay').val($.findDate(d));
-
-}
-
-$.findDate = function(date) {
-	return date.getFullYear()
-		+ "-" + $.formatDate((date.getMonth() + 1)) + "-" + $.formatDate(date.getDate());
-}
-$.formatDate = function(d) {
-	//(date.getMonth()+1) : 월
-	//date.getDate() : 일
-	if (d < 10) { // 10월 미만, 10일 미만
-		d = "0" + d;
-	}
-
-	return d;
-}
 
 </script>
 <style>

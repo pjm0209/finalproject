@@ -16,11 +16,17 @@
 					<div class="board-name" name="orderCancleList" value="">
 						<span><a href="<c:url value='/admin/order/orderCancleList?flag=orderCancle&orderFlag=orderCancle'/>">주문취소내역</a></span>
 					</div>
+					<c:if test="${param.flag == 'orderCancle' and (param.orderFlag == 'orderCancle' or param.orderFlag == null)}">
+						<span class="board-side-icon"><i class="fas fa-fw fa-check"></i></span>
+					</c:if>
 				</c:if>
 				<c:if test="${param.flag != 'orderCancle'}">
 					<div class="board-name" name="orderList" value="">
 						<span><a href="<c:url value='/admin/order/orderList?orderFlag=orderList'/>">전체 주문 내역</a></span>
 					</div>
+					<c:if test="${param.orderFlag == 'orderList' or param.flag == 'order'}">
+						<span class="board-side-icon"><i class="fas fa-fw fa-check"></i></span>
+					</c:if>
 				</c:if>
 			</div>
 			<div class="board-side-boardItem addIcon">
@@ -28,11 +34,17 @@
 					<div class="board-name" name="stockQty" value="">
 						<span><a href="<c:url value='/admin/order/orderList?orderFlag=moneyNotYet'/>">입금 대기</a></span>
 					</div>
+					<c:if test="${param.orderFlag == 'moneyNotYet'}">
+						<span class="board-side-icon"><i class="fas fa-fw fa-check"></i></span>
+					</c:if>
 				</c:if>
 				<c:if test="${param.flag eq 'orderCancle'}">
 					<div class="board-name" name="orderCancleDone" value="">
 						<span><a href="<c:url value='/admin/order/orderCancleList?flag=orderCancle&orderFlag=orderCancleDone'/>">취소 완료</a></span>
 					</div>
+					<c:if test="${param.orderFlag == 'orderCancleDone'}">
+						<span class="board-side-icon"><i class="fas fa-fw fa-check"></i></span>
+					</c:if>
 				</c:if>
 			</div>
 			<div class="board-side-boardItem addIcon">
@@ -40,11 +52,17 @@
 					<div class="board-name" name="moneyDone" value="">
 						<span><a href="<c:url value='/admin/order/orderList?orderFlag=moneyDone'/>">결재 완료</a></span>
 					</div>
+					<c:if test="${param.orderFlag == 'moneyDone'}">
+						<span class="board-side-icon"><i class="fas fa-fw fa-check"></i></span>
+					</c:if>
 				</c:if>
 				<c:if test="${param.flag eq 'orderCancle'}">	
 					<div class="board-name" name="returnNotYet" value="">
 						<span><a href="<c:url value='/admin/order/orderCancleList?flag=orderCancle&orderFlag=returnNotYet'/>">반품 신청</a></span>
 					</div>
+					<c:if test="${param.orderFlag == 'returnNotYet'}">
+						<span class="board-side-icon"><i class="fas fa-fw fa-check"></i></span>
+					</c:if>
 				</c:if>
 			</div>
 			<div class="board-side-boardItem addIcon">
@@ -52,11 +70,17 @@
 					<div class="board-name" name="shippingNotYet" value="">
 						<span><a href="<c:url value='/admin/order/orderList?orderFlag=shippingNotYet'/>">배송 준비</a></span>
 					</div>
+					<c:if test="${param.orderFlag == 'shippingNotYet'}">
+						<span class="board-side-icon"><i class="fas fa-fw fa-check"></i></span>
+					</c:if>
 				</c:if>
 				<c:if test="${param.flag eq 'orderCancle'}">	
 					<div class="board-name" name="returnDone" value="">
 						<span><a href="<c:url value='/admin/order/orderCancleList?flag=orderCancle&orderFlag=returnDone'/>">반품 완료</a></span>
 					</div>
+					<c:if test="${param.orderFlag == 'returnDone'}">
+						<span class="board-side-icon"><i class="fas fa-fw fa-check"></i></span>
+					</c:if>
 				</c:if>
 			</div>
 			<div class="board-side-boardItem addIcon">
@@ -64,11 +88,17 @@
 					<div class="board-name" name="shipping" value="">
 						<span><a href="<c:url value='/admin/order/orderList?orderFlag=shipping'/>">배송중</a></span>
 					</div>
+					<c:if test="${param.orderFlag == 'shipping'}">
+						<span class="board-side-icon"><i class="fas fa-fw fa-check"></i></span>
+					</c:if>
 				</c:if>
 				<c:if test="${param.flag eq 'orderCancle'}">	
 					<div class="board-name" name="exchangeNotYet" value="">
 						<span><a href="<c:url value='/admin/order/orderCancleList?flag=orderCancle&orderFlag=exchangeNotYet'/>">교환신청</a></span>
 					</div>
+					<c:if test="${param.orderFlag == 'exchangeNotYet'}">
+						<span class="board-side-icon"><i class="fas fa-fw fa-check"></i></span>
+					</c:if>
 				</c:if>
 			</div>
 			<div class="board-side-boardItem addIcon">
@@ -76,11 +106,17 @@
 					<div class="board-name" name="shippingDone" value="">
 						<span><a href="<c:url value='/admin/order/orderList?orderFlag=shippingDone'/>">배송 완료</a></span>
 					</div>
+					<c:if test="${param.orderFlag == 'shippingDone'}">
+						<span class="board-side-icon"><i class="fas fa-fw fa-check"></i></span>
+					</c:if>
 				</c:if>
 				<c:if test="${param.flag eq 'orderCancle'}">	
 					<div class="board-name" name="exchangeDone" value="">
 						<span><a href="<c:url value='/admin/order/orderCancleList?flag=orderCancle&orderFlag=exchangeDone'/>">교환 완료</a></span>
 					</div>
+					<c:if test="${param.orderFlag == 'exchangeDone'}">
+						<span class="board-side-icon"><i class="fas fa-fw fa-check"></i></span>
+					</c:if>
 				</c:if>
 			</div>
 			<div class="board-side-boardItem addIcon">
@@ -88,11 +124,17 @@
 					<div class="board-name" name="confirmed" value="">
 						<span><a href="<c:url value='/admin/order/orderList?orderFlag=confirmed'/>">구매 확정</a></span>
 					</div>
+					<c:if test="${param.orderFlag == 'confirmed'}">
+						<span class="board-side-icon"><i class="fas fa-fw fa-check"></i></span>
+					</c:if>
 				</c:if>
 				<c:if test="${param.flag eq 'orderCancle'}">
 					<div class="board-name" name="refundNotYet" value="">
 						<span><a href="<c:url value='/admin/order/orderCancleList?flag=orderCancle&orderFlag=refundNotYet'/>">환불 신청</a></span>
 					</div>
+					<c:if test="${param.orderFlag == 'refundNotYet'}">
+						<span class="board-side-icon"><i class="fas fa-fw fa-check"></i></span>
+					</c:if>
 				</c:if>
 			</div>
 			<div class="board-side-boardItem addIcon">
@@ -105,8 +147,10 @@
 					<div class="board-name" name="refundDone" value="refund">
 						<span><a href="<c:url value='/admin/order/orderCancleList?flag=orderCancle&orderFlag=refundDone'/>">환불 완료</a></span>
 					</div>
+					<c:if test="${param.orderFlag == 'refundDone'}">
+						<span class="board-side-icon"><i class="fas fa-fw fa-check"></i></span>
+					</c:if>
 				</c:if>
-				<span class="board-side-icon"><i class="fas fa-fw fa-check"></i></span>
 			</div>
 		</div>
 	</div>
