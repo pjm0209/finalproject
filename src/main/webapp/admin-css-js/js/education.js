@@ -1,5 +1,8 @@
 	$(function(){
-		var contextPath = "/mbti";
+		$('#check-All').click(function () {
+    		const isChecked = $(this).prop('checked');
+    		$('.check').prop('checked', isChecked);
+  	    });
 		
 		$('#education-delete-button').click(function(){
 			if($('input[type=checkbox]:checked').length<1){
@@ -50,5 +53,6 @@
 				$('form[name=frmDelete]').submit();
 			}
 		});
+		
 		
 	});
