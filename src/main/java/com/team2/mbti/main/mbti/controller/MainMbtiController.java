@@ -19,6 +19,7 @@ import com.team2.mbti.mbtisurvey.model.MbtiSurveyService;
 import com.team2.mbti.mbtisurvey.model.MbtiSurveyVO;
 
 import jakarta.servlet.http.HttpSession;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -136,50 +137,82 @@ public class MainMbtiController {
 			}
 		}
 		
-		int resultIE=0;
-		int resultSN=0;
-		int resultTF=0;
-		int resultPJ=0;
+		int resultI=0;
+		int resultE=0;
+		int resultS=0;
+		int resultN=0;
+		int resultT=0;
+		int resultF=0;
+		int resultP=0;
+		int resultJ=0;
 		
 		String resultMbti="";
 		if(iVal>eVal) {
 			resultMbti+="I";
-			resultIE=(int)(iVal/(iVal+eVal)*100);
+			resultI=(int)(iVal/(iVal+eVal)*100);
+			resultE=100-resultI;
 		}else {
 			resultMbti+="E";
-			resultIE=(int)(eVal/(iVal+eVal)*100);
+			resultE=(int)(eVal/(iVal+eVal)*100);
+			resultI=100-resultE;
 		}
 		
 		if(sVal>nVal) {
 			resultMbti+="S";
-			resultSN=(int)(sVal/(sVal+nVal)*100);
+			resultS=(int)(sVal/(sVal+nVal)*100);
+			resultN=100-resultS;
 		}else {
 			resultMbti+="N";
-			resultSN=(int)(nVal/(sVal+nVal)*100);
+			resultN=(int)(nVal/(sVal+nVal)*100);
+			resultS=100-resultN;
 		}
 		
 		if(tVal>fVal) {
 			resultMbti+="T";
-			resultTF=(int)(tVal/(tVal+fVal)*100);
+			resultT=(int)(tVal/(tVal+fVal)*100);
+			resultF=100-resultT;
 		}else {
 			resultMbti+="F";
-			resultTF=(int)(fVal/(tVal+fVal)*100);
+			resultF=(int)(fVal/(tVal+fVal)*100);
+			resultT=100-resultF;
 		}
 		
 		if(pVal>jVal) {
 			resultMbti+="P";
-			resultPJ=(int)(pVal/(pVal+jVal)*100);
+			resultP=(int)(pVal/(pVal+jVal)*100);
+			resultJ=100-resultP;
 		}else {
 			resultMbti+="J";
-			resultPJ=(int)(jVal/(pVal+jVal)*100);
+			resultJ=(int)(jVal/(pVal+jVal)*100);
+			resultP=100-resultJ;
 		}
-		logger.info("resultMbti={},resultIE={},resultSN={},resultTF={},resultPJ={}",resultMbti,resultIE,resultSN,resultTF,resultPJ);
+		logger.info("resultMbti={},resultI={},resultE={},resultN={},resultS={},resultF={},resultT={},resultP={},resultJ={}",resultMbti,resultI,resultE,resultN,resultS,resultF,resultT,resultP,resultJ);
 		model.addAttribute("resultMbti", resultMbti);
-		model.addAttribute("resultIE", resultIE);
-		model.addAttribute("resultSN", resultSN);
-		model.addAttribute("resultTF", resultTF);
-		model.addAttribute("resultPJ", resultPJ);
+		model.addAttribute("resultI", resultI);
+		model.addAttribute("resultE", resultE);
+		model.addAttribute("resultS", resultS);
+		model.addAttribute("resultN", resultN);
+		model.addAttribute("resultT", resultT);
+		model.addAttribute("resultF", resultF);
+		model.addAttribute("resultP", resultP);
+		model.addAttribute("resultJ", resultJ);
 
+		return "main/mbti/mbtiResult";
+	}
+	
+	@GetMapping("/mbtiResult")
+	public String mbtiResult_get(Model model) {
+		
+		model.addAttribute("resultMbti", "ESFJ");
+		model.addAttribute("resultI", 20);
+		model.addAttribute("resultE", 80);
+		model.addAttribute("resultS", 52);
+		model.addAttribute("resultN", 48);
+		model.addAttribute("resultT", 47);
+		model.addAttribute("resultF", 53);
+		model.addAttribute("resultP", 46);
+		model.addAttribute("resultJ", 54);
+		
 		return "main/mbti/mbtiResult";
 	}
 }
