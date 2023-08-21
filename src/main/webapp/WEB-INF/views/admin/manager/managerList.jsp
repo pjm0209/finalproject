@@ -3,14 +3,8 @@
 <%@ include file="../inc/top.jsp"%>
 
 <style>
-button#manager-edit-button {
-	float:  right;
-	border: 0;
-	border-radius: 5px;
-	padding: 6px 41px;
-	margin-top: -6px;
-	margin-right: 9px;
-	color: white;
+button#add-newBoard-button{
+	background: #eb5d1e;
 }
 
 button#manager-delete-button {
