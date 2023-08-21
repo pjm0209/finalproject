@@ -149,7 +149,7 @@
 								<tr>
 									<th style="text-align: center;vertical-align: middle;">배송지</th>
 									<td>
-										<input type="button" class="form-control btn btn-info" onclick="getZipcode();" value="우편번호 검색" style="background: #cb8cdf; border: 0px; margin: 5px 0px;color: white;"><br>
+										<input type="button" class="form-control btn btn-primary zip" onclick="getZipcode();" value="우편번호 검색"><br>
 										<input type="text" class="form-control" placeholder="우편번호" name="odma_zipcode" id="odma_zipcode" value="06271" readonly="readonly">
 										<input type="text" class="form-control" placeholder="기본주소" name="odma_addr1" id="odma_addr1" value="서울 강남구 강남대로 242" readonly="readonly" style="margin-top: 5px;">
 										<input type="text" class="form-control" placeholder="상세주소" name="odma_addr2" value="5" style="margin-top: 5px;">
@@ -219,7 +219,7 @@
 				<div class="form-group">
 					<div class=" text-right">
 						<button style="margin: 0px 5px;" type="button" class="btn btn-success" onclick=""><i class="fas fa-save"></i> 저장</button>
-						<button style="margin: 0px 5px;" type="button" class="btn btn-primary" onclick="history.back()"><i class="fas fa-list-ul"></i> 리스트</button>
+						<button style="margin: 0px 5px;" type="button" class="btn btn-primary" onclick="location.href=orderList.jsp"><i class="fas fa-list-ul"></i> 리스트</button>
 					<div class=" text-right">
 						<button type="button" class="btn btn-success btn-sm">결제완료</button>
 						<button type="button" class="btn btn-danger btn-sm">주문취소</button>
