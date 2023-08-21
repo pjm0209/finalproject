@@ -34,8 +34,8 @@ button#manager-delete-button {
 <script>
 	$(function(){
         $('#add-newBoard-button').click(function(){
-            var popupWidth = 400;
-            var popupHeight = 400;
+            var popupWidth = 600;
+            var popupHeight = 550;
             var leftPosition = (screen.width - popupWidth) / 2;
             var topPosition = (screen.height - popupHeight) / 2;
 
