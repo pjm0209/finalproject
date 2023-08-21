@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+.bg-orange-primary {
+	background: #eb5d1e;	
+}
+
 body {
 	overflow: auto;
 }

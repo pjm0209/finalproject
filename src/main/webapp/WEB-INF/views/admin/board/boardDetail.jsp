@@ -20,13 +20,13 @@
 	<div id="board-title">
 		<h5>${map['BOARD_FORM_NAME'] }</h5>
 		<div class="board-head-button">
-			<input type="button" class="bg-gradient-secondary" onclick="location.href='<c:url value="/admin/board/board?boardFormNo=${map['BOARD_FORM_NO'] }"/>'"	value="목록">
-			<input type="button" class="bg-gradient-primary" id="del-board" value="삭제">
+			<input type="button" class="bg-orange-primary" onclick="location.href='<c:url value="/admin/board/board?boardFormNo=${map['BOARD_FORM_NO'] }"/>'"	value="목록">
+			<input type="button" class="bg-gradient-secondary" id="del-board" value="삭제">
 			<c:if test="${map['ADMIN_ID'] == sessionScope.adminId}"> 
-				<input type="button" class="bg-gradient-primary" onclick="location.href='<c:url value="/admin/board/boardWriteEdit?boardNo=${param.boardNo }&boardWriteType=edit"/>'" id="eidt-board" value="수정">
+				<input type="button" class="bg-orange-primary" onclick="location.href='<c:url value="/admin/board/boardWriteEdit?boardNo=${param.boardNo }&boardWriteType=edit"/>'" id="eidt-board" value="수정">
 			</c:if>
 			<c:if test="${map['BOARD_STEP'] < 1 }">
-				<input type="button" class="bg-gradient-primary" onclick="location.href='<c:url value="/admin/board/boardWriteReply?boardNo=${param.boardNo }&boardWriteType=reply&boardFormNo=${map['BOARD_FORM_NO'] }"/>'" id="eidt-board" value="답변">
+				<input type="button" class="bg-orange-primary" onclick="location.href='<c:url value="/admin/board/boardWriteReply?boardNo=${param.boardNo }&boardWriteType=reply&boardFormNo=${map['BOARD_FORM_NO'] }"/>'" id="eidt-board" value="답변">
 			</c:if>
 		</div>
 	</div>
