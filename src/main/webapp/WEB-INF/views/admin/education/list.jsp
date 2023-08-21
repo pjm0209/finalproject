@@ -2,12 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
 
-<!-- Begin Page Content -->
-<!-- Page Heading -->
 <div class="head-div">
 	<h2 class="text-gray-800">교육 관리</h2>
 	<button type="button" class="add-edu-button"
-		id="add-edu-button" onclick="location.href='educationCreate'">교육 추가</button>
+		id="add-edu-button" onclick="location.href='eduWrite'">교육 추가</button>
 </div>
 <div class="side-body">
 	<div class="side-div-title">
@@ -61,8 +59,8 @@
 		<div class="board-head">
 			<div class="board-search-result">
 				<form name="frmSearch" method="post" action="<c:url value='/admin/education/list'/>">
-				<div class="input-group mb-3" id="board-search-div">
-					<select class="form-select form-select-lg" aria-label=".form-select-lg example" name="searchcondition" id="board-search-select">					  	
+				<div class="input-group mb-3" id="edu-search-div" class="education">
+					<select class="form-select form-select-lg" aria-label=".form-select-lg example" name="searchcondition" id="edu-search-select">					  	
 					  	<option value="edu_name" <c:if test="${param.searchCondition=='edu_name'}"> selected="selected" </c:if>>교육 이름</option>
 					  	<option value="edu_teacher" <c:if test="${param.searchCondition=='edu_teacher'}"> selected="selected" </c:if>>강사명</option>
 					  	<option value="ep_no" <c:if test="${param.searchCondition=='ep_name'}"> selected="selected" </c:if>>교육장</option>
@@ -100,7 +98,7 @@
 						<td>${educationVo.eduCom }</td>
 						<td>${educationVo.qty }</td>
 						<td>${educationVo.eduPeopleNumber }</td>
-						<td>${educationVo.eduPrice }</td>
+						<td><fmt:formatNumber value="${educationVo.eduPrice }" pattern="#,###"/>
 						<td>${educationVo.epName }</td>
 					</tr>
 				</c:forEach>

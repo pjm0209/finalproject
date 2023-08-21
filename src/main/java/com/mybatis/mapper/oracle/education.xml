@@ -20,6 +20,10 @@
 		values(#{epNo},#{epName},#{epZipcode},#{epAddress},#{epLatitude},#{epLongitude},#{epTel})
 	</insert>
 	
+	<select id="selectByNoEducation" parameterType="int" resultType="educationVo">
+		select * from mbti_education where edu_no = #{eduNo}
+	</select>
+	
 	<select id="selectAllLocation" parameterType="searchVo" resultType="educationVo">
 		select * from
 		(
@@ -50,16 +54,21 @@
 		<selectKey keyProperty="eduNo" order="BEFORE" resultType="int">
 			select mbti_education_seq.nextval from dual
 		</selectKey>
-		insert into mbti_education(edu_no, edu_name, edu_teacher, edu_com, edu_people_number, edu_price, ep_no)
-		values(#{eduNo}, #{eduName}, #{eduTeacher}, #{eduCom}, #{eduPeopleNumber}, #{eduPrice}, #{epNo})
+		insert into mbti_education(edu_no, edu_name, edu_teacher, edu_com, edu_people_number, edu_price, ep_name)
+		values(#{eduNo}, #{eduName}, #{eduTeacher}, #{eduCom}, #{eduPeopleNumber}, #{eduPrice}, #{epName})
 	</insert>
+	
+	<select id="selectTeacher" resultType="educationVo">
+		select edu_tea_name from education_teacher
+	</select>
 	
 	<select id="selectAllEducation" parameterType="searchVo" resultType="educationVo">
 		select * from
 		(
 		    select rownum as RNUM, a.* from
 		    (
-		        select m.*,(select count(*) from education_application e where e.edu_no=m.edu_no) qty
+		        select m.*,(select count(*) from education_application e where e.edu_no=m.edu_no) qty,
+		        (select ep_name from education_place e where e.ep_no=m.ep_no) epName
 		        from mbti_education m
 		        <include refid="searchEducation"></include>
 		        order by m.edu_no desc
@@ -78,6 +87,12 @@
 	<select id="selectByEduNo" parameterType="int" resultType="educationVo">
 		select * from education where eduNo=#{eduNo}
 	</select>
+	
+	<update id="updateEducation" parameterType="educationVo">
+		update mbti_education
+		set edu_name = #{eduName}, edu_teacher = #{eduTeacher}, edu_com = #{eduCom}, edu_people_number = #{eduPeopleNumber}, edu_price = {eduPrice}, ep_name = #{epName} 
+		where edu_no = #{eduNo}
+	</update>
 	
 	<delete id="deleteEducation" parameterType="int" >
 		delete from mbti_education

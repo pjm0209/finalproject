@@ -1,6 +1,11 @@
 	$(function(){
 		var contextPath = "/mbti";
 		
+		$('#check-All').click(function () {
+    		const isChecked = $(this).prop('checked');
+    		$('.check').prop('checked', isChecked);
+  	    });
+		
 		$('#education-delete-button').click(function(){
 			if($('input[type=checkbox]:checked').length<1){
 				alert('삭제할 교육을 체크하세요.');
@@ -50,5 +55,6 @@
 				$('form[name=frmDelete]').submit();
 			}
 		});
+		
 		
 	});
