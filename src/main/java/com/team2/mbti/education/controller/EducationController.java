@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.team2.mbti.common.ConstUtil;
@@ -26,8 +27,8 @@ public class EducationController {
 	
 	private final EducationService educationService;
 	
-	@GetMapping("/list")
-	public String list_get(@ModelAttribute SearchVO searchVo, Model model) {
+	@RequestMapping("/list")
+	public String list(@ModelAttribute SearchVO searchVo, Model model) {
 		logger.info("교육 리스트 페이지 보여주기");
 		
 		PaginationInfo pagingInfo = new PaginationInfo();
@@ -35,7 +36,7 @@ public class EducationController {
 		String condition=searchVo.getSearchCondition();
 		String keyword=searchVo.getSearchKeyword();
 		logger.info("condition={},keyword={}",condition,keyword);
-			
+		
 		pagingInfo.setBlockSize(ConstUtil.BLOCK_SIZE);
 		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
 		pagingInfo.setRecordCountPerPage(ConstUtil.MBTI_RECORD_COUNT);
@@ -56,6 +57,7 @@ public class EducationController {
 		return "admin/education/list";
 		
 	}
+	
 	
 	@RequestMapping("/eduDelete")
 	public String eduDelete(@ModelAttribute EducationVO vo, Model model) {
@@ -78,8 +80,8 @@ public class EducationController {
 	}
 	
 	
-	@GetMapping("/applicantList")
-	public String appliList_get(@ModelAttribute SearchVO searchVo, Model model) {
+	@RequestMapping("/applicantList")
+	public String appliList(@ModelAttribute SearchVO searchVo, Model model) {
 		logger.info("신청자 관리 페이지 보여주기, 파라미터 searchVo={}", searchVo);
 		
 		PaginationInfo pagingInfo = new PaginationInfo();
