@@ -14,16 +14,19 @@
 	<input type="hidden" class="admin-adminId" value="${map['ADMIN_ID'] }">
 	<input type="hidden" class="session-adminId" value="${sessionScope.adminId }">
 	<input type="hidden" value="${sessionScope.adminNo }" name="adminNo">
+	<input type="hidden" value="${map['BOARD_STEP'] }" name="boardStep">
+	<input type="hidden" value="${map['BOARD_GROUP_NO'] }" name="boardGroupNo">
+	<input type="hidden" value="${map['BOARD_FORM_NO'] }" name="boardFormNo">
 	<div id="board-title">
 		<h5>${map['BOARD_FORM_NAME'] }</h5>
 		<div class="board-head-button">
-			<input type="button" class="bg-gradient-secondary" onclick="location.href='<c:url value="/admin/board/board?boardFormNo=${map['BOARD_FORM_NO'] }"/>'"	value="목록">
-			<input type="button" class="bg-gradient-primary" onclick="location.href='<c:url value="/admin/board/boardWriteDel?boardNo=${param.boardNo }&boardStep=${map['BOARD_STEP'] }&boardGroupNo=${map['BOARD_GROUP_NO'] }&boardFormNo=${map['BOARD_FORM_NO'] }"/>'" id="del-board" value="삭제">
+			<input type="button" class="bg-orange-primary" onclick="location.href='<c:url value="/admin/board/board?boardFormNo=${map['BOARD_FORM_NO'] }"/>'"	value="목록">
+			<input type="button" class="bg-gradient-secondary" id="del-board" value="삭제">
 			<c:if test="${map['ADMIN_ID'] == sessionScope.adminId}"> 
-				<input type="button" class="bg-gradient-primary" onclick="location.href='<c:url value="/admin/board/boardWriteEdit?boardNo=${param.boardNo }&boardWriteType=edit"/>'" id="eidt-board" value="수정">
+				<input type="button" class="bg-orange-primary" onclick="location.href='<c:url value="/admin/board/boardWriteEdit?boardNo=${param.boardNo }&boardWriteType=edit"/>'" id="eidt-board" value="수정">
 			</c:if>
 			<c:if test="${map['BOARD_STEP'] < 1 }">
-				<input type="button" class="bg-gradient-primary" onclick="location.href='<c:url value="/admin/board/boardWriteReply?boardNo=${param.boardNo }&boardWriteType=reply&boardFormNo=${map['BOARD_FORM_NO'] }"/>'" id="eidt-board" value="답변">
+				<input type="button" class="bg-orange-primary" onclick="location.href='<c:url value="/admin/board/boardWriteReply?boardNo=${param.boardNo }&boardWriteType=reply&boardFormNo=${map['BOARD_FORM_NO'] }"/>'" id="eidt-board" value="답변">
 			</c:if>
 		</div>
 	</div>
@@ -86,127 +89,11 @@
 				</div>
 			</form>
 		</c:if>
-	<!--
-		<div class="accordion" id="accordionExample">
-		  <div class="accordion-item">
-		    <h2 class="accordion-header">
-		      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-		        Accordion Item #1
-		      </button>
-		    </h2>
-		    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-		      <div class="accordion-body">
-		        <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-		      </div>
-		    </div>
-		  </div>		  
-		</div>
-	-->
 	
 	</div>
 </div>
 </div>
 <!-- End of Main Content -->
-<script type="text/javascript">
-	function comments(comment) {		
-		var str = "";
-		var boardWriter = "";
-		var commentDelCount = 0;
-		var commentCount = 0;
-		var accordianNo = 0;
-		
-		if($('.member-userId').val().length < 1) {
-			boardWriter = $('.admin-adminId').val();
-		} else {
-			boardWriter = $('.member-userId').val();
-			
-		}
-		
-		str += "<div class='accordion' id='accordionExample'>";
-		
-		for(var i = 0; i < comment.length; i++) {
-			var map = comment[i];			
-			var date = new Date(map.COMMENTS_REGDATE);
-			var user = $('.session-adminId').val();
-			const regdate = new Date(date.getTime()).toISOString().split('T')[0] + " " + date.toTimeString().split(' ')[0];
-			
-			if(commentCount % 10 == 0 && comment.length - commentCount >= 10) {
-				str += "<div class='accordion-item'>";
-				str += "<h2 class='accordion-header'>";
-				str += "<button class='accordion-button collapsed' type='button' data-bs-toggle='collapse' data-bs-target='#collapse" + accordianNo + "' aria-expanded='false' aria-controls='collapse" + accordianNo + "'>";
-				str += (commentCount + 1) + " ~ " + (commentCount + 10) + "번째까지 댓글";
-				str += "</button></h2>";
-				str += "<div id='collapse" + accordianNo + "' class='accordion-collapse collapse' data-bs-parent='#accordionExample'>";
-				str += "<div class='accordion-body'>";
-				accordianNo = accordianNo + 1;
-			}
-			
-			if(map.COMMENTS_STEP < 1) {
-				str += "<div class='comment-item'>";
-			} else {
-				str += "<div class='comment-item reply'>";
-			}			
-			if(map.COMMENTS_DEL_FLAG === 'N') {
-				if(map.ADMIN_ID.length > 0) {
-					str += "<p class='comment-writer'>" + map.ADMIN_ID;
-					if(boardWriter === map.ADMIN_ID) {
-						str += "<span class='boardWriter-commentWrite'>작성자</span>";
-					}
-					str += "<span class='comment-write-regdate'>(" + regdate + ")</span>";
-					if(map.COMMENTS_STEP < 1) {
-						str += "<a class='comment-reply' onclick='commentReply(this)'>답글쓰기</a>";
-					}
-					str += "<input type='hidden' name='commentsNo' class='commentsNo' value='" + map.COMMENTS_NO + "'>";
-					str += "<div class='commentEditOrDel'>" + 
-					"<span onclick='commentMore(this)' class='comment-more'>";
-					str += "<i class='bi bi-three-dots-vertical'></i></span>";
-					str += "<div class='editDel'>";
-					if(user == map.ADMIN_ID) {
-						str += "<a class='commentEdit' onclick='commentEdit(this)'>수정</a>";
-					}
-					str += "<a class='commentDel' onclick='commentDel(" + map.COMMENTS_NO + ", " + map.COMMENTS_STEP + ", " + map.COMMENTS_GROUP_NO + ", " + map.BOARD_NO + ")'>삭제</a>" +
-					"</div>";
-				} else {
-					str += "<p class='comment-writer'>" + map.NAME;
-					if(boardWriter === map.NAME) {
-						str += "<span class='boardWriter-commentWrite'>작성자</span>"; 
-					}
-					str += "<span class='comment-write-regdate'>(" + regdate + ")</span>";
-					if(map.COMMENTS_STEP < 1) {
-						str += "<a class='comment-reply' onclick='commentReply(this)'>답글쓰기</a>";
-					}
-					str += "<input type='hidden' name='commentsNo' class='commentsNo' value='" + map.COMMENTS_NO + "'>";
-					str += "<span onclick='commentMore(this)' class='comment-more'>" + 
-					"<i class='bi bi-three-dots-vertical'></i></span>" +
-					"<div class='editDel'>" +
-					"<a class='commentEdit' onclick='commentEdit(this)'>수정</a>";
-					str += "<a class='commentDel' onclick='commentDel(" + map.COMMENTS_NO + ", " + map.COMMENTS_STEP + ", " + map.COMMENTS_GROUP_NO + ", " + map.BOARD_NO + ")'>삭제</a>" +
-					"</div>";
-				}
-				str += "</div>";
-				str += "<p class='comment-body'>" + map.COMMENTS_BODY + "</p>";				
-			} else {
-				str += "<span>삭제된 글입니다.</span>"
-				commentDelCount = commentDelCount + 1;
-			}
-			
-			str += "</div>";
-			
-			if(commentCount % 10 == 9 || commentCount == comment.length - 1) {
-				str += "</div></div></div>";
-			}
-			
-			if(map.COMMENTS_DEL_FLAG === 'N') {
-				commentCount = commentCount + 1;
-			}
-		} //for
-		
-		str += "</div>";
-		
-		$('div.commentList').html(str);
-		$('p.board-comment-count').html("<i class='bi bi-chat-square-dots'>&nbsp</i> 댓글" + (comment.length - commentDelCount));
-	}
-</script>
 
 <script src="<c:url value='/admin-css-js/js/board.js'/>"></script>
 <script src="<c:url value='/admin-css-js/vendor/bootstrap/js/bootstrap.bundle.min.js'/>"></script>

@@ -12,8 +12,8 @@
 		<div id="board-title">
 			<h5>${vo.boardFormName }</h5>
 			<div class="board-head-button">
-				<input type="button" class="bg-gradient-secondary" onclick="location.href='<c:url value="/admin/board/boardFormDel?boardFormNo=${param.boardFormNo }"/>'" value="삭제">			
-				<input type="submit" class="bg-gradient-primary" id="save-boardWrite" value="저장">
+				<input type="button" class="bg-gradient-secondary" id="boardFormDel" value="삭제">			
+				<input type="submit" class="bg-orange-primary" id="save-boardWrite" value="저장">
 			</div>
 		</div>
 		<div class="board">
