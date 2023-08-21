@@ -44,7 +44,7 @@
 	</form>
 	<div id="board-title">
 		<h5>${boardFormVo.boardFormName }</h5>
-		<button class="bg-gradient-secondary" id="board-write-button" onclick="location.href='<c:url value="/admin/board/boardWrite?boardFormNo=${param.boardFormNo}&boardWriteType=write"/>'">글쓰기</button>
+		<button class="bg-orange-primary" id="board-write-button" onclick="location.href='<c:url value="/admin/board/boardWrite?boardFormNo=${param.boardFormNo}&boardWriteType=write"/>'">글쓰기</button>
 	</div>
 	<div class="board">
 		<div class="board-head">

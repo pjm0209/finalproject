@@ -13,7 +13,10 @@ public interface EducationService {
 	int insertEducation(EducationVO vo);
 	List<EducationVO> selectAllEducation(SearchVO searchVo);
 	int getTotalRecordEducation(SearchVO searchVo);
+	int updateEducation(EducationVO vo);
 	int deleteEducation(int eduNo);
+	EducationVO selectByNoEducation(int eduNo);
+	List<EducationVO> selectTeacher(EducationVO vo);
 	
 	int insertTeacher(EducationVO vo);
 	List<EducationVO> selectAllTeacher(SearchVO searchVo);
