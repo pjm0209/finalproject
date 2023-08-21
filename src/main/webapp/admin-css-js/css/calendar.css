@@ -47,22 +47,29 @@ calendar {
   }
   
   .fc .fc-button-primary {
-    background-color: #6f42c1;
-    border-color: #6f42c1;
+    background-color:#eb5d1e;
+    border-color:#eb5d1e;
 	}
 	
 	.fc .fc-button-primary:not(:disabled).fc-button-active, .fc .fc-button-primary:not(:disabled):active {
-    background-color: #6f42c1;
-    border-color: #6f42c1;
+    background-color:#eb5d1e;
+    border-color:#eb5d1e;
 	}
+	
+	.fc .fc-button-primary:hover {
+   		background-color:#ff9800;
+    	border-color:#ff9800;
+	}
+	
 	.fc .fc-button-primary:disabled {
-   		background-color: #E5CCFF;
-    	border-color: #E5CCFF;
+   		background-color:#ff9800;
+    	border-color:#ff9800;
 	}
 	
 	:root {
-	--fc-today-bg-color: #E5CCFF;
+	--fc-today-bg-color:#eb5d1e;
 	}
+	
 	#modalTable th {
 		text-align: left;
 		padding-left: 30px;
