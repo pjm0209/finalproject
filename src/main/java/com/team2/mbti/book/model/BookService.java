@@ -1,5 +1,9 @@
 package com.team2.mbti.book.model;
 
-public interface BookService {
+import java.util.List;
 
+public interface BookService {
+	List<BookVO> selectBookAll(BookVO vo);
+	int selectBookCnt();
+	List<BookVO> selectByConditions(BookVO vo);
 }
