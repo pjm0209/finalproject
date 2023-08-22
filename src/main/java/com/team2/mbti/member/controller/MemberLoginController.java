@@ -169,4 +169,11 @@ public class MemberLoginController {
 		return result;
 	}
 	
+	@RequestMapping("/member/mypage")
+	public String mypage() {
+		logger.info("마이페이지 화면");
+		
+		return "main/member/mypage";
+	}
+	
 }

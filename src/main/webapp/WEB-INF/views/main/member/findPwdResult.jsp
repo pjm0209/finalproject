@@ -6,9 +6,9 @@
 <title>비밀번호 재설정 페이지</title>
 <style>
 body {
-    margin: 0;
+    margin-top: 100px;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: white;
 }
 
 .wrapper-findPwdResult {
@@ -26,58 +26,26 @@ body {
     margin-bottom: 20px;
 }
 
-.newPwd, .newPwdCheck {
-    margin-bottom: 20px;
-}
-
-.newPwd label, .newPwdCheck label {
-    display: block;
-    font-size: 14px;
-    margin-bottom: 5px;
-}
-
-.newPwd input, .newPwdCheck input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 14px;
-}
-
-button {
-    padding: 10px 20px;
-    background-color: #007bff;
+button {	
+    padding: 15px 120px;
+    background-color: #ff7f00;
     border: none;
     color: #fff;
     border-radius: 4px;
     font-size: 16px;
     cursor: pointer;
 }
-
-button:hover {
-    background-color: #0056b3;
-}
 </style>
 
 </head>
 <body>
 <div class="wrapper-findPwdResult">
-	<h1>비밀번호 재설정하기</h1>
-		<p>새로운 비밀번호를 입력해주세요.</p>
-
-		<div class="newPwd">
-		<label>새 비밀번호</label>
-			<input type="text" id="newPwd" placeholder="새로운 비밀번호를 입력하세요">	
-		</div>
-
-		<div class="newPwdCheck">
-		<label>비밀번호 확인</label>
-			<input type="text" id="newPwdCheck" placeholder="새로운 비밀번호를 입력하세요">	
-		</div>	
-		
-		<div class="">
-			<button id="">비밀번호 변경</button>
-		</div>	
+	<img src="../../images/이메일전송.png">
+	<h1>비밀번호 재설정 메일 발송 완료</h1>
+		<p>비밀번호 재설정 링크가 포함된 메일이 발송되었습니다.</p>
+		<p>메일함을 확인해주세요.</p>
+	
+		<button id="btnLogin">로그인화면으로</button>
 </div>		
 </body>
 </html>
