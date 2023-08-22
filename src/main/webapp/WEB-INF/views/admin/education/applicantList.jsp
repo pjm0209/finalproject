@@ -61,10 +61,10 @@
 			<div class="board-search-result">
 				<form name="frmSearch" method="post" action="<c:url value='/admin/education/applicantList'/>">
 				<div class="input-group mb-3" id="board-search-div">
-					<select class="form-select form-select-lg" aria-label=".form-select-lg example" name="searchcondition" id="edu-search-select">					  	
+					<select class="form-select form-select-lg" aria-label=".form-select-lg example" name="searchCondition" id="edu-search-select">					  	
+					  	<option value="name" <c:if test="${param.searchCondition=='name'}"> selected="selected" </c:if>>신청자</option>
+					  	<option value="edu_name" <c:if test="${param.searchCondition=='edu_name'}"> selected="selected" </c:if>>교육 이름</option>
 					  	<option value="ep_name" <c:if test="${param.searchCondition=='ep_name'}"> selected="selected" </c:if>>교육장</option>
-					  	<option value="ep_address" <c:if test="${param.searchCondition=='ep_address'}"> selected="selected" </c:if>>주소</option>
-					  	<option value="ep_tel" <c:if test="${param.searchCondition=='ep_tel'}"> selected="selected" </c:if>>전화번호</option>
 					</select>
 				 	<input type="text" class="form-control" name="searchKeyword" placeholder="검색어를 입력하세요" aria-label="Recipient's username" aria-describedby="button-addon2" id="board-search-area">
 				 	<button class="btn btn-outline-secondary" type="submit" id="button-addon2">검색</button>
@@ -72,12 +72,11 @@
 				</form>
 			</div>
 		</div>
-		<form name="frmDelete" method="post">
+		<form name="frmDelete" method="post" id="eduAppDelFrm" action="<c:url value='/admin/education/appliUpdate'/>">
 		<table class="table" id="educationtb">
 			<thead>
 				<tr class="board-table-colum">
 					<th scope="col"><input type="checkbox" id="check-All" class="board-checkbox"></th>
-					<th scope="col">번호</th>
 					<th scope="col">신청자</th>
 					<th scope="col">교육 이름</th>
 					<th scope="col">강사명</th>
@@ -86,15 +85,15 @@
 					<th scope="col">최대 인원</th>
 					<th scope="col">교육비</th>
 					<th scope="col">교육장</th>
+					<th scope="col">승인 상태</th>
 				</tr>
 			</thead>
-			<c:set var="idx" value="0"/>
 			<tbody>
+				<c:set var="idx" value="0"/>
 				<c:forEach var="educationVo" items="${list}">
 					<c:set var="educationApplicant" value="${educationVo.eduAppNo}"/>
 					<tr>
-						<th scope="row"><input type="checkbox" class="board-checkbox" name="eduAppNo" value="${educationVo.eduAppNo }"></th>
-						<td>${educationVo.eduAppNo }</td>
+						<th scope="row"><input type="checkbox" class="board-checkbox" name="educationItems[${idx }].eduAppNo" value="${educationVo.eduAppNo }"></th>
 						<td>${educationVo.name }</td>
 						<td>${educationVo.eduName }</td>
 						<td>${educationVo.eduTeaName }</td>
@@ -103,7 +102,9 @@
 						<td>${educationVo.eduPeopleNumber }</td>
 						<td>${educationVo.eduPrice }</td>
 						<td>${educationVo.epName }</td>
+						<td>${educationVo.eduAppFlag }</td>
 					</tr>
+					<c:set var="idx" value="${idx + 1 }" />
 				</c:forEach>
 			</tbody>
 		</table>

@@ -18,13 +18,17 @@ button.mbti-button{
 </style>
 <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
 <script type="text/javascript" src="<c:url value='/resources/ckeditor/ckeditor.js'/>"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 <script type="text/javascript" src="<c:url value='/admin-css-js/js/mbti.js'/>"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
 $(function(){
 	CKEDITOR.replace('question', {height: 300});
+	
+	$('#modal-close').click(function(){
+		$('#alertModal').modal('hide');
+	});
 });
 </script>
 </head>
@@ -70,6 +74,26 @@ $(function(){
 			<button class="mbti-button" type="button" id="mbti-close-button" onclick="self.close()">닫기</button>
 		</div>
 	</form>
-
+	
+	<button type="button" style="display: none" id="alertModalBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#alertModal"></button>
+    
+    <div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h1 class="modal-title fs-5" id="alertModalLabel">알림</h1>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	        <p id="alertModalBody"></p>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" id="modal-close" class="btn bg-orange-primary" data-bs-dismiss="modal">확인</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
+<script src="<c:url value='/admin-css-js/vendor/bootstrap/js/bootstrap.bundle.min.js'/>"></script>
 </body>
 </html>

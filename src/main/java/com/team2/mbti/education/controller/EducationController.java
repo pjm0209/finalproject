@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.team2.mbti.common.ConstUtil;
 import com.team2.mbti.common.PaginationInfo;
-import com.team2.mbti.common.SearchVO;
+import com.team2.mbti.education.model.EducationListVO;
 import com.team2.mbti.education.model.EducationService;
 import com.team2.mbti.education.model.EducationVO;
 import com.team2.mbti.mbtisurvey.model.MbtiSurveyVO;
@@ -33,7 +33,11 @@ public class EducationController {
 	public String eduWrite_get(Model model) {
 		logger.info("교육 등록 페이지");
 		
+		List<EducationVO> list = educationService.getTeaName();
+		logger.info("강사 이름 조회 결과, list.size={}", list.size());
+		
 		model.addAttribute("title", "교육 추가");
+		model.addAttribute("teaNameList", list);
 		
 		return "admin/education/educationWrite";
 	}
@@ -70,26 +74,26 @@ public class EducationController {
 	
 	
 	@RequestMapping("/list")
-	public String list(@ModelAttribute SearchVO searchVo, Model model) {
-		logger.info("교육 리스트 페이지 보여주기");
+	public String list(@ModelAttribute EducationVO vo, Model model) {
+		logger.info("교육 리스트 페이지 보여주기 condition: {}", vo.getSearchCondition());
 		
 		PaginationInfo pagingInfo = new PaginationInfo();
 		List<EducationVO> list = null;
-		String condition=searchVo.getSearchCondition();
-		String keyword=searchVo.getSearchKeyword();
+		String condition=vo.getSearchCondition();
+		String keyword=vo.getSearchKeyword();
 		logger.info("condition={},keyword={}",condition,keyword);
 		
 		pagingInfo.setBlockSize(ConstUtil.BLOCK_SIZE);
-		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
+		pagingInfo.setCurrentPage(vo.getCurrentPage());
 		pagingInfo.setRecordCountPerPage(ConstUtil.MBTI_RECORD_COUNT);
 		
-		searchVo.setBlockSize(ConstUtil.BLOCK_SIZE);
-		searchVo.setRecordCountPerPage(ConstUtil.MBTI_RECORD_COUNT);
-		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		vo.setBlockSize(ConstUtil.BLOCK_SIZE);
+		vo.setRecordCountPerPage(ConstUtil.MBTI_RECORD_COUNT);
+		vo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
 		
-		list = educationService.selectAllEducation(searchVo);
+		list = educationService.selectAllEducation(vo);
 		logger.info("교육 목록 결과 list.size={}", list.size());
-		int totalRecord=educationService.getTotalRecordEducation(searchVo);
+		int totalRecord=educationService.getTotalRecordEducation(vo);
 		logger.info("교육 전체 검색 결과 totalRecord={}",totalRecord);
 		pagingInfo.setTotalRecord(totalRecord);
 		
@@ -123,26 +127,26 @@ public class EducationController {
 	
 	
 	@RequestMapping("/applicantList")
-	public String appliList(@ModelAttribute SearchVO searchVo, Model model) {
-		logger.info("신청자 관리 페이지 보여주기, 파라미터 searchVo={}", searchVo);
+	public String appliList(@ModelAttribute EducationVO vo, Model model) {
+		logger.info("신청자 관리 페이지 보여주기, 파라미터 vo={}", vo);
 		
 		PaginationInfo pagingInfo = new PaginationInfo();
 		List<EducationVO> list = null;
-		String condition=searchVo.getSearchCondition();
-		String keyword=searchVo.getSearchKeyword();
+		String condition=vo.getSearchCondition();
+		String keyword=vo.getSearchKeyword();
 		logger.info("condition={},keyword={}",condition,keyword);
 			
 		pagingInfo.setBlockSize(ConstUtil.BLOCK_SIZE);
-		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
+		pagingInfo.setCurrentPage(vo.getCurrentPage());
 		pagingInfo.setRecordCountPerPage(ConstUtil.MBTI_RECORD_COUNT);
 		
-		searchVo.setBlockSize(ConstUtil.BLOCK_SIZE);
-		searchVo.setRecordCountPerPage(ConstUtil.MBTI_RECORD_COUNT);
-		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		vo.setBlockSize(ConstUtil.BLOCK_SIZE);
+		vo.setRecordCountPerPage(ConstUtil.MBTI_RECORD_COUNT);
+		vo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
 		
-		list = educationService.selectAllApplicant(searchVo);
-		logger.info("신청자 목록 결과 list.size={}", list.size());
-		int totalRecord=educationService.getTotalRecordApplicant(searchVo);
+		list = educationService.selectAllApplicant(vo);
+		logger.info("신청자 목록 결과 list={}", list);
+		int totalRecord=educationService.getTotalRecordApplicant(vo);
 		logger.info("신청자 전체 검색 결과 totalRecord={}",totalRecord);
 		pagingInfo.setTotalRecord(totalRecord);
 		
@@ -153,10 +157,12 @@ public class EducationController {
 	}
 	
 	@RequestMapping("/appliDelete")
-	public String appliDelete(@ModelAttribute EducationVO vo, Model model) {
-		logger.info("신청자 거절 처리, 파라미터 vo={}", vo);
+	public String appliDelete(@ModelAttribute EducationListVO listVo, Model model) {
+		logger.info("신청자 거절 처리, 파라미터 listVo={}", listVo);
 		
-		int cnt = educationService.deleteApplicant(vo.getEduAppNo());
+		List<EducationVO> list = listVo.getEducationItems();
+
+		int cnt = educationService.deleteApplicant(list);
 		
 		String msg="", url="/admin/education/applicantList";
 		if(cnt>0) {
@@ -172,28 +178,40 @@ public class EducationController {
 		
 	}
 	
+	@RequestMapping("/appliUpdate")
+	public String appliUpdate(@ModelAttribute EducationListVO listVo) {
+		logger.info("신청자 승인 처리, 파라미터 listVo={}", listVo);
+		
+		List<EducationVO> list = listVo.getEducationItems();
+		
+		int cnt = educationService.updateApplicant(list);
+		logger.info("신청자 승인처리 결과 cnt: {}", cnt);
+		
+		return "redirect:/admin/education/applicantList";
+	}
+	
 	
 	@GetMapping("/location")
-	public String location_get(@ModelAttribute SearchVO searchVo, Model model) {
-		logger.info("교육장 관리 페이지 보여주기, 파라미터 searchVo={}", searchVo);
+	public String location_get(@ModelAttribute EducationVO vo, Model model) {
+		logger.info("교육장 관리 페이지 보여주기, 파라미터 vo={}", vo);
 		
 		PaginationInfo pagingInfo = new PaginationInfo();
 		List<EducationVO> list = null;
-		String condition=searchVo.getSearchCondition();
-		String keyword=searchVo.getSearchKeyword();
+		String condition=vo.getSearchCondition();
+		String keyword=vo.getSearchKeyword();
 		logger.info("condition={},keyword={}",condition,keyword);
 			
 		pagingInfo.setBlockSize(ConstUtil.BLOCK_SIZE);
-		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
+		pagingInfo.setCurrentPage(vo.getCurrentPage());
 		pagingInfo.setRecordCountPerPage(ConstUtil.MBTI_RECORD_COUNT);
 		
-		searchVo.setBlockSize(ConstUtil.BLOCK_SIZE);
-		searchVo.setRecordCountPerPage(ConstUtil.MBTI_RECORD_COUNT);
-		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		vo.setBlockSize(ConstUtil.BLOCK_SIZE);
+		vo.setRecordCountPerPage(ConstUtil.MBTI_RECORD_COUNT);
+		vo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
 		
-		list = educationService.selectAllLocation(searchVo);
+		list = educationService.selectAllLocation(vo);
 		logger.info("교육장 목록 결과 list.size={}", list.size());
-		int totalRecord=educationService.getTotalRecordLocation(searchVo);
+		int totalRecord=educationService.getTotalRecordLocation(vo);
 		logger.info("교육장 전체 검색 결과 totalRecord={}",totalRecord);
 		pagingInfo.setTotalRecord(totalRecord);
 		
@@ -225,26 +243,26 @@ public class EducationController {
 	
 	
 	@GetMapping("/teacher")
-	public String teacher_get(@ModelAttribute SearchVO searchVo, Model model) {
-		logger.info("강사 관리 페이지 보여주기, 파라미터 searchVo={}", searchVo);
+	public String teacher_get(@ModelAttribute EducationVO vo, Model model) {
+		logger.info("강사 관리 페이지 보여주기, 파라미터 vo={}", vo);
 		
 		PaginationInfo pagingInfo = new PaginationInfo();
 		List<EducationVO> list = null;
-		String condition=searchVo.getSearchCondition();
-		String keyword=searchVo.getSearchKeyword();
+		String condition=vo.getSearchCondition();
+		String keyword=vo.getSearchKeyword();
 		logger.info("condition={},keyword={}",condition,keyword);
 			
 		pagingInfo.setBlockSize(ConstUtil.BLOCK_SIZE);
-		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
+		pagingInfo.setCurrentPage(vo.getCurrentPage());
 		pagingInfo.setRecordCountPerPage(ConstUtil.MBTI_RECORD_COUNT);
 		
-		searchVo.setBlockSize(ConstUtil.BLOCK_SIZE);
-		searchVo.setRecordCountPerPage(ConstUtil.MBTI_RECORD_COUNT);
-		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		vo.setBlockSize(ConstUtil.BLOCK_SIZE);
+		vo.setRecordCountPerPage(ConstUtil.MBTI_RECORD_COUNT);
+		vo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
 		
-		list = educationService.selectAllTeacher(searchVo);
+		list = educationService.selectAllTeacher(vo);
 		logger.info("강사 목록 결과 list.size={}", list.size());
-		int totalRecord=educationService.getTotalRecordTeacher(searchVo);
+		int totalRecord=educationService.getTotalRecordTeacher(vo);
 		logger.info("강사 전체 검색 결과 totalRecord={}",totalRecord);
 		pagingInfo.setTotalRecord(totalRecord);
 		

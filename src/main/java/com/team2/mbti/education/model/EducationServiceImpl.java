@@ -19,13 +19,13 @@ public class EducationServiceImpl implements EducationService{
 	}
 	
 	@Override
-	public List<EducationVO> selectAllLocation(SearchVO vo) {
+	public List<EducationVO> selectAllLocation(EducationVO vo) {
 		return educationDao.selectAllLocation(vo);
 	}
 
 	@Override
-	public int getTotalRecordLocation(SearchVO searchVo) {
-		return educationDao.getTotalRecordLocation(searchVo);
+	public int getTotalRecordLocation(EducationVO vo) {
+		return educationDao.getTotalRecordLocation(vo);
 	}
 
 	@Override
@@ -34,13 +34,13 @@ public class EducationServiceImpl implements EducationService{
 	}
 
 	@Override
-	public List<EducationVO> selectAllEducation(SearchVO searchVo) {
-		return educationDao.selectAllEducation(searchVo);
+	public List<EducationVO> selectAllEducation(EducationVO vo) {
+		return educationDao.selectAllEducation(vo);
 	}
 
 	@Override
-	public int getTotalRecordEducation(SearchVO searchVo) {
-		return educationDao.getTotalRecordEducation(searchVo);
+	public int getTotalRecordEducation(EducationVO vo) {
+		return educationDao.getTotalRecordEducation(vo);
 	}
 
 	@Override
@@ -49,13 +49,13 @@ public class EducationServiceImpl implements EducationService{
 	}
 
 	@Override
-	public List<EducationVO> selectAllTeacher(SearchVO searchVo) {
-		return educationDao.selectAllTeacher(searchVo);
+	public List<EducationVO> selectAllTeacher(EducationVO vo) {
+		return educationDao.selectAllTeacher(vo);
 	}
 
 	@Override
-	public int getTotalRecordTeacher(SearchVO searchVo) {
-		return educationDao.getTotalRecordTeacher(searchVo);
+	public int getTotalRecordTeacher(EducationVO vo) {
+		return educationDao.getTotalRecordTeacher(vo);
 	}
 
 	@Override
@@ -74,18 +74,24 @@ public class EducationServiceImpl implements EducationService{
 	}
 
 	@Override
-	public List<EducationVO> selectAllApplicant(SearchVO searchVo) {
-		return educationDao.selectAllApplicant(searchVo);
+	public List<EducationVO> selectAllApplicant(EducationVO vo) {
+		return educationDao.selectAllApplicant(vo);
 	}
 
 	@Override
-	public int getTotalRecordApplicant(SearchVO searchVo) {
-		return educationDao.getTotalRecordApplicant(searchVo);
+	public int getTotalRecordApplicant(EducationVO vo) {
+		return educationDao.getTotalRecordApplicant(vo);
 	}
 
 	@Override
-	public int deleteApplicant(int eduAppNo) {
-		return educationDao.deleteApplicant(eduAppNo);
+	public int deleteApplicant(List<EducationVO> list) {
+		int cnt = 0;
+		
+		for(EducationVO vo : list) {
+			cnt = educationDao.deleteApplicant(vo.getEduAppNo());
+		}
+		
+		return cnt;
 	}
 
 	@Override
@@ -99,8 +105,19 @@ public class EducationServiceImpl implements EducationService{
 	}
 
 	@Override
-	public List<EducationVO> selectTeacher(EducationVO vo) {
-		return educationDao.selectTeacher(vo);
+	public List<EducationVO> getTeaName() {
+		return educationDao.getTeaName();
+	}
+
+	@Override
+	public int updateApplicant(List<EducationVO> list) {
+		int cnt = 0;
+		
+		for(EducationVO vo : list) {
+			cnt = educationDao.updateApplicant(vo.getEduAppNo());
+		}
+		
+		return cnt;
 	}
 
 }

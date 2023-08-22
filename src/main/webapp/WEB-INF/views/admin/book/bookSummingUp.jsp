@@ -177,7 +177,7 @@ $(function() {
 	            </li>
 			</ul>
            	<div id="ex1" class="modal" style="display: hidden;">
-					      <div class="modal-header" style="background-image: linear-gradient(316deg, #c87fdf 10%, #5a63cf 100%);">
+					      <div class="modal-header" style="background-image: linear-gradient(316deg, #df7f7f 10%, #FF5722 100%);">
 					      	<h3 id="modalLabel">매출정보 ( ${date} )</h3>
 					      </div>
 					      <div class="modal-body">

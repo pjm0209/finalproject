@@ -5,8 +5,8 @@ section#mbti{
 	height: 1000px;
 }
 .mbti-div-size{
-	width: 1500px;
-	margin-left: 200px;
+	width: 1350px;
+	margin-left: 300px;
 }
 select#mbti-search-select {
 	margin-left: 780px;
@@ -115,19 +115,32 @@ section#mbtiSurvey{
 .mbti-result{
 	width: 100%;
 	height: 800px;
-	background-image: url("../../images/mbti_bg.jpg");
+	background-image: url("../../images/1.jpg");
 	background-size: 100%;
 	background-repeat: no-repeat;
 	margin-bottom: 100px;
 }
+
+.character-type h2{
+	margin-left: 300px;
+	margin-bottom: 50px;
+	font-size: 50px;
+	font-weight: bold;
+}
+
+.personality{
+	margin-top: 100px;
+}
 .personality h2{
 	font-size: 50px;
-	color: rgb(255, 128, 0);
 	font-weight: bold;
 }
 .personality p{
+	width: 1300px;
 	margin-top: 40px;
-	font-size: 25px;
+	font-size: 22px;
+	font-weight: bold;
+	line-height: 40px;
 }
 .personality h2, .personality p{
 	margin-left: 300px;
@@ -135,21 +148,22 @@ section#mbtiSurvey{
 .mbti-result-top h1{
 	padding-top: 400px;
 	margin-left: 300px;
-	text-shadow: 1px 1px 3px rgb(255, 128, 0);
 	font-size: 50px;
 	color: #fff;
+}
+.mbti-result-top h1 span{
+	font-size: 80px;
+	font-weight: bold;
 }
 .inner{
 	margin-top: 100px;
 	width: 100%;
 	height: 100px;
-	background-color: rgb(255, 128, 0);
 }
 .inner2{
 	margin-top: 100px;
 	width: 100%;
 	height: 100px;
-	background-color: rgb(128, 0, 0);
 	
 }
 .inner h2{
@@ -170,9 +184,15 @@ section#mbtiSurvey{
 	position: relative;
 	margin:0 auto;
 	margin-top: 100px;
+	padding-top: 100px;
+	padding-left: 100px;
 	width: 1400px;
 	height: 1000px;
-	background-color:#fe9601;
+}
+.defining div{
+	width: 1200px;
+	font-size: 24px;
+	color: white;
 }
 .defining2{
 	position: relative;
@@ -180,7 +200,6 @@ section#mbtiSurvey{
 	margin-top: 100px;
 	width: 1400px;
 	height: 1000px;
-	background-color:#fe9601;
 	padding: 30px;
 }
 .defining2 h2{ 
@@ -195,10 +214,10 @@ section#mbtiSurvey{
 	padding-top: 50px;
 	width: 1300px;
 	height: 400px;
-	background-color: #fff;
- 	border: 1px solid black;
  	margin-top: 20px;
  	line-height: 50px;
+ 	font-weight: bold;
+ 	color:white;
 }
 .defining2 #weakness{
 	margin:0 auto;
@@ -206,10 +225,9 @@ section#mbtiSurvey{
 	padding-top: 50px;
 	width: 1300px;
 	height: 400px;
-	background-color: #fff;
-	border: 1px solid black;
 	margin-top: 20px;
 	line-height: 50px;
+	font-weight: bold;
 }
 #mbti-jop{
 	margin: 0 auto;
@@ -218,7 +236,6 @@ section#mbtiSurvey{
 	width: 1400px;
 	height: 500px;
 	position: relative;
-	background-color: rgb(239, 239, 239);
 }
 #mbti-jop span{
 	font-size: 30px;
@@ -232,7 +249,6 @@ section#mbtiSurvey{
     height: 70px;
     line-height: 70px;
     text-align: center;
-    background-color: rgb(255, 128, 0);
     color: #fff;
     border-radius: 100px;
     font-weight: bold;
@@ -244,7 +260,6 @@ section#mbtiSurvey{
 	width: 1400px;
 	height: 800px;
 	position: relative;
-	background-color: rgb(239, 239, 239);
 }
 #mbti-compatibility span{
 	font-size: 30px;

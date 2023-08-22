@@ -7,11 +7,7 @@
 		<where>
 			<if test="searchKeyword!=null and searchKeyword!=''">
 	      		${searchCondition} like '%' || #{searchKeyword} || '%'
-				and edu_no = #{eduNo}
 	      	</if>
-	      	<if test="searchKeyword==null or searchKeyword==''">
-				edu_no = #{eduNo}
-			</if>
       	</where>
 	</sql>
 	
@@ -28,13 +24,13 @@
 		select * from mbti_education where edu_no = #{eduNo}
 	</select>
 	
-	<select id="selectAllLocation" parameterType="searchVo" resultType="educationVo">
+	<select id="selectAllLocation" parameterType="educationVo" resultType="educationVo">
 		select * from
 		(
 		    select rownum RNUM,a.* from
 		    (
 		        select * from education_place 
-		        <include refid="searchEducation"></include>
+		        <include refid="searchWhere"></include>
 		        order by ep_no desc
 		    )a
 		)
@@ -42,9 +38,9 @@
 		where RNUM > #{firstRecordIndex} and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}]]>
 	</select>
 	
-	<select id="getTotalRecordLocation" parameterType="searchVo" resultType="int">
+	<select id="getTotalRecordLocation" parameterType="educationVo" resultType="int">
 		select count(*) from education_place
-		<include refid="searchEducation"></include> 
+		<include refid="searchWhere"></include> 
 	</select>
 	
 	<delete id="deleteLocation" parameterType="int" >
@@ -62,19 +58,16 @@
 		values(#{eduNo}, #{eduName}, #{eduTeacher}, #{eduCom}, #{eduPeopleNumber}, #{eduPrice}, #{epName})
 	</insert>
 	
-	<select id="selectTeacher" resultType="educationVo">
-		select edu_tea_name from education_teacher
-	</select>
 	
-	<select id="selectAllEducation" parameterType="searchVo" resultType="educationVo">
+	<select id="selectAllEducation" parameterType="educationVo" resultType="educationVo">
 		select * from
 		(
 		    select rownum as RNUM, a.* from
 		    (
-		        select m.*,(select count(*) from education_application e where e.edu_no=m.edu_no) qty,
+		        select m.*,(select count(*) from education_application e where e.edu_no=m.edu_no and e.edu_app_flag = 'Y') qty,
 		        (select ep_name from education_place e where e.ep_no=m.ep_no) epName
 		        from mbti_education m
-		        <include refid="searchEducation"></include>
+		        <include refid="searchWhere"></include>
 		        order by m.edu_no desc
 		    )a
 		)
@@ -83,13 +76,13 @@
 		and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}]]>
 	</select>
 	
-	<select id="getTotalRecordEducation" parameterType="searchVo" resultType="int">
+	<select id="getTotalRecordEducation" parameterType="educationVo" resultType="int">
 		select count(*) from mbti_education
-		<include refid="searchEducation"></include> 
+		<include refid="searchWhere"></include> 
 	</select>
 	
 	<select id="selectByEduNo" parameterType="int" resultType="educationVo">
-		select * from education where eduNo=#{eduNo}
+		select * from education where edu_no=#{eduNo}
 	</select>
 	
 	<update id="updateEducation" parameterType="educationVo">
@@ -103,6 +96,9 @@
 		where edu_no=#{eduNo} 
 	</delete>
 	
+	<select id="getTeaName" resultType="educationVo">
+		select * from education_teacher order by edu_tea_no
+	</select>
 	
 	<!-- teacher -->
 	<insert id="insertTeacher" parameterType="educationVo">
@@ -113,13 +109,13 @@
 		values(#{eduTeaNo},#{eduTeaName},#{eduTeaId},#{eduTeaPwd},#{eduTeaEmail},#{epTeaTel})
 	</insert>
 	
-	<select id="selectAllTeacher" parameterType="searchVo" resultType="educationVo">
+	<select id="selectAllTeacher" parameterType="educationVo" resultType="educationVo">
 		select * from
 		(
 		    select rownum RNUM,a.* from
 		    (
 		        select * from education_teacher 
-		        <include refid="searchEducation"></include>
+		        <include refid="searchWhere"></include>
 		        order by edu_tea_no desc
 		    )a
 		)
@@ -127,9 +123,9 @@
 		where RNUM > #{firstRecordIndex} and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}]]>
 	</select>
 	
-	<select id="getTotalRecordTeacher" parameterType="searchVo" resultType="int">
+	<select id="getTotalRecordTeacher" parameterType="educationVo" resultType="int">
 		select count(*) from education_teacher
-		<include refid="searchEducation"></include> 
+		<include refid="searchWhere"></include> 
 	</select>
 	
 	<delete id="deleteTeacher" parameterType="int" >
@@ -138,14 +134,14 @@
 	</delete>
 	
 	<!-- applicant -->
-	<select id="selectAllApplicant" parameterType="searchVo" resultType="educationVo">
+	<select id="selectAllApplicant" parameterType="educationVo" resultType="educationVo">
 		select * from
 		(
 			select rownum RNUM, a.* from
 			(
-				select e.*,(select count(*) from education_application app where e.edu_no=app.edu_no) qty
+				select e.*,(select count(*) from education_application app where e.edu_no = app.edu_no and app.edu_app_flag = 'Y') qty
 				from educationview e
-				<include refid="searchEducation"></include>
+				<include refid="searchWhere"></include>
 				order by edu_app_no desc
 			)a
 		)
@@ -153,14 +149,20 @@
 		where RNUM > #{firstRecordIndex} and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}]]>
 	</select>
 	
-	<select id="getTotalRecordApplicant" parameterType="searchVo" resultType="int">
+	<select id="getTotalRecordApplicant" parameterType="educationVo" resultType="int">
 		select count(*) from educationview
-		<include refid="searchEducation"></include> 
+		<include refid="searchWhere"></include> 
 	</select>
 	
 	<delete id="deleteApplicant" parameterType="int" >
 		delete from education_application
 		where edu_app_no=#{eduAppNo} 
 	</delete>
+	
+	<update id="updateApplicant" parameterType="int">
+		update education_application
+		set edu_app_flag = 'Y'
+		where edu_app_no = #{eduAppNo}
+	</update>
 	
 </mapper>
