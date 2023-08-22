@@ -63,4 +63,5 @@
 		select * from mbti
 		where mbti_type=#{mbtiType}
 	</select>
+	
 </mapper>
