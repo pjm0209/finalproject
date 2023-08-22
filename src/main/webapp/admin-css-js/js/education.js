@@ -1,10 +1,13 @@
 var contextPath = "/mbti"	
 	
 	$(function(){
+		//전체 선택
 		$('#check-All').click(function(){
 			$('.board-checkbox').prop('checked', this.checked);
 		});	
 		
+		
+		//교육 삭제 유효성 검사
 		$('#education-delete-button').click(function(){
 			if($('input[type=checkbox]:checked').length<1){
 				alert('삭제할 교육을 체크하세요.');
@@ -18,6 +21,7 @@ var contextPath = "/mbti"
 		});
 		
 		
+		//교육장 삭제 유효성 검사
 		$('#location-delete-button').click(function(){
 			if($('input[type=checkbox]:checked').length<1){
 				alert('삭제할 교육장을 선택하세요.');
@@ -31,6 +35,7 @@ var contextPath = "/mbti"
 		});
 		
 		
+		//강사 삭제 유효성 검사
 		$('#teacher-delete-button').click(function(){
 			if($('input[type=checkbox]:checked').length<1){
 				alert('삭제할 강사를 선택하세요.');
