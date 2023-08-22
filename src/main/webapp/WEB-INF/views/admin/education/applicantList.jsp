@@ -61,7 +61,7 @@
 			<div class="board-search-result">
 				<form name="frmSearch" method="post" action="<c:url value='/admin/education/applicantList'/>">
 				<div class="input-group mb-3" id="board-search-div">
-					<select class="form-select form-select-lg" aria-label=".form-select-lg example" name="searchcondition" id="board-search-select">					  	
+					<select class="form-select form-select-lg" aria-label=".form-select-lg example" name="searchcondition" id="edu-search-select">					  	
 					  	<option value="ep_name" <c:if test="${param.searchCondition=='ep_name'}"> selected="selected" </c:if>>교육장</option>
 					  	<option value="ep_address" <c:if test="${param.searchCondition=='ep_address'}"> selected="selected" </c:if>>주소</option>
 					  	<option value="ep_tel" <c:if test="${param.searchCondition=='ep_tel'}"> selected="selected" </c:if>>전화번호</option>

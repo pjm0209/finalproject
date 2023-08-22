@@ -63,7 +63,7 @@
 			<div class="board-search-result">
 				<form name="frmSearch" method="post" action="<c:url value='/admin/education/teacher'/>">
 				<div class="input-group mb-3" id="board-search-div">
-					<select class="form-select form-select-lg" aria-label=".form-select-lg example" name="searchcondition" id="board-search-select">					  	
+					<select class="form-select form-select-lg" aria-label=".form-select-lg example" name="searchcondition" id="edu-search-select">					  	
 					  	<option value="edu_name" <c:if test="${param.searchCondition=='edu_tea_name'}"> selected="selected" </c:if>>이름</option>
 					  	<option value="edu_teacher" <c:if test="${param.searchCondition=='edu_tea_id'}"> selected="selected" </c:if>>아이디</option>
 					  	<option value="ep_no" <c:if test="${param.searchCondition=='edu_tea_tel'}"> selected="selected" </c:if>>전화번호</option>
