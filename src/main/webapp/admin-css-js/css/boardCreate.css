@@ -128,17 +128,17 @@ textarea#board_desc {
 }
 
 .checkbox_group > .use_off {
-    border-right: 1px solid #2c8bcb;
+    border-right: 1px solid #eb5d1e;
     border-radius: 3px 0 0 3px;
 }
 
 .checkbox_group > .use_on {
-    border: 1px solid #2c8bcb;
+    border: 1px solid #eb5d1e;
     border-radius: 0 3px 3px 0;
 }
 
 .checkbox_group > span.on {
-    background: #2c8bcb;
+    background: #eb5d1e;
     color: white;
 }
 
@@ -148,6 +148,6 @@ textarea#board_desc {
     padding: 6px 0;
     float: left;
     cursor: pointer;
-    border: 1px solid #2c8bcb;
+    border: 1px solid #eb5d1e;
     text-align: center;    
 }

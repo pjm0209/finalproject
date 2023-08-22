@@ -2,40 +2,13 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
 
-<style>
-button#location-write-button {
-	float:  right;
-	border: 0;
-	border-radius: 5px;
-	padding: 6px 41px;
-	margin-top: -6px;
-	margin-right: 9px;
-	color: white;
-}
-
-button#location-delete-button {
-	float:  right;
-	border: 0;
-	border-radius: 5px;
-	padding: 6px 41px;
-	margin-top: -6px;
-	margin-right: 9px;
-	color: white;
-}
-
-.location-button {
-	background-color: #858796;
-    background-image: linear-gradient(180deg, #858796 10%, #60616f 100%);
-    background-size: cover;
-}
-</style>
 
 <!-- Begin Page Content -->
 <!-- Page Heading -->
 <div class="head-div">
 	<h2 class="text-gray-800">교육 관리</h2>
-	<button type="button" class="bg-gradient-primary"
-		id="add-newBoard-button" onclick="location.href='locationCreate'">교육장 추가</button>
+	<button type="button" class="add-edu-button"
+		id="add-edu-button" onclick="location.href='locationCreate'">교육장 추가</button>
 </div>
 <div class="side-body">
 	<div class="side-div-title">
@@ -82,7 +55,7 @@ button#location-delete-button {
 <div class="board-body">
 	<div id="board-title">
 		<h5>교육장 관리</h5>
-		<button class="location-button" id="location-write-button">추가</button>
+		<button class="location-button" id="location-edit-button">수정</button>
 		<button class="location-button" id="location-delete-button">삭제</button>
 	</div>
 	<div class="board">
@@ -90,7 +63,7 @@ button#location-delete-button {
 			<div class="board-search-result">
 				<form name="frmSearch" method="post" action="<c:url value='/admin/education/location'/>">
 				<div class="input-group mb-3" id="board-search-div">
-					<select class="form-select form-select-lg" aria-label=".form-select-lg example" name="searchcondition" id="board-search-select">					  	
+					<select class="form-select form-select-lg" aria-label=".form-select-lg example" name="searchcondition" id="edu-search-select">					  	
 					  	<option value="ep_name" <c:if test="${param.searchCondition=='ep_name'}"> selected="selected" </c:if>>교육장</option>
 					  	<option value="ep_address" <c:if test="${param.searchCondition=='ep_address'}"> selected="selected" </c:if>>주소</option>
 					  	<option value="ep_tel" <c:if test="${param.searchCondition=='ep_tel'}"> selected="selected" </c:if>>전화번호</option>
@@ -159,5 +132,4 @@ button#location-delete-button {
 </div>
 </div>
 <!-- End of Main Content -->
-<script type="text/javascript" src="<c:url value='/admin-css-js/js/education.js'/>"></script>	
 <%@ include file="../inc/bottom.jsp"%>

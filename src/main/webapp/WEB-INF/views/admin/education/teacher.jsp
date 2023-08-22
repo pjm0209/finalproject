@@ -2,40 +2,13 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
 
-<style>
-button#teacher-edit-button {
-	float:  right;
-	border: 0;
-	border-radius: 5px;
-	padding: 6px 41px;
-	margin-top: -6px;
-	margin-right: 9px;
-	color: white;
-}
-
-button#teacher-delete-button {
-	float:  right;
-	border: 0;
-	border-radius: 5px;
-	padding: 6px 41px;
-	margin-top: -6px;
-	margin-right: 9px;
-	color: white;
-}
-
-.teacher-button {
-	background-color: #858796;
-    background-image: linear-gradient(180deg, #858796 10%, #60616f 100%);
-    background-size: cover;
-}
-</style>
 
 <!-- Begin Page Content -->
 <!-- Page Heading -->
 <div class="head-div">
 	<h2 class="text-gray-800">교육 관리</h2>
-	<button type="button" class="bg-gradient-primary"
-		id="add-newBoard-button" onclick="location.href='educationCreate'">강사 추가</button>
+	<button type="button" class="add-edu-button"
+		id="add-edu-button" onclick="location.href='educationCreate'">강사 추가</button>
 </div>
 <div class="side-body">
 	<div class="side-div-title">
@@ -90,7 +63,7 @@ button#teacher-delete-button {
 			<div class="board-search-result">
 				<form name="frmSearch" method="post" action="<c:url value='/admin/education/teacher'/>">
 				<div class="input-group mb-3" id="board-search-div">
-					<select class="form-select form-select-lg" aria-label=".form-select-lg example" name="searchcondition" id="board-search-select">					  	
+					<select class="form-select form-select-lg" aria-label=".form-select-lg example" name="searchcondition" id="edu-search-select">					  	
 					  	<option value="edu_name" <c:if test="${param.searchCondition=='edu_tea_name'}"> selected="selected" </c:if>>이름</option>
 					  	<option value="edu_teacher" <c:if test="${param.searchCondition=='edu_tea_id'}"> selected="selected" </c:if>>아이디</option>
 					  	<option value="ep_no" <c:if test="${param.searchCondition=='edu_tea_tel'}"> selected="selected" </c:if>>전화번호</option>
@@ -160,5 +133,5 @@ button#teacher-delete-button {
 </div>
 </div>
 <!-- End of Main Content -->
-<script type="text/javascript" src="<c:url value='/admin-css-js/js/education.js'/>"></script>	
+
 <%@ include file="../inc/bottom.jsp"%>

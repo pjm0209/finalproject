@@ -63,7 +63,7 @@
         function scrollToPosition(position) {
             $('html, body').animate({
 				scrollTop: position
-			}, 1000);
+			}, "fast");
         }
 	});
 </script>
@@ -103,7 +103,8 @@
 		            </div><br>
 		            <div class="answer">
 		                <div class="options">
-		                	<input type="hidden" name="mbtiResultItem[${num}].mbtiSurveyNo" value="${mbtiSurveyVo.mbtiSurveyNo}" />
+		                	<input type="hidden" name="mbtiResultItem[${num}].questionTypeNo" value="${mbtiSurveyVo.questionTypeNo}" />
+		                	<input type="hidden" name="mbtiResultItem[${num}].questionCategoryNo" value="${mbtiSurveyVo.questionCategoryNo}" />
 		                	<input type="radio" id="statement${idx}_1" data-name="statement${idx}" name="mbtiResultItem[${num}].mbtiVal" value="0"/>
 		                    <label for="statement${idx}_1" class="ch_01 disagree max">전혀 그렇지 않다</label>
 		                    <input type="radio" id="statement${idx}_2" data-name="statement${idx}" name="mbtiResultItem[${num}].mbtiVal" value="1"/>

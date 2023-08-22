@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.team2.mbti.common.SearchVO;
 
@@ -29,10 +28,10 @@ public class MemberServiceImpl implements MemberService {
 	public int getTotalRecordMember(SearchVO searchVo) {
 		return memberDao.getTotalRecordMember(searchVo);
 	}
-
+	
 	@Override
-	public MemberVO selectByNoMember(int no) {
-		return memberDao.selectByNoMember(no);
+	public String memberIdSearch(Map<String, Object> map) {
+		return memberDao.memberIdSearch(map);
 	}
 
 	@Override
@@ -47,16 +46,16 @@ public class MemberServiceImpl implements MemberService {
 		}
 		return result;
 	}
-
+	
 	@Override
-	public int deleteMember(int no) {
-		return memberDao.deleteMember(no);
+	public String selectPwd(String userid) {
+		return memberDao.selectPwd(userid);
 	}
 
 	@Override
 	public int loginCheck(String userid, String pwd) {
 		int result=0;
-		String dbPwd= memberDao.selectMemberPwd(userid);
+		String dbPwd= memberDao.selectPwd(userid);
 		
 		if(dbPwd!=null && !dbPwd.isEmpty()) {
 			if(dbPwd.equals(pwd)) {
@@ -70,18 +69,14 @@ public class MemberServiceImpl implements MemberService {
 
 		return result;
 	}
-
+	
 	@Override
-	public int selectMemberNo(String userid) {		 
-		return memberDao.selectMemberNo(userid);
+	public int deleteMember(int no) {
+		return memberDao.deleteMember(no);
 	}
 
 	@Override
-	public String memberIdSearch(Map<String, Object> map) {
-		return memberDao.memberIdSearch(map);
+	public MemberVO selectByUserid(String userid) {
+		return memberDao.selectByUserid(userid);
 	}
-	
-	
-
-
 }

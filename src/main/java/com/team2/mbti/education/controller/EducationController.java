@@ -8,13 +8,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.team2.mbti.common.ConstUtil;
 import com.team2.mbti.common.PaginationInfo;
 import com.team2.mbti.common.SearchVO;
 import com.team2.mbti.education.model.EducationService;
 import com.team2.mbti.education.model.EducationVO;
+import com.team2.mbti.mbtisurvey.model.MbtiSurveyVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -26,8 +29,48 @@ public class EducationController {
 	
 	private final EducationService educationService;
 	
-	@GetMapping("/list")
-	public String list_get(@ModelAttribute SearchVO searchVo, Model model) {
+	@GetMapping("/educationWrite")
+	public String eduWrite_get(Model model) {
+		logger.info("교육 등록 페이지");
+		
+		model.addAttribute("title", "교육 추가");
+		
+		return "admin/education/educationWrite";
+	}
+	
+	@PostMapping("/educationWrite")
+	public String eduWrite_post(@ModelAttribute EducationVO vo, Model model){
+		logger.info("교육 등록 처리, 파라미터 vo={}", vo);
+		
+		int cnt=educationService.insertEducation(vo);
+		logger.info("교육 등록 처리 결과 cnt={}", cnt);
+		
+		String msg="교육 등록에 실패하였습니다.",url="/admin/education/educationWrite";
+		if(cnt>0) {
+			msg="새 교육이 성공적으로 등록되었습니다.";
+			url="/admin/education/list?eduNo="+vo.getEduNo();
+		}else {
+			cnt=educationService.updateEducation(vo);
+			logger.info("교육 수정 결과 cnt={}",cnt);
+			
+			if(cnt>0) {
+				msg="선택한 교육 정보가 수정되었습니다.";
+				url="/admin/education/list";
+			}else {
+				msg="선택한 교육 정보 수정에 실패하였습니다.";
+				url="/admin/education/educationWrite";
+			}
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
+	}
+	
+	
+	@RequestMapping("/list")
+	public String list(@ModelAttribute SearchVO searchVo, Model model) {
 		logger.info("교육 리스트 페이지 보여주기");
 		
 		PaginationInfo pagingInfo = new PaginationInfo();
@@ -35,7 +78,7 @@ public class EducationController {
 		String condition=searchVo.getSearchCondition();
 		String keyword=searchVo.getSearchKeyword();
 		logger.info("condition={},keyword={}",condition,keyword);
-			
+		
 		pagingInfo.setBlockSize(ConstUtil.BLOCK_SIZE);
 		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
 		pagingInfo.setRecordCountPerPage(ConstUtil.MBTI_RECORD_COUNT);
@@ -56,6 +99,7 @@ public class EducationController {
 		return "admin/education/list";
 		
 	}
+	
 	
 	@RequestMapping("/eduDelete")
 	public String eduDelete(@ModelAttribute EducationVO vo, Model model) {
@@ -78,8 +122,8 @@ public class EducationController {
 	}
 	
 	
-	@GetMapping("/applicantList")
-	public String appliList_get(@ModelAttribute SearchVO searchVo, Model model) {
+	@RequestMapping("/applicantList")
+	public String appliList(@ModelAttribute SearchVO searchVo, Model model) {
 		logger.info("신청자 관리 페이지 보여주기, 파라미터 searchVo={}", searchVo);
 		
 		PaginationInfo pagingInfo = new PaginationInfo();

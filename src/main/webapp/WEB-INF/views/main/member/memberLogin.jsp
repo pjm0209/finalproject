@@ -27,7 +27,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #4070f4;
+    background-color: #FFA500;
     column-gap: 30px;
 }
 .form{
@@ -129,101 +129,83 @@ form{
 .form-content a:hover{
     text-decoration: underline;
 }
-
 </style>
   
-<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-<script>
-Kakao.init('134b854676688bdb6bb627d7da5de730'); //발급받은 키 중 javascript키를 사용해준다.
-console.log(Kakao.isInitialized()); // sdk초기화여부판단
-//카카오로그인
-function kakaoLogin() {
-    Kakao.Auth.login({
-      success: function (response) {
-        Kakao.API.request({
-          url: '/v2/user/me',
-          success: function (response) {
-        	  console.log(response)
-          },
-          fail: function (error) {
-            console.log(error)
-          },
-        })
-      },
-      fail: function (error) {
-        console.log(error)
-      },
-    })
-  }
-//카카오로그아웃  
-function kakaoLogout() {
-    if (Kakao.Auth.getAccessToken()) {
-      Kakao.API.request({
-        url: '/v1/user/unlink',
-        success: function (response) {
-        	console.log(response)
-        },
-        fail: function (error) {
-          console.log(error)
-        },
-      })
-      Kakao.Auth.setAccessToken(undefined)
-    }
-  }  
-</script>
+<script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>     
 <script type="text/javascript">
-</script>                   
+$(function(){
+    $('#memberRegister-button').click(function() {
+        window.location.href = '<c:url value="/main/member/agreement"/>';
+    }); 
+});  	    	
+</script> 
+
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<!-- 네이버 로그인 버튼 노출 영역 -->
+<div id="naver_id_login"></div>
+<!-- //네이버 로그인 버튼 노출 영역 -->
+<script type="text/javascript">
+	var naver_id_login = new naver_id_login("1oa3agcXar1fhtfiq5Fy", "http://localhost:9091/mbti/main/index");
+	var state = naver_id_login.getUniqState();
+	naver_id_login.setButton("green", 2,40);
+	naver_id_login.setDomain("YOUR_SERVICE_URL");
+	naver_id_login.setState(state);
+	naver_id_login.setPopup();
+	naver_id_login.init_naver_id_login(); 
+</script>
+
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+var naver_id_login = new naver_id_login("1oa3agcXar1fhtfiq5Fy", "http://localhost:9091/mbti/main/index");
+// 접근 토큰 값 출력
+alert(naver_id_login.oauthParams.access_token);
+// 네이버 사용자 프로필 조회
+naver_id_login.get_naver_userprofile("naverSignInCallback()");
+// 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
+function naverSignInCallback() {
+  alert(naver_id_login.getProfileData('email'));
+  alert(naver_id_login.getProfileData('nickname'));
+  alert(naver_id_login.getProfileData('age'));
+}
+</script>
+          
 </head>
 <body>
     <section class="container forms">    
         <div class="form login">
             <div class="form-content">
                 <h1><img src="../../images/MBTI_Login.png"/></h1>
-                <form method="post" id="login-form" action="<c:url value='/main/member/memberLogin'/>">
+                
+                <form class="form-memberLogin" method="post" id="memberLogin-form" action="<c:url value='/main/member/memberLogin'/>">
                     <div class="field input-field">
-                        <input type="text" placeholder="아이디를 입력하세요." class="input">                       
+                        <input type="text" name="userid" placeholder="아이디를 입력하세요." class="input">                       
                     </div>
 
                     <div class="field input-field">
-                        <input type="password" placeholder="비밀번호를 입력하세요." class="password">                    
+                        <input type="password" name="pwd" placeholder="비밀번호를 입력하세요." class="password">                    
                         <i class='bx bx-hide eye-icon'></i>
                     </div><br>
                     
-                    <label for="remember-check">
-                		<input type="checkbox" id="remember-check">&nbsp; 아이디 저장하기
-            		</label>
+                    <div class="remember-check">
+                		<input type="checkbox" name="chkSave" id="remember-check">&nbsp; 아이디 저장하기
+                		<a class="forgot-id" href="<c:url value='/main/member/forgot-id'/>">아이디 찾기</a>
+                		<span style="color:blue;">|</span>
+                		<a class="forgot-password" href="<c:url value='/main/member/forgot-pwd'/>">비밀번호 찾기</a>
+            		</div>
                   
                     <div class="field button-field">
-                        <input type="submit" value="Login" id="login-button">     
+                        <input type="submit" value="로그인" id="memberLogin-button">     
                     </div>
-                </form>
-                
-                    <div class="form-link">
-                        <a href="<c:url value='/main/member/forgot-id'/>" class="forgot-id">아이디 찾기</a>
-                    </div>   
                     
-                    <div class="form-link">
-                        <a href="<c:url value='/main/member/forgot-pwd'/>" class="forgot-password">비밀번호 찾기</a>
-                    </div>                
-
-                <div class="form-link">
-                    <span>계정이 없으신가요? <a href="<c:url value='/main/member/agreement'/>">회원가입</a></span>          
-                </div>
-                
-                <hr><br>
-                
-				<div onclick="kakaoLogin();">
-			      <a href="javascript:void(0)">
-			          <span>카카오 로그인</span>
-			      </a>
-				</div>
-				<div onclick="kakaoLogout();">
-			      <a href="javascript:void(0)">
-			          <span>카카오 로그아웃</span>
-			      </a>
-				</div>                   
+                    <div class="field button-field">
+                    	<span>계정이 없으신가요?</span>
+                    	<input type="button" value="회원가입" id="memberRegister-button">  
+                    </div>                   
+                </form>                 
             </div>
         </div>
-    </section>   
+    </section>  
 </body>
 </html>

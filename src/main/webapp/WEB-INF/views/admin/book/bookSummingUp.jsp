@@ -1,8 +1,13 @@
+<%@page import="java.text.ParseException"%>
+<%@page import="java.util.Calendar"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
 <%@ include file="../inc/top.jsp"%>
 <link href="<c:url value='/admin-css-js/css/calendar.css'/>" rel="stylesheet">
+
 <script type="text/javascript" src="<c:url value='/admin-css-js/js/calendar.js'/>"></script>
 <script type="text/javascript" src="<c:url value='/resources/fullcalendar-6.1.8/dist/index.global.js'/>"></script>
 <script type="text/javascript" src="<c:url value='/resources/fullcalendar-6.1.8/packages/core/locales/ko.global.min.js'/>"></script>
@@ -13,8 +18,18 @@
 
 <script>
 
-$(function() {
 
+$(function() {
+	var yearFisrtDay = new Date('2023-01-01');
+	var yearFisrtDay2 = yearFisrtDay.getFullYear() + "-"
+		+ ( (yearFisrtDay.getMonth() + 1) < 10 ? "0" + (yearFisrtDay.getMonth() + 1) : (yearFisrtDay.getMonth() + 1) )
+		+ "-" + ( yearFisrtDay.getDate() < 10 ? "0" + yearFisrtDay.getDate() : yearFisrtDay.getDate());
+	
+	var yearLastDay = new Date('2023-01-01');
+	var yearLastDay2 = yearLastDay.getFullYear() + "-"
+		+ ( (yearLastDay.getMonth() + 1) < 10 ? "0" + (yearLastDay.getMonth() + 1) : (yearLastDay.getMonth() + 1) )
+		+ "-" + ( yearLastDay.getDate() < 10 ? "0" + yearLastDay.getDate() : yearLastDay.getDate()); 
+	
 	var calendarEl = document.getElementById('calendar');
 	var calendar = new FullCalendar.Calendar(calendarEl, {
 		String, default: 'bootstrap5',
@@ -24,69 +39,92 @@ $(function() {
 			right: 'dayGridMonth,multiMonthYear'
 		},
 		initialView: 'dayGridMonth',
-		/*     initialDate: '2023-01-12', */
+		/*initialDate: '2023-01-12', */
 		locale: 'ko',
+		dateClick: function(info) {
+			console.log(info.dateStr);
+			$('#dateStr').val(info.dateStr);
+			openModal(info);
+		},
 		/*  navLinks: true, // can click day/week names to navigate views */
 		selectable: true,
 		select: function(info) {
 			/* calendar.unselect() */
+			console.log(info.dateStr);
 			openModal(info);
 		},
-		eventClick: function(){
-			openModal();
+		eventClick: function(info){
+			
+			var date = info.event.start;
+			var d = date.getFullYear() + "-"
+			+ ( (date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1) )
+			+ "-" + ( date.getDate() < 10 ? "0" + date.getDate() : date.getDate()); 
+			
+			$('#dateStr').val(d);
+			
+			console.log(d);
+			openModal(info);
 		},
 		editable: true,
 		dayMaxEvents: true, // allow "more" link when too many events
 	    events: [
-			{
-				title: '결 제 금 액 : ',
-				start: '2023-08-17',
-				textColor : 'green',
-				backgroundColor : "white",
-				borderColor  : "white"
-			},
-			{
-				title: '환 불 금 액 : ',
-				start: '2023-08-17',
-				textColor : 'red',
-				backgroundColor : "white",
-				borderColor  : "white"
-			},
-			{
-				title: '매 출 액 : ',
-				start: '2023-08-17',
-				textColor : 'blue',
-				backgroundColor : "white",
-				borderColor  : "white"
-			},{
-				title: '결 제 금 액 : ',
-				start: '2023-08-16',
-				textColor : 'green',
-				backgroundColor : "white",
-				borderColor  : "white"
-			},
-			{
-				title: '환 불 금 액 : ',
-				start: '2023-08-16',
-				textColor : 'red',
-				backgroundColor : "white",
-				borderColor  : "white"
-			},
-			{
-				title: '매 출 액 : ',
-				start: '2023-08-16',
-				textColor : 'blue',
-				backgroundColor : "white",
-				borderColor  : "white"
-			}
+		    	<% // 날짜 형식
+		    	// 날짜 형식
+		 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	
+		 		Calendar cal = Calendar.getInstance();
+		 		try {
+		 			cal.setTime(sdf.parse("2023-12-32"));
+		 		} catch (ParseException e) {
+		 			e.printStackTrace();
+		 		}
+		 		/*
+		 		 * 종료날짜: 금일-1일 셋팅 실행 조건이 특정일로부터 금일의 하루전까지 출력 만약 현재날짜라면 cal.add(Calendar.DATE, 1); 해줘야 함
+		 		 */
+		 		String nowDay = sdf.format(cal.getTime());
+	
+		 		// 시작 날짜 셋팅
+		 		cal.set(2023, 0, 1);
+	
+		 		// while 비교를 위한 날짜 선언
+		 		String nextDay = "";
+	
+		 		while (!nowDay.equals(nextDay)) {
+		 			String resultDay = sdf.format(cal.getTime());
+		 			String dot = ",";
+		 			
+					if(resultDay.equals("2023-12-31")) {
+						dot = "";
+					}%> 
+	    		{
+					title: '결 제 금 액 : ',
+					start: "<%=resultDay%>",
+					textColor : 'green',
+					backgroundColor : "white",
+					borderColor  : "white"
+				},
+				{
+					title: '환 불 금 액 : ',
+					start: "<%=resultDay%>",
+					textColor : 'red',
+					backgroundColor : "white",
+					borderColor  : "white"
+				},
+				{
+					title: '매 출 액 : ',
+					start: "<%=resultDay%>",
+					textColor : 'blue',
+					backgroundColor : "white",
+					borderColor  : "white"
+				}<%=dot%>
+			 <%
+				cal.add(Calendar.DATE, 1); // 하루하루 더해준다.
+	 			nextDay = sdf.format(cal.getTime()); // 비교를 위한 값 셋팅
+			}%>
 		] 
 	});
 
 	calendar.render();
-	
-	/* $('#calendar div:nth-child(2) table tbody tr td div div table tbody tr td div').attr('data-bs-toggle', 'modal');
-	$('#calendar div:nth-child(2) table tbody tr td div div table tbody tr td div').attr('data-bs-target', '#exampleModal'); */
-	
 		
 });
 
@@ -114,7 +152,7 @@ $(function() {
 	                <dl class="info payment align-right">
 	                    <dt class="title">
 	                        <i class="fas fa-fw fa-database greenF"></i>
-	                        <span class="greenF align-right">결제 금액</span> 
+	                        <span class="greenF align-right">결제 금액</span>
 	                    </dt>
 	                    <dd id="payment" class="price"><span class="no">0</span><span class="unit">원</span></dd>
 	                </dl>
@@ -184,7 +222,7 @@ $(function() {
 					        <a href="#" rel="modal:close" type="button" class="btn btn-primary" data-bs-dismiss="modal" style="width: 100%;">닫기</a>
 					      </div>
 					</div>
-	        <br><br>
+	        <br><br><input id="dateStr" type="text">
 				<!-- Cloudflare Pages Analytics -->	
 			<div id='calendar'></div>
 				<!-- Cloudflare Pages Analytics -->

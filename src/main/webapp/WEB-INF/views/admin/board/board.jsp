@@ -6,8 +6,7 @@
 <!-- Page Heading -->
 <div class="head-div">
 	<h2 class="text-gray-800">게시판</h2>
-	<button type="button" class="bg-gradient-primary"
-		id="add-newBoard-button" onclick="location.href='<c:url value="/admin/board/boardCreate"/>'">새 게시판 추가</button>
+	<button type="button" class="bg-orange-primary"	id="add-newBoard-button" onclick="location.href='<c:url value="/admin/board/boardCreate"/>'">새 게시판 추가</button>
 </div>
 <div class="side-body">
 	<div class="side-div-title">
@@ -45,7 +44,7 @@
 	</form>
 	<div id="board-title">
 		<h5>${boardFormVo.boardFormName }</h5>
-		<button class="bg-gradient-secondary" id="board-write-button" onclick="location.href='<c:url value="/admin/board/boardWrite?boardFormNo=${param.boardFormNo}"/>'">글쓰기</button>
+		<button class="bg-orange-primary" id="board-write-button" onclick="location.href='<c:url value="/admin/board/boardWrite?boardFormNo=${param.boardFormNo}&boardWriteType=write"/>'">글쓰기</button>
 	</div>
 	<div class="board">
 		<div class="board-head">
@@ -53,19 +52,25 @@
 				<span class="search-count"></span>
 				<form name="searchForm" method="post" action="<c:url value='/admin/board/board'/>">
 					<div class="input-group mb-3" id="board-search-div">
-						<input type="hidden" name="boardFormNo" value="${param.boardFormNo }">
-						<select class="form-select form-select-lg" aria-label=".form-select-lg example" id="board-search-select" name="searchCondition">					  	
-						  	<option value="board_title" <c:if test="${param.searchCondition == 'board_title' }">selected="selected"</c:if>>제목</option>
-						  	<option value="board_body" <c:if test="${param.searchCondition == 'board_body' }">selected="selected"</c:if>>내용</option>
-						  	<option value="name" <c:if test="${param.searchCondition == 'name' }">selected="selected"</c:if>>작성자</option>
-						</select>
-					 	<input type="text" class="form-control" name="searchKeyword" value="${param.searchKeyword }" placeholder="검색어를 입력하세요" aria-label="Recipient's username" aria-describedby="button-addon2" id="board-search-area">
-					 	<button class="btn btn-outline-secondary" type="submit" id="button-addon2">검색</button>
+						<div class="board-head-Group1">
+							<input type="button" value="삭제" class="btn btn-outline-secondary" id="boardMultiDel">
+							<span class="boardDelCount"></span>
+						</div>
+						<div class="board-head-Group2">
+							<input type="hidden" name="boardFormNo" value="${param.boardFormNo }">
+							<select class="form-select form-select-lg" aria-label=".form-select-lg example" id="board-search-select" name="searchCondition">					  	
+							  	<option value="board_title" <c:if test="${param.searchCondition == 'board_title' }">selected="selected"</c:if>>제목</option>
+							  	<option value="board_body" <c:if test="${param.searchCondition == 'board_body' }">selected="selected"</c:if>>내용</option>
+							  	<option value="name" <c:if test="${param.searchCondition == 'name' }">selected="selected"</c:if>>작성자</option>
+							</select>
+						 	<input type="text" class="form-control" name="searchKeyword" value="${param.searchKeyword }" placeholder="검색어를 입력하세요" aria-label="Recipient's username" aria-describedby="button-addon2" id="board-search-area">
+						 	<button class="btn btn-outline-secondary" type="submit" id="button-addon2">검색</button>
+						</div>
 					</div>
 				</form>
 			</div>
 		</div>
-		<form name="boardFrm" action="post" action="<c:url value='/admin/board/boardListDel'/>">
+		<form name="boardFrm" method="post" action="<c:url value='/admin/board/boardListDel'/>">
 			<table class="table board-table">
 				<thead>
 					<tr class="board-table-colum">
@@ -87,6 +92,10 @@
 						<c:forEach var="map" items="${list }">
 							<tr>
 								<th scope="row"><input type="checkbox" class="board-checkbox" name="boardItems[${idx }].boardNo" value="${map['BOARD_NO'] }"></th>
+								<input type="hidden" class="board-checkbox" name="boardItems[${idx }].boardGroupNo" value="${map['BOARD_GROUP_NO'] }">
+								<input type="hidden" class="board-checkbox" name="boardItems[${idx }].boardStep" value="${map['BOARD_STEP'] }">
+								<input type="hidden" class="board-checkbox" name="boardItems[${idx }].boardSort" value="${map['BOARD_SORT'] }">
+								<input type="hidden" class="board-checkbox" name="boardItems[${idx }].boardFormNo" value="${map['BOARD_FORM_NO'] }">
 								<td class="board-title">
 									<c:if test="${map['BOARD_STEP'] > 0 }">
 										<c:forEach var="i" begin="0" end="${map['BOARD_STEP'] }">
@@ -102,6 +111,9 @@
 										<c:if test="${map['COMMENTCOUNT'] != 0 and map['COMMENT_FLAG'] == 'Y'}">
 											<span>[${map['COMMENTCOUNT'] }]</span>
 										</c:if>																
+									</c:if>
+									<c:if test="${map['BOARD_DEL_FLAG'] == 'Y' }">
+										<span>삭제된 글입니다.</span>
 									</c:if>
 								</td>
 								<td class="board-writer">

@@ -3,11 +3,15 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.team2.mbti.education.model.EducationDAO">
-	<sql id="searchEducation">
+	<sql id="searchWhere">
 		<where>
 			<if test="searchKeyword!=null and searchKeyword!=''">
 	      		${searchCondition} like '%' || #{searchKeyword} || '%'
+				and edu_no = #{eduNo}
 	      	</if>
+	      	<if test="searchKeyword==null or searchKeyword==''">
+				edu_no = #{eduNo}
+			</if>
       	</where>
 	</sql>
 	
@@ -20,14 +24,18 @@
 		values(#{epNo},#{epName},#{epZipcode},#{epAddress},#{epLatitude},#{epLongitude},#{epTel})
 	</insert>
 	
+	<select id="selectByNoEducation" parameterType="int" resultType="educationVo">
+		select * from mbti_education where edu_no = #{eduNo}
+	</select>
+	
 	<select id="selectAllLocation" parameterType="searchVo" resultType="educationVo">
 		select * from
 		(
 		    select rownum RNUM,a.* from
 		    (
 		        select * from education_place 
-		        <include refid="searchEducation"></include>
-		        order by ep_no
+		        <include refid="searchWhere"></include>
+		        order by ep_no desc
 		    )a
 		)
 		<![CDATA[
@@ -36,7 +44,7 @@
 	
 	<select id="getTotalRecordLocation" parameterType="searchVo" resultType="int">
 		select count(*) from education_place
-		<include refid="searchEducation"></include> 
+		<include refid="searchWhere"></include> 
 	</select>
 	
 	<delete id="deleteLocation" parameterType="int" >
@@ -50,18 +58,24 @@
 		<selectKey keyProperty="eduNo" order="BEFORE" resultType="int">
 			select mbti_education_seq.nextval from dual
 		</selectKey>
-		insert into mbti_education(edu_no, edu_name, edu_com, edu_teacher, edu_price, ep_no)
-		values(#{eduNo},#{eduName},#{eduCom},#{eduTeacher},#{eduPrice},#{epNo})
+		insert into mbti_education(edu_no, edu_name, edu_teacher, edu_com, edu_people_number, edu_price, ep_name)
+		values(#{eduNo}, #{eduName}, #{eduTeacher}, #{eduCom}, #{eduPeopleNumber}, #{eduPrice}, #{epName})
 	</insert>
+	
+	<select id="selectTeacher" resultType="educationVo">
+		select edu_tea_name from education_teacher
+	</select>
 	
 	<select id="selectAllEducation" parameterType="searchVo" resultType="educationVo">
 		select * from
 		(
 		    select rownum as RNUM, a.* from
 		    (
-		        select * from mbti_education 
-		        <include refid="searchEducation"></include>
-		        order by edu_no desc
+		        select m.*,(select count(*) from education_application e where e.edu_no=m.edu_no) qty,
+		        (select ep_name from education_place e where e.ep_no=m.ep_no) epName
+		        from mbti_education m
+		        <include refid="searchWhere"></include>
+		        order by m.edu_no desc
 		    )a
 		)
 		<![CDATA[
@@ -71,12 +85,18 @@
 	
 	<select id="getTotalRecordEducation" parameterType="searchVo" resultType="int">
 		select count(*) from mbti_education
-		<include refid="searchEducation"></include> 
+		<include refid="searchWhere"></include> 
 	</select>
 	
 	<select id="selectByEduNo" parameterType="int" resultType="educationVo">
 		select * from education where eduNo=#{eduNo}
 	</select>
+	
+	<update id="updateEducation" parameterType="educationVo">
+		update mbti_education
+		set edu_name = #{eduName}, edu_teacher = #{eduTeacher}, edu_com = #{eduCom}, edu_people_number = #{eduPeopleNumber}, edu_price = {eduPrice}, ep_name = #{epName} 
+		where edu_no = #{eduNo}
+	</update>
 	
 	<delete id="deleteEducation" parameterType="int" >
 		delete from mbti_education
@@ -99,8 +119,8 @@
 		    select rownum RNUM,a.* from
 		    (
 		        select * from education_teacher 
-		        <include refid="searchEducation"></include>
-		        order by edu_tea_no
+		        <include refid="searchWhere"></include>
+		        order by edu_tea_no desc
 		    )a
 		)
 		<![CDATA[
@@ -109,7 +129,7 @@
 	
 	<select id="getTotalRecordTeacher" parameterType="searchVo" resultType="int">
 		select count(*) from education_teacher
-		<include refid="searchEducation"></include> 
+		<include refid="searchWhere"></include> 
 	</select>
 	
 	<delete id="deleteTeacher" parameterType="int" >
@@ -123,9 +143,10 @@
 		(
 			select rownum RNUM, a.* from
 			(
-				select * from educationview
-				<include refid="searchEducation"></include>
-				order by edu_app_no
+				select e.*,(select count(*) from education_application app where e.edu_no=app.edu_no) qty
+				from educationview e
+				<include refid="searchWhere"></include>
+				order by edu_app_no desc
 			)a
 		)
 		<![CDATA[
@@ -134,7 +155,7 @@
 	
 	<select id="getTotalRecordApplicant" parameterType="searchVo" resultType="int">
 		select count(*) from educationview
-		<include refid="searchEducation"></include> 
+		<include refid="searchWhere"></include> 
 	</select>
 	
 	<delete id="deleteApplicant" parameterType="int" >

@@ -1,5 +1,10 @@
 @charset "UTF-8";
 
+.bg-orange-primary {
+	background: #eb5d1e;	
+	color: white;
+}
+
 body {
 	overflow: auto;
 }
@@ -85,6 +90,10 @@ div#board-title h5 {
 	display: inline-block;
 }
 
+button#button-addon2 {
+    width: 75px;
+}
+
 button#board-write-button {
 	float: right;
 	border: 0;
@@ -109,9 +118,9 @@ input[type="checkbox"]:checked.board-checkbox {
 }
 
 div#board-search-div {
-	display: flex;
-	justify-content: flex-end;
-	padding: 18px 27px 5px 20px;
+    display: flex;
+    justify-content: space-between;
+    padding: 18px 27px 5px 20px;
 }
 
 input#board-search-area {
@@ -121,10 +130,11 @@ input#board-search-area {
 
 select#board-search-select {
 	margin-right: 30px;
-	height: 40px;
+	height: 43px;
 	margin-bottom: 0;
 	border: 1px solid #d8dce5;
 	border-radius: 6px;
+	width: 120px;
 }
 
 .board-side-boardItem {
@@ -260,7 +270,7 @@ select#select_board {
 	width: 60%;
 }
 
-input#board-wirte-title {
+input#board-write-title {
 	width: 100%;
 	border: 0;
 	outline-width: 0;
@@ -402,11 +412,19 @@ form[name=commentFrm] {
 	padding: 20px;
 }
 
+.comment-item > span {
+    margin-top: 20px;
+    margin-left: 10px;
+    color: gray;
+    display: inline-block;
+}
+
 div.board {
 	overflow: auto;
 	background: white;
 	margin-top: 15px;
 	margin-right: 15px;
+	margin-bottom: 25px;
 	border-radius: 10px;
 	padding: 10px;
 	padding-top: 0;
@@ -415,6 +433,10 @@ div.board {
 .board-content {
 	min-height: 400px;
 	padding-left: 22px;
+}
+
+.board-head-Group2 {
+	display: flex;
 }
 
 .boardFile {
@@ -449,8 +471,16 @@ ul.file-list {
 
 .comment-item {
     border-bottom: 1px solid #e1e1e1;
+    margin-top: 10px;
+    padding: 0px 15px;
+    min-height: 80px;
+}
+
+.comment-item.reply {
+	border-bottom: 1px solid #e1e1e1;
     margin-bottom: 10px;
     padding: 0px 15px;
+    padding-left: 70px;
 }
 
 span.comment-write-regdate {
@@ -525,7 +555,6 @@ commentEditOrDel div {
     z-index: 1;
     max-height: 370px;
     width: 100px;
-    visibility: hidden;
 }
 
 a.commentEdit {
@@ -538,4 +567,26 @@ a.comment-reply {
     font-weight: normal;
     margin-left: 15px;
     font-size: 13px;
+    cursor: pointer;
+}
+
+.commentReply {
+	margin: 0px 0px -20px;
+    border-bottom: 0px;
+}
+
+.editDel a {
+	cursor: pointer;
+}
+
+#commentReply-submit {
+	width: 100px;
+	border: 1px solid #d3d3d3;
+	background: #FFF;
+	font-size: 13px;
+}
+
+.accordion-body {
+	padding: 0 20px;
+	padding-bottom: 0;
 }

@@ -1,2 +1,235 @@
 @charset "UTF-8";
 
+input[type=checkbox] {
+  accent-color: #eb5d1e;
+}
+
+button#education-edit-button {
+	float:  right;
+	border: 0;
+	border-radius: 5px;
+	padding: 6px 41px;
+	margin-top: -6px;
+	margin-right: 9px;
+	color: white;
+}
+
+button#education-delete-button {
+	float:  right;
+	border: 0;
+	border-radius: 5px;
+	padding: 6px 41px;
+	margin-top: -6px;
+	margin-right: 9px;
+	color: white;
+}
+
+.education-button {
+	background-color: #eb5d1e;
+    background-size: cover;
+}
+
+button#applicant-edit-button {
+	float:  right;
+	border: 0;
+	border-radius: 5px;
+	padding: 6px 41px;
+	margin-top: -6px;
+	margin-right: 9px;
+	color: white;
+}
+
+button#applicant-delete-button {
+	float:  right;
+	border: 0;
+	border-radius: 5px;
+	padding: 6px 41px;
+	margin-top: -6px;
+	margin-right: 9px;
+	color: white;
+}
+
+.applicant-button {
+	background-color: #eb5d1e;
+    background-size: cover;
+}
+
+button#location-edit-button {
+	float:  right;
+	border: 0;
+	border-radius: 5px;
+	padding: 6px 41px;
+	margin-top: -6px;
+	margin-right: 9px;
+	color: white;
+}
+
+button#location-delete-button {
+	float:  right;
+	border: 0;
+	border-radius: 5px;
+	padding: 6px 41px;
+	margin-top: -6px;
+	margin-right: 9px;
+	color: white;
+}
+
+.location-button {
+	background-color: #eb5d1e;
+    background-size: cover;
+}
+
+button#teacher-edit-button {
+	float:  right;
+	border: 0;
+	border-radius: 5px;
+	padding: 6px 41px;
+	margin-top: -6px;
+	margin-right: 9px;
+	color: white;
+}
+
+button#teacher-delete-button {
+	float:  right;
+	border: 0;
+	border-radius: 5px;
+	padding: 6px 41px;
+	margin-top: -6px;
+	margin-right: 9px;
+	color: white;
+}
+
+.teacher-button {
+	background-color: #eb5d1e;
+    background-size: cover;
+}
+
+button#add-edu-button{
+	font-weight: bold;
+	background-color: #eb5d1e;
+	float:  right;
+	border: 0;
+	border-radius: 5px;
+	padding: 6px 41px;
+	margin-top: -6px;
+	margin-right: 9px;
+	color: white;
+}
+
+
+div#edu-search-div {
+    display: flex;
+    justify-content: space-between;
+    padding: 18px 27px 5px 20px;
+}
+
+select#edu-search-select {
+	font-size: 16px;
+    margin-right: 20px;
+    height: 40px;
+    margin-bottom: 0;
+    border: 1px solid #d8dce5;
+    border-radius: 6px;
+    margin-left: 840px;
+}
+
+
+/* educationWrite */
+.education-write-head-button {
+	width: max-content;
+	display: inline-block;
+	float: right;
+	margin-right: 15px;
+}
+
+.educationWrite-head input {
+	border: 0;
+	border-radius: 5px;
+	padding: 5px 20px 5px 20px;
+	color: white;
+}
+
+.educationWrite-head {
+	border-bottom: 1px solid #d8dce5;
+	padding: 0px 20px 10px 32px;
+}
+
+h2#educationCreate-title {
+	font-weight: bold;
+	display: inline-block;
+}
+
+input#save-educationWrite {
+	margin-left: 10px;
+	background: #eb5d1e;
+}
+
+.educationWrite-body {
+	display: flex;
+	justify-content: space-evenly;
+	width: 100%;
+	flex-direction: column;
+	align-items: center;
+}
+
+div.educationWrite-setting {
+	border: 1px solid #e1e1e1;
+	background: white;
+	border-radius: 5px;
+	width: 60%;
+	margin-top: 30px;
+}
+
+div.educationWrite-setting-head {
+	border-bottom: 1px solid #e1e1e1;
+}
+
+div.educationWrite-setting-head h3 {
+	display: inline-block;
+	font-weight: bold;
+	color: black;
+	font-size: 17px;
+	margin: 13px 73px 10px 20px;
+}
+
+span.setting-head {
+	padding-left: 50px;
+}
+
+.educationWrite-setting-body {
+	padding: 20px 30px;
+}
+
+.educationWrite-body dd {
+	margin-left: 190px;
+	padding: 10px 22px 10px 0;
+}
+
+div.educationWrite-setting-body dt {
+	font-size: 14px;
+	color: black;
+	float: left;
+	width: 190px;
+	padding: 17px 0;
+}
+
+div.input_group v2 input {
+	width: 100%;
+}
+
+.input_group.v2 {
+	border: 1px solid #d7dde4;
+	border-radius: 3px;	
+	width: 100%;
+	display: inline-block;
+	text-align: center;
+}
+
+input#board_name {
+	width: calc(100% - 20px);
+	vertical-align: middle;
+	outline-width: 0;
+	border: 0;
+	height: 38px;
+	text-align: left;
+}

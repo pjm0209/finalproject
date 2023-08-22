@@ -9,15 +9,16 @@ import com.team2.mbti.common.SearchVO;
 
 @Mapper
 public interface MemberDAO {
-	int insertMember(MemberVO vo);
-	List<MemberVO> selectAllMember(SearchVO vo);
-	int getTotalRecordMember(SearchVO searchVo);
-	MemberVO selectByNoMember(int no);
-	int selectCheckId(String userid);
-	String selectMemberPwd(String userid);
-	int selectMemberNo(String userid);
-	int deleteMember(int no);
+	int insertMember(MemberVO vo); //회원등록
+	List<MemberVO> selectAllMember(SearchVO vo); //회원리스트
+	int getTotalRecordMember(SearchVO searchVo); //총레코드수
+	String memberIdSearch(Map<String, Object> map); //회원검색
 	
-	String memberIdSearch(Map<String, Object> map);
+	int selectCheckId(String userid); //아이디확인
+	String selectPwd(String userid); //비번확인
+	int deleteMember(int no); //회원탈퇴
+	
+	MemberVO selectByUserid(String userid);
+	
 		
 }

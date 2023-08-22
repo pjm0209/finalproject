@@ -21,4 +21,19 @@ public class CommentServiceImpl implements CommentService {
 	public List<Map<String, Object>> selectCommentList(int boardNo) {
 		return commentDao.selectCommentList(boardNo);
 	}
+
+	@Override
+	public void deleteComment(Map<String, String> map) {
+		commentDao.deleteComment(map);
+	}
+
+	@Override
+	public int insertCommentReply(CommentVO vo) {
+		return commentDao.insertCommentReply(vo);
+	}
+
+	@Override
+	public int updateComment(CommentVO vo) {
+		return commentDao.updateComment(vo);
+	}
 }

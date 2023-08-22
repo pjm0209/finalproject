@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,7 +40,7 @@ public class MemberLoginController {
 	}
 	
 	@PostMapping("/member/memberLogin")
-	public String memberLogin_post(@RequestParam String userid, @RequestParam String pwd,
+	public String memberLogin_post(@RequestParam(required =  false) String userid, @RequestParam(required =  false) String pwd,
 			@RequestParam(required =  false) String chkSave, HttpServletRequest request, HttpServletResponse response, Model model) {
 		
 		logger.info("회원 로그인 처리, 파라미터 userid={}, pwd={}, chkSave={}", userid, pwd, chkSave);
@@ -52,7 +53,7 @@ public class MemberLoginController {
 			msg = userid + "회원님이 로그인되었습니다.";
 			url = "/main/index";
 			
-			int no = memberService.selectMemberNo(userid);
+			MemberVO no = memberService.selectByUserid(userid);
 			
 			HttpSession session = request.getSession();
 			session.setAttribute("userid", userid);
@@ -98,10 +99,31 @@ public class MemberLoginController {
 	}
 	
 	@RequestMapping("/member/memberRegister")
-	public String register() {
+	public String memberRegister() {
 		logger.info("회원가입 화면");
 				
 		return "main/member/memberRegister";
+	}
+	
+	@PostMapping("/member/memberRegister")
+	public String memberRegister_post(@ModelAttribute MemberVO membervo, HttpServletRequest request, Model model){
+		logger.info("회원가입 처리, 파라미터 membervo={}",membervo);
+				
+		int result = memberService.insertMember(membervo);
+		
+		logger.info("회원 가입 완료, result = {}",result);		
+		String msg = "회원 가입에 실패하였습니다.", url = "main/member/memberRegister";
+		
+		if(result > 0) {
+			msg = "회원 가입이 완료되었습니다.";
+			url = "main/index";
+		}
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		
+		return "common/message";
+	
 	}
 	
 	@RequestMapping("/member/forgot-id")
@@ -112,17 +134,10 @@ public class MemberLoginController {
 	}
 	
 	@RequestMapping("/member/findIdResult")
-	public String findIdresult(@RequestBody Map<String, Object> requestMap) {		
-		logger.info("아이디 찾기 결과 화면");
-		
-		String name = (String) requestMap.get("name");
-		String email = (String) requestMap.get("email");
-		 
-        Map<String, Object> paramMap = new HashMap<>();
-        paramMap.put("name", name);
-        paramMap.put("email", email);
+	public String findIdresult() {		
+		logger.info("아이디 찾기 결과 화면");		
 	 	 
-		return "/member/findIdResult";
+		return "main/member/findIdResult";
 	}
 		
 	@RequestMapping("/member/forgot-pwd")
@@ -154,10 +169,4 @@ public class MemberLoginController {
 		return result;
 	}
 	
-	@RequestMapping("/member/findZipcode")
-	public String findZipcode() {
-		logger.info("우편번호 찾기 화면");
-		
-		return "main/member/findZipcode";
-	}
 }

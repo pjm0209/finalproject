@@ -1,5 +1,6 @@
 package com.team2.mbti.comment.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -44,5 +45,43 @@ public class CommentController {
 		logger.info("댓글 리스트 검색결과 list: {}", list);
 		
 		return list;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/delete")
+	public String commentDel(@ModelAttribute CommentVO vo) {
+		logger.info("댓글 삭제 파라미터 vo: {}", vo);
+		
+		Map<String, String> map = new HashMap<>();
+		
+		map.put("commentsNo", vo.getCommentsNo() + "");
+		map.put("commentsStep", vo.getCommentsStep() + "");
+		map.put("commentsGroupNo", vo.getCommentsGroupNo() + "");
+		
+		commentService.deleteComment(map);
+		
+		return "삭제";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/commentsReply")
+	public int commentsReply(@ModelAttribute CommentVO vo) {
+		logger.info("댓글 답글등록 파라미터 vo: {}", vo);
+		
+		int cnt = commentService.insertCommentReply(vo);
+		logger.info("댓글 답글 등록처리 결과 cnt: {}", cnt);
+		
+		return cnt;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/commentsWriteEdit")
+	public int commentsWriteEdit(@ModelAttribute CommentVO vo) {
+		logger.info("댓글 수정 파라미터 vo: {}", vo);
+		
+		int cnt = commentService.updateComment(vo);
+		logger.info("댓글 수정처리 결과 cnt: {}", cnt);
+		
+		return cnt;
 	}
 }

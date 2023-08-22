@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.team2.mbti.board.model.BoardFileVO;
 import com.team2.mbti.board.model.BoardFormVO;
+import com.team2.mbti.board.model.BoardListVO;
 import com.team2.mbti.board.model.BoardService;
 import com.team2.mbti.board.model.BoardVO;
 import com.team2.mbti.comment.model.CommentVO;
@@ -149,9 +150,32 @@ public class BoardController {
 		return "common/message";
 	}
 	
+	@RequestMapping("/boardFormDel")
+	public String boardFormDel(@RequestParam(defaultValue = "0") int boardFormNo, Model model) {
+		logger.info("게시판 삭제 파라미터 boardFormNo: {}", boardFormNo);
+		
+		int boardCount = boardService.findBoard(boardFormNo);
+		logger.info("게시판 게시글존재유무 확인 결과 boardCount: {}", boardCount);
+		
+		String msg = "게시글을 전부 삭제해야 삭제할 수 있습니다.", url = "/admin/board/boardEdit?boardFormNo=" + boardFormNo;
+		if(boardCount < 1) {
+			int cnt = boardService.boardFormDel(boardFormNo);
+			logger.info("게시판 삭제 처리결과 cnt: {}", cnt);
+			if(cnt > 0) {
+				msg = "게시판을 삭제했습니다";
+				url = "/admin/board/board?boardFormNo=1";
+			}
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
+	}
+	
 	@GetMapping("/boardWrite")
-	public String boardWrite_get(@RequestParam int boardFormNo, Model model) {
-		logger.info("게시판 글쓰기 화면 보여주기");
+	public String boardWrite_get(@RequestParam int boardFormNo, @RequestParam String boardWriteType, Model model) {
+		logger.info("게시판 글쓰기 화면 보여주기 파라미터 boardFormNo: {}, boardWriteType: {}", boardFormNo, boardWriteType);
 		
 		List<BoardFormVO> list = boardService.selectAllBoard();
 		logger.info("게시판 종류 전체조회 결과: list: {}", list);
@@ -190,8 +214,8 @@ public class BoardController {
 	}
 	
 	@GetMapping("/boardWriteEdit")
-	public String boardWriteEdit_get(@RequestParam int boardNo, Model model) {
-		logger.info("게시글 수정 화면 파라미터 boardNo: {}", boardNo);
+	public String boardWriteEdit_get(@RequestParam int boardNo, @RequestParam String boardWriteType, Model model) {
+		logger.info("게시글 수정 화면 파라미터 boardNo: {}, boardWriteType: {}", boardNo, boardWriteType);
 		
 		List<BoardFormVO> list = boardService.selectAllBoard();		
 		Map<String, Object> map = boardService.selectBoardByNo(boardNo);
@@ -225,6 +249,46 @@ public class BoardController {
 		
 		int cnt = boardService.updateBoard(vo);
 		logger.info("게시글 수정처리 결과 cnt: {}", cnt);
+		
+		int fileCnt = boardService.insertFile(fileList, vo.getBoardNo());
+		logger.info("게시판 파일 업로드 처리 결과 fileCnt: {}", fileCnt);
+		
+		return "redirect:/admin/board/board?boardFormNo=" + vo.getBoardFormNo();
+	}
+	
+	@GetMapping("/boardWriteReply")
+	public String boardWriteReply_get(@RequestParam int boardNo, @RequestParam int boardFormNo, @RequestParam String boardWriteType, Model model) {
+		logger.info("게시글 답변 화면처리 파라미터 boardNo: {}, boardFromNo: {}, boardWriteType: {}", boardNo, boardFormNo, boardWriteType);
+		
+		List<BoardFormVO> list = boardService.selectAllBoard();		
+		Map<String, Object> map = boardService.selectBoardByNo(boardNo);
+		
+		logger.info("게시글 조회 결과 map: {}", map);
+		logger.info("게시판 종류 전체조회 결과: list: {}", list);
+		
+		model.addAttribute("map", map);
+		model.addAttribute("boardList", list);		
+		model.addAttribute("title", "게시글 답글쓰기");
+		
+		return "admin/board/boardWrite";
+	}
+	
+	@PostMapping("/boardWriteReply")
+	public String boardWriteReply_post(@ModelAttribute BoardVO vo, HttpServletRequest request) {
+		logger.info("게시글 답변 처리 파라미터 vo: {}", vo);
+		
+		List<Map<String, Object>> fileList = new ArrayList<>();
+		
+		try {
+			fileList = fileUploadUtil.fileupload(request, ConstUtil.UPLOAD_FILE_FLAG);
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		int cnt = boardService.insertBoardReply(vo);
+		logger.info("게시글 답변 처리결과 cnt: {}", cnt);
 		
 		int fileCnt = boardService.insertFile(fileList, vo.getBoardNo());
 		logger.info("게시판 파일 업로드 처리 결과 fileCnt: {}", fileCnt);
@@ -291,5 +355,64 @@ public class BoardController {
 		}
 		
 		return result;
+	}
+	
+	@RequestMapping("/boardListDel")
+	public String boardListDel(@ModelAttribute BoardListVO listVo, HttpServletRequest request) {
+		logger.info("게시글 다중삭제 파라미터 listVo: {}", listVo);
+		
+		List<BoardVO> list = listVo.getBoardItems();
+		
+		List<String> fileList = boardService.selectBoardFileList(list);
+		logger.info("파일리스트 fileList: {}", fileList);
+		
+		boardService.deleteBoardMulti(list);
+		
+		for(String fileName : fileList) {
+			String filePath = fileUploadUtil.getUploadPath(request, ConstUtil.UPLOAD_FILE_FLAG);
+			File file = new File(filePath, fileName);
+			if(file.exists()) {
+				boolean result = false;
+				result = file.delete();
+				logger.info("삭제처리 - 파일삭제처리 결과 result: {}", result);
+			}
+		}
+		
+		return "redirect:/admin/board/board?boardFormNo=" + list.get(0).getBoardFormNo();
+	}
+	
+	@RequestMapping("/boardWriteDel")
+	public String boardWriteDel(@RequestParam(defaultValue = "0") int boardNo, @RequestParam int boardStep,
+			@RequestParam int boardGroupNo, @RequestParam int boardFormNo, HttpServletRequest request, Model model) {
+		logger.info("게시글 삭제 파라미터 boardNo: {}, boardStep: {}, boardGroupNo: {}", boardNo, boardStep, boardGroupNo);
+		
+		Map<String, String> map = new HashMap<>();
+		
+		map.put("boardNo", boardNo + "");
+		map.put("boardStep", boardStep + "");
+		map.put("boardGroupNo", boardGroupNo + "");
+		
+		List<BoardFileVO> list = boardService.selectFileList(boardNo);
+		logger.info("게시글 첨부파일 조회결과 list: {}", list);
+		
+		String msg = "게시글을 삭제했습니다.", url = "/admin/board/board?boardFormNo=" + boardFormNo;
+		boardService.deleteBoard(map);
+		
+		for(int i = 0; i < list.size(); i++) {
+			BoardFileVO vo = list.get(i);
+			
+			String filePath = fileUploadUtil.getUploadPath(request, ConstUtil.UPLOAD_FILE_FLAG);
+			File file = new File(filePath, vo.getFileName());
+			
+			if(file.exists()) {
+				boolean result = file.delete();
+				logger.info("파일 삭제처리 결과 result: {}", result);
+			}
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
 	}
 }

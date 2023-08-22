@@ -88,4 +88,19 @@ public class EducationServiceImpl implements EducationService{
 		return educationDao.deleteApplicant(eduAppNo);
 	}
 
+	@Override
+	public EducationVO selectByNoEducation(int eduNo) {
+		return educationDao.selectByNoEducation(eduNo);
+	}
+
+	@Override
+	public int updateEducation(EducationVO vo) {
+		return educationDao.updateEducation(vo);
+	}
+
+	@Override
+	public List<EducationVO> selectTeacher(EducationVO vo) {
+		return educationDao.selectTeacher(vo);
+	}
+
 }
