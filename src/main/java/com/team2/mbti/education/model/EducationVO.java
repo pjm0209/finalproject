@@ -4,9 +4,11 @@ import java.util.List;
 
 import com.team2.mbti.common.SearchVO;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class EducationVO extends SearchVO {
 	private int eduNo;
 	private String eduName;
