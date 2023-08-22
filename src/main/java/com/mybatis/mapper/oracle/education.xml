@@ -11,43 +11,6 @@
       	</where>
 	</sql>
 	
-	<!-- location -->
-	<insert id="insertLocation" parameterType="educationVo">
-		<selectKey keyProperty="epNo" order="BEFORE" resultType="int">
-			select education_place_seq.nextval from dual
-		</selectKey>
-		insert into education_place(ep_no, ep_name, ep_zipcode, ep_address, ep_latitude, ep_longitude, ep_tel)
-		values(#{epNo},#{epName},#{epZipcode},#{epAddress},#{epLatitude},#{epLongitude},#{epTel})
-	</insert>
-	
-	<select id="selectByNoEducation" parameterType="int" resultType="educationVo">
-		select * from mbti_education where edu_no = #{eduNo}
-	</select>
-	
-	<select id="selectAllLocation" parameterType="educationVo" resultType="educationVo">
-		select * from
-		(
-		    select rownum RNUM,a.* from
-		    (
-		        select * from education_place 
-		        <include refid="searchWhere"></include>
-		        order by ep_no desc
-		    )a
-		)
-		<![CDATA[
-		where RNUM > #{firstRecordIndex} and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}]]>
-	</select>
-	
-	<select id="getTotalRecordLocation" parameterType="educationVo" resultType="int">
-		select count(*) from education_place
-		<include refid="searchWhere"></include> 
-	</select>
-	
-	<delete id="deleteLocation" parameterType="int" >
-		delete from education_place
-		where ep_no=#{epNo} 
-	</delete>
-	
 	
 	<!-- list -->
 	<insert id="insertEducation" parameterType="educationVo">
@@ -100,6 +63,50 @@
 		select * from education_teacher order by edu_tea_no
 	</select>
 	
+	<select id="getEpName" resultType="educationVo">
+		select * from education_place order by ep_no
+	</select>
+	
+	
+	<!-- location -->
+	<insert id="insertLocation" parameterType="educationVo">
+		<selectKey keyProperty="epNo" order="BEFORE" resultType="int">
+			select education_place_seq.nextval from dual
+		</selectKey>
+		insert into education_place(ep_no, ep_name, ep_zipcode, ep_address, ep_latitude, ep_longitude, ep_tel)
+		values(#{epNo},#{epName},#{epZipcode},#{epAddress},#{epLatitude},#{epLongitude},#{epTel})
+	</insert>
+	
+	<select id="selectByNoEducation" parameterType="int" resultType="educationVo">
+		select * from mbti_education where edu_no = #{eduNo}
+	</select>
+	
+	<select id="selectAllLocation" parameterType="educationVo" resultType="educationVo">
+		select * from
+		(
+		    select rownum RNUM,a.* from
+		    (
+		        select * from education_place 
+		        <include refid="searchWhere"></include>
+		        order by ep_no desc
+		    )a
+		)
+		<![CDATA[
+		where RNUM > #{firstRecordIndex} and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}]]>
+	</select>
+	
+	<select id="getTotalRecordLocation" parameterType="educationVo" resultType="int">
+		select count(*) from education_place
+		<include refid="searchWhere"></include> 
+	</select>
+	
+	<delete id="deleteLocation" parameterType="int" >
+		delete from education_place
+		where ep_no=#{epNo} 
+	</delete>
+	
+	
+	
 	<!-- teacher -->
 	<insert id="insertTeacher" parameterType="educationVo">
 		<selectKey keyProperty="eduTeaNo" order="BEFORE" resultType="int">
@@ -132,6 +139,7 @@
 		delete from education_teacher
 		where edu_tea_no=#{eduTeaNo} 
 	</delete>
+	
 	
 	<!-- applicant -->
 	<select id="selectAllApplicant" parameterType="educationVo" resultType="educationVo">

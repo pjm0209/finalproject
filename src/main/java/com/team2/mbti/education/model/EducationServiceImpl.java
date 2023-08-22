@@ -59,18 +59,36 @@ public class EducationServiceImpl implements EducationService{
 	}
 
 	@Override
-	public int deleteLocation(int epNo) {
-		return educationDao.deleteLocation(epNo);
+	public int deleteLocation(List<EducationVO> list) {
+		int cnt = 0;
+		
+		for(EducationVO vo : list) {
+			cnt = educationDao.deleteLocation(vo.getEpNo());
+		}
+		
+		return cnt;
 	}
 
 	@Override
-	public int deleteTeacher(int eduTeaNo) {
-		return educationDao.deleteTeacher(eduTeaNo);
+	public int deleteTeacher(List<EducationVO> list) {
+		int cnt = 0;
+		
+		for(EducationVO vo : list) {
+			cnt = educationDao.deleteTeacher(vo.getEduTeaNo());
+		}
+		
+		return cnt;
 	}
 
 	@Override
-	public int deleteEducation(int eduNo) {
-		return educationDao.deleteEducation(eduNo);
+	public int deleteEducation(List<EducationVO> list) {
+		int cnt = 0;
+		
+		for(EducationVO vo : list) {
+			cnt = educationDao.deleteEducation(vo.getEduNo());
+		}
+		
+		return cnt;
 	}
 
 	@Override
@@ -107,6 +125,11 @@ public class EducationServiceImpl implements EducationService{
 	@Override
 	public List<EducationVO> getTeaName() {
 		return educationDao.getTeaName();
+	}
+
+	@Override
+	public List<EducationVO> getEpName() {
+		return educationDao.getEpName();
 	}
 
 	@Override
