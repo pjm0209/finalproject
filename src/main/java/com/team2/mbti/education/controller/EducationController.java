@@ -34,6 +34,7 @@ public class EducationController {
 		logger.info("교육 등록 페이지");
 		
 		model.addAttribute("title", "교육 추가");
+		model.addAttribute("getTeaName", educationService.getTeaName());
 		
 		return "admin/education/educationWrite";
 	}

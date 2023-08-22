@@ -9,9 +9,6 @@
 	      		${searchCondition} like '%' || #{searchKeyword} || '%'
 				and edu_no = #{eduNo}
 	      	</if>
-	      	<if test="searchKeyword==null or searchKeyword==''">
-				edu_no = #{eduNo}
-			</if>
       	</where>
 	</sql>
 	
@@ -62,9 +59,6 @@
 		values(#{eduNo}, #{eduName}, #{eduTeacher}, #{eduCom}, #{eduPeopleNumber}, #{eduPrice}, #{epName})
 	</insert>
 	
-	<select id="selectTeacher" resultType="educationVo">
-		select edu_tea_name from education_teacher
-	</select>
 	
 	<select id="selectAllEducation" parameterType="searchVo" resultType="educationVo">
 		select * from
@@ -89,7 +83,7 @@
 	</select>
 	
 	<select id="selectByEduNo" parameterType="int" resultType="educationVo">
-		select * from education where eduNo=#{eduNo}
+		select * from education where edu_no=#{eduNo}
 	</select>
 	
 	<update id="updateEducation" parameterType="educationVo">
@@ -103,6 +97,9 @@
 		where edu_no=#{eduNo} 
 	</delete>
 	
+	<select id="getTeaName" resultType="educationVo">
+		select edu_tea_name from education_teacher
+	</select>
 	
 	<!-- teacher -->
 	<insert id="insertTeacher" parameterType="educationVo">
