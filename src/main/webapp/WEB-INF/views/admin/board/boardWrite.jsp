@@ -106,7 +106,7 @@
 					                		<div>
 							                    <div class="file_input">
 							                    	<span class="fileName">${fileVo.originalFileName }</span>	
-							                    	<span class="bi bi-x-lg btns del_btn edit" onclick="removeFile(this);"></span>
+							                    	<span class="bi bi-x-lg btns del_btn edit" id="edit${i + 1 }"></span>
 							                    	<input type="hidden" class="fileName" value="${fileVo.fileName }">
 							                        <input type="hidden" class="fileNo" value="${fileVo.fileNo }">
 							                        <input type="hidden" class="fileIdx" value="${i }">

@@ -47,18 +47,20 @@ $(function(){
 	//게시판생성 유효성검사
 	$('form[name=boardCreate-frm]').submit(function(){
 		if($('div.input_group.v2 > #board_name').val().length < 1) {
-			alert("게시판 이름을 입력해 주세요");
+			$('#alertModalBody').html('게시판 이름을 입력해 주세요');		
+			$('#alertModalBtn').trigger('click');	
 			$('div.input_group.v2 > #board_name').focus();
 			event.preventDefault();
 		}
 	});
 	
+	//게시판 삭제확인 메세지 이벤트
 	$('#boardFormDel').click(function() {
-		var boardFormNo = $('input[name=boardFormNo]').val();
+		var boardFormNo = $('input[name=boardFormNo]').val();		
 		
-		if(confirm("정말로 삭제하시겠습니까?")) {
-			location.href = contextPath + "/admin/board/boardFormDel?boardFormNo=" + boardFormNo;
-		}
+		$('#confirmModalBody').html('정말로 삭제하시겠습니까?');
+		$('#confirmOk').attr('onclick', 'location.href=\"' + contextPath + '/admin/board/boardFormDel?boardFormNo=' + boardFormNo + "\"" + '');
+		$('#confirmModalBtn').trigger('click');	
 	});
 	
 	/*게시글 목록 전체선택 체크박스*/
@@ -84,31 +86,32 @@ $(function(){
     
     //게시글 다중삭제 이벤트
     $('#boardMultiDel').click(function() {
-		if(confirm("해당 게시글을 삭제하시겠습니까?")) {
-			$('form[name=boardFrm]').submit();
-		}
+		$('#confirmModalBody').html('해당 게시글을 삭제하겠습니까?');
+		$('#confirmOk').attr('onclick', '$("form[name=boardFrm]").submit();');
+		$('#confirmModalBtn').trigger('click');		
 	});
 	
 	//게시글 저장버튼 검사
 	$('form[name=boardWriteForm]').submit(function(){
-		if($('#board-write-title').val().length < 1) {
-			alert("제목을 입력해주세요");
+		if($('#board-write-title').val().length < 1) {			
+			$('#alertModalBody').html('제목을 입력해주세요');
+			$('#alertModalBtn').trigger('click');		
 			$('#board-write-title').focus();
 			
 			return false;			
 		}
 	});
 	
-	//게시판 삭제 확인메세지
+	//게시글 삭제 확인메세지
 	$('#del-board').click(function() {
 		var boardFormNo = $('input[name=boardFormNo]').val();
 		var boardNo = $('input[name=boardNo]').val();
 		var boardGroupNo = $('input[name=boardGroupNo]').val();
 		var boardStep = $('input[name=boardStep]').val()
 		
-		if(confirm("정말로 삭제하시겠습니까?")) {
-			location.href=contextPath + "/admin/board/boardWriteDel?boardNo=" + boardNo + "&boardFormNo=" + boardFormNo + "&boardGroupNo=" + boardGroupNo + "&boardStep=" + boardStep;
-		}
+		$('#confirmModalBody').html('정말로 삭제하시겠습니까?');
+		$('#confirmOk').attr('onclick', 'location.href=\"' + contextPath + '/admin/board/boardWriteDel?boardNo=' + boardNo + '&boardFormNo=' + boardFormNo + '&boardGroupNo=' + boardGroupNo + '&boardStep=' + boardStep + "\"" + '');
+		$('#confirmModalBtn').trigger('click');			
 	});
 	
 	/*게시글 상세보기 첨부파일 슬라이드 효과*/
@@ -122,27 +125,6 @@ $(function(){
 	if($('.board_comment_flag').val() == 'Y') {
 		commentsList($('input[name=boardNo]').val());
 	}
-	
-	/*파일수정 첨부파일 삭제*/
-	$('.btns.del_btn.edit').click(function() {
-		var fileName = $(this).nextAll('.fileName').val();
-		var fileNo = $(this).nextAll('.fileNo').val();
-		
-		if(confirm("정말로 삭제하시겠습니까?")) {
-			$.ajax({
-				url:contextPath + "/admin/board/fileDel",
-				data:{fileName: fileName,
-					  fileNo: fileNo},
-				type:"GET",				
-				success:function(result) {
-					console.log("result: " + result);					
-				},
-				error:function(xhr, status, error) {
-					alert(status + ": " + error);
-				}
-			});
-		}
-	});	
 	
 	//게시글상세보기면 좋아요숫자, 좋아요 체크유무 검색
 	if($('#boardDetail').val() == 'boardDetail') {
@@ -159,9 +141,37 @@ $(function(){
 		}
 	});
 	
+	//파일삭제 모달창세팅 이벤트
+	$('.bi.bi-x-lg.btns.del_btn.edit').click(function() {
+		var id = $(this).attr('id');
+		$('#confirmModalBody').html('파일을 삭제하시겠습니까?');
+		$('#confirmOk').attr('onclick', 'fileDel('+ id + ')');
+		$('#confirmModalBtn').trigger('click');
+	});
+	
 	const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
 	const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
 });
+
+//파일삭제 함수
+function fileDel(element){		
+	var fileName = $(element).nextAll('.fileName').val();
+	var fileNo = $(element).nextAll('.fileNo').val();
+	
+	$.ajax({
+		url:contextPath + "/admin/board/fileDel",
+		data:{fileName: fileName,
+			  fileNo: fileNo},
+		type:"GET",				
+		success:function(result) {
+			console.log("result: " + result);
+			removeFile(element);					
+		},
+		error:function(xhr, status, error) {
+			alert(status + ": " + error);
+		}
+	});
+}
 
 //댓글 수정,삭제박스 열기함수
 function commentMore(element) {	
@@ -323,7 +333,7 @@ function comments(comment) {
 					if(user == map.ADMIN_ID) {
 						str += "<a class='commentEdit' onclick='commentEdit(this)'>수정</a>";
 					}
-					str += "<a class='commentDel' onclick='commentDel(" + map.COMMENTS_NO + ", " + map.COMMENTS_STEP + ", " + map.COMMENTS_GROUP_NO + ", " + map.BOARD_NO + ")'>삭제</a>" +
+					str += "<a class='commentDel' onclick='commentDelModal(" + map.COMMENTS_NO + ", " + map.COMMENTS_STEP + ", " + map.COMMENTS_GROUP_NO + ", " + map.BOARD_NO + ")'>삭제</a>" +
 					"</div>";
 				} else {
 					str += "<p class='comment-writer'>" + map.NAME;
@@ -339,7 +349,7 @@ function comments(comment) {
 					"<i class='bi bi-three-dots-vertical'></i></span>" +
 					"<div class='editDel'>" +
 					"<a class='commentEdit' onclick='commentEdit(this)'>수정</a>";
-					str += "<a class='commentDel' onclick='commentDel(" + map.COMMENTS_NO + ", " + map.COMMENTS_STEP + ", " + map.COMMENTS_GROUP_NO + ", " + map.BOARD_NO + ")'>삭제</a>" +
+					str += "<a class='commentDel' onclick='commentDelModal(" + map.COMMENTS_NO + ", " + map.COMMENTS_STEP + ", " + map.COMMENTS_GROUP_NO + ", " + map.BOARD_NO + ")'>삭제</a>" +
 					"</div>";
 				}
 				str += "</div>";
@@ -405,7 +415,8 @@ function commentReply(element) {
 //댓글쓰기 처리함수
 function commentWrite() {
 	if($('#comment-area').val().length < 1) {
-		alert("내용을 입력해주세요!");
+		$('#alertModalBody').html('내용을 입력해주세요');		
+		$('#alertModalBtn').trigger('click');
 		$('#comment-area').focus();
 		return false;
 	}
@@ -428,7 +439,8 @@ function commentWrite() {
 //댓글 답글쓰기 처리 함수
 function commentReplyWrite() {
 	if($('#comment-area').val().length < 1) {
-		alert("내용을 입력해주세요!");
+		$('#alertModalBody').html('내용을 입력해주세요');		
+		$('#alertModalBtn').trigger('click');
 		$('#comment-area').focus();
 		return false;
 	}
@@ -452,7 +464,8 @@ function commentReplyWrite() {
 //댓글 수정처리 함수
 function commentWriteEdit() {
 	if($('#comment-area').val().length < 1) {
-		alert("내용을 입력해주세요!");
+		$('#alertModalBody').html('내용을 입력해주세요');		
+		$('#alertModalBtn').trigger('click');
 		$('#comment-area').focus();
 		return false;
 	}
@@ -505,24 +518,29 @@ function commentEditCancel(element) {
 	$(element).html('수정');
 }
 
+//댓글삭제처리 모달함수
+function commentDelModal(commentsNo, commentsStep, commentsGroupNo, boardNo) {
+	$('#confirmModalBody').html('정말로 삭제하시겠습니까?');
+	$('#confirmOk').attr('onclick', 'commentDel(' + commentsNo + ',' + commentsStep + ',' + commentsGroupNo + ',' + boardNo + ');');
+	$('#confirmModalBtn').trigger('click');	
+}
+
 //댓글삭제함수
 function commentDel(commentsNo, commentsStep, commentsGroupNo, boardNo) {	
-	if(confirm("정말로 삭제하시겠습니까?")) {
-		$.ajax({
-			url:contextPath + '/comments/delete',
-			type:"POST",
-			data:{commentsNo:commentsNo,
-				  commentsStep:commentsStep,
-				  commentsGroupNo:commentsGroupNo},
-			success:function(result) {
-				console.log(result);
-				commentsList(boardNo);
-			},
-			error:function(xhr, status, error) {
-				alert(status + ": " + error);
-			}
-		});		
-	}	
+	$.ajax({
+		url:contextPath + '/comments/delete',
+		type:"POST",
+		data:{commentsNo:commentsNo,
+			  commentsStep:commentsStep,
+			  commentsGroupNo:commentsGroupNo},
+		success:function(result) {
+			console.log(result);
+			commentsList(boardNo);
+		},
+		error:function(xhr, status, error) {
+			alert(status + ": " + error);
+		}
+	});		
 }
 
 /*글쓰기 첨부파일 함수*/
@@ -563,7 +581,7 @@ function addFile() {
         <div class="file_input">            
             <span class="fileName"></span>
 	        
-            <label> <i class="bi bi-folder-plus"></i>` +
+            <label><i class="bi bi-folder-plus"></i>` +
                 '<input type="file" name="files' + ++fileIndex + '"onchange="selectFile(this);" />' +
              `</label>
         </div>
