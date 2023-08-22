@@ -7,8 +7,10 @@ public class MbtiVO {
 	private int mbtiNo;
 	private String mbtiType;
 	private String definingTrait;
-	private String compatiblity;
+	private String mbtiJop;
+	private String compatibility;
 	private String strength;
 	private String weakness;
-	private String personalityTrait;
+	private String personalityTrait;		
+	private String bestMbti;
 }
