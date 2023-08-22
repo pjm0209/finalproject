@@ -2,6 +2,7 @@
 
 .bg-orange-primary {
 	background: #eb5d1e;	
+	color: white;
 }
 
 body {
@@ -90,7 +91,7 @@ div#board-title h5 {
 }
 
 button#button-addon2 {
-    width: 60px;
+    width: 75px;
 }
 
 button#board-write-button {
@@ -129,7 +130,7 @@ input#board-search-area {
 
 select#board-search-select {
 	margin-right: 30px;
-	height: 40px;
+	height: 43px;
 	margin-bottom: 0;
 	border: 1px solid #d8dce5;
 	border-radius: 6px;

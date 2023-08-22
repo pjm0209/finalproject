@@ -7,6 +7,7 @@
 	<meta charset="UTF-8">
 	<title>message.jsp</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+	<link href="<c:url value='/admin-css-js/css/board.css'/>" rel="stylesheet" type="text/css">
 </head>
 <body>
 <c:if test="${empty closePopup}">
@@ -38,7 +39,7 @@
 	        	${msg}
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-primary" onclick='location.href="<c:url value='${url}'/>"' data-bs-dismiss="modal">확인</button>
+	        <button type="button" class="btn bg-orange-primary" onclick='location.href="<c:url value='${url}'/>"' data-bs-dismiss="modal">확인</button>
 	      </div>
 	    </div>
 	  </div>

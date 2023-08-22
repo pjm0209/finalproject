@@ -6,9 +6,9 @@
 <head>
 <style>
 button.mbti-button{
-	background-color: #c87fdf;
+	background-color: #eb5d1e;
     background-size: cover;
-    border:1px solid black;
+    border:0;
 	border-radius: 5px;
 	padding: 6px 41px;
 	margin-top: -6px;
@@ -49,10 +49,14 @@ $(function(){
 				<h5 style="clear: both;float: left;">질문 유형</h5>
 				<select class="form-control" name="questionCategoryNo" id="questionCategoryNo" style="width: 300px;float: right;">
 					<option value="0">선택</option>
-					<option value="1"<c:if test="${vo.questionCategoryNo=='1'}">selected="selected"</c:if>>I/E</option>
-					<option value="2"<c:if test="${vo.questionCategoryNo=='2'}">selected="selected"</c:if>>S/N</option>
-					<option value="3"<c:if test="${vo.questionCategoryNo=='3'}">selected="selected"</c:if>>T/F</option>
-					<option value="4"<c:if test="${vo.questionCategoryNo=='4'}">selected="selected"</c:if>>P/J</option>
+					<option value="1"<c:if test="${vo.questionCategoryNo=='1'}">selected="selected"</c:if>>I</option>
+					<option value="2"<c:if test="${vo.questionCategoryNo=='1'}">selected="selected"</c:if>>E</option>
+					<option value="3"<c:if test="${vo.questionCategoryNo=='1'}">selected="selected"</c:if>>S</option>
+					<option value="4"<c:if test="${vo.questionCategoryNo=='1'}">selected="selected"</c:if>>N</option>
+					<option value="5"<c:if test="${vo.questionCategoryNo=='2'}">selected="selected"</c:if>>T</option>
+					<option value="6"<c:if test="${vo.questionCategoryNo=='3'}">selected="selected"</c:if>>F</option>
+					<option value="7"<c:if test="${vo.questionCategoryNo=='4'}">selected="selected"</c:if>>P</option>
+					<option value="8"<c:if test="${vo.questionCategoryNo=='4'}">selected="selected"</c:if>>J</option>
 				</select>
 			</div>
 			<hr style="clear: both;border: 0">

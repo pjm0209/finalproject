@@ -10,12 +10,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.team2.mbti.common.ConstUtil;
 import com.team2.mbti.common.PaginationInfo;
 import com.team2.mbti.common.SearchVO;
 import com.team2.mbti.education.model.EducationService;
 import com.team2.mbti.education.model.EducationVO;
+import com.team2.mbti.mbtisurvey.model.MbtiSurveyVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -26,6 +28,46 @@ public class EducationController {
 	private static final Logger logger = LoggerFactory.getLogger(EducationController.class);
 	
 	private final EducationService educationService;
+	
+	@GetMapping("/educationWrite")
+	public String eduWrite_get(Model model) {
+		logger.info("교육 등록 페이지");
+		
+		model.addAttribute("title", "교육 추가");
+		
+		return "admin/education/educationWrite";
+	}
+	
+	@PostMapping("/educationWrite")
+	public String eduWrite_post(@ModelAttribute EducationVO vo, Model model){
+		logger.info("교육 등록 처리, 파라미터 vo={}", vo);
+		
+		int cnt=educationService.insertEducation(vo);
+		logger.info("교육 등록 처리 결과 cnt={}", cnt);
+		
+		String msg="교육 등록에 실패하였습니다.",url="/admin/education/educationWrite";
+		if(cnt>0) {
+			msg="새 교육이 성공적으로 등록되었습니다.";
+			url="/admin/education/list?eduNo="+vo.getEduNo();
+		}else {
+			cnt=educationService.updateEducation(vo);
+			logger.info("교육 수정 결과 cnt={}",cnt);
+			
+			if(cnt>0) {
+				msg="선택한 교육 정보가 수정되었습니다.";
+				url="/admin/education/list";
+			}else {
+				msg="선택한 교육 정보 수정에 실패하였습니다.";
+				url="/admin/education/educationWrite";
+			}
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
+	}
+	
 	
 	@RequestMapping("/list")
 	public String list(@ModelAttribute SearchVO searchVo, Model model) {
