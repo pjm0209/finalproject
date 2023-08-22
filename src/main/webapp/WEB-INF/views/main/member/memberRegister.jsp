@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
-<%@ include file="../inc/top.jsp" %>
 <style>
 * {
   margin: 0;
@@ -137,6 +136,7 @@ body {
 
 <script type="text/javascript" src="<c:url value ='/js/member.js"'/>"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>
 <script type="text/javascript">
 
 function validate_userid(uid) {
@@ -152,7 +152,13 @@ function validate_hp(ph) {
 
 	$(function(){
 		$('#btnChkId').click(function(){
-			
+			//아이디 입력
+	        if ($('#memberId').val().length < 1) {
+	            alert("먼저 아이디를 입력하세요");
+	            $('#memberId').focus();
+	            return false;
+	        }
+						
 			//아이디 조건
 			if (!validate_userid($('#userid').val())) {
 				alert("아이디는 영문, 숫자, _(밑줄문자)만 가능합니다");
@@ -181,7 +187,7 @@ function validate_hp(ph) {
 				}						
 			});
 		});
-		
+
 		//비밀번호 일치/불일치
 		$('#memberpwdCheck').keyup(function() {
 		    var memberPwd = $('#memberPwd').val();
@@ -253,19 +259,25 @@ function validate_hp(ph) {
 	        }
 	        
 	        //전화번호 조건
-	        if (telNumber.length !== 13) {
-	            alert("전화번호는 "(-)" 포함 13자리로 입력해주세요");
+	        if (telNumber.length !== 11) {
+	            alert("전화번호는 11자리로 입력해주세요");
 	            $("#memberTel").focus();
 	            return false;
 	        }
 	        
 	        //주소 입력
-	        if ($('#address').val().length < 1) {
-	            alert("주소를 입력하세요");
-	            $('#address').focus();
-	            return false;
-	        }
-		});	
+		    if ($('#memberPostalCode').val().length < 1) {
+		        alert("우편번호를 입력하세요");
+		        $('#memberPostalCode').focus();
+		        return false;
+		    }
+	        
+		    if ($('#memberAddressDetail').val().length < 1) {
+		        alert("상세주소를 입력하세요");
+		        $('#memberAddressDetail').focus();
+		        return false;
+		    }
+		});		
 		
 		//이메일 직접입력
 		$(function(){
@@ -276,8 +288,8 @@ function validate_hp(ph) {
 		            $('#memberEmail3').css('visibility', 'hidden');
 		        }
 		    });
-		});			 
-	});
+		});	
+	});	
 </script>
 
 <div class="form-memberRegister">
@@ -325,7 +337,7 @@ function validate_hp(ph) {
 		
 		<label>전화번호</label>
 		<div class="div-register">
-			<input type="text" class="tel" id="memberTel" name="registerTel" placeholder="휴대폰번호 입력 ('-')포함 13자리 입력)">
+			<input type="text" class="tel" id="memberTel" name="registerTel" placeholder="휴대폰번호 입력 ('-')제외 11자리 입력">
 			<div class="error" id="telError"></div>
 		</div>		
 					

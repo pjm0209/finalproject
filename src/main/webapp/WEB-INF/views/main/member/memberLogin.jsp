@@ -137,11 +137,22 @@ $(function(){
     $('#memberRegister-button').click(function() {
         window.location.href = '<c:url value="/main/member/agreement"/>';
     }); 
+    
+    $('#show-hide-password').click(function() {
+        var passwordInput = $(this).prev('.password');
+        var passwordType = passwordInput.attr('type');
+        
+        if (passwordType === 'password') {
+            passwordInput.attr('type', 'text');
+            $(this).removeClass('bx-hide').addClass('bx-show');
+        } else {
+            passwordInput.attr('type', 'password');
+            $(this).removeClass('bx-show').addClass('bx-hide');
+        }
+    });
 });  	    	
 </script> 
-
-
-        
+    
 </head>
 <body>
     <section class="container forms">    
@@ -156,7 +167,7 @@ $(function(){
 
                     <div class="field input-field">
                         <input type="password" name="pwd" placeholder="비밀번호를 입력하세요." class="password">                    
-                        <i class='bx bx-hide eye-icon'></i>
+                        <i class='bx bx-hide eye-icon' id="show-hide-password"></i>
                     </div><br>
                     
                     <div class="remember-check">
