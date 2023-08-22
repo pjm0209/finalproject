@@ -12,7 +12,7 @@
 				action="<c:url value='/admin/order/bookBasket?flag=BASKET'/>"
 			</c:if>
 		>
-			<div class="flex shadow-sm p-3 mb-5 bg-body rounded" style="margin: 10px 0px;background: white;">
+			<div class="flex shadow-sm p-3 mb-5 bg-body rounded" style="margin: 10px 0px;background: white;margin-right: 15px">
 			<h2>주문 검색</h2>
 			<c:if test="${param.flag != 'BASKET'}">
 				<div class="box  flex box_search">

@@ -103,3 +103,14 @@ div #board-title{
 	background: #eb5d1e; border: 0px; margin: 5px 0px;color: white;
 }
 
+
+#bookTbody th, td:not(:nth-of-type(3)){
+	vertical-align : middle;
+}
+
+/*paging*/
+
+ul .pagination{
+	display: flex;
+    justify-content: space-around;
+}
