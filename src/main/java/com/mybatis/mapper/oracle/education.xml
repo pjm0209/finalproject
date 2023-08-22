@@ -34,7 +34,7 @@
 		    select rownum RNUM,a.* from
 		    (
 		        select * from education_place 
-		        <include refid="searchEducation"></include>
+		        <include refid="searchWhere"></include>
 		        order by ep_no desc
 		    )a
 		)
@@ -44,7 +44,7 @@
 	
 	<select id="getTotalRecordLocation" parameterType="searchVo" resultType="int">
 		select count(*) from education_place
-		<include refid="searchEducation"></include> 
+		<include refid="searchWhere"></include> 
 	</select>
 	
 	<delete id="deleteLocation" parameterType="int" >
@@ -74,7 +74,7 @@
 		        select m.*,(select count(*) from education_application e where e.edu_no=m.edu_no) qty,
 		        (select ep_name from education_place e where e.ep_no=m.ep_no) epName
 		        from mbti_education m
-		        <include refid="searchEducation"></include>
+		        <include refid="searchWhere"></include>
 		        order by m.edu_no desc
 		    )a
 		)
@@ -85,7 +85,7 @@
 	
 	<select id="getTotalRecordEducation" parameterType="searchVo" resultType="int">
 		select count(*) from mbti_education
-		<include refid="searchEducation"></include> 
+		<include refid="searchWhere"></include> 
 	</select>
 	
 	<select id="selectByEduNo" parameterType="int" resultType="educationVo">
@@ -119,7 +119,7 @@
 		    select rownum RNUM,a.* from
 		    (
 		        select * from education_teacher 
-		        <include refid="searchEducation"></include>
+		        <include refid="searchWhere"></include>
 		        order by edu_tea_no desc
 		    )a
 		)
@@ -129,7 +129,7 @@
 	
 	<select id="getTotalRecordTeacher" parameterType="searchVo" resultType="int">
 		select count(*) from education_teacher
-		<include refid="searchEducation"></include> 
+		<include refid="searchWhere"></include> 
 	</select>
 	
 	<delete id="deleteTeacher" parameterType="int" >
@@ -145,7 +145,7 @@
 			(
 				select e.*,(select count(*) from education_application app where e.edu_no=app.edu_no) qty
 				from educationview e
-				<include refid="searchEducation"></include>
+				<include refid="searchWhere"></include>
 				order by edu_app_no desc
 			)a
 		)
@@ -155,7 +155,7 @@
 	
 	<select id="getTotalRecordApplicant" parameterType="searchVo" resultType="int">
 		select count(*) from educationview
-		<include refid="searchEducation"></include> 
+		<include refid="searchWhere"></include> 
 	</select>
 	
 	<delete id="deleteApplicant" parameterType="int" >

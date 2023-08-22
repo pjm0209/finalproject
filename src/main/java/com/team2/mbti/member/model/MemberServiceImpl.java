@@ -28,6 +28,11 @@ public class MemberServiceImpl implements MemberService {
 	public int getTotalRecordMember(SearchVO searchVo) {
 		return memberDao.getTotalRecordMember(searchVo);
 	}
+	
+	@Override
+	public String memberIdSearch(Map<String, Object> map) {
+		return memberDao.memberIdSearch(map);
+	}
 
 	@Override
 	public int selectCheckId(String userid) {
@@ -41,10 +46,10 @@ public class MemberServiceImpl implements MemberService {
 		}
 		return result;
 	}
-
+	
 	@Override
-	public int deleteMember(int no) {
-		return memberDao.deleteMember(no);
+	public String selectPwd(String userid) {
+		return memberDao.selectPwd(userid);
 	}
 
 	@Override
@@ -64,24 +69,14 @@ public class MemberServiceImpl implements MemberService {
 
 		return result;
 	}
-
+	
 	@Override
-	public String memberIdSearch(Map<String, Object> map) {
-		return memberDao.memberIdSearch(map);
-	}
-
-	@Override
-	public String selectPwd(String userid) {
-		return memberDao.selectPwd(userid);
+	public int deleteMember(int no) {
+		return memberDao.deleteMember(no);
 	}
 
 	@Override
 	public MemberVO selectByUserid(String userid) {
 		return memberDao.selectByUserid(userid);
 	}
-
-
-	
-
-
 }
