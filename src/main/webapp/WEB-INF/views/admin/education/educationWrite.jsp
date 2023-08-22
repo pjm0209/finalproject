@@ -4,7 +4,7 @@
 
 
 <div class="education-write">
-	<form name="educationWrite-frm" method="post" action="<c:url value='/admin/education/educationWrite'/>">
+	<form name="educationWrite-frm" method="get" action="<c:url value='/dadmin/education/educationWrite'/>">
 	<div class="educationWrite-head">
 		<h2 class="text-gray-800" id="educationCreate-title">새 교육 추가</h2>
 		<div class="education-write-head-button">
@@ -32,7 +32,7 @@
 						</select>
 					</div>
 					<dt>교육 기간</dt>
-						<div ></div>
+						<div><input type="date" name="educationCom" ></div>
 					<dt>최대 인원</dt>
 					<dd>
 						<div class="input_group v2"><input type="text" name="educationPeople" id="education_people" maxlength="10"></div>
