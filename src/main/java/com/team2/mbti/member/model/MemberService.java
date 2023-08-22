@@ -20,9 +20,10 @@ public interface MemberService {
 	String memberIdSearch(Map<String, Object> map);
 	
 	int selectCheckId(String userid);	
-	int deleteMember(int no);
+	String selectPwd(String userid); 
 	int loginCheck(String userid, String pwd);
-	String selectPwd(String userid); //비번확인
+	int deleteMember(int no);
+	
 	MemberVO selectByUserid(String userid);
 	
 

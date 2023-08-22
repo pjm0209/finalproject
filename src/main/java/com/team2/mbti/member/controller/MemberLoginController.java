@@ -134,17 +134,10 @@ public class MemberLoginController {
 	}
 	
 	@RequestMapping("/member/findIdResult")
-	public String findIdresult(@RequestBody Map<String, Object> requestMap) {		
-		logger.info("아이디 찾기 결과 화면");
-		
-		String name = (String) requestMap.get("name");
-		String email = (String) requestMap.get("email");
-		 
-        Map<String, Object> paramMap = new HashMap<>();
-        paramMap.put("name", name);
-        paramMap.put("email", email);
+	public String findIdresult() {		
+		logger.info("아이디 찾기 결과 화면");		
 	 	 
-		return "/member/findIdResult";
+		return "main/member/findIdResult";
 	}
 		
 	@RequestMapping("/member/forgot-pwd")
