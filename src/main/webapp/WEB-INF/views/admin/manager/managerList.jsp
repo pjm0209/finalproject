@@ -3,14 +3,8 @@
 <%@ include file="../inc/top.jsp"%>
 
 <style>
-button#manager-edit-button {
-	float:  right;
-	border: 0;
-	border-radius: 5px;
-	padding: 6px 41px;
-	margin-top: -6px;
-	margin-right: 9px;
-	color: white;
+button#add-newBoard-button{
+	background: #eb5d1e;
 }
 
 button#manager-delete-button {
@@ -34,8 +28,8 @@ button#manager-delete-button {
 <script>
 	$(function(){
         $('#add-newBoard-button').click(function(){
-            var popupWidth = 400;
-            var popupHeight = 400;
+            var popupWidth = 600;
+            var popupHeight = 550;
             var leftPosition = (screen.width - popupWidth) / 2;
             var topPosition = (screen.height - popupHeight) / 2;
 
