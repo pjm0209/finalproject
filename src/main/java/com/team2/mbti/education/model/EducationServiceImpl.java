@@ -99,8 +99,8 @@ public class EducationServiceImpl implements EducationService{
 	}
 
 	@Override
-	public List<EducationVO> selectTeacher(EducationVO vo) {
-		return educationDao.selectTeacher(vo);
+	public List<EducationVO> getTeaName(EducationVO vo) {
+		return educationDao.getTeaName(vo);
 	}
 
 }

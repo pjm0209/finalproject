@@ -16,7 +16,7 @@ public interface EducationService {
 	int updateEducation(EducationVO vo);
 	int deleteEducation(int eduNo);
 	EducationVO selectByNoEducation(int eduNo);
-	List<EducationVO> selectTeacher(EducationVO vo);
+	List<EducationVO> getTeaName(EducationVO vo);
 	
 	int insertTeacher(EducationVO vo);
 	List<EducationVO> selectAllTeacher(SearchVO searchVo);
@@ -26,4 +26,5 @@ public interface EducationService {
 	List<EducationVO> selectAllApplicant(SearchVO searchVo);
 	int getTotalRecordApplicant(SearchVO searchVo);
 	int deleteApplicant(int eduAppNo);
+	
 }
