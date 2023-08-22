@@ -24,14 +24,15 @@
 					</dd>
 					<dt>강사명</dt>
 					<div class="mb-3">
-					    <select id="selectTeaName" class="form-control"  name="teacherName" >
-					    	<option></option>
-					       		<c:forEach var="educationVo" items = "${list }">
-					      	 	</c:forEach>
-					    </select>
+						<select id="getTeaName" class="form-control" name="eduTeaNo">
+							<option value="0">강사명을 선택하세요.</option>
+							<c:forEach var="educationVo" items="${teaNameList}">
+								<option value="${educationVo.eduTeaNo }">${educationVo.eduTeaName }</option>
+							</c:forEach>
+						</select>
 					</div>
 					<dt>교육 기간</dt>
-					
+						<div ></div>
 					<dt>최대 인원</dt>
 					<dd>
 						<div class="input_group v2"><input type="text" name="educationPeople" id="education_people" maxlength="10"></div>
