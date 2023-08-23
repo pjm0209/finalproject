@@ -4,7 +4,7 @@
 
 
 <div class="education-write">
-	<form name="educationWrite-frm" method="get" action="<c:url value='/dadmin/education/educationWrite'/>">
+	<form name="educationWrite-frm" method="post" action="<c:url value='/admin/education/educationWrite'/>">
 	<div class="educationWrite-head">
 		<h2 class="text-gray-800" id="educationCreate-title">새 교육 추가</h2>
 		<div class="education-write-head-button">
@@ -24,6 +24,16 @@
 					</dd>
 					<dt>강사명</dt>
 					<dd>
+<<<<<<< HEAD
+						<div class="mb-3">
+							<select id="getTeaName" class="form-control" name="eduTeaNo">
+								<option value="0">강사명을 선택하세요.</option>
+								<c:forEach var="educationVo" items="${teaNameList}">
+									<option value="${educationVo.eduTeaNo }">${educationVo.eduTeaName }</option>
+								</c:forEach>
+							</select>
+						</div>
+=======
 					<div class="mb-3">
 						<select id="getTeaName" class="form-control" name="eduTeaNo">
 							<option value="0">강사명을 선택하세요.</option>
@@ -32,6 +42,7 @@
 							</c:forEach>
 						</select>
 					</div>
+>>>>>>> branch 'dami' of https://github.com/pjm0209/finalproject.git
 					</dd>
 					<dt>교육 기간</dt>
 					<dd>
@@ -49,10 +60,14 @@
 					<dd>
 						<div class="mb-3">
 						    <select id="selectPlace" class="form-control"  name="educationPlace" >
+<<<<<<< HEAD
+						    	<option></option>
+=======
 						    	<option value="0">교육장을 선택하세요.</option>
 						    	<c:forEach var="educationVo" items="${epNameList }">
 						    		<option value="${educationVo.epNo }">${educationVo.epName }</option>
 						    	</c:forEach>
+>>>>>>> branch 'dami' of https://github.com/pjm0209/finalproject.git
 						    </select>
 						</div>
 					</dd>
