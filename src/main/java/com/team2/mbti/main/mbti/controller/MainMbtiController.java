@@ -17,6 +17,7 @@ import com.team2.mbti.mbtiResult.model.MbtiResultService;
 import com.team2.mbti.mbtiResult.model.MbtiResultVO;
 import com.team2.mbti.mbtisurvey.model.MbtiSurveyService;
 import com.team2.mbti.mbtisurvey.model.MbtiSurveyVO;
+import com.team2.mbti.mbtisurvey.model.MbtiVO;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.Getter;
@@ -186,7 +187,9 @@ public class MainMbtiController {
 			resultJ=(int)(jVal/(pVal+jVal)*100);
 			resultP=100-resultJ;
 		}
-		logger.info("resultMbti={},resultI={},resultE={},resultN={},resultS={},resultF={},resultT={},resultP={},resultJ={}",resultMbti,resultI,resultE,resultN,resultS,resultF,resultT,resultP,resultJ);
+		
+		MbtiVO mbtiVo=mbtiSurveyService.selectMbti(resultMbti);
+		
 		model.addAttribute("resultMbti", resultMbti);
 		model.addAttribute("resultI", resultI);
 		model.addAttribute("resultE", resultE);
@@ -196,23 +199,29 @@ public class MainMbtiController {
 		model.addAttribute("resultF", resultF);
 		model.addAttribute("resultP", resultP);
 		model.addAttribute("resultJ", resultJ);
-
+		model.addAttribute("mbtiVo", mbtiVo);
+		
 		return "main/mbti/mbtiResult";
 	}
 	
 	@GetMapping("/mbtiResult")
 	public String mbtiResult_get(Model model) {
 		
-		model.addAttribute("resultMbti", "ESFJ");
-		model.addAttribute("resultI", 20);
-		model.addAttribute("resultE", 80);
-		model.addAttribute("resultS", 52);
-		model.addAttribute("resultN", 48);
-		model.addAttribute("resultT", 47);
-		model.addAttribute("resultF", 53);
-		model.addAttribute("resultP", 46);
-		model.addAttribute("resultJ", 54);
+		MbtiVO mbtiVo=mbtiSurveyService.selectMbti("INTP");
+		
+		model.addAttribute("resultMbti", "INTP");
+		model.addAttribute("resultI", 60);
+		model.addAttribute("resultE", 40);
+		model.addAttribute("resultS", 48);
+		model.addAttribute("resultN", 52);
+		model.addAttribute("resultT", 53);
+		model.addAttribute("resultF", 47);
+		model.addAttribute("resultP", 70);
+		model.addAttribute("resultJ", 30);
+		model.addAttribute("mbtiVo", mbtiVo);
 		
 		return "main/mbti/mbtiResult";
 	}
+	
+
 }

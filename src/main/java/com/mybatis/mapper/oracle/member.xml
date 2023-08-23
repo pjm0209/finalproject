@@ -5,13 +5,10 @@
 <mapper namespace="com.team2.mbti.member.model.MemberDAO">
 	<insert id="insertMember" parameterType="memberVO">
 		<selectKey keyProperty="no" order="BEFORE" resultType="int">
-		select * member_seq.nextval from dual
-		</selectKey>
-	
-		insert into member(no, userid, pwd, name, hp, email, zipcode, address, address_detail, 
-		regdate, activatable, outdate, mati_no)
-		values(#{no}, #{userid}, #{pwd}, #{name}, #{hp},n#{email}, #{zipcode}, #{address}, #{address_detail}
-		#{regdate}, #{activatable}, #{outdate}, #{mati_no})
+		select member_seq.nextval from dual
+		</selectKey>	
+		insert into member(no, userid, pwd, name, hp, email, zipcode, address, address_detail)
+		values(#{no}, #{userid}, #{pwd}, #{name}, #{hp}, #{email}, #{zipcode}, #{address}, #{addressDetail})
 	</insert>
 
 	<sql id="searchMember">

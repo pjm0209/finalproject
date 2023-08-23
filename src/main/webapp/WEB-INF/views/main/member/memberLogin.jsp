@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+ 
 <!DOCTYPE html>
     <html lang="ko">
     <head>
@@ -130,19 +131,37 @@ form{
     text-decoration: underline;
 }
 
+#memberLogin-button{
+	background: #eb5d1e;
+}
 
-
+#memberRegister-button{
+	background: #eb5d1e;
+}
 </style>
-  
+
 <script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>     
 <script type="text/javascript">
 $(function(){
     $('#memberRegister-button').click(function() {
         window.location.href = '<c:url value="/main/member/agreement"/>';
     }); 
+    
+    $('#show-hide-password').click(function() {
+        var passwordInput = $(this).prev('.password');
+        var passwordType = passwordInput.attr('type');
+        
+        if (passwordType === 'password') {
+            passwordInput.attr('type', 'text');
+            $(this).removeClass('bx-hide').addClass('bx-show');
+        } else {
+            passwordInput.attr('type', 'password');
+            $(this).removeClass('bx-show').addClass('bx-hide');
+        }
+    });
 });  	    	
-</script>   
-                
+</script> 
+    
 </head>
 <body>
     <section class="container forms">    
@@ -152,16 +171,18 @@ $(function(){
                 
                 <form class="form-memberLogin" method="post" id="memberLogin-form" action="<c:url value='/main/member/memberLogin'/>">
                     <div class="field input-field">
-                        <input type="text" name="userid" placeholder="아이디를 입력하세요." class="input">                       
+                        <input type="text" name="userid" placeholder="아이디를 입력하세요."value="${cookie.ck_userid.value }">                       
                     </div>
 
                     <div class="field input-field">
                         <input type="password" name="pwd" placeholder="비밀번호를 입력하세요." class="password">                    
-                        <i class='bx bx-hide eye-icon'></i>
+                        <i class='bx bx-hide eye-icon' id="show-hide-password"></i>
                     </div><br>
                     
                     <div class="remember-check">
                 		<input type="checkbox" name="chkSave" id="remember-check">&nbsp; 아이디 저장하기
+                			<c:if test="${!empty cookie.ck_userid }">         
+                			</c:if>   
                 		<a class="forgot-id" href="<c:url value='/main/member/forgot-id'/>">아이디 찾기</a>
                 		<span style="color:blue;">|</span>
                 		<a class="forgot-password" href="<c:url value='/main/member/forgot-pwd'/>">비밀번호 찾기</a>
@@ -174,7 +195,9 @@ $(function(){
                     <div class="field button-field">
                     	<span>계정이 없으신가요?</span>
                     	<input type="button" value="회원가입" id="memberRegister-button">  
-                    </div>
+                    </div>  
+                    
+                    <div id="naver_id_login"></div>                 
                 </form>                 
             </div>
         </div>

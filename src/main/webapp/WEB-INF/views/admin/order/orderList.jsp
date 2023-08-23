@@ -43,7 +43,7 @@
 	<div>
 		<%@ include file="../order/orderSearch.jsp"%>
 	<!--  -->
-	<div class="board shadow-sm p-3 mb-5 bg-body rounded" style="margin: 10px 0px;background: white;">
+	<div class="board shadow-sm p-3 mb-5 bg-body rounded" style="margin: 10px 0px;background: white;margin-right: 15px">
 		
 		<%@ include file="../order/orderListBody.jsp"%>
 		

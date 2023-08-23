@@ -145,7 +145,7 @@
                     <i class="fas fa-gift"></i>
                     <span>판매 상품 관리</span></a>
             </li>
-            <li class="nav-item">
+            <%-- <li class="nav-item">
            		<div class="dropend">
 				  <a class="nav-link dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false" href="">
 				    <i class="fas fa-shopping-cart"></i>
@@ -158,32 +158,20 @@
 				    	style="color:black;">주문 취소 관리</a></li>
 				  </ul>
 				</div>
-			</li>
-            <%-- <li class="nav-item">
-                <a class="nav-link" href="<c:url value='/admin/order/orderList'/>">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span>주문 관리</span></a>
-            </li>
-             <li class="nav-item">
-                <a class="nav-link" href="<c:url value='/admin/order/orderCancleList?flag=orderCancle'/>">
-                    <i class="fas fa-window-close"></i>
-                    <span>주문 취소 관리</span></a>
-            </li> --%>
+			</li> --%>
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse-setting-Utilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>유틸리티</span>
+                    <i class="fas fa-fw fa-shopping-cart"></i>
+                    <span>주문 및 취소 관리</span>
                 </a>
                 <div id="collapse-setting-Utilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="<c:url value='/admin/utilities-color'/>">Colors</a>
-                        <a class="collapse-item" href="<c:url value='/admin/utilities-border'/>">Borders</a>
-                        <a class="collapse-item" href="<c:url value='/admin/utilities-animation'/>">Animations</a>
-                        <a class="collapse-item" href="<c:url value='/admin/utilities-other'/>">Other</a>
+                        <h6 class="collapse-header">order management:</h6>
+                        <a class="collapse-item" href="<c:url value='/admin/order/orderList?flag=order'/>">주문 관리</a>
+                        <a class="collapse-item" href="<c:url value='/admin/order/orderCancleList?flag=orderCancle'/>">주문 취소 관리</a>
                     </div>
                 </div>
             </li>

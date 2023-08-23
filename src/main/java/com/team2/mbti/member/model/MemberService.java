@@ -13,16 +13,17 @@ public interface MemberService {
 	int PWD_DISAGREE=2; 
 	int USERID_NONE=3; 
 		
-	int insertMember(MemberVO vo); 
+	int insertMember(MemberVO membervo); 
 	
 	List<MemberVO> selectAllMember(SearchVO vo);
 	int getTotalRecordMember(SearchVO searchVo);
 	String memberIdSearch(Map<String, Object> map);
 	
 	int selectCheckId(String userid);	
-	int deleteMember(int no);
+	String selectPwd(String userid); 
 	int loginCheck(String userid, String pwd);
-	String selectPwd(String userid); //비번확인
+	int deleteMember(int no);
+	
 	MemberVO selectByUserid(String userid);
 	
 

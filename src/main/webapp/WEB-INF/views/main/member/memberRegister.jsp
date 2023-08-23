@@ -136,6 +136,7 @@ body {
 
 <script type="text/javascript" src="<c:url value ='/js/member.js"'/>"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>
 <script type="text/javascript">
 
 function validate_userid(uid) {
@@ -151,7 +152,13 @@ function validate_hp(ph) {
 
 	$(function(){
 		$('#btnChkId').click(function(){
-			
+			//아이디 입력
+	        if ($('#memberId').val().length < 1) {
+	            alert("먼저 아이디를 입력하세요");
+	            $('#memberId').focus();
+	            return false;
+	        }
+						
 			//아이디 조건
 			if (!validate_userid($('#userid').val())) {
 				alert("아이디는 영문, 숫자, _(밑줄문자)만 가능합니다");
@@ -180,7 +187,7 @@ function validate_hp(ph) {
 				}						
 			});
 		});
-		
+
 		//비밀번호 일치/불일치
 		$('#memberpwdCheck').keyup(function() {
 		    var memberPwd = $('#memberPwd').val();
@@ -252,19 +259,25 @@ function validate_hp(ph) {
 	        }
 	        
 	        //전화번호 조건
-	        if (telNumber.length !== 13) {
-	            alert("전화번호는 "(-)" 포함 13자리로 입력해주세요");
+	        if (telNumber.length !== 11) {
+	            alert("전화번호는 11자리로 입력해주세요");
 	            $("#memberTel").focus();
 	            return false;
 	        }
 	        
 	        //주소 입력
-	        if ($('#address').val().length < 1) {
-	            alert("주소를 입력하세요");
-	            $('#address').focus();
-	            return false;
-	        }
-		});	
+		    if ($('#memberPostalCode').val().length < 1) {
+		        alert("우편번호를 입력하세요");
+		        $('#memberPostalCode').focus();
+		        return false;
+		    }
+	        
+		    if ($('#memberAddressDetail').val().length < 1) {
+		        alert("상세주소를 입력하세요");
+		        $('#memberAddressDetail').focus();
+		        return false;
+		    }
+		});		
 		
 		//이메일 직접입력
 		$(function(){
@@ -275,29 +288,29 @@ function validate_hp(ph) {
 		            $('#memberEmail3').css('visibility', 'hidden');
 		        }
 		    });
-		});			 
-	});
+		});	
+	});	
 </script>
 
 <div class="form-memberRegister">
 	<h1>MBTI&nbsp;&nbsp;회원가입</h1>
-	<form class="form-register" name="memberRegister" method="post" action="<c:url value='/main/member/memberReigster'/>">		
+	<form class="form-register" name="memberRegister" method="post" action="<c:url value='/main/member/memberRegister'/>">		
 		<label>이름</label>
 		<div class="div-register">		
-	    	<input type="text" class="name" id="memberName" name="registerName" placeholder="이름을 입력하세요.">
+	    	<input type="text" class="name" id="memberName" name="name" placeholder="이름을 입력하세요.">
 	    	<div class="error" id="nameError"></div>	    	
 		</div>
 		
 		<label>아이디</label>
 		<div class="div-register">		
-			<input type="text" class="id" id="memberId" name="registerId" placeholder="아이디 입력(6~20자)">&nbsp;
+			<input type="text" class="id" id="memberId" name="userid" placeholder="아이디 입력(6~20자)">&nbsp;
 			<button id="btnChkId" value="중복 확인" type="button">중복 확인</button>			
 			<span class="error" id="idError"></span>
 		</div>
 		
 		<label>비밀번호</label>
 		<div class="div-register">
-			<input type="password" class="pwd" id="memberPwd" name="registerPwd" placeholder="비밀번호 입력(문자,숫자,특수문자 포함 8~20자)">
+			<input type="password" class="pwd" id="memberPwd" name="pwd" placeholder="비밀번호 입력(문자,숫자,특수문자 포함 8~20자)">
 			<div class="error" id="pwdError"></div>
 		</div>
 		
@@ -309,7 +322,7 @@ function validate_hp(ph) {
 		
 		<label>이메일</label>
 		<div class="div-register">
-			<input type="text" class="email" id="memberEmail1" name="registerEmail" placeholder="이메일 주소">&nbsp;@&nbsp;
+			<input type="text" class="email" id="memberEmail1" name="email" placeholder="이메일 주소">&nbsp;@&nbsp;
 				<select name="email2" id="memberEmail2">
 					<option value="naver.com">naver.com</option>
 					<option value="nate.com">nate.com</option>
@@ -324,24 +337,24 @@ function validate_hp(ph) {
 		
 		<label>전화번호</label>
 		<div class="div-register">
-			<input type="text" class="tel" id="memberTel" name="registerTel" placeholder="휴대폰번호 입력 ('-')포함 13자리 입력)">
+			<input type="text" class="tel" id="memberTel" name="hp" placeholder="휴대폰번호 입력 ('-')제외 11자리 입력">
 			<div class="error" id="telError"></div>
 		</div>		
 					
 		<label>우편번호</label>			
 		<div class="div-register">
-			<input type="text" class="postalCode" id="memberPostalCode" name="registerPostalCode" placeholder="우편번호를 검색하세요">&nbsp;	
+			<input type="text" class="postalCode" id="memberPostalCode" name="zipcode" placeholder="우편번호를 검색하세요">&nbsp;	
 			<input type="Button" value="우편번호 찾기" id="btnZipcode" title="새창열림" onclick="sample4_execDaumPostcode()">	
 		</div>
 		
 		<label>주소</label>
 		<div class="div-register">
-			<input type="text" class="address" id="memberAddress" name="registerAddress" placeholder="주소를 입력하세요">
+			<input type="text" class="address" id="memberAddress" name="address" placeholder="주소를 입력하세요">
 		</div>
 		
 		<label>상세주소</label>
 		<div class="div-register">
-			<input type="text" class="addressDetail" id="memberAddressDetail" name="registerAddressDetail" placeholder="상세주소를 입력하세요">
+			<input type="text" class="addressDetail" id="memberAddressDetail" name="addressDetail" placeholder="상세주소를 입력하세요">
 		</div>		
 						
         <div class="signUp"><br>

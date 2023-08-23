@@ -12,7 +12,7 @@
 				action="<c:url value='/admin/order/bookBasket?flag=BASKET'/>"
 			</c:if>
 		>
-			<div class="flex shadow-sm p-3 mb-5 bg-body rounded" style="margin: 10px 0px;background: white;">
+			<div class="flex shadow-sm p-3 mb-5 bg-body rounded" style="margin: 10px 0px;background: white;margin-right: 15px">
 			<h2>주문 검색</h2>
 			<c:if test="${param.flag != 'BASKET'}">
 				<div class="box  flex box_search">
@@ -132,7 +132,7 @@
 					<div class="box num_01">
 					<label>정렬</label>
 				
-						<select class="form-select" id="" name="">
+						<select class="form-select" id="" name="" style="margin-left: 214px;">
 							<option value="" selected="selected">선택</option>
 							<option value="">상품명 오름차순</option>
 							<option value="">상품명 내림차순</option>

@@ -1,16 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
-
 <style>
-button#manager-edit-button {
-	float:  right;
-	border: 0;
-	border-radius: 5px;
-	padding: 6px 41px;
-	margin-top: -6px;
-	margin-right: 9px;
-	color: white;
+button#add-newBoard-button{
+	background: #eb5d1e;
 }
 
 button#manager-delete-button {
@@ -21,21 +14,18 @@ button#manager-delete-button {
 	margin-top: -6px;
 	margin-right: 9px;
 	color: white;
+	background-color: #eb5d1e;
 }
 
-.manager-button {
-	background-color: #858796;
-    background-image: linear-gradient(180deg, #858796 10%, #60616f 100%);
-    background-size: cover;
-}
 </style>
 
+<script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>
 <script type="text/javascript"></script>
 <script>
 	$(function(){
         $('#add-newBoard-button').click(function(){
-            var popupWidth = 400;
-            var popupHeight = 400;
+            var popupWidth = 600;
+            var popupHeight = 550;
             var leftPosition = (screen.width - popupWidth) / 2;
             var topPosition = (screen.height - popupHeight) / 2;
 
@@ -44,14 +34,23 @@ button#manager-delete-button {
             window.open('managerAdditional', '_blank', popupFeatures);
         });
 	        
-		$('#board-write-button').click(function(){
-			if(confirm("선택한 관리자를 삭제하시겠습니까?")){
-				var contextpath = "/mbti";
-				location.href=contextpath+"/admin/manager/managerList";
+		$('#manager-delete-button').click(function(){
+			if($('input[type=checkbox]:checked').length<1){
+				alert('삭제할 관리자를 선택하세요.');
+				return;
 			}
 			
-		});	
+			if(confirm('선택한 관리자를 삭제하시겠습니까?')){
+				$('form[name=form-Delete]').prop('action',contextPath+'/admin/manger/managerDelete');
+				$('form[name=form-Delete]').submit();
+			}
 	});
+	
+	function managerDel() {
+		$('#selectManagerDelete').attr('action', contextPath + '/admin/manager/managerDelete');
+		$('form[name=form-Delete]').submit();
+	}
+	});	
 </script>
 
 <!-- Begin Page Content -->
@@ -103,7 +102,7 @@ button#manager-delete-button {
 				</form>
 			</div>
 		</div>
-		<form name="frmDelete" method="post">
+		<form name="form-Delete" method="post" id="selectManagerDelete">
 		<table class="table" id="managertb">
 			<thead>
 				<tr class="board-table-colum">
@@ -117,8 +116,9 @@ button#manager-delete-button {
 			<c:set var="idx" value="0"/>
 			<tbody>
 				<c:forEach var="vo" items="${list}">
+					<c:set var="adminInformation" value="${adminVo.adminNo}"/>
 					<tr>
-						<th scope="row"><input type="checkbox" class="board-checkbox"></th>
+						<th scope="row"><input type="checkbox" class="board-checkbox" name="adminNo" value="${adminVo.adminNo }"></th>
 						<td>${vo.adminNo}</td>
 						<td>${vo.adminId}</td>
 						<td>${vo.adminEmail}</td>

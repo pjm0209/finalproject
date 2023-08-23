@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.team2.mbti.common.ConstUtil;
 import com.team2.mbti.common.PaginationInfo;
 import com.team2.mbti.common.SearchVO;
+import com.team2.mbti.mbtisurvey.model.MbtiSurveyVO;
 import com.team2.mbti.member.model.MemberService;
 import com.team2.mbti.member.model.MemberVO;
 
@@ -58,6 +59,24 @@ public class MemberController {
 		
 		return "admin/member/memberList";
 	}
-		
 	
+	@RequestMapping("/memberDelete")
+	public String memberDelete(@ModelAttribute MemberVO membervo, Model model){
+		logger.info("회원 탈퇴 처리, 파라미터 membervo={}", membervo);
+		
+		int cnt = memberService.deleteMember(membervo.getNo());
+		
+		String msg="", url="/admin/member/memberList";
+		
+		if(cnt > 0) {
+			msg="선택한 회원이 탈퇴되었습니다.";
+		}else {
+			msg="회원을 탈퇴하는중에 에러가 발생하였습니다.";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
+	}		
 }
