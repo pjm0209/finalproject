@@ -9,15 +9,17 @@ var contextPath = "/mbti"
 		
 		//교육 삭제 유효성 검사
 		$('#education-delete-button').click(function(){
-			if($('input[type=checkbox]:checked').length<1){
-				alert('삭제할 교육을 체크하세요.');
-				return;
+			var count = $('input[type=checkbox]:checked').length;
+			
+			if(count < 1) {
+				$('#alertModalBody').html('삭제할 교육을 선택하세요.');
+				$('#alertModalBtn').trigger('click');
+				return false;
 			}
 			
-			if(confirm('선택한 교육을 삭제하시겠습니까?')){
-				$('form[name=frmDelete]').prop('action',contextPath+'/admin/education/eduDelete');
-				$('form[name=frmDelete]').submit();
-			}
+			$('#confirmModalBody').html('선택한 교육을 삭제하시겠습니까?');		
+			 $('#confirmOk').attr('onclick', 'educationDel()');	 		 
+	         $('#confirmModalBtn').trigger('click');
 		});
 		
 		
@@ -54,7 +56,7 @@ var contextPath = "/mbti"
 		
 		
 		
-		//강의 등록 유효성검사
+		//교육 등록 유효성검사
 		$('#save-educationWrite').click(function(){
 			var teaNo = $('#getTeaName').val();
 			
@@ -67,6 +69,28 @@ var contextPath = "/mbti"
 			
 			$('form[name=educationWrite-frm]').submit();
 		});
+		
+		
+		//교육 수정
+		$('#education-edit-button').click(function(){
+			if($('input[type=checkbox]:checked').length>1){
+				$('#alertModalBody').html("수정할 질문을 하나만 선택하세요.");
+				$('#alertModalBtn').trigger('click');
+				return false;
+			}
+			
+			if($('input[type=checkbox]:checked').length<1){
+				$('#alertModalBody').html("수정할 질문을 선택하세요.");
+				$('#alertModalBtn').trigger('click');
+				return false;
+			}
+			
+			var no = $('input[type=checkbox]:checked').val();
+						
+			location.href= contextPath + "/admin/education/educationEdit?eduNo=" + no;
+			
+		});
+		
 		
 		//교육 신청 승인 처리
 		$('#applicant-edit-button').click(function(){
@@ -97,9 +121,20 @@ var contextPath = "/mbti"
          $('#confirmModalBtn').trigger('click');
 
 		});
+		
+		//우편번호 찾기
+		$('#btnZipcode').click(function(){            
+			window.open(contextPath+'/admin/education/zipcode','zipcode',
+				'width=750,height=800,location=yes,resizable=yes,left=0,top=0');
+	    });
 
 		
 	});
+
+	function educationDel() {
+		$('#eduDelFrm').attr('action', contextPath + '/admin/education/eduDelete');
+		$('form[name=frmDelete]').submit();
+	}
 	
 	function educationAppDel() {
 		$('#eduAppDelFrm').attr('action', contextPath + '/admin/education/appliDelete');

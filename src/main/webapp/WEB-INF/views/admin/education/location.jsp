@@ -8,7 +8,7 @@
 <div class="head-div">
 	<h2 class="text-gray-800">교육 관리</h2>
 	<button type="button" class="add-edu-button"
-		id="add-edu-button" onclick="location.href='locationCreate'">교육장 추가</button>
+		id="add-edu-button" onclick="location.href='locationWrite'">교육장 추가</button>
 </div>
 <div class="side-body">
 	<div class="side-div-title">
@@ -74,7 +74,7 @@
 				</form>
 			</div>
 		</div>
-		<form name="frmDelete" method="post">
+		<form name="frmDelete" method="post" id="eduLocDelFrm" action="<c:url value='/admin/education/locDelete'/>">
 		<table class="table" id="educationtb">
 			<thead>
 				<tr class="board-table-colum">
@@ -86,19 +86,27 @@
 					<th scope="col">전화번호</th>
 				</tr>
 			</thead>
-			<c:set var="idx" value="0"/>
 			<tbody>
-				<c:forEach var="educationVo" items="${list}">
-					<c:set var="educationPlace" value="${educationVo.epNo}"/>
+				<c:set var="idx" value="0"/>
+				<c:if test="${empty list }">
 					<tr>
-						<th scope="row"><input type="checkbox" class="board-checkbox" name="epNo" value="${educationVo.epNo }"></th>
-						<td>${educationVo.epNo }</td>
-						<td>${educationVo.epName }</td>
-						<td>${educationVo.epZipcode }</td>
-						<td>${educationVo.epAddress }</td>
-						<td>${educationVo.epTel }</td>
+						<td colspan="9">해당 검색 내용이 없습니다.</td>
 					</tr>
-				</c:forEach>
+				</c:if>
+				<c:if test="${!empty list }">
+					<c:forEach var="educationVo" items="${list}">
+						<c:set var="educationPlace" value="${educationVo.epNo}"/>
+						<tr>
+							<th scope="row"><input type="checkbox" class="board-checkbox" name="educationItems[${idx }].epNo" value="${educationVo.epNo }"></th>
+							<td>${educationVo.epNo }</td>
+							<td>${educationVo.epName }</td>
+							<td>${educationVo.epZipcode }</td>
+							<td>${educationVo.epAddress }</td>
+							<td>${educationVo.epTel }</td>
+						</tr>
+						<c:set var="idx" value="${idx + 1 }" />
+					</c:forEach>
+				</c:if>
 			</tbody>
 		</table>
 		<div style="width: 10%;text-align: center;margin: 0 auto;">
