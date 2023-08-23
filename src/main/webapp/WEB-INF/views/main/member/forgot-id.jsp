@@ -57,6 +57,7 @@ div {
 
 label{
 	font-weight: bold;
+	margin-left: 80px;
 }
 
 .btnSearch {
@@ -108,6 +109,7 @@ form {
 .tab-content.active {
     display: block;
 }
+
 </style>
 
 <script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>

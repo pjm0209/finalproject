@@ -1,8 +1,5 @@
  package com.team2.mbti.member.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -10,7 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -105,18 +101,18 @@ public class MemberLoginController {
 		return "main/member/memberRegister";
 	}
 	
-	@PostMapping("/member/memberRegister")
-	public String memberRegister_post(@ModelAttribute MemberVO membervo, HttpServletRequest request, Model model){
+	@PostMapping("/member/memberWrite")
+	public String memberRegister_post(@ModelAttribute MemberVO membervo,@RequestParam String email3, Model model){
 		logger.info("회원가입 처리, 파라미터 membervo={}",membervo);
 				
-		int result = memberService.insertMember(membervo);
+		int cnt = memberService.insertMember(membervo);
 		
-		logger.info("회원 가입 완료, result = {}",result);		
-		String msg = "회원 가입에 실패하였습니다.", url = "main/member/memberRegister";
+		logger.info("회원 가입 완료, result = {}",cnt);		
+		String msg = "회원 가입에 실패하였습니다.", url = "/member/memberRegister";
 		
-		if(result > 0) {
+		if(cnt > 0) {
 			msg = "회원 가입이 완료되었습니다.";
-			url = "main/index";
+			url = "/";
 		}
 		
 		model.addAttribute("msg",msg);
@@ -167,6 +163,13 @@ public class MemberLoginController {
 		
 		//4
 		return result;
+	}
+	
+	@RequestMapping("/member/mypage")
+	public String mypage() {
+		logger.info("마이페이지 화면");
+		
+		return "main/member/mypage";
 	}
 	
 }
