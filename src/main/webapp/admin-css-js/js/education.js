@@ -23,29 +23,33 @@ var contextPath = "/mbti"
 		
 		//교육장 삭제 유효성 검사
 		$('#location-delete-button').click(function(){
-			if($('input[type=checkbox]:checked').length<1){
-				alert('삭제할 교육장을 선택하세요.');
-				return;
-			}
+			var count = $('input[type=checkbox]:checked').length;
 			
-			if(confirm('선택한 교육장을 삭제하시겠습니까?')){
-				$('form[name=frmDelete]').prop('action', contextPath+'/admin/education/locDelete');
-				$('form[name=frmDelete]').submit();
+			if(count < 1) {
+				$('#alertModalBody').html('삭제할 교육장을 선택하세요.');
+				$('#alertModalBtn').trigger('click');
+				return false;
 			}
+	
+			 $('#confirmModalBody').html('선택한 교육장을 삭제하시겠습니까?');		
+			 $('#confirmOk').attr('onclick', 'educationLocDel()');	 		 
+	         $('#confirmModalBtn').trigger('click');
 		});
 		
 		
 		//강사 삭제 유효성 검사
 		$('#teacher-delete-button').click(function(){
-			if($('input[type=checkbox]:checked').length<1){
-				alert('삭제할 강사를 선택하세요.');
-				return;
-			}
+			var count = $('input[type=checkbox]:checked').length;
 			
-			if(confirm('선택한 강사를 삭제하시겠습니까?')){
-				$('form[name=frmDelete]').prop('action', contextPath+'/admin/education/teaDelete');
-				$('form[name=frmDelete]').submit();
+			if(count < 1) {
+				$('#alertModalBody').html('삭제할 강사를 선택하세요.');
+				$('#alertModalBtn').trigger('click');
+				return false;
 			}
+	
+			 $('#confirmModalBody').html('선택한 강사를 삭제하시겠습니까?');		
+			 $('#confirmOk').attr('onclick', 'educationTeaDel()');	 		 
+	         $('#confirmModalBtn').trigger('click');
 		});
 		
 		
@@ -93,15 +97,7 @@ var contextPath = "/mbti"
          $('#confirmModalBtn').trigger('click');
 
 		});
-		
-		//교육 등록 달력
-		$('#startDay').datepicker({
-			dateFormat:'yy-mm-dd',
-			changeYear:true,
-			dayNamesMin:['일','월','화','수','목','금','토'],
-			monthNames:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
-		});
-		
+
 		
 	});
 	
@@ -111,4 +107,14 @@ var contextPath = "/mbti"
 	}
 	
 	
+	function educationTeaDel() {
+		$('#eduTeaDelFrm').attr('action', contextPath + '/admin/education/teaDelete');
+		$('form[name=frmDelete]').submit();
+	}
+
+
+	function educationLocDel() {
+		$('#eduTeaDelFrm').attr('action', contextPath + '/admin/education/locDelete');
+		$('form[name=frmDelete]').submit();
+	}
 	

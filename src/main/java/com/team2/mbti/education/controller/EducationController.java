@@ -36,8 +36,12 @@ public class EducationController {
 		List<EducationVO> list = educationService.getTeaName();
 		logger.info("강사 이름 조회 결과, list.size={}", list.size());
 		
+		List<EducationVO> list2 = educationService.getEpName();
+		logger.info("교육장 조회 결과, list.size={}", list.size());
+		
 		model.addAttribute("title", "교육 추가");
 		model.addAttribute("teaNameList", list);
+		model.addAttribute("epNameList", list2);
 		
 		return "admin/education/educationWrite";
 	}
@@ -106,16 +110,18 @@ public class EducationController {
 	
 	
 	@RequestMapping("/eduDelete")
-	public String eduDelete(@ModelAttribute EducationVO vo, Model model) {
-		logger.info("교육 삭제 처리, 파라미터 vo={}", vo);
+	public String eduDelete(@ModelAttribute EducationListVO listVo, Model model) {
+		logger.info("교육 삭제 처리, 파라미터 listVo={}", listVo);
 		
-		int cnt = educationService.deleteEducation(vo.getEduNo());
+		List<EducationVO> list = listVo.getEducationItems();
+
+		int cnt = educationService.deleteEducation(list);
 		
 		String msg="", url="/admin/education/list";
 		if(cnt>0) {
 			msg="선택한 교육이 삭제되었습니다.";
 		}else {
-			msg="선택한 교육울 삭제하는 도중 에러가 발생하였습니다.";
+			msg="선택한 교육을 삭제하는 도중 에러가 발생하였습니다.";
 		}
 		
 		model.addAttribute("msg", msg);
@@ -191,8 +197,8 @@ public class EducationController {
 	}
 	
 	
-	@GetMapping("/location")
-	public String location_get(@ModelAttribute EducationVO vo, Model model) {
+	@RequestMapping("/location")
+	public String locationList(@ModelAttribute EducationVO vo, Model model) {
 		logger.info("교육장 관리 페이지 보여주기, 파라미터 vo={}", vo);
 		
 		PaginationInfo pagingInfo = new PaginationInfo();
@@ -223,10 +229,12 @@ public class EducationController {
 
 	
 	@RequestMapping("/locDelete")
-	public String locDelete(@ModelAttribute EducationVO vo, Model model) {
-		logger.info("교육장 삭제 처리, 파라미터 vo={}", vo);
+	public String locDelete(@ModelAttribute EducationListVO listVo, Model model) {
+		logger.info("교육장 삭제 처리, 파라미터 listVo={}", listVo);
 		
-		int cnt = educationService.deleteLocation(vo.getEpNo());
+		List<EducationVO> list = listVo.getEducationItems();
+
+		int cnt = educationService.deleteLocation(list);
 		
 		String msg="", url="/admin/education/location";
 		if(cnt>0) {
@@ -242,8 +250,8 @@ public class EducationController {
 	}
 	
 	
-	@GetMapping("/teacher")
-	public String teacher_get(@ModelAttribute EducationVO vo, Model model) {
+	@RequestMapping("/teacher")
+	public String teacherList(@ModelAttribute EducationVO vo, Model model) {
 		logger.info("강사 관리 페이지 보여주기, 파라미터 vo={}", vo);
 		
 		PaginationInfo pagingInfo = new PaginationInfo();
@@ -275,10 +283,12 @@ public class EducationController {
 	
 	
 	@RequestMapping("/teaDelete")
-	public String teaDelete(@ModelAttribute EducationVO vo, Model model) {
-		logger.info("강사 삭제 처리, 파라미터 vo={}", vo);
+	public String teaDelete(@ModelAttribute EducationListVO listVo, Model model) {
+		logger.info("강사 삭제 처리, 파라미터 listVo={}", listVo);
 		
-		int cnt = educationService.deleteTeacher(vo.getEduTeaNo());
+		List<EducationVO> list = listVo.getEducationItems();
+
+		int cnt = educationService.deleteTeacher(list);
 		
 		String msg="", url="/admin/education/teacher";
 		if(cnt>0) {
@@ -293,5 +303,6 @@ public class EducationController {
 		return "common/message";
 		
 	}
+	
 	
 }
