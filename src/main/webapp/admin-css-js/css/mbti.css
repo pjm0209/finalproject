@@ -231,8 +231,8 @@ section#mbtiSurvey{
 	margin: 0 auto;
 	margin-top: 200px;
 	padding-top: 50px;
+	padding-bottom: 50px;
 	width: 1400px;
-	height: 500px;
 	position: relative;
 }
 #mbti-jop span{
@@ -271,7 +271,6 @@ section#mbtiSurvey{
     height: 70px;
     line-height: 70px;
     text-align: center;
-    background-color: rgb(255, 128, 0);
     color: #fff;
     border-radius: 100px;
     font-weight: bold;
@@ -285,38 +284,59 @@ section#mbtiSurvey{
  	margin-top: 20px;
  	margin-left: 20px;
 }
-#mbti-compatibility #mbti-etc{
+#mbti-dating{
+	margin: 0 auto;
+	margin-top: 200px;
+	padding-top: 50px;
+	padding-left: 100px;
+	width: 1400px;
+	padding-bottom: 50px;
+	position: relative;
+}
+#mbti-dating span{
+	font-size: 30px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin-left: -140px;
+    margin-top: -35px;
+    display: inline-block;
+    width: 280px;
+    height: 70px;
+    line-height: 70px;
+    text-align: center;
+    color: #fff;
+    border-radius: 100px;
+    font-weight: bold;
+}
+#mbti-dating #mbti-etc{
 	padding-left: 30px;
 	padding-top: 30px;
-	width: 650px;
 	height: 650px;
-	float: right;
-	margin-top: 20px;
-	margin-right: 20px;
+ 	float: left;
+ 	margin-top: 20px;
+ 	margin-left: 20px;
 }
+
 #mbti-compatibility p:first-of-type{
-	font-size: 32px;
+	font-size: 40px;
     display: inline-block;
-    text-align: center;
     font-weight: bold;
+    width: 900px;
 }
 #mbti-compatibility p:last-of-type{
-	font-size: 18px;
+	font-size: 24px;
 	font-weight: bold;
 	margin-top: 20px;
-	width: 600px;
+	margin-left: 10px;
+	width: 750px;
+	line-height: 60px;
 }
-#mbti-etc p:first-of-type{
-	font-size: 32px;
-    display: inline-block;
-    text-align: center;
-    font-weight: bold;
-}
-#mbti-etc p:last-of-type{
-	font-size: 18px;
+#mbti-dating p{
+	font-size: 28px;
 	font-weight: bold;
 	margin-top: 20px;
-	width: 600px;
+	line-height: 60px;
 }
 .mbti-survey p{
 	font-size: 26px;
@@ -326,14 +346,13 @@ section#mbtiSurvey{
     padding-left: 30px;
     font-weight: bold;
 }
+
 #mbti-jop .mbti-jop{
 	margin: 0 auto;
 	margin-top: 20px;
 	padding-top: 7px;
 	color: #fff;
 	width: 1200px;
-	height: 100px;
-	background-color: #fe9601;
 	border-radius: 20px;
 	text-align: center;
 }
