@@ -7,6 +7,9 @@
 		<where>
 			<if test="searchKeyword!=null and searchKeyword!=''">
 				${searchCondition} like '%' || #{searchKeyword} || '%'
+				<if test="searchCondition == 'name'">
+					or admin_id like '%' || #{searchKeyword} || '%'
+				</if>
 				and board_form_no = #{boardFormNo}
 			</if>
 			<if test="searchKeyword==null or searchKeyword == ''">
