@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+ 
 <!DOCTYPE html>
     <html lang="ko">
     <head>
@@ -129,6 +130,14 @@ form{
 .form-content a:hover{
     text-decoration: underline;
 }
+
+#memberLogin-button{
+	background: #eb5d1e;
+}
+
+#memberRegister-button{
+	background: #eb5d1e;
+}
 </style>
 
 <script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>     
@@ -162,7 +171,7 @@ $(function(){
                 
                 <form class="form-memberLogin" method="post" id="memberLogin-form" action="<c:url value='/main/member/memberLogin'/>">
                     <div class="field input-field">
-                        <input type="text" name="userid" placeholder="아이디를 입력하세요." class="input">                       
+                        <input type="text" name="userid" placeholder="아이디를 입력하세요."value="${cookie.ck_userid.value }">                       
                     </div>
 
                     <div class="field input-field">
@@ -172,6 +181,8 @@ $(function(){
                     
                     <div class="remember-check">
                 		<input type="checkbox" name="chkSave" id="remember-check">&nbsp; 아이디 저장하기
+                			<c:if test="${!empty cookie.ck_userid }">         
+                			</c:if>   
                 		<a class="forgot-id" href="<c:url value='/main/member/forgot-id'/>">아이디 찾기</a>
                 		<span style="color:blue;">|</span>
                 		<a class="forgot-password" href="<c:url value='/main/member/forgot-pwd'/>">비밀번호 찾기</a>

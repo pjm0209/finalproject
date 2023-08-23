@@ -294,23 +294,23 @@ function validate_hp(ph) {
 
 <div class="form-memberRegister">
 	<h1>MBTI&nbsp;&nbsp;회원가입</h1>
-	<form class="form-register" name="memberRegister" method="post" action="<c:url value='/main/member/memberReigster'/>">		
+	<form class="form-register" name="memberRegister" method="post" action="<c:url value='/main/member/memberRegister'/>">		
 		<label>이름</label>
 		<div class="div-register">		
-	    	<input type="text" class="name" id="memberName" name="registerName" placeholder="이름을 입력하세요.">
+	    	<input type="text" class="name" id="memberName" name="name" placeholder="이름을 입력하세요.">
 	    	<div class="error" id="nameError"></div>	    	
 		</div>
 		
 		<label>아이디</label>
 		<div class="div-register">		
-			<input type="text" class="id" id="memberId" name="registerId" placeholder="아이디 입력(6~20자)">&nbsp;
+			<input type="text" class="id" id="memberId" name="userid" placeholder="아이디 입력(6~20자)">&nbsp;
 			<button id="btnChkId" value="중복 확인" type="button">중복 확인</button>			
 			<span class="error" id="idError"></span>
 		</div>
 		
 		<label>비밀번호</label>
 		<div class="div-register">
-			<input type="password" class="pwd" id="memberPwd" name="registerPwd" placeholder="비밀번호 입력(문자,숫자,특수문자 포함 8~20자)">
+			<input type="password" class="pwd" id="memberPwd" name="pwd" placeholder="비밀번호 입력(문자,숫자,특수문자 포함 8~20자)">
 			<div class="error" id="pwdError"></div>
 		</div>
 		
@@ -322,7 +322,7 @@ function validate_hp(ph) {
 		
 		<label>이메일</label>
 		<div class="div-register">
-			<input type="text" class="email" id="memberEmail1" name="registerEmail" placeholder="이메일 주소">&nbsp;@&nbsp;
+			<input type="text" class="email" id="memberEmail1" name="email" placeholder="이메일 주소">&nbsp;@&nbsp;
 				<select name="email2" id="memberEmail2">
 					<option value="naver.com">naver.com</option>
 					<option value="nate.com">nate.com</option>
@@ -337,24 +337,24 @@ function validate_hp(ph) {
 		
 		<label>전화번호</label>
 		<div class="div-register">
-			<input type="text" class="tel" id="memberTel" name="registerTel" placeholder="휴대폰번호 입력 ('-')제외 11자리 입력">
+			<input type="text" class="tel" id="memberTel" name="hp" placeholder="휴대폰번호 입력 ('-')제외 11자리 입력">
 			<div class="error" id="telError"></div>
 		</div>		
 					
 		<label>우편번호</label>			
 		<div class="div-register">
-			<input type="text" class="postalCode" id="memberPostalCode" name="registerPostalCode" placeholder="우편번호를 검색하세요">&nbsp;	
+			<input type="text" class="postalCode" id="memberPostalCode" name="zipcode" placeholder="우편번호를 검색하세요">&nbsp;	
 			<input type="Button" value="우편번호 찾기" id="btnZipcode" title="새창열림" onclick="sample4_execDaumPostcode()">	
 		</div>
 		
 		<label>주소</label>
 		<div class="div-register">
-			<input type="text" class="address" id="memberAddress" name="registerAddress" placeholder="주소를 입력하세요">
+			<input type="text" class="address" id="memberAddress" name="address" placeholder="주소를 입력하세요">
 		</div>
 		
 		<label>상세주소</label>
 		<div class="div-register">
-			<input type="text" class="addressDetail" id="memberAddressDetail" name="registerAddressDetail" placeholder="상세주소를 입력하세요">
+			<input type="text" class="addressDetail" id="memberAddressDetail" name="addressDetail" placeholder="상세주소를 입력하세요">
 		</div>		
 						
         <div class="signUp"><br>

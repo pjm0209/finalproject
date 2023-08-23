@@ -17,14 +17,24 @@ button#member-delete-button{
 <script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>
 <script type="text/javascript">
 	$(function(){
-		$('#board-write-button').click(function(){
-			if(confirm("선택한 회원을 삭제하시겠습니까?")){
-				var contextpath = "/mbti";
-				location.href=contextpath+"/admin/member/memberList";
+		$('#member-delete-button').click(function(){
+			if($('input[type=checkbox]:checked').length<1){
+				alert('탈퇴시킬 회원을 선택하세요.');
+				return;
 			}
 			
-		});	
+			if(confirm('선택한 회원을 탈퇴시키겠습니까?')){
+				$('form[name=form-Delete]').prop('action',contextPath+'/admin/member/memberDelete');
+				$('form[name=form-Delete]').submit();
+			}
+		});
 	});
+	
+	function memberDel() {
+		$('#selectMemberDelete').attr('action', contextPath + '/admin/member/memberDelete');
+		$('form[name=form-Delete]').submit();
+	}
+	
 </script>
 
 <!-- Begin Page Content -->
@@ -54,7 +64,7 @@ button#member-delete-button{
 <div class="board-body">
 	<div id="board-title">
 		<h5>회원 리스트</h5>
-			<button class="manager-button" id="member-delete-button">삭제</button>
+			<button class="member-button" id="member-delete-button">삭제</button>
 	</div>
 	
 	<div class="board">
@@ -73,7 +83,7 @@ button#member-delete-button{
 			</div>
 		</div>
 		
-		<form name="frmDelete" method="post">
+		<form name="form-Delete" method="post" id="selectMemberDelete" action="<c:url value='/admin/member/memberDel'/>">
 		<table class="table">
 			<thead>
 				<tr class="board-table-colum">
