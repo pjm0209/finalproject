@@ -161,28 +161,24 @@ public class AdminController {
 	}
 	
 	@PostMapping("/manager/managerAdditional")
-	public String managerAdditional_post(@ModelAttribute AdminVO adminvo, Model model) {
-		logger.info("관리자 추가 처리, 파라미터 adminvo={}", adminvo);
+	public String managerAdditional_post(@ModelAttribute AdminVO adminvo, Model model){
+		logger.info("관리자 등록 처리, 파라미터 membervo={}",adminvo);
 		
-		String msg = "관리자 등록 실패", url="/admin/manager/managerAdditional";
-		boolean closePopup=false;
+		int cnt = adminService.insertManager(adminvo);
 		
-		if(adminvo.getAdminNo()==0) {
-			int cnt = adminService.insertManager(adminvo);
-			logger.info("관리자 등록 결과 cnt={}",cnt);
-			
-			if(cnt > 0) {
-				msg = "관리자 등록되었습니다.";
-				url = "/admin/manager/managerAdditional";
-				
-				closePopup=true;
-			}
+		logger.info("관리자 등록 완료, result = {}",cnt);		
+		String msg = "관리자 등록에 실패하였습니다.", url = "/manager/managerAdditional";
+		
+		if(cnt > 0) {
+			msg = "관리자 등록에 성공하였습니다.";
+			url = "/admin/manager/managerAdditional";
 		}
-		model.addAttribute("msg", msg);
-		model.addAttribute("url", url);
-		model.addAttribute("closePopup", closePopup);
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
 		
 		return "common/message";
+	
 	}
 	
 	@RequestMapping("/manager/managerDelete")

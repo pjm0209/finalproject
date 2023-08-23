@@ -145,7 +145,7 @@ $(function(){
 			    <td style="width:100px;"><h5>아이디</h5></td>
 			    <td>
 			        <div style="display: flex;">
-			            <input class="form-control" type="text" id="managerId" name="managerId" maxLength="20" style="flex: 1;">&nbsp;
+			            <input class="form-control" type="text" id="managerId" name="adminId" maxLength="20" style="flex: 1;">&nbsp;
 			            <button id="btnChkId" value="중복 확인" type="button">중복 확인</button>
 			            <span class="error" id="idError"></span>	 
 			        </div>                      
@@ -154,7 +154,7 @@ $(function(){
 			
 			<tr>
 				<td style="width:100px;"><h5>비밀번호</h5></td>
-				<td><input class="form-control" type="password" id="managerPwd" name="managerPwd" maxLength="20"></td>							
+				<td><input class="form-control" type="password" id="managerPwd" name="adminPwd" maxLength="20"></td>							
 			</tr>
 			
 			<tr>
@@ -164,12 +164,12 @@ $(function(){
 			
 			<tr>
 				<td style="width:100px;"><h5>전화번호</h5></td>
-				<td><input class="form-control" type="text" id="managerTel" name="managerTel"  maxLength="20"></td>							
+				<td><input class="form-control" type="text" id="managerTel" name="adminTel"  maxLength="20"></td>							
 			</tr>
 						
 			<tr>
 				<td style="width:100px;"><h5>이메일</h5></td>
-				<td colspan="2"><input class="form-control" type="email" id="managerEmail" name="managerEmail"  maxLength="20"></td>							
+				<td colspan="2"><input class="form-control" type="email" id="managerEmail" name="adminEmail"  maxLength="20"></td>							
 			</tr>
 						
 			<tr>

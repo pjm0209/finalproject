@@ -8,7 +8,7 @@
 			select admin_seq.nextval from dual
 		</selectKey>
 		insert into admin(admin_no, admin_id, admin_pwd, admin_email, admin_tel)
-		values(admin_seq.nextval, #{adminId}, #{adminPwd}, #{adminEmail}, #{adminTel});
+		values(admin_seq.nextval, #{adminId}, #{adminPwd}, #{adminEmail}, #{adminTel})
 	</insert>
 	
 	<sql id="searchManager">
