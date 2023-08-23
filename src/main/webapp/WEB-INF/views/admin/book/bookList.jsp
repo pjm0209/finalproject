@@ -3,12 +3,27 @@
 
 <%@ include file="../inc/top.jsp"%>
 <script type="text/javascript" src="<c:url value='/admin-css-js/js/book.js'/>"></script>
-
+<script type="text/javascript">
+	$(function(){
+		$('#searchByKeywordBtn').click(function(){
+			$('form[name=frmPage]').submit();
+			$('form[name=serach]').submit();
+		});
+	});
+</script>
 
 <!-- Begin Page Content -->
-<form name="frmPage" method="post" action="<c:url value='/admin/book/bookList'/>">
-	<input type="hidden" name="" value="">
-	<input type="hidden" name="currentPage">	
+<form name="frmPage" method="post" action="<c:url value='/admin/book/bookList?bookFlag=${param.bookFlag}'/>">
+	<input type="hidden" name="bookFlag" value="${param.bookFlag}">
+	<input type="text" name="currentPage" >
+	<input type="hidden" name="perRecord">
+	<input type="hidden" name="keywordNo">
+	<input type="hidden" name="keywordTitle">
+	<input type="hidden" name="keywordPublisher">
+	<input type="hidden" name="keywordUseflag">
+	<input type="hidden" name="keywordRegdate">
+	<input type="hidden" name="keywordRegdate2">
+	<input type="hidden" name="keywordCategory">
 </form>
 <!-- Page Heading -->
 
@@ -35,17 +50,17 @@
 	</div>
 	<!--  -->
 	<div>
-		
-		<%@ include file="../book/bookSearch.jsp"%>
 	
+		<%@ include file="../book/bookSearch.jsp"%>
+		
 		<!--  -->
 		<div class="board shadow-sm p-3 mb-5 bg-body rounded" style="margin: 10px 0px;background: white;margin-right: 15px">
 			
 			<table class="table">
 				<colgroup>
+					<col style="width:5%;" />
 					<col style="width:10%;" />
-					<col style="width:10%;" />
-					<col style="width:10%;" />
+					<col style="width:15%;" />
 					<col style="width:10%;" />
 					<col style="width:10%;" />
 					<col style="width:10%;" />	
@@ -74,72 +89,87 @@
 					</tr>
 				</thead>
 				<tbody id="bookTbody">
-					<c:forEach var="bookVo" items="${list}">
-						<tr>
-							<th scope="row">
-								<input type="checkbox" class="book-checkbox">
-							</th>
-							<td>${bookVo.bookNo}</td>
-							<td>${bookVo.bookTitle}</td>
-							<td>
-								<img width="140px" height="210px" src="<c:url value='/images/bookProduct/${bookVo.bookNo}.jpg'/>" alt="${bookVo.bookTitle}">
-							</td>
-							<td>${bookVo.bookCategory}</td>
-							<td>${bookVo.bookPrice}</td>
-							<c:if test="${param.bookFlag != 'Inventory'}">
-								<td>판매수</td>						
-							</c:if>
-							<c:if test="${param.bookFlag == 'Inventory'}">
-								<td class="form-inline">
-									<input class="form-control" name="" type="number" value="1">
-								</td>
-							</c:if>
-							<td>${bookVo.bookUseflag}</td>
-							<td>${bookVo.bookRegdate}</td>
-							<c:if test="${param.bookFlag == 'Inventory' }">
+					<c:if test="${empty list}">
+					<tr>
+						<th colspan="10" style="color:gray;">해당 상품은 존재하지 않습니다.</th>
+					</tr>
+					</c:if>
+					<c:if test="${!empty list}">
+						<c:forEach var="map" items="${list}">
+							<tr>
+								<th scope="row">
+									<input type="checkbox" class="book-checkbox">
+								</th>
+								<td>${map["BOOK_NO"]}</td>
+								<td>${map["BOOK_TITLE"]}</td>
 								<td>
-									<button class="btn btn-info btn-xs blue" onclick="location.href='bookRegister?bookNo=${bookVo.bookNo}" type="button" title="재고저장"><i class="fas fa-save"></i></button>
+									<img width="140px" height="210px" src="<c:url value='/images/bookProduct/${map["BOOK_NO"]}.jpg'/>" alt="${map['BOOK_TITLE']}">
 								</td>
-							</c:if>
-							<c:if test="${param.bookFlag != 'Inventory' }">
-								<td id="tdLast">
-									<a class="btn btn-info btn-xs" href="" target="_blank" title="상품보기"><i class="fas fa-eye"></i></a>
-									<button class="btn btn-info btn-xs" onclick="location.href='bookRegister?bookNo=${bookVo.bookNo}'" type="button" title="복사"><i class="fas fa-copy"></i></button>
-									<button class="btn btn-primary btn-xs" onclick="location.href='bookEdot?bookNo=${bookVo.bookNo}'" type="button" title="수정"><i class="fas fa-edit"></i></button>
-									<button class="btn btn-danger btn-xs" id="delBtn" type="button" title="삭제"><i class="fas fa-trash"></i></button>
+								<td>${map["BOOK_CATEGORY"]}</td>
+								<td>
+									<fmt:formatNumber value="${map['BOOK_PRICE']}" pattern="#,###"/>원
 								</td>
-							</c:if>
-						</tr>
-					</c:forEach>
+								<c:if test="${param.bookFlag != 'Inventory'}">
+									<td>
+										<fmt:formatNumber value="" pattern="#,###"/>부
+									</td>						
+								</c:if>
+								<c:if test="${param.bookFlag == 'Inventory'}">
+									<td>
+										<input class="form-control" name="" type="number" value="${map['STOCK_QTY']}">
+									</td>
+								</c:if>
+								<td>${map["BOOK_USEFLAG"]}</td>
+								<td>
+									${map["BOOK_REGDATE"]}
+								</td>
+								<c:if test="${param.bookFlag == 'Inventory' }">
+									<td>
+										<button class="btn btn-info btn-xs blue" onclick="location.href='bookRegister?bookNo=${map['BOOK_NO']}" type="button" title="재고저장"><i class="fas fa-save"></i></button>
+									</td>
+								</c:if>
+								<c:if test="${param.bookFlag != 'Inventory' }">
+									<td id="tdLast">
+										<a class="btn btn-info btn-xs" href="" target="_blank" title="상품보기"><i class="fas fa-eye"></i></a>
+										<button class="btn btn-info btn-xs" onclick="location.href='bookRegister?bookNo=${map['BOOK_NO']}'" type="button" title="복사"><i class="fas fa-copy"></i></button>
+										<button class="btn btn-primary btn-xs" onclick="location.href='bookEdot?bookNo=${map['BOOK_NO']}'" type="button" title="수정"><i class="fas fa-edit"></i></button>
+										<button class="btn btn-danger btn-xs" id="delBtn" type="button" title="삭제"><i class="fas fa-trash"></i></button>
+									</td>
+								</c:if>
+							</tr>
+						</c:forEach>
+					</c:if>
 				</tbody>
 			</table>
 			<!-- 페이지 번호 추가 -->	
-			<nav class="bookPaging" aria-label="Page navigation example">
-			  <ul class="pagination pagination-lg justify-content-center">
-			  	<c:if test="${pagingInfo.firstPage > 1 }">
-				    <li class="page-item">
-				      <a class="page-link" href="#" onclick="bookListPage(${pagingInfo.fistPage - 1})" aria-label="Previous">
-				        <span aria-hidden="true">&laquo;</span>
-				      </a>
-				    </li>
-			    </c:if>
-			    <c:forEach var="i" begin="${pagingInfo.firstPage }" end="${pagingInfo.lastPage }">
-			    	<c:if test="${i == pagingInfo.currentPage }">
-					    <li class="page-item active"><a class="page-link" href="#">${i }</a></li>		    
-			    	</c:if>
-			    	<c:if test="${i != pagingInfo.currentPage }">
-					    <li class="page-item"><a class="page-link" href="#" onclick="bookListPage(${i})">${i }</a></li>		    
-			    	</c:if>
-			    </c:forEach>
-			    <c:if test="${pagingInfo.lastPage < pagingInfo.totalPage }">
-				    <li class="page-item">
-				      <a class="page-link" href="#" aria-label="Next" onclick="bookListPage(${pagingInfo.lastPage + 1})">
-				        <span aria-hidden="true">&raquo;</span>
-				      </a>
-				    </li>
-			    </c:if>
-			  </ul>
-			</nav>
+			<c:if test="${!empty list}">
+				<nav class="bookPaging" aria-label="Page navigation example">
+				  <ul class="pagination pagination-lg justify-content-center">
+				  	<c:if test="${pagingInfo.firstPage > 1 }">
+					    <li class="page-item">
+					      <a class="page-link" href="#" onclick="bookListPage(${pagingInfo.fistPage - 1})" aria-label="Previous">
+					        <span aria-hidden="true">&laquo;</span>
+					      </a>
+					    </li>
+				    </c:if>
+				    <c:forEach var="i" begin="${pagingInfo.firstPage }" end="${pagingInfo.lastPage }">
+				    	<c:if test="${i == pagingInfo.currentPage }">
+						    <li class="page-item active"><a class="page-link" href="#">${i }</a></li>		    
+				    	</c:if>
+				    	<c:if test="${i != pagingInfo.currentPage }">
+						    <li class="page-item"><a class="page-link" href="#" onclick="bookListPage(${i})">${i }</a></li>		    
+				    	</c:if>
+				    </c:forEach>
+				    <c:if test="${pagingInfo.lastPage < pagingInfo.totalPage }">
+					    <li class="page-item">
+					      <a class="page-link" href="#" aria-label="Next" onclick="bookListPage(${pagingInfo.lastPage + 1})">
+					        <span aria-hidden="true">&raquo;</span>
+					      </a>
+					    </li>
+				    </c:if>
+				  </ul>
+				</nav>
+			</c:if>
 			<!--  페이지 번호 끝 -->
 		</div>
 	</div>
