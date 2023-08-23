@@ -57,9 +57,8 @@ public class MainMbtiController {
 	
 	@PostMapping("/mbtiResult")
 	public String mbtiResult_post(@ModelAttribute MbtiResultListVO mbtiResultListVo,HttpSession session, Model model) {
-		/* int no=(int)session.getAttribute("no"); */
-		int no=4;
-		logger.info("mbti 결과, 파라미터 mbtiResultListVo={}",mbtiResultListVo);
+		int no=(int)session.getAttribute("no");
+		logger.info("mbti 결과, 파라미터 mbtiResultListVo={},no={}",mbtiResultListVo,no);
 		
 		int cnt=mbtiResultService.insertMbtiResultList(mbtiResultListVo,no);
 		logger.info("mbti 검사 결과, cnt={}",cnt);
