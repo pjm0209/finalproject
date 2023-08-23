@@ -6,24 +6,27 @@ import com.team2.mbti.common.SearchVO;
 
 public interface EducationService {
 	int insertLocation(EducationVO vo);
-	List<EducationVO> selectAllLocation(SearchVO searchVo);
-	int getTotalRecordLocation(SearchVO searchVo);
-	int deleteLocation(int epNo);
+	List<EducationVO> selectAllLocation(EducationVO vo);
+	int getTotalRecordLocation(EducationVO vo);
+	int deleteLocation(List<EducationVO> list);
 	
 	int insertEducation(EducationVO vo);
-	List<EducationVO> selectAllEducation(SearchVO searchVo);
-	int getTotalRecordEducation(SearchVO searchVo);
+	List<EducationVO> selectAllEducation(EducationVO vo);
+	int getTotalRecordEducation(EducationVO vo);
 	int updateEducation(EducationVO vo);
-	int deleteEducation(int eduNo);
+	int deleteEducation(List<EducationVO> list);
 	EducationVO selectByNoEducation(int eduNo);
-	List<EducationVO> selectTeacher(EducationVO vo);
+	List<EducationVO> getTeaName();
+	List<EducationVO> getEpName();
 	
 	int insertTeacher(EducationVO vo);
-	List<EducationVO> selectAllTeacher(SearchVO searchVo);
-	int getTotalRecordTeacher(SearchVO searchVo);
-	int deleteTeacher(int eduTeaNo);
+	List<EducationVO> selectAllTeacher(EducationVO vo);
+	int getTotalRecordTeacher(EducationVO vo);
+	int deleteTeacher(List<EducationVO> list);
 	
-	List<EducationVO> selectAllApplicant(SearchVO searchVo);
-	int getTotalRecordApplicant(SearchVO searchVo);
-	int deleteApplicant(int eduAppNo);
+	List<EducationVO> selectAllApplicant(EducationVO vo);
+	int getTotalRecordApplicant(EducationVO vo);
+	int deleteApplicant(List<EducationVO> list);
+	int updateApplicant(List<EducationVO> list);
+	
 }

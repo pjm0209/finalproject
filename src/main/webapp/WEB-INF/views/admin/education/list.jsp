@@ -5,7 +5,7 @@
 <div class="head-div">
 	<h2 class="text-gray-800">교육 관리</h2>
 	<button type="button" class="add-edu-button"
-		id="add-edu-button" onclick="location.href='eduWrite'">교육 추가</button>
+		id="add-edu-button" onclick="location.href='educationWrite'">교육 추가</button>
 </div>
 <div class="side-body">
 	<div class="side-div-title">
@@ -60,10 +60,10 @@
 			<div class="board-search-result">
 				<form name="frmSearch" method="post" action="<c:url value='/admin/education/list'/>">
 				<div class="input-group mb-3" id="edu-search-div" class="education">
-					<select class="form-select form-select-lg" aria-label=".form-select-lg example" name="searchcondition" id="edu-search-select">					  	
+					<select class="form-select form-select-lg" aria-label=".form-select-lg example" name="searchCondition" id="edu-search-select">					  	
 					  	<option value="edu_name" <c:if test="${param.searchCondition=='edu_name'}"> selected="selected" </c:if>>교육 이름</option>
-					  	<option value="edu_teacher" <c:if test="${param.searchCondition=='edu_teacher'}"> selected="selected" </c:if>>강사명</option>
-					  	<option value="ep_no" <c:if test="${param.searchCondition=='ep_name'}"> selected="selected" </c:if>>교육장</option>
+					  	<option value="edu_tea_name" <c:if test="${param.searchCondition=='edu_tea_name'}"> selected="selected" </c:if>>강사명</option>
+					  	<option value="ep_no" <c:if test="${param.searchCondition=='ep_no'}"> selected="selected" </c:if>>교육장</option>
 					</select>
 				 	<input type="text" class="form-control" name="searchKeyword" placeholder="검색어를 입력하세요" aria-label="Recipient's username" aria-describedby="button-addon2" id="board-search-area" value="${param.searchKeyword}">
 				 	<button class="btn btn-outline-secondary" type="submit" id="button-addon2">검색</button>

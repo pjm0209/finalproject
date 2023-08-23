@@ -77,7 +77,5 @@ public class MemberController {
 		model.addAttribute("url", url);
 		
 		return "common/message";
-	}
-		
-	
+	}		
 }
