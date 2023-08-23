@@ -207,17 +207,17 @@ public class MainMbtiController {
 	@GetMapping("/mbtiResult")
 	public String mbtiResult_get(Model model) {
 		
-		MbtiVO mbtiVo=mbtiSurveyService.selectMbti("ESFJ");
+		MbtiVO mbtiVo=mbtiSurveyService.selectMbti("INTP");
 		
-		model.addAttribute("resultMbti", "ESFJ");
-		model.addAttribute("resultI", 20);
-		model.addAttribute("resultE", 80);
-		model.addAttribute("resultS", 52);
-		model.addAttribute("resultN", 48);
-		model.addAttribute("resultT", 47);
-		model.addAttribute("resultF", 53);
-		model.addAttribute("resultP", 46);
-		model.addAttribute("resultJ", 54);
+		model.addAttribute("resultMbti", "INTP");
+		model.addAttribute("resultI", 60);
+		model.addAttribute("resultE", 40);
+		model.addAttribute("resultS", 48);
+		model.addAttribute("resultN", 52);
+		model.addAttribute("resultT", 53);
+		model.addAttribute("resultF", 47);
+		model.addAttribute("resultP", 70);
+		model.addAttribute("resultJ", 30);
 		model.addAttribute("mbtiVo", mbtiVo);
 		
 		return "main/mbti/mbtiResult";

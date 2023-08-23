@@ -3,15 +3,111 @@
 <%@ include file="../inc/top.jsp"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <section id="mbtiSurvey" class="mbtiSurvey">
+	<c:if test="${resultMbti=='ESFJ'}">
+		<c:set var="color1" value="#6524d7"/>
+		<c:set var="color2" value="#cbaefe"/>
+		<c:set var="color3" value="#dfcdff"/>
+		<c:set var="color4" value="#dfcdff"/>
+	</c:if>
+	<c:if test="${resultMbti=='ISTP'}">
+		<c:set var="color1" value="#3ac906"/>
+		<c:set var="color2" value="#b4ff9a"/>
+		<c:set var="color3" value="#e8ffe2"/>
+		<c:set var="color4" value="#64a910"/>
+	</c:if>
+	<c:if test="${resultMbti=='ENFJ'}">
+		<c:set var="color1" value="#f6be06"/>
+		<c:set var="color2" value="#ffe783"/>
+		<c:set var="color3" value="#fffae2"/>
+		<c:set var="color4" value="#163fbb"/>
+	</c:if>
+	<c:if test="${resultMbti=='ISTJ'}">
+		<c:set var="color1" value="#6c51ff"/>
+		<c:set var="color2" value="#beb3ff"/>
+		<c:set var="color3" value="#e6e1ff"/>
+		<c:set var="color4" value="#6423d7"/>
+	</c:if>
+	<c:if test="${resultMbti=='ISFJ'}">
+		<c:set var="color1" value="#86c501"/>
+		<c:set var="color2" value="#d5ff7c"/>
+		<c:set var="color3" value="#efffd2"/>
+		<c:set var="color4" value="#dc1864"/>
+	</c:if>
+	<c:if test="${resultMbti=='ISFP'}">
+		<c:set var="color1" value="#b9b136"/>
+		<c:set var="color2" value="#fff998"/>
+		<c:set var="color3" value="#fefccc"/>
+		<c:set var="color4" value="#ff74e6"/>
+	</c:if>
+	<c:if test="${resultMbti=='INFP'}">
+		<c:set var="color1" value="#009bff"/>
+		<c:set var="color2" value="#94d5ff"/>
+		<c:set var="color3" value="#e1f3ff"/>
+		<c:set var="color4" value="#f05e0a"/>
+	</c:if>
+	<c:if test="${resultMbti=='INFJ'}">
+		<c:set var="color1" value="#015eac"/>
+		<c:set var="color2" value="#80c5ff"/>
+		<c:set var="color3" value="#e0f2fe"/>
+		<c:set var="color4" value="#ff8900"/>
+	</c:if>
+	<c:if test="${resultMbti=='INTJ'}">
+		<c:set var="color1" value="#163fbb"/>
+		<c:set var="color2" value="#7a9cfe"/>
+		<c:set var="color3" value="#dae4ff"/>
+		<c:set var="color4" value="#f3c003"/>
+	</c:if>
+	<c:if test="${resultMbti=='INTP'}">
+		<c:set var="color1" value="#03cecb"/>
+		<c:set var="color2" value="#84fffd"/>
+		<c:set var="color3" value="#e1ffff"/>
+		<c:set var="color4" value="#d100ff"/>
+	</c:if>
+	<c:if test="${resultMbti=='ESFJ'}">
+		<c:set var="color1" value="#6524d7"/>
+		<c:set var="color2" value="#cbaefe"/>
+		<c:set var="color3" value="#dfcdff"/>
+		<c:set var="color4" value="#163fbb"/>
+	</c:if>
+	<c:if test="${resultMbti=='ESFJ'}">
+		<c:set var="color1" value="#6524d7"/>
+		<c:set var="color2" value="#cbaefe"/>
+		<c:set var="color3" value="#dfcdff"/>
+		<c:set var="color4" value="#163fbb"/>
+	</c:if>
+	<c:if test="${resultMbti=='ESFJ'}">
+		<c:set var="color1" value="#6524d7"/>
+		<c:set var="color2" value="#cbaefe"/>
+		<c:set var="color3" value="#dfcdff"/>
+		<c:set var="color4" value="#163fbb"/>
+	</c:if>
+	<c:if test="${resultMbti=='ESFJ'}">
+		<c:set var="color1" value="#6524d7"/>
+		<c:set var="color2" value="#cbaefe"/>
+		<c:set var="color3" value="#dfcdff"/>
+		<c:set var="color4" value="#163fbb"/>
+	</c:if>
+	<c:if test="${resultMbti=='ESFJ'}">
+		<c:set var="color1" value="#6524d7"/>
+		<c:set var="color2" value="#cbaefe"/>
+		<c:set var="color3" value="#dfcdff"/>
+		<c:set var="color4" value="#163fbb"/>
+	</c:if>
+	<c:if test="${resultMbti=='ESFJ'}">
+		<c:set var="color1" value="#6524d7"/>
+		<c:set var="color2" value="#cbaefe"/>
+		<c:set var="color3" value="#dfcdff"/>
+		<c:set var="color4" value="#163fbb"/>
+	</c:if>
 	<div class="mbti-result" style="background-image: url(<c:url value='/images/${resultMbti}.jpg'/>)">
 		<div class="mbti-result-top">
-			<h1 style="text-shadow: 1px 1px 3px #6524d7;">
-				당신의 MBTI는<br><span style="color:#6524d7;">${resultMbti}</span> 입니다.
+			<h1 style="text-shadow: 1px 1px 3px ${color1};">
+				당신의 MBTI는<br><span style="color:${color1};">${resultMbti}</span> 입니다.
 			</h1>
 		</div>
 	</div>
 	<div class="character-type">
-		<h2 style="color:#6524d7;">성격 유형</h2>
+		<h2 style="color:${color1};">성격 유형</h2>
 	</div>
 	<!-- Project Card Example -->
     <div class="card shadow mb-4 mbti-div-size">
@@ -70,27 +166,27 @@
         </div>
     </div>
 	<div class="personality">
-		<h2 style="color:#6524d7;">성격 특징</h2>
+		<h2 style="color:${color1};">성격 특징</h2>
 		<p style="color:#000000;">
 			${mbtiVo.personalityTrait}
 		</p>
 		
 	</div>
-	<div class="inner" style="background-color:#6524d7;">
+	<div class="inner" style="background-color:${color1};">
 		<h2>주요 특징</h2>
 	</div>
-	<div class="defining" style="background-color:#dfcdff;">
+	<div class="defining" style="background-color:${color3};">
 		<div style="color:#14100c;font-weight: bold;">
 			${mbtiVo.definingTrait}
 		</div>
 	</div>
 	
-	<div class="inner2" style="background-color:#6524d7;">
+	<div class="inner2" style="background-color:${color1};">
 		<h2>강점 및 약점</h2>
 	</div>
-	<c:set var="strength" value="${fn:split(mbtiVo.strength,'hr')}"/>
-	<c:set var="weakness" value="${fn:split(mbtiVo.weakness,'hr')}"/>
-	<div class="defining2" style="background-color:#dfcdff;">
+	<c:set var="strength" value="${fn:split(mbtiVo.strength,'@')}"/>
+	<c:set var="weakness" value="${fn:split(mbtiVo.weakness,'@')}"/>
+	<div class="defining2" style="background-color:${color3};">
 		<div id="strength" >
 			<h2>강점</h2><br>
 			<ul>
@@ -109,41 +205,26 @@
 		</div>
 	</div>
 	<c:set var="mbtiJop" value="${fn:split(mbtiVo.mbtiJop,'@')}"/>
-	<div id="mbti-jop" style="background-color: #dfcdff;">
-		<span style="background-color:#6524d7;">관련 직업</span>
+	<div id="mbti-jop" style="background-color: ${color3};">
+		<span style="background-color:${color1};">관련 직업</span>
 	 	<c:forEach var="i" begin="0" end="${fn:length(mbtiJop)-1}">
-			<div class="mbti-jop" style="background-color: #6524d7;">
+			<div class="mbti-jop" style="background-color: ${color1};">
 				<p>${mbtiJop[i]}</p>
 			</div>
 	 	</c:forEach>
-		
 	</div>
 	
-	<div id="mbti-compatibility" style="background-image: url('<c:url value="/images/2.jpg"/>')">
-		<span style="background-color: #b8b13d;">궁합</span>
+	<c:set var="compatibility" value="${fn:split(mbtiVo.compatibility,'@')}"/>
+	<div id="mbti-compatibility" style="background-image: url('<c:url value="/images/${mbtiVo.bestMbti}.jpg"/>')">
+		<span style="background-color: ${color4};">궁합</span>
 		<div id="best">
-			<p>Best궁합은 ISTJ 현실주의자 유형입니다.</p>
-			<p>
-			   ISTJ는 실하게 행동하는 자신의 모습에서 자부심을 느끼며,<br>
-			   자기 생각을 솔직하게 이야기하고 어떤 것에 헌신하기로 한 경우 최선을 다합니다.<br>
-			   상대방에게 배려심이 깊고 인내심이 강한 편입니다.<br>
-			   사귀기 시작하면 관계를 오래 지속하는 성격입니다.</p>
+			<p>${compatibility[0]}</p>
+			<p>${compatibility[1]}</p>
 		</div>
-		<div id="mbti-etc">
-			<!-- <p>연애특징</p>
-			<p>
-				연애특징<br>
-				1. 목적 없이 사람들과 어울리는 것을 싫어합니다.<br>
-				
-				2. 내향적 이성에겐 끌려 하지 않으며 밝고 활기찬 E type(외향적)을 선호합니다.<br>
-				
-				3. 본인이 진정 사랑하는 상대를 만나게 되면 모든 걸 다 쏟는 성격입니다.<br>
-				
-				4. 자신의 생각과 감정을 모두 표현해야 좋은 관계를 유지하는 데 도움이 됩니다.<br>
-				
-				5. 직관보다 현실과 사실을 중요시 합니다.
-			</p> -->
-		</div>
+	</div>
+	<div id="mbti-dating" style="background-color: ${color3};">
+		<span style="background-color: ${color1};">${compatibility[2]}</span>
+			<p>${compatibility[3]}</p>
 	</div>
 </section>
 <%@ include file="../inc/bottom.jsp"%>
