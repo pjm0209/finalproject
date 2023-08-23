@@ -66,9 +66,7 @@ calendar {
     	border-color:#ff9800;
 	}
 	
-	:root {
-	--fc-today-bg-color:#eb5d1e;
-	}
+	
 	
 	#modalTable th {
 		text-align: left;
