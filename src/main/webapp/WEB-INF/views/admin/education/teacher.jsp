@@ -74,7 +74,7 @@
 				</form>
 			</div>
 		</div>
-		<form name="frmDelete" method="post" id="eduTeaDelFrm">
+		<form name="frmDelete" method="post" id="eduTeaDelFrm" action="<c:url value='/admin/education/teaDelete'/>">
 		<table class="table" id="educationtb">
 			<thead>
 				<tr class="board-table-colum">
@@ -87,12 +87,12 @@
 					<th scope="col">전화번호</th>
 				</tr>
 			</thead>
-			<c:set var="idx" value="0"/>
 			<tbody>
+				<c:set var="idx" value="0"/>
 				<c:forEach var="educationVo" items="${list}">
 					<c:set var="educationPlace" value="${educationVo.eduTeaNo}"/>
 					<tr>
-						<th scope="row"><input type="checkbox" class="board-checkbox" name="eduTeaNo" value="${educationVo.eduNo }"></th>
+						<th scope="row"><input type="checkbox" class="board-checkbox" name="educationItems[${idx }].eduTeaNo"value=" ${educationVo.eduTeaNo }"></th>
 						<td>${educationVo.eduTeaNo }</td>
 						<td>${educationVo.eduTeaName }</td>
 						<td>${educationVo.eduTeaId }</td>
@@ -100,6 +100,7 @@
 						<td>${educationVo.eduTeaEmail }</td>
 						<td>${educationVo.eduTeaTel }</td>
 					</tr>
+					<c:set var="idx" value="${idx + 1 }" />
 				</c:forEach>
 			</tbody>
 		</table>

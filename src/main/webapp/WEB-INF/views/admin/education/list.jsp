@@ -63,7 +63,7 @@
 					<select class="form-select form-select-lg" aria-label=".form-select-lg example" name="searchCondition" id="edu-search-select">					  	
 					  	<option value="edu_name" <c:if test="${param.searchCondition=='edu_name'}"> selected="selected" </c:if>>교육 이름</option>
 					  	<option value="edu_tea_name" <c:if test="${param.searchCondition=='edu_tea_name'}"> selected="selected" </c:if>>강사명</option>
-					  	<option value="ep_no" <c:if test="${param.searchCondition=='ep_no'}"> selected="selected" </c:if>>교육장</option>
+					  	<option value="ep_name" <c:if test="${param.searchCondition=='ep_name'}"> selected="selected" </c:if>>교육장</option>
 					</select>
 				 	<input type="text" class="form-control" name="searchKeyword" placeholder="검색어를 입력하세요" aria-label="Recipient's username" aria-describedby="button-addon2" id="board-search-area" value="${param.searchKeyword}">
 				 	<button class="btn btn-outline-secondary" type="submit" id="button-addon2">검색</button>
@@ -71,11 +71,11 @@
 				</form>
 			</div>
 		</div>
-		<form name="frmDelete" method="post">
+		<form name="frmDelete" method="post" id="eduDelFrm" action="<c:url value='/admin/education/eduDelete'/>">
 		<table class="table" id="educationtb">
 			<thead>
 				<tr class="board-table-colum">
-					<th scope="col"><input type="checkbox" id="check-All" class="board-checkbox"></th>
+					<th scope="col"><input type="checkbox" id="check-All" class="board-checkbox" ></th>
 					<th scope="col">번호</th>
 					<th scope="col">교육 이름</th>
 					<th scope="col">강사명</th>
@@ -86,12 +86,12 @@
 					<th scope="col">교육장</th>
 				</tr>
 			</thead>
-			<c:set var="idx" value="0"/>
 			<tbody>
+				<c:set var="idx" value="0"/>
 				<c:forEach var="educationVo" items="${list}">
 					<c:set var="educationNo" value="${educationVo.eduNo}"/>
 					<tr>
-						<th scope="row"><input type="checkbox" class="board-checkbox" name="eduNo" value="${educationVo.eduNo }"></th>
+						<th scope="row"><input type="checkbox" class="board-checkbox" name="educationItems[${idx }].eduNo" value="${educationVo.eduNo }"/></th>
 						<td>${educationVo.eduNo }</td>
 						<td>${educationVo.eduName }</td>
 						<td>${educationVo.eduTeaName }</td>
@@ -101,6 +101,7 @@
 						<td><fmt:formatNumber value="${educationVo.eduPrice }" pattern="#,###"/>
 						<td>${educationVo.epName }</td>
 					</tr>
+					<c:set var="idx" value="${idx + 1 }" />
 				</c:forEach>
 			</tbody>
 		</table>

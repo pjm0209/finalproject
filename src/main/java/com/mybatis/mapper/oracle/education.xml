@@ -17,8 +17,8 @@
 		<selectKey keyProperty="eduNo" order="BEFORE" resultType="int">
 			select mbti_education_seq.nextval from dual
 		</selectKey>
-		insert into mbti_education(edu_no, edu_name, edu_teacher, edu_com, edu_people_number, edu_price, ep_name)
-		values(#{eduNo}, #{eduName}, #{eduTeacher}, #{eduCom}, #{eduPeopleNumber}, #{eduPrice}, #{epName})
+		insert into mbti_education(edu_no, edu_name, edu_com, edu_price, ep_no, edu_people_number, edu_tea_no)
+		values(#{eduNo}, #{eduName}, #{eduCom}, #{eduPrice}, #{epNo}, #{eduPeopleNumber}, #{eduTeaNo})
 	</insert>
 	
 	
@@ -27,11 +27,10 @@
 		(
 		    select rownum as RNUM, a.* from
 		    (
-		        select m.*,(select count(*) from education_application e where e.edu_no=m.edu_no and e.edu_app_flag = 'Y') qty,
-		        (select ep_name from education_place e where e.ep_no=m.ep_no) epName
-		        from mbti_education m
+		        select v.*,(select count(*) from education_application e where e.edu_no=v.edu_no and e.edu_app_flag = 'Y') qty
+		        from educationview v
 		        <include refid="searchWhere"></include>
-		        order by m.edu_no desc
+		        order by edu_no desc
 		    )a
 		)
 		<![CDATA[

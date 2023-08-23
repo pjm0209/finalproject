@@ -74,7 +74,7 @@
 				</form>
 			</div>
 		</div>
-		<form name="frmDelete" method="post">
+		<form name="frmDelete" method="post" id="eduLocDelFrm" action="<c:url value='/admin/education/locDelete'/>">
 		<table class="table" id="educationtb">
 			<thead>
 				<tr class="board-table-colum">
@@ -86,18 +86,19 @@
 					<th scope="col">전화번호</th>
 				</tr>
 			</thead>
-			<c:set var="idx" value="0"/>
 			<tbody>
+				<c:set var="idx" value="0"/>
 				<c:forEach var="educationVo" items="${list}">
 					<c:set var="educationPlace" value="${educationVo.epNo}"/>
 					<tr>
-						<th scope="row"><input type="checkbox" class="board-checkbox" name="epNo" value="${educationVo.epNo }"></th>
+						<th scope="row"><input type="checkbox" class="board-checkbox" name="educationItems[${idx }].epNo" value="${educationVo.epNo }"></th>
 						<td>${educationVo.epNo }</td>
 						<td>${educationVo.epName }</td>
 						<td>${educationVo.epZipcode }</td>
 						<td>${educationVo.epAddress }</td>
 						<td>${educationVo.epTel }</td>
 					</tr>
+					<c:set var="idx" value="${idx + 1 }" />
 				</c:forEach>
 			</tbody>
 		</table>

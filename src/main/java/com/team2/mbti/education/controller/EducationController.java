@@ -37,7 +37,7 @@ public class EducationController {
 		logger.info("강사 이름 조회 결과, list.size={}", list.size());
 		
 		List<EducationVO> list2 = educationService.getEpName();
-		logger.info("교육장 조회 결과, list.size={}", list.size());
+		logger.info("교육장 조회 결과, list.size={}", list2.size());
 		
 		model.addAttribute("title", "교육 추가");
 		model.addAttribute("teaNameList", list);
@@ -225,6 +225,49 @@ public class EducationController {
 		model.addAttribute("pagingInfo", pagingInfo);
 		
 		return "admin/education/location";
+	}
+	
+	@GetMapping("/locationWrite")
+	public String locWrite_get(Model model) {
+		logger.info("교육장 등록 페이지");
+		
+		List<EducationVO> list = educationService.getEpName();
+		logger.info("교육장 조회 결과, list.size={}", list.size());
+		
+		model.addAttribute("title", "교육장 추가");
+		model.addAttribute("epNameList", list);
+		
+		return "admin/education/locationWrite";
+	}
+	
+	@PostMapping("/locaionWrite")
+	public String locWrite_post(@ModelAttribute EducationVO vo, Model model){
+		logger.info("교육장 등록 처리, 파라미터 vo={}", vo);
+		
+		int cnt=educationService.insertLocation(vo);
+		logger.info("교육장 등록 처리 결과 cnt={}", cnt);
+		
+		String msg="교육장 등록에 실패하였습니다.",url="/admin/education/locationWrite";
+		if(cnt>0) {
+			msg="새 교육장이 성공적으로 등록되었습니다.";
+			url="/admin/education/location?epNo="+vo.getEpNo();
+		}else {
+			cnt=educationService.updateEducation(vo);
+			logger.info("교육장 수정 결과 cnt={}",cnt);
+			
+			if(cnt>0) {
+				msg="선택한 교육장 정보가 수정되었습니다.";
+				url="/admin/education/location";
+			}else {
+				msg="선택한 교육장 정보 수정에 실패하였습니다.";
+				url="/admin/education/locationWrite";
+			}
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
 	}
 
 	
