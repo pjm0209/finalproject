@@ -48,6 +48,8 @@
 		});
 		
 		$('#mbti-button').click(function(){
+			var question=CKEDITOR.instances.question.getData();
+			
 			if($('#questionTypeNo').val()==0){
 				event.preventDefault();
 				$('#alertModalBody').html("문제 유형을 선택하세요");
@@ -60,7 +62,7 @@
 				$('#alertModal').modal('show');
 				return false;
 			}
-			if($('#question').text()<1){
+			if(question.length<1){
 				event.preventDefault();
 				$('#alertModalBody').html("질문을 입력해주세요");
 				$('#alertModal').modal('show');
