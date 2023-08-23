@@ -60,8 +60,12 @@
 	<select id="selectAdminNo" parameterType="String" resultType="int">
 		select admin_No from admin
 		where admin_Id = #{adminId}
-	</select>	
+	</select>
 	
+	<delete id="deleteAdmin" parameterType="int">
+		delete from admin
+		where admin_no=#{adminNo}
+	</delete>	
 	
 	
 </mapper>

@@ -101,18 +101,18 @@ public class MemberLoginController {
 		return "main/member/memberRegister";
 	}
 	
-	@PostMapping("/member/memberWrite")
-	public String memberRegister_post(@ModelAttribute MemberVO membervo,@RequestParam String email3, Model model){
+	@PostMapping("/member/memberRegister")
+	public String memberRegister_post(@ModelAttribute MemberVO membervo, Model model){
 		logger.info("회원가입 처리, 파라미터 membervo={}",membervo);
-				
+		
 		int cnt = memberService.insertMember(membervo);
 		
 		logger.info("회원 가입 완료, result = {}",cnt);		
 		String msg = "회원 가입에 실패하였습니다.", url = "/member/memberRegister";
 		
 		if(cnt > 0) {
-			msg = "회원 가입이 완료되었습니다.";
-			url = "/";
+			msg = membervo.getUserid()+"님 회원가입을 축하드립니다.";
+			url = "/main/member/memberLogin";
 		}
 		
 		model.addAttribute("msg",msg);

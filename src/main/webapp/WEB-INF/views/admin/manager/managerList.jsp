@@ -19,6 +19,7 @@ button#manager-delete-button {
 
 </style>
 
+<script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>
 <script type="text/javascript"></script>
 <script>
 	$(function(){
@@ -33,14 +34,23 @@ button#manager-delete-button {
             window.open('managerAdditional', '_blank', popupFeatures);
         });
 	        
-		$('#board-write-button').click(function(){
-			if(confirm("선택한 관리자를 삭제하시겠습니까?")){
-				var contextpath = "/mbti";
-				location.href=contextpath+"/admin/manager/managerList";
+		$('#manager-delete-button').click(function(){
+			if($('input[type=checkbox]:checked').length<1){
+				alert('삭제할 관리자를 선택하세요.');
+				return;
 			}
 			
-		});	
+			if(confirm('선택한 관리자를 삭제하시겠습니까?')){
+				$('form[name=form-Delete]').prop('action',contextPath+'/admin/manger/managerDelete');
+				$('form[name=form-Delete]').submit();
+			}
+		});
 	});
+	
+	function managerDel() {
+		$('#selectManagerDelete').attr('action', contextPath + '/admin/manager/managerDelete');
+		$('form[name=form-Delete]').submit();
+	}
 </script>
 
 <!-- Begin Page Content -->
@@ -92,7 +102,7 @@ button#manager-delete-button {
 				</form>
 			</div>
 		</div>
-		<form name="frmDelete" method="post">
+		<form name="form-Delete" method="post" >
 		<table class="table" id="managertb">
 			<thead>
 				<tr class="board-table-colum">

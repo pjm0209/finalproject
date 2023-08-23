@@ -12,7 +12,10 @@ public interface AdminService {
 	int getTotalRecordManager(SearchVO searchVo);
 	String adminIdSearch(Map<String, Object> map); 
 	
+	int checkAdminId(String adminId);
 	int loginCheck(String adminId, String adminPwd);
 	int dupUserid(String userid);
 	int selectAdminNo(String adminId);
+	
+	int deleteAdmin(int adminNo);
 }
