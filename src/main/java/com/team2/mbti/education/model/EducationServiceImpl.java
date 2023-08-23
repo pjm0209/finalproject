@@ -143,4 +143,14 @@ public class EducationServiceImpl implements EducationService{
 		return cnt;
 	}
 
+	@Override
+	public int updateLocation(EducationVO vo) {
+		return educationDao.updateLocation(vo);
+	}
+
+	@Override
+	public EducationVO selectByNoLocation(int epNo) {
+		return educationDao.selectByNoLocation(epNo);
+	}
+
 }

@@ -23,10 +23,10 @@
 	        	'width=590,height=300,location=yes,resizable=yes,left=0,top=0');
 	    });
 
-		$('#btnZipcode').click(function(){            
+		/*$('#btnZipcode').click(function(){            
 			window.open(contextPath+'/zipcode/zipcode','zipcode',
 				'width=750,height=800,location=yes,resizable=yes,left=0,top=0');
-	    });
+	    });*/
 		
 	});
 

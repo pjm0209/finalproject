@@ -44,15 +44,15 @@
 		<include refid="searchWhere"></include> 
 	</select>
 	
-	<select id="selectByEduNo" parameterType="int" resultType="educationVo">
-		select * from education where edu_no=#{eduNo}
-	</select>
-	
 	<update id="updateEducation" parameterType="educationVo">
 		update mbti_education
 		set edu_name = #{eduName}, edu_tea_no = #{eduTeaNo}, edu_com = #{eduCom}, edu_people_number = #{eduPeopleNumber}, edu_price = #{eduPrice}, ep_no = #{epNo} 
 		where edu_no = #{eduNo}
 	</update>
+	
+	<select id="selectByNoEducation" parameterType="int" resultType="educationVo">
+		select * from mbti_education where edu_no = #{eduNo}
+	</select>
 	
 	<delete id="deleteEducation" parameterType="int" >
 		delete from mbti_education
@@ -77,8 +77,14 @@
 		values(#{epNo},#{epName},#{epZipcode},#{epAddress},#{epTel})
 	</insert>
 	
-	<select id="selectByNoEducation" parameterType="int" resultType="educationVo">
-		select * from mbti_education where edu_no = #{eduNo}
+	<update id="updateLocation" parameterType="educationVo">
+		update education_place
+		set ep_name = #{epName}, ep_zipcode = #{epZipcode}, ep_address = #{epAddress}, ep_tel = #{epTel}
+		where ep_no = #{epNo}
+	</update>
+	
+	<select id="selectByNoLocation" parameterType="int" resultType="educationVo">
+		select * from education_place where ep_no = #{epNo}
 	</select>
 	
 	<select id="selectAllLocation" parameterType="educationVo" resultType="educationVo">

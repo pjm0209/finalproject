@@ -42,7 +42,7 @@
 					</dd>
 					<dt>강사명</dt>
 					<dd>
-						<div class="mb-3">
+						<div class="input_group v2 mb-3">
 							<select id="getTeaName" class="form-control" name="eduTeaNo">
 								<option value="0">강사명을 선택하세요.</option>
 								<c:forEach var="educationVo" items="${teaNameList}">
@@ -58,7 +58,7 @@
 					</dd>
 					<dt>교육 기간</dt>
 					<dd>
-						<div>
+						<div class="input_group v2">
 							<input type="date" name="eduCom" value="${vo.eduCom }" class="form-control">${educationVo.eduCom}
 						</div>
 					</dd>
@@ -78,7 +78,7 @@
 					</dd>
 					<dt>교육장</dt>
 					<dd>
-						<div class="mb-3">
+						<div class="input_group v2 mb-3">
 						    <select id="selectPlace" class="form-control"  name="epNo" >
 						    	<option value="0">교육장을 선택하세요.</option>
 						    	<c:forEach var="educationVo" items="${epNameList }">
