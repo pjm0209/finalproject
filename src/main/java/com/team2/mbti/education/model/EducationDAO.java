@@ -20,6 +20,7 @@ public interface EducationDAO {
 	int deleteEducation(int eduNo);
 	EducationVO selectByNoEducation(int eduNo);
 	List<EducationVO> getTeaName();
+	List<EducationVO> getEpName();
 	
 	int insertTeacher(EducationVO vo);
 	List<EducationVO> selectAllTeacher(EducationVO vo);

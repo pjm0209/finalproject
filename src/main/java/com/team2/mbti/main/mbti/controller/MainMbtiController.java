@@ -17,6 +17,7 @@ import com.team2.mbti.mbtiResult.model.MbtiResultService;
 import com.team2.mbti.mbtiResult.model.MbtiResultVO;
 import com.team2.mbti.mbtisurvey.model.MbtiSurveyService;
 import com.team2.mbti.mbtisurvey.model.MbtiSurveyVO;
+import com.team2.mbti.mbtisurvey.model.MbtiVO;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.Getter;
@@ -186,7 +187,9 @@ public class MainMbtiController {
 			resultJ=(int)(jVal/(pVal+jVal)*100);
 			resultP=100-resultJ;
 		}
-		logger.info("resultMbti={},resultI={},resultE={},resultN={},resultS={},resultF={},resultT={},resultP={},resultJ={}",resultMbti,resultI,resultE,resultN,resultS,resultF,resultT,resultP,resultJ);
+		
+		MbtiVO mbtiVo=mbtiSurveyService.selectMbti(resultMbti);
+		
 		model.addAttribute("resultMbti", resultMbti);
 		model.addAttribute("resultI", resultI);
 		model.addAttribute("resultE", resultE);
@@ -196,12 +199,15 @@ public class MainMbtiController {
 		model.addAttribute("resultF", resultF);
 		model.addAttribute("resultP", resultP);
 		model.addAttribute("resultJ", resultJ);
-
+		model.addAttribute("mbtiVo", mbtiVo);
+		
 		return "main/mbti/mbtiResult";
 	}
 	
 	@GetMapping("/mbtiResult")
 	public String mbtiResult_get(Model model) {
+		
+		MbtiVO mbtiVo=mbtiSurveyService.selectMbti("ESFJ");
 		
 		model.addAttribute("resultMbti", "ESFJ");
 		model.addAttribute("resultI", 20);
@@ -212,7 +218,10 @@ public class MainMbtiController {
 		model.addAttribute("resultF", 53);
 		model.addAttribute("resultP", 46);
 		model.addAttribute("resultJ", 54);
+		model.addAttribute("mbtiVo", mbtiVo);
 		
 		return "main/mbti/mbtiResult";
 	}
+	
+
 }

@@ -1,6 +1,5 @@
+	var contextPath = "/mbti";
 	$(function(){
-		var contextPath = "/mbti";
-		
 		$('div[name=mbti]').click(function(){
 			location.href=contextPath+"/admin/mbti/mbti";
 		});
@@ -48,10 +47,27 @@
 			
 		});
 		
-		function mbtiWriteSubmit(){
-			$('form[name=frmDelete]').prop('action',contextPath+'/admin/mbti/mbtiDelete');
-			$('form[name=frmDelete]').submit();
-		}
+		$('#mbti-button').click(function(){
+			if($('#questionTypeNo').val()==0){
+				event.preventDefault();
+				$('#alertModalBody').html("문제 유형을 선택하세요");
+				$('#alertModal').modal('show');
+				return false;
+			}
+			if($('#questionCategoryNo').val()==0){
+				event.preventDefault();
+				$('#alertModalBody').html("질문 유형을 선택하세요");
+				$('#alertModal').modal('show');
+				return false;
+			}
+			if($('#question').text()<1){
+				event.preventDefault();
+				$('#alertModalBody').html("질문을 입력해주세요");
+				$('#alertModal').modal('show');
+				return false;
+			}
+			
+		});
 		
 		$('#mbti-free-button').click(function(){
 			location.href=contextPath+"/main/mbti/question?questionTypeNo=1";
@@ -67,5 +83,9 @@
 			$(this).toggleClass("active").animate("fast");
 		});
 		
-		
 	});
+	
+	function mbtiWriteSubmit(){
+			$('form[name=frmDelete]').prop('action',contextPath+'/admin/mbti/mbtiDelete');
+			$('form[name=frmDelete]').submit();
+	}
