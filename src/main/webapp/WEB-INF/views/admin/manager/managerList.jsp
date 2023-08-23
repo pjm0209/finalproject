@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
-
 <style>
 button#add-newBoard-button{
 	background: #eb5d1e;
@@ -15,13 +14,9 @@ button#manager-delete-button {
 	margin-top: -6px;
 	margin-right: 9px;
 	color: white;
+	background-color: #eb5d1e;
 }
 
-.manager-button {
-	background-color: #858796;
-    background-image: linear-gradient(180deg, #858796 10%, #60616f 100%);
-    background-size: cover;
-}
 </style>
 
 <script type="text/javascript"></script>

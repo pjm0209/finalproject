@@ -158,7 +158,6 @@ section#mbtiSurvey{
 .inner{
 	margin-top: 100px;
 	width: 100%;
-	height: 100px;
 }
 .inner2{
 	margin-top: 100px;
@@ -187,7 +186,7 @@ section#mbtiSurvey{
 	padding-top: 100px;
 	padding-left: 100px;
 	width: 1400px;
-	height: 1000px;
+	padding-bottom:100px;
 }
 .defining div{
 	width: 1200px;
@@ -199,7 +198,6 @@ section#mbtiSurvey{
 	margin:0 auto;
 	margin-top: 100px;
 	width: 1400px;
-	height: 1000px;
 	padding: 30px;
 }
 .defining2 h2{ 
@@ -217,16 +215,17 @@ section#mbtiSurvey{
  	margin-top: 20px;
  	line-height: 50px;
  	font-weight: bold;
+ 	
 }
 .defining2 #weakness{
 	margin:0 auto;
 	padding-left: 50px;
 	padding-top: 50px;
 	width: 1300px;
-	height: 400px;
 	margin-top: 20px;
 	line-height: 50px;
 	font-weight: bold;
+	padding-bottom: 50px;
 }
 #mbti-jop{
 	margin: 0 auto;
