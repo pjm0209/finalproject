@@ -1,15 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>zipcode.jsp</title>
-<link rel="stylesheet" type="text/css" href="<c:url value='/css/mainstyle.css'/>" />
-<script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>
-<script type="text/javascript" src="<c:url value='/js/paging.js'/>"></script>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"> 
 
 <style type="text/css">
 	#divZip table{
@@ -152,7 +146,6 @@
 	}
    
 </script>
-</head>
 <body>
 	<h2>도로명 주소 검색</h2><br>
 	<p>도로명 주소, 건물명 또는 지번을 입력하세요</p>
@@ -174,6 +167,4 @@
 	<div id="divZip"></div>
 	<div id="divPage"></div>
 	
-
 </body>
-</html>

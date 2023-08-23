@@ -5,7 +5,7 @@
 <div class="head-div">
 	<h2 class="text-gray-800">교육 관리</h2>
 	<button type="button" class="add-edu-button"
-		id="add-edu-button" onclick="location.href='educationWrite'">교육 추가</button>
+		id="add-edu-button" onclick="location.href='educationWrite'">교육 등록</button>
 </div>
 <div class="side-body">
 	<div class="side-div-title">
@@ -88,21 +88,28 @@
 			</thead>
 			<tbody>
 				<c:set var="idx" value="0"/>
-				<c:forEach var="educationVo" items="${list}">
-					<c:set var="educationNo" value="${educationVo.eduNo}"/>
+				<c:if test="${empty list }">
 					<tr>
-						<th scope="row"><input type="checkbox" class="board-checkbox" name="educationItems[${idx }].eduNo" value="${educationVo.eduNo }"/></th>
-						<td>${educationVo.eduNo }</td>
-						<td>${educationVo.eduName }</td>
-						<td>${educationVo.eduTeaName }</td>
-						<td>${educationVo.eduCom }</td>
-						<td>${educationVo.qty }</td>
-						<td>${educationVo.eduPeopleNumber }</td>
-						<td><fmt:formatNumber value="${educationVo.eduPrice }" pattern="#,###"/>
-						<td>${educationVo.epName }</td>
+						<td colspan="9">해당 검색 내용이 없습니다.</td>
 					</tr>
-					<c:set var="idx" value="${idx + 1 }" />
-				</c:forEach>
+				</c:if>
+				<c:if test="${!empty list }">
+					<c:forEach var="educationVo" items="${list}">
+						<c:set var="educationNo" value="${educationVo.eduNo}"/>
+						<tr>
+							<th scope="row"><input type="checkbox" class="board-checkbox" name="educationItems[${idx }].eduNo" value="${educationVo.eduNo }"/></th>
+							<td>${educationVo.eduNo }</td>
+							<td>${educationVo.eduName }</td>
+							<td>${educationVo.eduTeaName }</td>
+							<td>${educationVo.eduCom }</td>
+							<td>${educationVo.qty }</td>
+							<td>${educationVo.eduPeopleNumber }</td>
+							<td><fmt:formatNumber value="${educationVo.eduPrice }" pattern="#,###"/>
+							<td>${educationVo.epName }</td>
+						</tr>
+						<c:set var="idx" value="${idx + 1 }" />
+					</c:forEach>
+				</c:if>
 			</tbody>
 		</table>
 		<div style="width: 10%;text-align: center;margin: 0 auto;">

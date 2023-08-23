@@ -90,22 +90,29 @@
 			</thead>
 			<tbody>
 				<c:set var="idx" value="0"/>
-				<c:forEach var="educationVo" items="${list}">
-					<c:set var="educationApplicant" value="${educationVo.eduAppNo}"/>
+				<c:if test="${empty list }">
 					<tr>
-						<th scope="row"><input type="checkbox" class="board-checkbox" name="educationItems[${idx }].eduAppNo" value="${educationVo.eduAppNo }"></th>
-						<td>${educationVo.name }</td>
-						<td>${educationVo.eduName }</td>
-						<td>${educationVo.eduTeaName }</td>
-						<td>${educationVo.eduCom }</td>
-						<td>${educationVo.qty }</td>
-						<td>${educationVo.eduPeopleNumber }</td>
-						<td>${educationVo.eduPrice }</td>
-						<td>${educationVo.epName }</td>
-						<td>${educationVo.eduAppFlag }</td>
+						<td colspan="9">해당 검색 내용이 없습니다.</td>
 					</tr>
-					<c:set var="idx" value="${idx + 1 }" />
-				</c:forEach>
+				</c:if>
+				<c:if test="${!empty list }">
+					<c:forEach var="educationVo" items="${list}">
+						<c:set var="educationApplicant" value="${educationVo.eduAppNo}"/>
+						<tr>
+							<th scope="row"><input type="checkbox" class="board-checkbox" name="educationItems[${idx }].eduAppNo" value="${educationVo.eduAppNo }"></th>
+							<td>${educationVo.name }</td>
+							<td>${educationVo.eduName }</td>
+							<td>${educationVo.eduTeaName }</td>
+							<td>${educationVo.eduCom }</td>
+							<td>${educationVo.qty }</td>
+							<td>${educationVo.eduPeopleNumber }</td>
+							<td>${educationVo.eduPrice }</td>
+							<td>${educationVo.epName }</td>
+							<td>${educationVo.eduAppFlag }</td>
+						</tr>
+						<c:set var="idx" value="${idx + 1 }" />
+					</c:forEach>
+				</c:if>
 			</tbody>
 		</table>
 		<div style="width: 10%;text-align: center;margin: 0 auto;">

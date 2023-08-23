@@ -70,6 +70,28 @@ var contextPath = "/mbti"
 			$('form[name=educationWrite-frm]').submit();
 		});
 		
+		
+		//교육 수정
+		$('#education-edit-button').click(function(){
+			if($('input[type=checkbox]:checked').length>1){
+				$('#alertModalBody').html("수정할 질문을 하나만 선택하세요.");
+				$('#alertModalBtn').trigger('click');
+				return false;
+			}
+			
+			if($('input[type=checkbox]:checked').length<1){
+				$('#alertModalBody').html("수정할 질문을 선택하세요.");
+				$('#alertModalBtn').trigger('click');
+				return false;
+			}
+			
+			var no = $('input[type=checkbox]:checked').val();
+						
+			location.href= contextPath + "/admin/education/educationEdit?eduNo=" + no;
+			
+		});
+		
+		
 		//교육 신청 승인 처리
 		$('#applicant-edit-button').click(function(){
 			var count = $('input[type=checkbox]:checked').length;
@@ -99,6 +121,12 @@ var contextPath = "/mbti"
          $('#confirmModalBtn').trigger('click');
 
 		});
+		
+		//우편번호 찾기
+		$('#btnZipcode').click(function(){            
+			window.open(contextPath+'/admin/education/zipcode','zipcode',
+				'width=750,height=800,location=yes,resizable=yes,left=0,top=0');
+	    });
 
 		
 	});

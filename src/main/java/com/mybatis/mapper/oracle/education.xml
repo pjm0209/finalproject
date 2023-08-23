@@ -27,8 +27,9 @@
 		(
 		    select rownum as RNUM, a.* from
 		    (
-		        select v.*,(select count(*) from education_application e where e.edu_no=v.edu_no and e.edu_app_flag = 'Y') qty
-		        from educationview v
+		        select v.*,(select count(*) from education_application e where e.edu_no=v.edu_no) qty,
+		        (select ep_name from education_place e where e.ep_no=v.ep_no) epName
+		        from eduListview v
 		        <include refid="searchWhere"></include>
 		        order by edu_no desc
 		    )a
@@ -39,7 +40,7 @@
 	</select>
 	
 	<select id="getTotalRecordEducation" parameterType="educationVo" resultType="int">
-		select count(*) from mbti_education
+		select count(*) from eduListview
 		<include refid="searchWhere"></include> 
 	</select>
 	
@@ -49,7 +50,7 @@
 	
 	<update id="updateEducation" parameterType="educationVo">
 		update mbti_education
-		set edu_name = #{eduName}, edu_teacher = #{eduTeacher}, edu_com = #{eduCom}, edu_people_number = #{eduPeopleNumber}, edu_price = {eduPrice}, ep_name = #{epName} 
+		set edu_name = #{eduName}, edu_tea_no = #{eduTeaNo}, edu_com = #{eduCom}, edu_people_number = #{eduPeopleNumber}, edu_price = #{eduPrice}, ep_no = #{epNo} 
 		where edu_no = #{eduNo}
 	</update>
 	
@@ -72,8 +73,8 @@
 		<selectKey keyProperty="epNo" order="BEFORE" resultType="int">
 			select education_place_seq.nextval from dual
 		</selectKey>
-		insert into education_place(ep_no, ep_name, ep_zipcode, ep_address, ep_latitude, ep_longitude, ep_tel)
-		values(#{epNo},#{epName},#{epZipcode},#{epAddress},#{epLatitude},#{epLongitude},#{epTel})
+		insert into education_place(ep_no, ep_name, ep_zipcode, ep_address,ep_tel)
+		values(#{epNo},#{epName},#{epZipcode},#{epAddress},#{epTel})
 	</insert>
 	
 	<select id="selectByNoEducation" parameterType="int" resultType="educationVo">
