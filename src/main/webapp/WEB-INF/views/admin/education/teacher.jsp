@@ -63,17 +63,18 @@
 			<div class="board-search-result">
 				<form name="frmSearch" method="post" action="<c:url value='/admin/education/teacher'/>">
 				<div class="input-group mb-3" id="board-search-div">
-					<select class="form-select form-select-lg" aria-label=".form-select-lg example" name="searchcondition" id="edu-search-select">					  	
-					  	<option value="edu_name" <c:if test="${param.searchCondition=='edu_tea_name'}"> selected="selected" </c:if>>이름</option>
-					  	<option value="edu_teacher" <c:if test="${param.searchCondition=='edu_tea_id'}"> selected="selected" </c:if>>아이디</option>
-					  	<option value="ep_no" <c:if test="${param.searchCondition=='edu_tea_tel'}"> selected="selected" </c:if>>전화번호</option>
+					<select class="form-select form-select-lg" aria-label=".form-select-lg example" name="searchCondition" id="edu-search-select">					  	
+					  	<option value="edu_tea_name" <c:if test="${param.searchCondition=='edu_tea_name'}"> selected="selected" </c:if>>이름</option>
+					  	<option value="edu_tea_id" <c:if test="${param.searchCondition=='edu_tea_id'}"> selected="selected" </c:if>>아이디</option>
+					  	<option value="edu_tea_tel" <c:if test="${param.searchCondition=='edu_tea_tel'}"> selected="selected" </c:if>>전화번호</option>
 					</select>
 				 	<input type="text" class="form-control" name="searchKeyword" placeholder="검색어를 입력하세요" aria-label="Recipient's username" aria-describedby="button-addon2" id="board-search-area" value="${param.searchKeyword}">
 				 	<button class="btn btn-outline-secondary" type="submit" id="button-addon2">검색</button>
 				</div>
+				</form>
 			</div>
 		</div>
-		<form name="frmDelete" method="post">
+		<form name="frmDelete" method="post" id="eduTeaDelFrm">
 		<table class="table" id="educationtb">
 			<thead>
 				<tr class="board-table-colum">
