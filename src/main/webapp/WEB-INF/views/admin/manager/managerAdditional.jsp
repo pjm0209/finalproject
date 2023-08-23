@@ -110,7 +110,7 @@ $(function(){
 		$.ajax({
 			url:"<c:url value='/admin/manager/checkId'/>",
 			type: "get",
-			data: "adminid=" + $('#managerId').val(),
+			data: "adminId=" + $('#managerId').val(),
 			dataType: 'json',
 			success:function(res){
 				console.log(res);
@@ -128,7 +128,7 @@ $(function(){
 			}						
 		});
 	});
-	
+		
 });
 </script>
 

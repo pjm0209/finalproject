@@ -83,8 +83,10 @@ public class MemberLoginController {
 		logger.info("로그아웃");
 		
 		session.invalidate();
+		//session.setAttribute("userid","");
+		//session.setAttribute("no", "");
 		
-		return "redirect:/";
+		return "redirect:/main/index";	
 	}
 	
 	@RequestMapping("/member/agreement")

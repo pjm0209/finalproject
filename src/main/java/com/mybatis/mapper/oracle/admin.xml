@@ -62,7 +62,7 @@
 		where admin_Id = #{adminId}
 	</select>
 	
-	<delete id="deleteAdmin" parameterType="int">
+	<delete id="deleteMultiAdmin" parameterType="int">
 		delete from admin
 		where admin_no=#{adminNo}
 	</delete>	

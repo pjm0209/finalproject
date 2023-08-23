@@ -22,9 +22,7 @@ public class MvcConfiguration implements WebMvcConfigurer{
 		 registry.addInterceptor(new LoginInterceptor())
 		 .excludePathPatterns("/admin/login")
 		 .addPathPatterns("/admin/**");
-		
-
-
+		 
 	}
 
 	/*

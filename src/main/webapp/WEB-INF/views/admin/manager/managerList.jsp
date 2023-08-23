@@ -44,13 +44,13 @@ button#manager-delete-button {
 				$('form[name=form-Delete]').prop('action',contextPath+'/admin/manger/managerDelete');
 				$('form[name=form-Delete]').submit();
 			}
-		});
 	});
 	
 	function managerDel() {
 		$('#selectManagerDelete').attr('action', contextPath + '/admin/manager/managerDelete');
 		$('form[name=form-Delete]').submit();
 	}
+	});	
 </script>
 
 <!-- Begin Page Content -->
@@ -102,7 +102,7 @@ button#manager-delete-button {
 				</form>
 			</div>
 		</div>
-		<form name="form-Delete" method="post" >
+		<form name="form-Delete" method="post" id="selectManagerDelete">
 		<table class="table" id="managertb">
 			<thead>
 				<tr class="board-table-colum">
@@ -116,8 +116,9 @@ button#manager-delete-button {
 			<c:set var="idx" value="0"/>
 			<tbody>
 				<c:forEach var="vo" items="${list}">
+					<c:set var="adminInformation" value="${adminVo.adminNo}"/>
 					<tr>
-						<th scope="row"><input type="checkbox" class="board-checkbox"></th>
+						<th scope="row"><input type="checkbox" class="board-checkbox" name="adminNo" value="${adminVo.adminNo }"></th>
 						<td>${vo.adminNo}</td>
 						<td>${vo.adminId}</td>
 						<td>${vo.adminEmail}</td>

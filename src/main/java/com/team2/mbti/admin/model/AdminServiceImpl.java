@@ -78,7 +78,13 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public int deleteAdmin(int adminNo) {
-		return adminDao.deleteAdmin(adminNo);
-	}	
+	public int deleteMultiAdmin(List<AdminVO> list) {
+		int cnt = 0;
+		
+		for(AdminVO vo : list) {
+			cnt = adminDao.deleteMultiAdmin(vo.getAdminNo());
+		}
+		
+		return cnt;
+	}
 }

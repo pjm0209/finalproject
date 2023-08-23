@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.team2.mbti.admin.model.AdminListVO;
 import com.team2.mbti.admin.model.AdminService;
 import com.team2.mbti.admin.model.AdminVO;
 import com.team2.mbti.common.ConstUtil;
 import com.team2.mbti.common.PaginationInfo;
 import com.team2.mbti.common.SearchVO;
-import com.team2.mbti.member.model.MemberVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -182,15 +182,23 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/manager/managerDelete")
-	public String managerDelete(@ModelAttribute AdminVO adminvo, Model model){
-		logger.info("관리자 삭제 처리, 파라미터 membervo={}", adminvo);
+	public String managerDelete(@ModelAttribute AdminListVO listVo, Model model){
+		logger.info("관리자 삭제 처리, 파라미터 listVo={}", listVo);
 		
-		int cnt = adminService.deleteAdmin(adminvo.getAdminNo());
+		List<AdminVO> list = listVo.getAdminItems();
 		
-		String msg="", url="/admin/manager/managerList";
+		int cnt = adminService.deleteMultiAdmin(list);
+		
+		String msg="", url="/main/manager/managerList";
 		
 		if(cnt > 0) {
 			msg="선택한 관리자가 탈퇴되었습니다.";
+			for(int i=0; i < list.size(); i++) {
+				AdminVO adminVo=list.get(i);
+				int adminNo = adminVo.getAdminNo();
+				
+				logger.info("i={}, adminNo={}",i, adminNo);
+			}
 		}else {
 			msg="관리자를 삭제하는중에 에러가 발생하였습니다.";
 		}

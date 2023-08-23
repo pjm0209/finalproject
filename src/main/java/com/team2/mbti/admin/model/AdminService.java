@@ -17,5 +17,5 @@ public interface AdminService {
 	int dupUserid(String userid);
 	int selectAdminNo(String adminId);
 	
-	int deleteAdmin(int adminNo);
+	int deleteMultiAdmin(List<AdminVO> list);
 }
