@@ -80,7 +80,7 @@
           <li><a class="nav-link scrollto" href="#portfolio">MBTI 교육</a></li>
           <li><a class="nav-link scrollto" href="<c:url value='/main/mbti/'/>">MBTI 검사</a></li>
           <li><a class="nav-link scrollto" href="<c:url value='/main/book/bookMain'/>">도서/자료 구매</a></li>
-          <li class="dropdown"><a href="#"><span>커뮤니티</span> <i class="bi bi-chevron-down"></i></a>
+          <li class="dropdown"><a href="<c:url value='/main/board/boardMain'/>"><span>커뮤니티</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
 			  <c:import url="/main/board/boardFormList"></c:import>              
             </ul>
