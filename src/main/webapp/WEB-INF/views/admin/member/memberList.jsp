@@ -1,6 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
+<style>
+button#member-delete-button{
+	float:  right;
+	border: 0;
+	border-radius: 5px;
+	padding: 6px 41px;
+	margin-top: -6px;
+	margin-right: 9px;
+	color: white;
+	background-color: #eb5d1e;
+}
+</style>
+
 <script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>
 <script type="text/javascript">
 	$(function(){
@@ -41,7 +54,7 @@
 <div class="board-body">
 	<div id="board-title">
 		<h5>회원 리스트</h5>
-			<button class="bg-gradient-secondary" id="board-write-button">탈퇴</button>
+			<button class="manager-button" id="member-delete-button">삭제</button>
 	</div>
 	
 	<div class="board">

@@ -57,6 +57,7 @@ div {
 
 label{
 	font-weight: bold;
+	margin-left: 80px;
 }
 
 .btnSearch {
