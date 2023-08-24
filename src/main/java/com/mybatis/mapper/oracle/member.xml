@@ -68,5 +68,12 @@
 		select * from member
 		where userid=#{userid}
 	</select>
+	
+	<select id="findId" resultType="string">
+		select * from member
+		where name=#{name} 
+		and hp=#{hp}
+	</select>
+
 
 </mapper>

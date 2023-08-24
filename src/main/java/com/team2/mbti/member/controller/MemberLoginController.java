@@ -82,11 +82,12 @@ public class MemberLoginController {
 	public String logout(HttpSession session) {
 		logger.info("로그아웃");
 		
-		session.invalidate();
+		session.removeAttribute("userid");
+		//session.invalidate();
 		//session.setAttribute("userid","");
 		//session.setAttribute("no", "");
 		
-		return "redirect:/main/index";	
+		return "redirect:/";	
 	}
 	
 	@RequestMapping("/member/agreement")
@@ -131,6 +132,17 @@ public class MemberLoginController {
 		return "main/member/forgot-id";
 	}
 	
+	@PostMapping("/member/forgot-id")
+	public String forgotid_post(@ModelAttribute MemberVO membervo, Model model){
+		logger.info("아이디 찾기 처리, 파라미터 membervo={}",membervo);
+		
+		int cnt = memberService.insertMember(membervo);
+		
+		logger.info("아이디 찾기 완료, result = {}",cnt);		
+		
+		return "main/member/forgot-id";
+	}
+	
 	@RequestMapping("/member/findIdResult")
 	public String findIdresult() {		
 		logger.info("아이디 찾기 결과 화면");		
@@ -165,13 +177,6 @@ public class MemberLoginController {
 		
 		//4
 		return result;
-	}
-	
-	@RequestMapping("/member/mypage")
-	public String mypage() {
-		logger.info("마이페이지 화면");
-		
-		return "main/member/mypage";
 	}
 	
 }
