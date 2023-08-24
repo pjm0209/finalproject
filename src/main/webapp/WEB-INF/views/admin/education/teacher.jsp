@@ -8,7 +8,7 @@
 <div class="head-div">
 	<h2 class="text-gray-800">교육 관리</h2>
 	<button type="button" class="add-edu-button"
-		id="add-edu-button" onclick="location.href='educationCreate'">강사 추가</button>
+		id="add-edu-button" onclick="location.href='teacherWrite'">강사 등록</button>
 </div>
 <div class="side-body">
 	<div class="side-div-title">
