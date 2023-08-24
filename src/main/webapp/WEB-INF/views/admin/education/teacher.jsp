@@ -74,7 +74,7 @@
 				</form>
 			</div>
 		</div>
-		<form name="frmDelete" method="post" id="eduTeaDelFrm">
+		<form name="frmDelete" method="post" id="eduTeaDelFrm" action="<c:url value='/admin/education/teaDelete'/>">
 		<table class="table" id="educationtb">
 			<thead>
 				<tr class="board-table-colum">
@@ -87,20 +87,28 @@
 					<th scope="col">전화번호</th>
 				</tr>
 			</thead>
-			<c:set var="idx" value="0"/>
 			<tbody>
-				<c:forEach var="educationVo" items="${list}">
-					<c:set var="educationPlace" value="${educationVo.eduTeaNo}"/>
+				<c:set var="idx" value="0"/>
+				<c:if test="${empty list }">
 					<tr>
-						<th scope="row"><input type="checkbox" class="board-checkbox" name="eduTeaNo" value="${educationVo.eduNo }"></th>
-						<td>${educationVo.eduTeaNo }</td>
-						<td>${educationVo.eduTeaName }</td>
-						<td>${educationVo.eduTeaId }</td>
-						<td>${educationVo.eduTeaPwd }</td>
-						<td>${educationVo.eduTeaEmail }</td>
-						<td>${educationVo.eduTeaTel }</td>
+						<td colspan="9">해당 검색 내용이 없습니다.</td>
 					</tr>
-				</c:forEach>
+				</c:if>
+				<c:if test="${!empty list }">
+					<c:forEach var="educationVo" items="${list}">
+						<c:set var="educationPlace" value="${educationVo.eduTeaNo}"/>
+						<tr>
+							<th scope="row"><input type="checkbox" class="board-checkbox" name="educationItems[${idx }].eduTeaNo"value=" ${educationVo.eduTeaNo }"></th>
+							<td>${educationVo.eduTeaNo }</td>
+							<td>${educationVo.eduTeaName }</td>
+							<td>${educationVo.eduTeaId }</td>
+							<td>${educationVo.eduTeaPwd }</td>
+							<td>${educationVo.eduTeaEmail }</td>
+							<td>${educationVo.eduTeaTel }</td>
+						</tr>
+						<c:set var="idx" value="${idx + 1 }" />
+					</c:forEach>
+				</c:if>
 			</tbody>
 		</table>
 	<div style="width: 10%;text-align: center;margin: 0 auto;">

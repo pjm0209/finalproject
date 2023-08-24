@@ -13,7 +13,6 @@ public class EducationVO extends SearchVO {
 	private int eduNo;
 	private String eduName;
 	private String eduCom;
-	private String eduTeacher;
 	private int eduPrice;
 	private int qty;
 	private int eduPeopleNumber;
@@ -44,8 +43,8 @@ public class EducationVO extends SearchVO {
 
 	@Override
 	public String toString() {
-		return "EducationVO [eduNo=" + eduNo + ", eduName=" + eduName + ", eduCom=" + eduCom + ", eduTeacher="
-				+ eduTeacher + ", eduPrice=" + eduPrice + ", qty=" + qty + ", eduPeopleNumber=" + eduPeopleNumber
+		return "EducationVO [eduNo=" + eduNo + ", eduName=" + eduName + ", eduCom=" + eduCom  + ", eduPrice=" + eduPrice 
+				+ ", qty=" + qty + ", eduPeopleNumber=" + eduPeopleNumber
 				+ ", epNo=" + epNo + ", epName=" + epName + ", epZipcode=" + epZipcode + ", epAddress=" + epAddress
 				+ ", epLatitude=" + epLatitude + ", epLongitude=" + epLongitude + ", epTel=" + epTel + ", eduAppNo="
 				+ eduAppNo + ", no=" + no + ", eduAppFlag=" + eduAppFlag + ", eduTeaNo=" + eduTeaNo + ", eduTeaName="
