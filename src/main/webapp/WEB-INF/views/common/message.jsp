@@ -18,8 +18,13 @@
 	<script type="text/javascript">
 		$(function(){
 			$('#MessageModal').trigger('click');
+			$('#btClose').click(function(){
+				if(${closePopup}){
+					opener.location.reload();
+					self.close();
+				}
+			});
 		});
-		
 	</script>
 	
 	<button type="button" style="display: none" id="MessageModal" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></button>
@@ -36,7 +41,7 @@
 	        	${msg}
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn bg-orange-primary" onclick='location.href="<c:url value='${url}'/>"' data-bs-dismiss="modal">확인</button>
+	        <button type="button" id="btClose" class="btn bg-orange-primary" onclick='location.href="<c:url value='${url}'/>"' data-bs-dismiss="modal">확인</button>
 	      </div>
 	    </div>
 	  </div>
