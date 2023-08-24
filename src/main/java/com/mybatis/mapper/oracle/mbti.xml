@@ -64,4 +64,8 @@
 		where mbti_type=#{mbtiType}
 	</select>
 	
+	<select id="selectAllMbti" resultType="mbtiVo">
+		select * from mbti
+		order by mbti_no
+	</select>
 </mapper>

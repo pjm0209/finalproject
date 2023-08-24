@@ -119,7 +119,23 @@
                 <a class="nav-link" href="<c:url value='/admin/board/board?boardFormNo=1'/>">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>게시판</span></a>
-            </li>            
+            </li>   
+            
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#boardNav"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>게시판</span>
+                </a>
+                <div id="boardNav" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">게시판 목록</h6>
+                        <c:import url="/admin/board/sideBoard"></c:import>
+                    </div>
+                </div>
+            </li>      
+               
             <li class="nav-item">
                 <a class="nav-link" href="<c:url value='/admin/manager/managerList'/>">
                     <i class="fas fa-fw fa-cog"></i>
