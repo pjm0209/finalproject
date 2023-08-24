@@ -13,7 +13,7 @@ public interface MemberService {
 	int PWD_DISAGREE=2; 
 	int USERID_NONE=3; 
 		
-	int insertMember(MemberVO vo); 
+	int insertMember(MemberVO membervo); 
 	
 	List<MemberVO> selectAllMember(SearchVO vo);
 	int getTotalRecordMember(SearchVO searchVo);

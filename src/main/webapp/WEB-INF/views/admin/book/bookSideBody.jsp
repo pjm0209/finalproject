@@ -16,7 +16,7 @@
 				<div class="board-name" name="bookList" value="bookList" onclick="change_div(event)">
 					<span><a href="<c:url value='/admin/book/bookList?bookFlag=bookList'/>">상품 리스트</a></span>
 				</div>
-				<c:if test="${param.bookFlag == 'bookList'}">
+				<c:if test="${param.bookFlag == 'bookList' || param.bookFlag == 'bookListByKeyword'}">
 					<span class="board-side-icon"><i class="fas fa-fw fa-check"></i></span>
 				</c:if>
 			</div>

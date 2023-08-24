@@ -70,5 +70,21 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public String adminIdSearch(Map<String, Object> map) {
 		return adminDao.adminIdSearch(map);
-	}	
+	}
+
+	@Override
+	public int checkAdminId(String adminId) {
+		return adminDao.checkAdminId(adminId);
+	}
+
+	@Override
+	public int deleteMultiAdmin(List<AdminVO> list) {
+		int cnt = 0;
+		
+		for(AdminVO vo : list) {
+			cnt = adminDao.deleteMultiAdmin(vo.getAdminNo());
+		}
+		
+		return cnt;
+	}
 }
