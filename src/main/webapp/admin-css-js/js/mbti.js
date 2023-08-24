@@ -69,6 +69,7 @@
 				return false;
 			}
 			
+			
 		});
 		
 		$('#mbti-free-button').click(function(){
