@@ -122,6 +122,22 @@ form {
             }
         }); 
         
+        $('#btnCheck').click(function() {
+            var activeTabContent = $('.tab-content.active');
+
+            var name = activeTabContent.find('#name').val();
+            var tel = activeTabContent.find('#tel').val();
+            
+            var expectedName = "winter"; 
+            var expectedTel = "010-1010-2020"; 
+
+            if (name === expectedName && tel === expectedTel) {
+                window.location.href = 'http://localhost:9091/mbti/main/member/findIdResult';
+            } else {
+                alert("입력한 정보가 올바르지 않습니다.");
+            }
+        });
+        
         $('.tab-button').click(function() {
             $('.tab-button').removeClass('active');
             $(this).addClass('active');
@@ -141,7 +157,7 @@ form {
         <div class="tab-button">이메일로 찾기</div>
     </div>
     
-	<form name = "form-forgot-id" method="post" action="<c:url value='main/member/forgot-id'/>">	
+	<form name = "form-find-id-tel" method="post" action="<c:url value='main/member/forgot-id'/>">	
 		<div class="tab-content active">
 			<p>회원가입 시 입력한 휴대폰 번호를 입력하시면 아이디를 찾을 수 있습니다.</p>			
 				<div class="findTel-name">
@@ -159,7 +175,9 @@ form {
 					<input type="button" id="btnCancel" value="취소">					
 				</div>
 		</div>	
-				
+		</form>
+		
+		<form name = "form-find-id-" method="post" action="<c:url value='main/member/forgot-id'/>">		
 		<div class="tab-content">
 			<p>회원가입 시 입력한 이메일을 입력하시면 아이디를 찾을 수 있습니다.</p>	
 				<div class="findEmail-name">

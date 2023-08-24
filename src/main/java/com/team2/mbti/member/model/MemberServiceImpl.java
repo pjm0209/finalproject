@@ -79,4 +79,10 @@ public class MemberServiceImpl implements MemberService {
 	public MemberVO selectByUserid(String userid) {
 		return memberDao.selectByUserid(userid);
 	}
+
+	@Override
+	public MemberVO findId(MemberVO membervo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

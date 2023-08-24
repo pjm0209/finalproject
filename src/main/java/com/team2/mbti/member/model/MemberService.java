@@ -26,5 +26,7 @@ public interface MemberService {
 	
 	MemberVO selectByUserid(String userid);
 	
+	MemberVO findId(MemberVO membervo); //아이디 찾기
+	
 
 }

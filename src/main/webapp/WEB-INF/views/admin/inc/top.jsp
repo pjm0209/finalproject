@@ -90,18 +90,36 @@
                         <c:import url="/admin/board/sideBoard"></c:import>
                     </div>
                 </div>
+            </li>     
+             
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#memberNav"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>회원목록</span>
+                </a>
+                <div id="memberNav" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="<c:url value='/admin/member/memberList'/>">회원 관리</a>
+                    </div>
+                </div>
             </li>      
                
-            <li class="nav-item">
-                <a class="nav-link" href="<c:url value='/admin/manager/managerList'/>">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>관리자 관리</span></a>
-            </li>                       
-            <li class="nav-item">
-                <a class="nav-link" href="<c:url value='/admin/member/memberList'/>">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>회원 관리</span></a>
-            </li>
+			 <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#managerNav"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>관리자 목록</span>
+                </a>
+                <div id="managerNav" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="<c:url value='/admin/manager/managerList'/>">관리자 관리</a>
+                    </div>
+                </div>
+            </li>                        
+    
              <li class="nav-item">
                 <a class="nav-link" href="<c:url value='/admin/mbti/mbti'/>">
                     <i class="fas fa-fw fa-cog"></i>
