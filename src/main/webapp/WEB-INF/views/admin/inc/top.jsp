@@ -118,6 +118,23 @@
                         <a class="collapse-item" href="<c:url value='/admin/manager/managerList'/>">관리자 관리</a>
                     </div>
                 </div>
+            </li>
+                                    
+			 <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#educationNav"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>교육 목록</span>
+                </a>
+                <div id="educationNav" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="<c:url value='/admin/education/list'/>">교육리스트</a>
+                        <a class="collapse-item" href="<c:url value='/admin/education/applicantList'/>">신청자 관리</a>
+                        <a class="collapse-item" href="<c:url value='/admin/education/teacher'/>">강사 관리</a>
+                        <a class="collapse-item" href="<c:url value='/admin/education/location'/>">교육장 관리</a>
+                    </div>
+                </div>
             </li>                        
     
              <li class="nav-item">
