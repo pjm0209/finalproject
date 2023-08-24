@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
 
-
 <!-- Begin Page Content -->
 <!-- Page Heading -->
 <div class="head-div">

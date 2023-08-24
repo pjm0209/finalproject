@@ -38,26 +38,6 @@ var contextPath = "/mbti"
 	         $('#confirmModalBtn').trigger('click');
 		});
 		
-		//교육장 수정
-		$('#location-edit-button').click(function(){
-			if($('input[type=checkbox]:checked').length>1){
-				$('#alertModalBody').html("수정할 교육장을 하나만 선택하세요.");
-				$('#alertModalBtn').trigger('click');
-				return false;
-			}
-			
-			if($('input[type=checkbox]:checked').length<1){
-				$('#alertModalBody').html("수정할 교육장을 선택하세요.");
-				$('#alertModalBtn').trigger('click');
-				return false;
-			}
-			
-			var no = $('input[type=checkbox]:checked').val();
-						
-			location.href= contextPath + "/admin/education/locationEdit?eduNo=" + no;
-			
-		});
-		
 		
 		//강사 삭제 유효성 검사
 		$('#teacher-delete-button').click(function(){
@@ -75,20 +55,25 @@ var contextPath = "/mbti"
 		});
 		
 		
-		
-		//교육 등록 유효성검사
-		$('#save-educationWrite').click(function(){
-			var teaNo = $('#getTeaName').val();
-			
-			if(teaNo == 0){
-				$('#alertModalBody').html('강사명을 선택하세요.');
+		//교육장 수정
+		$('#location-edit-button').click(function(){
+			if($('input[type=checkbox]:checked').length>1){
+				$('#alertModalBody').html("수정할 교육장을 하나만 선택하세요.");
 				$('#alertModalBtn').trigger('click');
-				$('#getTeaName').focus();
 				return false;
 			}
 			
-			$('form[name=educationWrite-frm]').submit();
-		});
+			if($('input[type=checkbox]:checked').length<1){
+				$('#alertModalBody').html("수정할 교육장을 선택하세요.");
+				$('#alertModalBtn').trigger('click');
+				return false;
+			}
+			
+			var no = $('input[type=checkbox]:checked').val();
+						
+			location.href= contextPath + "/admin/education/locationEdit?epNo=" + no;
+			
+		});	
 		
 		
 		//교육 수정
@@ -110,6 +95,42 @@ var contextPath = "/mbti"
 			location.href= contextPath + "/admin/education/educationEdit?eduNo=" + no;
 			
 		});
+		
+		
+		//강사 수정
+		$('#teacher-edit-button').click(function(){
+			if($('input[type=checkbox]:checked').length>1){
+				$('#alertModalBody').html("수정할 강사를 한명만 선택하세요.");
+				$('#alertModalBtn').trigger('click');
+				return false;
+			}
+			
+			if($('input[type=checkbox]:checked').length<1){
+				$('#alertModalBody').html("수정할 강사를 선택하세요.");
+				$('#alertModalBtn').trigger('click');
+				return false;
+			}
+			
+			var no = $('input[type=checkbox]:checked').val();
+						
+			location.href= contextPath + "/admin/education/teacherEdit?eduTeaNo=" + no;
+			
+		});
+		
+		
+		//교육 등록 유효성검사
+		$('#save-educationWrite').click(function(){
+			var teaNo = $('#getTeaName').val();
+			
+			if(teaNo == 0){
+				$('#alertModalBody').html('강사명을 선택하세요.');
+				$('#alertModalBtn').trigger('click');
+				$('#getTeaName').focus();
+				return false;
+			}
+			
+			$('form[name=educationWrite-frm]').submit();
+		});	
 		
 		
 		//교육 신청 승인 처리
@@ -142,15 +163,8 @@ var contextPath = "/mbti"
 
 		});
 		
-		
-		//우편번호
-		$('#btnZipcode').click(function(){            
-			window.open(contextPath+'/admin/education/zipcode','zipcode',
-				'width=750,height=800,location=yes,resizable=yes,left=0,top=0');
-	    });
-
-		
 	});
+	
 
 	function educationDel() {
 		$('#eduDelFrm').attr('action', contextPath + '/admin/education/eduDelete');

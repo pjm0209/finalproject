@@ -153,4 +153,14 @@ public class EducationServiceImpl implements EducationService{
 		return educationDao.selectByNoLocation(epNo);
 	}
 
+	@Override
+	public int updateTeacher(EducationVO vo) {
+		return educationDao.updateTeacher(vo);
+	}
+
+	@Override
+	public EducationVO selectByNoTeacher(int eduTeaNo) {
+		return educationDao.selectByNoTeacher(eduTeaNo);
+	}
+
 }

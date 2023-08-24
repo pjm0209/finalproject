@@ -41,7 +41,7 @@
 		return pattern.test(uid);
 
 	}
-	
+
     function sample4_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {

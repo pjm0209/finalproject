@@ -1,7 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
-
+<script type="text/javascript">
+						$(function(){
+							$('.education-search').keyup(function() {
+								if($('#edu-search-select').val() == 'edu_app_flag') {
+									var str = $('input[name=searchKeyword]').val();
+									
+									if(str != 'Y' && str != 'N' && str != 'y' && str != 'n') {
+										$('input[name=searchKeyword]').val('');
+									} else {
+										if(str == 'y') {
+											$('input[name=searchKeyword]').val('Y');
+										} else if(str == 'n') {
+											$('input[name=searchKeyword]').val('N');
+										}
+									}
+								}
+							});
+						});
+					</script>
 
 <!-- Begin Page Content -->
 <!-- Page Heading -->
@@ -62,11 +80,12 @@
 				<form name="frmSearch" method="post" action="<c:url value='/admin/education/applicantList'/>">
 				<div class="input-group mb-3" id="board-search-div">
 					<select class="form-select form-select-lg" aria-label=".form-select-lg example" name="searchCondition" id="edu-search-select">					  	
+					  	<option value="edu_app_flag" <c:if test="${param.searchCondition=='edu_app_flag'}"> selected="selected" </c:if>>승인 상태</option>
 					  	<option value="name" <c:if test="${param.searchCondition=='name'}"> selected="selected" </c:if>>신청자</option>
-					  	<option value="edu_name" <c:if test="${param.searchCondition=='edu_name'}"> selected="selected" </c:if>>교육 이름</option>
 					  	<option value="ep_name" <c:if test="${param.searchCondition=='ep_name'}"> selected="selected" </c:if>>교육장</option>
 					</select>
-				 	<input type="text" class="form-control" name="searchKeyword" placeholder="검색어를 입력하세요" aria-label="Recipient's username" aria-describedby="button-addon2" id="board-search-area">
+					
+				 	<input type="text" class="form-control education-search" name="searchKeyword" placeholder="검색어를 입력하세요" aria-label="Recipient's username" aria-describedby="button-addon2" id="board-search-area">
 				 	<button class="btn btn-outline-secondary" type="submit" id="button-addon2">검색</button>
 				</div>
 				</form>
