@@ -28,7 +28,8 @@
 		    select rownum as RNUM, a.* from
 		    (
 		        select v.*,(select count(*) from education_application e where e.edu_no=v.edu_no) qty,
-		        (select ep_name from education_place e where e.ep_no=v.ep_no) epName
+		        (select ep_name from education_place e where e.ep_no=v.ep_no) epName,
+		        (select edu_tea_name from education_teacher e where e.edu_tea_no=v.edu_tea_no) eduTeaName
 		        from eduListview v
 		        <include refid="searchWhere"></include>
 		        order by edu_no desc
@@ -73,13 +74,13 @@
 		<selectKey keyProperty="epNo" order="BEFORE" resultType="int">
 			select education_place_seq.nextval from dual
 		</selectKey>
-		insert into education_place(ep_no, ep_name, ep_zipcode, ep_address,ep_tel)
-		values(#{epNo},#{epName},#{epZipcode},#{epAddress},#{epTel})
+		insert into education_place(ep_no, ep_name, ep_zipcode, ep_address, ep_latitude, ep_longitude, ep_tel)
+		values(#{epNo},#{epName},#{epZipcode},#{epAddress},#{epLatitude},#{epLongitude},#{epTel})
 	</insert>
 	
 	<update id="updateLocation" parameterType="educationVo">
 		update education_place
-		set ep_name = #{epName}, ep_zipcode = #{epZipcode}, ep_address = #{epAddress}, ep_tel = #{epTel}
+		set ep_name = #{epName}, ep_zipcode = #{epZipcode}, ep_address = #{epAddress}, ep_latitude = #{epLatitude}, ep_longitude = #{epLongitude}, ep_tel = #{epTel}
 		where ep_no = #{epNo}
 	</update>
 	
@@ -119,7 +120,7 @@
 			select education_teacher_seq.nextval from dual
 		</selectKey>
 		insert into education_teacher(edu_tea_no, edu_tea_name, edu_tea_id, edu_tea_pwd, edu_tea_email, edu_tea_tel)
-		values(#{eduTeaNo},#{eduTeaName},#{eduTeaId},#{eduTeaPwd},#{eduTeaEmail},#{epTeaTel})
+		values(#{eduTeaNo},#{eduTeaName},#{eduTeaId},#{eduTeaPwd},#{eduTeaEmail},#{eduTeaTel})
 	</insert>
 	
 	<select id="selectAllTeacher" parameterType="educationVo" resultType="educationVo">
@@ -141,10 +142,20 @@
 		<include refid="searchWhere"></include> 
 	</select>
 	
+	<select id="selectByNoTeacher" parameterType="int" resultType="educationVo">
+		select * from education_teacher where edu_tea_no = #{eduTeaNo}
+	</select>
+	
 	<delete id="deleteTeacher" parameterType="int" >
 		delete from education_teacher
 		where edu_tea_no=#{eduTeaNo} 
 	</delete>
+	
+	<update id="updateTeacher" parameterType="educationVo">
+		update education_teacher
+		set edu_tea_name = #{eduTeaName}, edu_tea_id = #{eduTeaId}, edu_tea_pwd = #{eduTeaPwd}, edu_tea_email = #{eduTeaEmail}, edu_tea_tel = #{eduTeaTel}
+		where edu_tea_no = #{eduTeaNo}
+	</update>
 	
 	
 	<!-- applicant -->
@@ -156,7 +167,7 @@
 				select e.*,(select count(*) from education_application app where e.edu_no = app.edu_no and app.edu_app_flag = 'Y') qty
 				from educationview e
 				<include refid="searchWhere"></include>
-				order by edu_app_no desc
+				order by edu_app_flag, edu_app_no desc
 			)a
 		)
 		<![CDATA[

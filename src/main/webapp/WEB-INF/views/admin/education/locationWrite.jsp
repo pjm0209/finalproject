@@ -17,7 +17,9 @@
 </c:if>
 <div class="location-write">
 	<form name="locationWrite-frm" method="post" action="<c:url value='${url}'/>">
-	<input type="hidden" value="${vo.epNo }" name="epNo">
+	<c:if test="${!empty vo}">
+		<input type="hidden" value="${vo.epNo }" name="epNo">
+	</c:if>
 	<div class="locationWrite-head">
 		<h2 class="text-gray-800" id="locationCreate-title">${pageTitle}</h2>
 		<div class="location-write-head-button">
@@ -34,17 +36,15 @@
 					<dt>교육장 이름</dt>
 					<dd>
 						<div class="input_group v2">
-							<input class="form-control" value="${vo.epName }" type="text" name="epName" id="location_name" maxlength="60"
-								<c:if test="${vo.epName == educationVo.epName }">
-									selected="selected"
-								</c:if>
-							>
+							<input class="form-control" value="${vo.epName }" type="text" name="epName" id="location_name" maxlength="60">
+							${educationVo.epName }
 						</div>
 					</dd>
 					<dt>우편번호</dt>
 					<dd>
-						<div class="input_group v2">
-							 <input class="form-control mr-2" type="text" name="zipcode" id="zipcodePostalCode" style="width:200px; float:left">	
+						<div>
+							 <input class="form-control mr-2" type="text" value="${vo.epZipcode }" name="epZipcode" id="zipcodePostalCode" style="width:200px; float:left">	
+							 ${educationVo.epZipcode }
        						 <input type="button" class="form-control" style="width:130px" value="우편번호 찾기" id="btnZipcode" title="새창열림" onclick="sample4_execDaumPostcode()">
 						</div>
 					</dd>
@@ -52,6 +52,18 @@
 					<dd>
 						<div class="input_group v2">
 							<input type="text" class="form-control" id="locationAddress" name="epAddress"  value="${vo.epAddress }" >${educationVo.epAddress}
+						</div>
+					</dd>
+					<dt>경도</dt>
+					<dd>
+						<div class="input_group v2">
+							<input type="text" class="form-control" id="locationLatitude" name="epLatitude"  value="${vo.epLatitude }" >${educationVo.epLatitude}
+						</div>
+					</dd>
+					<dt>위도</dt>
+					<dd>
+						<div class="input_group v2">
+							<input type="text" class="form-control" id="locationLongitude" name="epLongitude"  value="${vo.epLongitude }" >${educationVo.epLongitude}
 						</div>
 					</dd>
 					<dt>전화번호</dt>

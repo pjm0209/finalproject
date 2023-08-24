@@ -16,7 +16,9 @@
 </c:if>
 <div class="education-write">
 	<form name="educationWrite-frm" method="post" action="<c:url value='${url}'/>">
-	<input type="hidden" value="${vo.eduNo }" name="eduNo">
+	<c:if test="${!empty vo}">
+		<input type="hidden" value="${vo.eduNo }" name="eduNo">
+	</c:if>
 	<div class="educationWrite-head">
 		<h2 class="text-gray-800" id="educationCreate-title">${pageTitle}</h2>
 		<div class="education-write-head-button">
@@ -33,11 +35,8 @@
 					<dt>교육 이름</dt>
 					<dd>
 						<div class="input_group v2">
-							<input class="form-control" value="${vo.eduName }" type="text" name="eduName" id="education_name" maxlength="60"
-								<c:if test="${vo.eduName == educationVo.eduName }">
-									selected="selected"
-								</c:if>
-							>
+							<input class="form-control" value="${vo.eduName }" type="text" name="eduName" id="education_name" maxlength="60">
+							${educationVo.eduName}
 						</div>
 					</dd>
 					<dt>강사명</dt>
