@@ -243,6 +243,13 @@ tr td.board-readcount {
 }
 
 /*게시판 글쓰기 css*/
+select.form-select.writembti {
+    width: 200px;
+    margin: 0;
+    margin-left: 20px;
+    display: inline-block;
+}
+
 #board-title input {
 	border: 0;
 	border-radius: 5px;
@@ -457,6 +464,13 @@ div.board {
 
 .board-head-Group2 {
 	display: flex;
+	width: 670px;
+}
+
+select.form-select {
+    height: 44px;
+    margin-right: 26px;
+    width: 130px;
 }
 
 .boardFile {

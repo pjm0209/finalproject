@@ -30,17 +30,15 @@
 								<span class="boardDelCount"></span>
 							</div>
 						</div>
-						<div class="mbtiBoardSelect">
+						<div class="board-head-Group2">
 							<c:if test="${param.boardFormNo == 5 }">
-								<select class="form-select" aria-label="Default select example">
-									<option selected>원하는 유형의 mbti게시판을 선택하세요</option>
+								<select class="form-select" aria-label="Default select example" class="mbtiBoardmbti" name="mbtiNo">
+									<option value="0">전체글</option>	
 									<c:forEach var="mbtiVo" items="${mbtiList }">
-										<option value="1">${mbtiVo.mbtiType }</option>								
+										<option value="${mbtiVo.mbtiNo }">${mbtiVo.mbtiType }</option>								
 									</c:forEach>
 								</select>
 							</c:if>
-						</div>
-						<div class="board-head-Group2">
 							<input type="hidden" name="boardFormNo" value="${param.boardFormNo }">
 							<select class="form-select form-select-lg" aria-label=".form-select-lg example" id="board-search-select" name="searchCondition">					  	
 							  	<option value="board_title" <c:if test="${param.searchCondition == 'board_title' }">selected="selected"</c:if>>제목</option>
@@ -68,7 +66,7 @@
 				<tbody>
 					<c:if test="${empty list }">
 						<tr>
-							<td colspan="4" style="text-align: center;">등록된 게시글이 없습니다.</td>
+							<td colspan="5" style="text-align: center;">등록된 게시글이 없습니다.</td>
 						</tr>
 					</c:if>
 					<c:if test="${!empty list }">
@@ -117,7 +115,7 @@
 				</tbody>
 			</table>
 		</form>
-		<button class="bg-orange-primary" id="board-write-button" onclick="location.href='<c:url value="/admin/board/boardWrite?boardFormNo=${param.boardFormNo}&boardWriteType=write"/>'">글쓰기</button>
+		<button class="bg-orange-primary" id="board-write-button" >글쓰기</button>
 		<nav class="boardPaging" aria-label="Page navigation example">
 		  <ul class="pagination">
 		  	<c:if test="${pagingInfo.firstPage > 1 }">

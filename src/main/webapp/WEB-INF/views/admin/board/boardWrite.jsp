@@ -71,10 +71,13 @@
 									<option value="${map['BOARD_FORM_NO'] }">${map['BOARD_FORM_NAME'] }</option>
 								</c:if>
 							</select>
-							<label class="resp_checkbox">
-								<input type="checkbox" name="boardTop" value="Y">
-								게시판 최상단 고정
-							</label>
+							<c:if test="${param.boardFormNo == 5 }">
+								<select class="form-select writembti" aria-label="Default select example" name="mbtiNo">
+									<c:forEach var="mbtiVo" items="${mbtiList }">
+										<option value="${mbtiVo.mbtiNo }" <c:if test="${mbtiVo.mbtiNo == param.mbtiNo }"> selected = "selected"</c:if>>${mbtiVo.mbtiType }</option>								
+									</c:forEach>
+								</select>
+							</c:if>
 						</dd>
 						<dt>제목</dt>
 						<dd>

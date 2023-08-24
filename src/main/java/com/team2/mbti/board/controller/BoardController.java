@@ -182,7 +182,7 @@ public class BoardController {
 	}
 	
 	@GetMapping("/boardWrite")
-	public String boardWrite_get(@RequestParam int boardFormNo, @RequestParam String boardWriteType, Model model) {
+	public String boardWrite_get(@RequestParam int boardFormNo, @RequestParam(defaultValue = "0", required = false) int mbtiNo, @RequestParam String boardWriteType, Model model) {
 		logger.info("게시판 글쓰기 화면 보여주기 파라미터 boardFormNo: {}, boardWriteType: {}", boardFormNo, boardWriteType);
 		
 		List<BoardFormVO> list = boardService.selectAllBoard();
@@ -191,9 +191,17 @@ public class BoardController {
 		BoardFormVO boardFormVo = boardService.selectBoard(boardFormNo);
 		logger.info("게시판 검색결과 boardFormVo: {}", boardFormVo);
 		
+		List<MbtiVO> mbtiList = null;
+		
+		if(boardFormNo == 5) {			
+			mbtiList = mbtiService.selectAllMbti();
+			logger.info("mbti종류 전체조회 결과 mbtiList: {}", mbtiList);			
+		}
+		
 		model.addAttribute("boardList", list);			
 		model.addAttribute("title", "게시판 글쓰기");
 		model.addAttribute("boardFormVo", boardFormVo);
+		model.addAttribute("mbtiList", mbtiList);
 		
 		return "admin/board/boardWrite";
 	}
