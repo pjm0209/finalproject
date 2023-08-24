@@ -9,48 +9,7 @@
 	<button type="button" class="add-edu-button"
 		id="add-edu-button" onclick="location.href='teacherWrite'">강사 등록</button>
 </div>
-<div class="side-body">
-	<div class="side-div-title">
-		<h6>교육</h6>
-		<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
-			fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
-  			<path fill-rule="evenodd"
-				d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
-		</svg>
-	</div>
-	<div class="group">
-		<div id="group-list" class="nav">
-		<div class="board-side-boardItem">
-				<div class="board-name">
-					<a class="applicantList-link" href="<c:url value='/admin/education/list'/>">
-						<span>교육 리스트</span>
-					</a>
-				</div>
-			</div>
-			<div class="board-side-boardItem">
-				<div class="board-name">
-					<a class="applicantList-link" href="<c:url value='/admin/education/applicantList'/>">
-						<span>신청자 관리</span>
-					</a>
-				</div>
-			</div>
-			<div class="board-side-boardItem">
-				<div class="board-name">
-					<a class="applicantList-link" href="<c:url value='/admin/education/teacher'/>">
-						<span>강사 관리</span>
-					</a>
-				</div>
-			</div>
-			<div class="board-side-boardItem">
-				<div class="board-name">
-					<a class="applicantList-link" href="<c:url value='/admin/education/location'/>">
-						<span>교육장 관리</span>
-					</a>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+
 <div class="board-body">
 	<div id="board-title">
 		<h5>강사 관리</h5>
