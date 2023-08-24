@@ -24,11 +24,10 @@ import com.team2.mbti.board.model.BoardFormVO;
 import com.team2.mbti.board.model.BoardListVO;
 import com.team2.mbti.board.model.BoardService;
 import com.team2.mbti.board.model.BoardVO;
-import com.team2.mbti.comment.model.CommentVO;
 import com.team2.mbti.common.ConstUtil;
 import com.team2.mbti.common.FileUploadUtil;
 import com.team2.mbti.common.PaginationInfo;
-import com.team2.mbti.mbtisurvey.model.MbtiSurveyServiceImpl;
+import com.team2.mbti.mbtisurvey.model.MbtiSurveyService;
 import com.team2.mbti.mbtisurvey.model.MbtiVO;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -42,6 +41,7 @@ public class BoardController {
 	
 	private final BoardService boardService;
 	private final FileUploadUtil fileUploadUtil;
+	private final MbtiSurveyService mbtiService;
 	
 	@GetMapping("/sideBoard")
 	public String boardHeadSide(Model model) {
@@ -67,8 +67,6 @@ public class BoardController {
 		//[2]SearchVo에 입력되지 않은 두 개의 변수에 값 셋팅
 		vo.setRecordCountPerPage(ConstUtil.BOARD_RECORD_COUNT);
 		vo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
-
-		List<Map<String, Object>> list = null;
 		
 		BoardFormVO boardFormVo = boardService.selectBoard(boardFormNo);
 		logger.info("게시판 이름 검색결과 board: {}", boardFormVo);
@@ -76,8 +74,15 @@ public class BoardController {
 		List<BoardFormVO> boardList = boardService.selectAllBoard();
 		logger.info("게시판 종류 전체조회 결과: boardList: {}", boardList);
 		
-		list = boardService.selectAll(vo);
+		List<Map<String, Object>> list = boardService.selectAll(vo);
 		logger.info("게시판 전체조회 결과: list.size: {}", list.size());
+
+		List<MbtiVO> mbtiList = null;
+		
+		if(boardFormNo == 5) {			
+			mbtiList = mbtiService.selectAllMbti();
+			logger.info("mbti종류 전체조회 결과 mbtiList: {}", mbtiList);			
+		}
 		
 		int totalRecord = boardService.getTotalRecord(vo);
 		logger.info("글 목록 전체 조회 - totalRecord: {}", totalRecord);
@@ -88,6 +93,7 @@ public class BoardController {
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("pagingInfo", pagingInfo);
 		model.addAttribute("boardFormVo", boardFormVo);
+		model.addAttribute("mbtiList", mbtiList);
 		
 		return "admin/board/board";
 	}
@@ -176,7 +182,7 @@ public class BoardController {
 	}
 	
 	@GetMapping("/boardWrite")
-	public String boardWrite_get(@RequestParam int boardFormNo, @RequestParam String boardWriteType, Model model) {
+	public String boardWrite_get(@RequestParam int boardFormNo, @RequestParam(defaultValue = "0", required = false) int mbtiNo, @RequestParam String boardWriteType, Model model) {
 		logger.info("게시판 글쓰기 화면 보여주기 파라미터 boardFormNo: {}, boardWriteType: {}", boardFormNo, boardWriteType);
 		
 		List<BoardFormVO> list = boardService.selectAllBoard();
@@ -185,9 +191,17 @@ public class BoardController {
 		BoardFormVO boardFormVo = boardService.selectBoard(boardFormNo);
 		logger.info("게시판 검색결과 boardFormVo: {}", boardFormVo);
 		
+		List<MbtiVO> mbtiList = null;
+		
+		if(boardFormNo == 5) {			
+			mbtiList = mbtiService.selectAllMbti();
+			logger.info("mbti종류 전체조회 결과 mbtiList: {}", mbtiList);			
+		}
+		
 		model.addAttribute("boardList", list);			
 		model.addAttribute("title", "게시판 글쓰기");
 		model.addAttribute("boardFormVo", boardFormVo);
+		model.addAttribute("mbtiList", mbtiList);
 		
 		return "admin/board/boardWrite";
 	}
