@@ -8,14 +8,16 @@ section#mbti{
 	width: 1350px;
 	margin-left: 300px;
 }
-select#mbti-search-select {
-	margin-left: 780px;
-	margin-right: 10px;
+#mbti-search-div{
+	width: 550px;
+	float: right;
+}
+
+select[name=searchCondition] {
 	height: 40px;
 	margin-bottom: 0;
 	border: 1px solid #d8dce5;
 	border-radius: 6px;
-	width: 120px;
 	font-size: 16px;
 }
 
@@ -211,7 +213,6 @@ section#mbtiSurvey{
 	padding-left: 50px;
 	padding-top: 50px;
 	width: 1300px;
-	height: 400px;
  	margin-top: 20px;
  	line-height: 50px;
  	font-weight: bold;
@@ -220,8 +221,8 @@ section#mbtiSurvey{
 .defining2 #weakness{
 	margin:0 auto;
 	padding-left: 50px;
-	padding-top: 50px;
 	width: 1300px;
+	padding-bottom: 10px;
 	margin-top: 20px;
 	line-height: 50px;
 	font-weight: bold;
@@ -256,7 +257,7 @@ section#mbtiSurvey{
 	margin-top: 200px;
 	padding-top: 50px;
 	width: 1400px;
-	height: 800px;
+	height: 600px;
 	position: relative;
 }
 #mbti-compatibility span{
@@ -278,8 +279,7 @@ section#mbtiSurvey{
 #mbti-compatibility #best{
 	padding-left: 30px;
 	padding-top: 30px;
-	width: 650px;
-	height: 650px;
+	width: 500px;
  	float: left;
  	margin-top: 20px;
  	margin-left: 20px;
@@ -329,7 +329,7 @@ section#mbtiSurvey{
 	font-weight: bold;
 	margin-top: 20px;
 	margin-left: 10px;
-	width: 700px;
+	width: 600px;
 	line-height: 60px;
 }
 #mbti-dating p{

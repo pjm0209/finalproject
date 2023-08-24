@@ -123,6 +123,11 @@ div#edu-search-div {
     padding: 18px 27px 5px 20px;
 }
 
+input#board-search-area {
+	flex: none;
+    width: 250px;
+}
+
 select#edu-search-select {
 	font-size: 16px;
     margin-right: 20px;
@@ -130,7 +135,12 @@ select#edu-search-select {
     margin-bottom: 0;
     border: 1px solid #d8dce5;
     border-radius: 6px;
-    margin-left: 840px;
+    margin-left: 1095px;
+}
+
+button#button-addon2 {
+    width: 75px;
+    height: 38px;
 }
 
 

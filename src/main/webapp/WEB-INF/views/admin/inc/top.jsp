@@ -76,13 +76,7 @@
                 게시판
             </div>
 
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link" href="<c:url value='/admin/board/board?boardFormNo=1'/>">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>게시판</span></a>
-            </li>   
-            
+            <!-- Nav Item - Pages Collapse Menu -->             
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#boardNav"
                     aria-expanded="true" aria-controls="collapseUtilities">
@@ -124,6 +118,23 @@
                         <a class="collapse-item" href="<c:url value='/admin/manager/managerList'/>">관리자 관리</a>
                     </div>
                 </div>
+            </li>
+                                    
+			 <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#educationNav"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>교육 목록</span>
+                </a>
+                <div id="educationNav" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="<c:url value='/admin/education/list'/>">교육 리스트</a>
+                        <a class="collapse-item" href="<c:url value='/admin/education/applicantList'/>">신청자 관리</a>
+                        <a class="collapse-item" href="<c:url value='/admin/education/teacher'/>">강사 관리</a>
+                        <a class="collapse-item" href="<c:url value='/admin/education/location'/>">교육장 관리</a>
+                    </div>
+                </div>
             </li>                        
     
              <li class="nav-item">
@@ -131,11 +142,7 @@
                     <i class="fas fa-fw fa-cog"></i>
                     <span>MBTI 관리</span></a>
             </li>
-             <li class="nav-item">
-                <a class="nav-link" href="<c:url value='/admin/education/list'/>">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>교육관리</span></a>
-            </li>
+            
             <li class="nav-item">
                 <a class="nav-link" href="<c:url value='/admin/book/bookList?bookFlag=bookList'/>">
                     <i class="fas fa-gift"></i>

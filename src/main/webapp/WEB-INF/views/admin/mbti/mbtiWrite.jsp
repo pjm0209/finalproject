@@ -54,13 +54,13 @@ $(function(){
 				<select class="form-control" name="questionCategoryNo" id="questionCategoryNo" style="width: 300px;float: right;">
 					<option value="0">선택</option>
 					<option value="1"<c:if test="${vo.questionCategoryNo=='1'}">selected="selected"</c:if>>I</option>
-					<option value="2"<c:if test="${vo.questionCategoryNo=='1'}">selected="selected"</c:if>>E</option>
-					<option value="3"<c:if test="${vo.questionCategoryNo=='1'}">selected="selected"</c:if>>S</option>
-					<option value="4"<c:if test="${vo.questionCategoryNo=='1'}">selected="selected"</c:if>>N</option>
-					<option value="5"<c:if test="${vo.questionCategoryNo=='2'}">selected="selected"</c:if>>T</option>
-					<option value="6"<c:if test="${vo.questionCategoryNo=='3'}">selected="selected"</c:if>>F</option>
-					<option value="7"<c:if test="${vo.questionCategoryNo=='4'}">selected="selected"</c:if>>P</option>
-					<option value="8"<c:if test="${vo.questionCategoryNo=='4'}">selected="selected"</c:if>>J</option>
+					<option value="2"<c:if test="${vo.questionCategoryNo=='2'}">selected="selected"</c:if>>E</option>
+					<option value="3"<c:if test="${vo.questionCategoryNo=='3'}">selected="selected"</c:if>>S</option>
+					<option value="4"<c:if test="${vo.questionCategoryNo=='4'}">selected="selected"</c:if>>N</option>
+					<option value="5"<c:if test="${vo.questionCategoryNo=='5'}">selected="selected"</c:if>>T</option>
+					<option value="6"<c:if test="${vo.questionCategoryNo=='6'}">selected="selected"</c:if>>F</option>
+					<option value="7"<c:if test="${vo.questionCategoryNo=='7'}">selected="selected"</c:if>>P</option>
+					<option value="8"<c:if test="${vo.questionCategoryNo=='8'}">selected="selected"</c:if>>J</option>
 				</select>
 			</div>
 			<hr style="clear: both;border: 0">
@@ -88,7 +88,7 @@ $(function(){
 	        <p id="alertModalBody"></p>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" id="modal-close" class="btn bg-orange-primary" data-bs-dismiss="modal">확인</button>
+	        <button type="button" id="mbti-modal-close" onclick="opener.window.close()" class="btn bg-orange-primary" data-bs-dismiss="modal">확인</button>
 	      </div>
 	    </div>
 	  </div>

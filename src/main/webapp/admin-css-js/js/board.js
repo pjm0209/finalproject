@@ -144,6 +144,27 @@ $(function(){
 		$('#confirmModalBtn').trigger('click');
 	});
 	
+	$('#board-write-button').click(function(){
+		var mbtiNo = $('select[name=mbtiNo]').val();
+		var boardFormNo = $('input[name=boardFormNo]').val();
+		
+		if(mbtiNo != null) {
+			location.href = contextPath + '/admin/board/boardWrite?boardFormNo=' + boardFormNo + '&mbtiNo=' + mbtiNo + '&boardWriteType=write';
+		} else {
+			location.href = contextPath + '/admin/board/boardWrite?boardFormNo=' + boardFormNo + '&boardWriteType=write';
+		}
+	});
+	
+	$('#select_board').click(function(){
+		var board = $(this).val();
+		
+		if(board != 5) {
+			$('select[name=mbtiNo]').hide();
+		} else {
+			$('select[name=mbtiNo]').show();
+		}
+	});
+	
 	const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
 	const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
 });
@@ -555,7 +576,8 @@ function selectFile(element) {
     // 2. 파일 크기가 20MB를 초과하는 경우
     const fileSize = Math.floor(file.size / 1024 / 1024);
     if (fileSize > 20) {
-        alert('20MB 이하의 파일로 업로드해 주세요.');
+        $('#alertModalBody').html('20MB 이하의 파일로 업로드해 주세요.');		
+		$('#alertModalBtn').trigger('click');
         filename.value = '';
         element.value = '';
         return false;

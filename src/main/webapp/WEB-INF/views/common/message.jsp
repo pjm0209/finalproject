@@ -16,13 +16,14 @@
 	<script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 	<script type="text/javascript">
-		if(${closePopup}){
-			self.close();
-			opener.location.reload();
-		}
-		
 		$(function(){
 			$('#MessageModal').trigger('click');
+			$('#btClose').click(function(){
+				if(${closePopup}){
+					opener.location.reload();
+					self.close();
+				}
+			});
 		});
 	</script>
 	
@@ -40,7 +41,7 @@
 	        	${msg}
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn bg-orange-primary" onclick='location.href="<c:url value='${url}'/>"' data-bs-dismiss="modal">확인</button>
+	        <button type="button" id="btClose" class="btn bg-orange-primary" onclick='location.href="<c:url value='${url}'/>"' data-bs-dismiss="modal">확인</button>
 	      </div>
 	    </div>
 	  </div>

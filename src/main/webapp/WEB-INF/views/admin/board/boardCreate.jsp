@@ -10,7 +10,7 @@
 		<h2 class="text-gray-800" id="boardCreate-title">새 게시판 추가</h2>
 		<div class="board-head-button">
 			<input type="button" class="bg-gradient-secondary" onclick="location.href='<c:url value="/admin/board/board?boardFormNo=1"/>'" value="취소">
-			<input type="submit" class="bg-gradient-primary" id="save-boardCreate" value="저장">
+			<input type="submit" class="bg-orange-primary" id="save-boardCreate" value="저장">
 		</div>
 	</div>
 		<div class="boardCreate-body">

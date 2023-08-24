@@ -3,23 +3,11 @@
 <%@ include file="../inc/top.jsp"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <section id="mbtiSurvey" class="mbtiSurvey">
-	<c:if test="${resultMbti=='ESFJ'}">
-		<c:set var="color1" value="#6524d7"/>
-		<c:set var="color2" value="#cbaefe"/>
-		<c:set var="color3" value="#dfcdff"/>
-		<c:set var="color4" value="#dfcdff"/>
-	</c:if>
 	<c:if test="${resultMbti=='ISTP'}">
 		<c:set var="color1" value="#3ac906"/>
 		<c:set var="color2" value="#b4ff9a"/>
 		<c:set var="color3" value="#e8ffe2"/>
 		<c:set var="color4" value="#64a910"/>
-	</c:if>
-	<c:if test="${resultMbti=='ENFJ'}">
-		<c:set var="color1" value="#f6be06"/>
-		<c:set var="color2" value="#ffe783"/>
-		<c:set var="color3" value="#fffae2"/>
-		<c:set var="color4" value="#163fbb"/>
 	</c:if>
 	<c:if test="${resultMbti=='ISTJ'}">
 		<c:set var="color1" value="#6c51ff"/>
@@ -63,41 +51,54 @@
 		<c:set var="color3" value="#e1ffff"/>
 		<c:set var="color4" value="#d100ff"/>
 	</c:if>
-	<c:if test="${resultMbti=='ESFJ'}">
-		<c:set var="color1" value="#6524d7"/>
-		<c:set var="color2" value="#cbaefe"/>
-		<c:set var="color3" value="#dfcdff"/>
+	<c:if test="${resultMbti=='ENTP'}">
+		<c:set var="color1" value="#64aa0c"/>
+		<c:set var="color2" value="#c7ff84"/>
+		<c:set var="color3" value="#f0ffe0"/>
+		<c:set var="color4" value="#3acc07"/>
+	</c:if>
+	<c:if test="${resultMbti=='ENTJ'}">
+		<c:set var="color1" value="#df1664"/>
+		<c:set var="color2" value="#ffa1c6"/>
+		<c:set var="color3" value="#ffebf4"/>
+		<c:set var="color4" value="#87c700"/>
+	</c:if>
+	<c:if test="${resultMbti=='ENFP'}">
+		<c:set var="color1" value="#ff74e7"/>
+		<c:set var="color2" value="#ffc1f4"/>
+		<c:set var="color3" value="#fee0fa"/>
+		<c:set var="color4" value="#b9b33b"/>
+	</c:if>
+	<c:if test="${resultMbti=='ENFJ'}">
+		<c:set var="color1" value="#f6be06"/>
+		<c:set var="color2" value="#ffe783"/>
+		<c:set var="color3" value="#fffae2"/>
 		<c:set var="color4" value="#163fbb"/>
 	</c:if>
 	<c:if test="${resultMbti=='ESFJ'}">
 		<c:set var="color1" value="#6524d7"/>
 		<c:set var="color2" value="#cbaefe"/>
 		<c:set var="color3" value="#dfcdff"/>
-		<c:set var="color4" value="#163fbb"/>
+		<c:set var="color4" value="#dfcdff"/>
 	</c:if>
-	<c:if test="${resultMbti=='ESFJ'}">
-		<c:set var="color1" value="#6524d7"/>
-		<c:set var="color2" value="#cbaefe"/>
-		<c:set var="color3" value="#dfcdff"/>
-		<c:set var="color4" value="#163fbb"/>
+	
+	<c:if test="${resultMbti=='ESFP'}">
+		<c:set var="color1" value="#f15d09"/>
+		<c:set var="color2" value="#ffb085"/>
+		<c:set var="color3" value="#fef0e5"/>
+		<c:set var="color4" value="#0399ff"/>
 	</c:if>
-	<c:if test="${resultMbti=='ESFJ'}">
-		<c:set var="color1" value="#6524d7"/>
-		<c:set var="color2" value="#cbaefe"/>
-		<c:set var="color3" value="#dfcdff"/>
-		<c:set var="color4" value="#163fbb"/>
+	<c:if test="${resultMbti=='ESTJ'}">
+		<c:set var="color1" value="#de1764"/>
+		<c:set var="color2" value="#ffa0c6"/>
+		<c:set var="color3" value="#ffebf4"/>
+		<c:set var="color4" value="#88c600"/>
 	</c:if>
-	<c:if test="${resultMbti=='ESFJ'}">
-		<c:set var="color1" value="#6524d7"/>
-		<c:set var="color2" value="#cbaefe"/>
-		<c:set var="color3" value="#dfcdff"/>
-		<c:set var="color4" value="#163fbb"/>
-	</c:if>
-	<c:if test="${resultMbti=='ESFJ'}">
-		<c:set var="color1" value="#6524d7"/>
-		<c:set var="color2" value="#cbaefe"/>
-		<c:set var="color3" value="#dfcdff"/>
-		<c:set var="color4" value="#163fbb"/>
+	<c:if test="${resultMbti=='ESTP'}">
+		<c:set var="color1" value="#d300ff"/>
+		<c:set var="color2" value="#efa4ff"/>
+		<c:set var="color3" value="#fbe7ff"/>
+		<c:set var="color4" value="#03cecb"/>
 	</c:if>
 	<div class="mbti-result" style="background-image: url(<c:url value='/images/${resultMbti}.jpg'/>)">
 		<div class="mbti-result-top">
@@ -111,9 +112,6 @@
 	</div>
 	<!-- Project Card Example -->
     <div class="card shadow mb-4 mbti-div-size">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">성격 유형</h6>
-        </div>
         <div class="card-body">
             <h4 class="font-weight-bold">내향형 ${resultI}%
 	            <span class="float-right">외향형 ${resultE}%</span>
@@ -215,7 +213,7 @@
 	</div>
 	
 	<c:set var="compatibility" value="${fn:split(mbtiVo.compatibility,'@')}"/>
-	<div id="mbti-compatibility" style="background-image: url('<c:url value="/images/${mbtiVo.bestMbti}.jpg"/>')">
+	<div id="mbti-compatibility" style="background-image: url('<c:url value="/images/${mbtiVo.bestMbti}.jpg"/>');background-position: center;">
 		<span style="background-color: ${color4};">궁합</span>
 		<div id="best">
 			<p>${compatibility[0]}</p>
