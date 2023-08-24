@@ -28,6 +28,8 @@ import com.team2.mbti.comment.model.CommentVO;
 import com.team2.mbti.common.ConstUtil;
 import com.team2.mbti.common.FileUploadUtil;
 import com.team2.mbti.common.PaginationInfo;
+import com.team2.mbti.mbtisurvey.model.MbtiSurveyServiceImpl;
+import com.team2.mbti.mbtisurvey.model.MbtiVO;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -39,18 +41,23 @@ public class BoardController {
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 	
 	private final BoardService boardService;
+	private final MbtiSurveyServiceImpl mbtiService;
 	private final FileUploadUtil fileUploadUtil;
 	
-	@GetMapping("/boardHeadSide")
+	@GetMapping("/sideBoard")
 	public String boardHeadSide(Model model) {
 		logger.info("게시판 사이드바");
 		
 		List<BoardFormVO> list = boardService.selectAllBoard();
 		logger.info("게시판 종류 전체조회 결과: list: {}", list);
+	
+		List<MbtiVO> mbtiList = mbtiService.selectAllMbti();
+		logger.info("MBTI종류 전체조회결과 mbtiList: {}", mbtiList);
 		
 		model.addAttribute("boardList", list);		
+		model.addAttribute("board");
 		
-		return "admin/board/boardHeadSide";
+		return "admin/inc/sideBoard";
 	}
 	
 	@RequestMapping("/board")

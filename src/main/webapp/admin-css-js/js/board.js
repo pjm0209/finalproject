@@ -1,12 +1,7 @@
 var fileIndex = 0;
 var contextPath = "/mbti";
 
-$(function(){	
-	$('.board-side-icon').click(function(){
-		const boardFormNo = $(this).prev().find('input[type=hidden]').val();
-		location.href = contextPath + "/admin/board/boardEdit?boardFormNo=" + boardFormNo;
-	});
-	
+$(function(){		
 	CKEDITOR.replace("p_content", {
 						uploadUrl: contextPath + "/imageUpload",	//드래그 앤 드롭					
 						filebrowserUploadUrl:  contextPath + "/imageUpload", //파일은 이 경로로 업로드
