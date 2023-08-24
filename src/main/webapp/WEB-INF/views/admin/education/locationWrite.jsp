@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <c:if test="${empty vo}">
 	<c:set var="str" value="등록"/>
@@ -42,13 +43,15 @@
 					</dd>
 					<dt>우편번호</dt>
 					<dd>
-							 <input class="form-control mr-2" type="text" name="zipcode" id="zipcode" style="width:200px; float:left">
-       						 <input type="button" class="form-control" style="width:130px" value="우편번호 찾기" id="btnZipcode" title="새창열림">
+						<div class="input_group v2">
+							 <input class="form-control mr-2" type="text" name="zipcode" id="zipcodePostalCode" style="width:200px; float:left">	
+       						 <input type="button" class="form-control" style="width:130px" value="우편번호 찾기" id="btnZipcode" title="새창열림" onclick="sample4_execDaumPostcode()">
+						</div>
 					</dd>
 					<dt>상세 주소</dt>
 					<dd>
-						<div>
-							<input type="text" name="epAddress"  value="${vo.epAddress }" class="form-control">${educationVo.epAddress}
+						<div class="input_group v2">
+							<input type="text" class="form-control" id="locationAddress" name="epAddress"  value="${vo.epAddress }" >${educationVo.epAddress}
 						</div>
 					</dd>
 					<dt>전화번호</dt>
