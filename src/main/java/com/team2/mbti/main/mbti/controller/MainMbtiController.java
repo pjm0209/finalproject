@@ -32,7 +32,7 @@ public class MainMbtiController {
 	private final MbtiSurveyService mbtiSurveyService;
 	private final MbtiResultService mbtiResultService;
 	
-	@RequestMapping("/")
+	@RequestMapping("/mbti")
 	public String mbti() {
 		logger.info("MBTI 페이지 불러오기");
 		
