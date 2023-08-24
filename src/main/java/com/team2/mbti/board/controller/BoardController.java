@@ -41,7 +41,6 @@ public class BoardController {
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 	
 	private final BoardService boardService;
-	private final MbtiSurveyServiceImpl mbtiService;
 	private final FileUploadUtil fileUploadUtil;
 	
 	@GetMapping("/sideBoard")
@@ -50,12 +49,8 @@ public class BoardController {
 		
 		List<BoardFormVO> list = boardService.selectAllBoard();
 		logger.info("게시판 종류 전체조회 결과: list: {}", list);
-	
-		List<MbtiVO> mbtiList = mbtiService.selectAllMbti();
-		logger.info("MBTI종류 전체조회결과 mbtiList: {}", mbtiList);
 		
 		model.addAttribute("boardList", list);		
-		model.addAttribute("board");
 		
 		return "admin/inc/sideBoard";
 	}
