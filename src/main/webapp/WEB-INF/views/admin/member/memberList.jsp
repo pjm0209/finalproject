@@ -42,25 +42,6 @@ button#member-delete-button{
 <div class="head-div">
 	<h2 class="text-gray-800">회원 관리</h2>
 </div>
-<div class="side-body">
-	<div class="side-div-title">
-		<h6>회원 관리 </h6>
-		<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
-			fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
-  			<path fill-rule="evenodd"
-				d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
-		</svg>
-	</div>
-	<div class="group">
-		<div id="group-list" class="nav">	
-			<div class="board-side-boardItem">
-				<div class="board-name" name="notice" value="notice" onclick="showRegisteredMembers()">
-					<span>회원 리스트</span>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
 <div class="board-body">
 	<div id="board-title">
 		<h5>회원 리스트</h5>

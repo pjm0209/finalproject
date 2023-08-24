@@ -1,7 +1,5 @@
 package com.team2.mbti.education.model;
 
-import java.util.List;
-
 import com.team2.mbti.common.SearchVO;
 
 import lombok.Getter;

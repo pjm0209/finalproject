@@ -87,7 +87,7 @@
           </li>
           <li><a class="nav-link scrollto" href="<c:url value='/main/myPage'/>">마이페이지</a></li>
           <li><a class="getstarted scrollto" href="#about">Get Started</a></li>
-          <li><a class="nav-link scrollto">${sessionScope.userid} 님</a></li>	
+          <li><a class="nav-link scrollto">${sessionScope.userid}</a></li>	
        	  <!-- 로그인 안된 경우 -->
 		  <c:if test="${empty sessionScope.userid }">			
 			<li><a href="<c:url value='/main/member/memberLogin'/>">로그인</a></li>

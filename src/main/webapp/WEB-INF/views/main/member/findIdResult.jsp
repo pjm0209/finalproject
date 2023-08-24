@@ -96,7 +96,7 @@ $(function() {
 <h1>아이디 찾기</h1>	   
 	<form name = "form-findIdResult" method="post" action="<c:url value='main/member/findIdResult'/>">	
 		<div class="tab-content active">
-			<p>회원가입 시 사용한 아이디는 ****입니다.</p>										
+			<p>회원님의 아이디는: <%= request.getParameter("userId") %></p>									
 				<div class="btnSearch"><br>
 					<input type="button" id="btnLoginScreen" value="로그인 화면으로">					
 				</div>

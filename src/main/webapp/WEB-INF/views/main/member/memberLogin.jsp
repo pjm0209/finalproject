@@ -138,6 +138,21 @@ form{
 #memberRegister-button{
 	background: #eb5d1e;
 }
+
+.images-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 20px;
+    margin-top: 20px;
+}
+
+.centered-span {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
 </style>
 
 <script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>     
@@ -161,6 +176,47 @@ $(function(){
     });
 });  	    	
 </script> 
+
+<!-- 카카오 스크립트 -->
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script>
+Kakao.init('8815f5cb0c494f67abd247e4c2b31b88'); //발급받은 키 중 javascript키를 사용해준다.
+console.log(Kakao.isInitialized()); // sdk초기화여부판단
+//카카오로그인
+function kakaoLogin() {
+    Kakao.Auth.login({
+      success: function (response) {
+        Kakao.API.request({
+          url: '/v2/user/me',
+          success: function (response) {
+        	  console.log(response)
+          },
+          fail: function (error) {
+            console.log(error)
+          },
+        })
+      },
+      fail: function (error) {
+        console.log(error)
+      },
+    })
+  }
+//카카오로그아웃  
+function kakaoLogout() {
+    if (Kakao.Auth.getAccessToken()) {
+      Kakao.API.request({
+        url: '/v1/user/unlink',
+        success: function (response) {
+        	console.log(response)
+        },
+        fail: function (error) {
+          console.log(error)
+        },
+      })
+      Kakao.Auth.setAccessToken(undefined)
+    }
+  }  
+</script>
     
 </head>
 <body>
@@ -191,9 +247,22 @@ $(function(){
                     <div class="field button-field">
                         <input type="submit" value="로그인" id="memberLogin-button">     
                     </div>
-                    
+                    <span class="centered-span">또는</span><br>
+                    <hr><br>
+					<div onclick="kakaoLogin();">
+				      <a href="javascript:void(0)">
+				          <img src='../../images/kakao_login_large_narrow.png' width=370; height=60;>
+				      </a>
+					</div><br>
+					
+					<div onclick="naverLogin();">
+				      <a href="javascript:void(0)">
+				          <img src='../../images/btnG_완성형.png' width=370; height=60;>
+				      </a>
+					</div>
+                
                     <div class="field button-field">
-                    	<span>계정이 없으신가요?</span>
+                    	<span >계정이 없으신가요?</span>
                     	<input type="button" value="회원가입" id="memberRegister-button">  
                     </div>  
                     

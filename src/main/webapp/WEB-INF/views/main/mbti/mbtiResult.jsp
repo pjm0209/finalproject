@@ -63,23 +63,23 @@
 		<c:set var="color3" value="#e1ffff"/>
 		<c:set var="color4" value="#d100ff"/>
 	</c:if>
-	<c:if test="${resultMbti=='ESFJ'}">
+	<c:if test="${resultMbti=='ESFP'}">
+		<c:set var="color1" value="#f25d08"/>
+		<c:set var="color2" value="#ffb186"/>
+		<c:set var="color3" value="#fef0e5"/>
+		<c:set var="color4" value="#0399ff"/>
+	</c:if>
+	<c:if test="${resultMbti=='ESTP'}">
 		<c:set var="color1" value="#6524d7"/>
 		<c:set var="color2" value="#cbaefe"/>
 		<c:set var="color3" value="#dfcdff"/>
 		<c:set var="color4" value="#163fbb"/>
 	</c:if>
-	<c:if test="${resultMbti=='ESFJ'}">
-		<c:set var="color1" value="#6524d7"/>
-		<c:set var="color2" value="#cbaefe"/>
-		<c:set var="color3" value="#dfcdff"/>
-		<c:set var="color4" value="#163fbb"/>
-	</c:if>
-	<c:if test="${resultMbti=='ESFJ'}">
-		<c:set var="color1" value="#6524d7"/>
-		<c:set var="color2" value="#cbaefe"/>
-		<c:set var="color3" value="#dfcdff"/>
-		<c:set var="color4" value="#163fbb"/>
+	<c:if test="${resultMbti=='ESTJ'}">
+		<c:set var="color1" value="#df1664"/>
+		<c:set var="color2" value="#ffa1c6"/>
+		<c:set var="color3" value="#ffebf4"/>
+		<c:set var="color4" value="#87c700"/>
 	</c:if>
 	<c:if test="${resultMbti=='ESFJ'}">
 		<c:set var="color1" value="#6524d7"/>

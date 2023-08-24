@@ -1,55 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
-
+<script type="text/javascript">
+						$(function(){
+							$('.education-search').keyup(function() {
+								if($('#edu-search-select').val() == 'edu_app_flag') {
+									var str = $('input[name=searchKeyword]').val();
+									
+									if(str != 'Y' && str != 'N' && str != 'y' && str != 'n') {
+										$('input[name=searchKeyword]').val('');
+									} else {
+										if(str == 'y') {
+											$('input[name=searchKeyword]').val('Y');
+										} else if(str == 'n') {
+											$('input[name=searchKeyword]').val('N');
+										}
+									}
+								}
+							});
+						});
+					</script>
 
 <!-- Begin Page Content -->
 <!-- Page Heading -->
 <div class="head-div">
 	<h2 class="text-gray-800">교육 관리</h2>
 </div>
-<div class="side-body">
-	<div class="side-div-title">
-		<h6>교육</h6>
-		<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
-			fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
-  			<path fill-rule="evenodd"
-				d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
-		</svg>
-	</div>
-	<div class="group">
-		<div id="group-list" class="nav">
-			<div class="board-side-boardItem">
-				<div class="board-name">
-					<a class="applicantList-link" href="<c:url value='/admin/education/list'/>">
-						<span>교육 리스트</span>
-					</a>
-				</div>
-			</div>
-			<div class="board-side-boardItem">
-				<div class="board-name">
-					<a class="applicantList-link" href="<c:url value='/admin/education/applicantList'/>">
-						<span>신청자 관리</span>
-					</a>
-				</div>
-			</div>
-			<div class="board-side-boardItem">
-				<div class="board-name">
-					<a class="applicantList-link" href="<c:url value='/admin/education/teacher'/>">
-						<span>강사 관리</span>
-					</a>
-				</div>
-			</div>
-			<div class="board-side-boardItem">
-				<div class="board-name">
-					<a class="applicantList-link" href="<c:url value='/admin/education/location'/>">
-						<span>교육장 관리</span>
-					</a>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+
 <div class="board-body">
 	<div id="board-title">
 		<h5>신청자 관리</h5>
@@ -62,11 +39,12 @@
 				<form name="frmSearch" method="post" action="<c:url value='/admin/education/applicantList'/>">
 				<div class="input-group mb-3" id="board-search-div">
 					<select class="form-select form-select-lg" aria-label=".form-select-lg example" name="searchCondition" id="edu-search-select">					  	
+					  	<option value="edu_app_flag" <c:if test="${param.searchCondition=='edu_app_flag'}"> selected="selected" </c:if>>승인 상태</option>
 					  	<option value="name" <c:if test="${param.searchCondition=='name'}"> selected="selected" </c:if>>신청자</option>
-					  	<option value="edu_name" <c:if test="${param.searchCondition=='edu_name'}"> selected="selected" </c:if>>교육 이름</option>
 					  	<option value="ep_name" <c:if test="${param.searchCondition=='ep_name'}"> selected="selected" </c:if>>교육장</option>
 					</select>
-				 	<input type="text" class="form-control" name="searchKeyword" placeholder="검색어를 입력하세요" aria-label="Recipient's username" aria-describedby="button-addon2" id="board-search-area">
+					
+				 	<input type="text" class="form-control education-search" name="searchKeyword" placeholder="검색어를 입력하세요" aria-label="Recipient's username" aria-describedby="button-addon2" id="board-search-area">
 				 	<button class="btn btn-outline-secondary" type="submit" id="button-addon2">검색</button>
 				</div>
 				</form>
