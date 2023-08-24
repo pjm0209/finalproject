@@ -124,7 +124,7 @@ div#edu-search-div {
 }
 
 input#board-search-area {
-    flex: none;
+	flex: none;
     width: 250px;
 }
 
@@ -141,6 +141,7 @@ select#edu-search-select {
 button#button-addon2 {
     width: 75px;
     height: 38px;
+}
 
 
 /* educationWrite */
