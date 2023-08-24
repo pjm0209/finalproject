@@ -88,7 +88,7 @@ $(function(){
 	        <p id="alertModalBody"></p>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" id="modal-close" class="btn bg-orange-primary" data-bs-dismiss="modal">확인</button>
+	        <button type="button" id="mbti-modal-close" onclick="opener.window.close()" class="btn bg-orange-primary" data-bs-dismiss="modal">확인</button>
 	      </div>
 	    </div>
 	  </div>

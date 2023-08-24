@@ -18,15 +18,15 @@
 		<div class="board-head">
 			<div class="board-search-result">
 				<form name="frmSearch" method="post" action="<c:url value='/admin/mbti/mbti'/>">
-				<div class="input-group mb-3" id="board-search-div">
-					<select class="form-select form-select-lg" name="searchCondition" aria-label=".form-select-lg example" id="mbti-search-select">					  	
-					  	<option value="question_type_no" <c:if test="${param.searchCondition=='question_type_no'}"> selected="selected" </c:if> >문제 유형</option>
-					  	<option value="question" <c:if test="${param.searchCondition=='question'}"> selected="selected" </c:if>>질문지</option>
-					</select>
-				 	<input type="text"  class="form-control" name="searchKeyword" placeholder="검색어를 입력하세요"
-				 		aria-label="Recipient's username" aria-describedby="button-addon2" id="mbti-search-area" value="${param.searchKeyword}">
-				 	<button class="mbti-button4" type="submit" id="mbti-search">검색</button>
-				</div>
+					<div class="input-group mb-3" id="mbti-search-div">
+						<select class="form-select form-select-lg" name="searchCondition" aria-label=".form-select-lg example" id="mbti-search-select">					  	
+						  	<option value="question_type_no" <c:if test="${param.searchCondition=='question_type_no'}"> selected="selected" </c:if> >문제 유형</option>
+						  	<option value="question" <c:if test="${param.searchCondition=='question'}"> selected="selected" </c:if>>질문지</option>
+						</select>
+					 	<input type="text"  class="form-control" name="searchKeyword" placeholder="검색어를 입력하세요"
+					 		aria-label="Recipient's username" aria-describedby="button-addon2" id="mbti-search-area" value="${param.searchKeyword}">
+					 	<button class="mbti-button4" type="submit" id="mbti-search">검색</button>
+					</div>
 				</form>
 			</div>
 		</div>
