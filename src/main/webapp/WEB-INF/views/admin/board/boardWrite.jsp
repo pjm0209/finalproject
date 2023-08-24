@@ -8,18 +8,22 @@
 
 <c:if test="${param.boardWriteType == 'write' }">
 	<c:set var="url" value="/admin/board/boardWrite"/>
+	<c:set var="cancelUrl" value="${param.boardFormNo }"/>
 	<c:set var="board" value="${boardFormVo.boardFormName }"/>
 	<c:set var="buttonType" value="저장"/>
 </c:if>
 
 <c:if test="${param.boardWriteType == 'edit' }">
 	<c:set var="url" value="/admin/board/boardWriteEdit"/>
+	<c:set var="cancelUrl" value="${map['BOARD_FORM_NO'] }"/>
 	<c:set var="board" value="${map['BOARD_FORM_NAME'] }"/>
 	<c:set var="buttonType" value="수정"/>
 </c:if>
 
 <c:if test="${param.boardWriteType == 'reply' }">
 	<c:set var="url" value="/admin/board/boardWriteReply"/>
+	<c:set var="cancelUrl" value="${param.boardFormNo }"/>
+	<c:set var="cancelUrl" value="${map['BOARD_FORM_NO'] }"/>
 	<c:set var="board" value="${map['BOARD_FORM_NAME'] }"/>
 	<c:set var="buttonType" value="저장"/>
 </c:if>
@@ -47,7 +51,8 @@
 				</c:if>
 			</h5>
 			<div class="board-head-button">
-				<input type="submit" class="bg-gradient-primary" id="saveBoard" value="${buttonType }">
+				<input type="button" class="bg-gradient-secondary" onclick="location.href='<c:url value="/admin/board/board?boardFormNo=${cancelUrl }"/>'" value="취소">
+				<input type="submit" class="bg-orange-primary" id="saveBoard" value="${buttonType }">
 			</div>
 		</div>
 		<div class="board">

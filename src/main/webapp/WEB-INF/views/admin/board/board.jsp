@@ -18,19 +18,27 @@
 		<input type="hidden" name="searchKeyword" value="${param.searchKeyword }">
 		<input type="hidden" name="currentPage">
 	</form>
-	<div id="board-title">
-		<h5>${boardFormVo.boardFormName }</h5>
-		<button class="bg-orange-primary" id="board-write-button" onclick="location.href='<c:url value="/admin/board/boardWrite?boardFormNo=${param.boardFormNo}&boardWriteType=write"/>'">글쓰기</button>
-	</div>
 	<div class="board">
 		<div class="board-head">
-			<div class="board-search-result">
-				<span class="search-count"></span>
+			<div class="board-search-result">				
 				<form name="searchForm" method="post" action="<c:url value='/admin/board/board'/>">
 					<div class="input-group mb-3" id="board-search-div">
-						<div class="board-head-Group1">
-							<input type="button" value="삭제" class="btn btn-outline-secondary" id="boardMultiDel">
-							<span class="boardDelCount"></span>
+						<div class="boardNameAndDel">
+							<h5>${boardFormVo.boardFormName }</h5>
+							<div class="board-head-Group1">
+								<input type="button" value="삭제" class="btn btn-outline-secondary" id="boardMultiDel">
+								<span class="boardDelCount"></span>
+							</div>
+						</div>
+						<div class="mbtiBoardSelect">
+							<c:if test="${param.boardFormNo == 5 }">
+								<select class="form-select" aria-label="Default select example">
+									<option selected>원하는 유형의 mbti게시판을 선택하세요</option>
+									<c:forEach var="mbtiVo" items="${mbtiList }">
+										<option value="1">${mbtiVo.mbtiType }</option>								
+									</c:forEach>
+								</select>
+							</c:if>
 						</div>
 						<div class="board-head-Group2">
 							<input type="hidden" name="boardFormNo" value="${param.boardFormNo }">
@@ -109,6 +117,7 @@
 				</tbody>
 			</table>
 		</form>
+		<button class="bg-orange-primary" id="board-write-button" onclick="location.href='<c:url value="/admin/board/boardWrite?boardFormNo=${param.boardFormNo}&boardWriteType=write"/>'">글쓰기</button>
 		<nav class="boardPaging" aria-label="Page navigation example">
 		  <ul class="pagination">
 		  	<c:if test="${pagingInfo.firstPage > 1 }">
@@ -134,7 +143,7 @@
 			    </li>
 		    </c:if>
 		  </ul>
-		</nav>
+		</nav>		
 	</div>
 </div>
 </div>
