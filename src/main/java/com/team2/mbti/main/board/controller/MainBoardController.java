@@ -1,11 +1,13 @@
 package com.team2.mbti.main.board.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.team2.mbti.board.model.BoardFormVO;
@@ -34,7 +36,14 @@ public class MainBoardController {
 	}
 	
 	@RequestMapping("/boardMain")
-	public String boardMain() {
+	public String boardMain(Model model) {
+		logger.info("커뮤니티 메인페이지");
+		
+		List<BoardFormVO> boardFormList = boardService.selectAllBoard();
+		logger.info("게시판목록 조회결과 boardFormList: {}", boardFormList);
+		
+		model.addAttribute("boardFormList", boardFormList);
+		
 		return "main/board/boardMain";
 	}
 }

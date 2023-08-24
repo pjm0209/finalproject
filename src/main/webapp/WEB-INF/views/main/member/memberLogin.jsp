@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+ 
 <!DOCTYPE html>
     <html lang="ko">
     <head>
@@ -129,6 +130,29 @@ form{
 .form-content a:hover{
     text-decoration: underline;
 }
+
+#memberLogin-button{
+	background: #eb5d1e;
+}
+
+#memberRegister-button{
+	background: #eb5d1e;
+}
+
+.images-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 20px;
+    margin-top: 20px;
+}
+
+.centered-span {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
 </style>
 
 <script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>     
@@ -152,17 +176,58 @@ $(function(){
     });
 });  	    	
 </script> 
+
+<!-- 카카오 스크립트 -->
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script>
+Kakao.init('8815f5cb0c494f67abd247e4c2b31b88'); //발급받은 키 중 javascript키를 사용해준다.
+console.log(Kakao.isInitialized()); // sdk초기화여부판단
+//카카오로그인
+function kakaoLogin() {
+    Kakao.Auth.login({
+      success: function (response) {
+        Kakao.API.request({
+          url: '/v2/user/me',
+          success: function (response) {
+        	  console.log(response)
+          },
+          fail: function (error) {
+            console.log(error)
+          },
+        })
+      },
+      fail: function (error) {
+        console.log(error)
+      },
+    })
+  }
+//카카오로그아웃  
+function kakaoLogout() {
+    if (Kakao.Auth.getAccessToken()) {
+      Kakao.API.request({
+        url: '/v1/user/unlink',
+        success: function (response) {
+        	console.log(response)
+        },
+        fail: function (error) {
+          console.log(error)
+        },
+      })
+      Kakao.Auth.setAccessToken(undefined)
+    }
+  }  
+</script>
     
 </head>
 <body>
     <section class="container forms">    
         <div class="form login">
             <div class="form-content">
-                <h1><img src="../../images/MBTI_Login.png"/></h1>
+                <h1><img src="../../images/로고이미지.png"/></h1>
                 
                 <form class="form-memberLogin" method="post" id="memberLogin-form" action="<c:url value='/main/member/memberLogin'/>">
                     <div class="field input-field">
-                        <input type="text" name="userid" placeholder="아이디를 입력하세요." class="input">                       
+                        <input type="text" name="userid" placeholder="아이디를 입력하세요."value="${cookie.ck_userid.value }">                       
                     </div>
 
                     <div class="field input-field">
@@ -172,6 +237,8 @@ $(function(){
                     
                     <div class="remember-check">
                 		<input type="checkbox" name="chkSave" id="remember-check">&nbsp; 아이디 저장하기
+                			<c:if test="${!empty cookie.ck_userid }">         
+                			</c:if>   
                 		<a class="forgot-id" href="<c:url value='/main/member/forgot-id'/>">아이디 찾기</a>
                 		<span style="color:blue;">|</span>
                 		<a class="forgot-password" href="<c:url value='/main/member/forgot-pwd'/>">비밀번호 찾기</a>
@@ -180,9 +247,22 @@ $(function(){
                     <div class="field button-field">
                         <input type="submit" value="로그인" id="memberLogin-button">     
                     </div>
-                    
+                    <span class="centered-span">또는</span><br>
+                    <hr><br>
+					<div onclick="kakaoLogin();">
+				      <a href="javascript:void(0)">
+				          <img src='../../images/kakao_login_large_narrow.png' width=370; height=50;>
+				      </a>
+					</div>
+					
+					<div onclick="naverLogin();">
+				      <a href="javascript:void(0)">
+				          <img src='../../images/btnG_완성형.png' width=370; height=50;>
+				      </a>
+					</div>
+                
                     <div class="field button-field">
-                    	<span>계정이 없으신가요?</span>
+                    	<span >계정이 없으신가요?</span>
                     	<input type="button" value="회원가입" id="memberRegister-button">  
                     </div>  
                     

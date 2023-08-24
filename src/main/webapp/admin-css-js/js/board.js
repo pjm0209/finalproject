@@ -1,12 +1,7 @@
 var fileIndex = 0;
 var contextPath = "/mbti";
 
-$(function(){	
-	$('.board-side-icon').click(function(){
-		const boardFormNo = $(this).prev().find('input[type=hidden]').val();
-		location.href = contextPath + "/admin/board/boardEdit?boardFormNo=" + boardFormNo;
-	});
-	
+$(function(){		
 	CKEDITOR.replace("p_content", {
 						uploadUrl: contextPath + "/imageUpload",	//드래그 앤 드롭					
 						filebrowserUploadUrl:  contextPath + "/imageUpload", //파일은 이 경로로 업로드
@@ -147,6 +142,27 @@ $(function(){
 		$('#confirmModalBody').html('파일을 삭제하시겠습니까?');
 		$('#confirmOk').attr('onclick', 'fileDel('+ id + ')');
 		$('#confirmModalBtn').trigger('click');
+	});
+	
+	$('#board-write-button').click(function(){
+		var mbtiNo = $('select[name=mbtiNo]').val();
+		var boardFormNo = $('input[name=boardFormNo]').val();
+		
+		if(mbtiNo != null) {
+			location.href = contextPath + '/admin/board/boardWrite?boardFormNo=' + boardFormNo + '&mbtiNo=' + mbtiNo + '&boardWriteType=write';
+		} else {
+			location.href = contextPath + '/admin/board/boardWrite?boardFormNo=' + boardFormNo + '&boardWriteType=write';
+		}
+	});
+	
+	$('#select_board').click(function(){
+		var board = $(this).val();
+		
+		if(board != 5) {
+			$('select[name=mbtiNo]').hide();
+		} else {
+			$('select[name=mbtiNo]').show();
+		}
 	});
 	
 	const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
@@ -560,7 +576,8 @@ function selectFile(element) {
     // 2. 파일 크기가 20MB를 초과하는 경우
     const fileSize = Math.floor(file.size / 1024 / 1024);
     if (fileSize > 20) {
-        alert('20MB 이하의 파일로 업로드해 주세요.');
+        $('#alertModalBody').html('20MB 이하의 파일로 업로드해 주세요.');		
+		$('#alertModalBtn').trigger('click');
         filename.value = '';
         element.value = '';
         return false;

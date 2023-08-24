@@ -12,19 +12,39 @@ button#member-delete-button{
 	color: white;
 	background-color: #eb5d1e;
 }
+
+select#member-search-select {
+	font-size: 16px;
+    margin-right: 20px;
+    height: 40px;
+    margin-bottom: 0;
+    border: 1px solid #d8dce5;
+    border-radius: 6px;
+    margin-left: 840px;
+}
 </style>
 
 <script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>
 <script type="text/javascript">
 	$(function(){
-		$('#board-write-button').click(function(){
-			if(confirm("선택한 회원을 삭제하시겠습니까?")){
-				var contextpath = "/mbti";
-				location.href=contextpath+"/admin/member/memberList";
+		$('#member-delete-button').click(function(){
+			if($('input[type=checkbox]:checked').length<1){
+				alert('탈퇴시킬 회원을 선택하세요.');
+				return;
 			}
 			
-		});	
+			if(confirm('선택한 회원을 탈퇴시키겠습니까?')){
+				$('form[name=form-Delete]').prop('action',contextPath+'/admin/member/memberDelete');
+				$('form[name=form-Delete]').submit();
+			}
+		});
 	});
+	
+	function memberDel() {
+		$('#selectMemberDelete').attr('action', contextPath + '/admin/member/memberDelete');
+		$('form[name=form-Delete]').submit();
+	}
+	
 </script>
 
 <!-- Begin Page Content -->
@@ -32,29 +52,10 @@ button#member-delete-button{
 <div class="head-div">
 	<h2 class="text-gray-800">회원 관리</h2>
 </div>
-<div class="side-body">
-	<div class="side-div-title">
-		<h6>회원 관리 </h6>
-		<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
-			fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
-  			<path fill-rule="evenodd"
-				d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
-		</svg>
-	</div>
-	<div class="group">
-		<div id="group-list" class="nav">	
-			<div class="board-side-boardItem">
-				<div class="board-name" name="notice" value="notice" onclick="showRegisteredMembers()">
-					<span>회원 리스트</span>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
 <div class="board-body">
 	<div id="board-title">
 		<h5>회원 리스트</h5>
-			<button class="manager-button" id="member-delete-button">삭제</button>
+			<button class="member-button" id="member-delete-button" >삭제</button>
 	</div>
 	
 	<div class="board">
@@ -62,7 +63,7 @@ button#member-delete-button{
 			<div class="board-search-result">
 				<form name="frmSearch" method="post" action="<c:url value='/admin/member/memberList'/>">
 				<div class="input-group mb-3" id="board-search-div">
-					<select class="form-select form-select-lg" aria-label=".form-select-lg example" name="searchCondition" id="board-search-select">					  	
+					<select class="form-select form-select-lg" aria-label=".form-select-lg example" name="searchCondition" id="member-search-select">					  	
 					  	<option value="name"  <c:if test="${param.searchCondition=='name'}"> selected="selected" </c:if> >이름</option>
 					  	<option value="userid" <c:if test="${param.searchCondition=='userid'}"> selected="selected" </c:if>>아이디</option>
 					</select>
@@ -70,10 +71,11 @@ button#member-delete-button{
 				 	aria-label="Recipient's username" aria-describedby="button-addon2" id="board-search-area" value="${param.searchKeyword}">
 				 	<button class="btn btn-outline-secondary" type="submit" id="button-addon2">검색</button>
 				</div>
+				</form>
 			</div>
 		</div>
 		
-		<form name="frmDelete" method="post">
+		<form name="form-Delete" method="post" id="selectMemberDelete" action="<c:url value='/admin/member/memberDelete'/>">
 		<table class="table">
 			<thead>
 				<tr class="board-table-colum">
@@ -85,10 +87,11 @@ button#member-delete-button{
 				</tr>
 			</thead>
 			<c:set var="idx" value="0"/>
-			<tbody id="board-table-body">
+			<tbody>
 				<c:forEach var="vo" items="${list}">
+					<c:set var="memberInformation" value="${vo.no}"/>
 					<tr>
-						<th scope="row"><input type="checkbox" class="board-checkbox"></th>
+						<th scope="row"><input type="checkbox" class="board-checkbox" name="memberItems[${idx}].no" value="${vo.no }"></th>
 						<td>${vo.no}</td>
 						<td>${vo.userid}</td>
 						<td>${vo.name}</td>
@@ -96,7 +99,6 @@ button#member-delete-button{
 							<fmt:formatDate value="${vo.regdate}" pattern="yyyy-MM-dd"/>
 						</td>
 					</tr>	
-	
 				</c:forEach>					
 			</tbody>
 		</table>

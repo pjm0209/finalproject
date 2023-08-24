@@ -32,7 +32,7 @@ public class MainMbtiController {
 	private final MbtiSurveyService mbtiSurveyService;
 	private final MbtiResultService mbtiResultService;
 	
-	@RequestMapping("/")
+	@RequestMapping("/mbti")
 	public String mbti() {
 		logger.info("MBTI 페이지 불러오기");
 		
@@ -57,9 +57,8 @@ public class MainMbtiController {
 	
 	@PostMapping("/mbtiResult")
 	public String mbtiResult_post(@ModelAttribute MbtiResultListVO mbtiResultListVo,HttpSession session, Model model) {
-		/* int no=(int)session.getAttribute("no"); */
-		int no=4;
-		logger.info("mbti 결과, 파라미터 mbtiResultListVo={}",mbtiResultListVo);
+		int no=(int)session.getAttribute("no");
+		logger.info("mbti 결과, 파라미터 mbtiResultListVo={},no={}",mbtiResultListVo,no);
 		
 		int cnt=mbtiResultService.insertMbtiResultList(mbtiResultListVo,no);
 		logger.info("mbti 검사 결과, cnt={}",cnt);
@@ -207,17 +206,17 @@ public class MainMbtiController {
 	@GetMapping("/mbtiResult")
 	public String mbtiResult_get(Model model) {
 		
-		MbtiVO mbtiVo=mbtiSurveyService.selectMbti("ESFJ");
+		MbtiVO mbtiVo=mbtiSurveyService.selectMbti("ENFP");
 		
-		model.addAttribute("resultMbti", "ESFJ");
-		model.addAttribute("resultI", 20);
-		model.addAttribute("resultE", 80);
-		model.addAttribute("resultS", 52);
-		model.addAttribute("resultN", 48);
-		model.addAttribute("resultT", 47);
-		model.addAttribute("resultF", 53);
-		model.addAttribute("resultP", 46);
-		model.addAttribute("resultJ", 54);
+		model.addAttribute("resultMbti", "ENFP");
+		model.addAttribute("resultI", 40);
+		model.addAttribute("resultE", 60);
+		model.addAttribute("resultS", 48);
+		model.addAttribute("resultN", 52);
+		model.addAttribute("resultT", 54);
+		model.addAttribute("resultF", 46);
+		model.addAttribute("resultP", 30);
+		model.addAttribute("resultJ", 70);
 		model.addAttribute("mbtiVo", mbtiVo);
 		
 		return "main/mbti/mbtiResult";

@@ -123,6 +123,11 @@ div#edu-search-div {
     padding: 18px 27px 5px 20px;
 }
 
+input#board-search-area {
+	flex: none;
+    width: 250px;
+}
+
 select#edu-search-select {
 	font-size: 16px;
     margin-right: 20px;
@@ -130,7 +135,12 @@ select#edu-search-select {
     margin-bottom: 0;
     border: 1px solid #d8dce5;
     border-radius: 6px;
-    margin-left: 840px;
+    margin-left: 1095px;
+}
+
+button#button-addon2 {
+    width: 75px;
+    height: 38px;
 }
 
 
@@ -233,3 +243,155 @@ input#board_name {
 	height: 38px;
 	text-align: left;
 }
+
+/* locationWrite */
+.location-write-head-button {
+	width: max-content;
+	display: inline-block;
+	float: right;
+	margin-right: 15px;
+}
+
+.locationWrite-head input {
+	border: 0;
+	border-radius: 5px;
+	padding: 5px 20px 5px 20px;
+	color: white;
+}
+
+.locationWrite-head {
+	border-bottom: 1px solid #d8dce5;
+	padding: 0px 20px 10px 32px;
+}
+
+h2#locationCreate-title {
+	font-weight: bold;
+	display: inline-block;
+}
+
+input#save-locationWrite {
+	margin-left: 10px;
+	background: #eb5d1e;
+}
+
+.locationWrite-body {
+	display: flex;
+	justify-content: space-evenly;
+	width: 100%;
+	flex-direction: column;
+	align-items: center;
+}
+
+div.locationWrite-setting {
+	border: 1px solid #e1e1e1;
+	background: white;
+	border-radius: 5px;
+	width: 60%;
+	margin-top: 30px;
+}
+
+div.locationWrite-setting-head {
+	border-bottom: 1px solid #e1e1e1;
+}
+
+div.locationWrite-setting-head h3 {
+	display: inline-block;
+	font-weight: bold;
+	color: black;
+	font-size: 17px;
+	margin: 13px 73px 10px 20px;
+}
+
+.locationWrite-setting-body {
+	padding: 20px 30px;
+}
+
+.locationWrite-body dd {
+	margin-left: 190px;
+	padding: 10px 22px 10px 0;
+}
+
+div.locationWrite-setting-body dt {
+	font-size: 14px;
+	color: black;
+	float: left;
+	width: 190px;
+	padding: 17px 0;
+}
+
+
+/* teacherWrite */
+.teacher-write-head-button {
+	width: max-content;
+	display: inline-block;
+	float: right;
+	margin-right: 15px;
+}
+
+.teacherWrite-head input {
+	border: 0;
+	border-radius: 5px;
+	padding: 5px 20px 5px 20px;
+	color: white;
+}
+
+.teacherWrite-head {
+	border-bottom: 1px solid #d8dce5;
+	padding: 0px 20px 10px 32px;
+}
+
+h2#teacherCreate-title {
+	font-weight: bold;
+	display: inline-block;
+}
+
+input#save-teacherWrite {
+	margin-left: 10px;
+	background: #eb5d1e;
+}
+
+.teacherWrite-body {
+	display: flex;
+	justify-content: space-evenly;
+	width: 100%;
+	flex-direction: column;
+	align-items: center;
+}
+
+div.teacherWrite-setting {
+	border: 1px solid #e1e1e1;
+	background: white;
+	border-radius: 5px;
+	width: 60%;
+	margin-top: 30px;
+}
+
+div.teacherWrite-setting-head {
+	border-bottom: 1px solid #e1e1e1;
+}
+
+div.teacherWrite-setting-head h3 {
+	display: inline-block;
+	font-weight: bold;
+	color: black;
+	font-size: 17px;
+	margin: 13px 73px 10px 20px;
+}
+
+.teacherWrite-setting-body {
+	padding: 20px 30px;
+}
+
+.teacherWrite-body dd {
+	margin-left: 190px;
+	padding: 10px 22px 10px 0;
+}
+
+div.teacherWrite-setting-body dt {
+	font-size: 14px;
+	color: black;
+	float: left;
+	width: 190px;
+	padding: 17px 0;
+}
+

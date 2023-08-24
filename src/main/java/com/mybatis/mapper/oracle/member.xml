@@ -7,10 +7,8 @@
 		<selectKey keyProperty="no" order="BEFORE" resultType="int">
 		select member_seq.nextval from dual
 		</selectKey>	
-		insert into member(no, userid, pwd, name, hp, email, zipcode, address, address_detail, 
-							regdate, activatable, outdate, mati_no)
-		values(#{no}, #{userid}, #{pwd}, #{name}, #{hp},n#{email}, #{zipcode}, #{address}, #{address_detail}
-						#{regdate}, #{activatable}, #{outdate}, #{mati_no})
+		insert into member(no, userid, pwd, name, hp, email, zipcode, address, address_detail)
+		values(#{no}, #{userid}, #{pwd}, #{name}, #{hp}, #{email}, #{zipcode}, #{address}, #{addressDetail})
 	</insert>
 
 	<sql id="searchMember">
@@ -70,5 +68,18 @@
 		select * from member
 		where userid=#{userid}
 	</select>
+	
+	<delete id="deleteMultiMember" parameterType="int">
+		delete from member
+		where no=#{no}
+	</delete>
+	
+	<select id="findId" resultType="string">
+		select * from member
+		where name=#{name} 
+		and hp=#{hp}
+	</select>
+
+
 
 </mapper>

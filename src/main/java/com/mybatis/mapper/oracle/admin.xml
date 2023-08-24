@@ -8,7 +8,7 @@
 			select admin_seq.nextval from dual
 		</selectKey>
 		insert into admin(admin_no, admin_id, admin_pwd, admin_email, admin_tel)
-		values(admin_seq.nextval, #{adminId}, #{adminPwd}, #{adminEmail}, #{adminTel});
+		values(admin_seq.nextval, #{adminId}, #{adminPwd}, #{adminEmail}, #{adminTel})
 	</insert>
 	
 	<sql id="searchManager">
@@ -60,8 +60,12 @@
 	<select id="selectAdminNo" parameterType="String" resultType="int">
 		select admin_No from admin
 		where admin_Id = #{adminId}
-	</select>	
+	</select>
 	
+	<delete id="deleteMultiAdmin" parameterType="int">
+		delete from admin
+		where admin_no=#{adminNo}
+	</delete>	
 	
 	
 </mapper>

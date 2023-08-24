@@ -13,7 +13,7 @@ public interface MemberService {
 	int PWD_DISAGREE=2; 
 	int USERID_NONE=3; 
 		
-	int insertMember(MemberVO vo); 
+	int insertMember(MemberVO membervo); 
 	
 	List<MemberVO> selectAllMember(SearchVO vo);
 	int getTotalRecordMember(SearchVO searchVo);
@@ -22,9 +22,12 @@ public interface MemberService {
 	int selectCheckId(String userid);	
 	String selectPwd(String userid); 
 	int loginCheck(String userid, String pwd);
-	int deleteMember(int no);
 	
 	MemberVO selectByUserid(String userid);
+	
+	MemberVO findId(MemberVO membervo); //아이디 찾기
+	
+	int deleteMultiMember(List<MemberVO> list);
 	
 
 }

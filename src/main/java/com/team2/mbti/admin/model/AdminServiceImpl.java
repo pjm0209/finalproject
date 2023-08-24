@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.team2.mbti.common.SearchVO;
 import com.team2.mbti.member.model.MemberService;
@@ -70,5 +72,31 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public String adminIdSearch(Map<String, Object> map) {
 		return adminDao.adminIdSearch(map);
-	}	
+	}
+
+	@Override
+	public int checkAdminId(String adminId) {
+		return adminDao.checkAdminId(adminId);
+	}
+
+	@Override
+	@Transactional
+	public int deleteMultiAdmin(List<AdminVO> list) {
+		int cnt=0;
+		
+		try {
+			for(AdminVO vo : list) {
+				int adminNo = vo.getAdminNo();
+				if(adminNo!=0) { 
+					cnt=adminDao.deleteMultiAdmin(adminNo);
+				}
+			}
+		}catch(RuntimeException e) {
+			e.printStackTrace();
+			cnt=-1;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+		}
+		
+		return cnt;
+	}
 }

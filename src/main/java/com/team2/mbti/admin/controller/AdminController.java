@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.team2.mbti.admin.model.AdminListVO;
 import com.team2.mbti.admin.model.AdminService;
 import com.team2.mbti.admin.model.AdminVO;
 import com.team2.mbti.common.ConstUtil;
@@ -143,27 +145,66 @@ public class AdminController {
 		return "admin/manager/managerAdditional";
 	}	
 	
-	@PostMapping("/manager/managerAdditional")
-	public String managerAdditional_post(@ModelAttribute AdminVO adminvo, Model model) {
-		logger.info("관리자 추가 처리, 파라미터 adminvo={}", adminvo);
+	@ResponseBody
+	@RequestMapping("/manager/checkId")
+	public int checkId(@RequestParam String adminid, Model model) {
+		//1
+		logger.info("아이디 중복확인 파라미터, adminid={}", adminid);
+
+		//2
+		int result=0;
+		result = adminService.checkAdminId(adminid);
+		logger.info("중복확인 결과 result={}", result);
 		
-		String msg = "관리자 등록 실패", url="/admin/manager/managerAdditional";
-		boolean closePopup=false;
+		//4
+		return result;
+	}
+	
+	   @PostMapping("/manager/managerAdditional")
+	   public String managerAdditional_post(@ModelAttribute AdminVO adminvo, Model model){
+	      logger.info("관리자 등록 처리, 파라미터 membervo={}",adminvo);
+	      
+	      int cnt = adminService.insertManager(adminvo);
+	      
+	      logger.info("관리자 등록 완료, result = {}",cnt);      
+	      String msg = "관리자 등록에 실패하였습니다.", url = "/manager/managerAdditional";
+	      
+	      if(cnt > 0) {
+	         msg = "관리자 등록에 성공하였습니다.";
+	         url = "/admin/manager/managerAdditional";
+	      }
+	      
+	      model.addAttribute("msg",msg);
+	      model.addAttribute("url",url);
+	      
+	      return "common/message";
+	   
+	   }
+	
+	@RequestMapping("/manager/managerDelete")
+	public String managerDelete(@ModelAttribute AdminListVO listVo, Model model){
+		logger.info("관리자 삭제 처리, 파라미터 listVo={}", listVo);
 		
-		if(adminvo.getAdminNo()==0) {
-			int cnt = adminService.insertManager(adminvo);
-			logger.info("관리자 질문 등록 결과 cnt={}",cnt);
-			
-			if(cnt > 0) {
-				msg = "관리자 등록되었습니다.";
-				url = "/admin/manager/managerAdditional";
+		List<AdminVO> list = listVo.getAdminItems();
+		
+		int cnt = adminService.deleteMultiAdmin(list);
+		
+		String msg="", url="/admin/manager/managerList";
+		
+		if(cnt > 0) {
+			msg="선택한 관리자가 탈퇴되었습니다.";
+			for(int i=0; i < list.size(); i++) {
+				AdminVO adminVo=list.get(i);
+				int adminNo = adminVo.getAdminNo();
 				
-				closePopup=true;
+				logger.info("i={}, adminNo={}",i, adminNo);
 			}
+		}else {
+			msg="관리자를 삭제하는중에 에러가 발생하였습니다.";
 		}
+		
 		model.addAttribute("msg", msg);
 		model.addAttribute("url", url);
-		model.addAttribute("closePopup", closePopup);
 		
 		return "common/message";
 	}

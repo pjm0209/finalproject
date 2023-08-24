@@ -16,4 +16,5 @@ public interface MbtiSurveyService {
 	List<MbtiSurveyVO> selectByQuestionTypeNoMbtiSurvey(int questionTypeNo);
 	MbtiVO selectMbti(String mbtiType);
 	int getTotalRecordMbtiByQuestionTypeNo(MbtiResultVO mbtiResultVo);
+	List<MbtiVO> selectAllMbti();
 }
