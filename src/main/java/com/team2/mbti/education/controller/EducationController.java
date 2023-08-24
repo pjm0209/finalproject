@@ -1,16 +1,11 @@
 package com.team2.mbti.education.controller;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLEncoder;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,10 +17,7 @@ import com.team2.mbti.common.PaginationInfo;
 import com.team2.mbti.education.model.EducationListVO;
 import com.team2.mbti.education.model.EducationService;
 import com.team2.mbti.education.model.EducationVO;
-import com.team2.mbti.mbtisurvey.model.MbtiSurveyVO;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -102,7 +94,7 @@ public class EducationController {
 		String msg="교육 수정에 실패하였습니다.",url="/admin/education/list";
 		if(cnt>0) {
 			msg="교육이 성공적으로 수정되었습니다.";
-			url="/admin/education/list?eduNo="+vo.getEduNo();
+			url="/admin/education/list";
 		}
 		
 		model.addAttribute("msg", msg);
@@ -321,7 +313,7 @@ public class EducationController {
 		String msg="교육장 수정에 실패하였습니다.",url="/admin/education/location";
 		if(cnt>0) {
 			msg="교육장이 성공적으로 수정되었습니다.";
-			url="/admin/education/location?epNo="+vo.getEpNo();
+			url="/admin/education/location";
 		}
 		
 		model.addAttribute("msg", msg);
@@ -427,7 +419,7 @@ public class EducationController {
 		String msg="강사 등록에 실패하였습니다.",url="/admin/education/teacherWrite";
 		if(cnt>0) {
 			msg="강사가 성공적으로 등록되었습니다.";
-			url="/admin/education/teacher?eduTeaNo="+vo.getEduTeaNo();
+			url="/admin/education/teacher";
 		}
 		
 		model.addAttribute("msg", msg);
@@ -436,5 +428,36 @@ public class EducationController {
 		return "common/message";
 	}
 	
+	
+	@GetMapping("/teacherEdit")
+	public String teaEdit_get(@RequestParam(defaultValue = "0") int eduTeaNo, Model model) {
+		logger.info("강사 수정 페이지");
+		
+		EducationVO vo = educationService.selectByNoTeacher(eduTeaNo);
+		
+		model.addAttribute("title", "강사 수정");
+		model.addAttribute("vo", vo);
+		
+		return "admin/education/teacherWrite";
+	}
+	
+	@PostMapping("/teacherEdit")
+	public String teaEdit_post(@ModelAttribute EducationVO vo, Model model){
+		logger.info("강사 수정 처리, 파라미터 vo={}", vo);
+		
+		int cnt=educationService.updateTeacher(vo);
+		logger.info("강사 수정 처리 결과 cnt={}", cnt);
+		
+		String msg="강사 정보 수정에 실패하였습니다.",url="/admin/education/teacher";
+		if(cnt>0) {
+			msg="강사 정보가 성공적으로 수정되었습니다.";
+			url="/admin/education/teacher";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
+	}
 	
 }
