@@ -17,8 +17,8 @@
 		<selectKey keyProperty="eduNo" order="BEFORE" resultType="int">
 			select mbti_education_seq.nextval from dual
 		</selectKey>
-		insert into mbti_education(edu_no, edu_name, edu_teacher, edu_com, edu_people_number, edu_price, ep_name)
-		values(#{eduNo}, #{eduName}, #{eduTeacher}, #{eduCom}, #{eduPeopleNumber}, #{eduPrice}, #{epName})
+		insert into mbti_education(edu_no, edu_name, edu_com, edu_price, ep_no, edu_people_number, edu_tea_no)
+		values(#{eduNo}, #{eduName}, #{eduCom}, #{eduPrice}, #{epNo}, #{eduPeopleNumber}, #{eduTeaNo})
 	</insert>
 	
 	
@@ -27,11 +27,11 @@
 		(
 		    select rownum as RNUM, a.* from
 		    (
-		        select m.*,(select count(*) from education_application e where e.edu_no=m.edu_no and e.edu_app_flag = 'Y') qty,
-		        (select ep_name from education_place e where e.ep_no=m.ep_no) epName
-		        from mbti_education m
+		        select v.*,(select count(*) from education_application e where e.edu_no=v.edu_no) qty,
+		        (select ep_name from education_place e where e.ep_no=v.ep_no) epName
+		        from eduListview v
 		        <include refid="searchWhere"></include>
-		        order by m.edu_no desc
+		        order by edu_no desc
 		    )a
 		)
 		<![CDATA[
@@ -40,19 +40,19 @@
 	</select>
 	
 	<select id="getTotalRecordEducation" parameterType="educationVo" resultType="int">
-		select count(*) from mbti_education
+		select count(*) from eduListview
 		<include refid="searchWhere"></include> 
-	</select>
-	
-	<select id="selectByEduNo" parameterType="int" resultType="educationVo">
-		select * from education where edu_no=#{eduNo}
 	</select>
 	
 	<update id="updateEducation" parameterType="educationVo">
 		update mbti_education
-		set edu_name = #{eduName}, edu_teacher = #{eduTeacher}, edu_com = #{eduCom}, edu_people_number = #{eduPeopleNumber}, edu_price = {eduPrice}, ep_name = #{epName} 
+		set edu_name = #{eduName}, edu_tea_no = #{eduTeaNo}, edu_com = #{eduCom}, edu_people_number = #{eduPeopleNumber}, edu_price = #{eduPrice}, ep_no = #{epNo} 
 		where edu_no = #{eduNo}
 	</update>
+	
+	<select id="selectByNoEducation" parameterType="int" resultType="educationVo">
+		select * from mbti_education where edu_no = #{eduNo}
+	</select>
 	
 	<delete id="deleteEducation" parameterType="int" >
 		delete from mbti_education
@@ -73,12 +73,18 @@
 		<selectKey keyProperty="epNo" order="BEFORE" resultType="int">
 			select education_place_seq.nextval from dual
 		</selectKey>
-		insert into education_place(ep_no, ep_name, ep_zipcode, ep_address, ep_latitude, ep_longitude, ep_tel)
-		values(#{epNo},#{epName},#{epZipcode},#{epAddress},#{epLatitude},#{epLongitude},#{epTel})
+		insert into education_place(ep_no, ep_name, ep_zipcode, ep_address,ep_tel)
+		values(#{epNo},#{epName},#{epZipcode},#{epAddress},#{epTel})
 	</insert>
 	
-	<select id="selectByNoEducation" parameterType="int" resultType="educationVo">
-		select * from mbti_education where edu_no = #{eduNo}
+	<update id="updateLocation" parameterType="educationVo">
+		update education_place
+		set ep_name = #{epName}, ep_zipcode = #{epZipcode}, ep_address = #{epAddress}, ep_tel = #{epTel}
+		where ep_no = #{epNo}
+	</update>
+	
+	<select id="selectByNoLocation" parameterType="int" resultType="educationVo">
+		select * from education_place where ep_no = #{epNo}
 	</select>
 	
 	<select id="selectAllLocation" parameterType="educationVo" resultType="educationVo">

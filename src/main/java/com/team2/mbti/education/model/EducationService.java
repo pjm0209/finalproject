@@ -8,7 +8,9 @@ public interface EducationService {
 	int insertLocation(EducationVO vo);
 	List<EducationVO> selectAllLocation(EducationVO vo);
 	int getTotalRecordLocation(EducationVO vo);
+	int updateLocation(EducationVO vo);
 	int deleteLocation(List<EducationVO> list);
+	EducationVO selectByNoLocation(int epNo);
 	
 	int insertEducation(EducationVO vo);
 	List<EducationVO> selectAllEducation(EducationVO vo);

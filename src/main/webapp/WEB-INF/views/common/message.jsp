@@ -18,6 +18,7 @@
 	<script type="text/javascript">
 		if(${closePopup}){
 			self.close();
+			opener.location.reload();
 		}
 		
 		$(function(){

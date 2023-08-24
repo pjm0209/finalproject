@@ -39,6 +39,48 @@
 		<c:set var="color3" value="#fefccc"/>
 		<c:set var="color4" value="#ff74e6"/>
 	</c:if>
+	<c:if test="${resultMbti=='INFP'}">
+		<c:set var="color1" value="#009bff"/>
+		<c:set var="color2" value="#94d5ff"/>
+		<c:set var="color3" value="#e1f3ff"/>
+		<c:set var="color4" value="#f05e0a"/>
+	</c:if>
+	<c:if test="${resultMbti=='INFJ'}">
+		<c:set var="color1" value="#015eac"/>
+		<c:set var="color2" value="#80c5ff"/>
+		<c:set var="color3" value="#e0f2fe"/>
+		<c:set var="color4" value="#ff8900"/>
+	</c:if>
+	<c:if test="${resultMbti=='INTJ'}">
+		<c:set var="color1" value="#163fbb"/>
+		<c:set var="color2" value="#7a9cfe"/>
+		<c:set var="color3" value="#dae4ff"/>
+		<c:set var="color4" value="#f3c003"/>
+	</c:if>
+	<c:if test="${resultMbti=='INTP'}">
+		<c:set var="color1" value="#03cecb"/>
+		<c:set var="color2" value="#84fffd"/>
+		<c:set var="color3" value="#e1ffff"/>
+		<c:set var="color4" value="#d100ff"/>
+	</c:if>
+	<c:if test="${resultMbti=='ESFJ'}">
+		<c:set var="color1" value="#6524d7"/>
+		<c:set var="color2" value="#cbaefe"/>
+		<c:set var="color3" value="#dfcdff"/>
+		<c:set var="color4" value="#163fbb"/>
+	</c:if>
+	<c:if test="${resultMbti=='ESFJ'}">
+		<c:set var="color1" value="#6524d7"/>
+		<c:set var="color2" value="#cbaefe"/>
+		<c:set var="color3" value="#dfcdff"/>
+		<c:set var="color4" value="#163fbb"/>
+	</c:if>
+	<c:if test="${resultMbti=='ESFJ'}">
+		<c:set var="color1" value="#6524d7"/>
+		<c:set var="color2" value="#cbaefe"/>
+		<c:set var="color3" value="#dfcdff"/>
+		<c:set var="color4" value="#163fbb"/>
+	</c:if>
 	<c:if test="${resultMbti=='ESFJ'}">
 		<c:set var="color1" value="#6524d7"/>
 		<c:set var="color2" value="#cbaefe"/>
