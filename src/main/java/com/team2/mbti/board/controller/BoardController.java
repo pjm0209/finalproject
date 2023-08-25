@@ -81,7 +81,7 @@ public class BoardController {
 		
 		if(boardFormNo == 5) {			
 			mbtiList = mbtiService.selectAllMbti();
-			logger.info("mbti종류 전체조회 결과 mbtiList: {}", mbtiList);			
+			logger.info("mbti종류 전체조회 결과 mbtiList.size(): {}", mbtiList.size());			
 		}
 		
 		int totalRecord = boardService.getTotalRecord(vo);

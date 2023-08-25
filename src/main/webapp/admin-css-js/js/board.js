@@ -39,6 +39,10 @@ $(function(){
 		}
 	});
 	
+	$('select[name=mbtiNo]').change(function(){
+		$('form[name=searchForm]').submit();
+	});
+	
 	//게시판생성 유효성검사
 	$('form[name=boardCreate-frm]').submit(function(){
 		if($('div.input_group.v2 > #board_name').val().length < 1) {
@@ -144,6 +148,7 @@ $(function(){
 		$('#confirmModalBtn').trigger('click');
 	});
 	
+	//게시글 글쓰기 mbti선택
 	$('#board-write-button').click(function(){
 		var mbtiNo = $('select[name=mbtiNo]').val();
 		var boardFormNo = $('input[name=boardFormNo]').val();
@@ -155,6 +160,7 @@ $(function(){
 		}
 	});
 	
+	//게시글 글쓰기 게시판선택시 mbti셀렉트 보이기여부
 	$('#select_board').click(function(){
 		var board = $(this).val();
 		
@@ -194,6 +200,7 @@ function commentMore(element) {
 	$(element).next('.editDel').toggle();
 }
 
+//게시글목록 페이징 함수
 function pageFunc(curPage) {
 	$('input[name="currentPage"]').val(curPage);
 	$('form[name="paginForm"]').submit();
