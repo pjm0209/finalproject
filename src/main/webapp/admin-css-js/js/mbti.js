@@ -12,6 +12,9 @@
     		const isChecked = $(this).prop('checked');
     		$('.check').prop('checked', isChecked);
   	    });
+  	    $('#mbti-precise-button').click(function(){
+			
+		});
   	    
 
   	    $('#mbti-write-button').click(function(){
