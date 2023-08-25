@@ -1,6 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
+<script type="text/javascript">
+$(function(){
+	$('#mbti-precise-button').click(function(){
+		$('#alertModalBody').html("삭제할 질문을 선택하세요");
+		$('#alertModal').modal('show');
+		event.preventDefault();
+	});
+});
+</script>
 <section id="mbti" class="mbti">
 	<div id="mbti-title">
 		<div id="mbti-div">
