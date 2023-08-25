@@ -7,31 +7,9 @@
 <div class="head-div">
 	<h2 class="text-gray-800">MBTI</h2>
 </div>
-<div class="side-body">
-	<div class="side-div-title">
-		<h6>MBTI </h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
-			fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
-  			<path fill-rule="evenodd"
-				d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
-		</svg>
-	</div>
-	<div class="group">
-		<div id="board-group-list" class="nav">
-			<div class="side-boardItem">
-				<div class="board-name" name="mbti">
-					<span>MBTI 관리</span>
-				</div>
-				<div class="board-name" name="mbtiStatistics">
-					<span>MBTI 유형별 통계</span>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
 <div class="board-body">
 	<div id="board-title">
-		<h5>MBTI 유형별 통계</h5>
+		<h5>MBTI 검사 관리</h5>
 		<button class="mbti-button" id="mbti-write-button">질문지 등록</button>
 		<button class="mbti-button" id="mbti-edit-button">질문지 수정</button>
 		<button class="mbti-button" id="mbti-delete-button">질문지 삭제</button>
@@ -39,16 +17,16 @@
 	<div class="board">
 		<div class="board-head">
 			<div class="board-search-result">
-				<form name="frmSearch" method="post" action="<c:url value='/admin/member/memberList'/>">
-				<div class="input-group mb-3" id="board-search-div">
-					<select class="form-select form-select-lg" name="searchCondition" aria-label=".form-select-lg example" id="board-search-select">					  	
-					  	<option value="question_type_no" <c:if test="${param.searchCondition=='question_type_no'}"> selected="selected" </c:if> >문제 유형</option>
-					  	<option value="question" <c:if test="${param.searchCondition=='question'}"> selected="selected" </c:if>>질문지</option>
-					</select>
-				 	<input type="text"  class="form-control" name="searchKeyword" placeholder="검색어를 입력하세요"
-				 		aria-label="Recipient's username" aria-describedby="button-addon2" id="board-search-area" value="${param.searchKeyword}">
-				 	<button class="btn btn-outline-secondary" type="submit" id="button-addon2">검색</button>
-				</div>
+				<form name="frmSearch" method="post" action="<c:url value='/admin/mbti/mbti'/>">
+					<div class="input-group mb-3" id="mbti-search-div">
+						<select class="form-select form-select-lg" name="searchCondition" aria-label=".form-select-lg example" id="mbti-search-select">					  	
+						  	<option value="question_type_no" <c:if test="${param.searchCondition=='question_type_no'}"> selected="selected" </c:if> >회원 아이디</option>
+						  	<option value="question" <c:if test="${param.searchCondition=='question'}"> selected="selected" </c:if>>MBTI 성격 유형</option>
+						</select>
+					 	<input type="text"  class="form-control" name="searchKeyword" placeholder="검색어를 입력하세요"
+					 		aria-label="Recipient's username" aria-describedby="button-addon2" id="mbti-search-area" value="${param.searchKeyword}">
+					 	<button class="mbti-button4" type="submit" id="mbti-search">검색</button>
+					</div>
 				</form>
 			</div>
 		</div>
@@ -57,9 +35,10 @@
 			<thead>
 				<tr class="board-table-colum">
 					<th scope="col"><input type="checkbox" id="check-All" class="board-checkbox"></th>
-					<th scope="col" class="mbti-writer">번호</th>
-					<th scope="col" class="mbti-writer">문제 유형</th>
-					<th scope="col" class="mbti-title">질문지</th>
+					<th scope="col" class="mbti-writer">회원 아이디</th>
+					<th scope="col" class="mbti-writer">MBTI 검사 종류</th>
+					<th scope="col" class="mbti-title">MBTI 성격 유형</th>
+					<th scope="col" class="mbti-writer">검사한 날짜</th>
 				</tr>
 			</thead>
 			<c:set var="idx" value="0"/>
@@ -67,13 +46,12 @@
 				<c:forEach var="mbtiSurveyVo" items="${list}">
 					<c:set var="questionType" value="${mbtiSurveyVo.questionTypeNo}"/>
 					<tr>
-						<th scope="row"><input type="checkbox" name="surveyItems[${idx}].mbtiServeyNo" class="board-checkbox check" value="${mbtiSurveyVo.mbtiServeyNo}"></th>
-						<td>${mbtiSurveyVo.mbtiServeyNo}</td>
+						<th scope="row"><input type="checkbox" name="surveyItems[${idx}].mbtiSurveyNo" class="board-checkbox check" value="${mbtiSurveyVo.mbtiSurveyNo}"></th>
+						<td>${mbtiSurveyVo.mbtiSurveyNo}</td>
 						<td>
 							<c:choose>
 								<c:when test="${questionType == '1'}">F</c:when>
 								<c:when test="${questionType == '2'}">P</c:when>
-								<c:when test="${questionType == '3'}">M</c:when>
 							</c:choose>
 						</td>
 						<td> 

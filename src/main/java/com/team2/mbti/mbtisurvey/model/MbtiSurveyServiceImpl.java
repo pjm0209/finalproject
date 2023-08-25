@@ -8,6 +8,7 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.team2.mbti.common.SearchVO;
 import com.team2.mbti.mbtiResult.model.MbtiResultVO;
+import com.team2.mbti.member.model.MemberVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -77,5 +78,10 @@ public class MbtiSurveyServiceImpl implements MbtiSurveyService{
 	@Override
 	public List<MbtiVO> selectAllMbti() {
 		return mbtiSurveyDao.selectAllMbti();
+	}
+
+	@Override
+	public int updateMemberMbtiNoByNo(MemberVO memberVo) {
+		return mbtiSurveyDao.updateMemberMbtiNoByNo(memberVo);
 	}
 }

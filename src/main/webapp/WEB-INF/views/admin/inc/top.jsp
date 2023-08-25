@@ -129,24 +129,28 @@
                 <div id="educationNav" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="<c:url value='/admin/education/list'/>">교육리스트</a>
+                        <a class="collapse-item" href="<c:url value='/admin/education/list'/>">교육 리스트</a>
                         <a class="collapse-item" href="<c:url value='/admin/education/applicantList'/>">신청자 관리</a>
                         <a class="collapse-item" href="<c:url value='/admin/education/teacher'/>">강사 관리</a>
                         <a class="collapse-item" href="<c:url value='/admin/education/location'/>">교육장 관리</a>
                     </div>
                 </div>
-            </li>                        
-    
-             <li class="nav-item">
-                <a class="nav-link" href="<c:url value='/admin/mbti/mbti'/>">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>MBTI 관리</span></a>
             </li>
-             <li class="nav-item">
-                <a class="nav-link" href="<c:url value='/admin/education/list'/>">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>교육관리</span></a>
-            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#mbtiNav"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>MBTI 목록</span>
+                </a>
+                <div id="mbtiNav" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="<c:url value='/admin/mbti/mbti'/>">MBTI 질문 관리</a>
+                        <a class="collapse-item" href="<c:url value='/admin/mbti/mbtiStatistics'/>">MBTI 검사 관리</a>
+                    </div>
+                </div>
+            </li>                    
+
             <li class="nav-item">
                 <a class="nav-link" href="<c:url value='/admin/book/bookList?bookFlag=bookList'/>">
                     <i class="fas fa-gift"></i>

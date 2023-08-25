@@ -7,8 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div class="mypage-menu">
-</div>
+
 
 </body>
-</html>
+</html>	

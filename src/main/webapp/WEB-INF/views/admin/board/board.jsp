@@ -16,23 +16,32 @@
 		<input type="hidden" name="boardFormNo" value="${param.boardFormNo }">
 		<input type="hidden" name="searchCondition" value="${param.searchCondition }">
 		<input type="hidden" name="searchKeyword" value="${param.searchKeyword }">
+		<c:if test="${param.boardFormNo == 5 }">
+			<input type="hidden" name="mbtiNo" value="${param.mbtiNo }">
+		</c:if>
 		<input type="hidden" name="currentPage">
 	</form>
-	<div id="board-title">
-		<h5>${boardFormVo.boardFormName }</h5>
-		<button class="bg-orange-primary" id="board-write-button" onclick="location.href='<c:url value="/admin/board/boardWrite?boardFormNo=${param.boardFormNo}&boardWriteType=write"/>'">글쓰기</button>
-	</div>
 	<div class="board">
 		<div class="board-head">
-			<div class="board-search-result">
-				<span class="search-count"></span>
+			<div class="board-search-result">				
 				<form name="searchForm" method="post" action="<c:url value='/admin/board/board'/>">
 					<div class="input-group mb-3" id="board-search-div">
-						<div class="board-head-Group1">
-							<input type="button" value="삭제" class="btn btn-outline-secondary" id="boardMultiDel">
-							<span class="boardDelCount"></span>
+						<div class="boardNameAndDel">
+							<h5>${boardFormVo.boardFormName }</h5>
+							<div class="board-head-Group1">
+								<input type="button" value="삭제" class="btn btn-outline-secondary" id="boardMultiDel">
+								<span class="boardDelCount"></span>
+							</div>
 						</div>
 						<div class="board-head-Group2">
+							<c:if test="${param.boardFormNo == 5 }">
+								<select class="form-select" aria-label="Default select example" class="mbtiBoardmbti" name="mbtiNo">
+									<option value="0">전체글</option>	
+									<c:forEach var="mbtiVo" items="${mbtiList }">
+										<option value="${mbtiVo.mbtiNo }" <c:if test="${param.mbtiNo == mbtiVo.mbtiNo }"> selected="selected" </c:if>>${mbtiVo.mbtiType }</option>								
+									</c:forEach>
+								</select>
+							</c:if>
 							<input type="hidden" name="boardFormNo" value="${param.boardFormNo }">
 							<select class="form-select form-select-lg" aria-label=".form-select-lg example" id="board-search-select" name="searchCondition">					  	
 							  	<option value="board_title" <c:if test="${param.searchCondition == 'board_title' }">selected="selected"</c:if>>제목</option>
@@ -60,7 +69,7 @@
 				<tbody>
 					<c:if test="${empty list }">
 						<tr>
-							<td colspan="4" style="text-align: center;">등록된 게시글이 없습니다.</td>
+							<td colspan="5" style="text-align: center;">등록된 게시글이 없습니다.</td>
 						</tr>
 					</c:if>
 					<c:if test="${!empty list }">
@@ -109,6 +118,7 @@
 				</tbody>
 			</table>
 		</form>
+		<button class="bg-orange-primary" id="board-write-button" >글쓰기</button>
 		<nav class="boardPaging" aria-label="Page navigation example">
 		  <ul class="pagination">
 		  	<c:if test="${pagingInfo.firstPage > 1 }">
@@ -134,7 +144,7 @@
 			    </li>
 		    </c:if>
 		  </ul>
-		</nav>
+		</nav>		
 	</div>
 </div>
 </div>

@@ -1,13 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <script type="text/javascript">
-	var b = ${param.keywordCategory};
-	if(b === $('#s1').val()){
-		$('#s1 option').each(function(){
-			if($('#s1 option').val() === b)
-			$(this).prop("selected", "selected");
-		});
-	}
+	
 </script>
 <form name="serach" method="post"
 	 action="<c:url value='/admin/book/bookList?bookFlag=bookListByKeyword'/>">
