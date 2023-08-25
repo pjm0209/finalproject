@@ -55,7 +55,7 @@ public class MemberLoginController {
 			session.setAttribute("userid", userid);
 			session.setAttribute("no", no);
 			
-			request.getSession().setAttribute("userid", userid);
+			//request.getSession().setAttribute("userid", userid);
 			
 			Cookie ck = new Cookie("ck_userid", userid);
 			ck.setPath("/");
@@ -83,11 +83,8 @@ public class MemberLoginController {
 		logger.info("로그아웃");
 		
 		session.removeAttribute("userid");
-		//session.invalidate();
-		//session.setAttribute("userid","");
-		//session.setAttribute("no", "");
-		
-		return "redirect:/";	
+				
+		return "redirect:/main/index";	
 	}
 	
 	@RequestMapping("/member/agreement")
