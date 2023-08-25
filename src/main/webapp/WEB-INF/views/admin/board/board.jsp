@@ -16,7 +16,9 @@
 		<input type="hidden" name="boardFormNo" value="${param.boardFormNo }">
 		<input type="hidden" name="searchCondition" value="${param.searchCondition }">
 		<input type="hidden" name="searchKeyword" value="${param.searchKeyword }">
-		<input type="hidden" name="mbtiNo" value="${param.mbtiNo }">
+		<c:if test="${param.boardFormNo == 5 }">
+			<input type="hidden" name="mbtiNo" value="${param.mbtiNo }">
+		</c:if>
 		<input type="hidden" name="currentPage">
 	</form>
 	<div class="board">

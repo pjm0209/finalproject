@@ -56,7 +56,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/board")
-	public String board_get(@RequestParam int boardFormNo, @ModelAttribute BoardVO vo, Model model) {
+	public String board_get(@RequestParam(defaultValue = "1", required = false) int boardFormNo, @ModelAttribute BoardVO vo, Model model) {
 		logger.info("게시판 관리 화면 보여주기 파라미터 boardFormNo: {}, vo: {}", boardFormNo, vo);
 		
 		PaginationInfo pagingInfo = new PaginationInfo();
