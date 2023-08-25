@@ -10,18 +10,17 @@
 <div class="board-body">
 	<div id="board-title">
 		<h5>MBTI 검사 관리</h5>
-		<button class="mbti-button" id="mbti-write-button">질문지 등록</button>
-		<button class="mbti-button" id="mbti-edit-button">질문지 수정</button>
-		<button class="mbti-button" id="mbti-delete-button">질문지 삭제</button>
+		<button class="mbti-button" id="mbtiStatistics-delete-button">삭제</button>
 	</div>
 	<div class="board">
 		<div class="board-head">
 			<div class="board-search-result">
-				<form name="frmSearch" method="post" action="<c:url value='/admin/mbti/mbti'/>">
+				<form name="frmSearch" method="post" action="<c:url value='/admin/mbti/mbtiStatistics'/>">
 					<div class="input-group mb-3" id="mbti-search-div">
 						<select class="form-select form-select-lg" name="searchCondition" aria-label=".form-select-lg example" id="mbti-search-select">					  	
-						  	<option value="question_type_no" <c:if test="${param.searchCondition=='question_type_no'}"> selected="selected" </c:if> >회원 아이디</option>
-						  	<option value="question" <c:if test="${param.searchCondition=='question'}"> selected="selected" </c:if>>MBTI 성격 유형</option>
+						  	<option value="userid" <c:if test="${param.searchCondition=='userid'}"> selected="selected" </c:if> >회원 아이디</option>
+						  	<option value="question_type_name" <c:if test="${param.searchCondition=='question_type_name'}"> selected="selected" </c:if>>MBTI 성격 유형</option>
+						  	<option value="mbti_type" <c:if test="${param.searchCondition=='mbti_type'}"> selected="selected" </c:if>>MBTI 성격 유형</option>
 						</select>
 					 	<input type="text"  class="form-control" name="searchKeyword" placeholder="검색어를 입력하세요"
 					 		aria-label="Recipient's username" aria-describedby="button-addon2" id="mbti-search-area" value="${param.searchKeyword}">
@@ -35,35 +34,22 @@
 			<thead>
 				<tr class="board-table-colum">
 					<th scope="col"><input type="checkbox" id="check-All" class="board-checkbox"></th>
-					<th scope="col" class="mbti-writer">회원 아이디</th>
-					<th scope="col" class="mbti-writer">MBTI 검사 종류</th>
-					<th scope="col" class="mbti-title">MBTI 성격 유형</th>
-					<th scope="col" class="mbti-writer">검사한 날짜</th>
+					<th scope="col" class="mbti-id">회원 아이디</th>
+					<th scope="col" class="mbti-kind">MBTI 검사 종류</th>
+					<th scope="col" class="mbti-type">MBTI 성격 유형</th>
+					<th scope="col" class="mbti-regdate">검사한 날짜</th>
 				</tr>
 			</thead>
 			<c:set var="idx" value="0"/>
 			<tbody>
-				<c:forEach var="mbtiSurveyVo" items="${list}">
+				<c:forEach var="map" items="${list}">
 					<c:set var="questionType" value="${mbtiSurveyVo.questionTypeNo}"/>
 					<tr>
 						<th scope="row"><input type="checkbox" name="surveyItems[${idx}].mbtiSurveyNo" class="board-checkbox check" value="${mbtiSurveyVo.mbtiSurveyNo}"></th>
-						<td>${mbtiSurveyVo.mbtiSurveyNo}</td>
-						<td>
-							<c:choose>
-								<c:when test="${questionType == '1'}">F</c:when>
-								<c:when test="${questionType == '2'}">P</c:when>
-							</c:choose>
-						</td>
-						<td> 
-							<span style="float:left;margin-left: 50px;">
-								<c:if test="${fn:length(mbtiSurveyVo.question) > 70}">
-									${fn:substring(mbtiSurveyVo.question,0,50)}...
-								</c:if>
-								<c:if test="${fn:length(mbtiSurveyVo.question) <= 70}">
-									${mbtiSurveyVo.question}
-								</c:if>
-							</span>
-						</td>
+						<td>${map["USERID"]}</td>
+						<td>${map["QUESTION_TYPE_NAME"]}</td>
+						<td>${map["MBTI_TYPE"]}</td>
+						<td><fmt:formatDate value="${map['MBTI_RESULT_REGDATE']}" pattern="yyyy-MM-dd"/></td>
 					</tr>
 					<c:set var="idx" value="${idx+1}"/>
 				</c:forEach>
@@ -80,10 +66,10 @@
 				</c:if>
 				<c:forEach var="i" begin="${pagingInfo.firstPage}" end="${pagingInfo.lastPage}">
 					<c:if test="${i==pagingInfo.currentPage}">
-						<li class="page-item active"><a class="page-link" href="<c:url value='/admin/mbti/mbti?currentPage=${i}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">${i}</a></li>
+						<li class="page-item active"><a class="page-link" href="<c:url value='/admin/mbti/mbtiStatistics?currentPage=${i}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">${i}</a></li>
 					</c:if>
 					<c:if test="${i!=pagingInfo.currentPage}">
-						<li class="page-item"><a class="page-link" href="<c:url value='/admin/mbti/mbti?currentPage=${i}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">${i}</a></li>
+						<li class="page-item"><a class="page-link" href="<c:url value='/admin/mbti/mbtiStatistics?currentPage=${i}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">${i}</a></li>
 					</c:if>
 				</c:forEach>
 				<c:if test="${pagingInfo.lastPage < pagingInfo.totalPage}">
