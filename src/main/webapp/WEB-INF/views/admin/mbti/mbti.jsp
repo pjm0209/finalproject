@@ -9,7 +9,7 @@
 </div>
 <div class="board-body">
 	<div id="board-title">
-		<h5>MBTI 관리</h5>
+		<h5>MBTI 질문 관리</h5>
 		<button class="mbti-button" id="mbti-write-button">질문지 등록</button>
 		<button class="mbti-button" id="mbti-edit-button">질문지 수정</button>
 		<button class="mbti-button" id="mbti-delete-button">질문지 삭제</button>
@@ -51,7 +51,6 @@
 							<c:choose>
 								<c:when test="${questionType == '1'}">F</c:when>
 								<c:when test="${questionType == '2'}">P</c:when>
-								<c:when test="${questionType == '3'}">M</c:when>
 							</c:choose>
 						</td>
 						<td> 
