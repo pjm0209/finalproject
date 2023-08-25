@@ -1,41 +1,59 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
 
-<head>
-<title></title>
+<%@ include file="../../inc/top.jsp"%>
 <style>
-*, *:before, *:after {
-	box-sizing: border-box;
+#bookMain{
+	width: 100%;
 }
 
-body {
-	font-family: Arial;
+#topImg{
+	width: 100%;
+	margin: 0;
+	padding: 0;
 }
 
-header {
-	color: #888;
+#topImg img{
+	width: 100%;
+	height: 500px;
 }
 
-header h1 {
-	font-size: 30px;
+#pdList{
+	margin-top: 50px;
+	width: 1300px;
+	text-align: center;
+}
+#pdList h1{
+	text-align: center;
+	
+}
+#pdList ul{
+	width: 1300px;
+	text-align: center;
+	display: flex;
+    justify-content: space-around;
 }
 
-.container {
-	max-width: 700px;
+#pdList ul li img{
+	width: 250px;
+	height: 300px;
+}
+
+#bookMain .container {
 	margin: 0 auto;
+	width: 100%;
 }
 
 #content {
+	width: 100%;
 	border: 2px dotted green;
 	padding: 18px;
 	margin-left: 215px;
-	min-height: 2000px;
 	color: darkgrey;
 }
 
 #sidebar {
+	border: 2px dotted red;
 	float: left;
 	width: 200px;
 	color: #ffbdbd;
@@ -43,28 +61,10 @@ header h1 {
 }
 
 #sidebar .sidebar__inner {
-	border: 2px dotted red;
-	padding: 10px;
 	position: relative;
 	transform: translate(0, 0);
 	transform: translate3d(0, 0, 0);
 	will-change: position, transform;
-}
-
-footer {
-	height: 300px;
-	height: 85vh;
-	border: 2px dotted black;
-	margin-top: 20px;
-	text-align: center;
-	color: #8e8d8d;
-	background: rgba(0, 0, 0, 0.02);
-	line-height: 300px;
-	line-height: 95vh;
-}
-
-footer p {
-	margin: 0;
 }
 
 .clearfix:after {
@@ -72,6 +72,28 @@ footer p {
 	content: "";
 	clear: both;
 }
+
+#sidebar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 150px;
+  background-color: #f1f1f1;
+}
+
+#sidebar li a {
+  display: block;
+  color: #000;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+/* Change the link color on hover */
+#sidebar li a:hover {
+  background-color: #555;
+  color: white;
+}
+
 </style>
 
 </head>
@@ -82,11 +104,18 @@ footer p {
 			<h1>Site Title</h1>
 		</div>
 	</header>
-
+<section id="bookMain" class="book">
 	<div class="container clearfix" style="position: relative;">
 		<div id="sidebar" class="" style="">
 			<div class="sidebar__inner" style="position: relative;">
-				<p>This is sticky column</p>
+				<div>
+					<ul>
+					  <li><a href="#home">Home</a></li>
+					  <li><a href="#news">News</a></li>
+					  <li><a href="#contact">Contact</a></li>
+					  <li><a href="#about">About</a></li>
+					</ul>
+				</div>
 				<div class="resize-sensor"
 					style="position: absolute; inset: 0px; overflow: hidden; z-index: -1; visibility: hidden;">
 					<div class="resize-sensor-expand"
@@ -104,18 +133,63 @@ footer p {
 			</div>
 		</div>
 		<div id="content">
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras tempus id leo et aliquam.
-				Proin consectetur ligula vel neque cursus laoreet. Nullam dignissim, augue at consectetur
-				pellentesque, metus ipsum interdum sapien, quis ornare quam enim vel ipsum.</p>
-
-			<p>In congue nunc vitae magna tempor ultrices. Cras ultricies posuere elit. Nullam ultrices
-				purus ante, at mattis leo placerat ac. Nunc faucibus ligula nec lorem sodales venenatis.
-				Curabitur nec est condimentum, blandit tellus nec, semper arcu. Nullam in porta ipsum, non
-				consectetur mi. Sed pharetra sapien nisl. Aliquam ac lectus sed elit vehicula scelerisque ut vel
-				sem. Ut ut semper nisl.</p>
-
-			<p>Curabitur rhoncus, arcu at placerat volutpat, felis elit sollicitudin ante, sed tempus
-				justo nibh sed massa. Integer vestibulum non ante ornare eleifend. In vel mollis dolor.</p>
+			<div id="topImg" style="text-align: center;">
+				<img src="<c:url value='/images/72939_11192_2044.jpg'/>">
+			</div>
+			<div id="pdList">
+				<h1 class="display-3">도 서 구 매</h1>
+				<ul class="aa-product-catg">
+					<!-- start single product item -->
+					<li>
+						<figure>
+							<a class="aa-product-img" href="<c:url value='/main/book/bookDetail'/>">
+							 <img src="<c:url value='/images/bookProduct/20024.jpg'/>" alt="">
+							</a>
+							<a class="aa-add-card-btn" href="">
+								<span style="display: block;" class="fas fa-shopping-cart"></span>장바구니 담기</a>
+							<figcaption>
+								<h5 class="aa-product-title">
+									<a href="#"></a>
+								</h5>
+								<span class="aa-product-price">1700원</span>
+		
+							</figcaption>
+						</figure>
+					</li>
+					<li>
+						<figure>
+							<a class="aa-product-img" href="">
+							 <img src="<c:url value='/images/bookProduct/20025.jpg'/>" alt="">
+							</a>
+							<a class="aa-add-card-btn" href="">
+								<span style="display: block;" class="fas fa-shopping-cart"></span>장바구니 담기</a>
+							<figcaption>
+								<h5 class="aa-product-title">
+									<a href="#"></a>
+								</h5>
+								<span class="aa-product-price">1700원</span>
+		
+							</figcaption>
+						</figure>
+					</li>
+					<li>
+						<figure>
+							<a class="aa-product-img" href="">
+							 <img src="<c:url value='/images/bookProduct/20026.jpg'/>" alt="">
+							</a>
+							<a class="aa-add-card-btn" href="">
+								<span style="display: block;" class="fas fa-shopping-cart"></span>장바구니 담기</a>
+							<figcaption>
+								<h5 class="aa-product-title">
+									<a href="#"></a>
+								</h5>
+								<span class="aa-product-price">1700원</span>
+		
+							</figcaption>
+						</figure>
+					</li>
+				</ul>
+			</div>
 		</div>
 		<div class="resize-sensor"
 			style="position: absolute; inset: 0px; overflow: hidden; z-index: -1; visibility: hidden;">
@@ -132,9 +206,7 @@ footer p {
 		</div>
 	</div>
 
-	<footer>
-		<p>Very Tall Footer</p>
-	</footer>
+	
 	
 	<script type="text/javascript" src="<c:url value='/js/rAF.js'/>"></script>
 	<script type="text/javascript" src="<c:url value='/js/ResizeSensor.js'/>"></script>
@@ -142,9 +214,11 @@ footer p {
 	<script type="text/javascript" src="<c:url value='/js/sticky-sidebar.js'/>"></script>
 	<script type="text/javascript">
 		var a = new StickySidebar('#sidebar', {
-			topSpacing : 20
+			topSpacing : 200,
+			containerSelector: '.container'
 		});
+		
 	</script>
+</section>
 
-
-
+<%@ include file="../../inc/bottom.jsp"%>
