@@ -4,7 +4,6 @@
 
 <!-- Begin Page Content -->
 <!-- Page Heading -->
-<c:import url="/admin/board/boardHeadSide"></c:import>
 <div class="board-body">
 	<form name="boardSetEdit" method="post" action="<c:url value='/admin/board/boardEdit'/>">
 		<input type="hidden" name="lastEditAdminId" value="admin">
