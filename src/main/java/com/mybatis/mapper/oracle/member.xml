@@ -74,12 +74,10 @@
 		where no=#{no}
 	</delete>
 	
-	<select id="findId" resultType="string">
+	<select id="findId" parameterType="string" resultType="memberVo">
 		select * from member
 		where name=#{name} 
 		and hp=#{hp}
 	</select>
-
-
 
 </mapper>
