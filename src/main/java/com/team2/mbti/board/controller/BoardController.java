@@ -71,9 +71,6 @@ public class BoardController {
 		BoardFormVO boardFormVo = boardService.selectBoard(vo.getBoardFormNo());
 		logger.info("게시판 이름 검색결과 board: {}", boardFormVo);
 		
-		List<BoardFormVO> boardList = boardService.selectAllBoard();
-		logger.info("게시판 종류 전체조회 결과: boardList: {}", boardList);
-		
 		List<Map<String, Object>> list = boardService.selectAll(vo);
 		logger.info("게시판 전체조회 결과: list.size: {}", list.size());
 
@@ -82,6 +79,7 @@ public class BoardController {
 		if(vo.getBoardFormNo() == 5) {			
 			mbtiList = mbtiService.selectAllMbti();
 			logger.info("mbti종류 전체조회 결과 mbtiList.size(): {}", mbtiList.size());			
+			model.addAttribute("mbtiList", mbtiList);
 		}
 		
 		int totalRecord = boardService.getTotalRecord(vo);
@@ -90,10 +88,8 @@ public class BoardController {
 		
 		model.addAttribute("title", "게시판 관리");
 		model.addAttribute("list", list);
-		model.addAttribute("boardList", boardList);
 		model.addAttribute("pagingInfo", pagingInfo);
 		model.addAttribute("boardFormVo", boardFormVo);
-		model.addAttribute("mbtiList", mbtiList);
 		
 		return "admin/board/board";
 	}
