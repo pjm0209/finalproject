@@ -205,9 +205,8 @@ public class MainMbtiController {
 	
 	@GetMapping("/mbtiResult")
 	public String mbtiResult_get(Model model) {
-		
 		MbtiVO mbtiVo=mbtiSurveyService.selectMbti("ENFP");
-		
+
 		model.addAttribute("resultMbti", "ENFP");
 		model.addAttribute("resultI", 40);
 		model.addAttribute("resultE", 60);
@@ -218,7 +217,7 @@ public class MainMbtiController {
 		model.addAttribute("resultP", 30);
 		model.addAttribute("resultJ", 70);
 		model.addAttribute("mbtiVo", mbtiVo);
-		
+
 		return "main/mbti/mbtiResult";
 	}
 	
