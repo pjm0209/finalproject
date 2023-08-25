@@ -1,16 +1,11 @@
 package com.team2.mbti.education.controller;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLEncoder;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,10 +17,7 @@ import com.team2.mbti.common.PaginationInfo;
 import com.team2.mbti.education.model.EducationListVO;
 import com.team2.mbti.education.model.EducationService;
 import com.team2.mbti.education.model.EducationVO;
-import com.team2.mbti.mbtisurvey.model.MbtiSurveyVO;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -102,7 +94,7 @@ public class EducationController {
 		String msg="교육 수정에 실패하였습니다.",url="/admin/education/list";
 		if(cnt>0) {
 			msg="교육이 성공적으로 수정되었습니다.";
-			url="/admin/education/list?eduNo="+vo.getEduNo();
+			url="/admin/education/list";
 		}
 		
 		model.addAttribute("msg", msg);
@@ -295,41 +287,41 @@ public class EducationController {
 	}
 	
 	
-	@RequestMapping("/zipcode")
-	public String zipcode() {
-		logger.info("우편번호 찾기 화면 보여주기");
+	@GetMapping("/locationEdit")
+	public String locEdit_get(@RequestParam(defaultValue = "0") int epNo, Model model) {
+		logger.info("교육장 수정 페이지");
 		
-		return "admin/education/zipcode";
+		List<EducationVO> list = educationService.getEpName();
+		logger.info("교육장 조회 결과, list.size={}", list.size());
+		
+		EducationVO vo = educationService.selectByNoLocation(epNo);
+		
+		model.addAttribute("title", "교육장 수정");
+		model.addAttribute("vo", vo);
+		model.addAttribute("epNameList", list);
+		
+		return "admin/education/locationWrite";
 	}
 	
-	@RequestMapping("/ajaxZipcode")
-    public void getAddrApi(HttpServletRequest req, ModelMap model, HttpServletResponse response) throws Exception {
-		// 요청변수 설정
-		String currentPage = req.getParameter("currentPage");    //요청 변수 설정 (현재 페이지. currentPage : n > 0)
-		String countPerPage = req.getParameter("countPerPage");  //요청 변수 설정 (페이지당 출력 개수. countPerPage 범위 : 0 < n <= 100)
-		String resultType = req.getParameter("resultType");      //요청 변수 설정 (검색결과형식 설정, json)
-		String confmKey = req.getParameter("confmKey");          //요청 변수 설정 (승인키)
-		String keyword = req.getParameter("dong");            //요청 변수 설정 (키워드)
-		// OPEN API 호출 URL 정보 설정
-		String apiUrl = "https://business.juso.go.kr/addrlink/addrLinkApi.do?currentPage="+currentPage+"&countPerPage="+countPerPage+"&keyword="+URLEncoder.encode(keyword,"UTF-8")+"&confmKey="+confmKey+"&resultType="+resultType;
-					   //https://business.juso.go.kr/addrlink/addrLinkApi.do?currentPage=1&countPerPage=10&keyword=서초&confmKey=U01TX0FVVEgyMDE3MTIxODE3Mzc0MTEwNzU1Njg=&resultType=json
+	@PostMapping("/locationEdit")
+	public String locEdit_post(@ModelAttribute EducationVO vo, Model model){
+		logger.info("교육장 수정 처리, 파라미터 vo={}", vo);
 		
-		URL url = new URL(apiUrl);
-    	BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream(),"UTF-8"));
-    	StringBuffer sb = new StringBuffer();
-    	String tempStr = null;
-
-    	while(true){
-    		tempStr = br.readLine();
-    		if(tempStr == null) break;
-    		sb.append(tempStr);								// 응답결과 JSON 저장
-    	}
-    	br.close();
-    	response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/json");
-		response.getWriter().write(sb.toString());			// 응답결과 반환
-    }
-
+		int cnt=educationService.updateLocation(vo);
+		logger.info("교육장 수정 처리 결과 cnt={}", cnt);
+		
+		String msg="교육장 수정에 실패하였습니다.",url="/admin/education/location";
+		if(cnt>0) {
+			msg="교육장이 성공적으로 수정되었습니다.";
+			url="/admin/education/location";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
+	}
+	
 	
 	@RequestMapping("/locDelete")
 	public String locDelete(@ModelAttribute EducationListVO listVo, Model model) {
@@ -407,5 +399,65 @@ public class EducationController {
 		
 	}
 	
+	
+	@GetMapping("/teacherWrite")
+	public String teaWrite_get(Model model) {
+		logger.info("강사 등록 페이지");
+		
+		model.addAttribute("title", "강사 등록");
+		
+		return "admin/education/teacherWrite";
+	}
+	
+	@PostMapping("/teacherWrite")
+	public String teaWrite_post(@ModelAttribute EducationVO vo, Model model){
+		logger.info("강사 등록 처리, 파라미터 vo={}", vo);
+		
+		int cnt=educationService.insertTeacher(vo);
+		logger.info("강사 등록 처리 결과 cnt={}", cnt);
+		
+		String msg="강사 등록에 실패하였습니다.",url="/admin/education/teacherWrite";
+		if(cnt>0) {
+			msg="강사가 성공적으로 등록되었습니다.";
+			url="/admin/education/teacher";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
+	}
+	
+	
+	@GetMapping("/teacherEdit")
+	public String teaEdit_get(@RequestParam(defaultValue = "0") int eduTeaNo, Model model) {
+		logger.info("강사 수정 페이지");
+		
+		EducationVO vo = educationService.selectByNoTeacher(eduTeaNo);
+		
+		model.addAttribute("title", "강사 수정");
+		model.addAttribute("vo", vo);
+		
+		return "admin/education/teacherWrite";
+	}
+	
+	@PostMapping("/teacherEdit")
+	public String teaEdit_post(@ModelAttribute EducationVO vo, Model model){
+		logger.info("강사 수정 처리, 파라미터 vo={}", vo);
+		
+		int cnt=educationService.updateTeacher(vo);
+		logger.info("강사 수정 처리 결과 cnt={}", cnt);
+		
+		String msg="강사 정보 수정에 실패하였습니다.",url="/admin/education/teacher";
+		if(cnt>0) {
+			msg="강사 정보가 성공적으로 수정되었습니다.";
+			url="/admin/education/teacher";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
+	}
 	
 }

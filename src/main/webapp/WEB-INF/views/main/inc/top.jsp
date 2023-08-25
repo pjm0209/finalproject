@@ -78,7 +78,7 @@
           <li><a class="nav-link scrollto" href="#about">About Us</a></li>
           <li><a class="nav-link scrollto" href="#services">책</a></li>
           <li><a class="nav-link scrollto" href="#portfolio">MBTI 교육</a></li>
-          <li><a class="nav-link scrollto" href="<c:url value='/main/mbti/'/>">MBTI 검사</a></li>
+          <li><a class="nav-link scrollto" href="<c:url value='/main/mbti/mbti'/>">MBTI 검사</a></li>
           <li><a class="nav-link scrollto" href="<c:url value='/main/book/bookMain'/>">도서/자료 구매</a></li>
           <li class="dropdown"><a href="#"><span>커뮤니티</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
@@ -87,7 +87,7 @@
           </li>
           <li><a class="nav-link scrollto" href="<c:url value='/main/myPage'/>">마이페이지</a></li>
           <li><a class="getstarted scrollto" href="#about">Get Started</a></li>
-          <li><a class="nav-link scrollto">${sessionScope.userid} 님</a></li>	
+          <li><a class="nav-link scrollto">${sessionScope.userid}</a></li>	
        	  <!-- 로그인 안된 경우 -->
 		  <c:if test="${empty sessionScope.userid }">			
 			<li><a href="<c:url value='/main/member/memberLogin'/>">로그인</a></li>

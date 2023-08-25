@@ -1,9 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
+
 <style>
 button#add-newBoard-button{
 	background: #eb5d1e;
+}
+
+.head-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 button#manager-delete-button {
@@ -16,6 +23,18 @@ button#manager-delete-button {
 	color: white;
 	background-color: #eb5d1e;
 }
+
+select#manager-search-select {
+	font-size: 16px;
+    margin-right: 20px;
+    height: 40px;
+    margin-bottom: 0;
+    border: 1px solid #d8dce5;
+    border-radius: 6px;
+    margin-left: 840px;
+}
+
+
 
 </style>
 
@@ -41,7 +60,7 @@ button#manager-delete-button {
 			}
 			
 			if(confirm('선택한 관리자를 삭제하시겠습니까?')){
-				$('form[name=form-Delete]').prop('action',contextPath+'/admin/manger/managerDelete');
+				$('form[name=form-Delete]').prop('action',contextPath+'/admin/manager/managerDelete');
 				$('form[name=form-Delete]').submit();
 			}
 	});
@@ -60,27 +79,6 @@ button#manager-delete-button {
 	<button type="button" class="bg-gradient-primary"
 		id="add-newBoard-button">관리자 추가</button>
 </div>
-<div class="side-body">
-	<div class="side-div-title">
-		<h6>관리자</h6>
-		<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
-			fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
-  			<path fill-rule="evenodd"
-				d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
-		</svg>
-	</div>
-	<div class="group">
-		<div id="group-list" class="nav">
-			<div class="board-side-boardItem">
-				<div class="board-name">
-					<a class="managerList-link" href="<c:url value='/admin/manager/managerList'/>">
-						<span>관리자 리스트</span>
-					</a>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
 <div class="board-body">
 	<div id="board-title">
 		<h5>관리자 리스트</h5>		
@@ -91,7 +89,7 @@ button#manager-delete-button {
 			<div class="board-search-result">
 				<form name="frmSearch" method="post" action="<c:url value='/admin/manager/managerList'/>">
 				<div class="input-group mb-3" id="board-search-div">
-					<select class="form-select form-select-lg" aria-label=".form-select-lg example" name="searchcondition" id="board-search-select">					  						  
+					<select class="form-select form-select-lg" aria-label=".form-select-lg example" name="searchcondition" id="manager-search-select">					  						  
 					  	<option value="admin_id" <c:if test="${param.searchCondition=='adminId'}"> selected="selected" </c:if>>아이디</option>
 					  	<option value="admin_email" <c:if test="${param.searchCondition=='adminEmail'}"> selected="selected" </c:if>>이메일</option>					  	
 					  	<option value="admin_tel" <c:if test="${param.searchCondition=='adminTel'}"> selected="selected" </c:if>>전화번호</option>
@@ -102,7 +100,8 @@ button#manager-delete-button {
 				</form>
 			</div>
 		</div>
-		<form name="form-Delete" method="post" id="selectManagerDelete">
+		
+		<form name="form-Delete" method="post" id="selectManagerDelete" action="<c:url value='/admin/manager/managerDelete'/>">
 		<table class="table" id="managertb">
 			<thead>
 				<tr class="board-table-colum">
@@ -116,9 +115,9 @@ button#manager-delete-button {
 			<c:set var="idx" value="0"/>
 			<tbody>
 				<c:forEach var="vo" items="${list}">
-					<c:set var="adminInformation" value="${adminVo.adminNo}"/>
+					<c:set var="adminInformation" value="${vo.adminNo}"/>
 					<tr>
-						<th scope="row"><input type="checkbox" class="board-checkbox" name="adminNo" value="${adminVo.adminNo }"></th>
+						<th scope="row"><input type="checkbox" class="board-checkbox" name="adminItems[${idx}].adminNo" value="${vo.adminNo }"></th>
 						<td>${vo.adminNo}</td>
 						<td>${vo.adminId}</td>
 						<td>${vo.adminEmail}</td>

@@ -11,7 +11,9 @@ public interface EducationDAO {
 	int insertLocation(EducationVO vo);
 	List<EducationVO> selectAllLocation(EducationVO vo);
 	int getTotalRecordLocation(EducationVO vo);
+	int updateLocation(EducationVO vo);
 	int deleteLocation(int epNo);
+	EducationVO selectByNoLocation(int epNo);
 	
 	int insertEducation(EducationVO vo);
 	List<EducationVO> selectAllEducation(EducationVO vo);
@@ -25,7 +27,9 @@ public interface EducationDAO {
 	int insertTeacher(EducationVO vo);
 	List<EducationVO> selectAllTeacher(EducationVO vo);
 	int getTotalRecordTeacher(EducationVO vo);
+	int updateTeacher(EducationVO vo);
 	int deleteTeacher(int eduTeaNo);
+	EducationVO selectByNoTeacher(int eduTeaNo);
 	
 	List<EducationVO> selectAllApplicant(EducationVO vo);
 	int getTotalRecordApplicant(EducationVO vo);

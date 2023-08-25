@@ -83,6 +83,11 @@ public class MbtiController {
 	public String mbtiWrite_post(@ModelAttribute MbtiSurveyVO mbtiSurveyVo, Model model){
 		logger.info("mbti 질문 등록 처리, 파라미터 mbtiSurveyVo={}",mbtiSurveyVo);
 		
+		String question=mbtiSurveyVo.getQuestion();
+		
+		question=question.substring(question.indexOf(">")+1,question.lastIndexOf("<"));
+		mbtiSurveyVo.setQuestion(question);
+		
 		String msg="mbti 질문 등록 실패",url="/admin/mbti/mbtiWrite";
 		boolean closePopup=false;
 		if(mbtiSurveyVo.getMbtiSurveyNo()==0) {

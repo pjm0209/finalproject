@@ -70,76 +70,79 @@
             <div class="sidebar-heading">
                 Interface
             </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Components</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="<c:url value='/admin/buttons'/>">Buttons</a>
-                        <a class="collapse-item" href="<c:url value='/admin/cards'/>">Cards</a>
-                    </div>
-                </div>
-            </li>
-
-            <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Utilities</span>
-                </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="<c:url value='/admin/utilities-color'/>">Colors</a>
-                        <a class="collapse-item" href="<c:url value='/admin/utilities-border'/>">Borders</a>
-                        <a class="collapse-item" href="<c:url value='/admin/utilities-animation'/>">Animations</a>
-                        <a class="collapse-item" href="<c:url value='/admin/utilities-other'/>">Other</a>
-                    </div>
-                </div>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
             
             <!-- Heading -->
             <div class="sidebar-heading">
                 게시판
             </div>
 
-            <!-- Nav Item - Pages Collapse Menu -->
+            <!-- Nav Item - Pages Collapse Menu -->             
             <li class="nav-item">
-                <a class="nav-link" href="<c:url value='/admin/board/board?boardFormNo=1'/>">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>게시판</span></a>
-            </li>            
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#boardNav"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>게시판</span>
+                </a>
+                <div id="boardNav" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">게시판 목록</h6>
+                        <c:import url="/admin/board/sideBoard"></c:import>
+                    </div>
+                </div>
+            </li>     
+             
             <li class="nav-item">
-                <a class="nav-link" href="<c:url value='/admin/manager/managerList'/>">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>관리자 관리</span></a>
-            </li>                       
-            <li class="nav-item">
-                <a class="nav-link" href="<c:url value='/admin/member/memberList'/>">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>회원 관리</span></a>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#memberNav"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>회원목록</span>
+                </a>
+                <div id="memberNav" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="<c:url value='/admin/member/memberList'/>">회원 관리</a>
+                    </div>
+                </div>
+            </li>      
+               
+			 <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#managerNav"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>관리자 목록</span>
+                </a>
+                <div id="managerNav" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="<c:url value='/admin/manager/managerList'/>">관리자 관리</a>
+                    </div>
+                </div>
             </li>
+                                    
+			 <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#educationNav"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>교육 목록</span>
+                </a>
+                <div id="educationNav" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="<c:url value='/admin/education/list'/>">교육 리스트</a>
+                        <a class="collapse-item" href="<c:url value='/admin/education/applicantList'/>">신청자 관리</a>
+                        <a class="collapse-item" href="<c:url value='/admin/education/teacher'/>">강사 관리</a>
+                        <a class="collapse-item" href="<c:url value='/admin/education/location'/>">교육장 관리</a>
+                    </div>
+                </div>
+            </li>                        
+    
              <li class="nav-item">
                 <a class="nav-link" href="<c:url value='/admin/mbti/mbti'/>">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>MBTI 관리</span></a>
             </li>
-             <li class="nav-item">
-                <a class="nav-link" href="<c:url value='/admin/education/list'/>">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>교육관리</span></a>
-            </li>
+            
             <li class="nav-item">
                 <a class="nav-link" href="<c:url value='/admin/book/bookList?bookFlag=bookList'/>">
                     <i class="fas fa-gift"></i>

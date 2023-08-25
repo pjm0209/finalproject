@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.team2.mbti.common.SearchVO;
 
@@ -71,12 +73,35 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	@Override
-	public int deleteMember(int no) {
-		return memberDao.deleteMember(no);
-	}
-
-	@Override
 	public MemberVO selectByUserid(String userid) {
 		return memberDao.selectByUserid(userid);
 	}
+	
+	@Override
+	@Transactional
+	public int deleteMultiMember(List<MemberVO> list) {
+		int cnt=0;
+		
+		try {
+			for(MemberVO vo : list) {
+				int no = vo.getNo();
+				if(no!=0) { 
+					cnt=memberDao.deleteMultiMember(no);
+				}
+			}
+		}catch(RuntimeException e) {
+			e.printStackTrace();
+			cnt=-1;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+		}
+		
+		return cnt;
+	}
+
+	@Override
+	public MemberVO findId(MemberVO membervo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

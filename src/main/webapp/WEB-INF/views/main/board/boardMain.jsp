@@ -56,6 +56,18 @@ li.board-li-category {
 				</div>			
 			</div>
 		</div>
+		<div class="boardContent-body">
+			<div class="boardWritediv">
+				<button type="button" class="boardWriteBtn"><span class="boardWrite">게시글작성</span></button>
+			</div>
+			<ul class="boardFormList">
+				<c:forEach var="vo" items="${boardFormList }">
+					<li class="boardFormItem">
+						${vo.boardFormName }
+					</li>
+				</c:forEach>
+			</ul>
+		</div>
 	</div>
 </section>
 <%@ include file="../inc/bottom.jsp"%>
