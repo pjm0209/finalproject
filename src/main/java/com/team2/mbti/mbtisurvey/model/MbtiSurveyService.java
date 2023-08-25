@@ -1,6 +1,7 @@
 package com.team2.mbti.mbtisurvey.model;
 
 import java.util.List;
+import java.util.Map;
 
 import com.team2.mbti.common.SearchVO;
 import com.team2.mbti.mbtiResult.model.MbtiResultVO;
@@ -20,4 +21,6 @@ public interface MbtiSurveyService {
 	List<MbtiVO> selectAllMbti();
 	
 	int updateMemberMbtiNoByNo(MemberVO memberVo);
+	List<Map<String, Object>> selectMbtiStatisticsView(SearchVO searchVo);
+	int getTotalRecordMbtiStatisticsView(SearchVO searchVo);
 }
