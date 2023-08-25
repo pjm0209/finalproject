@@ -41,6 +41,7 @@
 	<!-- Custom styles for this template-->
 	<link href="<c:url value='/admin-css-js/css/sb-admin-2.css'/>" rel="stylesheet">
 	<link href="<c:url value='/admin-css-js/css/mbti.css'/>" rel="stylesheet">
+	<link href="<c:url value='/admin-css-js/css/education.css'/>" rel="stylesheet" type="text/css">
 	<link href="<c:url value='/admin-css-js/css/board.css'/>" rel="stylesheet" type="text/css">
 	<link href="<c:url value='/admin-css-js/css/boardCreate.css'/>" rel="stylesheet" type="text/css">
 	<link href="<c:url value='/admin-css-js/css/book-order.css'/>" rel="stylesheet" type="text/css">
@@ -77,7 +78,7 @@
           <li><a class="nav-link scrollto active" href="<c:url value='/main/index'/>">메인</a></li>
           <li><a class="nav-link scrollto" href="#about">About Us</a></li>
           <li><a class="nav-link scrollto" href="#services">책</a></li>
-          <li><a class="nav-link scrollto" href="#portfolio">MBTI 교육</a></li>
+          <li><a class="nav-link scrollto" href="<c:url value='/main/education/list'/>">MBTI 교육</a></li>
           <li><a class="nav-link scrollto" href="<c:url value='/main/mbti/mbti'/>">MBTI 검사</a></li>
           <li><a class="nav-link scrollto" href="<c:url value='/main/book/bookMain'/>">도서/자료 구매</a></li>
           <li class="dropdown"><a href="#"><span>커뮤니티</span> <i class="bi bi-chevron-down"></i></a>
