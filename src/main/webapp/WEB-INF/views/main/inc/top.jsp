@@ -77,7 +77,6 @@
         <ul>
           <li><a class="nav-link scrollto active" href="<c:url value='/main/index'/>">메인</a></li>
           <li><a class="nav-link scrollto" href="#about">About Us</a></li>
-          <li><a class="nav-link scrollto" href="#services">책</a></li>
           <li class="dropdown"><a href="#"><span>MBTI 교육</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
 			  <li><a href="<c:url value='/main/education/list'/>">교육 목록</a></li>            
@@ -92,16 +91,15 @@
 			  <c:import url="/main/board/boardFormList"></c:import>              
             </ul>
           </li>
-          <li><a class="nav-link scrollto" href="<c:url value='/main/myPage'/>">마이페이지</a></li>
-          <li><a class="getstarted scrollto" href="#about">Get Started</a></li>
+          <li><a class="nav-link scrollto" href="<c:url value='/main/member/mypage'/>">마이페이지</a></li>
           <li><a class="nav-link scrollto">${sessionScope.userid}</a></li>
        	  <!-- 로그인 안된 경우 -->
 		  <c:if test="${empty sessionScope.userid }">			
-			<li><a href="<c:url value='/main/member/memberLogin'/>">로그인</a></li>
+			<li><a class="getstarted scrollto" href="<c:url value='/main/member/memberLogin'/>">로그인</a></li>
 		  </c:if>
 		  <!-- 로그인 된 경우 -->
 		  <c:if test="${!empty sessionScope.userid }">
-			<li><a href="<c:url value='/main/logout'/>">로그아웃</a></li>
+			<li><a class="getstarted scrollto" href="<c:url value='/main/logout'/>">로그아웃</a></li>
 		  </c:if>			
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
