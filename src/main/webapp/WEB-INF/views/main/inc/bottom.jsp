@@ -82,7 +82,7 @@
 	        <p id="alertModalBody"></p>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn bg-orange-primary" data-bs-dismiss="modal">확인</button>
+	        <button type="button" id="btnClose" class="btn bg-orange-primary" data-bs-dismiss="modal">확인</button>
 	      </div>
 	    </div>
 	  </div>

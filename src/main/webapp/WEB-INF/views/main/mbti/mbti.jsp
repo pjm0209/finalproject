@@ -4,9 +4,17 @@
 <script type="text/javascript">
 $(function(){
 	$('#mbti-precise-button').click(function(){
-		$('#alertModalBody').html("삭제할 질문을 선택하세요");
-		$('#alertModal').modal('show');
-		event.preventDefault();
+		var sessionUserid="${sessionScope.userid}";
+		
+		if(sessionUserid==null || sessionUserid==''){
+			event.preventDefault();
+			$('#alertModalBody').html("먼저 로그인 하세요");
+			$('#alertModalBtn').trigger('click');
+			$('#btnClose').click(function(){
+				location.href="<c:url value='/main/member/memberLogin'/>";
+				return false;
+			})
+		}
 	});
 });
 </script>
