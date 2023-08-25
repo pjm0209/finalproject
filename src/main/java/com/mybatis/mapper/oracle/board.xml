@@ -15,28 +15,55 @@
 			<if test="searchKeyword==null or searchKeyword == ''">
 				board_form_no = #{boardFormNo}
 			</if>
+			<if test="mbtiNo != 0">
+				and mbti_no = #{mbtiNo}
+			</if>
 		</where>
 	</sql> 
 	
 	<sql id="insertBoardType">
 		<if test="no == 0 or no == null">
-			insert into board(board_no, board_form_no, board_title, board_body, board_group_no, admin_no)
-			values(#{boardNo}, #{boardFormNo}, #{boardTitle}, #{boardBody}, #{boardNo}, #{adminNo})
+			<if test="mbtiNo == 0">
+				insert into board(board_no, board_form_no, board_title, board_body, board_group_no, admin_no)
+				values(#{boardNo}, #{boardFormNo}, #{boardTitle}, #{boardBody}, #{boardNo}, #{adminNo})
+			</if>
+			<if test="mbtiNo != 0">
+				insert into board(board_no, board_form_no, board_title, board_body, board_group_no, admin_no, mbti_no)
+				values(#{boardNo}, #{boardFormNo}, #{boardTitle}, #{boardBody}, #{boardNo}, #{adminNo}, #{mbtiNo})
+			</if>
 		</if>
 		<if test="no != 0 and no != null">
-			insert into board(board_no, board_form_no, board_title, board_body, no, board_group_no)
-			values(#{boardNo}, #{boardFormNo}, #{boardTitle}, #{boardBody}, #{no}, #{boardNo})
+			<if test="mbtiNo == 0">
+				insert into board(board_no, board_form_no, board_title, board_body, no, board_group_no)
+				values(#{boardNo}, #{boardFormNo}, #{boardTitle}, #{boardBody}, #{no}, #{boardNo})
+			</if>
+			<if test="mbtiNo != 0">
+				insert into board(board_no, board_form_no, board_title, board_body, no, board_group_no, mbti_no)
+				values(#{boardNo}, #{boardFormNo}, #{boardTitle}, #{boardBody}, #{no}, #{boardNo}, #{mbtiNo})
+			</if>
 		</if>
 	</sql>
 	
 	<sql id="insertBoardReplyType">
 		<if test="no == 0 or no == null">
-			insert into board(board_no, board_form_no, board_title, board_body, board_group_no, board_step, board_sort, admin_no)
-			values(#{boardNo}, #{boardFormNo}, #{boardTitle}, #{boardBody}, #{boardGroupNo}, #{boardStep} + 1, #{boardSort} + 1, #{adminNo})
+			<if test="mbtiNo == 0">
+				insert into board(board_no, board_form_no, board_title, board_body, board_group_no, board_step, board_sort, admin_no)
+				values(#{boardNo}, #{boardFormNo}, #{boardTitle}, #{boardBody}, #{boardGroupNo}, #{boardStep} + 1, #{boardSort} + 1, #{adminNo})
+			</if>
+			<if test="mbtiNo != 0">
+				insert into board(board_no, board_form_no, board_title, board_body, board_group_no, board_step, board_sort, admin_no, mbti_no)
+				values(#{boardNo}, #{boardFormNo}, #{boardTitle}, #{boardBody}, #{boardGroupNo}, #{boardStep} + 1, #{boardSort} + 1, #{adminNo}, #{mbtiNo})
+			</if>
 		</if>
 		<if test="no != 0 and no != null">
-			insert into board(board_no, board_form_no, board_title, board_body, no, board_group_no, board_step, board_sort)
-			values(#{boardNo}, #{boardFormNo}, #{boardTitle}, #{boardBody}, #{no}, #{boardGroupNo}, #{boardStep} + 1, #{boardSort} + 1)
+			<if test="mbtiNo == 0">
+				insert into board(board_no, board_form_no, board_title, board_body, no, board_group_no, board_step, board_sort)
+				values(#{boardNo}, #{boardFormNo}, #{boardTitle}, #{boardBody}, #{no}, #{boardGroupNo}, #{boardStep} + 1, #{boardSort} + 1)
+			</if>
+			<if test="mbtiNo != 0">
+				insert into board(board_no, board_form_no, board_title, board_body, no, board_group_no, board_step, board_sort, mbti_no)
+				values(#{boardNo}, #{boardFormNo}, #{boardTitle}, #{boardBody}, #{no}, #{boardGroupNo}, #{boardStep} + 1, #{boardSort} + 1, mbtiNo)
+			</if>
 		</if>
 	</sql>
 
