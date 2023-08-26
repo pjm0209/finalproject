@@ -19,7 +19,7 @@ public interface MemberDAO {
 	
 	MemberVO selectByUserid(String userid);
 	
-	MemberVO findId(MemberVO membervo); //아이디 찾기
+	MemberVO findId(String name, String tel); //아이디 찾기
 	
 	int deleteMultiMember(int adminNo);
 	
