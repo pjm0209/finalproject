@@ -16,6 +16,9 @@
 		<input type="hidden" name="boardFormNo" value="${param.boardFormNo }">
 		<input type="hidden" name="searchCondition" value="${param.searchCondition }">
 		<input type="hidden" name="searchKeyword" value="${param.searchKeyword }">
+		<c:if test="${param.boardFormNo == 5 }">
+			<input type="hidden" name="mbtiNo" value="${param.mbtiNo }">
+		</c:if>
 		<input type="hidden" name="currentPage">
 	</form>
 	<div class="board">
@@ -35,7 +38,7 @@
 								<select class="form-select" aria-label="Default select example" class="mbtiBoardmbti" name="mbtiNo">
 									<option value="0">전체글</option>	
 									<c:forEach var="mbtiVo" items="${mbtiList }">
-										<option value="${mbtiVo.mbtiNo }">${mbtiVo.mbtiType }</option>								
+										<option value="${mbtiVo.mbtiNo }" <c:if test="${param.mbtiNo == mbtiVo.mbtiNo }"> selected="selected" </c:if>>${mbtiVo.mbtiType }</option>								
 									</c:forEach>
 								</select>
 							</c:if>

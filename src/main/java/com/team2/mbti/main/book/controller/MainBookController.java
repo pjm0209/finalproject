@@ -26,5 +26,22 @@ public class MainBookController {
 
 		return "main/book/bookMain";
 	}
+	@RequestMapping("/bookDetail")
+	public String bookDetail(Model model) {
+		logger.info("책 메인 판매 페이지 - 책 상세보기 페이지입니다.");
+
+		model.addAttribute("title", "책 판매 페이지");
+
+		return "main/book/bookDetail";
+	}
+	
+	@RequestMapping("/test/test")
+	public String test(Model model) {
+		logger.info("test");
+
+		model.addAttribute("title", "tes");
+
+		return "main/book/test/test";
+	}
 
 }//
