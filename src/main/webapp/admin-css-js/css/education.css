@@ -6,9 +6,11 @@
 		url("../assets/font/Pretendard-Medium.otf") format("opentype");
 }
 
+.inner1200 {position:relative; width:1400px; margin:0 auto; margin-top:50px;}
+
 /* 메인 페이지 */
 #education-main {
-	background-image: url("../../images/education_main.jpg");
+	background-image: url("../../images/education/education_main.jpg");
 	background-size: 100%;
 	background-position:top;
 	background-repeat: no-repeat;
@@ -19,7 +21,7 @@
 	height: 675px;
 }
 
-#edu-main-list, edu-main-schedule, edu-main-location {
+#edu-main-list, edu-main-info, edu-main-location {
 	font-family: "Pretendard";
 }
 
@@ -34,7 +36,50 @@
     font-family: "Pretendard";
 }
 
+/* educationInfo */
+.inner1200 h2 {
+    font-family: "Pretendard";
+	font-weight: bold;	
+	font-size: 300%;
+}
 
+.info1-space {
+	padding: 50px 80px;
+	justify-content: space-between;
+	display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    line-height: 1;
+}
+
+.info1-space div {
+	width: 300px;
+    height: 330px;
+    padding: 60px 0;
+    background: #fff;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0px 25px 40px -15px rgba(0,0,0,.1);
+}
+
+.info1-space div h3 {
+	margin: 18px 0;
+    font-weight: 700;
+    font-size: 28px;
+    display: block;
+}
+
+
+.inner h2 {
+    font-family: "Pretendard";
+	font-weight: bold;	
+	font-size: 300%;
+}
+
+.inner p {
+    margin-left: 300px;
+    color: white;
+}
 
 
 /* 관리자 페이지 */
