@@ -150,12 +150,20 @@
                     </div>
                 </div>
             </li>                    
-
             <li class="nav-item">
-                <a class="nav-link" href="<c:url value='/admin/book/bookList?bookFlag=bookList'/>">
-                    <i class="fas fa-gift"></i>
-                    <span>판매 상품 관리</span></a>
-            </li>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#bookPd"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>판매 상품 관리</span>
+                </a>
+                <div id="bookPd" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="<c:url value='/admin/mbti/mbti'/>"></a>
+                        <a class="collapse-item" href="<c:url value='/admin/mbti/mbtiStatistics'/>"></a>
+                    </div>
+                </div>
+            </li>  
             <%-- <li class="nav-item">
            		<div class="dropend">
 				  <a class="nav-link dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false" href="">
