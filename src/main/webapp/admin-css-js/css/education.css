@@ -6,9 +6,11 @@
 		url("../assets/font/Pretendard-Medium.otf") format("opentype");
 }
 
+.inner1200 {position:relative; width:1400px; margin:0 auto; margin-top:50px;}
+
 /* 메인 페이지 */
 #education-main {
-	background-image: url("../../images/education_main.jpg");
+	background-image: url("../../images/education/education_main.jpg");
 	background-size: 100%;
 	background-position:top;
 	background-repeat: no-repeat;
@@ -19,21 +21,136 @@
 	height: 675px;
 }
 
-#edu-main-list, edu-main-schedule, edu-main-location {
-	font-family: "Pretendard";
-}
-
 #education-main pre {
     display: block;
-    font-size: 140%;
+    font-size: 180%;
     color: #3a3b45;
     padding-left: 158px;
     position: absolute;
-    top: 420px;
+    top: 430px;
     font-weight: bold;
+    font-family: "Pretendard";
+}
+
+/* educationInfo */
+.education-info-main {
+	font-family: "Pretendard";
+	height: 100%;
+	padding-top: 60px;
+	padding-bottom: 0;
+}
+
+.section-info1 {
+	padding:30px 0;
+	overflow: hidden;
+}
+
+.inner1200 h2 {
+    font-family: "Pretendard";
+	font-weight: bold;	
+	font-size: 300%;
+	text-align: center;
+}
+
+.info1-space {
+	padding: 40px 10px;
+	justify-content: space-between;
+	display: flex;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.info1-space div {
+	width: 310px;
+    height: 360px;
+    margin: 0 auto;
+    padding: 60px 0;
+    background: #fff;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0px 25px 40px -15px rgba(0,0,0,.1);
+}
+
+.info1-space h6 {
+	color: #eb5d1e;
+	font-weight: bold;
 }
 
 
+.info1-space div h3 {
+	margin: 18px 0;
+    font-weight: 700;
+    font-size: 28px;
+    display: block;
+}
+
+.info2-space {
+	padding: 40px 10px;
+	justify-content: space-between;
+	display: flex;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+div.tea1 {
+	width: 250px;
+    height: 320px;
+    padding: 20px 0;
+    position: relative;
+    text-align: center;
+    background-image: url("../../images/education/na.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+div.tea2 {
+	width: 250px;
+    height: 320px;
+    padding: 20px 0;
+    position: relative;
+    text-align: center;
+    background-image: url("../../images/education/min.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+div.tea3 {
+	width: 250px;
+    height: 320px;
+    padding: 20px 0;
+    position: relative;
+    text-align: center;
+    background-image: url("../../images/education/mingi.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+div.tea4 {
+	width: 250px;
+    height: 320px;
+    padding: 20px 0;
+    position: relative;
+    text-align: center;
+    background-image: url("../../images/education/yong.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+div.tea5 {
+	width: 250px;
+    height: 320px;
+    padding: 20px 0;
+    position: relative;
+    text-align: center;
+    background-image: url("../../images/education/jun.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
 
 
 /* 관리자 페이지 */
