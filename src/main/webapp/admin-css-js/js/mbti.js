@@ -72,14 +72,6 @@
 			
 		});
 		
-		$('#mbti-free-button').click(function(){
-			location.href=contextPath+"/main/mbti/question?questionTypeNo=1";
-		});
-		
-		$('#mbti-precise-button').click(function(){
-			location.href=contextPath+"/main/mbti/question?questionTypeNo=2";
-		});
-		
 	    $('button.test_btn_style').hover(function(){
 			$(this).toggleClass("active").animate("fast");
 		},function(){
