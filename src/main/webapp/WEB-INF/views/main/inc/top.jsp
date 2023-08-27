@@ -79,8 +79,8 @@
           <li><a class="nav-link scrollto" href="#about">About Us</a></li>
           <li class="dropdown"><a href="#"><span>MBTI 교육</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
+			  <li><a href="<c:url value='/main/education/info'/>">교육 소개</a></li>            
 			  <li><a href="<c:url value='/main/education/list'/>">교육 목록</a></li>            
-			  <li><a href="<c:url value='/main/education/schedule'/>">교육 일정</a></li>            
 			  <li><a href="<c:url value='/main/education/location'/>">교육장 위치</a></li>            
             </ul>
           </li>
