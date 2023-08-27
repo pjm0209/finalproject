@@ -35,7 +35,9 @@
 /* educationInfo */
 .education-info-main {
 	font-family: "Pretendard";
-	height: 3000px;
+	height: 100%;
+	padding-top: 60px;
+	padding-bottom: 0;
 }
 
 .section-info1 {
@@ -47,20 +49,21 @@
     font-family: "Pretendard";
 	font-weight: bold;	
 	font-size: 300%;
+	text-align: center;
 }
 
 .info1-space {
-	padding: 50px 80px;
+	padding: 40px 10px;
 	justify-content: space-between;
 	display: flex;
     align-items: center;
     box-sizing: border-box;
-    line-height: 1;
 }
 
 .info1-space div {
-	width: 300px;
-    height: 330px;
+	width: 310px;
+    height: 360px;
+    margin: 0 auto;
     padding: 60px 0;
     background: #fff;
     border-radius: 10px;
@@ -68,23 +71,17 @@
     box-shadow: 0px 25px 40px -15px rgba(0,0,0,.1);
 }
 
+.info1-space h6 {
+	color: #eb5d1e;
+	font-weight: bold;
+}
+
+
 .info1-space div h3 {
 	margin: 18px 0;
     font-weight: 700;
     font-size: 28px;
     display: block;
-}
-
-
-.inner h2 {
-    font-family: "Pretendard";
-	font-weight: bold;	
-	font-size: 300%;
-	color : black;
-}
-
-.inner p {
-    margin-left: 300px;
 }
 
 .info3-space {
@@ -105,12 +102,14 @@
     line-height: 1;
 }
 
-.info3-space .tea1 {
+div.tea1 {
 	width: 300px;
     height: 600px;
     padding: 20px 0;
     border-radius: 50px;
-    
+    position: relative;
+    border-radius: 10px;
+    text-align: center;
 }
 
 
