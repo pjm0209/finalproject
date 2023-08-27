@@ -66,9 +66,11 @@
 		<div class="inner1200" style="margin-top:90px">
 			<h2>대표 강사</h2>
 			<div class="info2-space">
-				<div class="tea1">
-					<img src="../../images/education/na.jpg">
-				</div>
+				<div class="tea1"></div>
+				<div class="tea2"></div>
+				<div class="tea3"></div>
+				<div class="tea4"></div>
+				<div class="tea5"></div>
 			</div>
 		</div>
 	</section>
