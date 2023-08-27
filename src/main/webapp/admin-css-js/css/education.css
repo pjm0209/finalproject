@@ -84,36 +84,73 @@
     display: block;
 }
 
-.info3-space {
-	width: 1680px;
-    height: 320px;
-    overflow: hidden;
-    touch-action: pan-y;
-    position: absolute;
-    display: block;
-}
-
-.info3-space {
-	padding: 50px 80px;
+.info2-space {
+	padding: 40px 10px;
 	justify-content: space-between;
 	display: flex;
     align-items: center;
     box-sizing: border-box;
-    line-height: 1;
 }
 
 div.tea1 {
-	width: 300px;
-    height: 600px;
+	width: 250px;
+    height: 320px;
     padding: 20px 0;
-    border-radius: 50px;
     position: relative;
-    border-radius: 10px;
     text-align: center;
+    background-image: url("../../images/education/na.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
 
+div.tea2 {
+	width: 250px;
+    height: 320px;
+    padding: 20px 0;
+    position: relative;
+    text-align: center;
+    background-image: url("../../images/education/min.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
 
+div.tea3 {
+	width: 250px;
+    height: 320px;
+    padding: 20px 0;
+    position: relative;
+    text-align: center;
+    background-image: url("../../images/education/mingi.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
 
+div.tea4 {
+	width: 250px;
+    height: 320px;
+    padding: 20px 0;
+    position: relative;
+    text-align: center;
+    background-image: url("../../images/education/yong.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+div.tea5 {
+	width: 250px;
+    height: 320px;
+    padding: 20px 0;
+    position: relative;
+    text-align: center;
+    background-image: url("../../images/education/jun.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
 
 
 /* 관리자 페이지 */
