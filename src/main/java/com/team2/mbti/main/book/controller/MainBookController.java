@@ -35,13 +35,13 @@ public class MainBookController {
 		return "main/book/bookDetail";
 	}
 	
-	@RequestMapping("/test/test")
-	public String test(Model model) {
-		logger.info("test");
+	
+	@RequestMapping("/bookList1")
+	public String bookList1(Model model) {
+		logger.info("bookList1");
 
-		model.addAttribute("title", "tes");
+		model.addAttribute("title", "bookList1");
 
-		return "main/book/test/test";
+		return "main/book/bookList1";
 	}
-
 }//
