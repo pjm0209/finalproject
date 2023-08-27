@@ -77,17 +77,21 @@
         <ul>
           <li><a class="nav-link scrollto active" href="<c:url value='/main/index'/>">메인</a></li>
           <li><a class="nav-link scrollto" href="#about">About Us</a></li>
-          <li><a class="nav-link scrollto" href="#services">책</a></li>
-          <li class="dropdown"><a href="#"><span>MBTI 교육</span> <i class="bi bi-chevron-down"></i></a>
+          <li class="dropdown"><a class="nav-link scrollto" href="#"><span>MBTI 교육</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
+			  <li><a href="<c:url value='/main/education/info'/>">교육 소개</a></li>            
 			  <li><a href="<c:url value='/main/education/list'/>">교육 목록</a></li>            
-			  <li><a href="<c:url value='/main/education/schedule'/>">교육 일정</a></li>            
 			  <li><a href="<c:url value='/main/education/location'/>">교육장 위치</a></li>            
             </ul>
           </li>
-          <li><a class="nav-link scrollto" href="<c:url value='/main/mbti/mbti'/>">MBTI 검사</a></li>
+          <li class="dropdown"><a class="nav-link scrollto" href="#"><span>MBTI</span> <i class="bi bi-chevron-down"></i></a>
+          	<ul>
+			  <li><a class="nav-link scrollto" href="<c:url value='/main/mbti/mbti'/>">MBTI 검사</a></li>            
+			  <li><a class="nav-link scrollto" href="<c:url value='/main/mbti/mbtiStatistics'/>">MBTI 통계</a></li>            
+            </ul>
+          </li>
           <li><a class="nav-link scrollto" href="<c:url value='/main/book/bookMain'/>">도서/자료 구매</a></li>
-          <li class="dropdown"><a href="#"><span>커뮤니티</span> <i class="bi bi-chevron-down"></i></a>
+          <li class="dropdown"><a class="nav-link scrollto" href="#"><span>커뮤니티</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
 			  <c:import url="/main/board/boardFormList"></c:import>              
             </ul>
