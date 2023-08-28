@@ -135,21 +135,6 @@
                         <a class="collapse-item" href="<c:url value='/admin/education/location'/>">교육장 관리</a>
                     </div>
                 </div>
-<<<<<<< HEAD
-=======
-            </li>                        
-
-    
-             <li class="nav-item">
-                <a class="nav-link" href="<c:url value='/admin/mbti/mbti'/>">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>MBTI 관리</span></a>
->>>>>>> branch 'main' of https://github.com/pjm0209/finalproject.git
-            </li>
-<<<<<<< HEAD
-=======
-
->>>>>>> branch 'main' of https://github.com/pjm0209/finalproject.git
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#mbtiNav"
                     aria-expanded="true" aria-controls="collapseUtilities">
@@ -164,10 +149,6 @@
                     </div>
                 </div>
             </li>                    
-<<<<<<< HEAD
-=======
-
->>>>>>> branch 'main' of https://github.com/pjm0209/finalproject.git
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#bookPd"
                     aria-expanded="true" aria-controls="collapseUtilities">

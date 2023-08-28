@@ -45,24 +45,26 @@
 					<div class="flex">
 					<label>주문상태</label>
 						<div>
-							<select class="form-control" id="s_odm_status" name="s_odm_status">
-														<option value="">선택</option>
-														<option value="B1">입금대기</option>
-														<option value="C1">결제완료</option>
-														<option value="D1">배송준비</option>
-														<option value="E1">배송중</option>
-														<option value="F1">배송완료</option>
-														<option value="G1">구매확정</option>
-														<option value="H1">취소신청</option>
-														<option value="H2">취소완료</option>
-														<option value="I1">반품신청</option>
-														<option value="I2">반품완료</option>
-														<option value="J1">교환신청</option>
-														<option value="J2">교환완료</option>
-														<option value="K1">환불신청</option>
-														<option value="K2">환불완료</option>
-							</select>
-							
+							<c:if test="${param.flag eq 'orderCancle'}">
+								<select class="form-control" id="s_odm_status" name="s_odm_status">
+									<option value="">선택</option>
+									<option value="입금대기">입금대기</option>
+									<option value="결제완료">결제완료</option>
+									<option value="배송준비">배송준비</option>
+									<option value="배송중">배송중</option>
+									<option value="배송완료">배송완료</option>
+									<option value="구매확정">구매확정</option>
+									<option value="취소신청">취소신청</option>
+									<option value="취소완료">취소완료</option>
+									<option value="반품신청">반품신청</option>
+									<option value="반품완료">반품완료</option>
+									<option value="교환신청">교환신청</option>
+									<option value="교환완료">교환완료</option>
+									<option value="환불신청">환불신청</option>
+									<option value="환불완료">환불완료</option>
+								</select>
+							</c:if>	
+						<!--  -->		
 						</div>
 					</div>
 				</c:if>											
