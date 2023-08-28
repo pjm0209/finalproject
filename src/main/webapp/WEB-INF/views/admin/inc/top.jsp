@@ -135,6 +135,7 @@
                         <a class="collapse-item" href="<c:url value='/admin/education/location'/>">교육장 관리</a>
                     </div>
                 </div>
+            </li> 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#mbtiNav"
                     aria-expanded="true" aria-controls="collapseUtilities">

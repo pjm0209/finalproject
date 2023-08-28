@@ -13,20 +13,24 @@
 <c:if test="${empty closePopup}">
 	<c:set var="closePopup" value="false"/>
 </c:if>
+
 	<script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-	<script type="text/javascript">
-		$(function(){
-			$('#MessageModal').trigger('click');
-			$('#btClose').click(function(){
-				if(${closePopup}){
-					opener.location.reload();
-					self.close();
-				}
-			});
+<script type="text/javascript">
+	$(function(){
+		$('#MessageModal').trigger('click');
+		$('#btClose').click(function(){
+			if(${closePopup}){
+				opener.location.reload();
+				self.close();
+			}
 		});
-	</script>
-	
+		$(".modal").on("shown.bs.modal", function () {		
+			$('#btClose').focus();
+		});
+		
+	});
+</script>
 	<button type="button" style="display: none" id="MessageModal" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></button>
 
 	<!-- Modal -->

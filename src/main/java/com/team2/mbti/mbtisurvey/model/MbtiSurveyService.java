@@ -23,4 +23,6 @@ public interface MbtiSurveyService {
 	int updateMemberMbtiNoByNo(MemberVO memberVo);
 	List<Map<String, Object>> selectMbtiStatisticsView(SearchVO searchVo);
 	int getTotalRecordMbtiStatisticsView(SearchVO searchVo);
+	
+	List<Map<String, Object>>selectMbtiStatistics();
 }
