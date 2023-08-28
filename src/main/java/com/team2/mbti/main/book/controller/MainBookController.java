@@ -26,7 +26,6 @@ public class MainBookController {
 
 		return "main/book/bookMain";
 	}
-<<<<<<< HEAD
 	@RequestMapping("/bookDetail")
 	public String bookDetail(Model model) {
 		logger.info("책 메인 판매 페이지 - 책 상세보기 페이지입니다.");
@@ -45,7 +44,4 @@ public class MainBookController {
 
 		return "main/book/bookList1";
 	}
-=======
-
->>>>>>> parent of b1adafa (Merge branch 'main' of https://github.com/pjm0209/finalproject.git into)
 }//
