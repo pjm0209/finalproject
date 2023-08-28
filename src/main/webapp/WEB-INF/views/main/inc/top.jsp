@@ -47,10 +47,10 @@
 	<link href="<c:url value='/admin-css-js/css/book-order.css'/>" rel="stylesheet" type="text/css">
 	<script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>
 	<script type="text/javascript" src="<c:url value='/resources/ckeditor/ckeditor.js'/>"></script>	
-
+	
 
   <!-- Template Main CSS File -->
-  <link href="${path }//assets/css/style.css" rel="stylesheet">
+  <link href="${path }/assets/css/style.css" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: Ninestars

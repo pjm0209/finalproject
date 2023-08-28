@@ -212,6 +212,7 @@ public class MainMbtiController {
 		return "main/mbti/mbtiResult";
 	}
 	
+	/** 임시 메서드*/
 	@GetMapping("/mbtiResult")
 	public String mbtiResult_get(Model model) {
 		MbtiVO mbtiVo=mbtiSurveyService.selectMbti("ISFP");
@@ -230,6 +231,12 @@ public class MainMbtiController {
 		return "main/mbti/mbtiResult";
 	}
 	
+	@RequestMapping("/mbtiStatistics")
+	public String mbtiStatistics() {
+		logger.info("mbti 통계 페이지");
+		
+		return "main/mbti/mbtiStatistics";
+	}
 
 
 }
