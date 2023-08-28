@@ -223,7 +223,7 @@ function kakaoLogout() {
     <section class="container forms">    
         <div class="form login">
             <div class="form-content">
-                <h1><img src="../../images/로고이미지.png"/></h1>
+                <h1><img src="../../images/MBTI_Login.png"/></h1>
                 
                 <form class="form-memberLogin" method="post" id="memberLogin-form" action="<c:url value='/main/member/memberLogin'/>">
                     <div class="field input-field">
@@ -251,13 +251,13 @@ function kakaoLogout() {
                     <hr><br>
 					<div onclick="kakaoLogin();">
 				      <a href="javascript:void(0)">
-				          <img src='../../images/kakao_login_large_narrow.png' width=370; height=50;>
+				          <img src='../../images/kakao_login_large_narrow.png' width=370; height=60;>
 				      </a>
-					</div>
+					</div><br>
 					
 					<div onclick="naverLogin();">
 				      <a href="javascript:void(0)">
-				          <img src='../../images/btnG_완성형.png' width=370; height=50;>
+				          <img src='../../images/btnG_완성형.png' width=370; height=60;>
 				      </a>
 					</div>
                 

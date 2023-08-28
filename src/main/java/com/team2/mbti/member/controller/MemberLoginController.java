@@ -55,7 +55,7 @@ public class MemberLoginController {
 			session.setAttribute("userid", userid);
 			session.setAttribute("no", no);
 			
-			//request.getSession().setAttribute("userid", userid);
+			request.getSession().setAttribute("userid", userid);
 			
 			Cookie ck = new Cookie("ck_userid", userid);
 			ck.setPath("/");
@@ -83,8 +83,11 @@ public class MemberLoginController {
 		logger.info("로그아웃");
 		
 		session.removeAttribute("userid");
-				
-		return "redirect:/main/index";	
+		//session.invalidate();
+		//session.setAttribute("userid","");
+		//session.setAttribute("no", "");
+		
+		return "redirect:/";	
 	}
 	
 	@RequestMapping("/member/agreement")
@@ -130,17 +133,16 @@ public class MemberLoginController {
 	}
 	
 	@PostMapping("/member/forgot-id")
-	public String forgotid_post(String name, String tel){
-		logger.info("아이디 찾기 처리, 파라미터 name={}, tel={}", name, tel);
+	public String forgotid_post(@ModelAttribute MemberVO membervo, Model model){
+		logger.info("아이디 찾기 처리, 파라미터 membervo={}",membervo);
 		
-		MemberVO vo = memberService.findId(name, tel);
+		int cnt = memberService.insertMember(membervo);
 		
-		logger.info("아이디 찾기 완료, result = {}", vo);		
+		logger.info("아이디 찾기 완료, result = {}",cnt);		
 		
 		return "main/member/forgot-id";
 	}
 	
-
 	@RequestMapping("/member/findIdResult")
 	public String findIdresult() {		
 		logger.info("아이디 찾기 결과 화면");		

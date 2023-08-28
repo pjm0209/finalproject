@@ -4,6 +4,7 @@
 
 <!-- Begin Page Content -->
 <!-- Page Heading -->
+<c:import url="/admin/board/boardHeadSide"></c:import>
 <div class="board-body">
 	<input type="hidden" value="boardDetail" id="boardDetail">
 	<input type="hidden" name="lastEditAdminId" value="admin">
