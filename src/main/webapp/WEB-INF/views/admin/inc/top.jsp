@@ -136,13 +136,6 @@
                     </div>
                 </div>
             </li>                        
-    
-             <li class="nav-item">
-                <a class="nav-link" href="<c:url value='/admin/mbti/mbti'/>">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>MBTI 관리</span></a>
-            </li>
-<<<<<<< HEAD
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#mbtiNav"
                     aria-expanded="true" aria-controls="collapseUtilities">
@@ -157,9 +150,6 @@
                     </div>
                 </div>
             </li>                    
-=======
-            
->>>>>>> parent of b1adafa (Merge branch 'main' of https://github.com/pjm0209/finalproject.git into)
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#bookPd"
                     aria-expanded="true" aria-controls="collapseUtilities">
