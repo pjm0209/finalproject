@@ -230,6 +230,11 @@ public class MainMbtiController {
 		return "main/mbti/mbtiResult";
 	}
 	
-
+	@RequestMapping("/mbtiStatistics")
+	public String mbtiStatistics() {
+		logger.info("통계 페이지 보여주기");
+		
+		return "main/mbti/mbtiStatistics";
+	}
 
 }
