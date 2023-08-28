@@ -43,7 +43,7 @@ public class BoardController {
 	private final FileUploadUtil fileUploadUtil;
 	private final MbtiSurveyService mbtiService;
 	
-	@GetMapping("/sideBoard")
+	@RequestMapping("/sideBoard")
 	public String boardHeadSide(Model model) {
 		logger.info("게시판 사이드바");
 		
