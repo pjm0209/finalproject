@@ -54,7 +54,7 @@ public class MemberLoginController {
 			
 			HttpSession session = request.getSession();
 			session.setAttribute("userid", userid);
-			session.setAttribute("no", no);
+			session.setAttribute("no", no.getNo());
 			
 			//request.getSession().setAttribute("userid", userid);
 			
