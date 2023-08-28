@@ -140,7 +140,7 @@ $(function() {
 </div>
 <c:set var="price" value="10000원"/>
 <!--  -->
-<%@ include file="../book/bookSideBody.jsp"%>
+<%-- <%@ include file="../book/bookSideBody.jsp"%> --%>
 <div class="board-body">
 	<div id="board-title">
 		<h5>매출 현황</h5>

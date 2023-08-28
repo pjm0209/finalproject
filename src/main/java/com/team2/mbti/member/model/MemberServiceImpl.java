@@ -99,9 +99,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public MemberVO findId(MemberVO membervo) {
-		// TODO Auto-generated method stub
-		return null;
+	public MemberVO findId(String name, String tel) {
+		return memberDao.findId(name, tel);
 	}
 
 }

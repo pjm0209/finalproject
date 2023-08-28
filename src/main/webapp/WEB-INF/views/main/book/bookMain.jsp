@@ -1,68 +1,45 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<<<<<<< HEAD
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 <%@ include file="../inc/top.jsp"%>
-=======
-
-<!-- Remember to include jQuery :) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-
-<!-- jQuery Modal -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
->>>>>>> parent of 263901a (Merge branch 'main' of https://github.com/pjm0209/finalproject.git into)
 <style>
+#bookMain{
+	width: 100%;
+}
 
-#topImg {
-	width: 1300px;
+#topImg{
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+#topImg img{
+	width: 100%;
 	height: 500px;
-	text-align: center;
 }
 
-img {
-	width: 1300px;
-	height: 500px;
-}
-
-#leftNavi dt {
-	padding: 7px 5px 25px 20px;
-	font-weight: bold;
-}
-
-#leftNavi dd {
-	padding-left: 10px;
-}
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-#pdList{
+.pdList{
 	margin-top: 50px;
 	width: 1300px;
-	text-align: center;
-<<<<<<< HEAD
-}
-.pdList h1{
-	text-align: center;
 	
 }
+.pdList>a{
+	text-align: left;
+	font-weight:bold;
+	font-size:26px;
+	color:#222;
+	text-decoration: none;
+}
+.pdList>a span{
+	font-size:38px;
+	vertical-align:text-bottom;
+}
 .pdList ul{
-=======
-}
-#pdList h1{
-	text-align: center;
-	margin-left: 600px;
-}
-#pdList ul{
->>>>>>> parent of 263901a (Merge branch 'main' of https://github.com/pjm0209/finalproject.git into)
 	width: 1300px;
 	text-align: center;
 	display: flex;
     justify-content: space-around;
-<<<<<<< HEAD
+    list-style:none;
 }
 
 .pdList ul li img{
@@ -77,13 +54,13 @@ ul {
 
 #content {
 	    width: 1420px;
-	border: 2px dotted green;
+	
 	margin-left: 215px;
 	color: darkgrey;
 }
 
 #sidebar {
-	border: 2px dotted red;
+	
 	float: left;
 	color: #ffbdbd;
 	will-change: min-height;
@@ -102,22 +79,44 @@ ul {
 	clear: both;
 }
 
+.flex{display:flex; justify-content:space-between;}
 
-#bookSellMainImg{
+.flex .bestbook{background:#efefef; padding:40px 40px; width:70%;}
+.flex .bestbook .textbox p:nth-child(1){font-size:}
+
+.flex .bestbook>img{width:40%;}
+.flex .bestbook .textbox{color:#222; width:48%;}
+.flex .bestbook .textbox p:nth-child(1){font-size:30px; font-weight:bold; padding:30px 0;}
+.flex .bestbook .textbox p:nth-child(2){font-size:24px; padding-bottom:30px;}
+.flex .bestbook .textbox p:nth-child(3){font-size:20px; color:red; font-weight:bold; padding-bottom:50px;}
+.flex .bestbook .textbox button{width:100%; border:3px solid #eb5d1e; background:#fff; color:#eb5d1e; font-weight:bold; padding:10px; font-size:20px; border-radius:5px;}
+
+.flex .booksearch {border:1px #efefef solid; padding:20px; border-left:none;}
+.flex .booksearch>img{width:100%; margin-top: 30px; margin-bottom:85px;}
+.flex .booksearch input{border-right:none; height:50px; border:#eb5d1e 1px solid; margin-left:20px; width:85%;}
+.flex .booksearch button{height:50px; vertical-align:top; color:white; background:#eb5d1e; border:0;}
+.flex .booksearch span{font-size:50px;}
+
+ul,li{list-style:none;}
+/* #bookSellMainImg{
 	width:100%;
 	height: 500px;
 	margin: 0;
 	padding: 0;
 	margin-bottom: 200px;
 	
-}
-#bookSellMainImg img{
+} */
+/* #bookSellMainImg img{
 	width:1920px;
 	height: 600px;
 	margin: 0;
 	padding: 0;
-}
+} */
 
+.bookslide{width:100%; height:600px; overflow:hidden; position:relative;}
+.bookslide .gallery{width:400%; display:flex; position:absolute; top:0; left:0%;}
+.bookslide .gallery li{height:600px; width:100%; }
+.bookslide .gallery li img{width:100%; height:100%;}
 .container .clearfix{
 	margin-left: 0;
 	margin-right: 0;
@@ -134,6 +133,7 @@ ul {
   display: block;
   color: #000;
   padding: 8px 16px;
+  font-weight:bold;
   text-decoration: none;
 }
 
@@ -142,56 +142,99 @@ ul {
   background-color: #555;
   color: white;
 }
-</style>
 
-</head>
-
-<body>
-	<header>
-		<div class="container">
-			<h1>Site Title</h1>
-		</div>
-	</header>
-=======
-    margin-left: 308px;
+.sideBarBestBook{
+	position: absolute;
+    right: 0;
+    top: 760px;
+    margin-right: 10px;
+    text-align: center;
 }
 
-#pdList ul li img{
-	width: 250px;
-	height: 300px;
+.sideBarBestBook #sidebar li img{
+	width: 80px;
+	vertical-align: middle;
+}
+
+.sideBarBestBook #sidebar ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	width: 150px;
+	background-color: #efefef;
+}
+
+.sideBarBestBook #sidebar li  {
+	display: block;
+	color: #ee7843;
+	padding: 8px 16px;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+/* Change the link color on hover */
+.sideBarBestBook li a:hover {
+	background-color: #555;
+	color: white;
 }
 </style>
-<%@ include file="../inc/top.jsp"%>
 
->>>>>>> parent of 263901a (Merge branch 'main' of https://github.com/pjm0209/finalproject.git into)
+<script type="text/javascript">
+$(function(){
+	
+	$(window).scroll(function(){
+		var sc = $(this).scrollTop();
+		
+		
+		if( sc > 500){
+			$('.sideBarBestBook').css({position:'fixed', top:200,})
+		} else{
+			$('.sideBarBestBook').css({position:'absolute', top:760,})
+		} 
+	});
+	
+	
+	
+	function slideImg(){
+		$('.gallery').animate({left:'-100%'},1500,function(){
+			$('.gallery li:first').appendTo('.gallery');
+			$('.gallery').css({left:'0%'});
+		});
+		
+		
+	}
+	
+	setInterval(slideImg,3000);
+	
+	
+})
+</script>
+
 <section id="bookMain" class="book">
-	<div style="float: left;">
-		<nav style="margin-top: 300px; background: #dddddd;">
-			<dl id="leftNavi" style="width: 90px; padding: 0 0 0 0;">
-				<!-- category list -->
-				<dt>도 서</dt>
-				<dd>
-					<a href="#">검사자료</a>
-				</dd>
-				<dd>
-					<a href="#">도 서</a>
-				</dd>
-				<dd>
-					<a href="#">기 타</a>
-				</dd>
-			</dl>
-		</nav>
+	<div id='bookSellMainImg' class=" bookslide">
+		<ul class="gallery">
+			<li><img src="<c:url value='/images/bookProduct/slide_01.jpg'/>"></li>
+			<li><img src="<c:url value='/images/bookProduct/slide_02.jpg'/>"></li>
+			<li><img src="<c:url value='/images/bookProduct/slide_03.jpg'/>"></li>
+			<li><img src="<c:url value='/images/bookProduct/slide_04.jpg'/>"></li>
+		</ul>
+		
+		
 	</div>
-<<<<<<< HEAD
+	<div style="padding-left: 240px;margin-top: 50px;">
+		<a href="<c:url value='/main/index'/>"><i class="bi bi-house-door-fill"></i></a>
+		/
+		<a href="<c:url value='/main/book/bookMain'/>">도서 / 자료 구매</a>
+	</div>
 	<div id="containerWrap" class="container clearfix" style="margin-left: 0;
 	margin-right: 0;position: relative">
 		<div id="sidebar" class="" style="">
-			<div class="sidebar__inner" style="position: relative;">
+			<div class="sidebar__inner shadow-sm bg-body rounded"  style="position: relative;">
 				<div>
 					<ul>
-					  <li><a href="#home">검 사 자 료</a></li>
-					  <li><a href="#news">도 서</a></li>
-					  <li><a href="#contact">기 타 교 구</a></li>
+					  <li><a href="<c:url value='/main/book/bookList1'/>">검 사 자 료</a></li>
+					  <li><a href="<c:url value='/main/book/bookList1'/>">도 서</a></li>
+					  <li><a href="<c:url value='/main/book/bookList1'/>">기 타 교 구</a></li>
 					</ul>
 				</div>
 				<div class="resize-sensor"
@@ -211,11 +254,31 @@ ul {
 			</div>
 		</div>
 		<div id="content">
-			<div id="topImg" style="text-align: center;">
+			<%-- <div id="topImg" style="text-align: center;">
 				<img src="<c:url value='/images/72939_11192_2044.jpg'/>">
-			</div>
+			</div> --%>
+			
+			<div class="flex">
+				<div class="bestbook flex">
+					 <img src="<c:url value='/images/bookProduct/20025.jpg'/>" alt="">
+					 <div class="textbox">
+					 	<p>MBTI Form M 자가채점용</p>
+					 	<p>MBTI Form M 자가채점용은 검사지, 답안지, 프로파...</p>
+					 	<p>18,000원</p>
+					 	<button>구매하기</button>
+					 </div>
+				</div>
+				<div class="booksearch">
+					<img src="<c:url value='/images/searchBook2.jpg'/>" alt="책검색이미지">
+					<input type="text"><button type="submit"><span class="material-symbols-outlined">
+search
+</span></button>
+				</div>
+			</div>  
 			<div class="pdList">
-				<h1 class="display-3">도서부분 인기상품</h1>
+				<a href="#" class="display-3">도서부분 인기상품<span class="material-symbols-outlined">
+chevron_right
+</span></a>
 				<ul class="aa-product-catg">
 					<!-- start single product item -->
 					<li>
@@ -266,48 +329,10 @@ ul {
 							</figcaption>
 						</figure>
 					</li>
-				</ul>
-			</div>
-			<div class="pdList">
-				<h1 class="display-3">검사자료부분 인기상품</h1>
-				<ul class="aa-product-catg">
-					<!-- start single product item -->
-					<li>
-						<figure>
-							<a class="aa-product-img" href="<c:url value='/main/book/bookDetail'/>">
-							 <img src="<c:url value='/images/bookProduct/20024.jpg'/>" alt="">
-							</a>
-							<a class="aa-add-card-btn" href="">
-								<span style="display: block;" class="fas fa-shopping-cart"></span>장바구니 담기</a>
-							<figcaption>
-								<h5 class="aa-product-title">
-									<a href="#"></a>
-								</h5>
-								<span class="aa-product-price">1700원</span>
-		
-							</figcaption>
-						</figure>
-					</li>
 					<li>
 						<figure>
 							<a class="aa-product-img" href="">
-							 <img src="<c:url value='/images/bookProduct/20025.jpg'/>" alt="">
-							</a>
-							<a class="aa-add-card-btn" href="">
-								<span style="display: block;" class="fas fa-shopping-cart"></span>장바구니 담기</a>
-							<figcaption>
-								<h5 class="aa-product-title">
-									<a href="#"></a>
-								</h5>
-								<span class="aa-product-price">1700원</span>
-		
-							</figcaption>
-						</figure>
-					</li>
-					<li>
-						<figure>
-							<a class="aa-product-img" href="">
-							 <img src="<c:url value='/images/bookProduct/20026.jpg'/>" alt="">
+							 <img src="<c:url value='/images/bookProduct/20027.jpg'/>" alt="">
 							</a>
 							<a class="aa-add-card-btn" href="">
 								<span style="display: block;" class="fas fa-shopping-cart"></span>장바구니 담기</a>
@@ -323,13 +348,15 @@ ul {
 				</ul>
 			</div>
 			<div class="pdList">
-				<h1 class="display-3">기타교구부분 인기상품</h1>
+				<a href="#" class="display-3">검사자료부분 인기상품<span class="material-symbols-outlined">
+chevron_right
+</span></a>
 				<ul class="aa-product-catg">
 					<!-- start single product item -->
 					<li>
 						<figure>
 							<a class="aa-product-img" href="<c:url value='/main/book/bookDetail'/>">
-							 <img src="<c:url value='/images/bookProduct/20024.jpg'/>" alt="">
+							 <img src="<c:url value='/images/bookProduct/20028.jpg'/>" alt="">
 							</a>
 							<a class="aa-add-card-btn" href="">
 								<span style="display: block;" class="fas fa-shopping-cart"></span>장바구니 담기</a>
@@ -345,7 +372,95 @@ ul {
 					<li>
 						<figure>
 							<a class="aa-product-img" href="">
-							 <img src="<c:url value='/images/bookProduct/20025.jpg'/>" alt="">
+							 <img src="<c:url value='/images/bookProduct/20029.jpg'/>" alt="">
+							</a>
+							<a class="aa-add-card-btn" href="">
+								<span style="display: block;" class="fas fa-shopping-cart"></span>장바구니 담기</a>
+							<figcaption>
+								<h5 class="aa-product-title">
+									<a href="#"></a>
+								</h5>
+								<span class="aa-product-price">1700원</span>
+		
+							</figcaption>
+						</figure>
+					</li>
+					<li>
+						<figure>
+							<a class="aa-product-img" href="">
+							 <img src="<c:url value='/images/bookProduct/20030.jpg'/>" alt="">
+							</a>
+							<a class="aa-add-card-btn" href="">
+								<span style="display: block;" class="fas fa-shopping-cart"></span>장바구니 담기</a>
+							<figcaption>
+								<h5 class="aa-product-title">
+									<a href="#"></a>
+								</h5>
+								<span class="aa-product-price">1700원</span>
+		
+							</figcaption>
+						</figure>
+					</li>
+					<li>
+						<figure>
+							<a class="aa-product-img" href="">
+							 <img src="<c:url value='/images/bookProduct/20031.jpg'/>" alt="">
+							</a>
+							<a class="aa-add-card-btn" href="">
+								<span style="display: block;" class="fas fa-shopping-cart"></span>장바구니 담기</a>
+							<figcaption>
+								<h5 class="aa-product-title">
+									<a href="#"></a>
+								</h5>
+								<span class="aa-product-price">1700원</span>
+		
+							</figcaption>
+						</figure>
+					</li>
+				</ul>
+			</div>
+			<div class="pdList">
+				<a href="#" class="display-3">기타교구부분 인기상품<span class="material-symbols-outlined">
+chevron_right
+</span></a>
+				<ul class="aa-product-catg">
+					<!-- start single product item -->
+					<li>
+						<figure>
+							<a class="aa-product-img" href="<c:url value='/main/book/bookDetail'/>">
+							 <img src="<c:url value='/images/bookProduct/20032.jpg'/>" alt="">
+							</a>
+							<a class="aa-add-card-btn" href="">
+								<span style="display: block;" class="fas fa-shopping-cart"></span>장바구니 담기</a>
+							<figcaption>
+								<h5 class="aa-product-title">
+									<a href="#"></a>
+								</h5>
+								<span class="aa-product-price">1700원</span>
+		
+							</figcaption>
+						</figure>
+					</li>
+					<li>
+						<figure>
+							<a class="aa-product-img" href="">
+							 <img src="<c:url value='/images/bookProduct/20033.jpg'/>" alt="">
+							</a>
+							<a class="aa-add-card-btn" href="">
+								<span style="display: block;" class="fas fa-shopping-cart"></span>장바구니 담기</a>
+							<figcaption>
+								<h5 class="aa-product-title">
+									<a href="#"></a>
+								</h5>
+								<span class="aa-product-price">1700원</span>
+		
+							</figcaption>
+						</figure>
+					</li>
+					<li>
+						<figure>
+							<a class="aa-product-img" href="">
+							 <img src="<c:url value='/images/bookProduct/20034.jpg'/>" alt="">
 							</a>
 							<a class="aa-add-card-btn" href="">
 								<span style="display: block;" class="fas fa-shopping-cart"></span>장바구니 담기</a>
@@ -390,64 +505,46 @@ ul {
 				<div style="position: absolute; left: 0; top: 0; transition: 0s; width: 200%; height: 200%"></div>
 			</div>
 		</div>
-=======
-	<div class="topImg" style="text-align: center;">
-		<img style="margin-right: 84px;" src="<c:url value='/images/72939_11192_2044.jpg'/>">
->>>>>>> parent of 263901a (Merge branch 'main' of https://github.com/pjm0209/finalproject.git into)
 	</div>
-	<div id="pdList">
-		<h1 class="display-3">도 서 구 매</h1>
-		<ul class="aa-product-catg">
-			<!-- start single product item -->
-			<li>
-				<figure>
-					<a class="aa-product-img" href="">
-					 <img src="<c:url value='/images/bookProduct/20024.jpg'/>" alt="">
-					</a>
-					<a class="aa-add-card-btn" href="">
-						<span style="display: block;" class="fas fa-shopping-cart"></span>장바구니 담기</a>
-					<figcaption>
-						<h5 class="aa-product-title">
-							<a href="#"></a>
-						</h5>
-						<span class="aa-product-price">1700원</span>
-
-					</figcaption>
-				</figure>
-			</li>
-			<li>
-				<figure>
-					<a class="aa-product-img" href="">
-					 <img src="<c:url value='/images/bookProduct/20025.jpg'/>" alt="">
-					</a>
-					<a class="aa-add-card-btn" href="">
-						<span style="display: block;" class="fas fa-shopping-cart"></span>장바구니 담기</a>
-					<figcaption>
-						<h5 class="aa-product-title">
-							<a href="#"></a>
-						</h5>
-						<span class="aa-product-price">1700원</span>
-
-					</figcaption>
-				</figure>
-			</li>
-			<li>
-				<figure>
-					<a class="aa-product-img" href="">
-					 <img src="<c:url value='/images/bookProduct/20026.jpg'/>" alt="">
-					</a>
-					<a class="aa-add-card-btn" href="">
-						<span style="display: block;" class="fas fa-shopping-cart"></span>장바구니 담기</a>
-					<figcaption>
-						<h5 class="aa-product-title">
-							<a href="#"></a>
-						</h5>
-						<span class="aa-product-price">1700원</span>
-
-					</figcaption>
-				</figure>
-			</li>
-		</ul>
-	</div>
+	
+	<script type="text/javascript" src="<c:url value='/js/rAF.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/js/ResizeSensor.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/js/sticky-sidebar.js'/>"></script>
+	<script type="text/javascript">
+		var a = new StickySidebar('#sidebar', {
+			topSpacing : 200
+		});
+		
+	</script>
 </section>
+<nav class="sideBarBestBook">
+			<div id="sidebar" class="" style="">
+			<div class="sidebar__inner shadow-sm bg-body rounded" style="position: relative;">
+				<div>
+					<ul>
+						<li>이 분야 베스트3</li><br>
+						<li>
+							<i class="bi bi-1-square-fill"></i><br>
+							<img src="<c:url value='/images/bookProduct/1.jpg'/>">
+							<div>책 이름 넣기</div>
+						</li>
+						<li>
+							<i class="bi bi-2-square-fill"></i></i><br>
+							<img src="<c:url value='/images/bookProduct/1.jpg'/>" >
+							<div>책 이름 넣기</div>
+						</li>
+						<li>
+							<i class="bi bi-3-square-fill"></i></i><br>
+							<img src="<c:url value='/images/bookProduct/1.jpg'/>">
+							<div>책 이름 넣기</div>
+						</li>
+					</ul>
+				</div>
+				
+			</div>
+			
+		</div>
+		</nav>	
+
 <%@ include file="../inc/bottom.jsp"%>

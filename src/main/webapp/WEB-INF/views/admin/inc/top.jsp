@@ -135,16 +135,8 @@
                         <a class="collapse-item" href="<c:url value='/admin/education/location'/>">교육장 관리</a>
                     </div>
                 </div>
-            </li>                        
-    
-             <li class="nav-item">
-                <a class="nav-link" href="<c:url value='/admin/mbti/mbti'/>">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>MBTI 관리</span></a>
             </li>
-            
             <li class="nav-item">
-<<<<<<< HEAD
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#mbtiNav"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-wrench"></i>
@@ -158,29 +150,27 @@
                     </div>
                 </div>
             </li>                    
-
             <li class="nav-item">
-=======
->>>>>>> parent of 263901a (Merge branch 'main' of https://github.com/pjm0209/finalproject.git into)
-                <a class="nav-link" href="<c:url value='/admin/book/bookList?bookFlag=bookList'/>">
-                    <i class="fas fa-gift"></i>
-                    <span>판매 상품 관리</span></a>
-            </li>
-            <%-- <li class="nav-item">
-           		<div class="dropend">
-				  <a class="nav-link dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false" href="">
-				    <i class="fas fa-shopping-cart"></i>
-                       <span>주문 및 주문취소 관리</span>
-				  </a>
-				  <ul class="dropdown-menu shadow-sm p-3 mb-5 bg-body rounded">
-				    <li><a class="nav-link dropdown-item fw-bold" href="<c:url value='/admin/order/orderList?flag=order'/>"
-				    	style="color:black;"></i>주문 관리</a></li>
-				    <li><a class="nav-link dropdown-item fw-bold" href="<c:url value='/admin/order/orderCancleList?flag=orderCancle'/>"
-				    	style="color:black;">주문 취소 관리</a></li>
-				  </ul>
-				</div>
-			</li> --%>
-            <!-- Nav Item - Utilities Collapse Menu -->
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#bookPd"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>판매 상품 관리</span>
+                </a>
+                <div id="bookPd" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                    	<a class="collapse-item" href="<c:url value='/admin/book/bookList?bookFlag=bookList'/>">
+                    		상품 리스트
+                    	</a>
+                        <a class="collapse-item" href="<c:url value='/admin/book/bookList?bookFlag=Inventory'/>">
+                        	상품 재고관리
+                        </a>
+                        <a class="collapse-item" href="<c:url value='/admin/book/bookSummingUp?bookFlag=statistic'/>">
+                        	매출 현황
+                        </a>
+                    </div>
+                </div>
+            </li>  
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse-setting-Utilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
