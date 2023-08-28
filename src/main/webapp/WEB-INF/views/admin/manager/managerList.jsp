@@ -1,16 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
-
 <style>
 button#add-newBoard-button{
 	background: #eb5d1e;
-}
-
-.head-div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
 
 button#manager-delete-button {
@@ -23,18 +16,6 @@ button#manager-delete-button {
 	color: white;
 	background-color: #eb5d1e;
 }
-
-select#manager-search-select {
-	font-size: 16px;
-    margin-right: 20px;
-    height: 40px;
-    margin-bottom: 0;
-    border: 1px solid #d8dce5;
-    border-radius: 6px;
-    margin-left: 840px;
-}
-
-
 
 </style>
 
@@ -60,7 +41,7 @@ select#manager-search-select {
 			}
 			
 			if(confirm('선택한 관리자를 삭제하시겠습니까?')){
-				$('form[name=form-Delete]').prop('action',contextPath+'/admin/manager/managerDelete');
+				$('form[name=form-Delete]').prop('action',contextPath+'/admin/manger/managerDelete');
 				$('form[name=form-Delete]').submit();
 			}
 	});
@@ -89,7 +70,7 @@ select#manager-search-select {
 			<div class="board-search-result">
 				<form name="frmSearch" method="post" action="<c:url value='/admin/manager/managerList'/>">
 				<div class="input-group mb-3" id="board-search-div">
-					<select class="form-select form-select-lg" aria-label=".form-select-lg example" name="searchcondition" id="manager-search-select">					  						  
+					<select class="form-select form-select-lg" aria-label=".form-select-lg example" name="searchcondition" id="board-search-select">					  						  
 					  	<option value="admin_id" <c:if test="${param.searchCondition=='adminId'}"> selected="selected" </c:if>>아이디</option>
 					  	<option value="admin_email" <c:if test="${param.searchCondition=='adminEmail'}"> selected="selected" </c:if>>이메일</option>					  	
 					  	<option value="admin_tel" <c:if test="${param.searchCondition=='adminTel'}"> selected="selected" </c:if>>전화번호</option>
@@ -100,8 +81,7 @@ select#manager-search-select {
 				</form>
 			</div>
 		</div>
-		
-		<form name="form-Delete" method="post" id="selectManagerDelete" action="<c:url value='/admin/manager/managerDelete'/>">
+		<form name="form-Delete" method="post" id="selectManagerDelete">
 		<table class="table" id="managertb">
 			<thead>
 				<tr class="board-table-colum">
@@ -115,9 +95,9 @@ select#manager-search-select {
 			<c:set var="idx" value="0"/>
 			<tbody>
 				<c:forEach var="vo" items="${list}">
-					<c:set var="adminInformation" value="${vo.adminNo}"/>
+					<c:set var="adminInformation" value="${adminVo.adminNo}"/>
 					<tr>
-						<th scope="row"><input type="checkbox" class="board-checkbox" name="adminItems[${idx}].adminNo" value="${vo.adminNo }"></th>
+						<th scope="row"><input type="checkbox" class="board-checkbox" name="adminNo" value="${adminVo.adminNo }"></th>
 						<td>${vo.adminNo}</td>
 						<td>${vo.adminId}</td>
 						<td>${vo.adminEmail}</td>

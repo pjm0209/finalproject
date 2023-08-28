@@ -108,7 +108,7 @@ public class AdminController {
 		return "/admin/member/memberDelete";
 	}
 	
-	@RequestMapping("/manager/managerList")
+	@GetMapping("/manager/managerList")
 	public String managerList(@ModelAttribute SearchVO vo, @RequestParam(required = false) String searchCondition,
 			Model model) {
 		logger.info("관리자 리스트 페이지, 파라미터 vo={}, condition={}", vo, searchCondition);
@@ -160,26 +160,26 @@ public class AdminController {
 		return result;
 	}
 	
-	   @PostMapping("/manager/managerAdditional")
-	   public String managerAdditional_post(@ModelAttribute AdminVO adminvo, Model model){
-	      logger.info("관리자 등록 처리, 파라미터 membervo={}",adminvo);
-	      
-	      int cnt = adminService.insertManager(adminvo);
-	      
-	      logger.info("관리자 등록 완료, result = {}",cnt);      
-	      String msg = "관리자 등록에 실패하였습니다.", url = "/manager/managerAdditional";
-	      
-	      if(cnt > 0) {
-	         msg = "관리자 등록에 성공하였습니다.";
-	         url = "/admin/manager/managerAdditional";
-	      }
-	      
-	      model.addAttribute("msg",msg);
-	      model.addAttribute("url",url);
-	      
-	      return "common/message";
-	   
-	   }
+	@PostMapping("/manager/managerAdditional")
+	public String managerAdditional_post(@ModelAttribute AdminVO adminvo, Model model){
+		logger.info("관리자 등록 처리, 파라미터 membervo={}",adminvo);
+		
+		int cnt = adminService.insertManager(adminvo);
+		
+		logger.info("관리자 등록 완료, result = {}",cnt);		
+		String msg = "관리자 등록에 실패하였습니다.", url = "/manager/managerAdditional";
+		
+		if(cnt > 0) {
+			msg = "관리자 등록에 성공하였습니다.";
+			url = "/admin/manager/managerAdditional";
+		}
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		
+		return "common/message";
+	
+	}
 	
 	@RequestMapping("/manager/managerDelete")
 	public String managerDelete(@ModelAttribute AdminListVO listVo, Model model){
@@ -189,7 +189,7 @@ public class AdminController {
 		
 		int cnt = adminService.deleteMultiAdmin(list);
 		
-		String msg="", url="/admin/manager/managerList";
+		String msg="", url="/main/manager/managerList";
 		
 		if(cnt > 0) {
 			msg="선택한 관리자가 탈퇴되었습니다.";
