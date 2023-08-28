@@ -1,6 +1,5 @@
 @charset "UTF-8";
 
-<<<<<<< HEAD
 @font-face {
 	font-family: "Pretendard";
 	src: url("../assets/font/Pretendard-Medium.ttf") format("truetype"),
@@ -272,8 +271,6 @@ div.tea5 {
 
 /* 관리자 페이지 */
 
-=======
->>>>>>> parent of b1adafa (Merge branch 'main' of https://github.com/pjm0209/finalproject.git into)
 input[type=checkbox] {
   accent-color: #eb5d1e;
 }
