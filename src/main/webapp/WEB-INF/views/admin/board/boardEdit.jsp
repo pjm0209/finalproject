@@ -4,7 +4,6 @@
 
 <!-- Begin Page Content -->
 <!-- Page Heading -->
-<c:import url="/admin/board/boardHeadSide"></c:import>
 <div class="board-body">
 	<form name="boardSetEdit" method="post" action="<c:url value='/admin/board/boardEdit'/>">
 		<input type="hidden" name="lastEditAdminId" value="admin">
@@ -26,7 +25,7 @@
 					<div class="boardEdit-setting-body">
 						<dt>게시판명</dt>
 						<dd>
-							<div class="input_group v2"><input type="text" readonly="readonly" value="${vo.boardFormName }" name="boardFormName" id="board_name" maxlength="50"></div>
+							<div class="input_group v2"><input type="text" readonly="readonly" value="${vo.boardFormName }" style="cursor: default;" name="boardFormName" id="board_name" maxlength="50"></div>
 						</dd>
 						<dt>게시판 설명</dt>
 						<dd>
