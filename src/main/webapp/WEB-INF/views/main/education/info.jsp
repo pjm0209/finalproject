@@ -62,70 +62,16 @@
 			</div>
 		</div>
 	</section>
-	<section class="section-info2" style="padding-top:0px; padding-bottom:20px; background:#fff6ef">
+	<section class="section-info2" style="padding-top:0px; background:#fff6ef">
 		<div class="inner1200" style="margin-top:90px">
-			<h2 style="margin-bottom:30px">대표 강사</h2>
+			<h2>대표 강사</h2>
 			<div class="info2-space">
-			<ul style="list-style: none;">
 				<div class="tea1"></div>
-					<li class="info_area">
-						<div data-text-editable="true" style="font-size: 23px; font-weight:700; text-align: center;">
-							<p style="line-height: 1.0; margin-bottom:0;">&nbsp;</p>
-							<p style="line-height:1.3;">나다미 강사님</p>
-						</div>
-						<div data-text-editable="true" style="font-size:17px; color: #999; text-align: center;">
-							<p>대형 에이전시 출신 강사님으로<br>트렌디하고 수준 높은 강의를<br>제공합니다.</p>							
-						</div>
-					</li>
-			</ul>
-			<ul style="list-style: none;">
 				<div class="tea2"></div>
-					<li class="info_area">
-						<div data-text-editable="true" style="font-size: 23px; font-weight:700; text-align: center;">
-							<p style="line-height: 1.0; margin-bottom:0;">&nbsp;</p>
-							<p style="line-height:1.3;">박정민 강사님</p>
-						</div>
-						<div data-text-editable="true" style="font-size:17px; color: #999; text-align: center;">
-							<p>친절하고 체계적인 강의로<br>일상에서 활용 가능한 팁을<br>전수합니다.</p>							
-						</div>
-					</li>
-			</ul>
-			<ul style="list-style: none;">
 				<div class="tea3"></div>
-					<li class="info_area">
-						<div data-text-editable="true" style="font-size: 23px; font-weight:700; text-align: center;">
-							<p style="line-height: 1.0; margin-bottom:0;">&nbsp;</p>
-							<p style="line-height:1.3;">김민기 강사님</p>
-						</div>
-						<div data-text-editable="true" style="font-size:17px; color: #999; text-align: center;">
-							<p>트렌디하고 참신한 강의로<br>실제로 적용 가능한 A to Z를<br>컨설팅 해드립니다.</p>							
-						</div>
-					</li>
-			</ul>
-			<ul style="list-style: none;">
 				<div class="tea4"></div>
-					<li class="info_area">
-						<div data-text-editable="true" style="font-size: 23px; font-weight:700; text-align: center;">
-							<p style="line-height: 1.0; margin-bottom:0;">&nbsp;</p>
-							<p style="line-height:1.3;">방용진 강사님</p>
-						</div>
-						<div data-text-editable="true" style="font-size:17px; color: #999; text-align: center;">
-							<p>트렌디하고 참신한 강의로<br>실제로 적용 가능한 A to Z를<br>컨설팅 해드립니다.</p>							
-						</div>
-					</li>
-			</ul>
-			<ul style="list-style: none;">
 				<div class="tea5"></div>
-					<li class="info_area">
-						<div data-text-editable="true" style="font-size: 23px; font-weight:700; text-align: center;">
-							<p style="line-height: 1.0; margin-bottom:0;">&nbsp;</p>
-							<p style="line-height:1.3;">김영준 강사님</p>
-						</div>
-						<div data-text-editable="true" style="font-size:17px; color: #999; text-align: center;">
-							<p>트렌디하고 참신한 강의로<br>실제로 적용 가능한 A to Z를<br>컨설팅 해드립니다.</p>							
-						</div>
-					</li>
-			</ul>
+			</div>
 		</div>
 	</section>
 </section>

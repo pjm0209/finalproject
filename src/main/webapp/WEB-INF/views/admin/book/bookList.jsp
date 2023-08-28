@@ -46,7 +46,7 @@
 </div>
 
 <!--  -->
-<%-- <%@ include file="../book/bookSideBody.jsp"%> --%>
+<%@ include file="../book/bookSideBody.jsp"%>
 <!--  -->
 
 <div class="board-body">

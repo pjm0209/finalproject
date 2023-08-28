@@ -97,26 +97,21 @@
 .flex .booksearch button{height:50px; vertical-align:top; color:white; background:#eb5d1e; border:0;}
 .flex .booksearch span{font-size:50px;}
 
-ul,li{list-style:none;}
-/* #bookSellMainImg{
+#bookSellMainImg{
 	width:100%;
 	height: 500px;
 	margin: 0;
 	padding: 0;
 	margin-bottom: 200px;
 	
-} */
-/* #bookSellMainImg img{
+}
+#bookSellMainImg img{
 	width:1920px;
 	height: 600px;
 	margin: 0;
 	padding: 0;
-} */
+}
 
-.bookslide{width:100%; height:600px; overflow:hidden; position:relative;}
-.bookslide .gallery{width:400%; display:flex; position:absolute; top:0; left:0%;}
-.bookslide .gallery li{height:600px; width:100%; }
-.bookslide .gallery li img{width:100%; height:100%;}
 .container .clearfix{
 	margin-left: 0;
 	margin-right: 0;
@@ -142,89 +137,16 @@ ul,li{list-style:none;}
   background-color: #555;
   color: white;
 }
-
-.sideBarBestBook{
-	position: absolute;
-    right: 0;
-    top: 760px;
-    margin-right: 10px;
-    text-align: center;
-}
-
-.sideBarBestBook #sidebar li img{
-	width: 80px;
-	vertical-align: middle;
-}
-
-.sideBarBestBook #sidebar ul {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	width: 150px;
-	background-color: #efefef;
-}
-
-.sideBarBestBook #sidebar li  {
-	display: block;
-	color: #ee7843;
-	padding: 8px 16px;
-	font-weight: bold;
-	text-decoration: none;
-}
-
-/* Change the link color on hover */
-.sideBarBestBook li a:hover {
-	background-color: #555;
-	color: white;
-}
 </style>
-
 <script type="text/javascript">
-$(function(){
 	
-	$(window).scroll(function(){
-		var sc = $(this).scrollTop();
-		
-		
-		if( sc > 500){
-			$('.sideBarBestBook').css({position:'fixed', top:200,})
-		} else{
-			$('.sideBarBestBook').css({position:'absolute', top:760,})
-		} 
-	});
-	
-	
-	
-	function slideImg(){
-		$('.gallery').animate({left:'-100%'},1500,function(){
-			$('.gallery li:first').appendTo('.gallery');
-			$('.gallery').css({left:'0%'});
-		});
-		
-		
-	}
-	
-	setInterval(slideImg,3000);
-	
-	
-})
 </script>
+</head>
 
+<body>
 <section id="bookMain" class="book">
-	<div id='bookSellMainImg' class=" bookslide">
-		<ul class="gallery">
-			<li><img src="<c:url value='/images/bookProduct/slide_01.jpg'/>"></li>
-			<li><img src="<c:url value='/images/bookProduct/slide_02.jpg'/>"></li>
-			<li><img src="<c:url value='/images/bookProduct/slide_03.jpg'/>"></li>
-			<li><img src="<c:url value='/images/bookProduct/slide_04.jpg'/>"></li>
-		</ul>
-		
-		
-	</div>
-	<div style="padding-left: 240px;margin-top: 50px;">
-		<a href="<c:url value='/main/index'/>"><i class="bi bi-house-door-fill"></i></a>
-		/
-		<a href="<c:url value='/main/book/bookMain'/>">도서 / 자료 구매</a>
+	<div id='bookSellMainImg'>
+		<img src="<c:url value='/images/72939_11192_2044.jpg'/>">
 	</div>
 	<div id="containerWrap" class="container clearfix" style="margin-left: 0;
 	margin-right: 0;position: relative">
@@ -232,9 +154,9 @@ $(function(){
 			<div class="sidebar__inner shadow-sm bg-body rounded"  style="position: relative;">
 				<div>
 					<ul>
-					  <li><a href="<c:url value='/main/book/bookList1'/>">검 사 자 료</a></li>
-					  <li><a href="<c:url value='/main/book/bookList1'/>">도 서</a></li>
-					  <li><a href="<c:url value='/main/book/bookList1'/>">기 타 교 구</a></li>
+					  <li><a href="#home">검 사 자 료</a></li>
+					  <li><a href="#news">도 서</a></li>
+					  <li><a href="#contact">기 타 교 구</a></li>
 					</ul>
 				</div>
 				<div class="resize-sensor"
@@ -329,22 +251,6 @@ chevron_right
 							</figcaption>
 						</figure>
 					</li>
-					<li>
-						<figure>
-							<a class="aa-product-img" href="">
-							 <img src="<c:url value='/images/bookProduct/20027.jpg'/>" alt="">
-							</a>
-							<a class="aa-add-card-btn" href="">
-								<span style="display: block;" class="fas fa-shopping-cart"></span>장바구니 담기</a>
-							<figcaption>
-								<h5 class="aa-product-title">
-									<a href="#"></a>
-								</h5>
-								<span class="aa-product-price">1700원</span>
-		
-							</figcaption>
-						</figure>
-					</li>
 				</ul>
 			</div>
 			<div class="pdList">
@@ -356,7 +262,7 @@ chevron_right
 					<li>
 						<figure>
 							<a class="aa-product-img" href="<c:url value='/main/book/bookDetail'/>">
-							 <img src="<c:url value='/images/bookProduct/20028.jpg'/>" alt="">
+							 <img src="<c:url value='/images/bookProduct/20024.jpg'/>" alt="">
 							</a>
 							<a class="aa-add-card-btn" href="">
 								<span style="display: block;" class="fas fa-shopping-cart"></span>장바구니 담기</a>
@@ -372,7 +278,7 @@ chevron_right
 					<li>
 						<figure>
 							<a class="aa-product-img" href="">
-							 <img src="<c:url value='/images/bookProduct/20029.jpg'/>" alt="">
+							 <img src="<c:url value='/images/bookProduct/20025.jpg'/>" alt="">
 							</a>
 							<a class="aa-add-card-btn" href="">
 								<span style="display: block;" class="fas fa-shopping-cart"></span>장바구니 담기</a>
@@ -388,23 +294,7 @@ chevron_right
 					<li>
 						<figure>
 							<a class="aa-product-img" href="">
-							 <img src="<c:url value='/images/bookProduct/20030.jpg'/>" alt="">
-							</a>
-							<a class="aa-add-card-btn" href="">
-								<span style="display: block;" class="fas fa-shopping-cart"></span>장바구니 담기</a>
-							<figcaption>
-								<h5 class="aa-product-title">
-									<a href="#"></a>
-								</h5>
-								<span class="aa-product-price">1700원</span>
-		
-							</figcaption>
-						</figure>
-					</li>
-					<li>
-						<figure>
-							<a class="aa-product-img" href="">
-							 <img src="<c:url value='/images/bookProduct/20031.jpg'/>" alt="">
+							 <img src="<c:url value='/images/bookProduct/20026.jpg'/>" alt="">
 							</a>
 							<a class="aa-add-card-btn" href="">
 								<span style="display: block;" class="fas fa-shopping-cart"></span>장바구니 담기</a>
@@ -428,7 +318,7 @@ chevron_right
 					<li>
 						<figure>
 							<a class="aa-product-img" href="<c:url value='/main/book/bookDetail'/>">
-							 <img src="<c:url value='/images/bookProduct/20032.jpg'/>" alt="">
+							 <img src="<c:url value='/images/bookProduct/20024.jpg'/>" alt="">
 							</a>
 							<a class="aa-add-card-btn" href="">
 								<span style="display: block;" class="fas fa-shopping-cart"></span>장바구니 담기</a>
@@ -444,23 +334,7 @@ chevron_right
 					<li>
 						<figure>
 							<a class="aa-product-img" href="">
-							 <img src="<c:url value='/images/bookProduct/20033.jpg'/>" alt="">
-							</a>
-							<a class="aa-add-card-btn" href="">
-								<span style="display: block;" class="fas fa-shopping-cart"></span>장바구니 담기</a>
-							<figcaption>
-								<h5 class="aa-product-title">
-									<a href="#"></a>
-								</h5>
-								<span class="aa-product-price">1700원</span>
-		
-							</figcaption>
-						</figure>
-					</li>
-					<li>
-						<figure>
-							<a class="aa-product-img" href="">
-							 <img src="<c:url value='/images/bookProduct/20034.jpg'/>" alt="">
+							 <img src="<c:url value='/images/bookProduct/20025.jpg'/>" alt="">
 							</a>
 							<a class="aa-add-card-btn" href="">
 								<span style="display: block;" class="fas fa-shopping-cart"></span>장바구니 담기</a>
@@ -518,33 +392,5 @@ chevron_right
 		
 	</script>
 </section>
-<nav class="sideBarBestBook">
-			<div id="sidebar" class="" style="">
-			<div class="sidebar__inner shadow-sm bg-body rounded" style="position: relative;">
-				<div>
-					<ul>
-						<li>이 분야 베스트3</li><br>
-						<li>
-							<i class="bi bi-1-square-fill"></i><br>
-							<img src="<c:url value='/images/bookProduct/1.jpg'/>">
-							<div>책 이름 넣기</div>
-						</li>
-						<li>
-							<i class="bi bi-2-square-fill"></i></i><br>
-							<img src="<c:url value='/images/bookProduct/1.jpg'/>" >
-							<div>책 이름 넣기</div>
-						</li>
-						<li>
-							<i class="bi bi-3-square-fill"></i></i><br>
-							<img src="<c:url value='/images/bookProduct/1.jpg'/>">
-							<div>책 이름 넣기</div>
-						</li>
-					</ul>
-				</div>
-				
-			</div>
-			
-		</div>
-		</nav>	
 
 <%@ include file="../inc/bottom.jsp"%>
