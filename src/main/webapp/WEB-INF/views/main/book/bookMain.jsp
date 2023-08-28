@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
 <%@ include file="../inc/top.jsp"%>
 <style>
 #bookMain{
@@ -21,25 +21,17 @@
 .pdList{
 	margin-top: 50px;
 	width: 1300px;
+	text-align: center;
+}
+.pdList h1{
+	text-align: center;
 	
-}
-.pdList>a{
-	text-align: left;
-	font-weight:bold;
-	font-size:26px;
-	color:#222;
-	text-decoration: none;
-}
-.pdList>a span{
-	font-size:38px;
-	vertical-align:text-bottom;
 }
 .pdList ul{
 	width: 1300px;
 	text-align: center;
 	display: flex;
     justify-content: space-around;
-    list-style:none;
 }
 
 .pdList ul li img{
@@ -54,13 +46,13 @@
 
 #content {
 	    width: 1420px;
-	
+	border: 2px dotted green;
 	margin-left: 215px;
 	color: darkgrey;
 }
 
 #sidebar {
-	
+	border: 2px dotted red;
 	float: left;
 	color: #ffbdbd;
 	will-change: min-height;
@@ -79,23 +71,6 @@
 	clear: both;
 }
 
-.flex{display:flex; justify-content:space-between;}
-
-.flex .bestbook{background:#efefef; padding:40px 40px; width:70%;}
-.flex .bestbook .textbox p:nth-child(1){font-size:}
-
-.flex .bestbook>img{width:40%;}
-.flex .bestbook .textbox{color:#222; width:48%;}
-.flex .bestbook .textbox p:nth-child(1){font-size:30px; font-weight:bold; padding:30px 0;}
-.flex .bestbook .textbox p:nth-child(2){font-size:24px; padding-bottom:30px;}
-.flex .bestbook .textbox p:nth-child(3){font-size:20px; color:red; font-weight:bold; padding-bottom:50px;}
-.flex .bestbook .textbox button{width:100%; border:3px solid #eb5d1e; background:#fff; color:#eb5d1e; font-weight:bold; padding:10px; font-size:20px; border-radius:5px;}
-
-.flex .booksearch {border:1px #efefef solid; padding:20px; border-left:none;}
-.flex .booksearch>img{width:100%; margin-top: 30px; margin-bottom:85px;}
-.flex .booksearch input{border-right:none; height:50px; border:#eb5d1e 1px solid; margin-left:20px; width:85%;}
-.flex .booksearch button{height:50px; vertical-align:top; color:white; background:#eb5d1e; border:0;}
-.flex .booksearch span{font-size:50px;}
 
 #bookSellMainImg{
 	width:100%;
@@ -128,7 +103,6 @@
   display: block;
   color: #000;
   padding: 8px 16px;
-  font-weight:bold;
   text-decoration: none;
 }
 
@@ -138,12 +112,15 @@
   color: white;
 }
 </style>
-<script type="text/javascript">
-	
-</script>
+
 </head>
 
 <body>
+	<header>
+		<div class="container">
+			<h1>Site Title</h1>
+		</div>
+	</header>
 <section id="bookMain" class="book">
 	<div id='bookSellMainImg'>
 		<img src="<c:url value='/images/72939_11192_2044.jpg'/>">
@@ -151,7 +128,7 @@
 	<div id="containerWrap" class="container clearfix" style="margin-left: 0;
 	margin-right: 0;position: relative">
 		<div id="sidebar" class="" style="">
-			<div class="sidebar__inner shadow-sm bg-body rounded"  style="position: relative;">
+			<div class="sidebar__inner" style="position: relative;">
 				<div>
 					<ul>
 					  <li><a href="#home">검 사 자 료</a></li>
@@ -176,31 +153,11 @@
 			</div>
 		</div>
 		<div id="content">
-			<%-- <div id="topImg" style="text-align: center;">
+			<div id="topImg" style="text-align: center;">
 				<img src="<c:url value='/images/72939_11192_2044.jpg'/>">
-			</div> --%>
-			
-			<div class="flex">
-				<div class="bestbook flex">
-					 <img src="<c:url value='/images/bookProduct/20025.jpg'/>" alt="">
-					 <div class="textbox">
-					 	<p>MBTI Form M 자가채점용</p>
-					 	<p>MBTI Form M 자가채점용은 검사지, 답안지, 프로파...</p>
-					 	<p>18,000원</p>
-					 	<button>구매하기</button>
-					 </div>
-				</div>
-				<div class="booksearch">
-					<img src="<c:url value='/images/searchBook2.jpg'/>" alt="책검색이미지">
-					<input type="text"><button type="submit"><span class="material-symbols-outlined">
-search
-</span></button>
-				</div>
-			</div>  
+			</div>
 			<div class="pdList">
-				<a href="#" class="display-3">도서부분 인기상품<span class="material-symbols-outlined">
-chevron_right
-</span></a>
+				<h1 class="display-3">도서부분 인기상품</h1>
 				<ul class="aa-product-catg">
 					<!-- start single product item -->
 					<li>
@@ -254,9 +211,7 @@ chevron_right
 				</ul>
 			</div>
 			<div class="pdList">
-				<a href="#" class="display-3">검사자료부분 인기상품<span class="material-symbols-outlined">
-chevron_right
-</span></a>
+				<h1 class="display-3">검사자료부분 인기상품</h1>
 				<ul class="aa-product-catg">
 					<!-- start single product item -->
 					<li>
@@ -310,9 +265,7 @@ chevron_right
 				</ul>
 			</div>
 			<div class="pdList">
-				<a href="#" class="display-3">기타교구부분 인기상품<span class="material-symbols-outlined">
-chevron_right
-</span></a>
+				<h1 class="display-3">기타교구부분 인기상품</h1>
 				<ul class="aa-product-catg">
 					<!-- start single product item -->
 					<li>

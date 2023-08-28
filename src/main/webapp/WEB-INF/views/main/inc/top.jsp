@@ -77,6 +77,10 @@
         <ul>
           <li><a class="nav-link scrollto active" href="<c:url value='/main/index'/>">메인</a></li>
           <li><a class="nav-link scrollto" href="#about">About Us</a></li>
+<<<<<<< HEAD
+=======
+          <li><a class="nav-link scrollto" href="#services">책</a></li>
+>>>>>>> parent of e1f4e3c (Merge branch 'main' of https://github.com/pjm0209/finalproject.git into YJ)
           <li class="dropdown"><a href="#"><span>MBTI 교육</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
 			  <li><a href="<c:url value='/main/education/list'/>">교육 목록</a></li>            
