@@ -167,8 +167,11 @@ div.tea5 {
 	display: block;
 }
 
-.list-class li {
+.list-class li:first-child {
 	border-top: 1px solid #727272 !important;
+}
+
+.list-class li {
 	position: relative;
 	border-bottom: 1px solid #e1e1e1;
 	background: #fff;
@@ -180,7 +183,7 @@ div.tea5 {
 	display: table;
 	table-layout: fixed;
 	width: 100%;
-	height: 160px;
+	height: 200px;
 }
 
 .list-class figure {
@@ -195,8 +198,8 @@ div.tea5 {
 .list-class .tea {
 	overflow: hidden;
 	display: inline-block;
-	width: 80px;
-	height: 80px;
+	width: 90px;
+	height: 90px;
 	margin: 0 auto;
 	text-align: center;
 	border-radius: 100%;
@@ -208,12 +211,13 @@ div.tea5 {
 	margin: 2px 0 0 -17px;
 }
 
-.list-class .tea .tea-name {
-	display: inline-block;
+.list-class .tea-name {
 	margin-left: 5px;
-	font-size: 20px;
 	color: #444;
-	line-height: 16px;
+	line-height: 30px;
+    font-size: 22px;
+    margin-top: 10px;
+    margin-bottom: 5px;
 }
 
 .list-class figcaption {
@@ -221,11 +225,12 @@ div.tea5 {
 	display: table-cell;
 	width: 550px;
 	vertical-align: middle;
+	padding-left: 20px;
 }
 
 .list-class .tit {
-	margin-top: 10px;
 	padding-right: 20px;
+	font-weight: bold;
 }
 
 .list-class figcaption p {
@@ -233,6 +238,7 @@ div.tea5 {
 	font-size: 20px;
 	color: #666;
 }
+
 
 .list-class figcaption p em {
 	font-style: normal;
@@ -243,29 +249,26 @@ div.tea5 {
 .list-class .btnGroup {
 	position: relative;
 	display: table-cell;
-	width: 87px;
+	width: 115px;
 	vertical-align: middle;
 	box-sizing: border-box;
 }
 
-.list-class .btnGroup .applyBtn {
-	width: 85px;
-	height: 28px;
-	margin: 2px 0;
-	box-sizing: border-box;
-	padding: 0 10px;
-	min-width: 55px;
-	border: 1px solid #eb5d1e;
+input#applyBtn {
+    width: 150px;
+    height: 56px;
+    border-radius: 50px;
+    color: white;
+    border: none;
+    background-color: #eb5d1e;
+    font-size: 22px;
 }
 
-.list-class .btnGroup span {
-	margin-top: 4px;
-	color: #eb5d1e;
-	font-weight: bold;
+.classLoc .loc {
+	margin-top: 18px;
 	font-size: 20px;
-	display: block;
+    color: #333;
 }
-
 
 
 

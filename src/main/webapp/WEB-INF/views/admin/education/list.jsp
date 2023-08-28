@@ -70,6 +70,7 @@
 				</c:if>
 			</tbody>
 		</table>
+		<!-- Paging -->
 		<div style="width: 10%;text-align: center;margin: 0 auto;">
 			<ul class="pagination">
 				<c:if test="${pagingInfo.firstPage > 1 }">
