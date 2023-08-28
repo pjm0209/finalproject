@@ -16,7 +16,7 @@
 	</div>
 	<div class="board">
 		<div class="board-head">
-			<div class="board-search-result">
+			<div class="">
 				<form name="frmSearch" method="post" action="<c:url value='/admin/mbti/mbti'/>">
 					<div class="input-group mb-3" id="mbti-search-div">
 						<select class="form-select form-select-lg" name="searchCondition" aria-label=".form-select-lg example" id="mbti-search-select">					  	

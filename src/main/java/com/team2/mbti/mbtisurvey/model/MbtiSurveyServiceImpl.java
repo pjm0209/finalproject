@@ -1,6 +1,7 @@
 package com.team2.mbti.mbtisurvey.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -83,5 +84,15 @@ public class MbtiSurveyServiceImpl implements MbtiSurveyService{
 	@Override
 	public int updateMemberMbtiNoByNo(MemberVO memberVo) {
 		return mbtiSurveyDao.updateMemberMbtiNoByNo(memberVo);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectMbtiStatisticsView(SearchVO searchVo) {
+		return mbtiSurveyDao.selectMbtiStatisticsView(searchVo);
+	}
+
+	@Override
+	public int getTotalRecordMbtiStatisticsView(SearchVO searchVo) {
+		return mbtiSurveyDao.getTotalRecordMbtiStatisticsView(searchVo);
 	}
 }

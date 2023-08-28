@@ -75,7 +75,23 @@
 		where no=#{no}
 	</update>
 	
-	<select id="">
-	
+	<select id="selectMbtiStatisticsView" parameterType="searchVo" resultType="map" >
+		select * from
+		(
+		    select rownum RNUM,a.* from
+		    (
+		       select * from mbti_statistics_view
+		       <include refid="searchMbti"></include> 
+		       order by mbti_result_regdate desc
+		    )a
+		)
+		<![CDATA[
+		where RNUM > #{firstRecordIndex} and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}]]>
 	</select>
+	
+	<select id="getTotalRecordMbtiStatisticsView" parameterType="searchVo" resultType="int">
+		select count(*) from mbti_statistics_view
+		<include refid="searchMbti"></include> 
+	</select>
+	
 </mapper>

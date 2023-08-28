@@ -130,16 +130,17 @@ public class MemberLoginController {
 	}
 	
 	@PostMapping("/member/forgot-id")
-	public String forgotid_post(@ModelAttribute MemberVO membervo, Model model){
-		logger.info("아이디 찾기 처리, 파라미터 membervo={}",membervo);
+	public String forgotid_post(String name, String tel){
+		logger.info("아이디 찾기 처리, 파라미터 name={}, tel={}", name, tel);
 		
-		int cnt = memberService.insertMember(membervo);
+		MemberVO vo = memberService.findId(name, tel);
 		
-		logger.info("아이디 찾기 완료, result = {}",cnt);		
+		logger.info("아이디 찾기 완료, result = {}", vo);		
 		
 		return "main/member/forgot-id";
 	}
 	
+
 	@RequestMapping("/member/findIdResult")
 	public String findIdresult() {		
 		logger.info("아이디 찾기 결과 화면");		

@@ -127,14 +127,11 @@ form {
 
             var name = activeTabContent.find('#name').val();
             var tel = activeTabContent.find('#tel').val();
-            
-            var expectedName = "winter"; 
-            var expectedTel = "010-1010-2020"; 
 
-            if (name === expectedName && tel === expectedTel) {
-                window.location.href = 'http://localhost:9091/mbti/main/member/findIdResult';
+            if (name === "" || tel === "") {
+                alert("이름과 휴대폰 번호를 모두 입력해주세요.");
             } else {
-                alert("입력한 정보가 올바르지 않습니다.");
+            	 activeTabContent.closest('form').submit();
             }
         });
         
@@ -145,8 +142,10 @@ form {
             var tabIndex = $(this).index();
             $('.tab-content').removeClass('active');
             $('.tab-content').eq(tabIndex).addClass('active');
-        });
+        });       
     });
+    
+    
 </script>
 
 </head>
@@ -162,13 +161,13 @@ form {
 			<p>회원가입 시 입력한 휴대폰 번호를 입력하시면 아이디를 찾을 수 있습니다.</p>			
 				<div class="findTel-name">
 					<label>*&nbsp;이름 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-						<input type="text" id="name" placeholder="이름을 입력하세요">	
+						<input type="text" id="name" placeholder="이름을 입력하세요">
 				</div><br>													
 				
 				<div class="findTel-tel">
 					<label>*&nbsp;휴대폰 : &nbsp;</label>
 						<input type="text" id="tel" placeholder="휴대폰번호를 입력하세요">		
-				</div><br>
+				</div><br>	
 				
 				<div class="btnSearch"><br>
 					<input type="button" id="btnCheck" value="확인">	

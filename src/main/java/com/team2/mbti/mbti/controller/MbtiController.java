@@ -1,6 +1,7 @@
 package com.team2.mbti.mbti.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -141,9 +142,27 @@ public class MbtiController {
 		return "common/message";
 	}
 	
-	@GetMapping("/mbtiStatistics")
-	public String mbtiStatistics() {
-		logger.info("mbti 검사 관리 페이지");
+	@RequestMapping("/mbtiStatistics")
+	public String mbtiStatistics(@ModelAttribute SearchVO searchVo,Model model) {
+		logger.info("mbti 검사 관리 페이지, 파라미터 searchVo={}",searchVo);
+		
+		PaginationInfo pagingInfo = new PaginationInfo();
+		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
+		pagingInfo.setBlockSize(ConstUtil.BLOCK_SIZE);
+		pagingInfo.setRecordCountPerPage(ConstUtil.MBTI_RECORD_COUNT);
+		
+		searchVo.setRecordCountPerPage(ConstUtil.MBTI_RECORD_COUNT);
+		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		
+		List<Map<String, Object>> list=mbtiSurveyService.selectMbtiStatisticsView(searchVo);
+		logger.info("mbti 검사 결과 목록, list.size={}", list.size());
+		
+		int totalRecord=mbtiSurveyService.getTotalRecordMbtiStatisticsView(searchVo);
+		logger.info("mbti 전체 검사 결과 레코드, totalRecord={}",totalRecord);
+		pagingInfo.setTotalRecord(totalRecord);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("pagingInfo", pagingInfo);
 		
 		return "admin/mbti/mbtiStatistics";
 	}

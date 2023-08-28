@@ -1,6 +1,7 @@
 package com.team2.mbti.mbtisurvey.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -22,4 +23,6 @@ public interface MbtiSurveyDAO {
 	int getTotalRecordMbtiByQuestionTypeNo(MbtiResultVO mbtiResultVo);
 	List<MbtiVO> selectAllMbti();
 	int updateMemberMbtiNoByNo(MemberVO memberVo);
+	List<Map<String, Object>> selectMbtiStatisticsView(SearchVO searchVo);
+	int getTotalRecordMbtiStatisticsView(SearchVO searchVo);
 }
