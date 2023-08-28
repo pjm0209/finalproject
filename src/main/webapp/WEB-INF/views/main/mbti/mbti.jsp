@@ -1,23 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
-<script type="text/javascript">
-$(function(){
-	$('#mbti-precise-button').click(function(){
-		var sessionUserid="${sessionScope.userid}";
-		
-		if(sessionUserid==null || sessionUserid==''){
-			event.preventDefault();
-			$('#alertModalBody').html("먼저 로그인 하세요");
-			$('#alertModalBtn').trigger('click');
-			$('#btnClose').click(function(){
-				location.href="<c:url value='/main/member/memberLogin'/>";
-				return false;
-			})
-		}
-	});
-});
-</script>
 <section id="mbti" class="mbti">
 	<div id="mbti-title">
 		<div id="mbti-div">
