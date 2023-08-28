@@ -127,12 +127,25 @@ form {
 
             var name = activeTabContent.find('#name').val();
             var tel = activeTabContent.find('#tel').val();
-
-            if (name === "" || tel === "") {
-                alert("이름과 휴대폰 번호를 모두 입력해주세요.");
-            } else {
-            	 activeTabContent.closest('form').submit();
-            }
+           
+            $.ajax({
+                type: "POST", 
+                url: "<c:url value='/main/member/findId'/>", 
+                data: {
+                    name: $('#name').val(),
+                    tel: $('#tel').val()
+                },
+                success: function(response) {
+                    if (response.success) {
+                        window.location.href = 'http://localhost:9091/mbti/main/member/findIdResult';
+                    } else {
+                        alert("입력한 정보가 올바르지 않습니다.");
+                    }
+                },
+                error: function() {
+                    alert("서버 통신 에러");
+                }
+            });
         });
         
         $('.tab-button').click(function() {

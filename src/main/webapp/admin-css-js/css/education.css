@@ -6,11 +6,9 @@
 		url("../assets/font/Pretendard-Medium.otf") format("opentype");
 }
 
-.inner1200 {position:relative; width:1400px; margin:0 auto; margin-top:50px;}
-
 /* 메인 페이지 */
 #education-main {
-	background-image: url("../../images/education/education_main.jpg");
+	background-image: url("../../images/education_main.jpg");
 	background-size: 100%;
 	background-position:top;
 	background-repeat: no-repeat;
@@ -21,19 +19,24 @@
 	height: 675px;
 }
 
+#edu-main-list, edu-main-schedule, edu-main-location {
+	font-family: "Pretendard";
+}
+
 #education-main pre {
     display: block;
-    font-size: 180%;
+    font-size: 140%;
     color: #3a3b45;
     padding-left: 158px;
     position: absolute;
-    top: 430px;
+    top: 420px;
     font-weight: bold;
+<<<<<<< HEAD
     font-family: "Pretendard";
 }
 
 /* educationInfo */
-.education-info-main {
+section.education-info-main {
 	font-family: "Pretendard";
 	height: 100%;
 	padding-top: 60px;
@@ -91,6 +94,7 @@
     align-items: center;
     box-sizing: border-box;
 }
+
 
 div.tea1 {
 	width: 250px;
@@ -151,6 +155,126 @@ div.tea5 {
     background-position: center;
     background-size: cover;
 }
+=======
+}
+
+
+>>>>>>> parent of 2cdc602 (Merge branch 'main' of https://github.com/pjm0209/finalproject.git into yjk)
+
+
+/* educationList */
+.section-list {
+	padding:30px 0;
+	overflow: hidden;
+}
+
+.list-class {
+	font-family: "Pretendard";
+	position: relative;
+	list-style: none;
+	display: block;
+}
+
+.list-class li {
+	border-top: 1px solid #727272 !important;
+	position: relative;
+	border-bottom: 1px solid #e1e1e1;
+	background: #fff;
+	box-sizing: border-box;
+}
+
+.list-class article {
+	position: relative;
+	display: table;
+	table-layout: fixed;
+	width: 100%;
+	height: 160px;
+}
+
+.list-class figure {
+	position: relative;
+	display: table-cell;
+	width: 150px;
+	padding: 25px 0;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.list-class .tea {
+	overflow: hidden;
+	display: inline-block;
+	width: 80px;
+	height: 80px;
+	margin: 0 auto;
+	text-align: center;
+	border-radius: 100%;
+	background: #f2f2f2;
+}
+
+.list-class .tea img {
+	height: 170px;
+	margin: 2px 0 0 -17px;
+}
+
+.list-class .tea .tea-name {
+	display: inline-block;
+	margin-left: 5px;
+	font-size: 20px;
+	color: #444;
+	line-height: 16px;
+}
+
+.list-class figcaption {
+	position: relative;
+	display: table-cell;
+	width: 550px;
+	vertical-align: middle;
+}
+
+.list-class .tit {
+	margin-top: 10px;
+	padding-right: 20px;
+}
+
+.list-class figcaption p {
+	margin-top: 6px;
+	font-size: 20px;
+	color: #666;
+}
+
+.list-class figcaption p em {
+	font-style: normal;
+	font-weight: bold;
+	color: #333;
+}
+
+.list-class .btnGroup {
+	position: relative;
+	display: table-cell;
+	width: 87px;
+	vertical-align: middle;
+	box-sizing: border-box;
+}
+
+.list-class .btnGroup .applyBtn {
+	width: 85px;
+	height: 28px;
+	margin: 2px 0;
+	box-sizing: border-box;
+	padding: 0 10px;
+	min-width: 55px;
+	border: 1px solid #eb5d1e;
+}
+
+.list-class .btnGroup span {
+	margin-top: 4px;
+	color: #eb5d1e;
+	font-weight: bold;
+	font-size: 20px;
+	display: block;
+}
+
+
 
 
 /* 관리자 페이지 */

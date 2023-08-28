@@ -14,27 +14,14 @@ public class MainEducationController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MainEducationController.class);
 
-	@RequestMapping("/info")
-	public String eduInfo() {
-		logger.info("교육 소개 페이지 보여주기");
-		
-		return "main/education/info";
-	}
-
-	
 	@RequestMapping("/list")
 	public String eduList() {
-		logger.info("교육 목록 페이지 보여주기");
+		logger.info("교육 리스트 페이지 보여주기");
 		
 		return "main/education/list";
 	}
 	
 	
-	@RequestMapping("/location")
-	public String eduLocation() {
-		logger.info("교육장 위치 페이지 보여주기");
-		
-		return "main/education/location";
-	}
+	
 	
 }
