@@ -56,8 +56,8 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/board")
-	public String board_get(@ModelAttribute BoardVO vo, Model model) {
-		logger.info("게시판 관리 화면 보여주기 파라미터 vo: {}", vo);
+	public String board_get(@RequestParam int boardFormNo, @ModelAttribute BoardVO vo, Model model) {
+		logger.info("게시판 관리 화면 보여주기 파라미터 boardFormNo: {}, vo: {}", boardFormNo, vo);
 		
 		PaginationInfo pagingInfo = new PaginationInfo();
 		pagingInfo.setBlockSize(ConstUtil.BLOCK_SIZE);
@@ -68,18 +68,20 @@ public class BoardController {
 		vo.setRecordCountPerPage(ConstUtil.BOARD_RECORD_COUNT);
 		vo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
 		
-		BoardFormVO boardFormVo = boardService.selectBoard(vo.getBoardFormNo());
+		BoardFormVO boardFormVo = boardService.selectBoard(boardFormNo);
 		logger.info("게시판 이름 검색결과 board: {}", boardFormVo);
+		
+		List<BoardFormVO> boardList = boardService.selectAllBoard();
+		logger.info("게시판 종류 전체조회 결과: boardList: {}", boardList);
 		
 		List<Map<String, Object>> list = boardService.selectAll(vo);
 		logger.info("게시판 전체조회 결과: list.size: {}", list.size());
 
 		List<MbtiVO> mbtiList = null;
 		
-		if(vo.getBoardFormNo() == 5) {			
+		if(boardFormNo == 5) {			
 			mbtiList = mbtiService.selectAllMbti();
-			logger.info("mbti종류 전체조회 결과 mbtiList.size(): {}", mbtiList.size());			
-			model.addAttribute("mbtiList", mbtiList);
+			logger.info("mbti종류 전체조회 결과 mbtiList: {}", mbtiList);			
 		}
 		
 		int totalRecord = boardService.getTotalRecord(vo);
@@ -88,8 +90,10 @@ public class BoardController {
 		
 		model.addAttribute("title", "게시판 관리");
 		model.addAttribute("list", list);
+		model.addAttribute("boardList", boardList);
 		model.addAttribute("pagingInfo", pagingInfo);
 		model.addAttribute("boardFormVo", boardFormVo);
+		model.addAttribute("mbtiList", mbtiList);
 		
 		return "admin/board/board";
 	}

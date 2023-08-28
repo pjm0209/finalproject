@@ -18,7 +18,6 @@ import com.team2.mbti.mbtiResult.model.MbtiResultVO;
 import com.team2.mbti.mbtisurvey.model.MbtiSurveyService;
 import com.team2.mbti.mbtisurvey.model.MbtiSurveyVO;
 import com.team2.mbti.mbtisurvey.model.MbtiVO;
-import com.team2.mbti.member.model.MemberVO;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.Getter;
@@ -189,14 +188,6 @@ public class MainMbtiController {
 		}
 		
 		MbtiVO mbtiVo=mbtiSurveyService.selectMbti(resultMbti);
-		logger.info("MBTI 검사한 결과 조회, mbtiVo={}",mbtiVo);
-		
-		MemberVO memberVo= new MemberVO();
-		memberVo.setNo(no);
-		memberVo.setMbtiNo(mbtiVo.getMbtiNo());
-		
-		int cnt2=mbtiSurveyService.updateMemberMbtiNoByNo(memberVo);
-		logger.info("MBTI 결과 회원정보 입력(수정) 결과 cnt2={}",cnt2);
 		
 		model.addAttribute("resultMbti", resultMbti);
 		model.addAttribute("resultI", resultI);
@@ -214,9 +205,10 @@ public class MainMbtiController {
 	
 	@GetMapping("/mbtiResult")
 	public String mbtiResult_get(Model model) {
-		MbtiVO mbtiVo=mbtiSurveyService.selectMbti("ISFP");
-
-		model.addAttribute("resultMbti", "ISFP");
+		
+		MbtiVO mbtiVo=mbtiSurveyService.selectMbti("ENFP");
+		
+		model.addAttribute("resultMbti", "ENFP");
 		model.addAttribute("resultI", 40);
 		model.addAttribute("resultE", 60);
 		model.addAttribute("resultS", 48);
@@ -226,10 +218,9 @@ public class MainMbtiController {
 		model.addAttribute("resultP", 30);
 		model.addAttribute("resultJ", 70);
 		model.addAttribute("mbtiVo", mbtiVo);
-
+		
 		return "main/mbti/mbtiResult";
 	}
 	
-
 
 }

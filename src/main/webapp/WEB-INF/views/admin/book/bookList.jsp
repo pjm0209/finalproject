@@ -6,30 +6,16 @@
 <script type="text/javascript">
 	$(function(){
 		$('#searchByKeywordBtn').click(function(){
+			$('form[name=frmPage]').submit();
 			$('form[name=serach]').submit();
 		});
 	});
-	
-	function bookListPage(curPage){
-		$('input[name=currentPage]').val(curpage);
-		/*
-		$('input[name=perRecord]').val();
-		$('input[name=keywordNo]').val();
-		$('input[name=keywordTitle]').val();
-		$('input[name=keywordPublisher]').val();
-		$('input[name=keywordUseflag]').val();
-		$('input[name=keywordRegdate]').val();
-		$('input[name=keywordRegdate2]').val();
-		$('input[name=keywordCategory]').val();
-		*/
-		$('form[name=frmPage]').submit();
-	}
 </script>
 
 <!-- Begin Page Content -->
 <form name="frmPage" method="post" action="<c:url value='/admin/book/bookList?bookFlag=${param.bookFlag}'/>">
 	<input type="hidden" name="bookFlag" value="${param.bookFlag}">
-	<input type="hidden" name="currentPage">
+	<input type="text" name="currentPage" >
 	<input type="hidden" name="perRecord">
 	<input type="hidden" name="keywordNo">
 	<input type="hidden" name="keywordTitle">
