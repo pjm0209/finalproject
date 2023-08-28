@@ -34,6 +34,46 @@
 }
 
 
+<<<<<<< HEAD
+=======
+.info1-space div h3 {
+	margin: 18px 0;
+    font-weight: 700;
+    font-size: 28px;
+    display: block;
+}
+
+.info3-space {
+	width: 1680px;
+    height: 320px;
+    overflow: hidden;
+    touch-action: pan-y;
+    position: absolute;
+    display: block;
+}
+
+.info3-space {
+	padding: 50px 80px;
+	justify-content: space-between;
+	display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    line-height: 1;
+}
+
+div.tea1 {
+	width: 300px;
+    height: 600px;
+    padding: 20px 0;
+    border-radius: 50px;
+    position: relative;
+    border-radius: 10px;
+    text-align: center;
+}
+
+
+
+>>>>>>> parent of aa3aa44 (Merge branch 'dami')
 
 
 /* 관리자 페이지 */
