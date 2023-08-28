@@ -112,16 +112,27 @@
 
   <script type="text/javascript" src="<c:url value='/admin-css-js/js/mbti.js'/>"></script>
 	
-  <!-- Vendor JS Files -->
-  <script src="${path }/assets/vendor/aos/aos.js"></script>
-  <script src="${path }/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="${path }/assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="${path }/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="${path }/assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="${path }/assets/vendor/php-email-form/validate.js"></script>
 
   <!-- Template Main JS File -->
   <script src="${path }/assets/js/main.js"></script>
+  
+      
+	<script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+	
+
+    <!-- Core plugin JavaScript-->
+    <script src="<c:url value='/admin-css-js/vendor/jquery-easing/jquery.easing.min.js'/>"></script>
+	
+    <!-- Custom scripts for all pages-->
+    <script src="<c:url value='/admin-css-js/js/sb-admin-2.min.js'/>"></script>
+
+    <!-- Page level plugins -->
+    <script src="<c:url value='/admin-css-js/vendor/chart.js/Chart.min.js'/>"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="<c:url value='/admin-css-js/js/demo/chart-area-demo.js'/>"></script>
+    <script src="<c:url value='/admin-css-js/js/demo/chart-pie-demo.js'/>"></script>
+  
 
 </body>
 </html>

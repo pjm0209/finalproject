@@ -7,11 +7,13 @@ var ctx = document.getElementById("myPieChart");
 var myPieChart = new Chart(ctx, {
   type: 'doughnut',
   data: {
-    labels: ["Direct", "Referral", "Social"],
+    labels: ["ISFP","ISFJ","ISTP","ISTJ","INFP","INFJ","INTP","INTJ",
+    		 "ESFP","ESFJ","ESTP","ESTJ","ENFP","ENFJ","ENTP","ENTJ"],
     datasets: [{
-      data: [55, 30, 15],
-      backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
-      hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
+      data: [12,12,12,12,12,12,12,12,
+      		 12,12,12,12,12,12,12,12],
+      backgroundColor: ['#b9b136', '#86c501', '#3ac906','#6c51ff','#009bff','#015eac','#03cecb','#163fbb',
+      					'#f15d09','#6524d7','#d300ff','#de1764','#ff74e7','#f6be06','#64aa0c','#ff8900'],
       hoverBorderColor: "rgba(234, 236, 244, 1)",
     }],
   },
