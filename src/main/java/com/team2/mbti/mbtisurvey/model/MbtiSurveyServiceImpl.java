@@ -1,7 +1,6 @@
 package com.team2.mbti.mbtisurvey.model;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,7 +8,6 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.team2.mbti.common.SearchVO;
 import com.team2.mbti.mbtiResult.model.MbtiResultVO;
-import com.team2.mbti.member.model.MemberVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -79,20 +77,5 @@ public class MbtiSurveyServiceImpl implements MbtiSurveyService{
 	@Override
 	public List<MbtiVO> selectAllMbti() {
 		return mbtiSurveyDao.selectAllMbti();
-	}
-
-	@Override
-	public int updateMemberMbtiNoByNo(MemberVO memberVo) {
-		return mbtiSurveyDao.updateMemberMbtiNoByNo(memberVo);
-	}
-
-	@Override
-	public List<Map<String, Object>> selectMbtiStatisticsView(SearchVO searchVo) {
-		return mbtiSurveyDao.selectMbtiStatisticsView(searchVo);
-	}
-
-	@Override
-	public int getTotalRecordMbtiStatisticsView(SearchVO searchVo) {
-		return mbtiSurveyDao.getTotalRecordMbtiStatisticsView(searchVo);
 	}
 }

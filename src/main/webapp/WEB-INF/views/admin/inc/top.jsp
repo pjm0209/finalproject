@@ -135,8 +135,16 @@
                         <a class="collapse-item" href="<c:url value='/admin/education/location'/>">교육장 관리</a>
                     </div>
                 </div>
+            </li>                        
+    
+             <li class="nav-item">
+                <a class="nav-link" href="<c:url value='/admin/mbti/mbti'/>">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>MBTI 관리</span></a>
             </li>
+            
             <li class="nav-item">
+<<<<<<< HEAD
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#mbtiNav"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-wrench"></i>
@@ -152,6 +160,8 @@
             </li>                    
 
             <li class="nav-item">
+=======
+>>>>>>> parent of 263901a (Merge branch 'main' of https://github.com/pjm0209/finalproject.git into)
                 <a class="nav-link" href="<c:url value='/admin/book/bookList?bookFlag=bookList'/>">
                     <i class="fas fa-gift"></i>
                     <span>판매 상품 관리</span></a>

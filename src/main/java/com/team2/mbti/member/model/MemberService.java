@@ -25,7 +25,7 @@ public interface MemberService {
 	
 	MemberVO selectByUserid(String userid);
 	
-	MemberVO findId(String name, String tel);
+	MemberVO findId(MemberVO membervo); //아이디 찾기
 	
 	int deleteMultiMember(List<MemberVO> list);
 	
