@@ -33,9 +33,11 @@
 }
 
 /* educationInfo */
-.education-info-main {
+section.education-info-main {
 	font-family: "Pretendard";
-	height: 3000px;
+	height: 100%;
+	padding-top: 60px;
+	padding-bottom: 0;
 }
 
 .section-info1 {
@@ -47,26 +49,33 @@
     font-family: "Pretendard";
 	font-weight: bold;	
 	font-size: 300%;
+	text-align: center;
 }
 
 .info1-space {
-	padding: 50px 80px;
+	padding: 40px 10px;
 	justify-content: space-between;
 	display: flex;
     align-items: center;
     box-sizing: border-box;
-    line-height: 1;
 }
 
 .info1-space div {
-	width: 300px;
-    height: 330px;
+	width: 310px;
+    height: 360px;
+    margin: 0 auto;
     padding: 60px 0;
     background: #fff;
     border-radius: 10px;
     text-align: center;
     box-shadow: 0px 25px 40px -15px rgba(0,0,0,.1);
 }
+
+.info1-space h6 {
+	color: #eb5d1e;
+	font-weight: bold;
+}
+
 
 .info1-space div h3 {
 	margin: 18px 0;
@@ -75,44 +84,187 @@
     display: block;
 }
 
-
-.inner h2 {
-    font-family: "Pretendard";
-	font-weight: bold;	
-	font-size: 300%;
-	color : black;
-}
-
-.inner p {
-    margin-left: 300px;
-}
-
-.info3-space {
-	width: 1680px;
-    height: 320px;
-    overflow: hidden;
-    touch-action: pan-y;
-    position: absolute;
-    display: block;
-}
-
-.info3-space {
-	padding: 50px 80px;
+.info2-space {
+	padding: 40px 10px;
 	justify-content: space-between;
 	display: flex;
     align-items: center;
     box-sizing: border-box;
-    line-height: 1;
 }
 
-.info3-space .tea1 {
-	width: 300px;
-    height: 600px;
+
+div.tea1 {
+	width: 250px;
+    height: 320px;
     padding: 20px 0;
-    border-radius: 50px;
-    
+    position: relative;
+    text-align: center;
+    background-image: url("../../images/education/na.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
 
+div.tea2 {
+	width: 250px;
+    height: 320px;
+    padding: 20px 0;
+    position: relative;
+    text-align: center;
+    background-image: url("../../images/education/min.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+div.tea3 {
+	width: 250px;
+    height: 320px;
+    padding: 20px 0;
+    position: relative;
+    text-align: center;
+    background-image: url("../../images/education/mingi.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+div.tea4 {
+	width: 250px;
+    height: 320px;
+    padding: 20px 0;
+    position: relative;
+    text-align: center;
+    background-image: url("../../images/education/yong.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+div.tea5 {
+	width: 250px;
+    height: 320px;
+    padding: 20px 0;
+    position: relative;
+    text-align: center;
+    background-image: url("../../images/education/jun.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+
+/* educationList */
+.section-list {
+	padding:30px 0;
+	overflow: hidden;
+}
+
+.list-class {
+	font-family: "Pretendard";
+	position: relative;
+	list-style: none;
+	display: block;
+}
+
+.list-class li {
+	border-top: 1px solid #727272 !important;
+	position: relative;
+	border-bottom: 1px solid #e1e1e1;
+	background: #fff;
+	box-sizing: border-box;
+}
+
+.list-class article {
+	position: relative;
+	display: table;
+	table-layout: fixed;
+	width: 100%;
+	height: 160px;
+}
+
+.list-class figure {
+	position: relative;
+	display: table-cell;
+	width: 150px;
+	padding: 25px 0;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.list-class .tea {
+	overflow: hidden;
+	display: inline-block;
+	width: 80px;
+	height: 80px;
+	margin: 0 auto;
+	text-align: center;
+	border-radius: 100%;
+	background: #f2f2f2;
+}
+
+.list-class .tea img {
+	height: 170px;
+	margin: 2px 0 0 -17px;
+}
+
+.list-class .tea .tea-name {
+	display: inline-block;
+	margin-left: 5px;
+	font-size: 20px;
+	color: #444;
+	line-height: 16px;
+}
+
+.list-class figcaption {
+	position: relative;
+	display: table-cell;
+	width: 550px;
+	vertical-align: middle;
+}
+
+.list-class .tit {
+	margin-top: 10px;
+	padding-right: 20px;
+}
+
+.list-class figcaption p {
+	margin-top: 6px;
+	font-size: 20px;
+	color: #666;
+}
+
+.list-class figcaption p em {
+	font-style: normal;
+	font-weight: bold;
+	color: #333;
+}
+
+.list-class .btnGroup {
+	position: relative;
+	display: table-cell;
+	width: 87px;
+	vertical-align: middle;
+	box-sizing: border-box;
+}
+
+.list-class .btnGroup .applyBtn {
+	width: 85px;
+	height: 28px;
+	margin: 2px 0;
+	box-sizing: border-box;
+	padding: 0 10px;
+	min-width: 55px;
+	border: 1px solid #eb5d1e;
+}
+
+.list-class .btnGroup span {
+	margin-top: 4px;
+	color: #eb5d1e;
+	font-weight: bold;
+	font-size: 20px;
+	display: block;
+}
 
 
 

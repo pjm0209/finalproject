@@ -8,6 +8,9 @@
 지금 바로 다양한 교육을 신청해 보세요!</pre>
 	</div>
 	
+	<div class="inner1200">
+			<h2>ESSENTIAL 교육장 위치</h2>
+	
 	<div id="map" style="width:500px;height:400px;"></div>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2666b9d92b136acbf73b4b00a4f508ff"></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services,clusterer,drawing"></script>
@@ -141,6 +144,7 @@
 		    });
 		}
 	</script>
+	</div>
 	
 </section>
 

@@ -233,10 +233,17 @@ public class MainMbtiController {
 	
 	@RequestMapping("/mbtiStatistics")
 	public String mbtiStatistics() {
+<<<<<<< HEAD
 		logger.info("mbti 통계 페이지");
 		
 		return "main/mbti/mbtiStatistics";
 	}
 
+=======
+		logger.info("통계 페이지 보여주기");
+		
+		return "main/mbti/mbtiStatistics";
+	}
+>>>>>>> branch 'main' of https://github.com/pjm0209/finalproject.git
 
 }
