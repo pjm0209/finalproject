@@ -70,8 +70,4 @@ $(function() {
 	});
 });
 
-function bookListPage(curPage){
-	$('input[name=currentPage]').val(curPage);
-	$('form[name=frmPage]').submit();
-}
 

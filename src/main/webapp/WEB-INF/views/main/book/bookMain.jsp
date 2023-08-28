@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -9,64 +8,6 @@
 
 <script type="text/javascript" src="<c:url value='/admin-css-js/js/bookMain.js'/>"></script>
 
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
-<!-- Remember to include jQuery :) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-
-<!-- jQuery Modal -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-<style>
-	.modal{
-		position: fixed;
-	    top: 70px;
-	    left: 700;
-	    z-index: 1050;
-	    display: none;
-	    width: 100%;
-	    height: 84%;
-	    overflow: hidden;
-	    outline: 0;
-    }
->>>>>>> parent of b1adafa (Merge branch 'main' of https://github.com/pjm0209/finalproject.git into)
-</style>
-<%@ include file="../inc/top.jsp"%>
-
-<<<<<<< HEAD
-<script type="text/javascript">
-$(function(){
-	
-	$(window).scroll(function(){
-		var sc = $(this).scrollTop();
-		
-		
-		if( sc > 500){
-			$('.sideBarBestBook').css({position:'fixed', top:200,})
-		} else{
-			$('.sideBarBestBook').css({position:'absolute', top:760,})
-		} 
-	});
-	
-	
-	
-	function slideImg(){
-		$('.gallery').animate({left:'-100%'},1500,function(){
-			$('.gallery li:first').appendTo('.gallery');
-			$('.gallery').css({left:'0%'});
-		});
-		
-		
-	}
-	
-	setInterval(slideImg,3000);
-	
-	
-})
-</script>
->>>>>>> branch 'main' of https://github.com/pjm0209/finalproject.git
-
 <section id="bookMain" class="book">
 	<div id='bookSellMainImg' class=" bookslide">
 		<ul class="gallery">
@@ -75,8 +16,6 @@ $(function(){
 			<li><img src="<c:url value='/images/bookProduct/slide_03.jpg'/>"></li>
 			<li><img src="<c:url value='/images/bookProduct/slide_04.jpg'/>"></li>
 		</ul>
-		
-		
 	</div>
 	<div style="padding-left: 240px;margin-top: 50px;">
 		<a href="<c:url value='/main/index'/>"><i class="bi bi-house-door-fill"></i></a>
@@ -409,25 +348,5 @@ $(function(){
 		</div>
 	</div>
 </nav>	
-<!--  -->
 
-<<<<<<< HEAD
 <%@ include file="../inc/bottom.jsp"%>
-=======
-<%@ include file="../inc/bottom.jsp"%>
-=======
-<section id="bookMain" class="book">
-	<div style="width: 1000px;height: 800px;">
-		<!-- Modal HTML embedded directly into document -->
-		<div id="ex1" class="modal">
-		  <p>Thanks for clicking. That felt good.</p>
-		  <a href="#" rel="modal:close">Close</a>
-		</div>
-		
-		<!-- Link to open the modal -->
-		<p><a href="#ex1" rel="modal:open">Open Modal</a></p>
-	</div>
-</section>
-<%@ include file="../inc/bottom.jsp"%>
->>>>>>> parent of b1adafa (Merge branch 'main' of https://github.com/pjm0209/finalproject.git into)
->>>>>>> branch 'main' of https://github.com/pjm0209/finalproject.git

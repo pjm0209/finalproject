@@ -9,12 +9,12 @@
 
 <section id="q" class="detail_tbox" style="">
 	<div class="flex tab_menu" style="width:1420px; margin:0 auto; justify-content:flex-end; border:0; ">
-					<ul class="flex">
-						<li class="on"><a href="#detail">상세정보</a></li>
-						<li class="off"><a href="#notice">배송안내</a></li>
-						<li class="off"><a href="#rule">교환/환불 정책</a></li>
-					</ul>
-				</div>
+		<ul class="flex">
+			<li class="on"><a href="#detail">상세정보</a></li>
+			<li class="off"><a href="#notice">배송안내</a></li>
+			<li class="off"><a href="#rule">교환/환불 정책</a></li>
+		</ul>
+	</div>
 </section>
 
 <div class="fixbox flex">
