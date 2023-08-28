@@ -215,18 +215,20 @@ public class MainMbtiController {
 	
 	/** 임시 메서드*/
 	@GetMapping("/mbtiResult")
-	public String mbtiResult_get(Model model) {
-		MbtiVO mbtiVo=mbtiSurveyService.selectMbti("ISFP");
+	public String mbtiResult_get(@RequestParam String mbtiType, Model model) {
+		logger.info("mbti 결과 페이지, 파라미터 mbtiType={}",mbtiType);
+		
+		MbtiVO mbtiVo=mbtiSurveyService.selectMbti(mbtiType);
 
-		model.addAttribute("resultMbti", "ISFP");
-		model.addAttribute("resultI", 40);
-		model.addAttribute("resultE", 60);
-		model.addAttribute("resultS", 48);
-		model.addAttribute("resultN", 52);
-		model.addAttribute("resultT", 54);
-		model.addAttribute("resultF", 46);
-		model.addAttribute("resultP", 30);
-		model.addAttribute("resultJ", 70);
+		model.addAttribute("resultMbti", mbtiType);
+		model.addAttribute("resultI", "");
+		model.addAttribute("resultE", "");
+		model.addAttribute("resultS", "");
+		model.addAttribute("resultN", "");
+		model.addAttribute("resultT", "");
+		model.addAttribute("resultF", "");
+		model.addAttribute("resultP", "");
+		model.addAttribute("resultJ", "");
 		model.addAttribute("mbtiVo", mbtiVo);
 
 		return "main/mbti/mbtiResult";
@@ -237,6 +239,7 @@ public class MainMbtiController {
 		logger.info("통계 페이지 보여주기");
 		
 		List<Map<String, Object>> list=mbtiSurveyService.selectMbtiStatistics();
+		logger.info("통계 파이차트 결과 list.size()={}",list.size());
 		
 		model.addAttribute("list", list);
 		
