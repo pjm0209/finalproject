@@ -1,37 +1,68 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<<<<<<< HEAD
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%@ include file="../inc/top.jsp"%>
+=======
+
+<!-- Remember to include jQuery :) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+
+<!-- jQuery Modal -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+>>>>>>> parent of 263901a (Merge branch 'main' of https://github.com/pjm0209/finalproject.git into)
 <style>
-#bookMain{
-	width: 100%;
+
+#topImg {
+	width: 1300px;
+	height: 500px;
+	text-align: center;
 }
 
-#topImg{
-	width: 100%;
-	margin: 0;
-	padding: 0;
-}
-
-#topImg img{
-	width: 100%;
+img {
+	width: 1300px;
 	height: 500px;
 }
 
-.pdList{
+#leftNavi dt {
+	padding: 7px 5px 25px 20px;
+	font-weight: bold;
+}
+
+#leftNavi dd {
+	padding-left: 10px;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+#pdList{
 	margin-top: 50px;
 	width: 1300px;
 	text-align: center;
+<<<<<<< HEAD
 }
 .pdList h1{
 	text-align: center;
 	
 }
 .pdList ul{
+=======
+}
+#pdList h1{
+	text-align: center;
+	margin-left: 600px;
+}
+#pdList ul{
+>>>>>>> parent of 263901a (Merge branch 'main' of https://github.com/pjm0209/finalproject.git into)
 	width: 1300px;
 	text-align: center;
 	display: flex;
     justify-content: space-around;
+<<<<<<< HEAD
 }
 
 .pdList ul li img{
@@ -121,10 +152,37 @@
 			<h1>Site Title</h1>
 		</div>
 	</header>
+=======
+    margin-left: 308px;
+}
+
+#pdList ul li img{
+	width: 250px;
+	height: 300px;
+}
+</style>
+<%@ include file="../inc/top.jsp"%>
+
+>>>>>>> parent of 263901a (Merge branch 'main' of https://github.com/pjm0209/finalproject.git into)
 <section id="bookMain" class="book">
-	<div id='bookSellMainImg'>
-		<img src="<c:url value='/images/72939_11192_2044.jpg'/>">
+	<div style="float: left;">
+		<nav style="margin-top: 300px; background: #dddddd;">
+			<dl id="leftNavi" style="width: 90px; padding: 0 0 0 0;">
+				<!-- category list -->
+				<dt>도 서</dt>
+				<dd>
+					<a href="#">검사자료</a>
+				</dd>
+				<dd>
+					<a href="#">도 서</a>
+				</dd>
+				<dd>
+					<a href="#">기 타</a>
+				</dd>
+			</dl>
+		</nav>
 	</div>
+<<<<<<< HEAD
 	<div id="containerWrap" class="container clearfix" style="margin-left: 0;
 	margin-right: 0;position: relative">
 		<div id="sidebar" class="" style="">
@@ -332,18 +390,64 @@
 				<div style="position: absolute; left: 0; top: 0; transition: 0s; width: 200%; height: 200%"></div>
 			</div>
 		</div>
+=======
+	<div class="topImg" style="text-align: center;">
+		<img style="margin-right: 84px;" src="<c:url value='/images/72939_11192_2044.jpg'/>">
+>>>>>>> parent of 263901a (Merge branch 'main' of https://github.com/pjm0209/finalproject.git into)
 	</div>
-	
-	<script type="text/javascript" src="<c:url value='/js/rAF.js'/>"></script>
-	<script type="text/javascript" src="<c:url value='/js/ResizeSensor.js'/>"></script>
-	<script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>
-	<script type="text/javascript" src="<c:url value='/js/sticky-sidebar.js'/>"></script>
-	<script type="text/javascript">
-		var a = new StickySidebar('#sidebar', {
-			topSpacing : 200
-		});
-		
-	</script>
-</section>
+	<div id="pdList">
+		<h1 class="display-3">도 서 구 매</h1>
+		<ul class="aa-product-catg">
+			<!-- start single product item -->
+			<li>
+				<figure>
+					<a class="aa-product-img" href="">
+					 <img src="<c:url value='/images/bookProduct/20024.jpg'/>" alt="">
+					</a>
+					<a class="aa-add-card-btn" href="">
+						<span style="display: block;" class="fas fa-shopping-cart"></span>장바구니 담기</a>
+					<figcaption>
+						<h5 class="aa-product-title">
+							<a href="#"></a>
+						</h5>
+						<span class="aa-product-price">1700원</span>
 
+					</figcaption>
+				</figure>
+			</li>
+			<li>
+				<figure>
+					<a class="aa-product-img" href="">
+					 <img src="<c:url value='/images/bookProduct/20025.jpg'/>" alt="">
+					</a>
+					<a class="aa-add-card-btn" href="">
+						<span style="display: block;" class="fas fa-shopping-cart"></span>장바구니 담기</a>
+					<figcaption>
+						<h5 class="aa-product-title">
+							<a href="#"></a>
+						</h5>
+						<span class="aa-product-price">1700원</span>
+
+					</figcaption>
+				</figure>
+			</li>
+			<li>
+				<figure>
+					<a class="aa-product-img" href="">
+					 <img src="<c:url value='/images/bookProduct/20026.jpg'/>" alt="">
+					</a>
+					<a class="aa-add-card-btn" href="">
+						<span style="display: block;" class="fas fa-shopping-cart"></span>장바구니 담기</a>
+					<figcaption>
+						<h5 class="aa-product-title">
+							<a href="#"></a>
+						</h5>
+						<span class="aa-product-price">1700원</span>
+
+					</figcaption>
+				</figure>
+			</li>
+		</ul>
+	</div>
+</section>
 <%@ include file="../inc/bottom.jsp"%>

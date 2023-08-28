@@ -108,7 +108,7 @@ public class AdminController {
 		return "/admin/member/memberDelete";
 	}
 	
-	@RequestMapping("/manager/managerList")
+	@GetMapping("/manager/managerList")
 	public String managerList(@ModelAttribute SearchVO vo, @RequestParam(required = false) String searchCondition,
 			Model model) {
 		logger.info("관리자 리스트 페이지, 파라미터 vo={}, condition={}", vo, searchCondition);
