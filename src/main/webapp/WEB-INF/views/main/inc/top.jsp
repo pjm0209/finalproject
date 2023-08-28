@@ -90,25 +90,13 @@
 			  <li><a class="nav-link scrollto" href="<c:url value='/main/mbti/mbtiStatistics'/>">MBTI 통계</a></li>            
             </ul>
           </li>
-<<<<<<< HEAD
-=======
-
-          <li><a class="nav-link scrollto" href="#services">책</a></li>
-          <li><a class="nav-link scrollto" href="#portfolio">MBTI 교육</a></li>
-          <li><a class="nav-link scrollto" href="<c:url value='/main/mbti/mbti'/>">MBTI 검사</a></li>
-
->>>>>>> branch 'main' of https://github.com/pjm0209/finalproject.git
           <li><a class="nav-link scrollto" href="<c:url value='/main/book/bookMain'/>">도서/자료 구매</a></li>
           <li class="dropdown"><a class="nav-link scrollto" href="#"><span>커뮤니티</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
 			  <c:import url="/main/board/boardFormList"></c:import>              
             </ul>
           </li>
-<<<<<<< HEAD
-          <li><a class="nav-link scrollto" href="<c:url value='/main/myPage'/>">마이페이지</a></li>
-=======
           <li><a class="nav-link scrollto" href="<c:url value='/main/member/mypage'/>">마이페이지</a></li>
->>>>>>> branch 'main' of https://github.com/pjm0209/finalproject.git
           <li><a class="nav-link scrollto">${sessionScope.userid}</a></li>
        	  <!-- 로그인 안된 경우 -->
 		  <c:if test="${empty sessionScope.userid }">			
