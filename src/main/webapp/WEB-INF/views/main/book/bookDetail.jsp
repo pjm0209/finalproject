@@ -261,7 +261,7 @@ ul, li {
 	margin-bottom: 30px;
 }
 
-.detail_tbox .tab_menu h4 {
+.detail_tbox .tab_menu h4{
 	color: #333;
 	font-weight: bold;
 }
@@ -315,7 +315,7 @@ ul, li {
 .sideBarBestBook{
 	position: fixed;
     right: 0;
-    top: 200px;
+    top: 90px;
     margin-right: 10px;
     text-align: center;
 }
@@ -346,8 +346,82 @@ ul, li {
 	background-color: #555;
 	color: white;
 }
+.highlight{color:blue;}
 
+#q{ width:100%; border-bottom:2px #ee7843 solid; background:white; position:fixed; top:75px; left:0px; display:none; z-index:999;}
+#q .tab_menu ul.flex li.on {
+	background: #ee7843;
+	margin-right: 5px;
+	border-radius: 5px 5px 0px 0px;
+	color:white;
+}
+
+#q .tab_menu ul.flex li.on a {
+	background: #ee7843;
+	color: white;
+	padding: 10px 20px;
+	border-radius: 5px 5px 0px 0px;
+	width: 150px;
+	text-align: center;
+	display: block;
+}
+
+#q .tab_menu ul.flex li.off {
+	border: 2px #ee7843 solid;
+	margin-right: 5px;
+	border-bottom: 0;
+	border-radius: 5px 5px 0 0;
+}
+
+#q .tab_menu ul.flex li.off a {
+	color: #ee7843;
+	padding: 10px 20px;
+	width: 150px;
+	display: block;
+	text-align: center;
+}
 </style>
+<script type="text/javascript">
+$(function(){
+
+
+	$(window).scroll(function(){
+		var sc = $(this).scrollTop();
+		
+		
+		if( sc >= $('#detail').offset().top ){
+			$("#q").show();
+		}
+		if( sc >= $('#notice').offset().top -5 ){
+			$("#q .tab_menu ul li").removeClass();
+			$("#q .tab_menu ul li:eq(0), #q .tab_menu ul li:eq(2)").addClass('off');
+			$("#q .tab_menu ul li:eq(1)").addClass('on');
+		} else{
+			$("#q .tab_menu ul li").removeClass();
+			$("#q .tab_menu ul li:eq(1), #q .tab_menu ul li:eq(2)").addClass('off');
+			$("#q .tab_menu ul li:eq(0)").addClass('on');
+		}
+		if( sc >= $('#rule').offset().top - 5 ){
+			$("#q .tab_menu ul li").removeClass();
+			$("#q .tab_menu ul li:eq(0), #q .tab_menu ul li:eq(1)").addClass('off');
+			$("#q .tab_menu ul li:eq(2)").addClass('on');
+		}
+		if( sc < $('#detail').offset().top ){
+			$("#q").hide();
+		}
+	});
+})
+</script>
+
+<section id="q" class="detail_tbox" style="">
+	<div class="flex tab_menu" style="width:1420px; margin:0 auto; justify-content:flex-end; border:0; ">
+					<ul class="flex">
+						<li class="on"><a href="#detail">상세정보</a></li>
+						<li class="off"><a href="#notice">배송안내</a></li>
+						<li class="off"><a href="#rule">교환/환불 정책</a></li>
+					</ul>
+				</div>
+</section>
 <div class="fixbox flex">
 	<ul class="flex left">
 		<li>총 상품 금액</li>
@@ -358,15 +432,15 @@ ul, li {
 	<ul class="flex right">
 		<li class="flex">
 			<button class="plus">
-				<span class="material-symbols-outlined"> add </span>
+				<span class="material-symbols-outlined"> remove </span>
 			</button>
 			<p class="tt">0</p>
 			<button class="remove">
-				<span class="material-symbols-outlined"> remove </span>
+				<span class="material-symbols-outlined"> add </span>
 			</button>
 		</li>
-		<li>장바구니</li>
-		<li>바로구매</li>
+		<li><button type="submit" style="background: none;border: 0;">장바구니</button></li>
+		<li><button type="submit" style="background: none;border: 0;color:white;">바로구매</button></li>
 
 	</ul>
 
@@ -378,9 +452,9 @@ ul, li {
 			<div class="sidebar__inner shadow-sm bg-body rounded" style="position: relative;">
 				<div>
 					<ul>
-						<li><a href="#home">검 사 자 료</a></li>
-						<li><a href="#news">도 서</a></li>
-						<li><a href="#contact">기 타 교 구</a></li>
+						<li><a href="<c:url value='/main/book/bookList1'/>">검 사 자 료</a></li>
+						<li><a href="<c:url value='/main/book/bookList1'/>">도 서</a></li>
+						<li><a href="<c:url value='/main/book/bookList1'/>">기 타 교 구</a></li>
 					</ul>
 				</div>
 				<div class="resize-sensor"
@@ -489,9 +563,9 @@ ul, li {
 				<ul>
 					<span>* 출고 안내</span>
 					<li><span class="highlight">오후 5시까지 주문하신 상품은 평일 다음날 출고</span> 됩니다. (토, 공휴일 제외)</li>
-					<li><span class="highlight">오후 5시 이후 주문은 평일 다 다음날 출고</span> 됩니다. (토, 공휴일 제외)<br> <em>예시)
+					<li><span class="highlight">오후 5시 이후 주문은 평일 다 다음날 출고</span> 됩니다. (토, 공휴일 제외)<br> <u>예시)
 							<strong>금요일 5시 이후 주문은 다음주 평일 화요일에 출고</strong> 됩니다.
-					</em></li>
+					</u></li>
 					<li>단, 개인이 무통장입금으로 주문하신 경우<br> 주문하신 다음날 오전 12시 까지 입금이 되어야 합니다.<br></li>
 					<li>구매하시는 품목의 수량이 300부 이상일 경우 출고 지연이 될 수 있습니다.</li>
 
@@ -588,7 +662,7 @@ ul, li {
 	<script type="text/javascript" src="<c:url value='/js/sticky-sidebar.js'/>"></script>
 	<script type="text/javascript">
 			var a = new StickySidebar('#sidebar', {
-				topSpacing : 200
+				topSpacing : 500
 			});
 		</script>
 </section>
