@@ -8,8 +8,15 @@
 <html lang="ko">
 
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<meta charset="utf-8">
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	
+	<!-- chart meta -->
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Content-Script-Type" content="text/javascript" />
+	<meta http-equiv="Content-Style-Type" content="text/css" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	  
 	<c:set var="path" value="${pageContext.request.contextPath }"/>
 
   <!-- Custom fonts for this template-->
@@ -48,6 +55,8 @@
 	<script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>
 	<script type="text/javascript" src="<c:url value='/resources/ckeditor/ckeditor.js'/>"></script>	
 	
+	<!-- chart js css -->
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
   <!-- Template Main CSS File -->
   <link href="${path }/assets/css/style.css" rel="stylesheet">

@@ -95,4 +95,9 @@ public class MbtiSurveyServiceImpl implements MbtiSurveyService{
 	public int getTotalRecordMbtiStatisticsView(SearchVO searchVo) {
 		return mbtiSurveyDao.getTotalRecordMbtiStatisticsView(searchVo);
 	}
+
+	@Override
+	public List<Map<String, Object>>selectMbtiStatistics(){
+		return mbtiSurveyDao.selectMbtiStatistics();
+	}
 }

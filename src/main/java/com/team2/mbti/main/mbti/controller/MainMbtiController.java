@@ -1,6 +1,7 @@
 package com.team2.mbti.main.mbti.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -232,8 +233,12 @@ public class MainMbtiController {
 	}
 	
 	@RequestMapping("/mbtiStatistics")
-	public String mbtiStatistics() {
+	public String mbtiStatistics(Model model) {
 		logger.info("통계 페이지 보여주기");
+		
+		List<Map<String, Object>> list=mbtiSurveyService.selectMbtiStatistics();
+		
+		model.addAttribute("list", list);
 		
 		return "main/mbti/mbtiStatistics";
 	}
