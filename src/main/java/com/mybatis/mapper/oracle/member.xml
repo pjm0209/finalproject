@@ -74,10 +74,16 @@
 		where no=#{no}
 	</delete>
 	
-	<select id="findId" parameterType="string" resultType="memberVo">
-		select * from member
-		where name=#{name} 
-		and hp=#{hp}
+	<!-- 비밀번호 변경 -->
+	<update id="updatePw" >
+		update member 
+		set pwd = #{pwd} 
+		where userid = #{userid}
+	</update>
+	
+	<select id="findId" parameterType="string" resultType="string">
+		select userid from member 
+		where name = #{name} 
+		and email = #{email}
 	</select>
-
 </mapper>

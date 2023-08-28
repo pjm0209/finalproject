@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -121,36 +122,31 @@ public class MemberLoginController {
 		return "common/message";
 	
 	}
-	
+		
 	@RequestMapping("/member/forgot-id")
-	public String forgot_id(HttpServletRequest request, Model model, MemberVO membervo) {
+	public String forgot_id() {
 		logger.info("아이디 찾기 화면");
-		
+	    
 		return "main/member/forgot-id";
 	}
 	
-	@PostMapping("/member/forgot-id")
-	public String forgotid_post(String name, String tel){
-		logger.info("아이디 찾기 처리, 파라미터 name={}, tel={}", name, tel);
-		
-		MemberVO vo = memberService.findId(name, tel);
-		
-		logger.info("아이디 찾기 완료, result = {}", vo);		
-		
-		return "main/member/forgot-id";
-	}
-	
-
-	@RequestMapping("/member/findIdResult")
-	public String findIdresult() {		
-		logger.info("아이디 찾기 결과 화면");		
-	 	 
+	@RequestMapping(value = "/member/findIdResult", method = RequestMethod.GET)
+	public String search_pwd(HttpServletRequest request, Model model, MemberVO searchVO) {
+		logger.info("아이디 찾기 결과 처리 화면");
+	    
 		return "main/member/findIdResult";
 	}
 		
-	@RequestMapping("/member/forgot-pwd")
-	public String forgot_pwd() {
+	@RequestMapping(value="/member/forgot-pwd", method = RequestMethod.GET)
+	public String forgot_pwd_get() {
 		logger.info("비밀번호 찾기 화면");
+		
+		return "main/member/forgot-pwd";
+	}
+	
+	@RequestMapping(value="/member/forgot-pwd", method = RequestMethod.POST)
+	public String forgot_pwd_post(@ModelAttribute MemberVO membervo, HttpServletResponse response) {
+		logger.info("비밀번호 찾기 처리");
 		
 		return "main/member/forgot-pwd";
 	}

@@ -180,14 +180,21 @@ $(function(){
 <!-- 카카오 스크립트 -->
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script>
-Kakao.init('8815f5cb0c494f67abd247e4c2b31b88'); //발급받은 키 중 javascript키를 사용해준다.
+Kakao.init('ba663235e16b790c0b20037c2ed8ed93'); //발급받은 키 중 javascript키를 사용해준다.
 console.log(Kakao.isInitialized()); // sdk초기화여부판단
 //카카오로그인
 function kakaoLogin() {
     Kakao.Auth.login({
       success: function (response) {
+    	alert(response.access_token)
+    	Kakao.Auth.setAccessToken(response.access_token);
+    	
         Kakao.API.request({
           url: '/v2/user/me',
+          data : {
+        	  property_keys: ['kakao_profile_nickname', 'kakao_profile_image', 'kakao_account_email'],
+          },
+          
           success: function (response) {
         	  console.log(response)
           },

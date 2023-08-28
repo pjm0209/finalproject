@@ -112,6 +112,7 @@ form {
 </style>
 
 <script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
     $(function() {          
         $('#btnCancel').click(function(){
@@ -128,6 +129,20 @@ form {
             var tabIndex = $(this).index();
             $('.tab-content').removeClass('active');
             $('.tab-content').eq(tabIndex).addClass('active');
+        });
+        
+        $("#btnSubmit").click(function(){
+        	$.ajax({
+        		url : "/main/member/forgot-pwd",
+        		type : "POST",
+        		data : {
+        				id : $("#name").val(),
+        				email : $("#email").val()
+        		},
+        		success : function(result){
+        				alert(result);
+        		},
+        	});
         });
     });
 </script>
