@@ -106,7 +106,7 @@ textarea#board_desc {
     height: 80px;
     width: 98%;
     resize: none;
-    padding: 5px 0;
+    padding: 5px 5px;
 }
 
 .i_tooltip {

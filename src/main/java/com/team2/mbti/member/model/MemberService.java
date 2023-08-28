@@ -22,12 +22,11 @@ public interface MemberService {
 	int selectCheckId(String userid);	
 	String selectPwd(String userid); 
 	int loginCheck(String userid, String pwd);
+	int deleteMember(int no);
 	
 	MemberVO selectByUserid(String userid);
 	
-	MemberVO findId(String name, String tel);
-	
-	int deleteMultiMember(List<MemberVO> list);
+	MemberVO findId(MemberVO membervo); //아이디 찾기
 	
 
 }

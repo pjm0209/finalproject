@@ -69,15 +69,11 @@
 		where userid=#{userid}
 	</select>
 	
-	<delete id="deleteMultiMember" parameterType="int">
-		delete from member
-		where no=#{no}
-	</delete>
-	
-	<select id="findId" parameterType="string" resultType="memberVo">
+	<select id="findId" resultType="string">
 		select * from member
 		where name=#{name} 
 		and hp=#{hp}
 	</select>
+
 
 </mapper>

@@ -16,12 +16,11 @@ public interface MemberDAO {
 	
 	int selectCheckId(String userid); //아이디확인
 	String selectPwd(String userid); //비번확인
+	int deleteMember(int no); //회원탈퇴
 	
 	MemberVO selectByUserid(String userid);
 	
-	MemberVO findId(String name, String tel); //아이디 찾기
-	
-	int deleteMultiMember(int adminNo);
+	MemberVO findId(MemberVO membervo); //아이디 찾기
 	
 		
 }

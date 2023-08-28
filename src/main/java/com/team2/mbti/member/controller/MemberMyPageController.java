@@ -24,12 +24,5 @@ public class MemberMyPageController {
 		
 		return "main/member/mypage";
 	}
-	
-	@RequestMapping("/memberEdit")
-	public String memberEdit() {
-		logger.info("회원정보 수정");
-		
-		return "main/member/memberEdit";
-	}
 
 }

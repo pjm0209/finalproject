@@ -4,6 +4,8 @@
 
 <!-- Begin Page Content -->
 <!-- Page Heading -->
+<c:import url="/admin/board/boardHeadSide"></c:import>
+
 <c:if test="${param.boardWriteType == 'write' }">
 	<c:set var="url" value="/admin/board/boardWrite"/>
 	<c:set var="cancelUrl" value="${param.boardFormNo }"/>

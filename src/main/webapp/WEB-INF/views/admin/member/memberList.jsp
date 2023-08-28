@@ -12,16 +12,6 @@ button#member-delete-button{
 	color: white;
 	background-color: #eb5d1e;
 }
-
-select#member-search-select {
-	font-size: 16px;
-    margin-right: 20px;
-    height: 40px;
-    margin-bottom: 0;
-    border: 1px solid #d8dce5;
-    border-radius: 6px;
-    margin-left: 840px;
-}
 </style>
 
 <script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>
@@ -55,7 +45,7 @@ select#member-search-select {
 <div class="board-body">
 	<div id="board-title">
 		<h5>회원 리스트</h5>
-			<button class="member-button" id="member-delete-button" >삭제</button>
+			<button class="member-button" id="member-delete-button">삭제</button>
 	</div>
 	
 	<div class="board">
@@ -63,7 +53,7 @@ select#member-search-select {
 			<div class="board-search-result">
 				<form name="frmSearch" method="post" action="<c:url value='/admin/member/memberList'/>">
 				<div class="input-group mb-3" id="board-search-div">
-					<select class="form-select form-select-lg" aria-label=".form-select-lg example" name="searchCondition" id="member-search-select">					  	
+					<select class="form-select form-select-lg" aria-label=".form-select-lg example" name="searchCondition" id="board-search-select">					  	
 					  	<option value="name"  <c:if test="${param.searchCondition=='name'}"> selected="selected" </c:if> >이름</option>
 					  	<option value="userid" <c:if test="${param.searchCondition=='userid'}"> selected="selected" </c:if>>아이디</option>
 					</select>
@@ -71,11 +61,10 @@ select#member-search-select {
 				 	aria-label="Recipient's username" aria-describedby="button-addon2" id="board-search-area" value="${param.searchKeyword}">
 				 	<button class="btn btn-outline-secondary" type="submit" id="button-addon2">검색</button>
 				</div>
-				</form>
 			</div>
 		</div>
 		
-		<form name="form-Delete" method="post" id="selectMemberDelete" action="<c:url value='/admin/member/memberDelete'/>">
+		<form name="form-Delete" method="post" id="selectMemberDelete" action="<c:url value='/admin/member/memberDel'/>">
 		<table class="table">
 			<thead>
 				<tr class="board-table-colum">
@@ -87,11 +76,10 @@ select#member-search-select {
 				</tr>
 			</thead>
 			<c:set var="idx" value="0"/>
-			<tbody>
+			<tbody id="board-table-body">
 				<c:forEach var="vo" items="${list}">
-					<c:set var="memberInformation" value="${vo.no}"/>
 					<tr>
-						<th scope="row"><input type="checkbox" class="board-checkbox" name="memberItems[${idx}].no" value="${vo.no }"></th>
+						<th scope="row"><input type="checkbox" class="board-checkbox"></th>
 						<td>${vo.no}</td>
 						<td>${vo.userid}</td>
 						<td>${vo.name}</td>
@@ -99,6 +87,7 @@ select#member-search-select {
 							<fmt:formatDate value="${vo.regdate}" pattern="yyyy-MM-dd"/>
 						</td>
 					</tr>	
+	
 				</c:forEach>					
 			</tbody>
 		</table>

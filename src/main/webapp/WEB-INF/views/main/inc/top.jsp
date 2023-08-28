@@ -41,7 +41,6 @@
 	<!-- Custom styles for this template-->
 	<link href="<c:url value='/admin-css-js/css/sb-admin-2.css'/>" rel="stylesheet">
 	<link href="<c:url value='/admin-css-js/css/mbti.css'/>" rel="stylesheet">
-	<link href="<c:url value='/admin-css-js/css/education.css'/>" rel="stylesheet" type="text/css">
 	<link href="<c:url value='/admin-css-js/css/board.css'/>" rel="stylesheet" type="text/css">
 	<link href="<c:url value='/admin-css-js/css/boardCreate.css'/>" rel="stylesheet" type="text/css">
 	<link href="<c:url value='/admin-css-js/css/book-order.css'/>" rel="stylesheet" type="text/css">
@@ -96,15 +95,16 @@
 			  <c:import url="/main/board/boardFormList"></c:import>              
             </ul>
           </li>
-          <li><a class="nav-link scrollto" href="<c:url value='/main/member/mypage'/>">마이페이지</a></li>
-          <li><a class="nav-link scrollto">${sessionScope.userid}</a></li>
+          <li><a class="nav-link scrollto" href="<c:url value='/main/myPage'/>">마이페이지</a></li>
+          <li><a class="getstarted scrollto" href="#about">Get Started</a></li>
+          <li><a class="nav-link scrollto">${sessionScope.userid}</a></li>	
        	  <!-- 로그인 안된 경우 -->
 		  <c:if test="${empty sessionScope.userid }">			
-			<li><a class="getstarted scrollto" href="<c:url value='/main/member/memberLogin'/>">로그인</a></li>
+			<li><a href="<c:url value='/main/member/memberLogin'/>">로그인</a></li>
 		  </c:if>
 		  <!-- 로그인 된 경우 -->
 		  <c:if test="${!empty sessionScope.userid }">
-			<li><a class="getstarted scrollto" href="<c:url value='/main/logout'/>">로그아웃</a></li>
+			<li><a href="<c:url value='/main/index'/>">로그아웃</a></li>
 		  </c:if>			
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
