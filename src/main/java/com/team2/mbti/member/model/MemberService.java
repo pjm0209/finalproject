@@ -5,6 +5,8 @@ import java.util.Map;
 
 import com.team2.mbti.common.SearchVO;
 
+import jakarta.servlet.http.HttpServletResponse;
+
 public interface MemberService {
 	int EXIST_ID=1; 
 	int NONE_EXIST_ID=2; 
@@ -25,9 +27,14 @@ public interface MemberService {
 	
 	MemberVO selectByUserid(String userid);
 	
-	MemberVO findId(String name, String tel);
-	
 	int deleteMultiMember(List<MemberVO> list);
+	
+	int updateMember(MemberVO vo); //회원정보수정
+	
+	public void sendEmail(MemberVO vo, String div) throws Exception; //이메일 발송
+
+	public void findPwd(HttpServletResponse resp, MemberVO vo) throws Exception; //비밀번호찾기
+	
 	
 
 }

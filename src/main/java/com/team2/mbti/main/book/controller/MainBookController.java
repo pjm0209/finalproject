@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.team2.mbti.book.model.BookService;
 
@@ -43,5 +44,12 @@ public class MainBookController {
 		model.addAttribute("title", "bookList1");
 
 		return "main/book/bookList1";
+	}
+	
+	@RequestMapping("/bookBasket")
+	public String bookBasket(@RequestParam(defaultValue = "0") int bookNo, Model model) {
+		logger.info("책관리 페이지 - bookBasket, 파라미터 bookNo={}", bookNo);
+
+		return "main/book/bookBasket";
 	}
 }//

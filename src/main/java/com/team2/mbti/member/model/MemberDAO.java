@@ -18,10 +18,16 @@ public interface MemberDAO {
 	String selectPwd(String userid); //비번확인
 	
 	MemberVO selectByUserid(String userid);
-	
-	MemberVO findId(String name, String tel); //아이디 찾기
-	
+		
 	int deleteMultiMember(int adminNo);
+	
+	int updateMember(MemberVO vo); //회원정보수정
+	
+	MemberVO readMember(String userid); //회원읽기
+	public int updatePw(MemberVO vo) throws Exception;//비밀번호변경
+	
+	
+	
 	
 		
 }

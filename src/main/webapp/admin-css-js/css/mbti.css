@@ -541,7 +541,7 @@ section#mbtiSurvey{
     cursor: pointer;
     height: 50px;
     width: 200px;
-    border: 1px solid rgb(255, 128, 0);
+    border: 1px solid #eb5d1e;
     border-radius: 50px;
     line-height: 50px;
     text-align: center;
@@ -553,8 +553,53 @@ section#mbtiSurvey{
 }
 
 .options input[type=radio]:checked+label{
-    background-color: rgb(255, 128, 0);
+    background-color: #eb5d1e;
     color: #fff;
 }
 
+.mbtiRatio{
+	padding-left: 300px;
+	margin-top: 50px;
+	width: 100%;
+	height: 70px;
+	background-color: #eb5d1e;
+}
 
+.mbtiRatio h1{
+	line-height: 70px;
+	color: white;
+}
+
+#piechart{
+	margin-left: 400px;
+}
+
+#tbMbtiStatistics{
+	margin:0 auto;
+	margin-top: 100px;
+	width: 50%;
+	border: 2px solid black;
+	border-collapse: collapse;
+}
+
+#tbMbtiStatistics td, #tbMbtiStatistics tr, #tbMbtiStatistics th{
+	border: 1px solid black;
+	color: #5c5c5c;
+}
+
+#tbMbtiStatistics tr{
+	height: 70px;
+}
+
+#tbMbtiStatistics td a{
+	text-decoration: none;
+}
+#pMbtiDiv{
+	margin:0 auto;
+	margin-top:50px;
+	width: 500px;
+}
+p#mbti{
+	text-align: center;
+	color: #5c5c5c;
+}

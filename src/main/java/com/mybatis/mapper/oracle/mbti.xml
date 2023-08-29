@@ -94,4 +94,13 @@
 		<include refid="searchMbti"></include> 
 	</select>
 	
+	<select id="selectMbtiStatistics" resultType="map">
+		select mb.mbti_type, count(*) as count
+		from member mem join mbti mb
+		on mem.mbti_no = mb.mbti_no
+		where mem.mbti_no is not null
+		group by mb.mbti_type
+		order by mb.mbti_type
+	</select>
+	
 </mapper>

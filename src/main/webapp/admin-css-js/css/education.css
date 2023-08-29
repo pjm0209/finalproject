@@ -7,6 +7,7 @@
 }
 
 .inner1200 {position:relative; width:1400px; margin:0 auto; margin-top:50px;}
+.inner1000 {position:relative; width:1200px; margin:0 auto; margin-top:50px;}
 
 /* 메인 페이지 */
 #education-main {
@@ -155,6 +156,21 @@ div.tea5 {
 
 
 /* educationList */
+select#list-search-select {
+	font-size: 16px;
+    margin-right: 10px;
+    height: 40px;
+    margin-bottom: 0;
+    border: 1px solid #d8dce5;
+    border-radius: 6px;
+    margin-left: 885px;
+}
+
+input#list-search-area {
+	flex: none;
+    width: 250px;
+}
+
 .section-list {
 	padding:30px 0;
 	overflow: hidden;
@@ -167,8 +183,11 @@ div.tea5 {
 	display: block;
 }
 
-.list-class li {
+.list-class li:first-child {
 	border-top: 1px solid #727272 !important;
+}
+
+.list-class li {
 	position: relative;
 	border-bottom: 1px solid #e1e1e1;
 	background: #fff;
@@ -180,7 +199,7 @@ div.tea5 {
 	display: table;
 	table-layout: fixed;
 	width: 100%;
-	height: 160px;
+	height: 200px;
 }
 
 .list-class figure {
@@ -195,8 +214,8 @@ div.tea5 {
 .list-class .tea {
 	overflow: hidden;
 	display: inline-block;
-	width: 80px;
-	height: 80px;
+	width: 90px;
+	height: 90px;
 	margin: 0 auto;
 	text-align: center;
 	border-radius: 100%;
@@ -208,12 +227,13 @@ div.tea5 {
 	margin: 2px 0 0 -17px;
 }
 
-.list-class .tea .tea-name {
-	display: inline-block;
+.list-class .tea-name {
 	margin-left: 5px;
-	font-size: 20px;
 	color: #444;
-	line-height: 16px;
+	line-height: 30px;
+    font-size: 22px;
+    margin-top: 10px;
+    margin-bottom: 5px;
 }
 
 .list-class figcaption {
@@ -221,11 +241,12 @@ div.tea5 {
 	display: table-cell;
 	width: 550px;
 	vertical-align: middle;
+	padding-left: 20px;
 }
 
 .list-class .tit {
-	margin-top: 10px;
 	padding-right: 20px;
+	font-weight: bold;
 }
 
 .list-class figcaption p {
@@ -233,6 +254,7 @@ div.tea5 {
 	font-size: 20px;
 	color: #666;
 }
+
 
 .list-class figcaption p em {
 	font-style: normal;
@@ -243,28 +265,99 @@ div.tea5 {
 .list-class .btnGroup {
 	position: relative;
 	display: table-cell;
-	width: 87px;
+	width: 115px;
 	vertical-align: middle;
 	box-sizing: border-box;
 }
 
-.list-class .btnGroup .applyBtn {
-	width: 85px;
-	height: 28px;
-	margin: 2px 0;
-	box-sizing: border-box;
-	padding: 0 10px;
-	min-width: 55px;
-	border: 1px solid #eb5d1e;
+input#applyBtn {
+    width: 150px;
+    height: 56px;
+    border-radius: 50px;
+    color: white;
+    border: none;
+    background-color: #eb5d1e;
+    font-size: 22px;
 }
 
-.list-class .btnGroup span {
-	margin-top: 4px;
-	color: #eb5d1e;
-	font-weight: bold;
+.classLoc .loc {
+	margin-top: 18px;
 	font-size: 20px;
-	display: block;
+    color: #333;
 }
+
+
+/* educationLocation */
+.map-box .map-list {
+	flex-shrink: 0;
+	width: 220px;
+	margin-right: 120px;
+	margin-left: 30px;
+	list-style: none;
+	padding: 0;
+}
+
+.map-box .map-list li {
+	text-align: left;
+	border-bottom: 1px solid #cacacc;
+	padding-left: 20px;
+}
+
+.map-box .map-list li>button{
+	display: inline-block;
+	border: none;
+	font-size: 15px;
+	color: #666;
+	letter-spacing: -0.5em;
+	padding: 5px 0;
+	text-align: left;
+	cursor: pointer;
+}
+
+
+.map-info .map-wrap {
+	display: block;
+    background-color: #fff;
+    width: 928px;
+    height: 596px;
+}
+
+.location-info {
+	margin-top: 50px;
+	padding: 0 20px;
+}
+
+.location-info .zipcode {
+	width: 250px;
+	border-bottom: 2px solid #d6d6d6;
+	list-style: none;
+}
+
+.location-info .address {
+	width: 360px;
+	list-style: none;
+}
+
+.location-info .tel {
+	position: relative;
+	min-height: 114px;
+	list-style: none;
+}
+
+.location-info dt {
+	color: #000;
+	font-size: 21px;
+	font-weight: 800;
+	margin-bottom: 20px;
+}
+
+.location-info dd {
+	font-size: 16px;
+	color: #666;
+	word-break: keep-all;
+}
+
+
 
 
 
@@ -665,4 +758,3 @@ div.teacherWrite-setting-body dt {
 	width: 190px;
 	padding: 17px 0;
 }
-
