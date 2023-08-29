@@ -111,33 +111,33 @@ public class MypageController {
 			}
 		}
 		
-		int resultI=0;
-		int resultE=0;
-		int resultS=0;
-		int resultN=0;
-		int resultT=0;
-		int resultF=0;
-		int resultP=0;
-		int resultJ=0;
+		double resultI=0;
+		double resultE=0;
+		double resultS=0;
+		double resultN=0;
+		double resultT=0;
+		double resultF=0;
+		double resultP=0;
+		double resultJ=0;
 		
 		String resultMbti="";
 		if(iVal>eVal) {
 			resultMbti+="I";
-			resultI=(int)(iVal/(iVal+eVal)*100);
+			resultI=(iVal/(iVal+eVal)*100);
 			resultE=100-resultI;
 		}else {
 			resultMbti+="E";
-			resultE=(int)(eVal/(iVal+eVal)*100);
+			resultE=(eVal/(iVal+eVal)*100);
 			resultI=100-resultE;
 		}
 		
 		if(sVal>nVal) {
 			resultMbti+="S";
-			resultS=(int)(sVal/(sVal+nVal)*100);
+			resultS=(sVal/(sVal+nVal)*100);
 			resultN=100-resultS;
 		}else {
 			resultMbti+="N";
-			resultN=(int)(nVal/(sVal+nVal)*100);
+			resultN=(nVal/(sVal+nVal)*100);
 			resultS=100-resultN;
 		}
 		
