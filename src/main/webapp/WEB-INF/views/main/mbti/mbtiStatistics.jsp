@@ -56,10 +56,9 @@
 	<table id="tbMbtiStatistics">
 		<tbody>
 			<tr>
-				<td class="has-text-align-center" data-align="center"><strong>순위</strong></td>
-				<td class="has-text-align-center" data-align="center"><strong>유형</strong></td>
-				<td class="has-text-align-center" data-align="center"><strong>비율(총
-						104,484명)</strong></td>
+				<th data-align="center"><strong>순위</strong></th>
+				<th data-align="center"><strong>유형</strong></th>
+				<th data-align="center"><strong>비율(총 104,484명)</strong></th>
 			</tr>
 			<tr>
 				<td class="has-text-align-center" data-align="center">1</td>

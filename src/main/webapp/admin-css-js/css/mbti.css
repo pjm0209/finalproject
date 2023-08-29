@@ -582,7 +582,7 @@ section#mbtiSurvey{
 	border-collapse: collapse;
 }
 
-#tbMbtiStatistics td, #tbMbtiStatistics tr{
+#tbMbtiStatistics td, #tbMbtiStatistics tr, #tbMbtiStatistics th{
 	border: 1px solid black;
 	color: #5c5c5c;
 }
