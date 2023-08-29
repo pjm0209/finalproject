@@ -105,7 +105,7 @@
 			  <c:import url="/main/board/boardFormList"></c:import>              
             </ul>
           </li>
-          <li><a class="nav-link scrollto" href="<c:url value='/main/member/mypage'/>">마이페이지</a></li>
+          <li><a class="nav-link scrollto" href="<c:url value='/main/mypage/mypage'/>">마이페이지</a></li>
           <li><a class="nav-link scrollto">${sessionScope.userid}</a></li>
        	  <!-- 로그인 안된 경우 -->
 		  <c:if test="${empty sessionScope.userid }">			

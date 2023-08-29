@@ -10,6 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MypageController {
 	private static final Logger logger = LoggerFactory.getLogger(MypageController.class);
 	
+	@RequestMapping("/mypage")
+	public String mypage() {
+		logger.info("마이페이지");
+		
+		return "main/mypage/mypage";
+	}
+	
 	@RequestMapping("/mbtiResult")
 	public String mbtiResult() {
 		logger.info("마이페이지 - 나의 mbti 결과 페이지");
