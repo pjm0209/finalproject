@@ -4,7 +4,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style>
+<meta charset="UTF-8">
+<meta http-equi="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- <link rel="stylesheet" href="style.css"> -->
+<link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+<!-- <script src="script.js"></script>	 -->
+<style type="text/css">
 @import url('https://fonts.googleapis.com/css2?fmaily=Poppins:wght@300;400;500;600;700&display=swap');
 
 *{
@@ -28,8 +34,9 @@
 	--tran-05: all 0.5s ease;
 }
 section#myPage{
+	padding-left: 223px;
 	padding-top: 100px;
-	height:100%;
+	height:2000px;
 }
 body{
 	height: 100vh;
@@ -229,12 +236,6 @@ body.dark .switch::before{
 	left: 24px; 
 }
 </style>
-	<meta charset="UTF-8">
-	<meta http-equi="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="style.css">
-	<link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
-	<script src="script.js"></script>	
 </head>
 <body>
 	<nav class="sidebar">
