@@ -53,6 +53,7 @@
 	<link href="<c:url value='/admin-css-js/css/board.css'/>" rel="stylesheet" type="text/css">
 	<link href="<c:url value='/admin-css-js/css/boardCreate.css'/>" rel="stylesheet" type="text/css">
 	<link href="<c:url value='/admin-css-js/css/book-order.css'/>" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" href="<c:url value='/main-css-js/board.css'/>">
 	<script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>
 	<script type="text/javascript" src="<c:url value='/resources/ckeditor/ckeditor.js'/>"></script>	
 	
