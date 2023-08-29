@@ -80,4 +80,10 @@
 		where userid=#{userid}
 	</update>
 	
+	<update id="updateMemberOut" parameterType="string">
+      update member
+      set outdate=sysdate
+      where userid=#{userid}
+   </update>	
+	
 </mapper>
