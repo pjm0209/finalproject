@@ -113,8 +113,8 @@
   <script type="text/javascript" src="<c:url value='/admin-css-js/js/mbti.js'/>"></script>
 	
 
-    <script type="text/javascript" src="<c:url value='/admin-css-js/js/mbti.js'/>"></script>
-	
+	<script type="text/javascript" src="<c:url value='/admin-css-js/js/mbti.js'/>"></script>
+
   <!-- Vendor JS Files -->
   <script src="${path }/assets/vendor/aos/aos.js"></script>
   <script src="${path }/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
