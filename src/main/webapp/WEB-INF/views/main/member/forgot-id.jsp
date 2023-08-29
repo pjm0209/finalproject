@@ -121,20 +121,7 @@ form {
                 window.location.href = '<c:url value="/main/index"/>';
             }
         }); 
-        
-        $('#btnCheck').click(function() {
-            var activeTabContent = $('.tab-content.active');
-
-            var name = activeTabContent.find('#name').val();
-            var tel = activeTabContent.find('#tel').val();
-
-            if (name === "" || tel === "") {
-                alert("이름과 휴대폰 번호를 모두 입력해주세요.");
-            } else {
-            	 activeTabContent.closest('form').submit();
-            }
-        });
-        
+            
         $('.tab-button').click(function() {
             $('.tab-button').removeClass('active');
             $(this).addClass('active');

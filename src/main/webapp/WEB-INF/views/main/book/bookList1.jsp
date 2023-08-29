@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 
 <link type="text/css" rel="stylesheet" href="<c:url value='/admin-css-js/css/bookMain.css'/>">
 
 <script type="text/javascript" src="<c:url value='/admin-css-js/js/bookMain.js'/>"></script>
 
 <section>
+
 	<div id='bookSellMainImg' class=" bookslide">
 			<ul class="gallery">
 				<li><img src="<c:url value='/images/bookProduct/slide_01.jpg'/>"></li>
@@ -22,7 +24,16 @@
 		/
 		<a href="/mbti/main/book/bookMain">검사 자료</a>
 	</div>
-	<h2 style="margin-left: 236px;margin-top: 20px">검사자료 구매</h2>
+<div class="flex">
+			<h2 style="margin-left: 236px;margin-top: 20px">검사자료 구매</h2>
+		<div class="booksearch flex">
+					
+					<input type="text">
+						<button type="submit">
+							<span class="material-symbols-outlined">search</span>
+						</button>
+				</div>
+										</div>
 	<div id="containerWrap" class="container clearfix" style="margin-left: 0;margin-right: 0;position: relative">
 		<div id="sidebar" class="" style="">
 			<div class="sidebar__inner shadow-sm bg-body rounded"  style="position: relative;">
@@ -49,6 +60,7 @@
 				</div>
 			</div>
 		</div>
+		
 		<div id="section">
 			<div id="content">
 				<ul class="booklist" style="padding-left:0;">
@@ -58,7 +70,26 @@
 							<div>
 								<p class="box">검사자료</p>
 								<a href="#">MBTI Form M 자가채점용</a>
-								<p><span>가격 | </span>1부~9부 : 7,300원 / 10부~99부 : 6,800원 / 100부~ : 6,300원</p>
+								<p><span>가격 | </span>6,300원</p>
+								<p><span>작가 | </span>6,300원 <span style="padding-left:5px">출판사 | </span>6,300원</p>
+								
+							</div>
+							
+						</div>
+						<div class="btn">
+							<a href="<c:url value='/main/book/bookBasket'/>">장바구니</a>
+							<a href="#">바로구매</a>
+						</div>
+					</li>
+					<li class="flex">
+						<div class="flex title">
+							<a href="#"><img alt="#" src="<c:url value='/images/bookProduct/20024.jpg'/>"></a>
+							<div>
+								<p class="box">검사자료</p>
+								<a href="#">MBTI Form M 자가채점용</a>
+								<p><span>가격 | </span>6,300원</p>
+								<p><span>작가 | </span>6,300원 <span style="padding-left:5px">출판사 | </span>6,300원</p>
+								
 							</div>
 							
 						</div>
@@ -68,13 +99,14 @@
 						</div>
 					</li>
 					<li class="flex">
-						
 						<div class="flex title">
-							<a href="#"><img alt="#" src="<c:url value='/images/bookProduct/20025.jpg'/>"></a>
+							<a href="#"><img alt="#" src="<c:url value='/images/bookProduct/20024.jpg'/>"></a>
 							<div>
 								<p class="box">검사자료</p>
 								<a href="#">MBTI Form M 자가채점용</a>
-								<p><span>가격 | </span>1부~9부 : 7,300원 / 10부~99부 : 6,800원 / 100부~ : 6,300원</p>
+								<p><span>가격 | </span>6,300원</p>
+								<p><span>작가 | </span>6,300원 <span style="padding-left:5px">출판사 | </span>6,300원</p>
+								
 							</div>
 							
 						</div>
@@ -84,13 +116,14 @@
 						</div>
 					</li>
 					<li class="flex">
-						
 						<div class="flex title">
-							<a href="#"><img alt="#" src="<c:url value='/images/bookProduct/20026.jpg'/>"></a>
+							<a href="#"><img alt="#" src="<c:url value='/images/bookProduct/20024.jpg'/>"></a>
 							<div>
 								<p class="box">검사자료</p>
 								<a href="#">MBTI Form M 자가채점용</a>
-								<p><span>가격 | </span>1부~9부 : 7,300원 / 10부~99부 : 6,800원 / 100부~ : 6,300원</p>
+								<p><span>가격 | </span>6,300원</p>
+								<p><span>작가 | </span>6,300원 <span style="padding-left:5px">출판사 | </span>6,300원</p>
+								
 							</div>
 							
 						</div>
@@ -100,29 +133,14 @@
 						</div>
 					</li>
 					<li class="flex">
-						
 						<div class="flex title">
-							<a href="#"><img alt="#" src="<c:url value='/images/bookProduct/20027.jpg'/>"></a>
+							<a href="#"><img alt="#" src="<c:url value='/images/bookProduct/20024.jpg'/>"></a>
 							<div>
 								<p class="box">검사자료</p>
 								<a href="#">MBTI Form M 자가채점용</a>
-								<p><span>가격 | </span>1부~9부 : 7,300원 / 10부~99부 : 6,800원 / 100부~ : 6,300원</p>
-							</div>
-							
-						</div>
-						<div class="btn">
-							<a href="#">장바구니</a>
-							<a href="#">바로구매</a>
-						</div>
-					</li>
-					<li class="flex">
-						
-						<div class="flex title">
-							<a href="#"><img alt="#" src="<c:url value='/images/bookProduct/20028.jpg'/>"></a>
-							<div>
-								<p class="box">검사자료</p>
-								<a href="#">MBTI Form M 자가채점용</a>
-								<p><span>가격 | </span>1부~9부 : 7,300원 / 10부~99부 : 6,800원 / 100부~ : 6,300원</p>
+								<p><span>가격 | </span>6,300원</p>
+								<p><span>작가 | </span>6,300원 <span style="padding-left:5px">출판사 | </span>6,300원</p>
+								
 							</div>
 							
 						</div>

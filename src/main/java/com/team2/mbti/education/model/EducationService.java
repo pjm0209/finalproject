@@ -28,9 +28,13 @@ public interface EducationService {
 	int deleteTeacher(List<EducationVO> list);
 	EducationVO selectByNoTeacher(int eduTeaNo);
 	
+	int insertApply(EducationVO vo);
 	List<EducationVO> selectAllApplicant(EducationVO vo);
 	int getTotalRecordApplicant(EducationVO vo);
 	int deleteApplicant(List<EducationVO> list);
 	int updateApplicant(List<EducationVO> list);
 	
+	List<EducationVO> selectAllList(EducationVO vo);
+	
+	List<EducationVO> selectAllLocName();
 }

@@ -31,8 +31,13 @@ public interface EducationDAO {
 	int deleteTeacher(int eduTeaNo);
 	EducationVO selectByNoTeacher(int eduTeaNo);
 	
+	int insertApply(EducationVO vo);
 	List<EducationVO> selectAllApplicant(EducationVO vo);
 	int getTotalRecordApplicant(EducationVO vo);
 	int deleteApplicant(int eduAppNo);
 	int updateApplicant(int eduAppNo);
+	
+	List<EducationVO> selectAllList(EducationVO vo);
+	
+	List<EducationVO> selectAllLocName();
 }

@@ -21,6 +21,8 @@ public class MbtiSurveyServiceImpl implements MbtiSurveyService{
 	@Override
 	public List<MbtiSurveyVO> selectAllMbtiSurvey(SearchVO vo) {
 		return mbtiSurveyDao.selectAllMbtiSurvey(vo);
+		
+		
 	}
 
 	@Override
@@ -94,5 +96,10 @@ public class MbtiSurveyServiceImpl implements MbtiSurveyService{
 	@Override
 	public int getTotalRecordMbtiStatisticsView(SearchVO searchVo) {
 		return mbtiSurveyDao.getTotalRecordMbtiStatisticsView(searchVo);
+	}
+
+	@Override
+	public List<Map<String, Object>>selectMbtiStatistics(){
+		return mbtiSurveyDao.selectMbtiStatistics();
 	}
 }

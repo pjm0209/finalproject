@@ -40,6 +40,10 @@
 		and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}]]>
 	</select>
 	
+	<select id="selectAllList" parameterType="educationVo" resultType="educationVo">
+		select * from eduTeaListview order by edu_no desc
+	</select>
+	
 	<select id="getTotalRecordEducation" parameterType="educationVo" resultType="int">
 		select count(*) from eduListview
 		<include refid="searchWhere"></include> 
@@ -102,6 +106,10 @@
 		where RNUM > #{firstRecordIndex} and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}]]>
 	</select>
 	
+	<select id="selectAllLocName" resultType="educationVo">
+		select * from education_place order by ep_no
+	</select>
+	
 	<select id="getTotalRecordLocation" parameterType="educationVo" resultType="int">
 		select count(*) from education_place
 		<include refid="searchWhere"></include> 
@@ -119,8 +127,8 @@
 		<selectKey keyProperty="eduTeaNo" order="BEFORE" resultType="int">
 			select education_teacher_seq.nextval from dual
 		</selectKey>
-		insert into education_teacher(edu_tea_no, edu_tea_name, edu_tea_id, edu_tea_pwd, edu_tea_email, edu_tea_tel)
-		values(#{eduTeaNo},#{eduTeaName},#{eduTeaId},#{eduTeaPwd},#{eduTeaEmail},#{eduTeaTel})
+		insert into education_teacher(edu_tea_no, edu_tea_name, edu_tea_id, edu_tea_pwd, edu_tea_email, edu_tea_tel, edu_tea_img)
+		values(#{eduTeaNo},#{eduTeaName},#{eduTeaId},#{eduTeaPwd},#{eduTeaEmail},#{eduTeaTel},#{eduTeaImg})
 	</insert>
 	
 	<select id="selectAllTeacher" parameterType="educationVo" resultType="educationVo">
@@ -153,7 +161,7 @@
 	
 	<update id="updateTeacher" parameterType="educationVo">
 		update education_teacher
-		set edu_tea_name = #{eduTeaName}, edu_tea_id = #{eduTeaId}, edu_tea_pwd = #{eduTeaPwd}, edu_tea_email = #{eduTeaEmail}, edu_tea_tel = #{eduTeaTel}
+		set edu_tea_name = #{eduTeaName}, edu_tea_id = #{eduTeaId}, edu_tea_pwd = #{eduTeaPwd}, edu_tea_email = #{eduTeaEmail}, edu_tea_tel = #{eduTeaTel}, edu_tea_img=#{eduTeaImg}
 		where edu_tea_no = #{eduTeaNo}
 	</update>
 	
@@ -173,6 +181,14 @@
 		<![CDATA[
 		where RNUM > #{firstRecordIndex} and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}]]>
 	</select>
+	
+	<insert id="insertApply" parameterType="educationVo">
+		<selectKey keyProperty="eduAppNo" order="BEFORE" resultType="int">
+			select education_application_seq.nextval from dual
+		</selectKey>
+		insert into education_application(edu_app_no, no, edu_no)
+		values(#{eduAppNo},#{no},#{eduNo})
+	</insert>
 	
 	<select id="getTotalRecordApplicant" parameterType="educationVo" resultType="int">
 		select count(*) from educationview

@@ -8,8 +8,15 @@
 <html lang="ko">
 
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<meta charset="utf-8">
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	
+	<!-- chart meta -->
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Content-Script-Type" content="text/javascript" />
+	<meta http-equiv="Content-Style-Type" content="text/css" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	  
 	<c:set var="path" value="${pageContext.request.contextPath }"/>
 
   <!-- Custom fonts for this template-->
@@ -47,10 +54,12 @@
 	<link href="<c:url value='/admin-css-js/css/book-order.css'/>" rel="stylesheet" type="text/css">
 	<script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>
 	<script type="text/javascript" src="<c:url value='/resources/ckeditor/ckeditor.js'/>"></script>	
-
+	
+	<!-- chart js css -->
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
   <!-- Template Main CSS File -->
-  <link href="${path }//assets/css/style.css" rel="stylesheet">
+  <link href="${path }/assets/css/style.css" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: Ninestars
@@ -96,7 +105,7 @@
 			  <c:import url="/main/board/boardFormList"></c:import>              
             </ul>
           </li>
-          <li><a class="nav-link scrollto" href="<c:url value='/main/member/mypage'/>">마이페이지</a></li>
+          <li><a class="nav-link scrollto" href="<c:url value='/main/mypage/mypage'/>">마이페이지</a></li>
           <li><a class="nav-link scrollto">${sessionScope.userid}</a></li>
        	  <!-- 로그인 안된 경우 -->
 		  <c:if test="${empty sessionScope.userid }">			
