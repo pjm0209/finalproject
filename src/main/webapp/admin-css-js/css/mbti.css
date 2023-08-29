@@ -10,6 +10,11 @@ section#mbti{
 	width: 1350px;
 	margin-left: 300px;
 }
+
+.mbti-div-size2{
+	width: 1350px;
+	margin-left: 170px;
+}
 #mbti-search-div{
 	width: 600px;
 	float: right;
@@ -133,7 +138,14 @@ section#mbtiSurvey{
 	background-position: center;
 	margin-bottom: 100px;
 }
-
+.mbti-result2{
+	width: 100%;
+	height: 800px;
+	background-size: 100%;
+	background-repeat: no-repeat;
+	background-position: center;
+	margin-bottom: 100px;
+}
 .character-type h2{
 	margin-left: 300px;
 	margin-bottom: 50px;
