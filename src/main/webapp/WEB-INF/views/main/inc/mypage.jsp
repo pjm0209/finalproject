@@ -28,6 +28,7 @@
 	--tran-05: all 0.5s ease;
 }
 section#myPage{
+	padding-top: 100px;
 	height:100%;
 }
 body{
