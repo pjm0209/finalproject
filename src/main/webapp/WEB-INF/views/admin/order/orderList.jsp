@@ -8,7 +8,7 @@
 	<h2 class="text-gray-800">상품 주문 관리</h2>
 </div>
 <!--  -->
-<%@ include file="../order/orderSideBody.jsp"%>
+<!-- <%@ include file="../order/orderSideBody.jsp"%>  -->
 <!--  -->
 <div class="board-body">
 	<div id="board-title">
@@ -39,6 +39,8 @@
 			</c:otherwise> 
 		</c:choose>
 	</div>
+	
+	
 	<!--  -->
 	<div>
 		<%@ include file="../order/orderSearch.jsp"%>

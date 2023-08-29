@@ -7,6 +7,7 @@
 }
 
 .inner1200 {position:relative; width:1400px; margin:0 auto; margin-top:50px;}
+.inner1000 {position:relative; width:1200px; margin:0 auto; margin-top:50px;}
 
 /* 메인 페이지 */
 #education-main {
@@ -155,6 +156,21 @@ div.tea5 {
 
 
 /* educationList */
+select#list-search-select {
+	font-size: 16px;
+    margin-right: 10px;
+    height: 40px;
+    margin-bottom: 0;
+    border: 1px solid #d8dce5;
+    border-radius: 6px;
+    margin-left: 885px;
+}
+
+input#list-search-area {
+	flex: none;
+    width: 250px;
+}
+
 .section-list {
 	padding:30px 0;
 	overflow: hidden;
@@ -269,6 +285,80 @@ input#applyBtn {
 	font-size: 20px;
     color: #333;
 }
+
+
+/* educationLocation */
+.map-box .map-list {
+	flex-shrink: 0;
+	width: 220px;
+	margin-right: 120px;
+	margin-left: 30px;
+	list-style: none;
+	padding: 0;
+}
+
+.map-box .map-list li {
+	text-align: left;
+	border-bottom: 1px solid #cacacc;
+	padding-left: 20px;
+}
+
+.map-box .map-list li>button{
+	display: inline-block;
+	border: none;
+	font-size: 15px;
+	color: #666;
+	letter-spacing: -0.5em;
+	padding: 5px 0;
+	text-align: left;
+	cursor: pointer;
+}
+
+
+.map-info .map-wrap {
+	display: block;
+    background-color: #fff;
+    width: 928px;
+    height: 596px;
+}
+
+.location-info {
+	margin-top: 50px;
+	padding: 0 20px;
+}
+
+.location-info .zipcode {
+	width: 250px;
+	border-bottom: 2px solid #d6d6d6;
+	list-style: none;
+}
+
+.location-info .address {
+	width: 360px;
+	list-style: none;
+}
+
+.location-info .tel {
+	position: relative;
+	min-height: 114px;
+	list-style: none;
+}
+
+.location-info dt {
+	color: #000;
+	font-size: 21px;
+	font-weight: 800;
+	margin-bottom: 20px;
+}
+
+.location-info dd {
+	font-size: 16px;
+	color: #666;
+	word-break: keep-all;
+}
+
+
+
 
 
 

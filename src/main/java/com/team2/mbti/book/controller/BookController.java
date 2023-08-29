@@ -35,26 +35,39 @@ public class BookController {
 		// 1
 		logger.info("책관리 페이지 - 책 리스트 페이지입니다.,파라미터 vo={}", vo);
 		// 2
+		
+		//
 		//
 		PaginationInfo pagingInfo = new PaginationInfo();
 		pagingInfo.setBlockSize(ConstUtil.BLOCK_SIZE);
 		pagingInfo.setCurrentPage(vo.getCurrentPage());
 		
 		String bookFlag = request.getParameter("bookFlag");
+		if( (bookFlag != null && !bookFlag.isEmpty()) &&
+			( bookFlag.equals("bookList") || bookFlag.equals("bookListByKeyword")
+			|| bookFlag.equals("Inventory") || bookFlag.equals("InventoryByKeyword")) ) {
+			
+			vo.setBookFlag(bookFlag);
+		} else {
+			model.addAttribute("msg", "잘못된 url입니다.");
+			model.addAttribute("url", "/admin/index");
+			
+			return "common/message";
+		}
 		
 		if (bookFlag.equals("bookList")) {
 			pagingInfo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
 			vo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
 		} else if (bookFlag.equals("bookListByKeyword")) {
-			pagingInfo.setRecordCountPerPage(Integer.parseInt(vo.getPerRecord()));
-			vo.setRecordCountPerPage(Integer.parseInt(vo.getPerRecord()));
+			pagingInfo.setRecordCountPerPage(vo.getPerRecord());
+			vo.setRecordCountPerPage(vo.getPerRecord());
 			logger.info(" 레코드 확인용 vo={}", vo);
 		} else if(bookFlag.equals("Inventory")) {
 			pagingInfo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
 			vo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
-		} else if(bookFlag.equals("InventoryByKeyowrd")) {
-			pagingInfo.setRecordCountPerPage(Integer.parseInt(vo.getPerRecord()));
-			vo.setRecordCountPerPage(Integer.parseInt(vo.getPerRecord()));
+		} else if(bookFlag.equals("InventoryByKeyword")) {
+			pagingInfo.setRecordCountPerPage(vo.getPerRecord());
+			vo.setRecordCountPerPage(vo.getPerRecord());
 		}
 		
 		vo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
@@ -117,4 +130,6 @@ public class BookController {
 		return "redirect:/admin/book/bookList";
 	}
 
+	
+	
 }//

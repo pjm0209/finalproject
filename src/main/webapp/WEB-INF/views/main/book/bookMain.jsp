@@ -17,7 +17,7 @@
 			<li><img src="<c:url value='/images/bookProduct/slide_04.jpg'/>"></li>
 		</ul>
 	</div>
-	<div style="padding-left: 240px;margin-top: 50px;">
+	<div style="padding-left: 240px; margin-bottom:20px;">
 		<a href="<c:url value='/main/index'/>"><i class="bi bi-house-door-fill"></i></a>
 		/
 		<a href="<c:url value='/main/book/bookMain'/>">도서 / 자료 구매</a>
