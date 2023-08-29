@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.team2.mbti.member.model.MemberService;
 import com.team2.mbti.member.model.MemberVO;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
@@ -72,6 +74,51 @@ public class MemberMyPageController {
 		}else if(result==MemberService.PWD_DISAGREE) {
 			msg="비밀번호가 일치하지 않습니다.";
 		} 
+
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+
+		return "common/message";
+	}
+	
+	@GetMapping("/memberOut")
+	public String memberOut_get(HttpSession session) {
+		String userid=(String) session.getAttribute("userid");
+		logger.info("회원 탈퇴 화면, userid={}", userid);
+
+		return "main/member/memberOut";
+	}
+	
+	@PostMapping("/memberOut")
+	public String memberOut_post(@RequestParam String pwd, HttpSession session,
+			HttpServletResponse response, Model model) {
+
+		String userid=(String)session.getAttribute("userid");
+		logger.info("회원 탈퇴 처리, pwd={}, userid={}" ,pwd, userid);
+
+		int result=memberService.loginCheck(userid, pwd);
+		logger.info("비밀번호 체크 결과, result={}", result);
+		
+		String msg="회원 탈퇴 실패",url="/member/memberOut";
+		if(result==MemberService.LOGIN_OK) {
+			int cnt=memberService.updateMemberOut(userid);
+			logger.info("회원탈퇴 결과, cnt={}", cnt);
+			
+			if(cnt>0) {
+				msg="회원 탈퇴 성공";
+				url="/main/index";
+
+				session.invalidate();
+				
+				Cookie ck = new Cookie("ck_userid", userid);
+				ck.setPath("/");
+				ck.setMaxAge(0); 
+				response.addCookie(ck);
+			}
+		}else if(result==MemberService.PWD_DISAGREE) {
+			msg="비밀번호가 틀렸습니다";
+			url="/main/member/memberOut";
+		}
 
 		model.addAttribute("msg", msg);
 		model.addAttribute("url", url);

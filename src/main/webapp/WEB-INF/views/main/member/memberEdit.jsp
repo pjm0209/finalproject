@@ -172,7 +172,7 @@ body {
 			
 			<label>비밀번호 확인</label>
 			<div class="div-memberEdit">
-				<input type="password" class="pwdCheck" id="memberpwdCheck" name="registerPwdCheck">
+				<input type="password" class="pwdCheck" id="memberpwdCheck" name="editPwdCheck">
 				<div class="error" id="pwdCheckError"></div>
 			</div><br>
 			
