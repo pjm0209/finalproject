@@ -106,21 +106,18 @@ position:relative;
 	text-align: center;
 }
 
-.booklist_area {
-	width: 20%;
+#basket .booklist_area {
+	width: 25%;
     border: 3px #ee7843 solid;
     border-radius: 10px;
     padding: 25px;
-    max-height:360px;
-    position:fixed;
-    top: 180px;
-    right:260px;
+    max-height:285px;
     }
-.booklist_area>ul{padding:0; font-size:22px; margin:0;}
+#basket .booklist_area>ul{padding:0; font-size:22px;}
 
-.booklist_area>ul li p span{font-size:30px; font-weight: bold;}
+#basket .booklist_area>ul li p span{font-size:30px; font-weight: bold;}
 
-.booklist_area>button{
+#basket .booklist_area>button{
     width: 100%;
     padding: 20px;
     border: 0;
@@ -146,16 +143,6 @@ position:relative;
     padding: 5px 10px;
     border-radius: 10px;
     font-weight: bold;}
-    
-    section.booklist_right {    width: 23%;
-    position: absolute;
-    top: 50px;
-    right: 240px;}
-    
-    section.booklist_right>ul.flex li span{vertical-align:bottom; font-size:30px;}
-    section.booklist_right>ul.flex li{font-size:22px;}
-    section.booklist_right>ul.flex li.on {color:#ee7843; font-weight:bold;}
-    section.booklist_right>ul.flex li.on span{color:#ee7843; font-weight:bold;}
 </style>
 
 <div class="check_box flex">
@@ -196,96 +183,25 @@ position:relative;
 				</div>
 			</div>
 		</li> 
-		<li class="flex">
-			<div class="flex box1">
-				<input type="checkbox">
-				<div class="flex">
-					<img src="<c:url value='/images/bookProduct/1.jpg'/>" alt="상품이미지" width="140px;"
-					style="vertical-align: middle;">
-					<P>제 목<span>10,000원</span></P>
-				</div>
-			</div>
-			<div class="box2">
-				<a href="javascript:void(0);"><span class="material-symbols-outlined"> close </span></a>
-				<p>10,000원</p>
-				<div class="flex">
-					<button class="remove">
-						<span class="material-symbols-outlined"> remove </span>
-					</button>
-					<p class="tt">10</p>
-					<button class="plus">
-						<span class="material-symbols-outlined"> add </span>
-					</button>
-				</div>
-			</div>
-		</li> 
-		<li class="flex">
-			<div class="flex box1">
-				<input type="checkbox">
-				<div class="flex">
-					<img src="<c:url value='/images/bookProduct/1.jpg'/>" alt="상품이미지" width="140px;"
-					style="vertical-align: middle;">
-					<P>제 목<span>10,000원</span></P>
-				</div>
-			</div>
-			<div class="box2">
-				<a href="javascript:void(0);"><span class="material-symbols-outlined"> close </span></a>
-				<p>10,000원</p>
-				<div class="flex">
-					<button class="remove">
-						<span class="material-symbols-outlined"> remove </span>
-					</button>
-					<p class="tt">10</p>
-					<button class="plus">
-						<span class="material-symbols-outlined"> add </span>
-					</button>
-				</div>
-			</div>
-		</li> 
 
 	</ul>
 	
-	
-</section>
-
-<section class="booklist_right">
-	<ul class="flex">
-		<li class="on">
-		<span class="material-symbols-outlined"> counter_1 </span>
-		장바구니
-		</li>
-		<li>
-		<span class="material-symbols-outlined  "> counter_2 </span>
-		주문/결제
-		</li>
-		<li>
-		<span class="material-symbols-outlined  "> counter_3 </span>
-		주문완료
-		</li>
-	</ul>
 	<div class="booklist_area">
-			
-				<ul>
-					<li class="flex">
-						<p>상품금액</p>
-						<p><span>0</span>원</p>
-					</li>
-					<li class="flex">
-						<p>배송비</p>
-						<p><span>0</span>원</p>
-					</li>
-				</ul>
-				<hr>
-				<ul>
-					<li class="flex">
-						<p>총 금액</p>
-						<p><span>0</span>원</p>
-					</li>
-					
-				</ul>
-				
-				<button type="submit">주문하기</button>
-		</div>
+		
+			<ul>
+				<li class="flex">
+					<p>상품금액</p>
+					<p><span>0</span>원</p>
+				</li>
+				<li class="flex">
+					<p>배송비</p>
+					<p><span>0</span>원</p>
+				</li>
+			</ul>
+			<button type="submit">주문하기</button>
+	</div>
 </section>
+
+
 
 <%@ include file="../inc/bottom.jsp"%>
