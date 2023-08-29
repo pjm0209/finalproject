@@ -34,4 +34,7 @@ public interface EducationService {
 	int deleteApplicant(List<EducationVO> list);
 	int updateApplicant(List<EducationVO> list);
 	
+	List<EducationVO> selectAllList(EducationVO vo);
+	
+	List<EducationVO> selectAllLocName();
 }
