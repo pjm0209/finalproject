@@ -27,7 +27,10 @@
 	--tran-04: all 0.4s ease;
 	--tran-05: all 0.5s ease;
 }
-
+section#myPage{
+	padding-top: 100px;
+	height:100%;
+}
 body{
 	height: 100vh;
 	background: var(--body-color);
@@ -45,9 +48,9 @@ body.dark{
 /* == 메뉴바* == */
 .sidebar{
 	position: fixed;
-	top: 0;
+	top: 70px;
 	left: 0;
-	height: 100%;
+	height: 80%;
 	width: 250px;	
 	padding: 10px 14px;
 	background: var(--sidebar-color);
@@ -55,7 +58,7 @@ body.dark{
 
 /* == Resuable CSS == */
 .sidebar .text{
-	font-size: 20px;
+	font-size: 18px;
 	font-weight: bold;
 	color: var(--text-color);
 }
@@ -100,6 +103,7 @@ sidebar li .text{
 .sidebar header .image-text{
 	display: flex;
 	align-items: center;	
+	margin-left:-11px;
 } 
 
 header .image-text .header-text{
@@ -118,11 +122,11 @@ header .image-text .header-text{
 .sidebar header .toggle{
 	position: absolute;
 	top: 50%;
-	right: -25px;
+	right: -10px;
 	transform: translateY(-50%);
 	height: 25px;
 	width: 25px;
-	background: var(--primary-color);
+	/* background: var(--primary-color); */
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -218,12 +222,13 @@ header .image-text .header-text{
 	background: var(-sidebar-color);
 	transition: var(--tran-03);
 }
-
+ul#menu-links{
+	margin-left: -35px;
+}
 body.dark .switch::before{
 	left: 24px; 
 }
 </style>
-
 	<meta charset="UTF-8">
 	<meta http-equi="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -254,45 +259,45 @@ body.dark .switch::before{
 					<i class='bx bx-search icons'></i>
 						<input type="search" placeholder="Search...">																
 				</li>
-				<ul class="menu-links">
-					<li class="nav-link">
+				<ul class="menu-links" id="menu-links">
+					<li class="nav-link2">
 						<a href="<c:url value='/main/member/memberEdit'/>">
 							<i class='bx bx-home-alt icon'></i>
 							<span class="text nav-text">나의 정보</span>						
 						</a>
 					</li>
-					<li class="nav-link">
+					<li class="nav-link2">
 						<a href="#">
 							<i class='bx bx-bar-chart-alt-2 icon'></i>
 							<span class="text nav-text">장바구니</span>						
 						</a>
 					</li>					
-					<li class="nav-link">
+					<li class="nav-link2">
 						<a href="#">
 							<i class='bx bx-bell icon'></i>
 							<span class="text nav-text">주문 내역</span>						
 						</a>
 					</li>					
-					<li class="nav-link">
-						<a href="#">
+					<li class="nav-link2">
+						<a href="<c:url value='/main/mypage/mbtiResult'/>">
 							<i class='bx bx-pie-chart-alt icon'></i>
 							<span class="text nav-text">MBTI 결과</span>						
 						</a>
 					</li>	
-					<li class="nav-link">
+					<li class="nav-link2">
 						<a href="#">
 							<i class='bx bx-heart icon'></i>
 							<span class="text nav-text">나의 교육</span>						
 						</a>
 					</li>										
-					<li class="nav-link">
+					<li class="nav-link2">
 						<a href="<c:url value='/main/member/memberOut'/>">
 							<i class='bx bx-wallet icon'></i>
 							<span class="text nav-text">회원탈퇴 </span>						
 						</a>
 					</li>		
 					
-					<li class="nav-link">
+					<li class="nav-link2">
 						<a href="<c:url value='/main/index	'/>">
 							<i class='bx bx-home icon'></i>
 							<span class="text nav-text">메인으로 이동</span>						
@@ -302,5 +307,3 @@ body.dark .switch::before{
 			</div>		
 		</div>
 	</nav>
-</body>
-</html>	
