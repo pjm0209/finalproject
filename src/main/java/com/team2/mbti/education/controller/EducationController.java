@@ -1,6 +1,11 @@
 package com.team2.mbti.education.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.http.HttpRequest;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,12 +17,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.team2.mbti.board.model.BoardFileVO;
 import com.team2.mbti.common.ConstUtil;
+import com.team2.mbti.common.FileUploadUtil;
 import com.team2.mbti.common.PaginationInfo;
 import com.team2.mbti.education.model.EducationListVO;
 import com.team2.mbti.education.model.EducationService;
 import com.team2.mbti.education.model.EducationVO;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -27,6 +35,7 @@ public class EducationController {
 	private static final Logger logger = LoggerFactory.getLogger(EducationController.class);
 	
 	private final EducationService educationService;
+	private final FileUploadUtil fileUploadUtil;
 	
 	@GetMapping("/educationWrite")
 	public String eduWrite_get(Model model) {
@@ -378,19 +387,37 @@ public class EducationController {
 	
 	
 	@RequestMapping("/teaDelete")
-	public String teaDelete(@ModelAttribute EducationListVO listVo, Model model) {
+	public String teaDelete(@ModelAttribute EducationListVO listVo, HttpServletRequest request, Model model) {
 		logger.info("강사 삭제 처리, 파라미터 listVo={}", listVo);
 		
 		List<EducationVO> list = listVo.getEducationItems();
-
+		List<String> fileList = new ArrayList<>();
+		
+		for(EducationVO eduVo : listVo.getEducationItems()) {
+			EducationVO eduVo2 = educationService.selectByNoTeacher(eduVo.getEduTeaNo());
+			fileList.add(eduVo2.getEduTeaImg());
+		}
+		
 		int cnt = educationService.deleteTeacher(list);
 		
 		String msg="", url="/admin/education/teacher";
 		if(cnt>0) {
 			msg="선택한 강사가 삭제되었습니다.";
+			for(int i = 0; i < list.size(); i++) {
+				EducationVO vo = list.get(i);
+				String filePath = fileUploadUtil.getUploadPath(request, ConstUtil.UPLOAD_IMAGE_FLAG);
+				File file = new File(filePath, fileList.get(i));
+				
+				if(file.exists()) {
+					boolean result = file.delete();
+					logger.info("파일 삭제처리 결과 result: {}", result);
+				}
+			}
 		}else {
 			msg="선택한 강사를 삭제하는 도중 에러가 발생하였습니다.";
 		}
+		
+		
 		
 		model.addAttribute("msg", msg);
 		model.addAttribute("url", url);
@@ -409,19 +436,29 @@ public class EducationController {
 		return "admin/education/teacherWrite";
 	}
 	
-	@PostMapping("/teacherWrite")
-	public String teaWrite_post(@ModelAttribute EducationVO vo, Model model){
+	@RequestMapping("/teacherWrite")
+	public String teaWrite_post(@ModelAttribute EducationVO vo, HttpServletRequest request, Model model){
 		logger.info("강사 등록 처리, 파라미터 vo={}", vo);
-		
-		int cnt=educationService.insertTeacher(vo);
-		logger.info("강사 등록 처리 결과 cnt={}", cnt);
-		
-		String msg="강사 등록에 실패하였습니다.",url="/admin/education/teacherWrite";
-		if(cnt>0) {
-			msg="강사가 성공적으로 등록되었습니다.";
-			url="/admin/education/teacher";
-		}
-		
+		int cnt=0;
+			try {
+				List<Map<String, Object>> fileList = fileUploadUtil.fileupload(request, ConstUtil.UPLOAD_IMAGE_FLAG);
+				if(fileList != null && !fileList.isEmpty()) {
+					for(Map<String, Object> fileMap : fileList) {
+						String fileName = (String) fileMap.get("fileName");
+						vo.setEduTeaImg(fileName);
+						cnt=educationService.insertTeacher(vo);
+						logger.info("강사 등록 처리 결과 cnt={}", cnt);
+					}
+				}
+			} catch (IllegalStateException | IOException e) {
+				e.printStackTrace();
+			}
+			
+			String msg="강사 등록에 실패하였습니다.",url="/admin/education/teacherWrite";
+			if(cnt>0) {
+				msg="강사가 성공적으로 등록되었습니다.";
+				url="/admin/education/teacher";
+			}
 		model.addAttribute("msg", msg);
 		model.addAttribute("url", url);
 		
@@ -434,6 +471,7 @@ public class EducationController {
 		logger.info("강사 수정 페이지");
 		
 		EducationVO vo = educationService.selectByNoTeacher(eduTeaNo);
+		logger.info("강사 수정 페이지 조회, vo={}",vo);
 		
 		model.addAttribute("title", "강사 수정");
 		model.addAttribute("vo", vo);
@@ -442,9 +480,37 @@ public class EducationController {
 	}
 	
 	@PostMapping("/teacherEdit")
-	public String teaEdit_post(@ModelAttribute EducationVO vo, Model model){
+	public String teaEdit_post(@ModelAttribute EducationVO vo, @RequestParam String oldFileName, HttpServletRequest request, Model model){
 		logger.info("강사 수정 처리, 파라미터 vo={}", vo);
 		
+		String fileName = "", originalFileName = "";
+		try {
+			List<Map<String, Object>> fileList
+			= fileUploadUtil.fileupload(request, ConstUtil.UPLOAD_IMAGE_FLAG);
+
+			long fileSize = 0;
+			for(Map<String, Object> map : fileList) {
+				fileName = (String) map.get("fileName");
+			}
+
+			vo.setEduTeaImg(fileName);
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		if(fileName!=null && !fileName.isEmpty()) { 
+			if(oldFileName!=null && !oldFileName.isEmpty()) {
+				String upPath
+				=fileUploadUtil.getUploadPath(request, ConstUtil.UPLOAD_IMAGE_FLAG);
+				File file= new File(upPath,oldFileName);
+				if(file.exists()) {
+					boolean bool=file.delete();
+					logger.info("글 수정- 파일삭제 여부:{}", bool);
+				}
+			}
+		}//if
 		int cnt=educationService.updateTeacher(vo);
 		logger.info("강사 수정 처리 결과 cnt={}", cnt);
 		

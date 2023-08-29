@@ -21,6 +21,8 @@ public class MbtiSurveyServiceImpl implements MbtiSurveyService{
 	@Override
 	public List<MbtiSurveyVO> selectAllMbtiSurvey(SearchVO vo) {
 		return mbtiSurveyDao.selectAllMbtiSurvey(vo);
+		
+		
 	}
 
 	@Override

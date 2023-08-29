@@ -15,6 +15,7 @@ import com.team2.mbti.common.PaginationInfo;
 import com.team2.mbti.education.model.EducationService;
 import com.team2.mbti.education.model.EducationVO;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -51,7 +52,7 @@ public class MainEducationController {
 		vo.setRecordCountPerPage(ConstUtil.MBTI_RECORD_COUNT);
 		vo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
 		
-		list = educationService.selectAllEducation(vo);
+		list = educationService.selectAllList(vo);
 		logger.info("교육 목록 결과 list.size={}", list.size());
 		int totalRecord=educationService.getTotalRecordEducation(vo);
 		logger.info("교육 전체 검색 결과 totalRecord={}",totalRecord);
@@ -65,8 +66,10 @@ public class MainEducationController {
 	
 	
 	@RequestMapping("/apply")
-	public String eduApply(@ModelAttribute EducationVO vo, Model model){
+	public String eduApply(@ModelAttribute EducationVO vo, HttpSession session, Model model){
 		logger.info("신청 등록 처리, 파라미터 vo={}", vo);
+		int no = (int)session.getAttribute("no");
+		vo.setNo(no);
 		
 		int cnt=educationService.insertApply(vo);
 		logger.info("신청 등록 처리 결과 cnt={}", cnt);
@@ -85,8 +88,11 @@ public class MainEducationController {
 	
 	
 	@RequestMapping("/location")
-	public String eduLocation() {
-		logger.info("교육장 위치 페이지 보여주기");
+	public String eduLocation(@ModelAttribute EducationVO vo, Model model) {
+		logger.info("교육장 위치 페이지 보여주기, 파라미터 vo={}", vo);
+		
+		List<EducationVO> list = educationService.selectAllLocName();
+		model.addAttribute("list", list);
 		
 		return "main/education/location";
 	}

@@ -15,7 +15,7 @@
 	<c:set var="no" value="0" />	
 </c:if>
 <div class="teacher-write">
-	<form name="teacherWrite-frm" method="post" action="<c:url value='${url}'/>">
+	<form name="teacherWrite-frm" method="post" action="<c:url value='${url}'/>" enctype="multipart/form-data">
 	<c:if test="${!empty vo}">
 		<input type="hidden" value="${vo.eduTeaNo }" name="eduTeaNo">
 	</c:if>
@@ -65,6 +65,17 @@
 						<div class="input_group v2">
 							<input class="form-control" type="text" value="${vo.eduTeaTel }" name="eduTeaTel" id="teacher_tel" maxlength="13">
 							${educationVo.eduTeaTel }
+						</div>
+					</dd>
+					<dt>사진</dt>
+					<dd>
+						<div class="input_group v2">
+							<input type="hidden" name="oldFileName" value="${vo.eduTeaImg }">
+							<input class="form-control" type="file" value="${vo.eduTeaImg }" name="file" id="teacher_img" maxlength="20">
+							${educationVo.eduTeaImg }
+							<c:if test="${vo.eduTeaImg != null && vo.eduTeaImg != ''}">
+								<img src="<c:url value='/fileUpload/${vo.eduTeaImg }'/>">
+							</c:if>
 						</div>
 					</dd>
 				</div>
