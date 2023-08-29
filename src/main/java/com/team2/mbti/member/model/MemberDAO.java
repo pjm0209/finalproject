@@ -21,6 +21,9 @@ public interface MemberDAO {
 		
 	int deleteMultiMember(int adminNo);
 	
+	int updateMember(MemberVO vo); //회원정보수정
+	int updateMemberOut(String userid); //회원탈퇴
+	
 	MemberVO readMember(String userid); //회원읽기
 	public int updatePw(MemberVO vo) throws Exception;//비밀번호변경
 	

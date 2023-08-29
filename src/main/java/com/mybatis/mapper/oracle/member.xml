@@ -74,16 +74,16 @@
 		where no=#{no}
 	</delete>
 	
-	<!-- 비밀번호 변경 -->
-	<update id="updatePw" >
-		update member 
-		set pwd = #{pwd} 
-		where userid = #{userid}
+	<update id="updateMember" parameterType="memberVo">
+		update member
+		set email=#{email}, hp=#{hp}, zipcode=#{zipcode}, address=#{address}, address_Detail=#{addressDetail}
+		where userid=#{userid}
 	</update>
 	
-	<select id="findId" parameterType="string" resultType="string">
-		select userid from member 
-		where name = #{name} 
-		and email = #{email}
-	</select>
+	<update id="updateMemberOut" parameterType="string">
+      update member
+      set outdate=sysdate
+      where userid=#{userid}
+   </update>	
+	
 </mapper>

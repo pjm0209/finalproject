@@ -35,8 +35,9 @@
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i" rel="stylesheet">
-
-
+  
+  <!-- kakao -->
+  <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.3.0/kakao.min.js" integrity="sha384-70k0rrouSYPWJt7q9rSTKpiTfX6USlMYjZUtr1Du+9o4cGvhPAWxngdtVZDdErlh" crossorigin="anonymous"></script>
 <!-- Vendor CSS Files -->
   <link href="${path }/assets/vendor/aos/aos.css" rel="stylesheet">
   <link href="${path }/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -52,6 +53,7 @@
 	<link href="<c:url value='/admin-css-js/css/board.css'/>" rel="stylesheet" type="text/css">
 	<link href="<c:url value='/admin-css-js/css/boardCreate.css'/>" rel="stylesheet" type="text/css">
 	<link href="<c:url value='/admin-css-js/css/book-order.css'/>" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" href="<c:url value='/main-css-js/board.css'/>">
 	<script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>
 	<script type="text/javascript" src="<c:url value='/resources/ckeditor/ckeditor.js'/>"></script>	
 	
@@ -105,7 +107,7 @@
 			  <c:import url="/main/board/boardFormList"></c:import>              
             </ul>
           </li>
-          <li><a class="nav-link scrollto" href="<c:url value='/main/member/mypage'/>">마이페이지</a></li>
+          <li><a class="nav-link scrollto" href="<c:url value='/main/mypage/mypage'/>">마이페이지</a></li>
           <li><a class="nav-link scrollto">${sessionScope.userid}</a></li>
        	  <!-- 로그인 안된 경우 -->
 		  <c:if test="${empty sessionScope.userid }">			
