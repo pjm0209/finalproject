@@ -36,7 +36,7 @@ public class EducationVO extends SearchVO {
 	private String eduTeaPwd;
 	private String eduTeaEmail;
 	private String eduTeaTel;
-	
+	private String eduTeaImg;
 	private String name;
 
 	@Override
@@ -47,6 +47,6 @@ public class EducationVO extends SearchVO {
 				+ ", epLatitude=" + epLatitude + ", epLongitude=" + epLongitude + ", epTel=" + epTel + ", eduAppNo="
 				+ eduAppNo + ", no=" + no + ", eduAppFlag=" + eduAppFlag + ", eduTeaNo=" + eduTeaNo + ", eduTeaName="
 				+ eduTeaName + ", eduTeaId=" + eduTeaId + ", eduTeaPwd=" + eduTeaPwd + ", eduTeaEmail=" + eduTeaEmail
-				+ ", eduTeaTel=" + eduTeaTel + ", name=" + name + ", toString()=" + super.toString() + "]";
+				+ ", eduTeaTel=" + eduTeaTel + ", eduTeaImg=" + eduTeaImg + ", name=" + name + ", toString()=" + super.toString() + "]";
 	}
 }

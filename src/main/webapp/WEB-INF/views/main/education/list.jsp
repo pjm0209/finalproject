@@ -4,7 +4,7 @@
 
 <script type="text/javascript">
 	//신청하기 버튼을 눌렀을 때 로그인 체크
-	function logincheck(){
+	function logincheck(eduNo){
 		var signIn = "${sessionScope.userid}";
 		
 		if(signIn == null || signIn == ""){
@@ -15,7 +15,7 @@
 				return false;
 			})
 		}else {
-			location.href="<c:url value='/main/education/apply'/>";
+			location.href="<c:url value='/main/education/apply?eduNo="+eduNo+"'/>";
 		}
 	}
 </script>
@@ -59,7 +59,7 @@
 					<article>
 						  <figure>
 							<p class="tea" style="text-align: center; margin-top:10px">
-								<img src="../../images/education/na.jpg">
+								<img src="<c:url value='/images/education/${educationVo.eduTeaImg }'/>">
 							</p>
 							<p class="tea-name">
 								<span class="name">${educationVo.eduTeaName }<br>강사님</span>	
@@ -74,7 +74,7 @@
 						  	<p class="price"><em>가격</em>    <fmt:formatNumber value="${educationVo.eduPrice }" pattern="#,###"/>원</p>
 						  </figcaption>
 						  <div class="btnGroup">
-						  	<input type="button" id="applyBtn" value="신청하기" onclick='logincheck()'/>
+						  	<input type="button" id="applyBtn" value="신청하기" onclick='logincheck(${educationVo.eduNo})'/>
 						  </div>
 					</article>
 				</li>
