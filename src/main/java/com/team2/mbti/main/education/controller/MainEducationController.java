@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.team2.mbti.common.ConstUtil;
@@ -63,11 +64,33 @@ public class MainEducationController {
 	}
 	
 	
+	@RequestMapping("/apply")
+	public String eduApply(@ModelAttribute EducationVO vo, Model model){
+		logger.info("신청 등록 처리, 파라미터 vo={}", vo);
+		
+		int cnt=educationService.insertApply(vo);
+		logger.info("신청 등록 처리 결과 cnt={}", cnt);
+		
+		String msg="신청 등록에 실패하였습니다.",url="/main/education/list";
+		if(cnt>0) {
+			msg="신청이 성공적으로 등록되었습니다.";
+			url="/main/education/list?eduNo="+vo.getEduNo();
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
+	}
+	
+	
 	@RequestMapping("/location")
 	public String eduLocation() {
 		logger.info("교육장 위치 페이지 보여주기");
 		
 		return "main/education/location";
 	}
+	
+	
 	
 }

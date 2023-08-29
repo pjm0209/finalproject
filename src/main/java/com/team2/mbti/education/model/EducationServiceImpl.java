@@ -163,4 +163,9 @@ public class EducationServiceImpl implements EducationService{
 		return educationDao.selectByNoTeacher(eduTeaNo);
 	}
 
+	@Override
+	public int insertApply(EducationVO vo) {
+		return educationDao.insertApply(vo);
+	}
+
 }
