@@ -29,6 +29,8 @@ public interface MemberService {
 	
 	int deleteMultiMember(List<MemberVO> list);
 	
+	int updateMember(MemberVO vo); //회원정보수정
+	
 	public void sendEmail(MemberVO vo, String div) throws Exception; //이메일 발송
 
 	public void findPwd(HttpServletResponse resp, MemberVO vo) throws Exception; //비밀번호찾기

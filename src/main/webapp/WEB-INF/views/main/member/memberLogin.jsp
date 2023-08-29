@@ -191,14 +191,18 @@ function kakaoLogin() {
     	
         Kakao.API.request({
           url: '/v2/user/me',
-          data : {
-        	  property_keys: ['kakao_profile_nickname', 'kakao_profile_image', 'kakao_account_email'],
-          },
           
-          success: function (response) {
-        	  console.log(response)
+          success: function(result) {
+        	  console.log(result)
+        	  /*$.ajax({
+        		  url:"<c:url value='로그인 처리 할 url'/>"
+        		  data:{
+        			name:result.properties.nickname  
+        		  },
+        	  })*/
           },
           fail: function (error) {
+		    alert(error);
             console.log(error)
           },
         })

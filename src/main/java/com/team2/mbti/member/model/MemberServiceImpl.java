@@ -100,6 +100,12 @@ public class MemberServiceImpl implements MemberService {
 		
 		return cnt;
 	}
+	
+	//회원정보 수정
+	@Override
+	public int updateMember(MemberVO vo) {
+		return memberDao.updateMember(vo);
+	}
 
 	//비밀번호 찾기 이메일발송
 	@Override
@@ -178,4 +184,5 @@ public class MemberServiceImpl implements MemberService {
 			out.close();
 		}
 	}
+
 }

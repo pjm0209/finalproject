@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,7 +48,7 @@ body.dark{
 	top: 0;
 	left: 0;
 	height: 100%;
-	width: 250px;
+	width: 250px;	
 	padding: 10px 14px;
 	background: var(--sidebar-color);
 }
@@ -92,7 +93,7 @@ sidebar li .text{
 }
 
 .sidebar .image-text img{
-	width: 100px;
+	width: 220px;
 	border-radius: 10px;
 }
 
@@ -221,22 +222,14 @@ header .image-text .header-text{
 body.dark .switch::before{
 	left: 24px; 
 }
-
-
-
-
-
-
-
-
-
 </style>
 
 	<meta charset="UTF-8">
 	<meta http-equi="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="style.css">
-	<link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>	
+	<link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+	<script src="script.js"></script>	
 </head>
 <body>
 	<nav class="sidebar">
@@ -247,8 +240,8 @@ body.dark .switch::before{
 				</span>
 				
 				<div class="text header-text">
-					<span class="name">CodingLab</span>
-					<span class="profession">Web developer</span>
+					<span class="name"></span>
+					<span class="profession"></span>
 				</div>	
 			</div>
 			
@@ -263,7 +256,7 @@ body.dark .switch::before{
 				</li>
 				<ul class="menu-links">
 					<li class="nav-link">
-						<a href="#">
+						<a href="<c:url value='/main/member/memberEdit'/>">
 							<i class='bx bx-home-alt icon'></i>
 							<span class="text nav-text">나의 정보</span>						
 						</a>
@@ -299,43 +292,8 @@ body.dark .switch::before{
 						</a>
 					</li>					
 				</ul>
-			</div>
-			
-			<div class="bottom-content">
-				<li class="">
-					<a href="#">
-						<i class='bx bx-log-out icon'></i>
-						<span class="text nav-text">로그아웃 </span>						
-					</a>
-				</li>	
-				
-				<li class="mode">
-					<div class="moon-sun">
-						<i class='bx bx-moon icon moon'></i>
-						<i class='bx bx-sun icon sun'></i>
-					</div>
-					<span class="mode-text text">Dark Mode</span>
-					
-					<div class="toggle-switch"></div>	
-						<span class="switch"></span>
-				</li>		
-						
-			</div>
+			</div>		
 		</div>
 	</nav>
-	
-	<script src="script.js"></script>
-	
-	const body = document.querySelector("body"),
-		sidebar = body.querySelector(".sidebar"),
-		toggle = body.querySelector(".toggle"),
-		searchBtn = body.querySelector(".search-box"),
-		modeSwitch = body.querySelector(".toggle-switch"),
-		modeText = body.querySelector(".mode-text");
-		
-		modeSwitch.addEventListener("click", () =>{
-			body.classList.toggle("dark");
-		)};
-	
 </body>
 </html>	
