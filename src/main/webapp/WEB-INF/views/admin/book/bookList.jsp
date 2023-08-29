@@ -11,33 +11,25 @@
 	});
 	
 	function bookListPage(curPage){
-		$('input[name=currentPage]').val(curpage);
-		/*
-		$('input[name=perRecord]').val();
-		$('input[name=keywordNo]').val();
-		$('input[name=keywordTitle]').val();
-		$('input[name=keywordPublisher]').val();
-		$('input[name=keywordUseflag]').val();
-		$('input[name=keywordRegdate]').val();
-		$('input[name=keywordRegdate2]').val();
-		$('input[name=keywordCategory]').val();
-		*/
-		$('form[name=frmPage]').submit();
+		$('input[name=currentPage]').val(curPage);
+		$('input[name=perRecord]').val(${param.perRecord});
+		$('form[id=frmPageId]').submit();
 	}
 </script>
 
 <!-- Begin Page Content -->
-<form name="frmPage" method="post" action="<c:url value='/admin/book/bookList?bookFlag=${param.bookFlag}'/>">
+<form id="frmPageId" name="frmPage" method="post"
+		action="<c:url value='/admin/book/bookList?bookFlag=${param.bookFlag}'/>">
 	<input type="hidden" name="bookFlag" value="${param.bookFlag}">
-	<input type="hidden" name="currentPage">
-	<input type="hidden" name="perRecord">
-	<input type="hidden" name="keywordNo">
-	<input type="hidden" name="keywordTitle">
-	<input type="hidden" name="keywordPublisher">
-	<input type="hidden" name="keywordUseflag">
-	<input type="hidden" name="keywordRegdate">
-	<input type="hidden" name="keywordRegdate2">
-	<input type="hidden" name="keywordCategory">
+	<input type="hidden" name="currentPage" value="${param.currentPage}">
+	<input type="hidden" name="perRecord" value="5">
+	<input type="hidden" name="keywordNo" value="${param.keywordNo}">
+	<input type="hidden" name="keywordTitle" value="${param.keywordTitle}">
+	<input type="hidden" name="keywordPublisher" value="${param.keywordPublisher}">
+	<input type="hidden" name="keywordUseflag" value="${param.keywordUseflag}">
+	<input type="hidden" name="keywordRegdate" value="${param.keywordRegdate}">
+	<input type="hidden" name="keywordRegdate2" value="${param.keywordRegdate2}">
+	<input type="hidden" name="keywordCategory" value="${param.keywordCategory}">
 </form>
 <!-- Page Heading -->
 
@@ -58,7 +50,7 @@
 			<button class="bg-gradient-secondary book-button"  
 				 id="bookDeleteBtn" onclick="location.href='<c:url value='/admin/book/bookDelete'/>'">상품 삭제</button>
 		</c:if>
-		<c:if test="${param.bookFlag == 'Inventory'}">
+		<c:if test="${param.bookFlag == 'Inventory' or param.bookFlag == 'InventoryByKeyword'}">
 			<h5>상품 재고 관리</h5>
 		</c:if>
 	</div>
@@ -78,8 +70,13 @@
 					<col style="width:10%;" />
 					<col style="width:10%;" />
 					<col style="width:10%;" />	
-					<col style="width:10%;" />	
-					<col style="width:5%;" />
+					<c:if test="${param.bookFlag != 'Inventory' or param.bookFlag == 'bookListByKeyword'	}">
+						<col style="width:5%;" />
+					</c:if>
+					<c:if test="${param.bookFlag == 'Inventory' or param.bookFlag == 'InventoryByKeyword'}">
+						<col style="width:10%;" />
+					</c:if>
+					<col style="width:10%;" />
 					<col style="width:10%;" />	
 					<col style="width:15%;" />				
 				</colgroup>
@@ -91,10 +88,10 @@
 						<th scope="col" class="bookImage">상품이미지</th>
 						<th scope="col" class="bookCategory">카테고리</th>
 						<th scope="col" class="bookPrice">판매가</th>
-						<c:if test="${param.bookFlag != 'Inventory'}">
+						<c:if test="${param.bookFlag != 'Inventory' or param.bookFlag == 'bookListByKeyword'}">
 							<th scope="col" class="bookSellCount">판매수</th>
 						</c:if>
-						<c:if test="${param.bookFlag == 'Inventory'}">
+						<c:if test="${param.bookFlag == 'Inventory' or param.bookFlag == 'InventoryByKeyword'}">
 							<th scope="col" class="bookSellCount">재고수</th>
 						</c:if>
 						<th scope="col" class="bookUseflag">사용여부</th>
@@ -123,12 +120,12 @@
 								<td>
 									<fmt:formatNumber value="${map['BOOK_PRICE']}" pattern="#,###"/>원
 								</td>
-								<c:if test="${param.bookFlag != 'Inventory'}">
+								<c:if test="${param.bookFlag != 'Inventory' or param.bookFlag == 'bookListByKeyword'	}">
 									<td>
-										<fmt:formatNumber value="" pattern="#,###"/>부
+										<fmt:formatNumber value="" pattern="#,###"/>
 									</td>						
 								</c:if>
-								<c:if test="${param.bookFlag == 'Inventory'}">
+								<c:if test="${param.bookFlag == 'Inventory' or param.bookFlag == 'InventoryByKeyword'}">
 									<td>
 										<input class="form-control" name="" type="number" value="${map['STOCK_QTY']}">
 									</td>
@@ -137,12 +134,12 @@
 								<td>
 									${map["BOOK_REGDATE"]}
 								</td>
-								<c:if test="${param.bookFlag == 'Inventory' }">
+								<c:if test="${param.bookFlag == 'Inventory' or param.bookFlag == 'InventoryByKeyword' }">
 									<td>
 										<button class="btn btn-info btn-xs blue" onclick="location.href='bookRegister?bookNo=${map['BOOK_NO']}" type="button" title="재고저장"><i class="fas fa-save"></i></button>
 									</td>
 								</c:if>
-								<c:if test="${param.bookFlag != 'Inventory' }">
+								<c:if test="${(param.bookFlag != 'Inventory' or param.bookFlag == 'InventoryByKeyword') and (param.bookFlag == 'bookList' or param.bookFlag == 'bookListByKeword' or param.bookFlag == '')}">
 									<td id="tdLast">
 										<a class="btn btn-info btn-xs" href="" target="_blank" title="상품보기"><i class="fas fa-eye"></i></a>
 										<button class="btn btn-info btn-xs" onclick="location.href='bookRegister?bookNo=${map['BOOK_NO']}'" type="button" title="복사"><i class="fas fa-copy"></i></button>

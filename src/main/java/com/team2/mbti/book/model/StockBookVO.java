@@ -10,7 +10,7 @@ public class StockBookVO extends BookVO{
 	private int stockQty;
 	private String orderBy;
 	private String bookFlag;
-	private String perRecord;
+	private int perRecord;
 	private String keywordCategory;
 	private String keywordNo;
 	private String keywordTitle;
