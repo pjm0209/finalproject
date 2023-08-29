@@ -26,14 +26,7 @@ public class MemberMyPageController {
 	private static final Logger logger=LoggerFactory.getLogger(MemberMyPageController.class);
 	
 	private final MemberService memberService;
-	
-	@RequestMapping("/mypage")
-	public String mypage() {
-		logger.info("마이페이지 화면");
 		
-		return "main/member/mypage";
-	}
-	
 	@GetMapping("/memberEdit")
 	public String memberEdit_get(HttpSession session, Model model) {
 		
