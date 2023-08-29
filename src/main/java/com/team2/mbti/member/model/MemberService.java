@@ -30,6 +30,7 @@ public interface MemberService {
 	int deleteMultiMember(List<MemberVO> list);
 	
 	int updateMember(MemberVO vo); //회원정보수정
+	int updateMemberOut(String userid); //회원탈퇴
 	
 	public void sendEmail(MemberVO vo, String div) throws Exception; //이메일 발송
 

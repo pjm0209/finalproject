@@ -286,11 +286,18 @@ body.dark .switch::before{
 						</a>
 					</li>										
 					<li class="nav-link">
-						<a href="#">
+						<a href="<c:url value='/main/member/memberOut'/>">
 							<i class='bx bx-wallet icon'></i>
 							<span class="text nav-text">회원탈퇴 </span>						
 						</a>
-					</li>					
+					</li>		
+					
+					<li class="nav-link">
+						<a href="<c:url value='/main/index	'/>">
+							<i class='bx bx-home icon'></i>
+							<span class="text nav-text">메인으로 이동</span>						
+						</a>
+					</li>									
 				</ul>
 			</div>		
 		</div>

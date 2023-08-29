@@ -180,53 +180,38 @@ $(function(){
 <!-- 카카오 스크립트 -->
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script>
-Kakao.init('ba663235e16b790c0b20037c2ed8ed93'); //발급받은 키 중 javascript키를 사용해준다.
-console.log(Kakao.isInitialized()); // sdk초기화여부판단
-//카카오로그인
-function kakaoLogin() {
-    Kakao.Auth.login({
-      success: function (response) {
-    	alert(response.access_token)
-    	Kakao.Auth.setAccessToken(response.access_token);
-    	
-        Kakao.API.request({
-          url: '/v2/user/me',
-          
-          success: function(result) {
-        	  console.log(result)
-        	  /*$.ajax({
-        		  url:"<c:url value='로그인 처리 할 url'/>"
-        		  data:{
-        			name:result.properties.nickname  
-        		  },
-        	  })*/
-          },
-          fail: function (error) {
-		    alert(error);
-            console.log(error)
-          },
-        })
-      },
-      fail: function (error) {
-        console.log(error)
-      },
-    })
-  }
-//카카오로그아웃  
-function kakaoLogout() {
-    if (Kakao.Auth.getAccessToken()) {
-      Kakao.API.request({
-        url: '/v1/user/unlink',
-        success: function (response) {
-        	console.log(response)
-        },
-        fail: function (error) {
-          console.log(error)
-        },
-      })
-      Kakao.Auth.setAccessToken(undefined)
+//<![CDATA[
+// 사용할 앱의 JavaScript 키를 설정해 주세요.
+Kakao.init('ba663235e16b790c0b20037c2ed8ed93');
+// 카카오 로그인 버튼을 생성합니다.
+Kakao.Auth.createLoginButton({
+    container: '#kakao-login-btn',
+    success: function (authObj) {
+        alert(JSON.stringify(authObj));
+        Kakao.Auth.setAccessToken(authObj.access_token);
+        location.href=
+        	"https://kauth.kakao.com/oauth/authorize?client_id=63aae7bb7049cc37773c9691d2c30682&prompt=login"
+           +"&redirect_uri=http://localhost:9091/mbti/oauth/kakao&response_type=code";
+    },
+    fail: function (err) {
+        alert(JSON.stringify(err));
     }
-  }  
+});
+Kakao.API.request({
+	  url: '/v2/user/me',
+	  data: {
+	    property_keys: [
+	    	'kakao_account.email', 
+	    	'kakao_account.gender'],
+	  },
+	})
+	  .then(function(response) {
+	    console.log(response);
+	  })
+	  .catch(function(error) {
+	    console.log(error);
+	  });
+//]]> 
 </script>
     
 </head>
