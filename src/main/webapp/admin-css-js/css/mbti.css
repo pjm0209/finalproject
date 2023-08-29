@@ -45,14 +45,13 @@ input#mbti-search-area {
     width: 430px;
     height: 200px;
 }
-#frm-mbti2{
+#frm-mbti1{
 	margin-top: 230px;
 	width: 200px;
 	float: left;
 }
-#frm-mbti1{
-	margin-top: 230px;
-	width: 200px;
+#mbti-precise-button{
+	margin-top: 680px;
 	float: right;
 }
 .mbti-writer{
