@@ -39,10 +39,10 @@ public class MainBoardController {
 	public String boardMain(Model model) {
 		logger.info("커뮤니티 메인페이지");
 		
-		List<BoardFormVO> boardFormList = boardService.selectAllBoard();
-		logger.info("게시판목록 조회결과 boardFormList: {}", boardFormList);
+		List<Map<String, Object>> boardCategoryList = boardService.selectMainBoardFormCategory();
+		logger.info("게시판목록 조회결과 boardCategoryList: {}", boardCategoryList);
 		
-		model.addAttribute("boardFormList", boardFormList);
+		model.addAttribute("boardCategoryList", boardCategoryList);
 		
 		return "main/board/boardMain";
 	}

@@ -149,4 +149,9 @@ public class BoardServiceImpl implements BoardService {
 	public int insertBoardReply(BoardVO vo) {
 		return boardDao.insertBoardReply(vo);
 	}
+
+	@Override
+	public List<Map<String, Object>> selectMainBoardFormCategory() {
+		return boardDao.selectMainBoardFormCategory();
+	}
 }

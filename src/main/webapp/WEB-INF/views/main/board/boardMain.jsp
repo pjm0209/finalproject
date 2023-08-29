@@ -23,9 +23,14 @@
 				<button type="button" class="boardWriteBtn"><span class="boardWrite">게시글작성</span></button>
 			</div>
 			<ul class="boardFormList">
-				<c:forEach var="vo" items="${boardFormList }">
+				<c:forEach var="map" items="${boardCategoryList }">
 					<li class="boardFormItem">
-						${vo.boardFormName }
+						<div class="boardCategoryTitleImg"></div>
+						<div class="boardCategoryContent">
+							<a class="boardCategoryContentTitle" href="#">${map.BOARD_FORM_NAME }</a>
+							<p class="boardCategoryContentIntro">${map.BOARD_FORM_INTRO }</p>
+						</div>
+						<div class="boardCategoryWriteCount"><i class="bi bi-chat-square"></i><span class="boardWriteCount">${map.BOARDCOUNT }</span></div>						
 					</li>
 				</c:forEach>
 			</ul>
