@@ -9,4 +9,9 @@
 		insert into send_dm(send_dm_no, no, send_body, receive_no)
 		values(#{sendDmNo},#{no},#{sendBody},#{receiveNO})
 	</insert>
+	
+	<select id="selectAllMemberbyDm" resultType="memberVo">
+		select * from member where outdate is null
+		order by no desc
+	</select>
 </mapper>
