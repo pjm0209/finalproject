@@ -187,8 +187,14 @@
                     </div>
                 </div>
             </li>
+            <li class="nav-item">
+            	<a class="nav-link" href="<c:url value='/admin/message/message'/>">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>쪽지 관리</span>
+                </a>
+            </li>
 
-            <!-- Divider -->
+            <!-- Divider -->w
             <hr class="sidebar-divider">
 
             <!-- Heading -->
