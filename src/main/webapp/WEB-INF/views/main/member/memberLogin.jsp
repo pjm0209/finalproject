@@ -245,9 +245,12 @@ function kakaoLogout() {
                     </div><br>
                     
                     <div class="remember-check">
-                		<input type="checkbox" name="chkSave" id="remember-check">&nbsp; 아이디 저장하기
-                			<c:if test="${!empty cookie.ck_userid }">         
-                			</c:if>   
+                		<input type="checkbox" name="chkSave" id="remember-check"
+                			<c:if test="${!empty cookie.ck_userid }">  
+                				    checked="checked"   
+                			</c:if>
+                		>&nbsp; 아이디 저장하기
+                			  
                 		<a class="forgot-id" href="<c:url value='/main/member/forgot-id'/>">아이디 찾기</a>
                 		<span style="color:blue;">|</span>
                 		<a class="forgot-password" href="<c:url value='/main/member/forgot-pwd'/>">비밀번호 찾기</a>

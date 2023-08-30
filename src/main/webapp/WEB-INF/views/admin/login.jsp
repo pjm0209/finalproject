@@ -94,10 +94,12 @@ body {
             <input type="text" name="adminId" placeholder="아이디를 입력하세요." value="${cookie.ck_adminId.value }">            
             <input type="password" name="adminPwd" placeholder="비밀번호를 입력하세요.">            
             <label for="remember-check">
-                <input type="checkbox" name="chkSave" id="chkSave">&nbsp; 아이디 저장하기
-                <c:if test="${!empty cookie.ck_adminId }">
-                	
-                </c:if>               
+                <input type="checkbox" name="chkSave" id="chkSave"
+                	<c:if test="${!empty cookie.ck_adminId }">
+                		checked="checked"
+                	</c:if> 
+                >&nbsp; 아이디 저장하기
+                              
             </label>            
             <input type="submit" value="Login" id="login-button">                    
         </form>
