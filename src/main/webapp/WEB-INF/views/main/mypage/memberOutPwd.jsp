@@ -114,14 +114,14 @@ $(function(){
     });
     
     $('#cancel').click(function() {
-        history.go(-1);
+    	window.location.href = '/mbti/main/mypage/memberOut';
     });
 }); 	    	
 </script> 
 
 <article class="mypage">
     <h2>비밀번호 확인</h2>
-    <form name="form-memberOutPwd" method="post" action="<c:url value='/mypage/memberOutPwd'/>">
+    <form name="form-memberOutPwd" method="post" action="<c:url value='/main/mypage/memberOutPwd'/>">
         <table class="mypage-table">
             <tr>
                 <th>회원ID</th>

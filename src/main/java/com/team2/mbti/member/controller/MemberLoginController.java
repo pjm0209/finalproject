@@ -52,10 +52,10 @@ public class MemberLoginController {
 			
 			MemberVO no = memberService.selectByUserid(userid);
 			
-		    logger.info("Retrieved MemberVO: {}", no);
+		    logger.info("MemberVO: {}", no);
 		    
 		    String userName = no.getName();
-		    logger.info("Retrieved user name: {}", userName);
+		    logger.info("user name: {}", userName);
 			
 			HttpSession session = request.getSession();
 			session.setAttribute("userid", userid);
