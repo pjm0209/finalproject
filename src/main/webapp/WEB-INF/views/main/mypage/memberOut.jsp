@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%> 
+<%@include file="../inc/top.jsp" %>
+<%@include file="../inc/mypage.jsp" %>  
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>     
 <script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>     
 <script type="text/javascript">
@@ -8,27 +10,19 @@
          if (!$('#agree_check').is(':checked')) {
              alert("회원탈퇴에 동의하셔야 합니다.");
          } else {
-             var password = prompt("비밀번호를 입력하세요:", "");
-             if (password !== null && password !== "") {
-            	  var maskedPassword = "*".repeat(password.length);
-            	  alert("입력한 비밀번호: " + maskedPassword);
-             } else {
-                 alert("비밀번호를 입력하세요.");
-             }
-         }
-     });
-      
-      $('#btnCac').click(function() {
-    	  	window.location.href = "<c:url value='/main/member/mypage'/>"
-      });
-      
-    });  
+        	 window.location.href = "<c:url value='/main/mypage/memberOutPwd'/>";
+           }
+     });          
+   });  
 </script>
 
 <style>
+h2{
+	font-weight:bold;
+}
 .memberOut-agreement{
-	border: 3px solid #ffffff;
 	text-align:left;
+	margin-top: 150px;
 	margin-left: 300px;
 	margin-right: 300px;
 }
@@ -39,10 +33,11 @@
 }
 
 .content{
-	margin-left: 20px;
 	color: red;
 	font-weight: bold;
 	font-size: 15px;
+	margin-top: 20px;
+	margin-left: 20px;
 }
 
 .content1{
@@ -61,8 +56,9 @@ span{
 }
 
 .content2{
-	margin-left: 20px;
 	font-size: 15px;
+	margin-top: 20px;
+	margin-left: 20px;
 }
 
 .consent{
@@ -71,9 +67,7 @@ span{
 	color: #808080;	
 }
 
-#btnOut,
-#btnCac
-{
+#btnOut{
      font-size: 18px;
      padding: 10px 20px;
      background-color: red;
@@ -85,7 +79,7 @@ span{
 
 <div class="memberOut-agreement">
 <form name="form-memberOut" id="memberOut-form" method="post" action="<c:url value='/member/memberOut'/>" >
-<h2>회원 탈퇴</h2>
+<h2>회원 탈퇴</h2><br>
 	<div class="top-border">
 		<div class="content">
 			<p>회원탈퇴시 개인정보 및 ESSENTIAL MBTI에서 만들어진 모든 데이터는 삭제됩니다.</p>
@@ -118,7 +112,6 @@ span{
 
 	<div style="text-align:center">
 		<input type="button" id="btnOut" value="회원탈퇴">
-		<input type="button" id="btnCac" value="취소">
 	</div>
 	</form>
 </div>

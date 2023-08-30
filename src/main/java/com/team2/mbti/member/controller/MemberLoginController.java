@@ -52,8 +52,14 @@ public class MemberLoginController {
 			
 			MemberVO no = memberService.selectByUserid(userid);
 			
+		    logger.info("Retrieved MemberVO: {}", no);
+		    
+		    String userName = no.getName();
+		    logger.info("Retrieved user name: {}", userName);
+			
 			HttpSession session = request.getSession();
 			session.setAttribute("userid", userid);
+			session.setAttribute("name", userName);
 			session.setAttribute("no", no.getNo());
 			
 			//request.getSession().setAttribute("userid", userid);

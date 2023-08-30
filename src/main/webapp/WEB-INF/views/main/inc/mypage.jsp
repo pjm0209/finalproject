@@ -262,7 +262,7 @@ body.dark .switch::before{
 				</li>
 				<ul class="menu-links" id="menu-links">
 					<li class="nav-link2">
-						<a href="<c:url value='/main/member/memberEdit'/>">
+						<a href="<c:url value='/main/mypage/memberEdit'/>">
 							<i class='bx bx-home-alt icon'></i>
 							<span class="text nav-text">나의 정보</span>						
 						</a>
@@ -292,7 +292,7 @@ body.dark .switch::before{
 						</a>
 					</li>										
 					<li class="nav-link2">
-						<a href="<c:url value='/main/member/memberOut'/>">
+						<a href="<c:url value='/main/mypage/memberOut'/>">
 							<i class='bx bx-wallet icon'></i>
 							<span class="text nav-text">회원탈퇴 </span>						
 						</a>

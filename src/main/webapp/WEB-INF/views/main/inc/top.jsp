@@ -109,6 +109,8 @@
           </li>
           <li><a class="nav-link scrollto" href="<c:url value='/main/mypage/mypage'/>">마이페이지</a></li>
           <li><a class="nav-link scrollto">${sessionScope.userid}</a></li>
+          <li><a class="nav-link scrollto">${sessionScope.name}</a></li>
+          
        	  <!-- 로그인 안된 경우 -->
 		  <c:if test="${empty sessionScope.userid }">			
 			<li><a class="getstarted scrollto" href="<c:url value='/main/member/memberLogin'/>">로그인</a></li>
