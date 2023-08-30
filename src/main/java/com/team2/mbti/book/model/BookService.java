@@ -5,5 +5,6 @@ import java.util.Map;
 
 public interface BookService {
 	List<Map<String, Object>> selectBookAll(StockBookVO vo);
+	List<StockBookVO> selectBookAllAjax(StockBookVO vo);
 	int selectBookCnt(StockBookVO vo);
 }

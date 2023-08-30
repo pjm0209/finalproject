@@ -10,9 +10,14 @@
 	 	action="<c:url value='/admin/book/bookList?bookFlag=InventoryByKeyword'/>"
 	 </c:if>
 	 >
+	 <input name="bookFlag"  type="text"
+		<c:if test="${param.bookFlag eq 'bookList'}"> value="bookListByKeyword"</c:if>
+		<c:if test="${param.bookFlag eq 'Inventory'}"> value="InventoryByKeyword"</c:if>
+	>
 	<div class="flex shadow-sm p-3 mb-5 bg-body rounded"
 		style="margin: 10px 0px; background: white; margin-right: 15px">
 		<h2>상품 검색</h2>
+			
 		<div class="box">
 			<label>상품카테고리</label>
 
@@ -57,27 +62,19 @@
 			<div class="form-check">
 				<input class="form-check-input" type="radio" id="flexRadioDefault1"
 						name="keywordUseflag" placeholder="사용여부" type="radio" value="Y"
-						<c:if test="${empty param.keywordUseflag or param.keywordUseflag==''}">
-							 checked="checked"
-						</c:if>
+						checked="checked"
 				>
 				<label class="form-check-label" for="flexRadioDefault1">
 					전체
 				</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<input class="form-check-input" type="radio" id="flexRadioDefault2"
 						name="keywordUseflag" placeholder="사용여부" type="radio" value="Y"
-						<c:if test="${!empty param.keywordUseflag and param.keywordUseflag=='Y'}">
-							 checked="checked"
-						</c:if>		
 				>
 				<label class="form-check-label" for="flexRadioDefault2">
 					사용
 				</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<input class="form-check-input" type="radio" id="flexRadioDefault3"
 						name="keywordUseflag" placeholder="사용여부" type="radio" value="N"
-						<c:if test="${!empty param.keywordUseflag and param.keywordUseflag=='N'}">
-							 checked="checked"
-						</c:if>
 				>
 				<label class="form-check-label" for="flexRadioDefault3">
 					미사용
@@ -197,7 +194,6 @@
 		<div class="btn">
 			<button type="button" id="searchByKeywordBtn">검색</button>
 		</div>
-
 	</div>
 </form>
 </div>

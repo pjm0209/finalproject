@@ -24,8 +24,8 @@
 		/
 		<a href="/mbti/main/book/bookMain">검사 자료</a>
 	</div>
-<div class="flex">
-			<h2 style="margin-left: 236px;margin-top: 20px">검사자료 구매</h2>
+<div class="flex title_search">
+			<h2 style="margin-top: 20px">검사자료 구매</h2>
 		<div class="booksearch flex">
 					
 					<input type="text">
