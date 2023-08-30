@@ -109,7 +109,9 @@ li span#userName{
   color: #7a6960;
   text-decoration: none;
 }
-
+.container22{
+	margin-left: 450px;
+}
 #header .logo img {
   padding: 0;
   margin: 0;
@@ -140,6 +142,9 @@ li span#userName{
 
 .navbar li {
   position: relative;
+}
+#loginli{
+	margin-left: 40px;
 }
 
 .navbar a,
