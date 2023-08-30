@@ -32,7 +32,7 @@ public interface MemberService {
 	int updateMember(MemberVO vo); //회원정보수정
 	int updateMemberOut(String userid); //회원탈퇴
 	
-	String findId(MemberVO vo); // 아이디찾기
+	MemberVO findId(String name, String tel, String email); // 아이디찾기
 
 
 }

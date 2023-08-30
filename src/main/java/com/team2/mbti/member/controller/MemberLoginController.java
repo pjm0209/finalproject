@@ -1,7 +1,5 @@
  package com.team2.mbti.member.controller;
 
-import java.net.http.HttpRequest;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -129,33 +127,36 @@ public class MemberLoginController {
 		model.addAttribute("msg",msg);
 		model.addAttribute("url",url);
 		
-		return "common/message";
-	
+		return "common/message";	
 	}
 		
-	@GetMapping("/member/forgot-id")
-	public String forgot_id(HttpRequest request, @ModelAttribute MemberVO membervo, Model model) {
-		logger.info("아이디 찾기 화면, 파라미터 membervo={}", membervo);
+	@RequestMapping("/member/forgot-id")
+	public String forgot_id() {
+		logger.info("아이디 찾기 화면");
+			    
+		return "main/member/forgot-id";
+	}
+	
+	@RequestMapping("/member/doforgot-id")
+	public String doforgot_id(String name, String tel, String email, Model model) {
+		logger.info("아이디 찾기 처리");
+		MemberVO str = memberService.findId(name, tel, email);
 		
-		int cnt = memberService.findId(membervo);
-		
-		logger.info("아이디 찾기 완료, result={}", cnt);
-		String msg = "아이디 찾기 실패.", url = "/member/forgot-id";
-		
-		if(cnt > 0) {
-			msg = "아이디를 찾았습니다.";
-			url = "/main/member/findIdResult";
+		if(str == null) {
+			model.addAttribute("historyBack", true);
+			model.addAttribute("msg", "해당 회원이 존재하지 않습니다.");
+			
+			return "common/redirect";
 		}
 		
-		model.addAttribute("msg", msg);
-		model.addAttribute("url", url);
-		    
-		return "common/message";
+		model.addAttribute("historyBack", true);
+		model.addAttribute("msg", String.format("해당 회원의 로그인의 아이디는 %s입니다."));	    
+		return "common/redirect";
 	}
 	
-	@PostMapping("/member/findIdResult")
+	@RequestMapping("/member/findIdResult")
 	public String findIdResult(HttpServletResponse response, Model model) {
-		logger.info("아이디 찾기 처리");
+		logger.info("아이디 찾기 결과 화면");
 		
 		return "main/member/findIdResult";
 	}
