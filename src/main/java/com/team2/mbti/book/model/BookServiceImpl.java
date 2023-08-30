@@ -22,5 +22,10 @@ public class BookServiceImpl implements BookService {
 		return bookDao.selectBookCnt(vo);
 	}
 
+	@Override
+	public List<StockBookVO> selectBookAllAjax(StockBookVO vo) {
+		return bookDao.selectBookAllAjax(vo);
+	}
+
 	
 }//

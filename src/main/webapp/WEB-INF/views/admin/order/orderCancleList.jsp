@@ -36,11 +36,16 @@
 				<h5>전체 주문 취소 내역</h5>
 			</c:otherwise> 
 		</c:choose>
+		<button id="toggleBtn" class="bg-gradient-secondary book-button"
+			 type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
+			  aria-expanded="false" aria-controls="collapseExample">검색창 열기</button>
 	</div>
 	<!--  -->
 	
 	<div>
-		<%@ include file="../order/orderSearch.jsp"%>
+		<div class="collapse" id="collapseExample">
+			<%@ include file="../order/orderSearch.jsp"%>
+		</div>
 
 	<!--  -->
 	<div class="board shadow-sm p-3 mb-5 bg-body rounded" style="margin: 10px 0px;background: white;">

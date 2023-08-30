@@ -153,10 +153,24 @@ section#mbtiSurvey{
 	font-weight: bold;
 }
 
+.character-type2 h2{
+	margin-left: 200px;
+	margin-bottom: 50px;
+	font-size: 50px;
+	font-weight: bold;
+}
+
 .personality{
 	margin-top: 100px;
 }
+.personality2{
+	margin-top: 100px;
+}
 .personality h2{
+	font-size: 50px;
+	font-weight: bold;
+}
+.personality2 h2{
 	font-size: 50px;
 	font-weight: bold;
 }
@@ -167,8 +181,19 @@ section#mbtiSurvey{
 	font-weight: bold;
 	line-height: 40px;
 }
+.personality2 p{
+	width: 1300px;
+	margin-top: 40px;
+	font-size: 22px;
+	font-weight: bold;
+	line-height: 40px;
+}
 .personality h2, .personality p{
 	margin-left: 300px;
+}
+
+.personality2 h2, .personality2 p{
+	margin-left: 200px;
 }
 .mbti-result-top h1{
 	padding-top: 250px;
@@ -613,4 +638,7 @@ section#mbtiSurvey{
 p#mbti{
 	text-align: center;
 	color: #5c5c5c;
+}
+#kakaotalkButtonDiv{
+	text-align: center;
 }

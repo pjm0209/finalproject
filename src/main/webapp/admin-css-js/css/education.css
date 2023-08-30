@@ -312,7 +312,7 @@ input#applyBtn {
 	padding-left: 20px;
 }
 
-.map-box .map-list li>button{
+.map-box .map-list li button{
 	display: inline-block;
 	border: none;
 	font-size: 18px;
@@ -336,13 +336,13 @@ input#applyBtn {
 }
 
 .location-info .zipcode {
-	width: 250px;
+	width: 210px;
 	float: left;
 	list-style: none;
 }
 
 .location-info .address {
-	width: 360px;
+	width: 500px;
 	list-style: none;
 	float: left;
 }
@@ -361,7 +361,7 @@ input#applyBtn {
 }
 
 .location-info dd {
-	font-size: 16px;
+	font-size: 18px;
 	color: #666;
 	word-break: keep-all;
 }

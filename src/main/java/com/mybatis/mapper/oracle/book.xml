@@ -80,6 +80,58 @@
 		and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}]]>
 	</select>
 	
+	<select id="selectBookAllAjax" parameterType="stockBookVo" resultType="stockBookVo" >
+		SELECT *
+		FROM
+		(
+		    select rownum as RNUM, A.* from
+		    (
+			   select b.*, s.stock_qty from 
+			   book b join stock s
+			   on b.book_no = s.book_no
+			   <include refid="searchWhere" />
+			   <if test="orderBy!=null and orderBy!=''">
+					<if test="orderBy=='book_title'">
+						order by b.book_title
+					</if>
+					<if test="orderBy=='book_title_desc'">
+						order by b.book_title desc
+					</if>
+					<if test="orderBy=='book_regdate'">
+						order by b.book_regdate
+					</if>
+					<if test="orderBy=='book_regdate_desc'">
+						order by b.book_regdate desc
+					</if>
+					<if test="orderBy=='book_no'">
+						order by b.book_no
+					</if>
+					<if test="orderBy=='book_no_desc'">
+						order by b.book_no desc
+					</if>
+					<if test="orderBy=='book_price'">
+						order by b.book_price
+					</if>
+					<if test="orderBy=='book_price_desc'">
+						order by b.book_price desc
+					</if>
+					<!-- <if test="orderBy=='out_qty'">
+						order by s.outputQty
+					</if>
+					<if test="orderBy=='out_qty_desc'">
+						order by s.outputQty desc
+					</if> -->
+				</if>
+				<if test="orderBy==null or orderBy==''">
+					order by b.book_no desc
+				</if>
+		    )A
+		)
+   	 <![CDATA[
+		WHERE RNUM > #{firstRecordIndex}
+		and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}]]>
+	</select>
+	
 	<select id="selectBookCnt" parameterType="stockBookVo" resultType="int">
 		select count(*) from 
 		book b join stock s

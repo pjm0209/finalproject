@@ -114,7 +114,24 @@ form {
 
 <script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>
 <script type="text/javascript">
-    $(function() {          
+    $(function() { 
+    	$('#btnCheck').click(function(){
+            var name = $('#name').val();
+            var tel = $('#tel').val();
+              
+   			if($('#name').val().length < 1){
+   				alert("이름을 입력하세요");
+   				$('#name').focus();				
+   				return false;				
+   			}
+   			
+			if($('#tel').val().length < 1){
+				alert("전화번호를 입력하세요");
+				$('#tel').focus();				
+				return false;				
+			}	
+        });
+    		    	
         $('#btnCancel').click(function(){
             var confirmed = confirm("메인 화면으로 돌아가시겠습니까?");
             if (confirmed) {

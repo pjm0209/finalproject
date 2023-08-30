@@ -15,7 +15,7 @@
 		<ul class="map-list">
 		<c:forEach var="educationVo" items="${list}">
 			<c:set var="educationNo" value="${educationVo.epNo}"/>
-				<li class="name"><button type="button" id="ep-name">${educationVo.epName }</button></li>
+				<li class="name"><a onclick="setCenter(${educationVo.epLatitude}, ${educationVo.epLongitude})"><button type="button" id="ep-name" onclick="showepinfo('${educationVo.epNo}')">${educationVo.epName }</button></a></li>
 		</c:forEach> 
 		</ul>
 		
@@ -26,13 +26,12 @@
 		        <span onclick="zoomIn()"><img src="<c:url value='/images/education/ico_plus.png'/>" alt="확대"></span>  
 		        <span onclick="zoomOut()"><img src="<c:url value='/images/education/ico_minus.png'/>" alt="축소"></span>
 		    </div>
-			<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2666b9d92b136acbf73b4b00a4f508ff"></script>
-			<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services,clusterer,drawing"></script>
+			<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2666b9d92b136acbf73b4b00a4f508ff&libraries=services,clusterer,drawing"></script>
 			<script type="text/javascript">
 				
 				var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
 			    mapOption = { 
-			        center: new kakao.maps.LatLng(37.517104, 126.982044), // 지도의 중심좌표
+			        center: new kakao.maps.LatLng(37.502238, 127.024476), // 지도의 중심좌표
 			        level: 3 // 지도의 확대 레벨
 			    };
 		
@@ -167,20 +166,52 @@
 				function zoomOut() {
 				    map.setLevel(map.getLevel() + 1);
 				}
+				
+				
+				// 클릭한 지점 위치로 맵 이동
+				function setCenter(epLatitude,epLongitude) {            
+				    // 이동할 위도 경도 위치를 생성합니다 
+				    var moveLatLon = new kakao.maps.LatLng(epLatitude, epLongitude);
+				    
+				    // 지도 중심을 이동 시킵니다
+				    map.setCenter(moveLatLon);
+				}
+				
+				
+				// 클릭한 지점 해당 정보 보여주기
+				function showepinfo(epNo){
+					$.ajax({
+						url:"<c:url value='/main/education/locationAjax'/>",
+						data:{"epNo" : epNo},
+						type:"POST",
+						dataType:"json",
+						success:function(res){
+							var zipcode = res.epZipcode
+							var address = res.epAddress
+							var tel = res.epTel
+							$('.ep-zipcode').html(zipcode);
+							$('.ep-address').html(address);
+							$('.ep-tel').html(tel);
+						},
+						error:function(xhr, status, error){
+							alert(status+" : "+error);
+						}
+					});
+				}
 			</script>
 			</div>
 			<div class="location-info">
 				<dl class="zipcode">
 					<dt>우편번호</dt>
-					<dd class="detail">${educationVo.epZipcode }</dd>
+					<dd class="ep-zipcode">${educationVo.epZipcode }</dd>
 				</dl>		
 				<dl class="address">
 					<dt>주소</dt>
-					<dd class="detail">${educationVo.epAddress }</dd>
+					<dd class="ep-address">${educationVo.epAddress }</dd>
 				</dl>		
 				<dl class="tel">
 					<dt>전화번호</dt>
-					<dd class="detail">${educationVo.epTel }</dd>
+					<dd class="ep-tel">${educationVo.epTel }</dd>
 				</dl>		
 			</div>
 		</div>
