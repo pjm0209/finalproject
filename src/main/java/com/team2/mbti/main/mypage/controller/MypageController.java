@@ -188,7 +188,7 @@ public class MypageController {
 		model.addAttribute("resultF", resultF);
 		model.addAttribute("resultP", resultP);
 		model.addAttribute("resultJ", resultJ);
-		//model.addAttribute("mbtiVo", mbtiVo);
+		model.addAttribute("mbtiVo", mbtiVo);
 		
 		
 		return "main/mypage/mbtiResult";
