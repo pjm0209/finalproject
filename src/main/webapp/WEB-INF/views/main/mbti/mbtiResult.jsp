@@ -2,6 +2,32 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<script type="text/javascript">
+	var title='';
+	$(function(){
+		var name='${sessionsScope.name}';
+		if(name==null || name==''){
+			title='나의 MBTI는?';
+		}else{
+			 title="${sessionsScope.name}님의 MBTI는?";
+		}
+		if (!Kakao.isInitialized()) {
+		  Kakao.init('492cfd61b5b9e8677ad3f4db8cfedbdf');
+		}
+	});
+	var sendKakao = function() {
+	    // 메시지 공유 함수
+	  Kakao.Share.sendScrap({
+	    requestUrl: 'http://192.168.0.93:9091', // 페이지 url
+	    templateId: 97845, // 메시지템플릿 번호
+	    templateArgs: {
+	      TITLE: title, // 제목 텍스트 ${TITLE}
+	      DESC: '${resultMbti}', // 설명 텍스트 ${DESC}
+	      PATH: '${resultMbti}',
+	    },
+	  });
+	};
+</script>
 <section id="mbtiSurvey" class="mbtiSurvey">
 	<c:if test="${resultMbti=='ISTP'}">
 		<c:set var="color1" value="#3ac906"/>
@@ -229,6 +255,12 @@
 	<div id="mbti-dating" style="background-color: ${color3};">
 		<span style="background-color: ${color1};">${compatibility[2]}</span>
 			<p>${compatibility[3]}</p>
-	</div>
+	</div><br><br>
+	<div id="kakaotalkButtonDiv">
+    	<a id="kakaotalk-sharing-btn" href="javascript:;">
+		  <img src="https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_medium.png"
+		    alt="카카오톡 공유 보내기 버튼" onclick="sendKakao()"/>
+		</a><br>공유하기
+    </div>
 </section>
 <%@ include file="../inc/bottom.jsp"%>

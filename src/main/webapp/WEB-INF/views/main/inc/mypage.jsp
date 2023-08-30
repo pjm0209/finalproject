@@ -36,7 +36,7 @@
 section#myPage{
 	padding-left: 223px;
 	padding-top: 100px;
-	height:2000px;
+	height:6850px;
 }
 body{
 	height: 100vh;
