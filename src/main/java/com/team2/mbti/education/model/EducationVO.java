@@ -20,8 +20,8 @@ public class EducationVO extends SearchVO {
 	private String epName;
 	private String epZipcode;
 	private String epAddress;
-	private int epLatitude;
-	private int epLongitude;
+	private String epLatitude;
+	private String epLongitude;
 	private String epTel;
 	
 	//education_application
