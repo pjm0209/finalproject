@@ -92,6 +92,7 @@
     
 	<script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="<c:url value='/admin-css-js/js/mbti.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/admin-css-js/js/message.js'/>"></script>
 	<script type="text/javascript" src="<c:url value='/admin-css-js/js/education.js'/>"></script>	
 	
     <!-- Bootstrap core JavaScript-->     
