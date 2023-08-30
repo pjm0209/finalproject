@@ -187,4 +187,9 @@
 		
 		<include refid="insertBoardReplyType"></include>
 	</insert>
+	
+	<select id="selectMainBoardFormCategory" resultType="map">
+		select * from boardFormview
+		order by board_Form_No
+	</select>
 </mapper>

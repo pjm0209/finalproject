@@ -8,5 +8,6 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface BookDAO {
 	List<Map<String, Object>> selectBookAll(StockBookVO vo);
+	List<StockBookVO> selectBookAllAjax(StockBookVO vo);
 	int selectBookCnt(StockBookVO vo);
 }//

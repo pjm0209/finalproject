@@ -38,4 +38,6 @@ public interface BoardDAO {
 	int deleteFile(int fileNo);
 	
 	int insertBoardReply(BoardVO vo);
+	
+	List<Map<String, Object>> selectMainBoardFormCategory();
 }

@@ -38,4 +38,6 @@ public interface BoardService {
 	void deleteBoardMulti(List<BoardVO> listVo);
 	
 	int insertBoardReply(BoardVO vo);
+	
+	List<Map<String, Object>> selectMainBoardFormCategory();
 }

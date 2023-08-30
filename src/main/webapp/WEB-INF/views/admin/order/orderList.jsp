@@ -2,6 +2,25 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
 
+<script type="text/javascript">
+$(function(){
+	
+	$('#searchByKeywordBtn').click(function(){
+		$('form[name=serach]').submit();
+	});
+	
+	$('#toggleBtn').click(function(){
+		var a = $('#toggleBtn').text()
+	 	var b = '검색창 열기';
+		var c = '검색창 닫기';
+		if(a === b){
+			$('#toggleBtn').text(c);
+		} else if(a === c){
+			$('#toggleBtn').text(b);
+		} 
+	});
+});
+</script>
 <!-- Begin Page Content -->
 <!-- Page Heading -->
 <div class="head-div">
@@ -38,12 +57,17 @@
 				<h5>전체 주문 내역</h5>
 			</c:otherwise> 
 		</c:choose>
+		<button id="toggleBtn" class="bg-gradient-secondary book-button"
+			 type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
+			  aria-expanded="false" aria-controls="collapseExample">검색창 열기</button>
 	</div>
 	
 	
 	<!--  -->
 	<div>
-		<%@ include file="../order/orderSearch.jsp"%>
+		<div class="collapse" id="collapseExample">
+			<%@ include file="../order/orderSearch.jsp"%>
+		</div>
 	<!--  -->
 	<div class="board shadow-sm p-3 mb-5 bg-body rounded" style="margin: 10px 0px;background: white;margin-right: 15px">
 		

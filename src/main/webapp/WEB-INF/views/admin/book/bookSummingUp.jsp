@@ -147,7 +147,7 @@ $(function() {
 	</div>
 	<div class="shadow-sm p-3 mb-5 bg-body rounded" style="margin: 15px 0px;margin-right: 15px;background: white">
 		<div>
-			<ul class="list-group list-group-horizontal">
+			<ul class="list-group list-group-horizontal shadow-sm p-3 mb-5 bg-body rounded">
 	            <li class="list-group-item">
 	                <dl class="info payment align-right">
 	                    <dt class="title">
@@ -224,7 +224,7 @@ $(function() {
 					</div>
 	        <br><br><input id="dateStr" type="text">
 				<!-- Cloudflare Pages Analytics -->	
-			<div id='calendar'></div>
+			<div id="calendar" class="shadow-sm p-3 mb-5 bg-body rounded"></div>
 				<!-- Cloudflare Pages Analytics -->
 			
 		</div>
