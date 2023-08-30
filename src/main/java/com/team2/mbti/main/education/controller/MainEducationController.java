@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team2.mbti.common.ConstUtil;
 import com.team2.mbti.common.PaginationInfo;
@@ -98,5 +100,13 @@ public class MainEducationController {
 	}
 	
 	
+	@ResponseBody
+	@RequestMapping("/locationAjax")
+	public EducationVO ajaxLocation(@RequestParam(defaultValue = "0") int epNo) {
+		
+		EducationVO vo = educationService.selectByNoLocation(epNo);
+		
+		return vo;
+	}
 	
-}
+}	
