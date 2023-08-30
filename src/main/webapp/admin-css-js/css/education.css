@@ -312,7 +312,7 @@ input#applyBtn {
 	padding-left: 20px;
 }
 
-.map-box .map-list li>button{
+.map-box .map-list li button{
 	display: inline-block;
 	border: none;
 	font-size: 18px;
