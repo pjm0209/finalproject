@@ -2,13 +2,14 @@
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -29,11 +30,13 @@ public class MemberLoginController {
 	
 	private final MemberService memberService;
 	
+	private final PasswordEncoder passwordEncoder;
+
 	@GetMapping("/member/memberLogin")
 	public String login_get() {
 		logger.info("로그인 화면");
 		
-		return "/main/member/memberLogin";
+		return "main/member/memberLogin";
 	}
 	
 	@PostMapping("/member/memberLogin")
@@ -111,8 +114,8 @@ public class MemberLoginController {
 	@PostMapping("/member/memberRegister")
 	public String memberRegister_post(@ModelAttribute MemberVO membervo, Model model){
 		logger.info("회원가입 처리, 파라미터 membervo={}",membervo);
-		
-		int cnt = memberService.insertMember(membervo);
+		 membervo.setPwd(passwordEncoder.encode(membervo.getPwd()));
+		 int cnt = memberService.insertMember(membervo);	
 		
 		logger.info("회원 가입 완료, result = {}",cnt);		
 		String msg = "회원 가입에 실패하였습니다.", url = "/member/memberRegister";
@@ -129,28 +132,28 @@ public class MemberLoginController {
 	
 	}
 		
-	@RequestMapping("/member/forgot-id")
+	@GetMapping("/member/forgot-id")
 	public String forgot_id() {
 		logger.info("아이디 찾기 화면");
 	    
 		return "main/member/forgot-id";
 	}
 	
-	@RequestMapping(value = "/member/findIdResult", method = RequestMethod.GET)
-	public String search_pwd(HttpServletRequest request, Model model, MemberVO searchVO) {
-		logger.info("아이디 찾기 결과 처리 화면");
-	    
+	@PostMapping("/member/findIdResult")
+	public String findIdResult(@ModelAttribute MemberVO membervo, Model model) {
+		logger.info("아이디 찾기 처리");
+		
 		return "main/member/findIdResult";
 	}
 		
-	@RequestMapping(value="/member/forgot-pwd", method = RequestMethod.GET)
+	@GetMapping(value="/member/forgot-pwd")
 	public String forgot_pwd_get() {
 		logger.info("비밀번호 찾기 화면");
 		
 		return "main/member/forgot-pwd";
 	}
 	
-	@RequestMapping(value="/member/forgot-pwd", method = RequestMethod.POST)
+	@PostMapping(value="/member/forgot-pwd")
 	public String forgot_pwd_post(@ModelAttribute MemberVO membervo, HttpServletResponse response) {
 		logger.info("비밀번호 찾기 처리");
 		
