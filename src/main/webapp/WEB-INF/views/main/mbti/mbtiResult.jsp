@@ -21,7 +21,6 @@
 	    requestUrl: 'http://192.168.0.93:9091', // 페이지 url
 	    templateId: 97845, // 메시지템플릿 번호
 	    templateArgs: {
-	  	  NAME: name,
 	      TITLE: title, // 제목 텍스트 ${TITLE}
 	      DESC: '${resultMbti}', // 설명 텍스트 ${DESC}
 	      PATH: '${resultMbti}',
