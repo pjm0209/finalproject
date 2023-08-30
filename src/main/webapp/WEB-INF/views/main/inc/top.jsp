@@ -114,8 +114,7 @@
 		  </c:if>
 		  <!-- 로그인 된 경우 -->
 		  <c:if test="${!empty sessionScope.userid }">
-			<li><a class="nav-link scrollto">${sessionScope.userid}</a></li>
-			<li><a class="nav-link scrollto">${sessionScope.name}</a></li>
+			<li class="userName"><span id="userName">${sessionScope.name}</span><span>님 환영합니다</span></li>
 			<li><a class="getstarted scrollto" href="<c:url value='/main/logout'/>">로그아웃</a></li>
 		  </c:if>			
         </ul>
