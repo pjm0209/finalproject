@@ -15,7 +15,7 @@
 		<ul class="map-list">
 		<c:forEach var="educationVo" items="${list}">
 			<c:set var="educationNo" value="${educationVo.epNo}"/>
-				<li class="name"><button type="button" id="ep-name">${educationVo.epName }</button></li>
+				<li class="name"><button type="button" id="ep-name" onclick="showepinfo('${educationVo.epNo}')">${educationVo.epName }</button></li>
 		</c:forEach> 
 		</ul>
 		
@@ -167,20 +167,42 @@
 				function zoomOut() {
 				    map.setLevel(map.getLevel() + 1);
 				}
+				
+				function showepinfo(epNo){
+					$.ajax({
+						url:"<c:url value='/main/education/locationAjax'/>",
+						type:'post',
+						dataType:'json',
+						data:{
+							epNo: epNo
+						},
+						success:function(res){
+							var zipcode = res.epZipcode
+							var address = res.epAddress
+							var tel = res.epTel
+							$('.ep-zipcode').html(zipcode);
+							$('.ep-address').html(address);
+							$('.ep-tel').html(tel);
+						},
+						error:function(xhr, status, error){
+							alert(status+" : "+error);
+						}
+					});
+				}
 			</script>
 			</div>
 			<div class="location-info">
 				<dl class="zipcode">
 					<dt>우편번호</dt>
-					<dd class="detail">${educationVo.epZipcode }</dd>
+					<dd class="ep-zipcode">${educationVo.epZipcode }</dd>
 				</dl>		
 				<dl class="address">
 					<dt>주소</dt>
-					<dd class="detail">${educationVo.epAddress }</dd>
+					<dd class="ep-address">${educationVo.epAddress }</dd>
 				</dl>		
 				<dl class="tel">
 					<dt>전화번호</dt>
-					<dd class="detail">${educationVo.epTel }</dd>
+					<dd class="ep-tel">${educationVo.epTel }</dd>
 				</dl>		
 			</div>
 		</div>
