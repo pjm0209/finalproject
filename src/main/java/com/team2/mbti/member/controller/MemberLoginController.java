@@ -1,8 +1,9 @@
  package com.team2.mbti.member.controller;
 
+import java.net.http.HttpRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -133,14 +134,27 @@ public class MemberLoginController {
 	}
 		
 	@GetMapping("/member/forgot-id")
-	public String forgot_id() {
-		logger.info("아이디 찾기 화면");
-	    
-		return "main/member/forgot-id";
+	public String forgot_id(HttpRequest request, @ModelAttribute MemberVO membervo, Model model) {
+		logger.info("아이디 찾기 화면, 파라미터 membervo={}", membervo);
+		
+		int cnt = memberService.findId(membervo);
+		
+		logger.info("아이디 찾기 완료, result={}", cnt);
+		String msg = "아이디 찾기 실패.", url = "/member/forgot-id";
+		
+		if(cnt > 0) {
+			msg = "아이디를 찾았습니다.";
+			url = "/main/member/findIdResult";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		    
+		return "common/message";
 	}
 	
 	@PostMapping("/member/findIdResult")
-	public String findIdResult(@ModelAttribute MemberVO membervo, Model model) {
+	public String findIdResult(HttpServletResponse response, Model model) {
 		logger.info("아이디 찾기 처리");
 		
 		return "main/member/findIdResult";
