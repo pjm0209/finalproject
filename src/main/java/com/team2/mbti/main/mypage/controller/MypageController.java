@@ -301,4 +301,12 @@ public class MypageController {
 		return "main/mypage/memberOutResult";
 	}
 	
+	@RequestMapping("/mypageBasket")
+	public String mypageBasket(HttpSession session, Model model) {
+		
+		logger.info("마이페이지 - 나의 장바구니 조회 페이지, 파리미터 ???={}");
+		
+		return "main/mypage/mypageBasket";
+	}
+	
 }

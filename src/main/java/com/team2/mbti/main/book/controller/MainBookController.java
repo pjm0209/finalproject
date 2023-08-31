@@ -59,4 +59,13 @@ public class MainBookController {
 
 		return "main/book/bookOrderMain";
 	}
+	
+	@RequestMapping("/bookOrdering")
+	public String bookOrdering(@RequestParam(defaultValue = "0") int bookNo, Model model) {
+		logger.info("책 주문 페이지 - bookOrderMain, 파라미터 bookNo={}", bookNo);
+
+		return "main/book/bookOrdering";
+	}
+	
+	
 }//

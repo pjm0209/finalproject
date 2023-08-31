@@ -86,7 +86,7 @@
       where userid=#{userid}
    </update>	
    
-   <select id="findId" parameterType="string" resultType="string">
+   <select id="findId" parameterType="memberVo" resultType="memberVo">
    		select userid from member
 		where name= #{name} 
 		and hp= #{hp}

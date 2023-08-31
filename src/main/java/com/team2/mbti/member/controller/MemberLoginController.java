@@ -2,7 +2,6 @@
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -128,20 +127,36 @@ public class MemberLoginController {
 		model.addAttribute("msg",msg);
 		model.addAttribute("url",url);
 		
-		return "common/message";
-	
+		return "common/message";	
 	}
 		
-	@GetMapping("/member/forgot-id")
+	@RequestMapping("/member/forgot-id")
 	public String forgot_id() {
 		logger.info("아이디 찾기 화면");
-	    
+			    
 		return "main/member/forgot-id";
 	}
 	
-	@PostMapping("/member/findIdResult")
-	public String findIdResult(@ModelAttribute MemberVO membervo, Model model) {
+	@RequestMapping("/member/doforgot-id")
+	public String doforgot_id(String name, String tel, String email, Model model) {
 		logger.info("아이디 찾기 처리");
+		MemberVO str = memberService.findId(name, tel, email);
+		
+		if(str == null) {
+			model.addAttribute("historyBack", true);
+			model.addAttribute("msg", "해당 회원이 존재하지 않습니다.");
+			
+			return "common/redirect";
+		}
+		
+		model.addAttribute("historyBack", true);
+		model.addAttribute("msg", String.format("해당 회원의 로그인의 아이디는 %s입니다."));	    
+		return "common/redirect";
+	}
+	
+	@RequestMapping("/member/findIdResult")
+	public String findIdResult(HttpServletResponse response, Model model) {
+		logger.info("아이디 찾기 결과 화면");
 		
 		return "main/member/findIdResult";
 	}

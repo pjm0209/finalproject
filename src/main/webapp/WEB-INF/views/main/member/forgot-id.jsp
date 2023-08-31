@@ -147,9 +147,7 @@ form {
             $('.tab-content').removeClass('active');
             $('.tab-content').eq(tabIndex).addClass('active');
         });       
-    });
-    
-    
+    });   
 </script>
 
 </head>
@@ -194,7 +192,7 @@ form {
 				</div><br>
 													
 				<div class="btnSearch"><br>
-					<input type="button" id="btnCheck" value="확인">	
+					<input type="submit" id="btnCheck" value="확인">	
 					<input type="button" id="btnCancel" value="취소">					
 				</div>
 		</div>				
