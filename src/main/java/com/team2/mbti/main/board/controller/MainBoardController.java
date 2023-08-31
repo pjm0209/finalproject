@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.team2.mbti.board.model.BoardFormVO;
 import com.team2.mbti.board.model.BoardService;
+import com.team2.mbti.board.model.BoardVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -45,5 +46,17 @@ public class MainBoardController {
 		model.addAttribute("boardCategoryList", boardCategoryList);
 		
 		return "main/board/boardMain";
+	}
+	
+	@RequestMapping("/boardList")
+	public String boardList(@ModelAttribute BoardVO vo, Model model) {
+		logger.info("게시판 리스트 파라미터 vo: {}", vo);
+		
+		List<Map<String, Object>> boardList = boardService.selectAll(vo);
+		logger.info("게시판 리스트 조회결과 boardList: {}", boardList);
+		
+		model.addAttribute("boardList", boardList);
+		
+		return "main/board/boardList";
 	}
 }

@@ -68,6 +68,8 @@ p.boardCategoryContentIntro {
 .boardCategoryWriteCount {
     display: flex;
     align-items: center;
+    width: 155px;
+    justify-content: center;
 }
 
 ul.boardFormList {
@@ -81,4 +83,48 @@ ul.boardFormList {
     margin-top: 30px;
     background: none;
     color: white;
+}
+
+.boardCategoryContent {
+    width: 750px;
+}
+
+i.bi.bi-chat-square {
+    width: 20%;
+    text-align: left;
+}
+
+span.boardWriteCount {
+    width: 20px;
+    text-align: center;
+}
+
+select#mainBoardSearchCondtion {
+    height: 32px;
+    margin: 0;
+    width: 100px;
+    display: inline-block;
+}
+
+.searchInputText {
+    width: 250px;
+    height: 32px;
+    font-size: 15px;
+    border: 1px solid #e1e1e1;
+    border-radius: 15px;
+    display: inline-block;
+    margin-left: 15px;
+    padding: 0 10px;
+    padding-top: 3px;
+}
+
+input.boardSearchKeyword {
+    border: 0;
+    width: 88%;
+    outline: none;
+}
+
+.head-content-box2 {
+    display: flex;
+    align-items: center;
 }

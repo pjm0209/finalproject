@@ -24,13 +24,19 @@
 			</div>
 			<ul class="boardFormList">
 				<c:forEach var="map" items="${boardCategoryList }">
+					<c:if test="${!empty map.BOARDCOUNT}">
+						<c:set var="count" value="${map.BOARDCOUNT }"/>
+					</c:if>
+					<c:if test="${empty map.BOARDCOUNT}">
+						<c:set var="count" value="0"/>
+					</c:if>
 					<li class="boardFormItem">
 						<div class="boardCategoryTitleImg"></div>
 						<div class="boardCategoryContent">
-							<a class="boardCategoryContentTitle" href="#">${map.BOARD_FORM_NAME }</a>
+							<a class="boardCategoryContentTitle" href="<c:url value='/main/board/boardList?boardFormNo=${map.BOARD_FORM_NO }'/>">${map.BOARD_FORM_NAME }</a>
 							<p class="boardCategoryContentIntro">${map.BOARD_FORM_INTRO }</p>
 						</div>
-						<div class="boardCategoryWriteCount"><i class="bi bi-chat-square"></i><span class="boardWriteCount">${map.BOARDCOUNT }</span></div>						
+						<div class="boardCategoryWriteCount"><i class="bi bi-chat-square"></i><span class="boardWriteCount">${count }</span></div>						
 					</li>
 				</c:forEach>
 			</ul>
