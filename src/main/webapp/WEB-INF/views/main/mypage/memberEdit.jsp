@@ -88,13 +88,6 @@ body {
 }
 
 
-.div-memberEdit input[type="password"] {
-  width: 80%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-}
-
 #memberEmail{
 	width:80%;
 }
@@ -143,12 +136,6 @@ body {
   cursor: pointer;
 }
 
-.error {
-  color: red;
-  font-size: 12px;
-  margin-top: 5px;
-}
-
 </style>
     
 <article>
@@ -164,19 +151,7 @@ body {
 			<div class="div-memberEdit">		
 				<span>${sessionScope.userid}</span>
 			</div>
-			
-			<label>비밀번호</label>
-			<div class="div-memberEdit">
-				<input type="password" class="pwd" id="memberPwd" name="pwd">
-				<div class="error" id="pwdError"></div>
-			</div>
-			
-			<label>비밀번호 확인</label>
-			<div class="div-memberEdit">
-				<input type="password" class="pwdCheck" id="memberpwdCheck" name="editPwdCheck">
-				<div class="error" id="pwdCheckError"></div>
-			</div><br>
-			
+						
 			<label>이메일</label>
 			<div class="div-memberEdit">
 				<input type="text" class="email" id="memberEmail" name="email" value="${membervo.email}">

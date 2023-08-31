@@ -24,7 +24,8 @@ public interface MemberDAO {
 	int updateMember(MemberVO vo); //회원정보수정
 	int updateMemberOut(String userid); //회원탈퇴
 	
-	MemberVO findId(String name, String tel, String email); // 아이디찾기
-	public int updatePw(MemberVO vo) throws Exception;//비밀번호변경
+	MemberVO getMemberByNameAndEmail(String name, String email); // 아이디찾기 - 이름,이메일
+	MemberVO getMemberByNameAndHp(String name, String hp); //아이디찾기 - 이름, 전화번호
+	int updatePassword(String pwd); //비밀번호 변경
 			
 }

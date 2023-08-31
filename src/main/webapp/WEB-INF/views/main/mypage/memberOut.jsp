@@ -45,7 +45,7 @@ h2{
 	font-size: 15px;
 }
 
-span{
+.title{
 	font-size: 20px;
 	font-weight: bold;
 }
@@ -97,7 +97,7 @@ span{
 	</div>
 	</div><br>
 	
-	<span>*유의사항</span><br><br>
+	<span class="title">*유의사항</span><br><br>
 	<div class="bottom-border">
 	<div class="content2">
 	<p> - 회원탈퇴 처리 후에는 회원님의 개인정보를 복원할 수 없으며, 회원탈퇴 진행 시 해당 아이디는 영구적으로 삭제되어 재가입이 불가합니다.

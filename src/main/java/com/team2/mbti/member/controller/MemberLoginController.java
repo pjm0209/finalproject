@@ -2,6 +2,7 @@
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -137,29 +138,23 @@ public class MemberLoginController {
 		return "main/member/forgot-id";
 	}
 	
-	@RequestMapping("/member/doforgot-id")
-	public String doforgot_id(String name, String tel, String email, Model model) {
-		logger.info("아이디 찾기 처리");
-		MemberVO str = memberService.findId(name, tel, email);
+	@PostMapping("/member/findIdResult")
+	public String forgot_id_post(@RequestParam String name, @RequestParam String email, Model model) {
+		logger.info("아이디 찾기 처리, name={}, email={}", name, email);
+		 
+		MemberVO membervo = memberService.getMemberByNameAndEmail(name, email);
 		
-		if(str == null) {
-			model.addAttribute("historyBack", true);
-			model.addAttribute("msg", "해당 회원이 존재하지 않습니다.");
-			
-			return "common/redirect";
+		logger.info("아이디 찾기 결과, MemberVO={}", membervo);
+		
+		if(membervo == null) {
+			model.addAttribute("check", 1);
+		}else {
+			model.addAttribute("check",0);
+			model.addAttribute("id", membervo.getUserid());
 		}
 		
-		model.addAttribute("historyBack", true);
-		model.addAttribute("msg", String.format("해당 회원의 로그인의 아이디는 %s입니다."));	    
-		return "common/redirect";
-	}
-	
-	@RequestMapping("/member/findIdResult")
-	public String findIdResult(HttpServletResponse response, Model model) {
-		logger.info("아이디 찾기 결과 화면");
-		
-		return "main/member/findIdResult";
-	}
+        return "main/member/findIdResult";
+    }
 		
 	@GetMapping(value="/member/forgot-pwd")
 	public String forgot_pwd_get() {
@@ -185,15 +180,12 @@ public class MemberLoginController {
 	@ResponseBody
 	@RequestMapping("/member/checkId")
 	public int checkId(@RequestParam String userid, Model model) {
-		//1
 		logger.info("아이디 중복확인 파라미터, userid={}", userid);
 
-		//2
 		int result=0;
 		result = memberService.selectCheckId(userid);
 		logger.info("중복확인 결과 result={}", result);
 		
-		//4
 		return result;
 	}
 	

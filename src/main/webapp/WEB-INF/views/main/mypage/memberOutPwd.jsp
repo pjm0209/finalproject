@@ -55,7 +55,7 @@
     margin-top: 20px;
 }
 
-#submit {
+#btnCheck {
     background-color: orange; 
     color: white; 
     border: none;
@@ -64,11 +64,11 @@
     transition: background-color 0.3s ease;
 }
 
-#submit:hover {
+#btnCheck:hover {
     background-color: darkgreen; 
 }
 
-#cancel {
+#btnCancel {
     background-color: red;
     color: white; 
     border: none;
@@ -77,7 +77,7 @@
     transition: background-color 0.3s ease;
 }
 
-#cancel:hover {
+#btnCancel:hover {
     background-color: darkred; 
 }
 </style>
@@ -87,7 +87,7 @@
 $(function(){   
 	   $('#pwd').focus();
 	   
-	      $('#submit').click(function(){
+	      $('#btnCheck').click(function(){
 	         if($('#pwd').val().length<1){
 	            alert('비밀번호를 입력하세요.');
 	            $('#pwd').focus();
@@ -113,7 +113,7 @@ $(function(){
         }
     });
     
-    $('#cancel').click(function() {
+    $('#btnCancel').click(function() {
     	window.location.href = '/mbti/main/mypage/memberOut';
     });
 }); 	    	
@@ -142,8 +142,8 @@ $(function(){
         </div>
     
         <div class="align_center">
-            <input type="submit" id="submit" value="확인">
-            <input type="reset" id="cancel" value="취소">
+            <input type="submit" id="btnCheck" value="확인">
+            <input type="reset" id="btnCancel" value="취소">
         </div>						
     </form>
 </article>

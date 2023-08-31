@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,6 +34,8 @@ public class MypageController {
 	private final MbtiSurveyService mbtiSurveyService;
 	private final MbtiResultService mbtiResultService;
 	private final MemberService memberService;
+	
+	private final PasswordEncoder passwordEncoder;
 	
 	@RequestMapping("/mypage")
 	public String mypage() {
@@ -193,16 +196,36 @@ public class MypageController {
 		
 		return "main/mypage/mbtiResult";
 	}
+	
+	@RequestMapping("/memberEditPwd")
+	public String memberEditPwd() {
+		logger.info("개인정보 수정 비밀번호 입력 화면");
+
+		return "main/mypage/memberEditPwd";
+	}
+	
+	@PostMapping("/memberEditPwd")
+	public String memberEditPwd(@RequestParam String pwd, HttpSession session,
+			HttpServletResponse response, Model model) {
+		
+		String userid=(String)session.getAttribute("userid");
+		logger.info("개인정보 수정 비밀번호 확인 화면, pwd={}, userid={}" ,pwd, userid);
+
+		int result=memberService.loginCheck(userid, pwd);
+		logger.info("비밀번호 체크 결과, result={}", result);
+		
+		return "main/mypage/memberEditPwd";		
+	}
 		
 	@GetMapping("/memberEdit")
 	public String memberEdit_get(HttpSession session, Model model) {
 		
 		String userid=(String) session.getAttribute("userid");
 		
-		logger.info("회원 정보 수정 화면, 파라미터 userid={}", userid);
+		logger.info("개인 정보 수정 화면, 파라미터 userid={}", userid);
 		
 		MemberVO membervo = memberService.selectByUserid(userid);
-		logger.info("회원 정보 수정 화면, 정보 조회결과 membervo={}", membervo);
+		logger.info("개인 정보 수정 화면, 정보 조회결과 membervo={}", membervo);
 				
 		model.addAttribute("membervo",membervo);
 		
@@ -215,20 +238,21 @@ public class MypageController {
 		String userid = (String)session.getAttribute("userid");
 		membervo.setUserid(userid);
 
-		logger.info("회원 수정 처리, 파라미터 vo={},", membervo);
+		logger.info("개인 정보 수정 처리, 파라미터 vo={},", membervo);
+		membervo.setPwd(passwordEncoder.encode(membervo.getPwd()));
 
 		int result = memberService.loginCheck(membervo.getUserid(), membervo.getPwd());
 		logger.info("비밀번호 체크 결과, result={}", result);
 
-		String msg = "회원 수정 실패!", url = "/mypage/memberEdit";
+		String msg = "정보 수정 실패!", url = "/mypage/memberEdit";
 		
 		if(result==MemberService.LOGIN_OK) {
 			
 			int cnt = memberService.updateMember(membervo);
-			logger.info("회원 정보 수정 결과, cnt={}", cnt);
+			logger.info("개인 정보 수정 결과, cnt={}", cnt);
 			
 			if(cnt>0) {
-				msg = "회원 수정 성공!";
+				msg = "정보 수정 성공!";
 				url = "/main/mypage/mypage";
 			}
 		}else if(result==MemberService.PWD_DISAGREE) {
@@ -299,6 +323,14 @@ public class MypageController {
 		logger.info("회원 탈퇴 결과 화면");
 
 		return "main/mypage/memberOutResult";
+	}
+	
+	@RequestMapping("/editPwd")
+	public String editPwd() {
+		logger.info("비밀번호 변경 화면");
+			
+		return "main/mypage/editPwd";
+		
 	}
 	
 }
