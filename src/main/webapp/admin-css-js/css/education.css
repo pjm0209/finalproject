@@ -214,7 +214,7 @@ input#list-search-area {
 	position: relative;
 	display: table-cell;
 	width: 150px;
-	padding: 25px 0;
+	padding: 12px 0;
 	vertical-align: middle;
 	text-align: center;
 }
@@ -232,14 +232,14 @@ input#list-search-area {
 
 .list-class .tea img {
 	height: 170px;
-	margin: 2px 0 0 -17px;
+	margin: -2px -17px 0 -17px;
 }
 
 .list-class .tea-name {
 	margin-left: 5px;
 	color: #444;
-	line-height: 30px;
-    font-size: 22px;
+	line-height: 26px;
+    font-size: 18px;
     margin-top: 10px;
     margin-bottom: 5px;
 }
@@ -336,7 +336,7 @@ input#applyBtn {
 }
 
 .location-info .zipcode {
-	width: 210px;
+	width: 180px;
 	float: left;
 	list-style: none;
 }

@@ -190,6 +190,4 @@ public class MemberServiceImpl implements MemberService {
 			out.close();
 		}
 	}
-
-
 }

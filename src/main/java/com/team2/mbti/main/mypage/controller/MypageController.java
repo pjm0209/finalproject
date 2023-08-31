@@ -188,7 +188,7 @@ public class MypageController {
 		model.addAttribute("resultF", resultF);
 		model.addAttribute("resultP", resultP);
 		model.addAttribute("resultJ", resultJ);
-		//model.addAttribute("mbtiVo", mbtiVo);
+		model.addAttribute("mbtiVo", mbtiVo);
 		
 		
 		return "main/mypage/mbtiResult";
@@ -271,9 +271,9 @@ public class MypageController {
 			int cnt=memberService.updateMemberOut(userid);
 			logger.info("회원탈퇴 결과, cnt={}", cnt);
 			
-			if(cnt>0) {
+			if(cnt>0) {	
 				msg="회원 탈퇴 성공";
-				url="/mypage/memberOutResult";
+				url="/main/index";
 
 				session.invalidate();
 				
@@ -284,7 +284,8 @@ public class MypageController {
 			}
 		}else if(result==MemberService.PWD_DISAGREE) {
 			msg="비밀번호가 틀렸습니다";
-			url="/main/mypage/memberOut";
+			url="/main/mypage/memberOutPwd";
+			
 		}
 
 		model.addAttribute("msg", msg);
