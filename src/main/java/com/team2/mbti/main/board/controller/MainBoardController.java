@@ -57,9 +57,9 @@ public class MainBoardController {
 		PaginationInfo pagingInfo = new PaginationInfo();
 		pagingInfo.setBlockSize(ConstUtil.BLOCK_SIZE);
 		pagingInfo.setCurrentPage(vo.getCurrentPage());
-		pagingInfo.setRecordCountPerPage(ConstUtil.BOARD_MAIN_RECORD_COUNT);
+		pagingInfo.setRecordCountPerPage(ConstUtil.BOARD_RECORD_COUNT);
 
-		vo.setRecordCountPerPage(ConstUtil.BOARD_MAIN_RECORD_COUNT);
+		vo.setRecordCountPerPage(ConstUtil.BOARD_RECORD_COUNT);
 		vo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
 		
 		List<Map<String, Object>> boardList = boardService.selectAll(vo);
