@@ -65,14 +65,16 @@
 			<div style="margin-left: 30px;margin-top: 20px">
 				<span>받는 회원 : &nbsp;</span><span id="memberNameModal"></span>
 			</div>
-			<div class="modal-body" style="margin:0 auto">
-				<p>보낼 내용</p>
-				<textarea rows="20" cols="85" style="margin:0 auto"></textarea>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-				<button type="button" class="btn bg-orange-primary" >확인</button>
-			</div>
+			<form name="messageFrm" method="post" action="<c:url value='/admin/message/message'/>">
+				<div class="modal-body" style="margin:0 auto">
+					<p>보낼 내용</p>
+					<textarea rows="20" cols="85" style="margin:0 auto"></textarea>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+					<button type="button" class="btn bg-orange-primary" id="messageOkBtn" >확인</button>
+				</div>
+			</form>
 		</div>
 	</div>
 </div>

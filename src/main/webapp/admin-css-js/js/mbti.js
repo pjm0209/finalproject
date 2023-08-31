@@ -72,12 +72,6 @@
 			
 		});
 		
-	    $('button.test_btn_style').hover(function(){
-			$(this).toggleClass("active").animate("fast");
-		},function(){
-			$(this).toggleClass("active").animate("fast");
-		});
-		
 	});
 	
 	function mbtiWriteSubmit(){
