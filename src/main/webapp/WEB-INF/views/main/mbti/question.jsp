@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp" %>
 <script type="text/javascript">
-
 	$(function(){
 		var idx=1;
 		
@@ -56,10 +55,6 @@
 			}
 		});
 		
-		$('.test_btn_style').click(function(){
-			scrollToPosition($(window).scrollTop() + 670);
-		});
-        
         function scrollToPosition(position) {
             $('html, body').animate({
 				scrollTop: position
@@ -69,27 +64,12 @@
 </script>
 <section id="mbtiSurvey" class="mbtiSurvey">
 	<div class="mbti-survey">
-		<div>
-			<h2>
-				<img src="<c:url value='/images/text_stoke.png'/>" class="img_max_cont"> 페이지에 오신걸<br>환영합니다
-			</h2>
-			<h2 class="postition_new">
-                <img src="<c:url value='/images/m_true_01.png'/>" alt="MBTI달걀모양 MBTI검사" class="after_go">
-            </h2><br>
-			<p>무료 정밀검사로 성격유형에 맞는 <br><span>학과, 직업, 취미, 운동 등의 장.단점</span>을 알아보세요 !</p>
+		<div id="mbtiTopDiv">
+			<p>무료 정밀검사로 성격유형에 맞는 <br><span>학과, 직업, 취미, 운동 등의 장.단점</span>을 알아보세요!</p>
             <p>현재 감정상태를 기준으로 설문에 응해 주세요!</p>
-            <p>소요시간은 10분 내외 입니다.</p>
-            <button class="test_btn_style" data-value="1">
-            	<c:if test="${param.questionTypeNo==1}">
-            		MBTI 정식검사 시작하기
-            	</c:if>
-            	<c:if test="${param.questionTypeNo==2}">
-            		MBTI 간이검사 시작하기
-            	</c:if>
-            </button> 
+            <p>소요시간은 20분 내외 입니다.</p>
 		</div>
 	</div>
-	<!--text1 -->
 	<c:set var="num" value="0"/>
 	<c:set var="idx" value="1"/>
 	<c:set var="idx2" value="1"/>
@@ -125,7 +105,7 @@
 		        <c:set var="num" value="${num+1}"/>
 		    </div>
 	    </c:forEach>
-	    
+
 	    <div id="nextDivMbti">
 	    	<button type="button" class="mbti-button3" id="nextMbtiQuestion">다음</button>
 	    </div>

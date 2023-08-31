@@ -27,4 +27,5 @@ public interface MbtiSurveyDAO {
 	int getTotalRecordMbtiStatisticsView(SearchVO searchVo);
 	
 	List<Map<String, Object>>selectMbtiStatistics();
+	int deleteMbtiResult(MbtiResultVO mbtiResultVo);
 }

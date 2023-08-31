@@ -43,7 +43,6 @@ public class MessageController {
 		int cnt=messageService.insertSendDm(sendDmVo);
 		logger.info("쪽지 보내기 결과 cnt={}",cnt);
 		
-		
 		return "admin/message/message";
 	}
 }
