@@ -77,7 +77,7 @@
 							
 						</div>
 						<div class="btn">
-							<a href="<c:url value='/main/book/bookBasket'/>">장바구니</a>
+							<a href="<c:url value='/main/book/bookOrderMain'/>">장바구니</a>
 							<a href="#">바로구매</a>
 						</div>
 					</li>

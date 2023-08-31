@@ -258,7 +258,7 @@ body.dark .switch::before{
 			<div class="menu">	
 				<li class="search-box">	 		
 					<i class='bx bx-search icons'></i>
-						<input type="search" placeholder="Search...">																
+						<input type="search" placeholder="Search...">	
 				</li>
 				<ul class="menu-links" id="menu-links">
 					<li class="nav-link2">
@@ -268,7 +268,7 @@ body.dark .switch::before{
 						</a>
 					</li>
 					<li class="nav-link2">
-						<a href="#">
+						<a href="<c:url value='/main/mypage/mypageBasket'/>">
 							<i class='bx bx-bar-chart-alt-2 icon'></i>
 							<span class="text nav-text">장바구니</span>						
 						</a>
