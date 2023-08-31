@@ -14,4 +14,12 @@ public class CommonController {
 		
 		return "common/message";
 	}
+	
+	@GetMapping("/loginFirst2")
+	public String loginFirst2(Model model) {
+		model.addAttribute("msg", "먼저 로그인하세요!");
+		model.addAttribute("url", "/main/member/memberLogin");
+		
+		return "common/message";
+	}
 }

@@ -72,7 +72,7 @@
 			<ul class="pagination">
 				<c:if test="${pagingInfo.firstPage > 1 }">
 				    <li class="page-item">
-				      <a class="page-link" href="#" aria-label="Previous">
+				      <a class="page-link" href="<c:url value='/admin/mbti/mbti?currentPage=${pagingInfo.firstPage-1}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>" aria-label="Previous">
 				        <span aria-hidden="true">&laquo;</span>
 				      </a>
 				    </li>
@@ -87,7 +87,7 @@
 				</c:forEach>
 				<c:if test="${pagingInfo.lastPage < pagingInfo.totalPage}">
 				    <li class="page-item">
-				      <a class="page-link" href="#" aria-label="Next">
+				      <a class="page-link" href="<c:url value='/admin/mbti/mbti?currentPage=${pagingInfo.lastPage+1}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>" aria-label="Next">
 				        <span aria-hidden="true">&raquo;</span>
 				      </a>
 				    </li>

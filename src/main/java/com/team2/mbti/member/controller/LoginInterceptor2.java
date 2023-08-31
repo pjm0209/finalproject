@@ -1,4 +1,4 @@
-package com.team2.mbti.admin.controller;
+package com.team2.mbti.member.controller;
 
 import java.io.PrintWriter;
 
@@ -12,23 +12,23 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @Component
-public class LoginInterceptor implements HandlerInterceptor{
-	private static final Logger logger=LoggerFactory.getLogger(LoginInterceptor.class);
+public class LoginInterceptor2 implements HandlerInterceptor{
+	private static final Logger logger=LoggerFactory.getLogger(LoginInterceptor2.class);
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, 
 			HttpServletResponse response, Object handler)
 			throws Exception {
 		
-		String adminId=(String) request.getSession().getAttribute("adminId");		
-		logger.info("preHandle() 호출!, adminId={}", adminId);
+		String userid=(String) request.getSession().getAttribute("userid");		
+		logger.info("preHandle() 호출!, userid={}", userid);
 		
-		if(adminId==null || adminId.isEmpty()) {
+		if(userid==null || userid.isEmpty()) {
 			response.setContentType("text/html;charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.print("<script>");
 			//out.print("alert('먼저 로그인하세요!');");
-			out.print("location.href='"+ request.getContextPath() +"/loginFirst';");			
+			out.print("location.href='"+ request.getContextPath() +"/loginFirst2';");			
 			out.print("</script>");
 			
 			return false;

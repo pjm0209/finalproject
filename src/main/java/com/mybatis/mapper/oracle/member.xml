@@ -85,5 +85,11 @@
       set outdate=sysdate
       where userid=#{userid}
    </update>	
+   
+   <select id="findId" parameterType="memberVo" resultType="memberVo">
+   		select userid from member
+		where name= #{name} 
+		and hp= #{hp}
+   </select>
 	
 </mapper>

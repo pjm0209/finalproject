@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<%@ include file="../inc/top.jsp" %> 
+<%@include file="../inc/top.jsp" %>
+<%@include file="../inc/mypage.jsp" %>
 <script type="text/javascript" src="<c:url value ='/js/member.js"'/>"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>
@@ -152,7 +153,7 @@ body {
     
 <article>
 <div class="form-mypage">
-	<form class="form-memberEdit" name="memberEdit" method="post" action="<c:url value='/main/member/memberEdit'/>">			 
+	<form class="form-memberEdit" name="memberEdit" method="post" action="<c:url value='/main/mypage/memberEdit'/>">			 
 		<h1>회원 정보 수정</h1>         
 		    <label>이름</label>
 		    <div class="div-memberEdit">

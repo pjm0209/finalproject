@@ -9,6 +9,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title> Responsive Login and Signup Form </title>
+        <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 
         <!-- CSS -->
         <link rel="stylesheet" href="css/style.css">
@@ -178,42 +179,54 @@ $(function(){
 </script> 
 
 <!-- 카카오 스크립트 -->
-<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script>
-//<![CDATA[
-// 사용할 앱의 JavaScript 키를 설정해 주세요.
-Kakao.init('ba663235e16b790c0b20037c2ed8ed93');
-// 카카오 로그인 버튼을 생성합니다.
-Kakao.Auth.createLoginButton({
-    container: '#kakao-login-btn',
-    success: function (authObj) {
-        alert(JSON.stringify(authObj));
-        Kakao.Auth.setAccessToken(authObj.access_token);
-        location.href=
-        	"https://kauth.kakao.com/oauth/authorize?client_id=63aae7bb7049cc37773c9691d2c30682&prompt=login"
-           +"&redirect_uri=http://localhost:9091/mbti/oauth/kakao&response_type=code";
-    },
-    fail: function (err) {
-        alert(JSON.stringify(err));
+Kakao.init('5bdc967d76e3681232d52f0d0c435a2a'); //발급받은 키 중 javascript키를 사용해준다.
+console.log(Kakao.isInitialized()); // sdk초기화여부판단
+//카카오로그인
+function kakaoLogin() {
+    Kakao.Auth.login({
+      success: function (response) {
+       alert(response.access_token)
+       Kakao.Auth.setAccessToken(response.access_token);
+       
+        Kakao.API.request({
+          url: '/v2/user/me',
+          data : {
+             property_keys: ['kakao_profile_nickname', 'kakao_profile_image', 'kakao_account_email'],
+          },
+          
+          success: function (response) {
+             console.log(response)
+          },
+          fail: function (error) {
+            console.log(error)
+          },
+        })
+      },
+      fail: function (error) {
+        console.log(error)
+      },
+    })
+  }
+//카카오로그아웃  
+function kakaoLogout() {
+    if (Kakao.Auth.getAccessToken()) {
+      Kakao.API.request({
+        url: '/v1/user/unlink',
+        success: function (response) {
+           console.log(response)
+        },
+        fail: function (error) {
+          console.log(error)
+        },
+      })
+      Kakao.Auth.setAccessToken(undefined)
     }
-});
-Kakao.API.request({
-	  url: '/v2/user/me',
-	  data: {
-	    property_keys: [
-	    	'kakao_account.email', 
-	    	'kakao_account.gender'],
-	  },
-	})
-	  .then(function(response) {
-	    console.log(response);
-	  })
-	  .catch(function(error) {
-	    console.log(error);
-	  });
-//]]> 
+  }  
 </script>
-    
+
+
+   
 </head>
 <body>
     <section class="container forms">    
@@ -232,9 +245,12 @@ Kakao.API.request({
                     </div><br>
                     
                     <div class="remember-check">
-                		<input type="checkbox" name="chkSave" id="remember-check">&nbsp; 아이디 저장하기
-                			<c:if test="${!empty cookie.ck_userid }">         
-                			</c:if>   
+                		<input type="checkbox" name="chkSave" id="remember-check"
+                			<c:if test="${!empty cookie.ck_userid }">  
+                				    checked="checked"   
+                			</c:if>
+                		>&nbsp; 아이디 저장하기
+                			  
                 		<a class="forgot-id" href="<c:url value='/main/member/forgot-id'/>">아이디 찾기</a>
                 		<span style="color:blue;">|</span>
                 		<a class="forgot-password" href="<c:url value='/main/member/forgot-pwd'/>">비밀번호 찾기</a>
