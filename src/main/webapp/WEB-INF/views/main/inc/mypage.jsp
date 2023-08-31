@@ -286,7 +286,7 @@ body.dark .switch::before{
 						</a>
 					</li>	
 					<li class="nav-link2">
-						<a href="#">
+						<a href="<c:url value='/main/mypage/education'/>">
 							<i class='bx bx-heart icon'></i>
 							<span class="text nav-text">나의 교육</span>						
 						</a>
