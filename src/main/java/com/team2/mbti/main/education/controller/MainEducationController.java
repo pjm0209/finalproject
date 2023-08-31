@@ -112,8 +112,11 @@ public class MainEducationController {
 	
 	
 	@RequestMapping("/mypage/education")
-	public String myEdu(@ModelAttribute EducationVO vo, Model model) {
-		logger.info("마이 교육 페이지 보여주기");
+	public String myEdu(@ModelAttribute EducationVO vo, HttpSession session, Model model) {
+		logger.info("마이 교육 페이지 보여주기, vo={}", vo);
+	
+		int no = (int) session.getAttribute("no");
+		
 		
 		List<EducationVO> list = educationService.selectMyAllEdu(vo);
 		model.addAttribute("list", list);
