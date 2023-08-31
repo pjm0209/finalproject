@@ -37,6 +37,7 @@ section#myPage{
 	padding-left: 223px;
 	padding-top: 100px;
 	height:6850px;
+	background-color: #f7f7f7;
 }
 body{
 	height: 100vh;

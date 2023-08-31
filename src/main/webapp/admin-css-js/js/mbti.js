@@ -72,10 +72,14 @@
 			
 		});
 		
-	    $('button.test_btn_style').hover(function(){
-			$(this).toggleClass("active").animate("fast");
-		},function(){
-			$(this).toggleClass("active").animate("fast");
+		$('#mbtiStatistics-delete-button').click(function(){
+			if($('input[type=checkbox]:checked').length<1){
+				$('#alertModalBody').html("삭제할 질문을 선택하세요");
+				$('#alertModal').modal('show');
+				return false;
+			}
+			$('form[name=frmDelete]').prop('action',contextPath+'/admin/mbti/mbtiStatisticsDelete');
+			$('form[name=frmDelete]').submit();
 		});
 		
 	});
