@@ -24,7 +24,7 @@ label{
 	margin-top: 10px;
 }
 
-span{
+.Essential{
 	color:red;
 }
 
@@ -87,14 +87,14 @@ $(function() {
 	<div class="separator2"></div>
 
 	<label>이용약관 동의
-		<span>(필수)</span>
+		<span class="Essential">(필수)</span>
 			<input type="checkbox" id="agree1_check">
 	</label>
 	<iframe src="<c:url value='/inc2/provision.html'/>" width="700px" height="400px"></iframe>
 	<br>
 
 	<label>개인정보 수집 및 이용 동의
-		<span>(필수)</span>
+		<span class="Essential">(필수)</span>
 			<input type="checkbox" id="agree2_check">
 	</label>
 	<iframe src="<c:url value='/inc2/provision2.html'/>" width="700px" height="400px"></iframe>

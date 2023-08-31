@@ -115,10 +115,22 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.updateMemberOut(userid);
 	}
 
-	//아이디 찾기
+	//아이디 찾기 - 이름, 이메일
 	@Override
-	public MemberVO findId(String name, String tel, String email) {
-		return memberDao.findId(name, tel, email);
+	public MemberVO getMemberByNameAndEmail(String name, String email) {
+		return memberDao.getMemberByNameAndEmail(name, email);
+	}
+
+	//아이디찾기 - 이름, 전화번호
+	@Override
+	public MemberVO getMemberByNameAndHp(String name, String hp) {
+		return memberDao.getMemberByNameAndHp(name, hp);
+	}
+
+	//비밀번호 변경
+	@Override
+	public int updatePassword(String pwd) {
+		return memberDao.updatePassword(pwd);
 	}
 
 }

@@ -60,15 +60,26 @@ label{
 	margin-left: 80px;
 }
 
-.btnSearch {
+.btnSearch1 {
     text-align: center;	
     justify-content: space-between; 
 }
 
-input[type="button"]{
+.btnSearch2 {
+    text-align: center;	
+    justify-content: space-between; 
+}
+
+button[type="submit"]{
   	width: 180px;
  	height: 50px;
-	background-color: #ff7f00;
+	font-weight: bold;	
+	color: white;
+}
+
+button[type="button"]{
+	width: 180px;
+ 	height: 50px;
 	font-weight: bold;	
 	color: white;
 }
@@ -112,33 +123,8 @@ form {
 
 </style>
 
-<script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>
 <script type="text/javascript">
     $(function() { 
-    	$('#btnCheck').click(function(){
-            var name = $('#name').val();
-            var tel = $('#tel').val();
-              
-   			if($('#name').val().length < 1){
-   				alert("이름을 입력하세요");
-   				$('#name').focus();				
-   				return false;				
-   			}
-   			
-			if($('#tel').val().length < 1){
-				alert("전화번호를 입력하세요");
-				$('#tel').focus();				
-				return false;				
-			}	
-        });
-    		    	
-        $('#btnCancel').click(function(){
-            var confirmed = confirm("메인 화면으로 돌아가시겠습니까?");
-            if (confirmed) {
-                window.location.href = '<c:url value="/main/index"/>';
-            }
-        }); 
-            
         $('.tab-button').click(function() {
             $('.tab-button').removeClass('active');
             $(this).addClass('active');
@@ -146,7 +132,60 @@ form {
             var tabIndex = $(this).index();
             $('.tab-content').removeClass('active');
             $('.tab-content').eq(tabIndex).addClass('active');
-        });       
+        });
+        
+        $('#btnCancel1').click(function(){
+            var confirmed = confirm("메인 화면으로 돌아가시겠습니까?");
+            if (confirmed) {
+                window.location.href = '<c:url value="/main/index"/>';
+            }
+        }); 
+        
+        $('#btnCancel2').click(function(){
+            var confirmed = confirm("메인 화면으로 돌아가시겠습니까?");
+            if (confirmed) {
+                window.location.href = '<c:url value="/main/index"/>';
+            }
+        }); 
+            	
+        $('#btnSearch1').click(function(e) {
+            e.preventDefault(); 
+
+            var name = $('#name1').val();
+            var tel = $('#tel').val();
+
+            if (name.trim() === '') {
+                alert("이름을 입력하세요");
+                $('#name1').focus();
+                return false;
+            }
+
+            if (tel.trim() === '') {
+                alert("전화번호를 입력하세요");
+                $('#tel').focus();
+                return false;
+            }
+            
+            window.location.href = '<c:url value="/main/member/findIdResult"/>';
+        });
+        
+        // 서버로 데이터 전송
+        $.ajax({
+            type: "POST",
+            url: "<c:url value='main/member/forgot-id'/>",
+            data: {
+                name: name,
+                tel: tel
+            },
+            success: function(response) {
+                // 서버로부터의 응답 처리
+                console.log("데이터 전송 성공:", response);
+                // 원하는 처리를 여기에 추가
+            },
+            error: function(xhr, status, error) {
+                console.log("데이터 전송 실패:", error);
+            }
+        });
     });   
 </script>
 
@@ -158,42 +197,42 @@ form {
         <div class="tab-button">이메일로 찾기</div>
     </div>
     
-	<form name = "form-find-id-tel" method="post" action="<c:url value='main/member/forgot-id'/>">	
+	<form name = "form-find-id-tel" method="post" action="<c:url value='/main/member/forgot-id'/>">	
 		<div class="tab-content active">
 			<p>회원가입 시 입력한 휴대폰 번호를 입력하시면 아이디를 찾을 수 있습니다.</p>			
-				<div class="findTel-name">
+				<div class="findTel-name1">
 					<label>*&nbsp;이름 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-						<input type="text" id="name" placeholder="이름을 입력하세요">
+						<input type="text" name="name" id="name1" placeholder="이름을 입력하세요">
 				</div><br>													
 				
 				<div class="findTel-tel">
 					<label>*&nbsp;휴대폰 : &nbsp;</label>
-						<input type="text" id="tel" placeholder="휴대폰번호를 입력하세요">		
+						<input type="text" name="hp" id="tel" placeholder="휴대폰번호를 입력하세요">		
 				</div><br>	
 				
-				<div class="btnSearch"><br>
-					<input type="button" id="btnCheck" value="확인">	
-					<input type="button" id="btnCancel" value="취소">					
+				<div class="btnSearch1"><br>
+					<button class="btn btn-primary" type="submit" id="btnSearch1">찾기</button>	
+					<button class="btn btn-info" type="button" id="btnCancel1">취소</button>				
 				</div>
 		</div>	
 		</form>
 		
-		<form name = "form-find-id-" method="post" action="<c:url value='main/member/forgot-id'/>">		
+		<form name = "form-find-id-" method="post" action="<c:url value='/main/member/findIdResult'/>">		
 		<div class="tab-content">
 			<p>회원가입 시 입력한 이메일을 입력하시면 아이디를 찾을 수 있습니다.</p>	
-				<div class="findEmail-name">
+				<div class="findEmail-name2">
 					<label>*&nbsp;이름 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-						<input type="text" id="name" placeholder="이름을 입력하세요">	
+						<input type="text" name="name" id="name2" placeholder="이름을 입력하세요">	
 				</div><br>		
 			
 				<div class="findEmail-email">
 					<label>*&nbsp;E-mail : &nbsp;</label>
-						<input type="text" id="email" placeholder="이메일을 입력하세요">		
+						<input type="email" name="email" id="email" placeholder="이메일을 입력하세요">		
 				</div><br>
 													
-				<div class="btnSearch"><br>
-					<input type="submit" id="btnCheck" value="확인">	
-					<input type="button" id="btnCancel" value="취소">					
+				<div class="btnSearch2"><br>
+					<button class="btn btn-primary" type="submit" id="btnSearch2">찾기</button>	
+					<button class="btn btn-info" type="button" id="btnCancel2">취소</button>					
 				</div>
 		</div>				
 	</form>    

@@ -65,10 +65,16 @@ label{
     justify-content: space-between; 
 }
 
-input[type="button"]{
+button[type="submit"]{
   	width: 180px;
  	height: 50px;
-	background-color: #ff7f00;
+	font-weight: bold;	
+	color: white;
+}
+
+button[type="button"]{
+	width: 180px;
+ 	height: 50px;
 	font-weight: bold;	
 	color: white;
 }
@@ -160,17 +166,17 @@ form {
 			<p>회원가입 시 입력한 휴대폰 번호로 임시 비밀번호를 전송해드립니다. </p>			
 				<div class="findTel-name">
 					<label>*&nbsp;이름 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-						<input type="text" id="name" placeholder="이름을 입력하세요">	
+						<input type="text" name="name" id="name" placeholder="이름을 입력하세요">	
 				</div><br>													
 				
 				<div class="findTel-tel">
 					<label>*&nbsp;휴대폰 : &nbsp;</label>
-						<input type="text" id="tel" placeholder="휴대폰번호를 입력하세요">		
+						<input type="text" name="hp" id="tel" placeholder="휴대폰번호를 입력하세요">		
 				</div><br>
 				
 				<div class="btnSearch"><br>
-					<input type="button" id="btnSubmit" value="전송">	
-					<input type="button" id="btnCancel" value="취소">					
+					<button class="btn btn-primary" type="submit">찾기</button>	
+					<button class="btn btn-info" type="button" onclick="history.back();">취소</button>					
 				</div>
 		</div>	
 				
@@ -178,17 +184,17 @@ form {
 			<p>회원가입 시 입력한 이메일 주소로 임시 비밀번호를 전송해드립니다.</p>	
 				<div class="findEmail-name">
 					<label>*&nbsp;이름 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-						<input type="text" id="name" placeholder="이름을 입력하세요">	
+						<input type="text" name="name" id="name" placeholder="이름을 입력하세요">	
 				</div><br>		
 			
 				<div class="findEmail-email">
 					<label>*&nbsp;E-mail : &nbsp;</label>
-						<input type="text" id="email" placeholder="이메일을 입력하세요">		
+						<input type="text" name="email" id="email" placeholder="이메일을 입력하세요">		
 				</div><br>
 													
 				<div class="btnSearch"><br>
-					<input type="button" id="btnSubmit" value="전송">	
-					<input type="button" id="btnCancel" value="취소">					
+					<button class="btn btn-primary" type="submit">찾기</button>	
+					<button class="btn btn-info" type="button" onclick="history.back();">취소</button>					
 				</div>
 		</div>				
 	</form>    
