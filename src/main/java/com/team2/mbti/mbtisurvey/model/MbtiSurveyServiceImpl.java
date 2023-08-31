@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.team2.mbti.common.SearchVO;
+import com.team2.mbti.mbtiResult.model.MbtiResultListVO;
 import com.team2.mbti.mbtiResult.model.MbtiResultVO;
 import com.team2.mbti.member.model.MemberVO;
 
@@ -21,8 +22,6 @@ public class MbtiSurveyServiceImpl implements MbtiSurveyService{
 	@Override
 	public List<MbtiSurveyVO> selectAllMbtiSurvey(SearchVO vo) {
 		return mbtiSurveyDao.selectAllMbtiSurvey(vo);
-		
-		
 	}
 
 	@Override
@@ -101,5 +100,24 @@ public class MbtiSurveyServiceImpl implements MbtiSurveyService{
 	@Override
 	public List<Map<String, Object>>selectMbtiStatistics(){
 		return mbtiSurveyDao.selectMbtiStatistics();
+	}
+
+	@Override
+	@Transactional
+	public int deleteMbtiResult(MbtiResultListVO mbtiResultListVo) {
+		int cnt=0;
+		try {
+			List<MbtiResultVO> list=mbtiResultListVo.getMbtiResultItem();
+			for(MbtiResultVO mbtiResultVo : list) {
+				if(mbtiResultVo.getNo()!=0) {
+					cnt=mbtiSurveyDao.deleteMbtiResult(mbtiResultVo);
+				}
+			}
+		}catch (RuntimeException e) {
+			e.printStackTrace();
+			cnt=-1;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+		}
+		return cnt;
 	}
 }
