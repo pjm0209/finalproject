@@ -4,20 +4,21 @@
 <%@include file="../inc/mypage.jsp" %>
 
 <section id="myEduPage">
-	<div class="board">
-	<div class="applyFlagView">
-		<h4>교육 신청 현황</h4>
+<div class="board-body" style="width:87%">
+	<div class="board" style="margin-top: 35px;">
+	<div class="board-head">
+	<div id="board-title" style="border:0">
+		<h5>교육 신청 현황</h5>
 	</div>
-		<table class="table" id="educationtb">
+		<table class="table" id="educationtb" style="margin-top:90px;">
 			<thead>
 				<tr class="board-table-colum">
-					<th scope="col"><input type="checkbox" id="check-All" class="board-checkbox" ></th>
 					<th scope="col">교육 이름</th>
 					<th scope="col">강사명</th>
 					<th scope="col">교육 기간</th>
 					<th scope="col">교육비</th>
 					<th scope="col">교육장</th>
-					<th scope="col">승인 상태</th>
+					<th scope="col">신청 현황</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -29,15 +30,14 @@
 				</c:if>
 				<c:if test="${!empty list }">
 					<c:forEach var="educationVo" items="${list}">
-						<c:set var="educationNo" value="${educationVo.eduNo}"/>
+						<c:set var="educationNo" value="${educationVo.eduAppNo}"/>
 						<tr>
-							<th scope="row"><input type="checkbox" class="board-checkbox" name="educationItems[${idx }].eduNo" value="${educationVo.eduNo }"/></th>
 							<td>${educationVo.eduName }</td>
 							<td>${educationVo.eduTeaName }</td>
 							<td>${educationVo.eduCom }</td>
 							<td><fmt:formatNumber value="${educationVo.eduPrice }" pattern="#,###"/>
 							<td>${educationVo.epName }</td>
-							<td>${educationVo.epAppFlag }</td>
+							<td>${educationVo.eduAppFlag }</td>
 						</tr>
 						<c:set var="idx" value="${idx + 1 }" />
 					</c:forEach>
@@ -72,6 +72,8 @@
 			</ul>
 		</div>
 	</div>
+	</div>
+</div>
 </section>
 
 <%@include file="../inc/bottom.jsp" %>

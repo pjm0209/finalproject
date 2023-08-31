@@ -115,7 +115,8 @@ public class MainEducationController {
 	public String myEdu(@ModelAttribute EducationVO vo, Model model) {
 		logger.info("마이 교육 페이지 보여주기");
 		
-		
+		List<EducationVO> list = educationService.selectMyAllEdu(vo);
+		model.addAttribute("list", list);
 		
 		return "main/mypage/education";
 	}
