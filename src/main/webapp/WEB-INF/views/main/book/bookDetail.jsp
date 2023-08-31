@@ -6,6 +6,9 @@
 <link type="text/css" rel="stylesheet" href="<c:url value='/admin-css-js/css/bookMain.css'/>">
 
 <script type="text/javascript" src="<c:url value='/admin-css-js/js/bookMain.js'/>"></script>
+<script type="text/javascript">
+
+</script>
 
 <section id="q" class="detail_tbox" style="">
 	<div class="flex tab_menu" style="width:1420px; margin:0 auto; justify-content:flex-end; border:0; ">
@@ -66,7 +69,7 @@
 			</div>
 		</div>
 
-		<div id="content" style="margin-top: 30px;">
+		<div id="content" style="margin-top: 30px;margin-left: 278px;">
 			<div class="pdList flex ">
 				<div class="pdimg">
 					<img src="https:/i.ibb.co/yhbwLJR/1.png" alt="1">
@@ -124,7 +127,7 @@
 
 			<div id="detail" style="height: 75px"></div>
 			<section class="detail_tbox">
-				<div class="flex tab_menu">
+				<div id="detail_ul" class="flex tab_menu">
 					<h4>상세소개</h4>
 					<ul class="flex">
 						<li class='on'><a href="#detail">상세정보</a></li>
@@ -140,7 +143,7 @@
 			</section>
 			<div id="notice" style="height: 75px"></div>
 			<section class="detail_tbox">
-				<div class="flex tab_menu">
+				<div id="notice_ul" class="flex tab_menu">
 					<h4>배송안내</h4>
 					<ul class="flex">
 						<li class='off'><a href="#detail">상세정보</a></li>
@@ -173,7 +176,7 @@
 			</section>
 			<div id="rule" style="height: 75px"></div>
 			<section class="detail_tbox">
-				<div class="flex tab_menu">
+				<div id="rule_ul" class="flex tab_menu">
 					<h4>교환/환불 정책</h4>
 					<ul class="flex">
 						<li class='off'><a href="#detail">상세정보</a></li>
@@ -253,7 +256,7 @@
 	<script type="text/javascript" src="<c:url value='/js/sticky-sidebar.js'/>"></script>
 	<script type="text/javascript">
 			var a = new StickySidebar('#sidebar', {
-				topSpacing : 500
+				topSpacing : 400
 			});
 		</script>
 </section>

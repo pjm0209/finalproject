@@ -5,46 +5,6 @@
 <script type="text/javascript" src="<c:url value='/admin-css-js/js/book.js'/>"></script>
 <script type="text/javascript">
 	$(function(){
-		
-		$('#searchByKeywordBtn').click(function(){
-			$('form[name=serach]').submit();
-		});
-		
-		$('form[name=serach]').submit(function(){
-			alert($('form[name=serach]').serializeArray()); // [object Object],[object Object]
-			alert($.param($('form[name=serach]').serializeArray()));
-			alert($(this).serialize());
-			
-			$.ajax({
-				url:"<c:url value='/admin/book/bookAjaxList?bookFlag=${param.bookFlag}'/>",
-				type:"post",
-				dataType:"json",
-				data: $('form[name=serach]').serializeArray(), // 입력 양식의 내용을 객체로 만든다
-				
-				success:function(res){
-					var errCode = jsonStr.results.common.errorCode;
-					var errDesc = jsonStr.results.common.errorMessage;
-					if(errCode != "0"){
-						var str = "<tr>
-							<th colspan='10' style='color:gray;''>해당 상품은 존재하지 않습니다.</th>
-							</tr>";
-						$("#list").html(str);
-					}else{
-						if(jsonStr != null){
-							makeListJson(jsonStr);
-						}
-					}
-				},
-				error:function(xhr, status, error){
-					alert(status + " : " + error);
-				}
-			});//ajax
-			
-			//기본 이벤트 제거
-			event.preventDefault();
-			
-		});
-		
 		$('#toggleBtn').click(function(){
 			var a = $('#toggleBtn').text()
 		 	var b = '검색창 열기';
@@ -212,7 +172,7 @@
 				  <ul class="pagination pagination-lg justify-content-center">
 				  	<c:if test="${pagingInfo.firstPage > 1 }">
 					    <li class="page-item">
-					      <a class="page-link" href="#" onclick="bookListPage(${pagingInfo.fistPage - 1})" aria-label="Previous">
+					      <a class="page-link" href="#" onclick="bookListPage(${pagingInfo.firstPage - 1})" aria-label="Previous">
 					        <span aria-hidden="true">&laquo;</span>
 					      </a>
 					    </li>

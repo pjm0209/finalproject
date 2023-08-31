@@ -28,7 +28,7 @@ $(function(){
 });
 /**/
 
-/*bookDetail.jsp의 사진 슬라이드 부분*/
+/*bookDetail.jsp*/
 $(function(){
 
 	$(window).scroll(function(){
@@ -37,23 +37,35 @@ $(function(){
 		
 		if( sc >= $('#detail').offset().top ){
 			$("#q").show();
+			$('#detail_ul').hide();
 		}
+		
 		if( sc >= $('#notice').offset().top -5 ){
 			$("#q .tab_menu ul li").removeClass();
 			$("#q .tab_menu ul li:eq(0), #q .tab_menu ul li:eq(2)").addClass('off');
 			$("#q .tab_menu ul li:eq(1)").addClass('on');
+			$('#notice_ul').hide();
 		} else{
 			$("#q .tab_menu ul li").removeClass();
 			$("#q .tab_menu ul li:eq(1), #q .tab_menu ul li:eq(2)").addClass('off');
 			$("#q .tab_menu ul li:eq(0)").addClass('on');
+			$('#notice_ul').show();
+			$('#rule_ul').show();
 		}
+		
 		if( sc >= $('#rule').offset().top - 5 ){
 			$("#q .tab_menu ul li").removeClass();
 			$("#q .tab_menu ul li:eq(0), #q .tab_menu ul li:eq(1)").addClass('off');
 			$("#q .tab_menu ul li:eq(2)").addClass('on');
+			$('#rule_ul').hide();
+		}else {
+			$('#rule_ul').show();
 		}
 		if( sc < $('#detail').offset().top ){
 			$("#q").hide();
+			$('#detail_ul').show();
+			$('#notice_ul').show();
+			$('#rule_ul').show();
 		}
 	});
 });

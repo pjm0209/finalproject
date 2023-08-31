@@ -330,7 +330,14 @@ public class MypageController {
 		logger.info("비밀번호 변경 화면");
 			
 		return "main/mypage/editPwd";
+	}
+	
+	@RequestMapping("/mypageBasket")
+	public String mypageBasket(HttpSession session, Model model) {
 		
+		logger.info("마이페이지 - 나의 장바구니 조회 페이지, 파리미터 ???={}");
+		
+		return "main/mypage/mypageBasket";
 	}
 	
 }

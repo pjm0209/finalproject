@@ -2,18 +2,19 @@
 <script type="text/javascript">
 	
 </script>
-<form name="serach" method="post"
+<form name="serach">
+<%-- <form name="serach" method="post"
 	<c:if test="${param.bookFlag eq 'bookList'}">
 	 	action="<c:url value='/admin/book/bookList?bookFlag=bookListByKeyword'/>"
 	 </c:if>
 	 <c:if test="${param.bookFlag eq 'Inventory'}">
 	 	action="<c:url value='/admin/book/bookList?bookFlag=InventoryByKeyword'/>"
 	 </c:if>
+	 > --%>
+	 serach<input id="searchBookFlag" name="bookFlag"  type="text"
+	 <c:if test="${param.bookFlag == 'bookList' or param.bookFlag == 'bookListByKeyword'}"> value='bookListByKeyword'</c:if>
+	 <c:if test="${param.bookFlag == 'Inventory' or param.bookFlag == 'InventoryByKeyword'}"> value='InventoryByKeyword'</c:if>
 	 >
-	 <input name="bookFlag"  type="text"
-		<c:if test="${param.bookFlag eq 'bookList'}"> value="bookListByKeyword"</c:if>
-		<c:if test="${param.bookFlag eq 'Inventory'}"> value="InventoryByKeyword"</c:if>
-	>
 	<div class="flex shadow-sm p-3 mb-5 bg-body rounded"
 		style="margin: 10px 0px; background: white; margin-right: 15px">
 		<h2>상품 검색</h2>
