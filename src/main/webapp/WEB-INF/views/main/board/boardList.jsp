@@ -18,8 +18,8 @@
 				<div class="head-content-box1">
 					<nav class="board-nav">
 						<ul class="board-ul">
-							<li class="board-li-category">게시판 카테고리</li>
-							<li class="board-li-category">전체 게시글</li>							
+							<li class="board-li-category"><a href="<c:url value='/main/board/boardMain'/>">게시판 카테고리</a></li>
+							<li class="board-li-category"><a href="<c:url value='/main/board/boardList'/>">전체 게시글</a></li>							
 						</ul>
 					</nav>
 				</div>
@@ -33,9 +33,7 @@
 						<input type="text" class="boardSearchKeyword" name="seasrchKeyword">
 						<i class="bi bi-search"></i>					
 					</div>
-				</div>
-				<div class="head-content-box2">
-				</div>			
+				</div>		
 			</div>
 		</div>
 		<div class="boardContent-body">
@@ -60,7 +58,7 @@
 			
 			<!-- 게시글 -->
 			<ul class="boardFormList">
-				<c:forEach var="map" items="${boardList }">
+				<c:forEach var="map" items="${boardList }">					
 					<li class="boardPostItems">
 						<c:if test="${map['BOARD_DEL_FLAG'] != 'Y' }">
 							<div class="boardPostTitle">
@@ -77,7 +75,7 @@
 																								
 							</div>
 							<div class="boardPostComments">
-								<c:if test="${map['COMMENTCOUNT'] != 0 and map['COMMENT_FLAG'] == 'Y'}">
+								<c:if test="${map['COMMENT_FLAG'] == 'Y'}">
 									<span>${map['COMMENTCOUNT'] }</span>
 								</c:if>
 							</div>
