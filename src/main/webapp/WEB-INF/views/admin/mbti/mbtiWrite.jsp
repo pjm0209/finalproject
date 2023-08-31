@@ -46,8 +46,7 @@ $(function(){
 			<select class="form-control" name="questionTypeNo" id="questionTypeNo" style="width: 300px;float: right;">
 				<option value="0">선택</option>
 				<option value="1"<c:if test="${vo.questionTypeNo=='1'}">selected="selected"</c:if>>F(무료검사)</option>
-				<option value="2"<c:if test="${vo.questionTypeNo=='2'}">selected="selected"</c:if>>P(일반검사)</option>
-				<option value="3"<c:if test="${vo.questionTypeNo=='3'}">selected="selected"</c:if>>M(From M)</option>
+				<option value="2"<c:if test="${vo.questionTypeNo=='2'}">selected="selected"</c:if>>P(정식검사)</option>
 			</select><br>
 			<div style="margin-top: 40px">
 				<h5 style="clear: both;float: left;">질문 유형</h5>

@@ -9,6 +9,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title> Responsive Login and Signup Form </title>
+        <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 
         <!-- CSS -->
         <link rel="stylesheet" href="css/style.css">
@@ -178,7 +179,6 @@ $(function(){
 </script> 
 
 <!-- 카카오 스크립트 -->
-<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script>
 Kakao.init('5bdc967d76e3681232d52f0d0c435a2a'); //발급받은 키 중 javascript키를 사용해준다.
 console.log(Kakao.isInitialized()); // sdk초기화여부판단
@@ -186,8 +186,15 @@ console.log(Kakao.isInitialized()); // sdk초기화여부판단
 function kakaoLogin() {
     Kakao.Auth.login({
       success: function (response) {
+       alert(response.access_token)
+       Kakao.Auth.setAccessToken(response.access_token);
+       
         Kakao.API.request({
           url: '/v2/user/me',
+          data : {
+             property_keys: ['kakao_profile_nickname', 'kakao_profile_image', 'kakao_account_email'],
+          },
+          
           success: function (response) {
              console.log(response)
           },
@@ -200,7 +207,6 @@ function kakaoLogin() {
         console.log(error)
       },
     })
-    event.stopPropagation();
   }
 //카카오로그아웃  
 function kakaoLogout() {
@@ -218,6 +224,8 @@ function kakaoLogout() {
     }
   }  
 </script>
+
+
    
 </head>
 <body>
@@ -237,9 +245,12 @@ function kakaoLogout() {
                     </div><br>
                     
                     <div class="remember-check">
-                		<input type="checkbox" name="chkSave" id="remember-check">&nbsp; 아이디 저장하기
-                			<c:if test="${!empty cookie.ck_userid }">         
-                			</c:if>   
+                		<input type="checkbox" name="chkSave" id="remember-check"
+                			<c:if test="${!empty cookie.ck_userid }">  
+                				    checked="checked"   
+                			</c:if>
+                		>&nbsp; 아이디 저장하기
+                			  
                 		<a class="forgot-id" href="<c:url value='/main/member/forgot-id'/>">아이디 찾기</a>
                 		<span style="color:blue;">|</span>
                 		<a class="forgot-password" href="<c:url value='/main/member/forgot-pwd'/>">비밀번호 찾기</a>

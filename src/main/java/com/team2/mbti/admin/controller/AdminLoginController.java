@@ -29,7 +29,7 @@ public class AdminLoginController {
 	@GetMapping("/login")
 	public String login_get() {
 		logger.info("관리자 로그인 화면");
-		return "/admin/login";
+		return "admin/login";
 	}
 	
 	@PostMapping("/login")

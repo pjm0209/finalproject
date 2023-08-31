@@ -1,5 +1,7 @@
 package com.team2.mbti.book.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -31,69 +33,56 @@ public class BookController {
 
 	private static final Logger logger = LoggerFactory.getLogger(BookController.class);
 	private final BookService bookService;
-/*
-	@RequestMapping("/bookList")
-	public String bookList(@ModelAttribute StockBookVO vo, HttpServletRequest request , Model model) {
-		// 1
-		logger.info("책관리 페이지 - 책 리스트 페이지입니다.,파라미터 vo={}", vo);
-		// 2
-		
-		//
-		//
-		PaginationInfo pagingInfo = new PaginationInfo();
-		pagingInfo.setBlockSize(ConstUtil.BLOCK_SIZE);
-		pagingInfo.setCurrentPage(vo.getCurrentPage());
-		
-		String bookFlag = request.getParameter("bookFlag");
-		if( (bookFlag != null && !bookFlag.isEmpty()) &&
-			( bookFlag.equals("bookList") || bookFlag.equals("bookListByKeyword")
-			|| bookFlag.equals("Inventory") || bookFlag.equals("InventoryByKeyword")) ) {
-			
-			vo.setBookFlag(bookFlag);
-		} else {
-			model.addAttribute("msg", "잘못된 url입니다.");
-			model.addAttribute("url", "/admin/index");
-			
-			return "common/message";
-		}
-		
-		if (bookFlag.equals("bookList")) {
-			pagingInfo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
-			vo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
-		} else if (bookFlag.equals("bookListByKeyword")) {
-			pagingInfo.setRecordCountPerPage(vo.getPerRecord());
-			vo.setRecordCountPerPage(vo.getPerRecord());
-			logger.info(" 레코드 확인용 vo={}", vo);
-		} else if(bookFlag.equals("Inventory")) {
-			pagingInfo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
-			vo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
-		} else if(bookFlag.equals("InventoryByKeyword")) {
-			pagingInfo.setRecordCountPerPage(vo.getPerRecord());
-			vo.setRecordCountPerPage(vo.getPerRecord());
-		}
-		
-		vo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
-		logger.info("변경 후 vo={}", vo);
-		
-		List<Map<String, Object>> list = bookService.selectBookAll(vo);
-		logger.info("관리자 페이지 - 책 리스트 검색결과 list.size()={}", list.size());
 
-		int totalRecord = bookService.selectBookCnt(vo);
-		logger.info("책 전체 개수 조회 결과 totalRecord={}", totalRecord);
-		pagingInfo.setTotalRecord(totalRecord);
-
-		// 3
-		model.addAttribute("pagingInfo", pagingInfo);
-		model.addAttribute("list", list);
-		model.addAttribute("title", "책관리 페이지");
-		
-		logger.info("bookFlag={}", bookFlag);
-		// 4
-		return "admin/book/bookList";
-	}
-*/	
+	/*
+	 * @RequestMapping("/bookList") public String bookList(@ModelAttribute
+	 * StockBookVO vo, HttpServletRequest request , Model model) { // 1
+	 * logger.info("책관리 페이지 - 책 리스트 페이지입니다.,파라미터 vo={}", vo); // 2
+	 * 
+	 * // // PaginationInfo pagingInfo = new PaginationInfo();
+	 * pagingInfo.setBlockSize(ConstUtil.BLOCK_SIZE);
+	 * pagingInfo.setCurrentPage(vo.getCurrentPage());
+	 * 
+	 * String bookFlag = request.getParameter("bookFlag"); if( (bookFlag != null &&
+	 * !bookFlag.isEmpty()) && ( bookFlag.equals("bookList") ||
+	 * bookFlag.equals("bookListByKeyword") || bookFlag.equals("Inventory") ||
+	 * bookFlag.equals("InventoryByKeyword")) ) {
+	 * 
+	 * vo.setBookFlag(bookFlag); } else { model.addAttribute("msg", "잘못된 url입니다.");
+	 * model.addAttribute("url", "/admin/index");
+	 * 
+	 * return "common/message"; }
+	 * 
+	 * if (bookFlag.equals("bookList")) {
+	 * pagingInfo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
+	 * vo.setRecordCountPerPage(ConstUtil.RECORD_COUNT); } else if
+	 * (bookFlag.equals("bookListByKeyword")) {
+	 * pagingInfo.setRecordCountPerPage(vo.getPerRecord());
+	 * vo.setRecordCountPerPage(vo.getPerRecord()); logger.info(" 레코드 확인용 vo={}",
+	 * vo); } else if(bookFlag.equals("Inventory")) {
+	 * pagingInfo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
+	 * vo.setRecordCountPerPage(ConstUtil.RECORD_COUNT); } else
+	 * if(bookFlag.equals("InventoryByKeyword")) {
+	 * pagingInfo.setRecordCountPerPage(vo.getPerRecord());
+	 * vo.setRecordCountPerPage(vo.getPerRecord()); }
+	 * 
+	 * vo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+	 * logger.info("변경 후 vo={}", vo);
+	 * 
+	 * List<Map<String, Object>> list = bookService.selectBookAll(vo);
+	 * logger.info("관리자 페이지 - 책 리스트 검색결과 list.size()={}", list.size());
+	 * 
+	 * int totalRecord = bookService.selectBookCnt(vo);
+	 * logger.info("책 전체 개수 조회 결과 totalRecord={}", totalRecord);
+	 * pagingInfo.setTotalRecord(totalRecord);
+	 * 
+	 * // 3 model.addAttribute("pagingInfo", pagingInfo); model.addAttribute("list",
+	 * list); model.addAttribute("title", "책관리 페이지");
+	 * 
+	 * logger.info("bookFlag={}", bookFlag); // 4 return "admin/book/bookList"; }
+	 */
 	@RequestMapping("/bookList")
-	/*HttpServletRequest request, HttpSession session, Model model*/
+	/* HttpServletRequest request, HttpSession session, Model model */
 	public String bookList(HttpServletRequest request, Model model) {
 		String bookFlag = request.getParameter("bookFlag");
 		logger.info("책관리 페이지 - 책 리스트 페이지입니다.,파라미터 bookFlag={}", bookFlag);
@@ -101,14 +90,12 @@ public class BookController {
 		String url = "admin/book/bookList?bookFlag=" + bookFlag;
 
 		if ((bookFlag != null && !bookFlag.isEmpty())
-				&& (bookFlag.equals("bookList") || bookFlag.equals("bookListByKeyword")
-						|| bookFlag.equals("Inventory")
+				&& (bookFlag.equals("bookList") || bookFlag.equals("bookListByKeyword") || bookFlag.equals("Inventory")
 						|| bookFlag.equals("InventoryByKeyword"))) {
 
 			logger.info("url={}", url);
-			logger.info("<c:if test=\"${param.bookFlag != 'Inventory' or param.bookFlag == 'bookListByKeyword'}\">");
 		} else {
-			
+
 			model.addAttribute("msg", "잘못된 url입니다.");
 			model.addAttribute("url", "/admin/index");
 
@@ -117,32 +104,32 @@ public class BookController {
 
 		return "admin/book/bookList";
 	}
-	
+
 	@ResponseBody
 	@RequestMapping("/bookAjaxList")
-	public List<StockBookVO> bookAjaxList(@ModelAttribute StockBookVO vo, HttpServletRequest request , Model model) {
+	public Map<String, Object> bookAjaxList(@ModelAttribute StockBookVO vo, HttpServletRequest request, Model model) {
 		// 1
 		logger.info("책관리 페이지 - 책 리스트 페이지입니다.,파라미터 vo={}", vo);
 		logger.info("ajax 이용 - ajaxList");
+
+		Map<String, Object> map= new HashMap<>();
 		// 2
 		//
 		PaginationInfo pagingInfo = new PaginationInfo();
 		pagingInfo.setBlockSize(ConstUtil.BLOCK_SIZE);
 		pagingInfo.setCurrentPage(vo.getCurrentPage());
-		
+
 		String bookFlag = request.getParameter("bookFlag");
 		/*
-		if( (bookFlag != null && !bookFlag.isEmpty()) &&
-			( bookFlag.equals("bookList") || bookFlag.equals("bookListByKeyword")
-			|| bookFlag.equals("Inventory") || bookFlag.equals("InventoryByKeyword")) ) {
-			
-			vo.setBookFlag(bookFlag);
-		} else {
-			model.addAttribute("msg", "잘못된 url입니다.");
-			model.addAttribute("url", "/admin/index");
-			
-			return "common/message";
-		}*/
+		 * if( (bookFlag != null && !bookFlag.isEmpty()) && (
+		 * bookFlag.equals("bookList") || bookFlag.equals("bookListByKeyword") ||
+		 * bookFlag.equals("Inventory") || bookFlag.equals("InventoryByKeyword")) ) {
+		 * 
+		 * vo.setBookFlag(bookFlag); } else { model.addAttribute("msg", "잘못된 url입니다.");
+		 * model.addAttribute("url", "/admin/index");
+		 * 
+		 * return "common/message"; }
+		 */
 		if (bookFlag.equals("bookList")) {
 			pagingInfo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
 			vo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
@@ -150,36 +137,44 @@ public class BookController {
 			pagingInfo.setRecordCountPerPage(vo.getPerRecord());
 			vo.setRecordCountPerPage(vo.getPerRecord());
 			logger.info(" 레코드 확인용 vo={}", vo);
-		} else if(bookFlag.equals("Inventory")) {
+		} else if (bookFlag.equals("Inventory")) {
 			pagingInfo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
 			vo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
-		} else if(bookFlag.equals("InventoryByKeyword")) {
+		} else if (bookFlag.equals("InventoryByKeyword")) {
 			pagingInfo.setRecordCountPerPage(vo.getPerRecord());
 			vo.setRecordCountPerPage(vo.getPerRecord());
 		}
-		
+
 		vo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
 		logger.info("변경 후 vo={}", vo);
-		
+
 		List<StockBookVO> list = bookService.selectBookAllAjax(vo);
 		logger.info("관리자 페이지 - 책 리스트 ajax 검색결과 list.size()={}", list.size());
 
 		int totalRecord = bookService.selectBookCnt(vo);
 		logger.info("책 전체 개수 조회 결과 totalRecord={}", totalRecord);
 		pagingInfo.setTotalRecord(totalRecord);
+		logger.info("pagingInfo 객체, pagingInfo={}", pagingInfo);
 
+		
 		// 3
-		model.addAttribute("pagingInfo", pagingInfo);
-		/* model.addAttribute("list", list); */
-		model.addAttribute("title", "책관리 페이지");
-		logger.info("bookFlag={}", bookFlag);
+		/*
+		 * model.addAttribute("pagingInfo", pagingInfo); model.addAttribute("list",
+		 * list); model.addAttribute("title", "책관리 페이지"); logger.info("bookFlag={}",
+		 * bookFlag);
+		 */
+		map.put("list",list);
+		map.put("bookFlag",bookFlag);
+		map.put("pagingInfo",pagingInfo);
+		
+		
 		
 		// 4
 		/* return "admin/book/bookList"; */
-		return list;
-		
-	}	
-	
+		return map;
+
+	}
+
 	@GetMapping("/bookRegister")
 	public String bookRegister_get(Model model) {
 		logger.info("책관리 페이지 - 책 상품 등록 페이지입니다.");
@@ -223,7 +218,7 @@ public class BookController {
 	public String bookEdit(@RequestParam(defaultValue = "0") int bookNo, Model model) {
 		logger.info("책관리 페이지 - 책 상품 수정하기, 파라미터 bookNo={}", bookNo);
 
-		return "redirect:/admin/book/bookList";
+		return "redirect:/admin/book/bookRegister";
 	}
-	
+
 }//

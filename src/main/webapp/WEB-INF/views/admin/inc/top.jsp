@@ -5,8 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
     
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="UTF-8">
 <head>
 
     <meta charset="utf-8">
@@ -32,6 +31,7 @@
     <link href="<c:url value='/admin-css-js/css/education.css'/>" rel="stylesheet" type="text/css">
     <link href="<c:url value='/admin-css-js/css/boardCreate.css'/>" rel="stylesheet" type="text/css">
     <link href="<c:url value='/admin-css-js/css/book-order.css'/>" rel="stylesheet" type="text/css">  
+    <link href="<c:url value='/admin-css-js/css/message.css'/>" rel="stylesheet" type="text/css">  
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">  
 	<script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>
 	<script type="text/javascript" src="<c:url value='/resources/ckeditor/ckeditor.js'/>"></script>	
@@ -186,6 +186,12 @@
                         <a class="collapse-item" href="<c:url value='/admin/order/orderCancleList?flag=orderCancle'/>">주문 취소 관리</a>
                     </div>
                 </div>
+            </li>
+            <li class="nav-item">
+            	<a class="nav-link" href="<c:url value='/admin/message/message'/>">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>쪽지 관리</span>
+                </a>
             </li>
 
             <!-- Divider -->

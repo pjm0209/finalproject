@@ -7,6 +7,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.team2.mbti.admin.controller.LoginInterceptor;
+import com.team2.mbti.member.controller.LoginInterceptor2;
 
 @Configuration
 public class MvcConfiguration implements WebMvcConfigurer{
@@ -14,10 +15,9 @@ public class MvcConfiguration implements WebMvcConfigurer{
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 
-		/*
-		 registry.addInterceptor(new LoginInterceptor())
-		 .addPathPatterns("/shop/cart/*", "/shop/order/*",
-		 "/member/memberEdit","/member/memberOut");*/
+		
+		 registry.addInterceptor(new LoginInterceptor2())
+		 .addPathPatterns("/main/mypage/**");
 		
 		 registry.addInterceptor(new LoginInterceptor())
 		 .excludePathPatterns("/admin/login")

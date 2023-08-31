@@ -15,6 +15,7 @@
 		if (!Kakao.isInitialized()) {
 		  Kakao.init('492cfd61b5b9e8677ad3f4db8cfedbdf');
 		}
+		
 	});
 	var sendKakao = function() {
 	    // 메시지 공유 함수
