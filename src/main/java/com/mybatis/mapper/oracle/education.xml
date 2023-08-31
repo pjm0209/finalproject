@@ -217,4 +217,22 @@
 		where edu_app_no = #{eduAppNo}
 	</update>
 	
+	
+	<!-- mypage -->
+	<select id="selectMyAllEdu" parameterType="educationVo" resultType="educationVo">
+		select * from
+		(
+			select rownum RNUM, a.* from
+			(
+				select * from educationview 
+				where name=#{name}
+				<include refid="searchWhere"></include>
+				order by edu_app_no desc
+			)a
+		)
+		<![CDATA[
+		where RNUM > #{firstRecordIndex} and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}]]>
+	</select>
+	
+	
 </mapper>

@@ -37,4 +37,6 @@ public interface EducationService {
 	List<EducationVO> selectAllList(EducationVO vo);
 	
 	List<EducationVO> selectAllLocName();
+	
+	List<EducationVO> selectMyAllEdu(EducationVO vo);
 }
