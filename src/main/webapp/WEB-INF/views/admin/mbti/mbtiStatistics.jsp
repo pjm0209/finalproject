@@ -43,9 +43,9 @@
 			<c:set var="idx" value="0"/>
 			<tbody>
 				<c:forEach var="map" items="${list}">
-					<c:set var="questionType" value="${mbtiSurveyVo.questionTypeNo}"/>
+					<input type="hidden" name="mbtiResultItem[${idx}].questionTypeNo" value="${map['QUESTION_TYPE_NO']}">
 					<tr>
-						<th scope="row"><input type="checkbox" name="surveyItems[${idx}].mbtiSurveyNo" class="board-checkbox check" value="${mbtiSurveyVo.mbtiSurveyNo}"></th>
+						<th scope="row"><input type="checkbox" name="mbtiResultItem[${idx}].no" class="board-checkbox check" value="${map['NO']}"></th>
 						<td>${map["USERID"]}</td>
 						<td>${map["QUESTION_TYPE_NAME"]}</td>
 						<td>${map["MBTI_TYPE"]}</td>
