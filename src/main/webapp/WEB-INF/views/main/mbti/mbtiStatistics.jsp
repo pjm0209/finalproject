@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="sumCount" value="0"/>
 <script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);
@@ -11,11 +12,12 @@
           ['MBTI', 'SCORE'],
           <c:forEach var="map" items="${list}">
           	['${map["MBTI_TYPE"]}', ${map["COUNT"]}],
+          	<c:set var="sumCount" value="${sumCount+map['COUNT']}"/>
           </c:forEach>
         ]);
 
 		var options = {
-			title:"검사한 인원 : ${fn:length(list)}명",
+			title:"검사한 인원 : ${sumCount}명",
 			slices: {
 	            0: { color: '#6c51ff' },
 	            1: { color: '#3ac906' },
