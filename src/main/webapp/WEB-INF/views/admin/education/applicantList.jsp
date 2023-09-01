@@ -2,24 +2,24 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
 <script type="text/javascript">
-						$(function(){
-							$('.education-search').keyup(function() {
-								if($('#edu-search-select').val() == 'edu_app_flag') {
-									var str = $('input[name=searchKeyword]').val();
-									
-									if(str != 'Y' && str != 'N' && str != 'y' && str != 'n') {
-										$('input[name=searchKeyword]').val('');
-									} else {
-										if(str == 'y') {
-											$('input[name=searchKeyword]').val('Y');
-										} else if(str == 'n') {
-											$('input[name=searchKeyword]').val('N');
-										}
-									}
-								}
-							});
-						});
-					</script>
+	$(function(){
+		$('.education-search').keyup(function() {
+			if($('#edu-search-select').val() == 'edu_app_flag') {
+				var str = $('input[name=searchKeyword]').val();
+				
+				if(str != 'Y' && str != 'N' && str != 'y' && str != 'n') {
+					$('input[name=searchKeyword]').val('');
+				} else {
+					if(str == 'y') {
+						$('input[name=searchKeyword]').val('Y');
+					} else if(str == 'n') {
+						$('input[name=searchKeyword]').val('N');
+					}
+				}
+			}
+		});
+	});
+</script>
 
 <!-- Begin Page Content -->
 <!-- Page Heading -->
