@@ -103,4 +103,9 @@
 		order by mb.mbti_type
 	</select>
 	
+	<delete id="deleteMbtiResult" parameterType="mbtiResultVo">
+		delete from mbti_result
+		where no=#{no} and question_type_no=#{questionTypeNo}
+	</delete>
+	
 </mapper>

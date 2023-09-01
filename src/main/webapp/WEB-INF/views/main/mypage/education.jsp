@@ -30,7 +30,7 @@
 				</c:if>
 				<c:if test="${!empty list }">
 					<c:forEach var="educationVo" items="${list}">
-						<c:set var="educationNo" value="${educationVo.eduAppNo}"/>
+						<c:set var="educationNo" value="${educationVo.eduAppNO}"/>
 						<tr>
 							<td>${educationVo.eduName }</td>
 							<td>${educationVo.eduTeaName }</td>

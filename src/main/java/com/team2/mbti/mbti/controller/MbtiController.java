@@ -169,10 +169,23 @@ public class MbtiController {
 	}
 	
 	@RequestMapping("/mbtiStatisticsDelete")
-	public String mbtiStatisticsDelete(@ModelAttribute MbtiResultListVO mbtiResultListVo) {
+	public String mbtiStatisticsDelete(@ModelAttribute MbtiResultListVO mbtiResultListVo, Model model) {
 		logger.info("mbti 검사 결과 삭제 처리, 파라미터 mbtiResultListVo={}",mbtiResultListVo);
 		
 		
-		return "redirect:/admin/mbti/mbtiStatistics";
+		int cnt=mbtiSurveyService.deleteMbtiResult(mbtiResultListVo);
+		logger.info("mbti 검사 결과 삭제 결과, cnt={}",cnt);
+		
+		String msg="",url="redirect:/admin/mbti/mbtiStatistics";
+		if(cnt>0) {
+			msg="선택한 검사 결과들을 삭제하였습니다.";
+		}else {
+			msg="선택한 검사 결과들을 삭제중 에러가 발생하였습니다.";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
 	}
 }

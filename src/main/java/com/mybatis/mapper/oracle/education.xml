@@ -222,7 +222,7 @@
 	<select id="selectMyAllEdu" parameterType="educationVo" resultType="educationVo">
 		select * from
 		(
-			select rownum RNUM, a.* from
+			select rownum as RNUM, a.* from
 			(
 				select * from educationview 
 				where name=#{name}
