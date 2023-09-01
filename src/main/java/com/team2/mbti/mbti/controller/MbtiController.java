@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.team2.mbti.common.ConstUtil;
 import com.team2.mbti.common.PaginationInfo;
 import com.team2.mbti.common.SearchVO;
+import com.team2.mbti.mbtiResult.model.MbtiResultListVO;
 import com.team2.mbti.mbtisurvey.model.MbtiSurveyListVO;
 import com.team2.mbti.mbtisurvey.model.MbtiSurveyService;
 import com.team2.mbti.mbtisurvey.model.MbtiSurveyVO;
@@ -166,5 +167,25 @@ public class MbtiController {
 		
 		return "admin/mbti/mbtiStatistics";
 	}
-
+	
+	@RequestMapping("/mbtiStatisticsDelete")
+	public String mbtiStatisticsDelete(@ModelAttribute MbtiResultListVO mbtiResultListVo, Model model) {
+		logger.info("mbti 검사 결과 삭제 처리, 파라미터 mbtiResultListVo={}",mbtiResultListVo);
+		
+		
+		int cnt=mbtiSurveyService.deleteMbtiResult(mbtiResultListVo);
+		logger.info("mbti 검사 결과 삭제 결과, cnt={}",cnt);
+		
+		String msg="",url="redirect:/admin/mbti/mbtiStatistics";
+		if(cnt>0) {
+			msg="선택한 검사 결과들을 삭제하였습니다.";
+		}else {
+			msg="선택한 검사 결과들을 삭제중 에러가 발생하였습니다.";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
+	}
 }

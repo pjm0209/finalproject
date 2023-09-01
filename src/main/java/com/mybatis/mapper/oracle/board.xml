@@ -10,10 +10,14 @@
 				<if test="searchCondition == 'name'">
 					or admin_id like '%' || #{searchKeyword} || '%'
 				</if>
-				and board_form_no = #{boardFormNo}
+				<if test="boardFormNo!=null and boardFormNo!=''">
+					and board_form_no = #{boardFormNo}
+				</if>
 			</if>
 			<if test="searchKeyword==null or searchKeyword == ''">
-				board_form_no = #{boardFormNo}
+				<if test="boardFormNo!=null and boardFormNo!=''">
+					and board_form_no = #{boardFormNo}
+				</if>				
 			</if>
 			<if test="mbtiNo != 0">
 				and mbti_no = #{mbtiNo}

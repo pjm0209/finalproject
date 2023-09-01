@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.team2.mbti.board.model.BoardFormVO;
 import com.team2.mbti.board.model.BoardService;
+import com.team2.mbti.board.model.BoardVO;
+import com.team2.mbti.common.ConstUtil;
+import com.team2.mbti.common.PaginationInfo;
 
 import lombok.RequiredArgsConstructor;
 
@@ -45,5 +48,30 @@ public class MainBoardController {
 		model.addAttribute("boardCategoryList", boardCategoryList);
 		
 		return "main/board/boardMain";
+	}
+	
+	@RequestMapping("/boardList")
+	public String boardList(@ModelAttribute BoardVO vo, Model model) {
+		logger.info("게시판 리스트 파라미터 vo: {}", vo);
+		
+		PaginationInfo pagingInfo = new PaginationInfo();
+		pagingInfo.setBlockSize(ConstUtil.BLOCK_SIZE);
+		pagingInfo.setCurrentPage(vo.getCurrentPage());
+		pagingInfo.setRecordCountPerPage(ConstUtil.BOARD_RECORD_COUNT);
+
+		vo.setRecordCountPerPage(ConstUtil.BOARD_RECORD_COUNT);
+		vo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		
+		List<Map<String, Object>> boardList = boardService.selectAll(vo);
+		logger.info("게시판 리스트 조회결과 boardList: {}", boardList);
+		
+		int totalRecord = boardService.getTotalRecord(vo);
+		logger.info("글 목록 전체 조회 - totalRecord: {}", totalRecord);
+		pagingInfo.setTotalRecord(totalRecord);	
+		
+		model.addAttribute("boardList", boardList);
+		model.addAttribute("pagingInfo", pagingInfo);
+		
+		return "main/board/boardList";
 	}
 }

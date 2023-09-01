@@ -41,7 +41,18 @@
 	</select>
 	
 	<select id="selectAllList" parameterType="educationVo" resultType="educationVo">
-		select * from eduTeaListview order by edu_no desc
+	select * from
+			(
+			    select rownum as RNUM, a.* from
+			    (
+					select * from eduTeaListview 
+					<include refid="searchWhere"></include>
+					order by edu_no desc
+				)a
+			)
+			<![CDATA[
+			where RNUM > #{firstRecordIndex} 
+			and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}]]>
 	</select>
 	
 	<select id="getTotalRecordEducation" parameterType="educationVo" resultType="int">
@@ -205,5 +216,23 @@
 		set edu_app_flag = 'Y'
 		where edu_app_no = #{eduAppNo}
 	</update>
+	
+	
+	<!-- mypage -->
+	<select id="selectMyAllEdu" parameterType="educationVo" resultType="educationVo">
+		select * from
+		(
+			select rownum as RNUM, a.* from
+			(
+				select * from educationview 
+				where name=#{name}
+				<include refid="searchWhere"></include>
+				order by edu_app_no desc
+			)a
+		)
+		<![CDATA[
+		where RNUM > #{firstRecordIndex} and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}]]>
+	</select>
+	
 	
 </mapper>

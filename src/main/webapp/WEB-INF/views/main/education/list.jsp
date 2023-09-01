@@ -102,7 +102,7 @@
 					</c:forEach>
 					<c:if test="${pagingInfo.lastPage < pagingInfo.totalPage}">
 					    <li class="page-item">
-					      <a class="page-link" href="#" aria-label="Next">
+					      <a class="page-link" href="javascript:void(0);" aria-label="Next">
 					        <span aria-hidden="true">&raquo;</span>
 					      </a>
 					    </li>

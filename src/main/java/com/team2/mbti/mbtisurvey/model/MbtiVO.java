@@ -1,9 +1,13 @@
 package com.team2.mbti.mbtisurvey.model;
 
-import lombok.Data;
+import com.team2.mbti.common.SearchVO;
 
-@Data
-public class MbtiVO {
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
+public class MbtiVO extends SearchVO{
 	private int mbtiNo;
 	private String mbtiType;
 	private String definingTrait;
@@ -13,4 +17,12 @@ public class MbtiVO {
 	private String weakness;
 	private String personalityTrait;		
 	private String bestMbti;
+	@Override
+	public String toString() {
+		return "MbtiVO [mbtiNo=" + mbtiNo + ", mbtiType=" + mbtiType + ", definingTrait=" + definingTrait + ", mbtiJop="
+				+ mbtiJop + ", compatibility=" + compatibility + ", strength=" + strength + ", weakness=" + weakness
+				+ ", personalityTrait=" + personalityTrait + ", bestMbti=" + bestMbti + ", toString()="
+				+ super.toString() + "]";
+	}
+	
 }

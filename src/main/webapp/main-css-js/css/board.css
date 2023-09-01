@@ -1,0 +1,191 @@
+@charset "UTF-8";
+
+section.boardSection {
+    margin-top: 30px;
+    padding-top: 200px;
+    display: flex;
+    justify-content: center;
+}
+
+.boardContent {
+    width: 50%;
+    border: 1px solid black;
+    border-radius: 15px;
+}
+
+.boardContent-head {
+    border-bottom: 1px solid black;
+}
+
+.head-content {
+    display: flex;
+    justify-content: space-between;
+}
+
+nav.board-nav {
+    height: 100%;
+}
+
+ul.board-ul {
+    padding: 10px;
+    margin: 0;
+    display: flex;
+}
+
+li.board-li-category {
+    list-style: none;
+    margin-right: 45px;
+}
+
+button.boardWriteBtn {
+    background: #ee7843;
+    border: 1px solid #ee7843;
+    padding: 5px 30px;
+    margin: 10px;
+    float: right;
+    border-radius: 10px;
+}
+
+.boardWritediv {
+    width: 100%;
+    height: 60px;
+}
+
+li.boardFormItem {
+    list-style: none;
+    display: flex;
+    margin: 10px 0;
+}
+
+a.boardCategoryContentTitle {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+p.boardCategoryContentIntro {
+    font-size: 15px;
+}
+
+.boardCategoryWriteCount {
+    display: flex;
+    align-items: center;
+    width: 155px;
+    justify-content: center;
+}
+
+ul.boardFormList {
+    display: grid;
+    grid-template-columns: calc(120px + var(--forumCardBorderWidth)) auto auto 22% max-content;
+}
+
+.boardWrite {
+    border: none;
+    border-radius: 5px;
+    margin-top: 30px;
+    background: none;
+    color: white;
+}
+
+.boardCategoryContent {
+    width: 750px;
+}
+
+i.bi.bi-chat-square {
+    width: 20%;
+    text-align: left;
+}
+
+span.boardWriteCount {
+    width: 20px;
+    text-align: center;
+}
+
+select#mainBoardSearchCondtion {
+    height: 32px;
+    margin: 0;
+    width: 100px;
+    display: inline-block;
+}
+
+.searchInputText {	
+    width: 250px;
+    height: 32px;
+    font-size: 15px;
+    border: 1px solid #e1e1e1;
+    border-radius: 15px;
+    display: inline-block;
+    margin-left: 15px;
+    margin-right: 10px;    
+    padding: 0 10px;
+    padding-top: 3px;
+}
+
+input.boardSearchKeyword {
+    border: 0;
+    width: 88%;
+    outline: none;
+}
+
+.head-content-box2 {
+    display: flex;
+    align-items: center;
+}
+
+.boardWritediv h5 {
+    display: inline-block;
+    padding: 20px;
+}
+
+.boardListColumn {
+    width: 97%;
+    margin: 0 13px;
+    border-top: 1px solid #e1e1e1;
+    border-bottom: 1px solid #e1e1e1;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.Column div {
+    display: inline-block;
+    width: 100px;
+    text-align: center;
+}
+
+.Column {
+    display: flex;
+    justify-content: flex-end;
+}
+
+li.boardPostItems {
+    list-style: none;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.boardPostTitle {
+    width: 66%;
+    display: inline-block;
+}
+
+.boardPostComments {
+    display: inline-block;
+    width: 5%;
+}
+
+.boardPostReadCount {
+    display: inline-block;
+    width: 5%;
+}
+
+.boardPostWriter {
+    display: inline-block;
+    width: 10%;
+}
+
+i.bi.bi-search {
+    cursor: pointer;
+}

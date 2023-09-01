@@ -22,13 +22,13 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/main/education")
+@RequestMapping("/main")
 public class MainEducationController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MainEducationController.class);
 	private final EducationService educationService;
 
-	@RequestMapping("/info")
+	@RequestMapping("/education/info")
 	public String eduInfo() {
 		logger.info("교육 소개 페이지 보여주기");
 		
@@ -36,7 +36,7 @@ public class MainEducationController {
 	}
 
 	
-	@RequestMapping("/list")
+	@RequestMapping("/education/list")
 	public String eduList(@ModelAttribute EducationVO vo, Model model) {
 		logger.info("교육 리스트 페이지 보여주기 condition: {}", vo.getSearchCondition());
 		
@@ -67,7 +67,7 @@ public class MainEducationController {
 	}
 	
 	
-	@RequestMapping("/apply")
+	@RequestMapping("/education/apply")
 	public String eduApply(@ModelAttribute EducationVO vo, HttpSession session, Model model){
 		logger.info("신청 등록 처리, 파라미터 vo={}", vo);
 		int no = (int)session.getAttribute("no");
@@ -89,7 +89,7 @@ public class MainEducationController {
 	}
 	
 	
-	@RequestMapping("/location")
+	@RequestMapping("/education/location")
 	public String eduLocation(@ModelAttribute EducationVO vo, Model model) {
 		logger.info("교육장 위치 페이지 보여주기, 파라미터 vo={}", vo);
 		
@@ -101,12 +101,28 @@ public class MainEducationController {
 	
 	
 	@ResponseBody
-	@RequestMapping("/locationAjax")
+	@RequestMapping("/education/locationAjax")
 	public EducationVO ajaxLocation(@RequestParam(defaultValue = "0") int epNo) {
+		logger.info("해당 교육장 위치 보여주기");
 		
 		EducationVO vo = educationService.selectByNoLocation(epNo);
 		
 		return vo;
 	}
+	
+	
+	@RequestMapping("/mypage/education")
+	public String myEdu(@ModelAttribute EducationVO vo, HttpSession session, Model model) {
+		logger.info("마이 교육 페이지 보여주기, vo={}", vo);
+	
+		int no = (int) session.getAttribute("no");
+		
+		
+		List<EducationVO> list = educationService.selectMyAllEdu(vo);
+		model.addAttribute("list", list);
+		
+		return "main/mypage/education";
+	}
+	
 	
 }	

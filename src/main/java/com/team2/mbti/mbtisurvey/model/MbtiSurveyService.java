@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.team2.mbti.common.SearchVO;
+import com.team2.mbti.mbtiResult.model.MbtiResultListVO;
 import com.team2.mbti.mbtiResult.model.MbtiResultVO;
 import com.team2.mbti.member.model.MemberVO;
 
@@ -25,4 +26,5 @@ public interface MbtiSurveyService {
 	int getTotalRecordMbtiStatisticsView(SearchVO searchVo);
 	
 	List<Map<String, Object>>selectMbtiStatistics();
+	public int deleteMbtiResult(MbtiResultListVO mbtiResultListVo);
 }
