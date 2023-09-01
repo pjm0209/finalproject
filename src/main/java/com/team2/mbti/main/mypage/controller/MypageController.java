@@ -4,18 +4,15 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team2.mbti.mbtiResult.model.MbtiResultService;
 import com.team2.mbti.mbtiResult.model.MbtiResultVO;
@@ -209,31 +206,33 @@ public class MypageController {
 	}
 	
 	@PostMapping("/memberEditPwd")
-	public String memberEditPwd_post(@RequestParam String pwd, HttpSession session,
-			HttpServletResponse response, Model model) {
+	public String memberEditPwd_post(@ModelAttribute MemberVO membervo, HttpSession session, 
+			@RequestParam String currentPassword, Model model) {
+		logger.info("개인정보 수정 비밀번호 처리하기!!");
 		
 		String userid=(String)session.getAttribute("userid");
-		logger.info("회원 탈퇴 처리, pwd={}, userid={}" ,pwd, userid);
-
-		int result=memberService.loginCheck(userid, pwd);
-		logger.info("비밀번호 체크 결과, result={}", result);
+		logger.info("파라미터, userid={}, currentPassword={}, userid, currentPassword");
 		
-		String msg="회원 탈퇴 실패",url="/mypage/memberwdOut";
-		if(result==MemberService.LOGIN_OK) {
-			url="/main/mypage/memberEdit";
+		String msg="실패!!", url="/mypage/memberEditPwd";
+		String str = memberService.pwdCheck(userid);
+		logger.info("비밀 번호 확인 처리 str={}", str);
+		
+		if(passwordEncoder.matches(currentPassword, str)) {		
+			logger.info("결과 if : {}", passwordEncoder.matches(currentPassword, str));
+			return "redirect:/main/mypage/memberEdit";
 			
-		}else if(result==MemberService.PWD_DISAGREE) {
-			msg="비밀번호가 틀렸습니다";
-			url="/main/mypage/memberOutPwd";
-			
+		}else{
+			logger.info("결과 else : {}", passwordEncoder.matches(currentPassword, str));
+			msg="비밀번호가 틀렸습니다.";
+			url="/main/mypage/memberEditPwd";
 		}
-
-		model.addAttribute("msg", msg);
-		model.addAttribute("url", url);
-
+			model.addAttribute("msg", msg);
+			model.addAttribute("url", url);
+			
 		return "common/message";
-	}	
-		
+		//return "redirect:/main/mypage/memberEditPwd"; 
+	}
+			
 	@GetMapping("/memberEdit")
 	public String memberEdit_get(HttpSession session, Model model) {
 		
@@ -242,7 +241,7 @@ public class MypageController {
 		logger.info("개인 정보 수정 화면, 파라미터 userid={}", userid);
 		
 		MemberVO membervo = memberService.selectByUserid(userid);
-		logger.info("개인 정보 수정 화면, 정보 조회결과 membervo={}", membervo);
+		logger.info("개인 정보 수정 정보 조회결과 membervo={}", membervo);
 				
 		model.addAttribute("membervo",membervo);
 		
