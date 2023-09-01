@@ -57,13 +57,16 @@ public class MainBoardController {
 		PaginationInfo pagingInfo = new PaginationInfo();
 		pagingInfo.setBlockSize(ConstUtil.BLOCK_SIZE);
 		pagingInfo.setCurrentPage(vo.getCurrentPage());
-		pagingInfo.setRecordCountPerPage(ConstUtil.BOARD_MAIN_RECORD_COUNT);
+		pagingInfo.setRecordCountPerPage(ConstUtil.BOARD_RECORD_COUNT);
 
-		vo.setRecordCountPerPage(ConstUtil.BOARD_MAIN_RECORD_COUNT);
+		vo.setRecordCountPerPage(ConstUtil.BOARD_RECORD_COUNT);
 		vo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
 		
 		List<Map<String, Object>> boardList = boardService.selectAll(vo);
 		logger.info("게시판 리스트 조회결과 boardList: {}", boardList);
+		
+		BoardFormVO boardFormVo = boardService.selectBoard(vo.getBoardFormNo());
+		logger.info("게시판 검색결과 board: {}", boardFormVo);
 		
 		int totalRecord = boardService.getTotalRecord(vo);
 		logger.info("글 목록 전체 조회 - totalRecord: {}", totalRecord);
@@ -71,6 +74,7 @@ public class MainBoardController {
 		
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("pagingInfo", pagingInfo);
+		model.addAttribute("boardFormVo", boardFormVo);
 		
 		return "main/board/boardList";
 	}

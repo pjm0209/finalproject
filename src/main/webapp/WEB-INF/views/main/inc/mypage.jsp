@@ -21,7 +21,7 @@
 }
 
 :root{
-	--body-color: #E4E9F7;
+	--body-color: #f7f7f7;
 	--sidebar-color: #FFF;
 	--primary-color: #695CFE;
 	--primary-color-light: #F6F5FF;
@@ -300,7 +300,7 @@ body.dark .switch::before{
 					</li>
 					
 					<li class="nav-link2">
-						<a href="<c:url value='/main/mypage/editPwd'/>">
+						<a href="<c:url value='/main/mypage/newPwd'/>">
 							<i class='bx bx-wallet icon'></i>
 							<span class="text nav-text">비밀번호변경 </span>						
 						</a>

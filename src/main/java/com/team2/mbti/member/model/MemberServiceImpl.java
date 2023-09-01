@@ -126,11 +126,16 @@ public class MemberServiceImpl implements MemberService {
 	public MemberVO getMemberByNameAndHp(String name, String hp) {
 		return memberDao.getMemberByNameAndHp(name, hp);
 	}
+	
+	//비밀번호 확인
+	@Override
+	public String pwdCheck(String userid) {
+		return memberDao.pwdCheck(userid);
+	}
 
 	//비밀번호 변경
 	@Override
-	public int updatePassword(String pwd) {
-		return memberDao.updatePassword(pwd);
+	public int updatePassword(MemberVO membervo) {
+		return memberDao.updatePassword(membervo);
 	}
-
 }

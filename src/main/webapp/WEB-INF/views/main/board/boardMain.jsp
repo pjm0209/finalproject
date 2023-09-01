@@ -9,8 +9,8 @@
 				<div class="head-content-box1">
 					<nav class="board-nav">
 						<ul class="board-ul">
-							<li class="board-li-category">게시판 카테고리</li>
-							<li class="board-li-category">전체 게시글</li>							
+							<li class="board-li-category"><a href="<c:url value='/main/board/boardMain'/>">게시판 카테고리</a></li>
+							<li class="board-li-category"><a href="<c:url value='/main/board/boardList'/>">전체 게시글</a></li>								
 						</ul>
 					</nav>
 				</div>

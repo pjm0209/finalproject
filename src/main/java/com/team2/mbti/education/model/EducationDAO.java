@@ -42,4 +42,6 @@ public interface EducationDAO {
 	List<EducationVO> selectAllLocName();
 	
 	List<EducationVO> selectMyAllEdu(EducationVO vo);
+	List<EducationVO> myPayEdu(EducationVO vo);
+	int getTotalRecordEduList(EducationVO vo);
 }

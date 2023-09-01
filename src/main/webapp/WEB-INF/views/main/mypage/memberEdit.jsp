@@ -13,7 +13,7 @@
 		    var memberpwdCheck = $(this).val();
 		    var pwdCheckError = $('#pwdCheckError');
 
-		    if (memberPwd !== memberpwdCheck) {
+		    if (memberPwd !== memberpwdCheck) {	
 		    	pwdCheckError.html("비밀번호가 일치하지 않습니다.").css("color", "red");
 		    } else {
 		    	pwdCheckError.html("비밀번호가 일치합니다").css("color", "blue");
@@ -47,8 +47,9 @@ body {
 }
 
 .form-memberEdit {
-  max-width: 600px;
-  margin: 0 auto;
+  max-width: 500px;
+  margin-top: 100px;
+  margin-left: 800px;
   padding: 20px;
   background-color: #fff;
   border-radius: 5px;
@@ -56,7 +57,7 @@ body {
 }
 
 .form-memberEdit h1 {
-  text-align: center;x	
+  text-align: center;
   font-size: 30px;
   margin-bottom: 20px;
 }

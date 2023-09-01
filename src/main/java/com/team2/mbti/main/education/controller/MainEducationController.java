@@ -112,11 +112,34 @@ public class MainEducationController {
 	
 	
 	@RequestMapping("/mypage/education")
-	public String myEdu(@ModelAttribute EducationVO vo, Model model) {
-		logger.info("마이 교육 페이지 보여주기");
+	public String myEdu(@ModelAttribute EducationVO vo, HttpSession session, Model model) {
+		logger.info("마이 교육 페이지 보여주기, vo={}", vo);
+		
+		int no = (int) session.getAttribute("no");
+		vo.setNo(no);
+		
+		PaginationInfo pagingInfo = new PaginationInfo();
+
+		pagingInfo.setBlockSize(ConstUtil.BLOCK_SIZE);
+		pagingInfo.setCurrentPage(vo.getCurrentPage());
+		pagingInfo.setRecordCountPerPage(ConstUtil.MBTI_RECORD_COUNT);
+		
+		vo.setBlockSize(ConstUtil.BLOCK_SIZE);
+		vo.setRecordCountPerPage(ConstUtil.MBTI_RECORD_COUNT);
+		vo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
 		
 		List<EducationVO> list = educationService.selectMyAllEdu(vo);
+		List<EducationVO> payList = educationService.myPayEdu(vo);
+		logger.info("리스트 list.size={}", list.size());
+
+		int totalRecord=educationService.getTotalRecordEduList(vo);
+		logger.info("교육 전체 검색 결과 totalRecord={}",totalRecord);
+		pagingInfo.setTotalRecord(totalRecord);
+		
 		model.addAttribute("list", list);
+		model.addAttribute("payList", payList);
+		model.addAttribute("pagingInfo", pagingInfo);
+	
 		
 		return "main/mypage/education";
 	}

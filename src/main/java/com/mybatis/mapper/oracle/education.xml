@@ -222,12 +222,34 @@
 	<select id="selectMyAllEdu" parameterType="educationVo" resultType="educationVo">
 		select * from
 		(
-			select rownum RNUM, a.* from
+			select rownum as RNUM, a.* from
 			(
 				select * from educationview 
-				where name=#{name}
+				set edu_app_flag = 'N'
+				where no=#{no}
 				<include refid="searchWhere"></include>
-				order by edu_app_no desc
+				order by edu_no desc
+			)a
+		)
+		<![CDATA[
+		where RNUM > #{firstRecordIndex} and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}]]>
+	</select>
+	
+	<select id="getTotalRecordEduList" parameterType="educationVo" resultType="int">
+		select count(*) from educationview
+		<include refid="searchWhere"></include> 
+	</select>
+	
+	<select id="myPayEdu" parameterType="educationVo" resultType="educationVo">
+		select * from
+		(
+			select rownum as RNUM, a.* from
+			(
+				select * from educationview 
+				set edu_app_flag = 'Y'
+				where no=#{no}
+				<include refid="searchWhere"></include>
+				order by edu_no desc
 			)a
 		)
 		<![CDATA[

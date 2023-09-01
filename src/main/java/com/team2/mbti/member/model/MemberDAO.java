@@ -26,6 +26,13 @@ public interface MemberDAO {
 	
 	MemberVO getMemberByNameAndEmail(String name, String email); // 아이디찾기 - 이름,이메일
 	MemberVO getMemberByNameAndHp(String name, String hp); //아이디찾기 - 이름, 전화번호
-	int updatePassword(String pwd); //비밀번호 변경
+	
+	String pwdCheck(String userid); //비밀번호 확인
+	
+	int updatePassword(MemberVO membervo); //비밀번호 변경
+	
+	
+	
+	
 			
 }
