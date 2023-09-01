@@ -38,7 +38,7 @@
 		</div>
 		<div class="boardContent-body">
 			<div class="boardWritediv">
-				<h5><c:if test="${empty param.boardFormNo }">전체게시글</c:if><c:if test="${!empty param.boardFormNo }">${boardList[0].BOARD_FORM_NAME }</c:if></h5>
+				<h5><c:if test="${empty param.boardFormNo }">전체게시글</c:if><c:if test="${!empty param.boardFormNo }">${boardFormVo.boardFormName }</c:if></h5>
 				<button type="button" class="boardWriteBtn"><span class="boardWrite">게시글작성</span></button>
 			</div>
 			
@@ -58,42 +58,47 @@
 			
 			<!-- 게시글 -->
 			<ul class="boardFormList">
-				<c:forEach var="map" items="${boardList }">					
-					<li class="boardPostItems">
-						<c:if test="${map['BOARD_DEL_FLAG'] != 'Y' }">
-							<div class="boardPostTitle">
-								<c:if test="${map['BOARD_STEP'] > 0 }">
-									<c:forEach var="i" begin="0" end="${map['BOARD_STEP'] }">
-										&nbsp;
-									</c:forEach>
-									<i class="bi bi-arrow-return-right"></i>
-								</c:if>
-									<a href="<c:url value='/admin/board/boardDetail?boardNo=${map["BOARD_NO"] }'/>"> ${map['BOARD_TITLE']}</a>	
-									<c:if test="${map['FILECOUNT'] != 0 and map['BOARD_FILE_ADD_FLAG'] == 'Y'}">
-										<img alt="파일이미지" src="<c:url value='/images/file.gif'/>">
+				<c:if test="${empty boardList }">
+					<p class="notingBoardPost">게시글이 없습니다.</p>
+				</c:if>
+				<c:if test="${!empty boardList }">
+					<c:forEach var="map" items="${boardList }">					
+						<li class="boardPostItems">
+							<c:if test="${map['BOARD_DEL_FLAG'] != 'Y' }">
+								<div class="boardPostTitle">
+									<c:if test="${map['BOARD_STEP'] > 0 }">
+										<c:forEach var="i" begin="0" end="${map['BOARD_STEP'] }">
+											&nbsp;
+										</c:forEach>
+										<i class="bi bi-arrow-return-right"></i>
 									</c:if>
-																								
-							</div>
-							<div class="boardPostComments">
-								<c:if test="${map['COMMENT_FLAG'] == 'Y'}">
-									<span>${map['COMMENTCOUNT'] }</span>
-								</c:if>
-							</div>
-							<div class="boardPostReadCount">${map['BOARD_READCOUNT'] }</div>
-							<div class="boardPostWriter">
-								<c:if test="${!empty map['NAME'] }">
-									${map['NAME'] }
-								</c:if>
-								<c:if test="${empty map['NAME'] }">
-									${map['ADMIN_ID'] }
-								</c:if>
-							</div>
-						</c:if>
-						<c:if test="${map['BOARD_DEL_FLAG'] == 'Y' }">
-							<span class="DelPost">삭제된 글입니다.</span>
-						</c:if>
-					</li>
-				</c:forEach>
+										<a href="<c:url value='/admin/board/boardDetail?boardNo=${map["BOARD_NO"] }'/>"> ${map['BOARD_TITLE']}</a>	
+										<c:if test="${map['FILECOUNT'] != 0 and map['BOARD_FILE_ADD_FLAG'] == 'Y'}">
+											<img alt="파일이미지" src="<c:url value='/images/file.gif'/>">
+										</c:if>
+																									
+								</div>
+								<div class="boardPostComments">
+									<c:if test="${map['COMMENT_FLAG'] == 'Y'}">
+										<span>${map['COMMENTCOUNT'] }</span>
+									</c:if>
+								</div>
+								<div class="boardPostReadCount">${map['BOARD_READCOUNT'] }</div>
+								<div class="boardPostWriter">
+									<c:if test="${!empty map['NAME'] }">
+										${map['NAME'] }
+									</c:if>
+									<c:if test="${empty map['NAME'] }">
+										${map['ADMIN_ID'] }
+									</c:if>
+								</div>
+							</c:if>
+							<c:if test="${map['BOARD_DEL_FLAG'] == 'Y' }">
+								<span class="DelPost">삭제된 글입니다.</span>
+							</c:if>
+						</li>
+					</c:forEach>
+				</c:if>
 			</ul>
 			
 			<!-- 페이징 -->
