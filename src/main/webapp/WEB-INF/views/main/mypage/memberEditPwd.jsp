@@ -61,17 +61,6 @@ $(function() {
 	         $('#currentPassword').focus();
 	         return false;
 	         
-	      } else {
-	         var currentPassword = $('#currentPassword').val();
-	         if (currentPassword !== "") {
-	            $('#alertModalBody').html("비밀번호가 올바르지 않습니다.");
-	            $('#alertModal').modal('show');
-	            $('#currentPassword').val(''); 
-	            $('#currentPassword').focus(); 
-	            return false;
-	         }else{
-	        	 window.location.href = '/mbti/main/mypage/memberEditPwd';
-	         }
 	      }
 	   });
 	});
@@ -79,11 +68,11 @@ $(function() {
 
 <div class="container">
   <h2>비밀번호 확인</h2>
-  <form action="/mbti/main/mypage/memberEditPwd" method="post">
+  <form name="form-memberEditPwd" method="post" action="<c:url value='/main/mypage/memberEditPwd'/>">
     <label for="currentPassword">비밀번호</label>
-    <input type="password" id="currentPassword" name="currentPassword" placeholder="비밀번호를 입력해주세요" required>
+    <input type="password" id="currentPassword" name="currentPassword" class="password" placeholder="비밀번호를 입력해주세요" required>
  
-    <button class="submit" id="btnCheck" >확인</button>
+    <button type="submit" id="btnCheck" >확인</button>
   </form>
 </div>
   

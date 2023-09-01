@@ -99,10 +99,16 @@
 		and hp=#{hp}
    </select>
    
-   <update id="updatePassword" parameterType="string">
+   <select id="pwdCheck" parameterType="string" resultType="string">
+		select pwd from member
+		where userid = #{userid}
+		and outdate is null
+   </select>
+   
+   <update id="updatePassword" parameterType="memberVo">
    		update member
    		set pwd=#{pwd}
-   		where userid=#{userid} and pwd=#{pwd}
+   		where userid=#{userid} 
    </update>
 	
 </mapper>

@@ -21,7 +21,7 @@
 }
 
 :root{
-	--body-color: #E4E9F7;
+	--body-color: #f7f7f7;
 	--sidebar-color: #FFF;
 	--primary-color: #695CFE;
 	--primary-color-light: #F6F5FF;
