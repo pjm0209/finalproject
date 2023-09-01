@@ -376,7 +376,22 @@ section#myEduPage {
 	background-color: #f7f7f7;
 }
 
+#eduApply-title {
+	padding-left: 25px;
+    padding-top: 50px;
+    border:0;
+    font-weight: bold;
+}
 
+#check-All-my {
+	width: 20px;
+    height: 20px;
+}
+
+.board-checkbox-my {
+	width: 20px;
+    height: 20px;
+}
 
 
 /* 관리자 페이지 */
