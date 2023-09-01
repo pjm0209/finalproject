@@ -4,14 +4,18 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team2.mbti.mbtiResult.model.MbtiResultService;
 import com.team2.mbti.mbtiResult.model.MbtiResultVO;
@@ -197,7 +201,7 @@ public class MypageController {
 		return "main/mypage/mbtiResult";
 	}
 	
-	@RequestMapping("/memberEditPwd")
+	@GetMapping("/memberEditPwd")
 	public String memberEditPwd() {
 		logger.info("개인정보 수정 비밀번호 입력 화면");
 
@@ -205,17 +209,30 @@ public class MypageController {
 	}
 	
 	@PostMapping("/memberEditPwd")
-	public String memberEditPwd(@RequestParam String pwd, HttpSession session,
+	public String memberEditPwd_post(@RequestParam String pwd, HttpSession session,
 			HttpServletResponse response, Model model) {
 		
 		String userid=(String)session.getAttribute("userid");
-		logger.info("개인정보 수정 비밀번호 확인 화면, pwd={}, userid={}" ,pwd, userid);
+		logger.info("회원 탈퇴 처리, pwd={}, userid={}" ,pwd, userid);
 
 		int result=memberService.loginCheck(userid, pwd);
 		logger.info("비밀번호 체크 결과, result={}", result);
 		
-		return "main/mypage/memberEditPwd";		
-	}
+		String msg="회원 탈퇴 실패",url="/mypage/memberwdOut";
+		if(result==MemberService.LOGIN_OK) {
+			url="/main/mypage/memberEdit";
+			
+		}else if(result==MemberService.PWD_DISAGREE) {
+			msg="비밀번호가 틀렸습니다";
+			url="/main/mypage/memberOutPwd";
+			
+		}
+
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+
+		return "common/message";
+	}	
 		
 	@GetMapping("/memberEdit")
 	public String memberEdit_get(HttpSession session, Model model) {
@@ -325,12 +342,44 @@ public class MypageController {
 		return "main/mypage/memberOutResult";
 	}
 	
-	@RequestMapping("/editPwd")
-	public String editPwd() {
+	@GetMapping("/newPwd")
+	public String newPwd() {
 		logger.info("비밀번호 변경 화면");
 			
-		return "main/mypage/editPwd";
+		return "main/mypage/newPwd";
 	}
+	
+	//비밀번호 확인 처리 요청
+	@PostMapping("/chekcPwd")
+	public String checkPwd(@RequestBody String pwd, HttpSession session){
+		logger.info("비밀번호 확인 요청 발생");
+		
+		String result = null;
+		
+		MemberVO dbUser = (MemberVO)session.getAttribute("login");
+		logger.info("DB 회원의 비밀번호 : " + dbUser.getPwd());
+		logger.info("폼에서 받아온 비밀번호 : " + pwd);
+		
+		if(passwordEncoder.matches(pwd, dbUser.getPwd())) {
+			result = "pwConfirmOK";
+		}else {
+			result = "pwConfirmNO";
+		}
+		
+		return result;
+	}
+	
+	@PostMapping("newPwd")
+	public String pwChange(@RequestBody MemberVO membervo, HttpSession session) {
+		logger.info("비밀번호 변경 요청 발생!!!");
+	
+		//비밀번호 변경
+		memberService.updatePassword(membervo);
+		
+		//비밀번호 변경 성공시 로그인 세션 객체 다시 담음
+		
+	}
+
 	
 	@RequestMapping("/mypageBasket")
 	public String mypageBasket(HttpSession session, Model model) {

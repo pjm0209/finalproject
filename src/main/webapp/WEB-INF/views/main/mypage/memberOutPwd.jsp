@@ -89,12 +89,14 @@ $(function(){
 	   
 	      $('#btnCheck').click(function(){
 	         if($('#pwd').val().length<1){
-	            alert('비밀번호를 입력하세요.');
+	            $('#alertModalBody').html("비밀번호를 입력하세요.");
+	            $('#alertModal').modal('show');
 	            $('#pwd').focus();
 	            return false;
 	         }
 	         
 	         if(!confirm("회원탈퇴하시겠습니까?")){
+	        	 
 	            return false;   
 	         }
 	         
@@ -147,3 +149,4 @@ $(function(){
         </div>						
     </form>
 </article>
+<%@include file="../inc/bottom.jsp" %>
