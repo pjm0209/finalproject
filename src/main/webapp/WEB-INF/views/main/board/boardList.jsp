@@ -75,8 +75,7 @@
 										<a href="<c:url value='/admin/board/boardDetail?boardNo=${map["BOARD_NO"] }'/>"> ${map['BOARD_TITLE']}</a>	
 										<c:if test="${map['FILECOUNT'] != 0 and map['BOARD_FILE_ADD_FLAG'] == 'Y'}">
 											<img alt="파일이미지" src="<c:url value='/images/file.gif'/>">
-										</c:if>
-																									
+										</c:if>																									
 								</div>
 								<div class="boardPostComments">
 									<c:if test="${map['COMMENT_FLAG'] == 'Y'}">
