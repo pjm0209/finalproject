@@ -183,4 +183,14 @@ public class EducationServiceImpl implements EducationService{
 		return educationDao.selectMyAllEdu(vo);
 	}
 
+	@Override
+	public int getTotalRecordEduList(EducationVO vo) {
+		return educationDao.getTotalRecordEduList(vo);
+	}
+
+	@Override
+	public List<EducationVO> myPayEdu(EducationVO vo) {
+		return educationDao.myPayEdu(vo);
+	}
+
 }
