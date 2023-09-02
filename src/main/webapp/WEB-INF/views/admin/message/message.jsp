@@ -67,12 +67,13 @@
 			</div>
 			<form name="messageFrm" method="post" action="<c:url value='/admin/message/message'/>">
 				<div class="modal-body" style="margin:0 auto">
+					<p id="input">인풋태그</p>
 					<p>보낼 내용</p>
-					<textarea rows="20" cols="84" style="margin:0 auto"></textarea>
+					<textarea name="sendItems[0].sendBody" id="sendBody" rows="20" cols="84" style="margin:0 auto"></textarea>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-					<button type="button" class="btn bg-orange-primary" id="messageOkBtn" >확인</button>
+					<button type="submit" class="btn bg-orange-primary" id="messageOkBtn" >확인</button>
 				</div>
 			</form>
 		</div>
