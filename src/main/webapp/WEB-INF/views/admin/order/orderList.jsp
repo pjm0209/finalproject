@@ -57,7 +57,7 @@ $(function(){
 				<h5>전체 주문 내역</h5>
 			</c:otherwise> 
 		</c:choose>
-		<button id="toggleBtn" class="bg-gradient-secondary book-button"
+		<button id="toggleBtn" class="btn btn-warning bg-gradient-secondary book-button"
 			 type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
 			  aria-expanded="false" aria-controls="collapseExample">검색창 열기</button>
 	</div>

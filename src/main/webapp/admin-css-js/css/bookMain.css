@@ -144,7 +144,8 @@ ul,li{list-style:none;}
 .sideBarBestBook{
 	position: absolute;
     right: 0;
-    top: 760px;
+    top: 700px;
+     /*top: 760px;*/
     margin-right: 10px;
     text-align: center;
 }
@@ -727,7 +728,7 @@ ul, li {
 
 #basket{
 
-	    position: relative;
+	position: relative;
     left: 50%;
     transform: translateX(-50%);
     width: 1420px;

@@ -9,11 +9,12 @@ public interface ConstUtil {
 	
 	//파일 업로드 처리 관련 상수
 	String FILE_UPLOAD_TYPE = "test";
-	//String FILE_UPLOAD_TYPE = "deploy";
 	
 	//
 	String FILE_UPLOAD_PATH = "fileUpload";
 	String FILE_UPLOAD_PATH_TEST = "C:\\finalproject\\finalproject\\src\\main\\webapp\\fileUpload";
+	String BOOKFILE_UPLOAD_PATH = "BookFileUpload";
+	String BOOKFILE_UPLOAD_PATH_TEST = "C:\\finalproject\\finalproject\\src\\main\\webapp\\images\\bookProduct";
 	
 	//관리자 페이지
 	String IMAGE_FILE_UPLOAD_PATH = "pd_images";

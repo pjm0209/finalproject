@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class BookServiceImpl implements BookService {
 	private final BookDAO bookDao;
 
@@ -27,5 +29,9 @@ public class BookServiceImpl implements BookService {
 		return bookDao.selectBookAllAjax(vo);
 	}
 
+	@Override
+	public int insertBook(StockBookVO vo) {
+		return bookDao.insertBook(vo);
+	}
 	
 }//

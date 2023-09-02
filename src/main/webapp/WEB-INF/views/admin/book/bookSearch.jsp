@@ -11,7 +11,7 @@
 	 	action="<c:url value='/admin/book/bookList?bookFlag=InventoryByKeyword'/>"
 	 </c:if>
 	 > --%>
-	 serach<input id="searchBookFlag" name="bookFlag"  type="text"
+	 <input id="searchBookFlag" name="bookFlag"  type="hidden"
 	 <c:if test="${param.bookFlag == 'bookList' or param.bookFlag == 'bookListByKeyword'}"> value='bookListByKeyword'</c:if>
 	 <c:if test="${param.bookFlag == 'Inventory' or param.bookFlag == 'InventoryByKeyword'}"> value='InventoryByKeyword'</c:if>
 	 >
@@ -195,6 +195,9 @@
 		<div class="btn">
 			<button type="button" id="searchByKeywordBtn">검색</button>
 		</div>
+		
+		<input id="frmPageIdBookFlag" type="hidden" name="bookFlag">
+		<input type="hidden" name="currentPage" value="1">
 	</div>
 </form>
 </div>
