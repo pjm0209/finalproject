@@ -76,16 +76,22 @@ button:hover {
 <section>
   <div class="container">
     <h2>비밀번호 변경</h2>
-    <form id="changePasswordForm" action="/change-password" method="post">
-      <label for="currentPassword">현재 비밀번호</label>
-      <input type="password" id="currentPassword" name="pwd" placeholder="현재 비밀번호를 입력해주세요" required>
-      
-      <label for="newPassword">새 비밀번호</label>
-      <input type="password" id="newPassword" name="newPwd" placeholder="새로 사용하실 비밀번호를 입력해주세요" required>
-      
-      <label for="confirmPassword">새 비밀번호 확인</label>
-      <input type="password" id="confirmPassword" name="confirmPwd" placeholder="새로 사용하실 비밀번호를 재입력해주세요" required>
-      
+    <form name="form-newPwd" method="post" action="<c:url value='/main/mypage/newPwd'/>">
+    <div class="mypage-row">
+      <label>현재 비밀번호</label>
+      <input type="password" name="pwd" placeholder="현재 비밀번호를 입력해주세요" maxlength="30" required>
+    </div> 
+    
+    <div class="mypage-row"> 
+      <label>새 비밀번호</label>
+      <input type="password" name="newPwd" placeholder="새로 사용하실 비밀번호를 입력해주세요" maxlength="30" required>
+    </div> 
+     
+    <div class="mypage-row">  
+      <label>새 비밀번호 확인</label>
+      <input type="password" name="confirmPwd" placeholder="새로 사용하실 비밀번호를 재입력해주세요" maxlength="30" required>
+    </div>
+     
       <button type="submit">비밀번호 변경</button>
       
       <div class="bottom">

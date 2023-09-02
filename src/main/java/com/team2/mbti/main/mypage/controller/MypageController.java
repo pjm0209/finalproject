@@ -241,7 +241,7 @@ public class MypageController {
 		logger.info("개인 정보 수정 화면, 파라미터 userid={}", userid);
 		
 		MemberVO membervo = memberService.selectByUserid(userid);
-		logger.info("개인 정보 수정 정보 조회결과 membervo={}", membervo);
+		logger.info("개인 정보 수정 정보 조회 결과 membervo={}", membervo);
 				
 		model.addAttribute("membervo",membervo);
 		
@@ -348,38 +348,30 @@ public class MypageController {
 		return "main/mypage/newPwd";
 	}
 	
-	//비밀번호 확인 처리 요청
-	@PostMapping("/chekcPwd")
-	public String checkPwd(@RequestBody String pwd, HttpSession session){
-		logger.info("비밀번호 확인 요청 발생");
+	@PostMapping("/newPwd")
+	public String newPwd_post(@RequestParam String currentPassword, @RequestParam String newPwd,
+	        @RequestParam String confirmPwd, HttpSession session, Model model) {
+
+		logger.info("비밀번호 변경 처리");
 		
-		String result = null;
+		//1. 현재 비밀번호 맞는지 체크
+		String userid=(String)session.getAttribute("userid");
+		logger.info("파라미터, userid={}, currentPassword={}, userid, currentPassword");
 		
-		MemberVO dbUser = (MemberVO)session.getAttribute("login");
-		logger.info("DB 회원의 비밀번호 : " + dbUser.getPwd());
-		logger.info("폼에서 받아온 비밀번호 : " + pwd);
-		
-		if(passwordEncoder.matches(pwd, dbUser.getPwd())) {
-			result = "pwConfirmOK";
-		}else {
-			result = "pwConfirmNO";
+		String str = memberService.pwdCheck(userid);
+		logger.info("비밀 번호 확인 처리 str={}", str);
+				
+		//2. 새로운 비밀번호, 새 비밀번호 확인 맞는지 체크
+		if(newPwd.equals(confirmPwd) == false) {	
+			
 		}
 		
-		return result;
-	}
-	
-	@PostMapping("newPwd")
-	public String pwChange(@RequestBody MemberVO membervo, HttpSession session) {
-		logger.info("비밀번호 변경 요청 발생!!!");
-	
-		//비밀번호 변경
-		memberService.updatePassword(membervo);
+		//3. DB 비밀번호 변경
 		
-		//비밀번호 변경 성공시 로그인 세션 객체 다시 담음
-		
+		//4. 비밀번호 완료 메세지 띄우기
 	}
 
-	
+		
 	@RequestMapping("/mypageBasket")
 	public String mypageBasket(HttpSession session, Model model) {
 		

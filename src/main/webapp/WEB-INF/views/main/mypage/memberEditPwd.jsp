@@ -65,7 +65,7 @@ $(function() {
 	   });
 	});
 </script>
-
+<article>
 <div class="container">
   <h2>비밀번호 확인</h2>
   <form name="form-memberEditPwd" method="post" action="<c:url value='/main/mypage/memberEditPwd'/>">
@@ -75,5 +75,6 @@ $(function() {
     <button type="submit" id="btnCheck" >확인</button>
   </form>
 </div>
-  
+</article>  
+
 <%@include file="../inc/bottom.jsp" %>
