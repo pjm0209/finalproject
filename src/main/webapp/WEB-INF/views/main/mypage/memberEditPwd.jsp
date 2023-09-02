@@ -4,10 +4,9 @@
 <%@include file="../inc/mypage.jsp" %>    
 
 <style>
-
 .container {
   max-width: 500px;
-  margin-top: 200px;
+  margin-top: 200px;	
   margin-bottom: 100px;
   background-color: white;
   border: 1px solid #ccc;

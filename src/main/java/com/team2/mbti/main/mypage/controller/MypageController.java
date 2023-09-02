@@ -4,15 +4,17 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team2.mbti.mbtiResult.model.MbtiResultService;
 import com.team2.mbti.mbtiResult.model.MbtiResultVO;
@@ -348,27 +350,44 @@ public class MypageController {
 		return "main/mypage/newPwd";
 	}
 	
-	@PostMapping("/newPwd")
-	public String newPwd_post(@RequestParam String currentPassword, @RequestParam String newPwd,
-	        @RequestParam String confirmPwd, HttpSession session, Model model) {
-
-		logger.info("비밀번호 변경 처리");
+	@RequestMapping("/ajaxPwdCheck")
+	@ResponseBody
+	public int pwdCheck(HttpSession session, @RequestParam(required = false)String pwd) {
+		String userid = (String) session.getAttribute("userid");
+		logger.info("ajax이용 - 비밀번호 일치 파라미터 pwd={}, userid={}", pwd, userid);
 		
-		//1. 현재 비밀번호 맞는지 체크
-		String userid=(String)session.getAttribute("userid");
-		logger.info("파라미터, userid={}, currentPassword={}, userid, currentPassword");
-		
-		String str = memberService.pwdCheck(userid);
-		logger.info("비밀 번호 확인 처리 str={}", str);
-				
-		//2. 새로운 비밀번호, 새 비밀번호 확인 맞는지 체크
-		if(newPwd.equals(confirmPwd) == false) {	
-			
+		int result = memberService.loginCheck(pwd, userid);
+		if(result == memberService.LOGIN_OK) {
+			result = 1;
+		}else if(result == memberService.PWD_DISAGREE) {
+			result =0;
 		}
+			
+		logger.info("ajax이용 - 비밀번호 일치 결과 result={}", result);
 		
-		//3. DB 비밀번호 변경
+		return result;	
+	}
+	
+	@PostMapping("/newPwd")
+	public String newPwd_post(@ModelAttribute MemberVO membervo,
+			HttpSession session, Model model){
 		
-		//4. 비밀번호 완료 메세지 띄우기
+		String userid = (String) session.getAttribute("userid");
+		membervo.setUserid(userid);
+		membervo.setPwd(passwordEncoder.encode(membervo.getPwd()));
+		logger.info("비밀번호 변경 처리 파라미터 membervo={}", membervo);
+		
+		int cnt = memberService.updatePassword(membervo);
+		logger.info("비밀번호 변경 결과 cnt={}", cnt);
+		
+		String msg="비밀번호 변경에 실패했습니다.", url="/newPwd";
+		if(cnt > 0) {
+			msg = "비밀번호 변경이 완료되었습니다.";
+		}
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+				
+		return "common/message";
 	}
 
 		
