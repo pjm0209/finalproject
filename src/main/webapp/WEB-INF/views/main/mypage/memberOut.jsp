@@ -8,7 +8,8 @@
    $(function(){
      $('#btnOut').click(function() {
          if (!$('#agree_check').is(':checked')) {
-             alert("회원탈퇴에 동의하셔야 합니다.");
+            $('#alertModalBody').html("회원탈퇴에 동의하셔야 합니다.");
+            $('#alertModal').modal('show');
          } else {
         	 window.location.href = "<c:url value='/main/mypage/memberOutPwd'/>";
            }
@@ -22,7 +23,7 @@ h2{
 }
 .memberOut-agreement{
 	text-align:left;
-	margin-top: 150px;
+	margin-top: 110px;
 	margin-left: 300px;
 	margin-right: 300px;
 }
@@ -45,7 +46,7 @@ h2{
 	font-size: 15px;
 }
 
-span{
+.title{
 	font-size: 20px;
 	font-weight: bold;
 }
@@ -69,6 +70,7 @@ span{
 
 #btnOut{
      font-size: 18px;
+     margin-bottom: 30px;
      padding: 10px 20px;
      background-color: red;
      color: white;
@@ -97,7 +99,7 @@ span{
 	</div>
 	</div><br>
 	
-	<span>*유의사항</span><br><br>
+	<span class="title">*유의사항</span><br><br>
 	<div class="bottom-border">
 	<div class="content2">
 	<p> - 회원탈퇴 처리 후에는 회원님의 개인정보를 복원할 수 없으며, 회원탈퇴 진행 시 해당 아이디는 영구적으로 삭제되어 재가입이 불가합니다.
@@ -115,3 +117,4 @@ span{
 	</div>
 	</form>
 </div>
+<%@include file="../inc/bottom.jsp" %>

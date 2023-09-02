@@ -21,7 +21,7 @@
 }
 
 :root{
-	--body-color: #E4E9F7;
+	--body-color: #f7f7f7;
 	--sidebar-color: #FFF;
 	--primary-color: #695CFE;
 	--primary-color-light: #F6F5FF;
@@ -37,6 +37,7 @@ section#myPage{
 	padding-left: 223px;
 	padding-top: 100px;
 	height:6850px;
+	background-color: #f7f7f7;
 }
 body{
 	height: 100vh;
@@ -262,9 +263,9 @@ body.dark .switch::before{
 				</li>
 				<ul class="menu-links" id="menu-links">
 					<li class="nav-link2">
-						<a href="<c:url value='/main/mypage/memberEdit'/>">
+						<a href="<c:url value='/main/mypage/memberEditPwd'/>">
 							<i class='bx bx-home-alt icon'></i>
-							<span class="text nav-text">나의 정보</span>						
+							<span class="text nav-text">개인정보 </span>						
 						</a>
 					</li>
 					<li class="nav-link2">
@@ -286,7 +287,7 @@ body.dark .switch::before{
 						</a>
 					</li>	
 					<li class="nav-link2">
-						<a href="#">
+						<a href="<c:url value='/main/mypage/education'/>">
 							<i class='bx bx-heart icon'></i>
 							<span class="text nav-text">나의 교육</span>						
 						</a>
@@ -296,7 +297,14 @@ body.dark .switch::before{
 							<i class='bx bx-wallet icon'></i>
 							<span class="text nav-text">회원탈퇴 </span>						
 						</a>
-					</li>		
+					</li>
+					
+					<li class="nav-link2">
+						<a href="<c:url value='/main/mypage/newPwd'/>">
+							<i class='bx bx-wallet icon'></i>
+							<span class="text nav-text">비밀번호변경 </span>						
+						</a>
+					</li>							
 					
 					<li class="nav-link2">
 						<a href="<c:url value='/main/index	'/>">

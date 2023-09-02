@@ -55,6 +55,7 @@
 	<select id="selectPwd" parameterType="string" resultType="string">
 		select pwd from member
 		where userid=#{userid}
+		and outdate is null
 	</select>
 	
 	<select id="selectCheckId" parameterType="string"
@@ -81,15 +82,33 @@
 	</update>
 	
 	<update id="updateMemberOut" parameterType="string">
-      update member
-      set outdate=sysdate
-      where userid=#{userid}
+        update member
+        set outdate=sysdate
+        where userid=#{userid}
    </update>	
    
-   <select id="findId" parameterType="memberVo" resultType="memberVo">
+   <select id="getMemberByNameAndEmail" resultType="memberVo">
    		select userid from member
 		where name= #{name} 
-		and hp= #{hp}
+		and email= #{email}
    </select>
+   
+   <select id="getMemberByNameAndHp" resultType="memberVo">
+	   	select userid from member
+		where name= #{name}
+		and hp=#{hp}
+   </select>
+   
+   <select id="pwdCheck" parameterType="string" resultType="string">
+		select pwd from member
+		where userid = #{userid}
+		and outdate is null
+   </select>
+   
+   <update id="updatePassword" parameterType="memberVo">
+   		update member
+   		set pwd=#{pwd}
+   		where userid=#{userid} 
+   </update>
 	
 </mapper>

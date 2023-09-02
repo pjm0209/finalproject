@@ -3,7 +3,7 @@
 <%@ include file="../inc/top.jsp" %>
 <div class="board-body">
 	<div id="board-title">
-		<h5>쪽지함 관리</h5>
+		<h5>쪽지 관리</h5>
 		<button class="message-button">쪽지 보내기</button>
 		<button class="message-button">전체 쪽지 보내기</button>
 	</div>
@@ -58,21 +58,24 @@
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h1 class="modal-title fs-5" id="alertModalLabel" style="margin-left: 10px;"></h1>
+				<h1 class="modal-title fs-5" id="alertModalLabel" ></h1>
 				<button type="button" class="btn-close" data-bs-dismiss="modal"
 					aria-label="Close"></button>
 			</div>
-			<div style="margin-left: 30px;margin-top: 20px">
+			<div style="margin-left: 15px;margin-top: 20px">
 				<span>받는 회원 : &nbsp;</span><span id="memberNameModal"></span>
 			</div>
-			<div class="modal-body" style="margin:0 auto">
-				<p>보낼 내용</p>
-				<textarea rows="20" cols="85" style="margin:0 auto"></textarea>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-				<button type="button" class="btn bg-orange-primary" >확인</button>
-			</div>
+			<form name="messageFrm" method="post" action="<c:url value='/admin/message/message'/>">
+				<div class="modal-body" style="margin:0 auto">
+					<p id="input">인풋태그</p>
+					<p>보낼 내용</p>
+					<textarea name="sendItems[0].sendBody" id="sendBody" rows="20" cols="84" style="margin:0 auto"></textarea>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+					<button type="submit" class="btn bg-orange-primary" id="messageOkBtn" >확인</button>
+				</div>
+			</form>
 		</div>
 	</div>
 </div>

@@ -9,8 +9,8 @@
 				<div class="head-content-box1">
 					<nav class="board-nav">
 						<ul class="board-ul">
-							<li class="board-li-category">게시판 카테고리</li>
-							<li class="board-li-category">전체 게시글</li>							
+							<li class="board-li-category"><a href="<c:url value='/main/board/boardMain'/>">게시판 카테고리</a></li>
+							<li class="board-li-category"><a href="<c:url value='/main/board/boardList'/>">전체 게시글</a></li>								
 						</ul>
 					</nav>
 				</div>
@@ -24,17 +24,24 @@
 			</div>
 			<ul class="boardFormList">
 				<c:forEach var="map" items="${boardCategoryList }">
+					<c:if test="${!empty map.BOARDCOUNT}">
+						<c:set var="count" value="${map.BOARDCOUNT }"/>
+					</c:if>
+					<c:if test="${empty map.BOARDCOUNT}">
+						<c:set var="count" value="0"/>
+					</c:if>
 					<li class="boardFormItem">
 						<div class="boardCategoryTitleImg"></div>
 						<div class="boardCategoryContent">
-							<a class="boardCategoryContentTitle" href="#">${map.BOARD_FORM_NAME }</a>
+							<a class="boardCategoryContentTitle" href="<c:url value='/main/board/boardList?boardFormNo=${map.BOARD_FORM_NO }'/>">${map.BOARD_FORM_NAME }</a>
 							<p class="boardCategoryContentIntro">${map.BOARD_FORM_INTRO }</p>
 						</div>
-						<div class="boardCategoryWriteCount"><i class="bi bi-chat-square"></i><span class="boardWriteCount">${map.BOARDCOUNT }</span></div>						
+						<div class="boardCategoryWriteCount"><i class="bi bi-chat-square"></i><span class="boardWriteCount">${count }</span></div>						
 					</li>
 				</c:forEach>
 			</ul>
 		</div>
 	</div>
 </section>
+
 <%@ include file="../inc/bottom.jsp"%>

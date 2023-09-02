@@ -13,7 +13,7 @@
 		    var memberpwdCheck = $(this).val();
 		    var pwdCheckError = $('#pwdCheckError');
 
-		    if (memberPwd !== memberpwdCheck) {
+		    if (memberPwd !== memberpwdCheck) {	
 		    	pwdCheckError.html("비밀번호가 일치하지 않습니다.").css("color", "red");
 		    } else {
 		    	pwdCheckError.html("비밀번호가 일치합니다").css("color", "blue");
@@ -47,8 +47,9 @@ body {
 }
 
 .form-memberEdit {
-  max-width: 600px;
-  margin: 0 auto;
+  max-width: 500px;
+  margin-top: 100px;
+  margin-left: 800px;
   padding: 20px;
   background-color: #fff;
   border-radius: 5px;
@@ -56,7 +57,7 @@ body {
 }
 
 .form-memberEdit h1 {
-  text-align: center;x	
+  text-align: center;
   font-size: 30px;
   margin-bottom: 20px;
 }
@@ -87,13 +88,6 @@ body {
   border-radius: 3px;
 }
 
-
-.div-memberEdit input[type="password"] {
-  width: 80%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-}
 
 #memberEmail{
 	width:80%;
@@ -143,12 +137,6 @@ body {
   cursor: pointer;
 }
 
-.error {
-  color: red;
-  font-size: 12px;
-  margin-top: 5px;
-}
-
 </style>
     
 <article>
@@ -164,19 +152,7 @@ body {
 			<div class="div-memberEdit">		
 				<span>${sessionScope.userid}</span>
 			</div>
-			
-			<label>비밀번호</label>
-			<div class="div-memberEdit">
-				<input type="password" class="pwd" id="memberPwd" name="pwd">
-				<div class="error" id="pwdError"></div>
-			</div>
-			
-			<label>비밀번호 확인</label>
-			<div class="div-memberEdit">
-				<input type="password" class="pwdCheck" id="memberpwdCheck" name="editPwdCheck">
-				<div class="error" id="pwdCheckError"></div>
-			</div><br>
-			
+						
 			<label>이메일</label>
 			<div class="div-memberEdit">
 				<input type="text" class="email" id="memberEmail" name="email" value="${membervo.email}">

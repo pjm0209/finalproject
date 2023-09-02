@@ -54,7 +54,6 @@
 			</div>
 		</div>
 		<div class="board">
-			<!-- 기본설정 시작 -->
 				<div class="boardWrite">
 					<div class="boardWrite-body">
 						<dt>게시판</dt>
@@ -129,7 +128,6 @@
 						</c:if>
 					</div>
 				</div>
-				<!-- 기본설정 끝 --> 
 		</div>
 	</form>
 </div>

@@ -41,7 +41,18 @@
 	</select>
 	
 	<select id="selectAllList" parameterType="educationVo" resultType="educationVo">
-		select * from eduTeaListview order by edu_no desc
+	select * from
+			(
+			    select rownum as RNUM, a.* from
+			    (
+					select * from eduTeaListview 
+					<include refid="searchWhere"></include>
+					order by edu_no desc
+				)a
+			)
+			<![CDATA[
+			where RNUM > #{firstRecordIndex} 
+			and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}]]>
 	</select>
 	
 	<select id="getTotalRecordEducation" parameterType="educationVo" resultType="int">
@@ -205,5 +216,43 @@
 		set edu_app_flag = 'Y'
 		where edu_app_no = #{eduAppNo}
 	</update>
+	
+	
+	<!-- mypage -->
+	<select id="selectMyAllEdu" parameterType="educationVo" resultType="educationVo">
+		select * from
+		(
+			select rownum as RNUM, a.* from
+			(
+				select * from educationview 
+				where no=#{no} and edu_app_flag = 'N'
+				<include refid="searchWhere"></include>
+				order by edu_no desc
+			)a
+		)
+		<![CDATA[
+		where RNUM > #{firstRecordIndex} and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}]]>
+	</select>
+	
+	<select id="getTotalRecordEduList" parameterType="educationVo" resultType="int">
+		select count(*) from educationview
+		<include refid="searchWhere"></include> 
+	</select>
+	
+	<select id="myPayEdu" parameterType="educationVo" resultType="educationVo">
+		select * from
+		(
+			select rownum as RNUM, a.* from
+			(
+				select * from educationview 
+				where no=#{no} and edu_app_flag = 'Y'
+				<include refid="searchWhere"></include>
+				order by edu_no desc
+			)a
+		)
+		<![CDATA[
+		where RNUM > #{firstRecordIndex} and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}]]>
+	</select>
+	
 	
 </mapper>

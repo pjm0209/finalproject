@@ -5,6 +5,10 @@ var contextPath = "/mbti"
 		$('#check-All').click(function(){
 			$('.board-checkbox').prop('checked', this.checked);
 		});	
+
+		$('#check-All-my').click(function(){
+			$('.board-checkbox-my').prop('checked', this.checked);
+		});	
 		
 		
 		//교육 삭제 유효성 검사
