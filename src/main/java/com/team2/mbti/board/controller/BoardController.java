@@ -72,7 +72,7 @@ public class BoardController {
 		logger.info("게시판 이름 검색결과 board: {}", boardFormVo);
 		
 		List<Map<String, Object>> list = boardService.selectAll(vo);
-		logger.info("게시판 전체조회 결과: list.size: {}", list.size());
+		logger.info("게시판 전체조회 결과: list.size: {}", list);
 
 		List<MbtiVO> mbtiList = null;
 		

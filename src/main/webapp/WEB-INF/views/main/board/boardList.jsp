@@ -39,7 +39,14 @@
 		<div class="boardContent-body">
 			<div class="boardWritediv">
 				<h5><c:if test="${empty param.boardFormNo }">전체게시글</c:if><c:if test="${!empty param.boardFormNo }">${boardFormVo.boardFormName }</c:if></h5>
-				<button type="button" class="boardWriteBtn"><span class="boardWrite">게시글작성</span></button>
+				<button type="button" class="boardWriteBtn"
+					<c:if test="${empty param.boardFormNo }">
+						onclick="location='<c:url value="/main/board/boardWrite"/>'"
+					</c:if>
+					<c:if test="${!empty param.boardFormNo }">
+						onclick="location='<c:url value="/main/board/boardWrite?boardFormNo=${param.boardFormNo }"/>'"
+					</c:if>
+				><span class="boardWrite">게시글작성</span></button>
 			</div>
 			
 			<div class="boardListColumn">
@@ -72,11 +79,10 @@
 										</c:forEach>
 										<i class="bi bi-arrow-return-right"></i>
 									</c:if>
-										<a href="<c:url value='/admin/board/boardDetail?boardNo=${map["BOARD_NO"] }'/>"> ${map['BOARD_TITLE']}</a>	
+										<a href="<c:url value='/main/board/boardDetail?boardNo=${map["BOARD_NO"] }'/>"> ${map['BOARD_TITLE']}</a>	
 										<c:if test="${map['FILECOUNT'] != 0 and map['BOARD_FILE_ADD_FLAG'] == 'Y'}">
 											<img alt="파일이미지" src="<c:url value='/images/file.gif'/>">
-										</c:if>
-																									
+										</c:if>																									
 								</div>
 								<div class="boardPostComments">
 									<c:if test="${map['COMMENT_FLAG'] == 'Y'}">

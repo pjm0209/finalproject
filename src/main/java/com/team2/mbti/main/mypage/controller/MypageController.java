@@ -377,6 +377,7 @@ public class MypageController {
 		membervo.setPwd(passwordEncoder.encode(membervo.getPwd()));
 		logger.info("비밀번호 변경 처리 파라미터 membervo={}", membervo);
 		
+
 		int cnt = memberService.updatePassword(membervo);
 		logger.info("비밀번호 변경 결과 cnt={}", cnt);
 		
@@ -389,8 +390,7 @@ public class MypageController {
 				
 		return "common/message";
 	}
-
-		
+	
 	@RequestMapping("/mypageBasket")
 	public String mypageBasket(HttpSession session, Model model) {
 		

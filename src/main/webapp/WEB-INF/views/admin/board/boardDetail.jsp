@@ -87,8 +87,7 @@
 					<input type="button" value="답글등록" id="comment-submit" onclick="commentWrite()">
 				</div>
 			</form>
-		</c:if>
-	
+		</c:if>	
 	</div>
 </div>
 </div>

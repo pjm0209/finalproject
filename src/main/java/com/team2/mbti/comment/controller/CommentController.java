@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team2.mbti.comment.model.CommentService;
 import com.team2.mbti.comment.model.CommentVO;
+import com.team2.mbti.comment.model.CommentsVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -38,10 +39,10 @@ public class CommentController {
 	
 	@ResponseBody
 	@RequestMapping("/list")
-	public List<Map<String, Object>> commentList(@RequestParam int boardNo) {
+	public List<CommentsVO> commentList(@RequestParam int boardNo) {
 		logger.info("댓글 리스트 조회 파라미터 boardNo: {}", boardNo);
 		
-		List<Map<String, Object>> list = commentService.selectCommentList(boardNo);
+		List<CommentsVO> list = commentService.selectCommentList(boardNo);
 		logger.info("댓글 리스트 검색결과 list: {}", list);
 		
 		return list;

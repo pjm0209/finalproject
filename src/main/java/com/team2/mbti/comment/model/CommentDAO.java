@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface CommentDAO {
 	int insertComments(CommentVO vo);
-	List<Map<String, Object>> selectCommentList(int boardNo);
+	List<CommentsVO> selectCommentList(int boardNo);
 	
 	void deleteComment(Map<String, String> map);
 	
