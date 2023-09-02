@@ -195,15 +195,15 @@ function fileDel(element){
 	});
 }
 
-//댓글 수정,삭제박스 열기함수
-function commentMore(element) {	
-	$(element).next('.editDel').toggle();
-}
-
 //게시글목록 페이징 함수
 function pageFunc(curPage) {
 	$('input[name="currentPage"]').val(curPage);
 	$('form[name="paginForm"]').submit();
+}
+
+//댓글 수정,삭제박스 열기함수
+function commentMore(element) {	
+	$(element).next('.editDel').toggle();
 }
 
 //좋아요 처리함수
@@ -317,8 +317,8 @@ function comments(comment) {
 		str += "<div class='accordion' id='accordionExample'>";
 		
 		for(var i = 0; i < comment.length; i++) {
-			var map = comment[i];			
-			var date = new Date(map.COMMENTS_REGDATE);
+			var vo = comment[i];			
+			var date = new Date(vo.commentsRegdate);
 			var user = $('.session-adminId').val();
 			const regdate = new Date(date.getTime()).toISOString().split('T')[0] + " " + date.toTimeString().split(' ')[0];
 			
@@ -333,50 +333,44 @@ function comments(comment) {
 				accordianNo = accordianNo + 1;
 			}
 			
-			if(map.COMMENTS_STEP < 1) {
+			if(vo.commentsStep < 1) {
 				str += "<div class='comment-item'>";
 			} else {
 				str += "<div class='comment-item reply'>";
 			}			
-			if(map.COMMENTS_DEL_FLAG === 'N') {
-				if(map.ADMIN_ID.length > 0) {
-					str += "<p class='comment-writer'>" + map.ADMIN_ID;
-					if(boardWriter === map.ADMIN_ID) {
-						str += "<span class='boardWriter-commentWrite'>작성자</span>";
-					}
-					str += "<span class='comment-write-regdate'>(" + regdate + ")</span>";
-					if(map.COMMENTS_STEP < 1) {
-						str += "<a class='comment-reply' onclick='commentReply(this)'>답글쓰기</a>";
-					}
-					str += "<input type='hidden' name='commentsNo' class='commentsNo' value='" + map.COMMENTS_NO + "'>";
-					str += "<div class='commentEditOrDel'>" + 
-					"<span onclick='commentMore(this)' class='comment-more'>";
-					str += "<i class='bi bi-three-dots-vertical'></i></span>";
-					str += "<div class='editDel'>";
-					if(user == map.ADMIN_ID) {
-						str += "<a class='commentEdit' onclick='commentEdit(this)'>수정</a>";
-					}
-					str += "<a class='commentDel' onclick='commentDelModal(" + map.COMMENTS_NO + ", " + map.COMMENTS_STEP + ", " + map.COMMENTS_GROUP_NO + ", " + map.BOARD_NO + ")'>삭제</a>" +
-					"</div>";
+			if(vo.commentsDelFlag === 'N') {
+				if (vo.adminId != null) {
+					str += "<p class='comment-writer'>" + vo.adminId;
 				} else {
-					str += "<p class='comment-writer'>" + map.NAME;
-					if(boardWriter === map.NAME) {
-						str += "<span class='boardWriter-commentWrite'>작성자</span>"; 
-					}
-					str += "<span class='comment-write-regdate'>(" + regdate + ")</span>";
-					if(map.COMMENTS_STEP < 1) {
-						str += "<a class='comment-reply' onclick='commentReply(this)'>답글쓰기</a>";
-					}
-					str += "<input type='hidden' name='commentsNo' class='commentsNo' value='" + map.COMMENTS_NO + "'>";
-					str += "<span onclick='commentMore(this)' class='comment-more'>" + 
-					"<i class='bi bi-three-dots-vertical'></i></span>" +
-					"<div class='editDel'>" +
-					"<a class='commentEdit' onclick='commentEdit(this)'>수정</a>";
-					str += "<a class='commentDel' onclick='commentDelModal(" + map.COMMENTS_NO + ", " + map.COMMENTS_STEP + ", " + map.COMMENTS_GROUP_NO + ", " + map.BOARD_NO + ")'>삭제</a>" +
-					"</div>";
+					str += "<p class='comment-writer'>" + vo.name;
 				}
+				
+				if(boardWriter === vo.name) {
+					str += "<span class='boardWriter-commentWrite'>작성자</span>"; 
+				} else if(boardWriter === vo.adminId) {
+					str += "<span class='boardWriter-commentWrite'>작성자</span>";
+				}
+				
+				str += "<span class='comment-write-regdate'>(" + regdate + ")</span>";
+				
+				if(vo.commentsStep < 1) {
+					str += "<a class='comment-reply' onclick='commentReply(this)'>답글쓰기</a>";
+				}
+				
+				str += "<input type='hidden' name='commentsNo' class='commentsNo' value='" + vo.commentsNo + "'>";
+				str += "<div class='commentEditOrDel'>";
+				str += "<span onclick='commentMore(this)' class='comment-more'>";
+				str += "<i class='bi bi-three-dots-vertical'></i></span>";
+				str += "<div class='editDel'>";
+				
+				if(user == vo.adminId) {
+					str += "<a class='commentEdit' onclick='commentEdit(this)'>수정</a>";
+				}
+				
+				str += "<a class='commentDel' onclick='commentDelModal(" + vo.commentsNo + ", " + vo.commentsStep + ", " + vo.commentsGroupNo + ", " + vo.boardNo + ")'>삭제</a></div>";				
+				
 				str += "</div>";
-				str += "<p class='comment-body'>" + map.COMMENTS_BODY + "</p>";				
+				str += "<p class='comment-body'>" + vo.commentsBody + "</p>";				
 			} else {
 				str += "<span>삭제된 글입니다.</span>"
 				commentDelCount = commentDelCount + 1;
@@ -388,7 +382,7 @@ function comments(comment) {
 				str += "</div></div></div>";
 			}
 			
-			if(map.COMMENTS_DEL_FLAG === 'N') {
+			if(vo.commentsDelFlag === 'N') {
 				commentCount = commentCount + 1;
 			}
 		} //for

@@ -45,32 +45,34 @@ left join admin a
 on b.admin_no = a.admin_no
 order by b.board_no;
 
-create procedure DELETEBOARD  --?„ë¡œ?œì? ?´ë¦„ 
+create or replace procedure DELETEBOARD
 (
---ë§¤ê°œë³€??
     m_no number,
     m_step number,
     m_groupno number
 )
 is
---ë³€?˜ì„ ?¸ë?
     cnt number;
 begin
---ì²˜ë¦¬???´ìš©
     if m_step = 0 then
-        --?µë?ê¸€??ì¡´ì¬?˜ëŠ”ì§€ ì²´í¬
         select count(*) into cnt from board
         where board_group_No = m_groupno;
 
-        --?µë?ê¸€??ì¡´ì¬?˜ëŠ” ê²½ìš°
         if cnt > 1 then
             update board set board_Del_Flag = 'Y'
             where board_no = m_no;
-        else --?µë?ê¸€???†ëŠ” ê²½ìš°
+        else
             delete board where board_no = m_no;
         end if;
-    else --?µë?ê¸€ ?ì²´??ê²½ìš°
+    else
         delete board where board_no = m_no;
+        
+        select count(*) into cnt from board
+        where board_group_no = m_groupno;
+        
+        if cnt = 1 then
+            delete board where board_no = m_groupno;
+        end if;
     end if;
 
     commit;
@@ -81,32 +83,34 @@ EXCEPTION
         ROLLBACK;
 end;
 
-create procedure DELETECOMMENTS  --?„ë¡œ?œì? ?´ë¦„ 
+create or replace procedure DELETECOMMENTS  
 (
---ë§¤ê°œë³€??
     m_no number,
     m_step number,
     m_groupno number
 )
 is
---ë³€?˜ì„ ?¸ë?
     cnt number;
 begin
---ì²˜ë¦¬???´ìš©
     if m_step = 0 then
-        --?µë?ê¸€??ì¡´ì¬?˜ëŠ”ì§€ ì²´í¬
         select count(*) into cnt from comments
         where comments_group_No = m_groupno;
 
-        --?µë?ê¸€??ì¡´ì¬?˜ëŠ” ê²½ìš°
         if cnt > 1 then
             update comments set comments_Del_Flag = 'Y'
             where comments_no = m_no;
-        else --?µë?ê¸€???†ëŠ” ê²½ìš°
+        else 
             delete comments where comments_no = m_no;
         end if;
-    else --?µë?ê¸€ ?ì²´??ê²½ìš°
+    else        
         delete comments where comments_no = m_no;
+        
+        select count(*) into cnt from comments
+        where comments_group_No = m_groupno;
+        
+        if cnt = 1 then
+            delete comments where comments_no = m_groupno;
+        end if;
     end if;
 
     commit;

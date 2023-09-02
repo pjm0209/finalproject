@@ -1,5 +1,10 @@
 @charset "UTF-8";
 
+.bg-orange-primary {
+	background: #eb5d1e;	
+	color: white;
+}
+
 section.boardSection {
     margin-top: 30px;
     padding-top: 200px;
@@ -188,4 +193,46 @@ li.boardPostItems {
 
 i.bi.bi-search {
     cursor: pointer;
+}
+
+/*게시글상세보기*/
+
+
+/*댓글*/
+.editDel {
+    position: absolute;
+    right: 530px;
+    top: auto;
+    background: white;
+    box-shadow: 0 1px 12px 0 rgba(0, 0, 0, .06);
+    border-radius: 6px;
+    padding: 8px 15px;
+    box-sizing: border-box;
+    z-index: 1;
+    max-height: 370px;
+    width: 100px;
+}
+
+/*게시글 글쓰기*/
+
+.boardWrite-body dt {
+    font-size: 14px;
+    color: black;
+    float: left;
+    width: 94px;
+    padding: 17px 0;
+}
+
+.boardWrite-body dt {
+    font-size: 14px;
+    color: black;
+    float: left;
+    width: 94px;
+    padding: 17px 0;
+}
+
+.boardWrite-body dd {
+    margin-left: 98px;
+    padding: 10px 22px 10px 0;
+    width: 95%;
 }
