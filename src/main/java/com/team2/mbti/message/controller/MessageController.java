@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.team2.mbti.member.model.MemberVO;
 import com.team2.mbti.message.model.MessageService;
+import com.team2.mbti.message.model.SendDmListVO;
 import com.team2.mbti.message.model.SendDmVO;
 
 import lombok.RequiredArgsConstructor;
@@ -37,12 +38,22 @@ public class MessageController {
 	}
 	
 	@PostMapping("/message")
-	public String message_post(@ModelAttribute SendDmVO sendDmVo) {
-		logger.info("쪽지 보내기");
+	public String message_post(@ModelAttribute SendDmListVO sendDmListVo,Model model) {
+		logger.info("쪽지 보내기 처리, 파라미터 sendDmListVo={}", sendDmListVo);
 		
-		int cnt=messageService.insertSendDm(sendDmVo);
+		int cnt=messageService.insertSendDm(sendDmListVo);
 		logger.info("쪽지 보내기 결과 cnt={}",cnt);
 		
-		return "admin/message/message";
+		String msg="",url="redirect:/admin/message/message";
+		if(cnt>0) {
+			msg="쪽지를 보냈습니다.";
+		}else {
+			msg="쪽지를 보내는중 에러가 발생했습니다.";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+
+		return "common/message";
 	}
 }
