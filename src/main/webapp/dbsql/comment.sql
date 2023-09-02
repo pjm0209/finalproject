@@ -19,3 +19,11 @@ start with 1
 nocache;
 
 select * from comments;
+
+create or replace view commentsview
+as
+select c.*, m.name, m.userid, a.admin_id
+from comments c left join member m
+on c.no = m.no
+left join admin a
+on c.admin_no = a.admin_no;
