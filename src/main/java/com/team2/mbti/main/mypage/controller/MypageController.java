@@ -377,6 +377,8 @@ public class MypageController {
 		
 		//비밀번호 변경 성공시 로그인 세션 객체 다시 담음
 		
+		return "";
+		
 	}
 
 	
