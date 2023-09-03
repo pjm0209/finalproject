@@ -349,47 +349,44 @@ public class MypageController {
 			
 		return "main/mypage/newPwd";
 	}
-	
-	@RequestMapping("/ajaxPwdCheck")
-	@ResponseBody
-	public int pwdCheck(HttpSession session, @RequestParam(required = false)String pwd) {
-		String userid = (String) session.getAttribute("userid");
-		logger.info("ajax이용 - 비밀번호 일치 파라미터 pwd={}, userid={}", pwd, userid);
 		
-		int result = memberService.loginCheck(pwd, userid);
-		if(result == memberService.LOGIN_OK) {
-			result = 1;
-		}else if(result == memberService.PWD_DISAGREE) {
-			result =0;
-		}
-			
-		logger.info("ajax이용 - 비밀번호 일치 결과 result={}", result);
-		
-		return result;	
-	}
-	
 	@PostMapping("/newPwd")
-	public String newPwd_post(@ModelAttribute MemberVO membervo,
-			HttpSession session, Model model){
-		
-		String userid = (String) session.getAttribute("userid");
-		membervo.setUserid(userid);
-		membervo.setPwd(passwordEncoder.encode(membervo.getPwd()));
-		logger.info("비밀번호 변경 처리 파라미터 membervo={}", membervo);
-		
+	public String newPwd_post(HttpSession session, Model model, @RequestParam String pwd,
+	                           @RequestParam String newPwd, @RequestParam String confirmPwd) {
 
-		int cnt = memberService.updatePassword(membervo);
-		logger.info("비밀번호 변경 결과 cnt={}", cnt);
-		
-		String msg="비밀번호 변경에 실패했습니다.", url="/newPwd";
-		if(cnt > 0) {
-			msg = "비밀번호 변경이 완료되었습니다.";
-		}
-		model.addAttribute("msg", msg);
-		model.addAttribute("url", url);
-				
-		return "common/message";
+	    String userid = (String) session.getAttribute("userid");
+
+	    MemberVO existingMember = memberService.selectByUserid(userid);
+	    if (existingMember != null) {
+	        boolean isPasswordMatch = passwordEncoder.matches(pwd, existingMember.getPwd());
+
+	        if (isPasswordMatch) {
+	            String encodedNewPwd = passwordEncoder.encode(newPwd);
+
+	            existingMember.setPwd(encodedNewPwd);
+	            int cnt = memberService.updatePassword(existingMember);
+
+	            if (cnt > 0) {
+	                session.invalidate();
+
+	                model.addAttribute("msg", "비밀번호 변경 성공!!.");
+	                model.addAttribute("url", "/main/index");
+	            } else {
+	                model.addAttribute("msg", "비밀번호 변경 실패!!.");
+	                model.addAttribute("url", "/mypage/newPwd");
+	            }
+	        } else {
+	            model.addAttribute("msg", "현재 비밀번호가 일치하지 않습니다.");
+	            model.addAttribute("url", "/mypage/newPwd");
+	        }
+	    } else {
+	        model.addAttribute("msg", "사용자 정보를 찾을 수 없습니다.");
+	        model.addAttribute("url", "/mypage/newPwd");
+	    }
+
+	    return "common/message";
 	}
+
 	
 	@RequestMapping("/mypageBasket")
 	public String mypageBasket(HttpSession session, Model model) {
