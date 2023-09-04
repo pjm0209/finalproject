@@ -119,6 +119,7 @@ public class EducationController {
 		
 		PaginationInfo pagingInfo = new PaginationInfo();
 		List<EducationVO> list = null;
+		List<EducationVO> list2 = null;
 		String condition=vo.getSearchCondition();
 		String keyword=vo.getSearchKeyword();
 		logger.info("condition={},keyword={}",condition,keyword);
@@ -132,12 +133,14 @@ public class EducationController {
 		vo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
 		
 		list = educationService.selectAllEducation(vo);
+		list2 = educationService.applyMemInfo(vo);
 		logger.info("교육 목록 결과 list.size={}", list.size());
 		int totalRecord=educationService.getTotalRecordEducation(vo);
 		logger.info("교육 전체 검색 결과 totalRecord={}",totalRecord);
 		pagingInfo.setTotalRecord(totalRecord);
 		
 		model.addAttribute("list", list);
+		model.addAttribute("list2", list2);
 		model.addAttribute("pagingInfo", pagingInfo);
 		
 		return "admin/education/list";

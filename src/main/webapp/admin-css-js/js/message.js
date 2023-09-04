@@ -18,13 +18,9 @@
 			
 			$('input[type=checkbox]:checked:not(input[id=check-All])').each(function(idx,item){
 				if(idx!=$('input[type=checkbox]:checked:not(input[id=check-All])').length-1){
-					var no=$(this).val();
 					var name= $('#name'+no).text()+", ";
-					result="<input type='text' name='sendItems["+idx+"].no' value='"+no+"'>";
 				}else{
-					var no=$(this).val();
 					var name= $('#name'+no).text();
-					result="<input type='text' name='sendItems["+idx+"].no' value='"+no+"'>";
 				}
 				
 				$('#input').append(result);
