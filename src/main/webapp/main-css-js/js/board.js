@@ -38,17 +38,86 @@ $(function(){
 			$('#confirmOk').attr('onclick', 'location.href=\"' + contextPath + '/main/member/memberLogin' + "\"" + '');
 			$('#confirmModalBtn').trigger('click');	
 		}
-	});	
+	});
+	
+	$('.boardSubmitBtn').click(function(){
+		$('form[name=boardWriteForm]').submit();
+	});
 	
 	if($('.session-userId').val() === $('.member-userId').val()) {
 		var boardNo = $('.boardNo').val();
+		var str = "";
 		
 		str += '<input type="button" class="bg-orange-primary" onclick="location.href=\"/main/board/boardEdit?boardNo=' + boardNo + '\"" value="수정">';
 		str += '<input type="button" class="bg-orange-primary" value="삭제">';
 		
 		$('.boardListBtn').after().html(str);
 	}
+	
+	//게시글리스트 검색
+	$('.bi.bi-search').click(function(){
+		$('form[name=searchForm]').submit();
+	});
+	
+	//MBTI게시판 MBTI종류 선택시 검색		
+	$('select[name=mbtiNo]').change(function(){
+		$('form[name=searchForm]').submit();
+	});
+	
+	//게시글 글쓰기 게시판 선택시 MBTI종류 보이기 유무
+	$('#board-write-button').click(function(){
+		var mbtiNo = $('select[name=mbtiNo]').val();
+		var boardFormNo = $('input[name=boardFormNo]').val();
+		
+		if(mbtiNo != null) {
+			location.href = contextPath + '/main/board/boardWrite?boardFormNo=' + boardFormNo + '&mbtiNo=' + mbtiNo + '&boardWriteType=write';
+		} else {
+			location.href = contextPath + '/main/board/boardWrite?boardFormNo=' + boardFormNo + '&boardWriteType=write';
+		}
+	});
+	
+	//게시글 글쓰기 게시판선택시 mbti셀렉트 보이기여부
+	$('#select_board').click(function(){
+		var board = $(this).val();
+		
+		if(board != 5) {
+			$('select[name=mbtiNo]').hide();
+		} else {
+			$('select[name=mbtiNo]').show();
+		}
+	});
+	
+	//파일삭제 모달창세팅 이벤트
+	$('.bi.bi-x-lg.btns.del_btn.edit').click(function() {
+		var id = $(this).attr('id');
+		$('#confirmModalBody').html('파일을 삭제하시겠습니까?');
+		$('#confirmOk').attr('onclick', 'fileDel('+ id + ')');
+		$('#confirmModalBtn').trigger('click');
+	});
+	
+	const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+	const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
 });
+
+//파일삭제 함수
+function fileDel(element){		
+	var fileName = $(element).nextAll('.fileName').val();
+	var fileNo = $(element).nextAll('.fileNo').val();
+	
+	$.ajax({
+		url:contextPath + "/main/board/fileDel",
+		data:{fileName: fileName,
+			  fileNo: fileNo},
+		type:"GET",				
+		success:function(result) {
+			console.log("result: " + result);
+			removeFile(element);					
+		},
+		error:function(xhr, status, error) {
+			alert(status + ": " + error);
+		}
+	});
+}
 
 //게시글목록 페이징 함수
 function pageFunc(curPage) {
@@ -428,6 +497,8 @@ function commentDel(commentsNo, commentsStep, commentsGroupNo, boardNo) {
 }
 
 /*글쓰기 첨부파일 함수*/
+
+var fileIndex = 0;
 
 // 파일 선택
 function selectFile(element) {

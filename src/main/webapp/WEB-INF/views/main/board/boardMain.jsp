@@ -20,7 +20,7 @@
 		</div>
 		<div class="boardContent-body">
 			<div class="boardWritediv">
-				<button type="button" class="boardWriteBtn"><span class="boardWrite">게시글작성</span></button>
+				<!-- <button type="button" class="boardWriteBtn"><span class="boardWrite">게시글작성</span></button> -->
 			</div>
 			<ul class="boardFormList">
 				<c:forEach var="map" items="${boardCategoryList }">

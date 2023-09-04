@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+.head-content-box2 .btn {
+    margin-right: 15px;
+}
+
 .bg-orange-primary {
 	background: #eb5d1e;	
 	color: white;
@@ -235,4 +239,8 @@ i.bi.bi-search {
     margin-left: 98px;
     padding: 10px 22px 10px 0;
     width: 95%;
+}
+
+span.fileName, .del_btn {
+	color: black;
 }

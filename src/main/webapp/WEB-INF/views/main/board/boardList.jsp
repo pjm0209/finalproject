@@ -13,6 +13,7 @@
 </form>
 <section class="boardSection">
 	<div class="boardContent">
+		<form name="searchForm" method="POST" action="<c:url value='/main/board/boardList'/>">
 		<div class="boardContent-head">
 			<div class="head-content">
 				<div class="head-content-box1">
@@ -30,7 +31,7 @@
 					  	<option value="name" <c:if test="${param.searchCondition == 'name' }">selected="selected"</c:if>>작성자</option>
 					</select>
 					<div class="searchInputText">
-						<input type="text" class="boardSearchKeyword" name="seasrchKeyword">
+						<input type="text" class="boardSearchKeyword" name="searchKeyword">
 						<i class="bi bi-search"></i>					
 					</div>
 				</div>		
@@ -39,14 +40,19 @@
 		<div class="boardContent-body">
 			<div class="boardWritediv">
 				<h5><c:if test="${empty param.boardFormNo }">전체게시글</c:if><c:if test="${!empty param.boardFormNo }">${boardFormVo.boardFormName }</c:if></h5>
-				<button type="button" class="boardWriteBtn"
-					<c:if test="${empty param.boardFormNo }">
-						onclick="location='<c:url value="/main/board/boardWrite"/>'"
-					</c:if>
-					<c:if test="${!empty param.boardFormNo }">
-						onclick="location='<c:url value="/main/board/boardWrite?boardFormNo=${param.boardFormNo }"/>'"
-					</c:if>
-				><span class="boardWrite">게시글작성</span></button>
+				<c:if test="${param.boardFormNo == 5 }">
+					<select class="form-select form-select-sm" id="mainBoardSearchCondtion" aria-label="Small select example" name="mbtiNo">				
+						<option value="0">전체글</option>	
+						<c:forEach var="mbtiVo" items="${mbtiList }">
+							<option value="${mbtiVo.mbtiNo }" <c:if test="${param.mbtiNo == mbtiVo.mbtiNo }"> selected="selected" </c:if>>${mbtiVo.mbtiType }</option>								
+						</c:forEach>
+					</select>
+				</c:if>
+				<c:if test="${!empty param.boardFormNo and param.boardFormNo != 1 and param.boardFormNo != 2 }">
+					<button type="button" class="boardWriteBtn"	onclick="location='<c:url value="/main/board/boardWrite?boardFormNo=${param.boardFormNo }&boardWriteType=write"/>'">
+						<span class="boardWrite">게시글작성</span>
+					</button>
+				</c:if>
 			</div>
 			
 			<div class="boardListColumn">
@@ -135,6 +141,7 @@
 			  </ul>
 			</nav>
 		</div>
+		</form>
 	</div>
 </section>
 
