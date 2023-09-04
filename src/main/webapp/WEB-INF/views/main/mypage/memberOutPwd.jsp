@@ -5,7 +5,7 @@
 <style>
 .mypage{	
 	text-align: center;
-	position: absolute;
+	position: relative;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
@@ -15,6 +15,7 @@
 	border: 2px solid #3498db;
 	background-color: #f9f9f9;
 	box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+	margin-bottom: 300px;
 }
 
 .mypage-table {
@@ -89,17 +90,12 @@ $(function(){
 	   
 	      $('#btnCheck').click(function(){
 	         if($('#pwd').val().length<1){
+
 	            $('#alertModalBody').html("비밀번호를 입력하세요.");
 	            $('#alertModal').modal('show');
 	            $('#pwd').focus();
 	            return false;
-	         }
-	         
-	         if(!confirm("회원탈퇴하시겠습니까?")){
-	        	 
-	            return false;   
-	         }
-	         
+	         }	     	       
 	      });	
 		
     $('#show-hide-password').click(function() {

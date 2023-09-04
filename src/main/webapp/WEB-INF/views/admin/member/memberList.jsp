@@ -23,7 +23,6 @@ select#member-search-select {
     margin-left: 840px;
 }
 </style>
-
 <script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>
 <script type="text/javascript">
 	$(function(){
@@ -88,6 +87,13 @@ select#member-search-select {
 			</thead>
 			<c:set var="idx" value="0"/>
 			<tbody>
+                <c:choose>
+                    <c:when test="${empty list}">
+                        <tr>
+                            <td colspan="5">조건에 일치하는 검색결과가 없습니다.</td>
+                        </tr>
+                    </c:when>
+                    <c:otherwise>			
 				<c:forEach var="vo" items="${list}">
 					<c:set var="memberInformation" value="${vo.no}"/>
 					<tr>
@@ -99,7 +105,9 @@ select#member-search-select {
 							<fmt:formatDate value="${vo.regdate}" pattern="yyyy-MM-dd"/>
 						</td>
 					</tr>	
-				</c:forEach>					
+				</c:forEach>	
+				</c:otherwise>
+			</c:choose>								
 			</tbody>
 		</table>
 		

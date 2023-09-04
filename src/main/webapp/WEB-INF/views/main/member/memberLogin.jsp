@@ -179,54 +179,39 @@ $(function(){
 </script> 
 
 <!-- 카카오 스크립트 -->
-<script>
-Kakao.init('5bdc967d76e3681232d52f0d0c435a2a'); //발급받은 키 중 javascript키를 사용해준다.
-console.log(Kakao.isInitialized()); // sdk초기화여부판단
-//카카오로그인
-function kakaoLogin() {
+<script src = "https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script type="text/javascript">
+Kakao.init('d65e0cfc403eb24ae905648f7b9656bd');
+
+$("#kakao-login-btn").on("click", function(){
+    //1. 로그인 시도
     Kakao.Auth.login({
-      success: function (response) {
-       alert(response.access_token)
-       Kakao.Auth.setAccessToken(response.access_token);
-       
-        Kakao.API.request({
-          url: '/v2/user/me',
-          data : {
-             property_keys: ['kakao_profile_nickname', 'kakao_profile_image', 'kakao_account_email'],
-          },
-          
-          success: function (response) {
-             console.log(response)
-          },
-          fail: function (error) {
-            console.log(error)
-          },
-        })
-      },
-      fail: function (error) {
-        console.log(error)
-      },
-    })
-  }
-//카카오로그아웃  
-function kakaoLogout() {
-    if (Kakao.Auth.getAccessToken()) {
-      Kakao.API.request({
-        url: '/v1/user/unlink',
-        success: function (response) {
-           console.log(response)
+        success: function(authObj) {
+         
+          //2. 로그인 성공시, API 호출
+          Kakao.API.request({
+            url: '/v2/user/me',
+            success: function(res) {
+              console.log(res);
+              var id = res.id;
+			  scope : 'account_email';
+			alert('로그인성공');
+              location.href="callback주소";             
+        }
+          })
+          console.log(authObj);
+          var token = authObj.access_token;
         },
-        fail: function (error) {
-          console.log(error)
-        },
-      })
-      Kakao.Auth.setAccessToken(undefined)
-    }
-  }  
+        fail: function(err) {
+          alert(JSON.stringify(err));
+        }
+      });
+        
+}) //
+
+
 </script>
 
-
-   
 </head>
 <body>
     <section class="container forms">    

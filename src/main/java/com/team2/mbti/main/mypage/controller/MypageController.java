@@ -4,15 +4,17 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team2.mbti.mbtiResult.model.MbtiResultService;
 import com.team2.mbti.mbtiResult.model.MbtiResultVO;
@@ -241,7 +243,7 @@ public class MypageController {
 		logger.info("개인 정보 수정 화면, 파라미터 userid={}", userid);
 		
 		MemberVO membervo = memberService.selectByUserid(userid);
-		logger.info("개인 정보 수정 정보 조회결과 membervo={}", membervo);
+		logger.info("개인 정보 수정 정보 조회 결과 membervo={}", membervo);
 				
 		model.addAttribute("membervo",membervo);
 		
@@ -347,38 +349,42 @@ public class MypageController {
 			
 		return "main/mypage/newPwd";
 	}
-	
-	//비밀번호 확인 처리 요청
-	@PostMapping("/chekcPwd")
-	public String checkPwd(@RequestBody String pwd, HttpSession session){
-		logger.info("비밀번호 확인 요청 발생");
 		
-		String result = null;
-		
-		MemberVO dbUser = (MemberVO)session.getAttribute("login");
-		logger.info("DB 회원의 비밀번호 : " + dbUser.getPwd());
-		logger.info("폼에서 받아온 비밀번호 : " + pwd);
-		
-		if(passwordEncoder.matches(pwd, dbUser.getPwd())) {
-			result = "pwConfirmOK";
-		}else {
-			result = "pwConfirmNO";
-		}
-		
-		return result;
-	}
-	
-	@PostMapping("newPwd")
-	public String pwChange(@RequestBody MemberVO membervo, HttpSession session) {
-		logger.info("비밀번호 변경 요청 발생!!!");
-	
-		//비밀번호 변경
-		memberService.updatePassword(membervo);
-		
-		//비밀번호 변경 성공시 로그인 세션 객체 다시 담음
-		
-		return "";
-		
+	@PostMapping("/newPwd")
+	public String newPwd_post(HttpSession session, Model model, @RequestParam String pwd,
+	                           @RequestParam String newPwd, @RequestParam String confirmPwd) {
+
+	    String userid = (String) session.getAttribute("userid");
+
+	    MemberVO existingMember = memberService.selectByUserid(userid);
+	    if (existingMember != null) {
+	        boolean isPasswordMatch = passwordEncoder.matches(pwd, existingMember.getPwd());
+
+	        if (isPasswordMatch) {
+	            String encodedNewPwd = passwordEncoder.encode(newPwd);
+
+	            existingMember.setPwd(encodedNewPwd);
+	            int cnt = memberService.updatePassword(existingMember);
+
+	            if (cnt > 0) {
+	                session.invalidate();
+
+	                model.addAttribute("msg", "비밀번호 변경 성공!!.");
+	                model.addAttribute("url", "/main/index");
+	            } else {
+	                model.addAttribute("msg", "비밀번호 변경 실패!!.");
+	                model.addAttribute("url", "/mypage/newPwd");
+	            }
+	        } else {
+	            model.addAttribute("msg", "현재 비밀번호가 일치하지 않습니다.");
+	            model.addAttribute("url", "/mypage/newPwd");
+	        }
+	    } else {
+	        model.addAttribute("msg", "사용자 정보를 찾을 수 없습니다.");
+	        model.addAttribute("url", "/mypage/newPwd");
+	    }
+
+	    return "common/message";
 	}
 
 	

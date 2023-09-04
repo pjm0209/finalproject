@@ -41,9 +41,11 @@
   box-sizing: border-box;
 }
 
-body {
+article {
   font-family: Arial, sans-serif;
   background-color: #f5f5f5;
+  margin-top: 100px;
+  margin-bottom: 50px;
 }
 
 .form-memberEdit {
@@ -186,4 +188,4 @@ body {
 </div>	
 </article>
 
-
+<%@include file="../inc/bottom.jsp" %>
