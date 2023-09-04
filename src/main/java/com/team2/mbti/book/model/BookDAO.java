@@ -11,4 +11,9 @@ public interface BookDAO {
 	List<StockBookVO> selectBookAllAjax(StockBookVO vo);
 	int selectBookCnt(StockBookVO vo);
 	int insertBook(StockBookVO vo);
+	StockBookVO selectBookByNo(int bookNo);
+	
+	int updateBook(StockBookVO vo);
+	
+	int deleteBook(int bookNo);
 }//

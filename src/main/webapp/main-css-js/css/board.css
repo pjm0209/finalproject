@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+.head-content-box2 .btn {
+    margin-right: 15px;
+}
+
 .bg-orange-primary {
 	background: #eb5d1e;	
 	color: white;
@@ -197,6 +201,35 @@ i.bi.bi-search {
 
 /*게시글상세보기*/
 
+/*첨부파일 박스*/
+div.boardFile button {
+	padding-right: 25px;
+	background: none;
+}
+
+.boardFile {
+    display: inline-block;
+    float: right;
+    background: none;
+    font-size: 13px;
+    position: absolute;
+    right: 27%;
+}
+
+.board-content-body {
+	max-width: 100%;
+	height: auto;
+	overflow: auto;
+	clear: both;
+}
+
+ul.file-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 5px;
+    position: absolute;
+    width: 137px;
+}
 
 /*댓글*/
 .editDel {
@@ -235,4 +268,8 @@ i.bi.bi-search {
     margin-left: 98px;
     padding: 10px 22px 10px 0;
     width: 95%;
+}
+
+span.fileName, .del_btn {
+	color: black;
 }

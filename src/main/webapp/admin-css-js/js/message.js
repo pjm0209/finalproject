@@ -18,9 +18,13 @@
 			
 			$('input[type=checkbox]:checked:not(input[id=check-All])').each(function(idx,item){
 				if(idx!=$('input[type=checkbox]:checked:not(input[id=check-All])').length-1){
+					var no=$(this).val();
 					var name= $('#name'+no).text()+", ";
+					result="<input type='text' name='sendItems["+idx+"].receiveNo' value='"+no+"'>";
 				}else{
+					var no=$(this).val();
 					var name= $('#name'+no).text();
+					result="<input type='text' name='sendItems["+idx+"].receiveNo' value='"+no+"'>";
 				}
 				
 				$('#input').append(result);
@@ -34,6 +38,7 @@
 			$('#alertModalLabel').html('전체 쪽지 보내기');
 			$('#memberNameModal').html("전체");
 			$('#messageModal').modal('show');
+			
 		}
 		
 		$("#messageModal").on("shown.bs.modal", function () {

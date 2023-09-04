@@ -15,13 +15,13 @@
 	var sel_files = [];
 	
 	$(function(){
-		$("#input_imgs").on("change", handleImgFileSelect);
+		$("#upfile").on("change", handleImgFileSelect);
 		$('#imgLb').text("");
 	});
 	
 	function fileUploadAction(){
 		cosole.log("fileUploadAction");
-		$("#input_imgs").trigger('click');
+		$("#upfile").trigger('click');
 	}
 	
 	function handleImgFileSelect(e){
@@ -79,10 +79,18 @@ function deleteImageAction(index){
 		</c:if>
 	</h2>
 </div>
-
-<form name="frmBookRegister" method="post" enctype="multipart/form-data"
- action="<c:url value='/admin/book/bookRegister'/>">
-<!--  -->
+<c:if test="${!empty param.bookNo}">
+		<input type="text" name="bookNo" id="bookNo" value="${param.bookNo}">
+	 </c:if>
+<form id="frmBookRegister" name="frmBookRegister" method="post" enctype="multipart/form-data"
+	<c:if test="${empty param.bookNo}">
+		action="<c:url value='/admin/book/bookRegister'/>"
+	</c:if>
+	<c:if test="${!empty param.bookNo}">
+		action="<c:url value='/admin/book/bookEdit'/>"
+	</c:if>
+ >
+	<!--  -->
 	<div class="wrap shadow-sm p-3 mb-5 bg-body rounded" style="margin: 15px 15px;background: white;">
 		<div class="x_title">
 			<h2>
@@ -107,17 +115,17 @@ function deleteImageAction(index){
 									selected="selected"
 								</c:if>
 							>선택하기</option>
-					 		<option value="1"
+					 		<option value="검사자료"
 								<c:if test="${vo.bookCategory == '검사자료'}">
 									selected="selected"
 								</c:if>
 							>검사자료</option>
-							<option value="2"
+							<option value="도서"
 								<c:if test="${vo.bookCategory == '도서'}">
 									selected="selected"
 								</c:if>
 							>도서</option>
-							<option value="3"
+							<option value="기타"
 								<c:if test="${vo.bookCategory == '기타'}">
 									selected="selected"
 								</c:if>
@@ -134,12 +142,17 @@ function deleteImageAction(index){
 					</div> -->
 				</div>									
 			</div>
-	
+			<div class="bookTitle">
+				<label class="" for="bookExplains">상품 이름</label>
+				<div class="inputBookTitle">
+					<input class="form-control" id="bookTitle" name="bookTitle" placeholder="책 이름" type="text" value="${vo.bookTitle}">
+				</div>
+			</div>
 			<div class="bookExplains">
 				<label class="" for="bookExplains">상품간단설명</label>
 				<div class="inputBookExplains">
-					<input class="form-control" id="bookExplains" name="bookExplains" placeholder="상품간단설명(최대 400자까지 입력가능합니다)"
-					 type="text" value="${vo.bookDetails}">
+					<input class="form-control" id="bookExplains" name="bookExplains" placeholder="상품간단설명(최대 60자까지 입력가능합니다)"
+					 type="text" value="${vo.bookExplains}" maxlength="125">
 				</div>
 			</div>
 			
@@ -159,7 +172,7 @@ function deleteImageAction(index){
 					<p id="output"></p> -->
 					<!-- <input id="myfiles" type="file" style="margin-bottom: 1em;" multiple="multiple" onchange="readURL(this);"> -->
 					<!-- <a href="javascript:" onclick="fileUploadAction();" class="my_button">파일업로드</a> -->
-					<input type="file" id="input_imgs" multiple="multiple" onclick="deleteImageAction(-1)" name="bookImgName">
+					<input class="form-control" type="file" id="upfile" name="upfile" multiple="multiple" onclick="deleteImageAction(-1)">
 					<p id="output"></p>
 					<div class="imgs_wrap">
 						<label id="imgLb" class="" for="preview" style="margin-left: -240px">
@@ -169,8 +182,9 @@ function deleteImageAction(index){
 				<c:if test="${!empty param.bookNo}">
 					<label class="" for="bookImage">현재이미지</label>
 					<div class="inputBookImage">
-						미리보기<img src="<c:url value='/images/" + ${vo.bookImgOriginalName} + ".jpg'/>" alt="상품이미지"
-								id="preview" width="1000px;">
+						<img src="<c:url value='/images/bookProduct/upload_img/${vo.bookImgName}'/>" 
+							alt = "${vo.bookImgOriginalname}이미지" id="preview" width="300px;">
+						<input type="text" name="bookImgName" value="${vo.bookImgName}">
 					</div>
 				</c:if>
 			</div>
@@ -201,7 +215,7 @@ function deleteImageAction(index){
 			</div>
 	
 			<div class="bookRegate">
-				<label class="" for="bookRegate">출간일</label>
+				<label class="" for="bookRegate">등록일</label>
 				<div class="inputBookRegdate">
 					<input class="form-control" id="bookRegate" name="bookRegate" placeholder="출간일"
 					 type="date" value="${vo.bookRegdate}">
@@ -212,8 +226,8 @@ function deleteImageAction(index){
 			<div class="contents">
 				<label class="" for="contents">내용</label>
 				<div class="inputContents">
-					<textarea rows="" cols="" name="contents" id="contents">
-					${vo.bookExaplains}
+					<textarea rows="" cols="" name="bookDetails" id="contents">
+					${vo.bookDetails}
 					</textarea>
 					<script>
 						$(function () {
@@ -231,14 +245,14 @@ function deleteImageAction(index){
 				<label class="" for="inputBookFlag">사용여부</label>
 				<div class="inputBookFlag">
 					<label class="radio-inline">
-						<input name="bookFlag" placeholder="사용여부" type="radio" value="Y"
+						<input name="bookUseflag" placeholder="사용여부" type="radio" value="Y"
 						<c:if test="${vo.bookUseflag == 'Y'}">
 						 	checked="checked"
 						 </c:if>
 						 >YES
 					</label>
 					<label class="radio-inline">
-						<input name="bookFlag" placeholder="사용여부" type="radio" value="N"
+						<input name="bookUseflag" placeholder="사용여부" type="radio" value="N"
 							<c:if test="${vo.bookUseflag == 'N'}">
 						 		checked="checked"
 						 	</c:if>
@@ -248,8 +262,15 @@ function deleteImageAction(index){
 			</div>
 	
 			<div class="divBtn">
-				<button class="btn btn-success btn-sm" title="저장" type="submit"><i class="fas fa-save"></i> 저장</button>
-				<button class="btn btn-primary btn-sm" onclick="location.href='bookList'" title="리스트" type="button" ><i class="fas fa-list-ul"></i> 리스트</button>
+				<button id="submitBtn" class="btn btn-success btn-sm" type="submit"><i class="fas fa-save"></i>
+					<c:if test="${empty param.bookNo}">
+						 저 장
+					</c:if>
+					<c:if test="${!empty param.bookNo}">
+						 수 정
+					</c:if>
+				</button>
+				<button class="btn btn-primary btn-sm" onclick="location.href='bookList?bookFlag=bookList'" title="리스트" type="button" ><i class="fas fa-list-ul"></i> 리 스 트</button>
 			</div>
 	
 		</div>

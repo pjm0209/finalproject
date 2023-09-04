@@ -279,7 +279,13 @@ body.dark .switch::before{
 							<i class='bx bx-bell icon'></i>
 							<span class="text nav-text">주문 내역</span>						
 						</a>
-					</li>					
+					</li>
+					<li class="nav-link2">
+						<a href="<c:url value='/main/mypage/myMessage'/>">
+							<i class='bx bx-bell icon'></i>
+							<span class="text nav-text">내 쪽지함</span>						
+						</a>
+					</li>
 					<li class="nav-link2">
 						<a href="<c:url value='/main/mypage/mbtiResult'/>">
 							<i class='bx bx-pie-chart-alt icon'></i>
