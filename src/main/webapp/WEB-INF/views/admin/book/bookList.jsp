@@ -31,6 +31,16 @@
 			
 		});
 		
+		$('#bookDeleteBtn').click(function(){
+			
+			$('input[name=currentPage]').val("1");
+			ajaxFunc(); // ajax 함수
+			
+			//기본 이벤트 제거
+			/* event.preventDefault(); */
+			
+		});
+		
 		$('#toggleBtn').click(function(){
 			var a = $('#toggleBtn').text()
 		 	var b = '검색창 열기';
@@ -68,6 +78,8 @@
 						result=makePage(res.pagingInfo);
 						$("#bookPaging").html(result);
 						
+						$("#captionBook").text("TOTAL " + res.pagingInfo.totalRecord + " ROWS");
+						
 				} else {
 					var str = "<tr>";
 					str += "<th colspan='10' style='color:gray;'>해당 상품은 존재하지 않습니다.</th>";
@@ -81,7 +93,9 @@
 			}
 		});//ajax
 	}
-	
+	function openEdit(bookNo){
+		location.href="bookEdit?bookNo=" + bookNo;
+	}
 	function makeListJson(list){
 		var htmlStr = "";
 		
@@ -100,7 +114,7 @@
 			htmlStr += "<td>" + this.bookNo + "</td>";
 			htmlStr += "<td>" + this.bookTitle + "</td>";
 			htmlStr += "<td>";
-			htmlStr += "<img class='shadow-sm rounded' width='100px' height='150px' src=\"<c:url value='/images/bookProduct/" + this.bookNo + ".jpg'/>\" alt=\"" + this.bookTitle + "\">";
+			htmlStr += "<img class='shadow-sm rounded' width='100px' height='150px' src=\"<c:url value='/images/bookProduct/" + this.bookImgOriginalname + "'/>\" alt=\"" + this.bookTitle + "\">";
 			htmlStr += "</td>";
 			htmlStr += "<td>";
 			htmlStr += this.bookCategory;
@@ -133,7 +147,8 @@
 			htmlStr += "<td id='tdLast'>";
 			htmlStr += "<a class='btn btn-info btn-xs' href='' target='_blank' title='상품보기'><i class='fas fa-eye'></i></a>";
 			htmlStr += "<button class='btn btn-success btn-xs' onclick=\"location.href='bookCopyPaste?bookNo='\"" + this.bookNo + " type='button' title='복사'><i class='fas fa-copy'></i></button>";
-			htmlStr += "<button class='btn btn-warning btn-xs' onclick=\"location.href='bookEdit?bookNo='\"" + this.bookNo + " type='button' title='수정'><i class='fas fa-edit'></i></button>";
+			/* htmlStr += "<button class='btn btn-warning btn-xs' onclick=\"location.href='bookEdit?bookNo='\"" + this.bookNo + " type='button' title='수정'><i class='fas fa-edit'></i></button>"; */
+			htmlStr += "<button class='btn btn-warning btn-xs' onclick=\"openEdit(" +this.bookNo+ ")\" type='button' title='수정'><i class='fas fa-edit'></i></button>";
 			htmlStr += "<button class='btn btn-danger btn-xs' id='delBtn' type='button' title='삭제'><i class='fas fa-trash'></i></button>";
 			htmlStr += "</td>";
 			htmlStr += "</c:if>";
@@ -153,21 +168,15 @@
 		}
 		var f = pageInfo.firstPage;
 		var l = pageInfo.lastPage;
-		/* alert("f=" + f);
-		alert("l=" + l); */
 		for(var i=f; i <= l; i++){
-			/* alert("for문 시작 i = "  + i); */
 			if(i==pageInfo.currentPage){
-				/* alert("if(i=pageInfo.currentPage)<br> i="  + i); */
 				pageHtmlStr += "<li class='page-item active'>";
 				pageHtmlStr += "<a class='page-link' href='javascript:void(0);'>" + i + "</a></li>"; 
 			}
 			if(i !== pageInfo.currentPage){
-				/* alert("if(i !=pageInfo.currentPage)<br> i="  + i); */
 				pageHtmlStr += "<li class='page-item'>";
 				pageHtmlStr += "<a class='page-link' href='javascript:void(0);' onclick='bookListPage(" + i + ")'>" + i + "</a></li>";
 		    }
-			/* alert("for문 끝 i = "  + i); */
 		}
 		
 		if((pageInfo.lastPage < pageInfo.totalPage)){
@@ -217,13 +226,14 @@
 <!--  -->
 
 <div class="board-body">
+
 	<div id="board-title">
 		<c:if test="${param.bookFlag != 'Inventory'}">
 			<h5>상품 리스트</h5>
 			<button class="btn btn-warning bg-gradient-secondary book-button"
 				 id="bookRegisterBtn" onclick="location.href='bookRegister'">새 상품 등록</button>
 			<button class="btn btn-warning bg-gradient-secondary book-button"  
-				 id="bookDeleteBtn" onclick="location.href='<c:url value='/admin/book/bookDelete'/>'">상품 삭제</button>
+				 id="bookDeleteBtn" >상품 삭제</button>
 			
 		</c:if>
 		<c:if test="${param.bookFlag == 'Inventory' or param.bookFlag == 'InventoryByKeyword'}">
@@ -242,9 +252,7 @@
 		<!--  -->
 		<div class="board shadow-sm p-3 mb-5 bg-body rounded" style="margin: 10px 0px;background: white;margin-right: 15px">
 			<table class="table">
-				<c:if test="${!empty list}">
-					<caption class="captionBook">TOTAL &nbsp;${pagingInfo.totalRecord}&nbsp; ROWS</caption>
-				</c:if>
+				<caption id="captionBook" class="captionBook"></caption> <!-- TOTAL &nbsp;${res.pagingInfo.totalRecord}&nbsp; ROWS -->
 				<colgroup>
 					<col style="width:5%;" />
 					<col style="width:10%;" />
@@ -282,7 +290,6 @@
 					</tr>
 				</thead>
 				<tbody id="bookTbody">
-					
 				</tbody>
 			</table>
 			<!-- 페이지 번호 추가 -->	
@@ -315,7 +322,7 @@
 			<!--  페이지 번호 끝 -->
 		</div>
 	</div>
-	
 </div>
+
 <!-- End of Main Content -->
 <%@ include file="../inc/bottom.jsp"%>

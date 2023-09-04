@@ -9,4 +9,10 @@ public interface BookService {
 	int selectBookCnt(StockBookVO vo);
 	
 	int insertBook(StockBookVO vo);
+	
+	StockBookVO selectBookByNo(int bookNo);
+	
+	int updateBook(StockBookVO vo);
+	
+	int deleteMulti(List<StockBookVO> list);
 }

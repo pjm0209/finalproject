@@ -28,7 +28,7 @@ public class FileUploadUtil2 {
 		MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
 		
 		//Map<String, MultipartFile> fileMap = multiRequest.getFileMap();
-		List<MultipartFile> files = multiRequest.getFiles("bookImgName");
+		List<MultipartFile> files = multiRequest.getFiles("upfile");
 		
 		// 여러개 업로드된 파일의 정보를 저장할 리스트
 		List<Map<String, Object>> resultList = new ArrayList<>();
@@ -72,13 +72,13 @@ public class FileUploadUtil2 {
 			if(pathFlag == ConstUtil.UPLOAD_FILE_FLAG) { //자료실
 				path = ConstUtil.FILE_UPLOAD_PATH_TEST;
 			} else if (pathFlag == ConstUtil.UPLOAD_IMAGE_FLAG) { //상품 이미지 업로드
-				path = ConstUtil.IMAGE_FILE_UPLOAD_PATH_TEST;
+				path = ConstUtil.BOOKIMAGE_FILE_UPLOAD_PATH_TEST;
 			}
 		} else { //deploy
 			if(pathFlag == ConstUtil.UPLOAD_FILE_FLAG) { //자료실
 				path = ConstUtil.FILE_UPLOAD_PATH; //pds_upload
 			} else if (pathFlag == ConstUtil.UPLOAD_IMAGE_FLAG) { //상품 이미지 업로드
-				path = ConstUtil.IMAGE_FILE_UPLOAD_PATH; //pd_images
+				path = ConstUtil.BOOKIMAGE_FILE_UPLOAD_PATH; //pd_images
 			}
 			
 			//실제 물리적인 경로 구하기

@@ -62,7 +62,7 @@
 			<label>사용여부</label>
 			<div class="form-check">
 				<input class="form-check-input" type="radio" id="flexRadioDefault1"
-						name="keywordUseflag" placeholder="사용여부" type="radio" value="Y"
+						name="keywordUseflag" placeholder="사용여부" type="radio" value=""
 						checked="checked"
 				>
 				<label class="form-check-label" for="flexRadioDefault1">

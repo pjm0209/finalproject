@@ -6,7 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class StockBookVO extends BookVO{
-	
 	private int stockQty;
 	private String orderBy;
 	private String bookFlag;
