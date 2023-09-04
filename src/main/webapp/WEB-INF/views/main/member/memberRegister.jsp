@@ -196,12 +196,29 @@ function validate_hp(ph) {
 
 		    if (memberPwd !== memberpwdCheck) {
 		    	pwdCheckError.html("비밀번호가 일치하지 않습니다.");
+		    	pwdCheckError.css('color', 'red');
 		    } else {
 		    	pwdCheckError.html("비밀번호가 일치합니다");
+		    	pwdCheckError.css('color', 'blue');
 		    }
-		});		
+		});	
 			
+		$('#memberTel').on('input', function() {
+		    var inputTel = $(this).val();
+		    
+		    var cleanedTel = inputTel.replace(/-/g, '');
+	
+		    if (cleanedTel.length >= 4) {
+		        cleanedTel = cleanedTel.substring(0, 3) + '-' + cleanedTel.substring(3);
+		    }
+		    if (cleanedTel.length >= 9) {
+		        cleanedTel = cleanedTel.substring(0, 8) + '-' + cleanedTel.substring(8);
+		    }
+		    
+		    $(this).val(cleanedTel);
+		});
 		
+				
 		$('#signUpButton').click(function(){
 			
 			//이름 입력
@@ -249,18 +266,10 @@ function validate_hp(ph) {
 	            $('#memberEmail1').focus();
 	            return false;
 	        }
-	        	 
-	        //전화번호 입력
-	        var telNumber = $("#memberTel").val();
-	        if (!validate_hp(telNumber)) {
-	            alert("전화번호는 숫자만 가능합니다");
-	            $("#memberTel").focus();
-	            return false;
-	        }
-	        
+	        	 	        
 	        //전화번호 조건
-	        if (telNumber.length !== 11) {
-	            alert("전화번호는 11자리로 입력해주세요");
+	        if (telNumber.length !== 13) {
+	            alert("전화번호는 (-)포함 13자리로 입력해주세요");
 	            $("#memberTel").focus();
 	            return false;
 	        }
@@ -337,7 +346,7 @@ function validate_hp(ph) {
 		
 		<label>전화번호</label>
 		<div class="div-register">
-			<input type="text" class="tel" id="memberTel" name="hp" placeholder="휴대폰번호 입력 ('-')제외 11자리 입력">
+			<input type="text" class="tel" id="memberTel" name="hp" placeholder="휴대폰번호 입력 ('-')제외 11자리 입력" oninput="formatPhoneNumber(this)">
 			<div class="error" id="telError"></div>
 		</div>		
 					

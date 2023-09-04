@@ -99,6 +99,17 @@
 		and hp=#{hp}
    </select>
    
+   <update id="findPwd" parameterType="memberVo">
+	    update member
+	    set pwd=#{pwd} 
+	    where no=#{no} and email=#{email} 
+    </update>
+    
+    <select id="findInfoCheck" parameterType="memberVo" resultType="int">
+    	select count(*) from member
+ 		where no=#{no} and email=#{email} 
+    </select>
+   
    <select id="pwdCheck" parameterType="string" resultType="string">
 		select pwd from member
 		where userid = #{userid}
