@@ -69,7 +69,9 @@
 					</ul>
 					</div>
 				</c:if>
-				${boardMap['BOARD_BODY'] }			
+				<div class="board-content-body">
+					${boardMap['BOARD_BODY'] }			
+				</div>
 			</div>
 			
 			<div class="board-like">

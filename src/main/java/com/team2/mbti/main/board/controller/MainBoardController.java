@@ -291,6 +291,6 @@ public class MainBoardController {
 		int fileCnt = boardService.insertFile(fileList, vo.getBoardNo());
 		logger.info("게시판 파일 업로드 처리 결과 fileCnt: {}", fileCnt);
 		
-		return "redirect:/main/board/board?boardFormNo=" + vo.getBoardFormNo();
+		return "redirect:/main/board/boardList?boardFormNo=" + vo.getBoardFormNo();
 	}
 }

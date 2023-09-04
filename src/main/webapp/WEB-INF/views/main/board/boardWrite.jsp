@@ -17,7 +17,7 @@
 </c:if>
 
 <c:if test="${param.boardWriteType == 'reply' }">
-	<c:set var="url" value="/main/board/boardWriteReply"/>
+	<c:set var="url" value="/main/board/writeReply"/>
 	<c:set var="cancelUrl" value="${param.boardFormNo }"/>
 	<c:set var="cancelUrl" value="${map['BOARD_FORM_NO'] }"/>
 	<c:set var="board" value="${map['BOARD_FORM_NAME'] }"/>
@@ -87,7 +87,7 @@
 							</dd>
 							<dt>내용</dt>
 							<dd>
-								<div>
+								<div class="boardContentArea">
 									<textarea id="p_content" name="boardBody">${map['BOARD_BODY'] }</textarea>								
 								</div>
 							</dd>

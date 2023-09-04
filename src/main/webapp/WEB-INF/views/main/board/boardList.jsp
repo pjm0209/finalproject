@@ -3,7 +3,9 @@
 <%@ include file="../inc/top.jsp"%>
 
 <form name="paginForm" method="post" action="<c:url value='/main/board/boardList'/>">
-	<input type="hidden" name="boardFormNo" value="${param.boardFormNo }">
+	<c:if test="${!empty param.boardFormNo }">
+		<input type="hidden" name="boardFormNo" value="${param.boardFormNo }">
+	</c:if>
 	<input type="hidden" name="searchCondition" value="${param.searchCondition }">
 	<input type="hidden" name="searchKeyword" value="${param.searchKeyword }">
 	<c:if test="${param.boardFormNo == 5 }">
@@ -14,6 +16,9 @@
 <section class="boardSection">
 	<div class="boardContent">
 		<form name="searchForm" method="POST" action="<c:url value='/main/board/boardList'/>">
+			<c:if test="${!empty param.boardFormNo }">
+				<input type="hidden" value="${param.boardFormNo }" name="boardFormNo">
+			</c:if>
 		<div class="boardContent-head">
 			<div class="head-content">
 				<div class="head-content-box1">
@@ -31,7 +36,7 @@
 					  	<option value="name" <c:if test="${param.searchCondition == 'name' }">selected="selected"</c:if>>작성자</option>
 					</select>
 					<div class="searchInputText">
-						<input type="text" class="boardSearchKeyword" name="searchKeyword">
+						<input type="text" class="boardSearchKeyword" name="searchKeyword" value="${param.searchKeyword }">
 						<i class="bi bi-search"></i>					
 					</div>
 				</div>		

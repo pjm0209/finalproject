@@ -5,7 +5,10 @@ $(function(){
 						height : 500
 					});		
 	
-	CKEDITOR.editorConfig=function( config ){ config.resize_enabled=false;};
+	CKEDITOR.editorConfig=function( config ){ 
+		config.removePlugins = 'resize';
+  		config.resize_enabled = false;
+	};
 	
 	/*게시글 상세보기 첨부파일 슬라이드 효과*/
 	$('.file-list').hide();

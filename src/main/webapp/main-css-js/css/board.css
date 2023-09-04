@@ -201,6 +201,27 @@ i.bi.bi-search {
 
 /*게시글상세보기*/
 
+/*첨부파일 박스*/
+div.boardFile button {
+	padding-right: 25px;
+	background: none;
+}
+
+.boardFile {
+    display: inline-block;
+    float: right;
+    background: none;
+    font-size: 13px;
+    position: absolute;
+    right: 25%;
+}
+
+.board-content-body {
+	max-width: 100%;
+	height: auto;
+	overflow: auto;
+	clear: both;
+}
 
 /*댓글*/
 .editDel {
