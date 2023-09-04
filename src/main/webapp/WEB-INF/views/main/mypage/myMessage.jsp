@@ -15,7 +15,12 @@
 		<c:forEach var="map" items="${list}">
 			<tr>
 				<td type="checkbox" value="${map['RECEIVE_DM_NO']}"></td>
-				<td></td>
+				<c:if test="${map['NO']==null || map['NO']=='' || map['NO']==0}">
+					<td>${map["RECEIVE_ID"]}(관리자)</td>
+				</c:if>
+				<c:if test="${map['ADMIN_NO']==null || map['ADMIN_NO']=='' || map['ADMIN_NO']==0}">
+					<td>${map["RECEIVE_ID"]}</td>
+				</c:if>
 			</tr>
 		</c:forEach>
 	</table>

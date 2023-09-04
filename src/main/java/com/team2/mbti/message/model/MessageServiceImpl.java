@@ -103,7 +103,7 @@ public class MessageServiceImpl implements MessageService {
 
 	@Override
 	public List<Map<String, Object>> messageViewByNo(int no) {
-		return messageViewByNo(no);
+		return messageDao.messageViewByNo(no);
 	}
 	
 }

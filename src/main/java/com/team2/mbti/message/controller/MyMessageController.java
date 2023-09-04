@@ -26,8 +26,9 @@ public class MyMessageController {
 	@GetMapping("/myMessage")
 	public String myMessage_get(HttpSession session,Model model) {
 		int no=(int)session.getAttribute("no");
-		logger.info("내 쪽지함 페이지");
+		logger.info("내 쪽지함 페이지, 파라미터 no={}",no);
 		List<Map<String, Object>> list=messageService.messageViewByNo(no);
+		logger.info("쪽지 목록 결과 list.size={}",list.size());
 		
 		model.addAttribute("list", list);
 		
