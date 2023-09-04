@@ -8,6 +8,8 @@ import com.team2.mbti.member.model.MemberVO;
 
 @Mapper
 public interface MessageDao {
-	int insertSendDm(SendDmVO sendDmVo);
+	int insertSendDmToAdmin(SendDmVO sendDmVo);
+	int insertReceiveDm(ReceiveDmVO receiveDmVo);
+	int insertSendDmToMember(SendDmVO sendDmVo);
 	List<MemberVO> selectAllMemberbyDm();
 }

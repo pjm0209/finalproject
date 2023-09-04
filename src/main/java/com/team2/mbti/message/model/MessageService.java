@@ -5,6 +5,7 @@ import java.util.List;
 import com.team2.mbti.member.model.MemberVO;
 
 public interface MessageService {
-	int insertSendDm(SendDmListVO sendDmListVo);
+	int insertSendDmToAdmin(SendDmListVO sendDmListVo, int adminNo);
+	int insertSendDmToMember(SendDmListVO sendDmListVo, int no);
 	List<MemberVO> selectAllMemberbyDm();
 }
