@@ -7,7 +7,9 @@
 	<input type="hidden" class="member-userId" value="${boardMap['USERID'] }">
 	<input type="hidden" class="admin-adminId" value="${boardMap['ADMIN_ID'] }">
 	<input type="hidden" class="session-userId" value="${sessionScope.userid }">
-	<input type="hidden" value="${boardMap['BOARD_NO'] }" class="boardNo">
+	<input type="hidden" value="${boardMap.BOARD_NO }" class="boardNo">
+	<input type="hidden" value="${boardMap.BOARD_GROUP_NO }" name="boardGroupNo">
+	<input type="hidden" value="${boardMap.BOARD_STEP }" name="boardStep">
 
 	<div class="boardContent">
 		<div class="boardContent-head">
@@ -23,10 +25,10 @@
 				<div class="head-content-box2">
 					<input type="button" class="boardListBtn btn" onclick="location.href='<c:url value="/main/board/boardList?boardFormNo=${boardMap['BOARD_FORM_NO'] }"/>'" value="목록">
 					<c:if test="${boardMap['USERID'] == sessionScope.userid }">
-						<input type="button" class="btn-outline-secondary btn boardListBtn" value="삭제">
+						<input type="button" class="btn-outline-secondary btn boardDelBtn" value="삭제">
 						<input type="button" class="bg-orange-primary btn boardListBtn" onclick="location.href='<c:url value="/main/board/boardEdit?boardNo=${boardMap['BOARD_NO'] }&boardWriteType=edit"/>'" value="수정">
 					</c:if>
-					<c:if test="${boardMap['BOARD_STEP'] < 1 and boardMap['USERID'] != sessionScope.userid}">
+					<c:if test="${boardMap['BOARD_STEP'] < 1 and boardMap['USERID'] != sessionScope.userid and boardMap.BOARD_FORM_NO != 1 and boardMap.BOARD_FORM_NO != 2 and boardMap.BOARD_FORM_NO != 3}">
 						<input type="button" class="bg-orange-primary btn"
 							onclick="location.href='<c:url value="/main/board/writeReply?boardNo=${param.boardNo }&boardWriteType=reply&boardFormNo=${boardMap['BOARD_FORM_NO'] }"/>'" 
 							class="replyBtn" value="답변">

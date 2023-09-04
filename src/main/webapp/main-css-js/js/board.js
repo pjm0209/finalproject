@@ -1,3 +1,5 @@
+var contextPath = "/mbti";
+
 $(function(){
 	CKEDITOR.replace("p_content", {
 						uploadUrl: contextPath + "/imageUpload",	//드래그 앤 드롭					
@@ -95,6 +97,17 @@ $(function(){
 		var id = $(this).attr('id');
 		$('#confirmModalBody').html('파일을 삭제하시겠습니까?');
 		$('#confirmOk').attr('onclick', 'fileDel('+ id + ')');
+		$('#confirmModalBtn').trigger('click');
+	});
+	
+	//게시글 상세보기 게시글삭제 
+	$('.btn.boardDelBtn').click(function(){
+		var boardNo = $('input[name=boardNo]').val();
+		var boardGroupNo = $('input[name=boardGroupNo]').val();
+		var boardStep = $('input[name=boardStep]').val();
+		
+		$('#confirmModalBody').html('게시글을 삭제하시겠습니까?');
+		$('#confirmOk').attr('onclick', 'location.href=\"' + contextPath + '/main/board/boardDel?boardNo=' + boardNo + '&boardGroupNo=' + boardGroupNo + '&boardStep=' + boardStep + '\"');
 		$('#confirmModalBtn').trigger('click');
 	});
 	

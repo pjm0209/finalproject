@@ -47,6 +47,9 @@
 			<c:if test="${!empty param.boardNo }">
 				<input type="hidden" name="boardNo" value="${param.boardNo }">
 			</c:if>
+			<c:if test="${param.boardWriteType == 'reply' }">
+				<input type="hidden" name="boardGroupNo" value="${map.BOARD_GROUP_NO }">
+			</c:if>
 			<div class="boardContent-body">
 				<div class="boardWrite">
 						<div class="boardWrite-body">

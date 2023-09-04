@@ -293,4 +293,38 @@ public class MainBoardController {
 		
 		return "redirect:/main/board/boardList?boardFormNo=" + vo.getBoardFormNo();
 	}
+	
+	@RequestMapping("/boardDel")
+	public String boardDel(@ModelAttribute BoardVO vo, HttpServletRequest request, Model model) {
+		logger.info("게시글 삭제 파라미터 vo: {}", vo);
+		
+		Map<String, String> map = new HashMap<>();
+		
+		map.put("boardNo", vo.getBoardNo() + "");
+		map.put("boardStep", vo.getBoardStep() + "");
+		map.put("boardGroupNo", vo.getBoardGroupNo() + "");
+		
+		List<BoardFileVO> list = boardService.selectFileList(vo.getBoardNo());
+		logger.info("게시글 첨부파일 조회결과 list: {}", list);
+		
+		String msg = "게시글을 삭제했습니다.", url = "/main/board/boardList?boardFormNo=" + vo.getBoardFormNo();
+		boardService.deleteBoard(map);
+		
+		for(int i = 0; i < list.size(); i++) {
+			BoardFileVO fileVo = list.get(i);
+			
+			String filePath = fileUploadUtil.getUploadPath(request, ConstUtil.UPLOAD_FILE_FLAG);
+			File file = new File(filePath, fileVo.getFileName());
+			
+			if(file.exists()) {
+				boolean result = file.delete();
+				logger.info("파일 삭제처리 결과 result: {}", result);
+			}
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
+	}
 }
