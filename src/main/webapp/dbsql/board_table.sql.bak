@@ -81,32 +81,38 @@ EXCEPTION
         ROLLBACK;
 end;
 
-create procedure DELETECOMMENTS  --?ÑÎ°ú?úÏ? ?¥Î¶Ñ 
+create or replace procedure DELETECOMMENTS  
 (
---Îß§Í∞úÎ≥Ä??
+
     m_no number,
     m_step number,
     m_groupno number
 )
 is
---Î≥Ä?òÏÑ†?∏Î?
+
     cnt number;
 begin
---Ï≤òÎ¶¨???¥Ïö©
+
     if m_step = 0 then
-        --?µÎ?Í∏Ä??Ï°¥Ïû¨?òÎäîÏßÄ Ï≤¥ÌÅ¨
+
         select count(*) into cnt from comments
         where comments_group_No = m_groupno;
 
-        --?µÎ?Í∏Ä??Ï°¥Ïû¨?òÎäî Í≤ΩÏö∞
         if cnt > 1 then
             update comments set comments_Del_Flag = 'Y'
             where comments_no = m_no;
-        else --?µÎ?Í∏Ä???ÜÎäî Í≤ΩÏö∞
+        else 
             delete comments where comments_no = m_no;
         end if;
-    else --?µÎ?Í∏Ä ?êÏ≤¥??Í≤ΩÏö∞
+    else        
         delete comments where comments_no = m_no;
+        
+        select count(*) into cnt from comments
+        where comments_group_No = m_groupno;
+        
+        if cnt = 1 then
+            delete comments where comments_no = m_groupno;
+        end if;
     end if;
 
     commit;
@@ -117,6 +123,7 @@ EXCEPTION
         ROLLBACK;
 end;
 
+--main BoardCategory view
 create or replace view boardFormview
 as
 select bf.*, a.boardCount

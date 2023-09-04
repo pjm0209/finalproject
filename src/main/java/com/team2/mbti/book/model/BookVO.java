@@ -14,7 +14,7 @@ public class BookVO extends SearchVO{
 	private String bookPublisher;//BOOK_PUBLISHER	VARCHAR2(50 BYTE)
 	private String bookRegdate;//BOOK_REGDATE	DATE
 	private String bookImgName;//BOOK_IMG_NAME	VARCHAR2(500 BYTE)
-	private int bookImgSize;//BOOK_IMG_SIZE	NUMBER
+	private long bookImgSize;//BOOK_IMG_SIZE	NUMBER
 	private String bookImgOriginalname;//BOOK_IMG_ORIGINALNAME	VARCHAR2(30 BYTE)
 	private String bookCategory;//BOOK_CATEGORY	VARCHAR2(50 BYTE)
 	private String bookWriter;//BOOK_WRITER	VARCHAR2(50 BYTE)

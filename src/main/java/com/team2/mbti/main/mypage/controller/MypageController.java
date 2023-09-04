@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team2.mbti.mbtiResult.model.MbtiResultService;
 import com.team2.mbti.mbtiResult.model.MbtiResultVO;
@@ -197,7 +200,7 @@ public class MypageController {
 		return "main/mypage/mbtiResult";
 	}
 	
-	@RequestMapping("/memberEditPwd")
+	@GetMapping("/memberEditPwd")
 	public String memberEditPwd() {
 		logger.info("개인정보 수정 비밀번호 입력 화면");
 
@@ -205,18 +208,33 @@ public class MypageController {
 	}
 	
 	@PostMapping("/memberEditPwd")
-	public String memberEditPwd(@RequestParam String pwd, HttpSession session,
-			HttpServletResponse response, Model model) {
+	public String memberEditPwd_post(@ModelAttribute MemberVO membervo, HttpSession session, 
+			@RequestParam String currentPassword, Model model) {
+		logger.info("개인정보 수정 비밀번호 처리하기!!");
 		
 		String userid=(String)session.getAttribute("userid");
-		logger.info("개인정보 수정 비밀번호 확인 화면, pwd={}, userid={}" ,pwd, userid);
-
-		int result=memberService.loginCheck(userid, pwd);
-		logger.info("비밀번호 체크 결과, result={}", result);
+		logger.info("파라미터, userid={}, currentPassword={}, userid, currentPassword");
 		
-		return "main/mypage/memberEditPwd";		
+		String msg="실패!!", url="/mypage/memberEditPwd";
+		String str = memberService.pwdCheck(userid);
+		logger.info("비밀 번호 확인 처리 str={}", str);
+		
+		if(passwordEncoder.matches(currentPassword, str)) {		
+			logger.info("결과 if : {}", passwordEncoder.matches(currentPassword, str));
+			return "redirect:/main/mypage/memberEdit";
+			
+		}else{
+			logger.info("결과 else : {}", passwordEncoder.matches(currentPassword, str));
+			msg="비밀번호가 틀렸습니다.";
+			url="/main/mypage/memberEditPwd";
+		}
+			model.addAttribute("msg", msg);
+			model.addAttribute("url", url);
+			
+		return "common/message";
+		//return "redirect:/main/mypage/memberEditPwd"; 
 	}
-		
+			
 	@GetMapping("/memberEdit")
 	public String memberEdit_get(HttpSession session, Model model) {
 		
@@ -225,7 +243,7 @@ public class MypageController {
 		logger.info("개인 정보 수정 화면, 파라미터 userid={}", userid);
 		
 		MemberVO membervo = memberService.selectByUserid(userid);
-		logger.info("개인 정보 수정 화면, 정보 조회결과 membervo={}", membervo);
+		logger.info("개인 정보 수정 정보 조회 결과 membervo={}", membervo);
 				
 		model.addAttribute("membervo",membervo);
 		
@@ -325,12 +343,50 @@ public class MypageController {
 		return "main/mypage/memberOutResult";
 	}
 	
-	@RequestMapping("/editPwd")
-	public String editPwd() {
+	@GetMapping("/newPwd")
+	public String newPwd() {
 		logger.info("비밀번호 변경 화면");
 			
-		return "main/mypage/editPwd";
+		return "main/mypage/newPwd";
 	}
+		
+	@PostMapping("/newPwd")
+	public String newPwd_post(HttpSession session, Model model, @RequestParam String pwd,
+	                           @RequestParam String newPwd, @RequestParam String confirmPwd) {
+
+	    String userid = (String) session.getAttribute("userid");
+
+	    MemberVO existingMember = memberService.selectByUserid(userid);
+	    if (existingMember != null) {
+	        boolean isPasswordMatch = passwordEncoder.matches(pwd, existingMember.getPwd());
+
+	        if (isPasswordMatch) {
+	            String encodedNewPwd = passwordEncoder.encode(newPwd);
+
+	            existingMember.setPwd(encodedNewPwd);
+	            int cnt = memberService.updatePassword(existingMember);
+
+	            if (cnt > 0) {
+	                session.invalidate();
+
+	                model.addAttribute("msg", "비밀번호 변경 성공!!.");
+	                model.addAttribute("url", "/main/index");
+	            } else {
+	                model.addAttribute("msg", "비밀번호 변경 실패!!.");
+	                model.addAttribute("url", "/mypage/newPwd");
+	            }
+	        } else {
+	            model.addAttribute("msg", "현재 비밀번호가 일치하지 않습니다.");
+	            model.addAttribute("url", "/mypage/newPwd");
+	        }
+	    } else {
+	        model.addAttribute("msg", "사용자 정보를 찾을 수 없습니다.");
+	        model.addAttribute("url", "/mypage/newPwd");
+	    }
+
+	    return "common/message";
+	}
+
 	
 	@RequestMapping("/mypageBasket")
 	public String mypageBasket(HttpSession session, Model model) {

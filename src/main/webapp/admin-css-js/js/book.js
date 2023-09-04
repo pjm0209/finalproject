@@ -68,6 +68,25 @@ $(function() {
 			}
 		}
 	});
+	
+	/*$('#myFiles').change(function(){
+		var fileInput = document.querySelector("#myfiles");
+		var files = fileInput.files;
+		var fileListLength = files.length;
+		var result="";
+		for (var i = 0; i < fileListLength; i++) {
+			result+=files.item(i).name;
+    		if(i!=fileListLength-1){
+    			result+= "<br>";
+    		}
+    		console.log(files.item(i).name);
+  		}
+  		$('#output').html(result);
+	});*/
 });
+
+
+
+
 
 

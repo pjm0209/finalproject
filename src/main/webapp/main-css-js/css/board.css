@@ -1,5 +1,10 @@
 @charset "UTF-8";
 
+.bg-orange-primary {
+	background: #eb5d1e;	
+	color: white;
+}
+
 section.boardSection {
     margin-top: 30px;
     padding-top: 200px;
@@ -107,7 +112,7 @@ select#mainBoardSearchCondtion {
     display: inline-block;
 }
 
-.searchInputText {
+.searchInputText {	
     width: 250px;
     height: 32px;
     font-size: 15px;
@@ -115,6 +120,7 @@ select#mainBoardSearchCondtion {
     border-radius: 15px;
     display: inline-block;
     margin-left: 15px;
+    margin-right: 10px;    
     padding: 0 10px;
     padding-top: 3px;
 }
@@ -132,7 +138,7 @@ input.boardSearchKeyword {
 
 .boardWritediv h5 {
     display: inline-block;
-    padding: 13px;
+    padding: 20px;
 }
 
 .boardListColumn {
@@ -148,7 +154,8 @@ input.boardSearchKeyword {
 
 .Column div {
     display: inline-block;
-    width: 40px;
+    width: 100px;
+    text-align: center;
 }
 
 .Column {
@@ -161,10 +168,11 @@ li.boardPostItems {
     height: 50px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
 .boardPostTitle {
-    width: 70%;
+    width: 66%;
     display: inline-block;
 }
 
@@ -185,4 +193,46 @@ li.boardPostItems {
 
 i.bi.bi-search {
     cursor: pointer;
+}
+
+/*게시글상세보기*/
+
+
+/*댓글*/
+.editDel {
+    position: absolute;
+    right: 530px;
+    top: auto;
+    background: white;
+    box-shadow: 0 1px 12px 0 rgba(0, 0, 0, .06);
+    border-radius: 6px;
+    padding: 8px 15px;
+    box-sizing: border-box;
+    z-index: 1;
+    max-height: 370px;
+    width: 100px;
+}
+
+/*게시글 글쓰기*/
+
+.boardWrite-body dt {
+    font-size: 14px;
+    color: black;
+    float: left;
+    width: 94px;
+    padding: 17px 0;
+}
+
+.boardWrite-body dt {
+    font-size: 14px;
+    color: black;
+    float: left;
+    width: 94px;
+    padding: 17px 0;
+}
+
+.boardWrite-body dd {
+    margin-left: 98px;
+    padding: 10px 22px 10px 0;
+    width: 95%;
 }

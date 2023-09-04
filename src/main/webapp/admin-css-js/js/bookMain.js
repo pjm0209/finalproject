@@ -8,22 +8,30 @@ $(function(){
 	$(window).scroll(function(){
 		var sc = $(this).scrollTop();
 		
-		if( sc > 500){
+		if( sc >= 500){
 			$('.sideBarBestBook').css({position:'fixed', top:200,})
-		} else{
-			$('.sideBarBestBook').css({position:'absolute', top:760,})
+			if(sc>=1700)
+				$('.sideBarBestBook').css({position:'relative',top:-673, left:1740})
+		}else{
+			$('.sideBarBestBook').css({position:'absolute', top:700,})
+		} 
+		
+		if( sc >= 600){
+			$('.sideBarBestBook3').css({position:'fixed', top:200,})
+			if(sc>=1400)
+				$('.sideBarBestBook3').css({position:'relative',top:-735, left:1740})
+		}else{
+			$('.sideBarBestBook3').css({position:'absolute', top:825,})
 		} 
 	});
 	
 	function slideImg(){
-		$('.gallery').animate({left:'-100%'},1500,function(){
+		$('.gallery').animate({left:'-100%'},1000,function(){
 			$('.gallery li:first').appendTo('.gallery');
 			$('.gallery').css({left:'0%'});
 		});
-		
-		
 	}
-	setInterval(slideImg,5000);
+	setInterval(slideImg,3000);
 	
 });
 /**/

@@ -2,30 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@include file="../inc/top.jsp" %>
 <%@include file="../inc/mypage.jsp" %>    
-<!DOCTYPE html>
-<html>
-<head>
-<title>비밀번호 변경</title>
-<style>
-body {
-   font-family: Arial, sans-serif;
-   margin: 0;
-   padding: 0;
-   background-color: #f2f2f2;
-   display: flex;
-   align-items: center;
-   justify-content: center;
-   height: 100vh;
-}
 
+<style>
 .container {
-   max-width: 1000px;
-   max-height: 800px;
-   background-color: white;
-   border: 1px solid #ccc;
-   padding: 20px;
-   border-radius: 5px;
-   box-shadow: 0px 0px 5px 0px #aaa;
+    margin-top: 100px;
+    margin-left: 400px;
 }
 
 h2 {
@@ -69,24 +50,32 @@ button:hover {
 	font-weight: bold;
 }
 
-p{
-	
-}
+
 </style>
-</head>
-<body>
+
+<script type="text/javascript">
+
+</script>
+
+<section>
   <div class="container">
     <h2>비밀번호 변경</h2>
-    <form action="/change-password" method="post">
-      <label for="currentPassword">현재 비밀번호</label>
-      <input type="password" id="currentPassword" name="currentPassword" placeholder="현재 비밀번호를 입력해주세요" required>
-      
-      <label for="newPassword">새 비밀번호</label>
-      <input type="password" id="newPassword" name="newPassword" placeholder="새로 사용하실 비밀번호를 입력해주세요" required>
-      
-      <label for="confirmPassword">새 비밀번호 확인</label>
-      <input type="password" id="confirmPassword" name="confirmPassword" placeholder="새로 사용하실 비밀번호를 재입력해주세요" required>
-      
+    <form name="form-newPwd" method="post" action="<c:url value='/main/mypage/newPwd'/>">
+    <div class="mypage-row">
+      <label>현재 비밀번호</label>
+      <input type="password" name="pwd" placeholder="현재 비밀번호를 입력해주세요" maxlength="30" required>
+    </div> 
+    
+    <div class="mypage-row"> 
+      <label>새 비밀번호</label>
+      <input type="password" name="newPwd" placeholder="새로 사용하실 비밀번호를 입력해주세요" maxlength="30" required>
+    </div> 
+     
+    <div class="mypage-row">  
+      <label>새 비밀번호 확인</label>
+      <input type="password" name="confirmPwd" placeholder="새로 사용하실 비밀번호를 재입력해주세요" maxlength="30" required>
+    </div>
+     
       <button type="submit">비밀번호 변경</button>
       
       <div class="bottom">
@@ -97,6 +86,5 @@ p{
   	  </div>
     </form>
   </div>
-
-</body>
-</html>
+</section>  
+<%@include file="../inc/bottom.jsp" %>

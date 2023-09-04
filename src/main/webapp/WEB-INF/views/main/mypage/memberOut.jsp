@@ -8,7 +8,8 @@
    $(function(){
      $('#btnOut').click(function() {
          if (!$('#agree_check').is(':checked')) {
-             alert("회원탈퇴에 동의하셔야 합니다.");
+            $('#alertModalBody').html("회원탈퇴에 동의하셔야 합니다.");
+            $('#alertModal').modal('show');
          } else {
         	 window.location.href = "<c:url value='/main/mypage/memberOutPwd'/>";
            }
@@ -22,8 +23,8 @@ h2{
 }
 .memberOut-agreement{
 	text-align:left;
-	margin-top: 150px;
-	margin-left: 300px;
+	margin-top: 110px;
+	margin-left: 500px;
 	margin-right: 300px;
 }
 
@@ -69,6 +70,7 @@ h2{
 
 #btnOut{
      font-size: 18px;
+     margin-bottom: 30px;
      padding: 10px 20px;
      background-color: red;
      color: white;
@@ -115,3 +117,4 @@ h2{
 	</div>
 	</form>
 </div>
+<%@include file="../inc/bottom.jsp" %>

@@ -114,6 +114,13 @@ select#manager-search-select {
 			</thead>
 			<c:set var="idx" value="0"/>
 			<tbody>
+                <c:choose>
+                    <c:when test="${empty list}">
+                        <tr>
+                            <td colspan="5">조건에 일치하는 검색결과가 없습니다.</td>
+                        </tr>
+                    </c:when>
+                    <c:otherwise>			
 				<c:forEach var="vo" items="${list}">
 					<c:set var="adminInformation" value="${vo.adminNo}"/>
 					<tr>
@@ -123,7 +130,9 @@ select#manager-search-select {
 						<td>${vo.adminEmail}</td>
 						<td>${vo.adminTel}</td>
 					</tr>	
-				</c:forEach>						
+				</c:forEach>	
+					</c:otherwise>
+				</c:choose>									
 			</tbody>
 		</table>
 		<div style="width: 10%;text-align: center;margin: 0 auto;">

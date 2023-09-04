@@ -1,6 +1,6 @@
 package com.team2.mbti.book.controller;
 
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,12 +18,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team2.mbti.book.model.BookService;
 import com.team2.mbti.book.model.StockBookVO;
-import com.team2.mbti.book.model.orderBookVO;
 import com.team2.mbti.common.ConstUtil;
 import com.team2.mbti.common.PaginationInfo;
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -33,7 +31,7 @@ public class BookController {
 
 	private static final Logger logger = LoggerFactory.getLogger(BookController.class);
 	private final BookService bookService;
-
+	private final FileUploadUtil2 fileUploadUtil2;
 	/*
 	 * @RequestMapping("/bookList") public String bookList(@ModelAttribute
 	 * StockBookVO vo, HttpServletRequest request , Model model) { // 1
@@ -118,7 +116,10 @@ public class BookController {
 		PaginationInfo pagingInfo = new PaginationInfo();
 		pagingInfo.setBlockSize(ConstUtil.BLOCK_SIZE);
 		pagingInfo.setCurrentPage(vo.getCurrentPage());
-
+		
+		logger.info("vo.getCurrentPage()={}", vo.getCurrentPage());
+		logger.info("pagingInfo.getCurrentPage()={}", pagingInfo.getCurrentPage());
+		
 		String bookFlag = request.getParameter("bookFlag");
 		/*
 		 * if( (bookFlag != null && !bookFlag.isEmpty()) && (
@@ -184,10 +185,61 @@ public class BookController {
 		return "admin/book/bookRegister";
 	}
 
+	
 	@PostMapping("/bookRegister")
-	public String bookRegister_post(Model model) {
+	public String bookRegister_post(@ModelAttribute StockBookVO vo, HttpServletRequest request, Model model) {
+		logger.info("책관리 페이지 - 책 상품 등록 처리하기, 파라미터 vo={}", vo);
+		
+		List<Map<String, Object>> fileList = null;
+		try {
+			fileList = fileUploadUtil2.fileupload(request, ConstUtil.UPLOAD_IMAGE_FLAG);
+
+			String bookImgName = "", bookImgOriginalname = "";
+			long bookImgSize = 0;
+			for (Map<String, Object> map : fileList) {
+				bookImgName = (String) map.get("fileName");
+				bookImgOriginalname = (String) map.get("originalFileName");
+				bookImgSize = (long) map.get("fileSize");
+				
+				vo.setBookImgName(bookImgName);
+				vo.setBookImgOriginalname(bookImgOriginalname);
+				vo.setBookImgSize(bookImgSize);
+			} // for
+			
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		int cnt = bookService.insertBook(vo);
+		logger.info("상품 등록 처리결과 cnt={}", cnt);
+		logger.info("파일업로드 처리결과 list.size()={}", fileList.size());
+		if(cnt > 0) {
+			model.addAttribute("url", "admin/book/bookList");
+			model.addAttribute("msg", "상품등록이 완료되었습니다.");
+		} else {
+			model.addAttribute("url", "admin/book/bookRegister");
+			model.addAttribute("msg", "상품등록 실패...");
+		}
+		
+		
+		return "common/message";
+	}
+	
+	@GetMapping("/bookEdit")
+	public String bookEdit_get(HttpServletRequest request ,Model model) {
+		logger.info("책관리 페이지 - 책 상품 수정 페이지입니다.");
+
+		model.addAttribute("title", "책 등록 페이지");
+
+		return "admin/book/bookEdit";
+	}
+
+	@PostMapping("/bookEdit")
+	public String bookEdit_post(Model model) {
 		// 1
-		logger.info("책관리 페이지 - 책 상품 등록 처리하기");
+		logger.info("책관리 페이지 - 책 상품 수정 처리하기");
 
 		// 2
 
@@ -220,5 +272,7 @@ public class BookController {
 
 		return "redirect:/admin/book/bookRegister";
 	}
+	
+	
 
 }//
