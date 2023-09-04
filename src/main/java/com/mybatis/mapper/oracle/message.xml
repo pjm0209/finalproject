@@ -30,4 +30,9 @@
 		select * from member where outdate is null
 		order by no desc
 	</select>
+	
+	<select id="messageViewByNo" parameterType="int" resultType="map">
+		select * from messageView
+		where receive_no=#{receiveNo} and receive_manager_flag='N'
+	</select>
 </mapper>

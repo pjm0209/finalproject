@@ -1,11 +1,11 @@
 package com.team2.mbti.message.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
-import com.team2.mbti.member.model.MemberDAO;
 import com.team2.mbti.member.model.MemberVO;
 
 import lombok.RequiredArgsConstructor;
@@ -99,6 +99,11 @@ public class MessageServiceImpl implements MessageService {
 		}
 		
 		return cnt;
+	}
+
+	@Override
+	public List<Map<String, Object>> messageViewByNo(int no) {
+		return messageViewByNo(no);
 	}
 	
 }
