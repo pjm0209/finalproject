@@ -124,25 +124,19 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	@Override
-	public int emailCheck(String email, int no) {
-		String Email = memberDao.selectEmail(no);
+	public int emailCheck(Map<String, Object>map) {
+		String email = memberDao.emailCheck(map);
 		int result=0;
-		if(Email==null || Email.isEmpty()) {
-			result=USERID_NONE;
+		if(email==null || email.isEmpty()) {
+			result=EMAIL_DISAGREE;
+		}else {
+			result=EMAIL_OK;
 		}
+			
 		
 		return result;
 	}
-	
-	@Override
-	public int findInfoCheck(MemberVO membervo) {
-		return memberDao.findInfoCheck(membervo);
-	}
-	
-	@Override
-	public int findPwd(MemberVO membervo) {
-		return memberDao.findPwd(membervo);
-	}
+		
 	
 	@Override
 	public String pwdCheck(String userid) {
@@ -153,6 +147,8 @@ public class MemberServiceImpl implements MemberService {
 	public int updatePassword(MemberVO membervo) {
 		return memberDao.updatePassword(membervo);
 	}
+
+
 
 
 

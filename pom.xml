@@ -58,13 +58,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-security</artifactId>
 		<version>3.1.2</version>
-		</dependency>	
-		<!-- 메일 api -->
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-email</artifactId>
-			<version>1.2</version>
-		</dependency>		
+		</dependency>					
 		<!--  jsp  -->
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
@@ -120,8 +114,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>
 			<!--  <version>2.0.1.RELEASE</version>  -->
-		</dependency>
-		
+		</dependency>		
 		<!--i'mport-->
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
