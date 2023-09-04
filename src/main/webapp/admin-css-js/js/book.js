@@ -5,7 +5,7 @@ $(function() {
 
 		//유효성 검사
 		if (cnt < 1) {
-			alert("삭제할 상품을 선택해주세요.");
+			alert("삭제할 상품을 선택해주세요.1");
 			return false;
 		} else {
 			/* $('form[name=frmList]').prop('action', "<c:url value='/admin/product/deleteMulti'/>"); */
@@ -20,7 +20,7 @@ $(function() {
 
 		//유효성 검사
 		if (cnt < 1) {
-			alert("삭제할 상품을 선택해주세요.");
+			alert("삭제할 상품을 선택해주세요.2");
 			return false;
 		} else {
 			/* $('form[name=frmList]').prop('action', "<c:url value='/admin/product/deleteMulti'/>"); */
@@ -55,10 +55,10 @@ $(function() {
 	$("#btEventMulti").click(function() {
 		var cnt = $("table input[type='checkbox']:checked").length;
 		if (cnt < 1) {
-			alert("상품을 선택해주세요.");
+			alert("상품을 선택해주세요.3");
 			return false;
 		} else if ($("select[name='eventSel']").val() == "") {
-			alert("이벤트 이름을 선택해주세요.");
+			alert("이벤트 이름을 선택해주세요.3");
 			$("select[name='eventSel']").focus();
 			return false;
 		} else {

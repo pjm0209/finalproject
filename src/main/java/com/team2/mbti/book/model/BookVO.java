@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class BookVO extends SearchVO{
+public class BookVO extends SearchVO {
 	private int bookNo;//BOOK_NO	NUMBER
 	private String bookTitle;//BOOK_TITLE	VARCHAR2(300 BYTE)
 	private int bookPrice;//BOOK_PRICE	NUMBER
