@@ -12,11 +12,12 @@
 			<th>내용</th>
 			<th>날짜</th>
 		</tr>
-		<tr>
-			<c:forEach var="map" items="${list}">
+		<c:forEach var="map" items="${list}">
+			<tr>
 				<td type="checkbox" value="${map['RECEIVE_DM_NO']}"></td>
-			</c:forEach>
-		</tr>
+				<td></td>
+			</tr>
+		</c:forEach>
 	</table>
 </section>
 <%@include file="../inc/bottom.jsp" %>
