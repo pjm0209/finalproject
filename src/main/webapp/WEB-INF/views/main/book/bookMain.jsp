@@ -9,12 +9,17 @@
 <script type="text/javascript" src="<c:url value='/admin-css-js/js/bookMain.js'/>"></script>
 
 <section id="bookMain" class="book">
-	<div id='bookSellMainImg' class=" bookslide">
-		<ul class="gallery">
+	<div id='bookSellMainImg' class=" bookslide shadow-sm p-3 mb-5 bg-body rounded">
+		<ul class="gallery" style="padding-left: 0;">
 			<li><img src="<c:url value='/images/bookProduct/slide_01.jpg'/>"></li>
 			<li><img src="<c:url value='/images/bookProduct/slide_02.jpg'/>"></li>
 			<li><img src="<c:url value='/images/bookProduct/slide_03.jpg'/>"></li>
 			<li><img src="<c:url value='/images/bookProduct/slide_04.jpg'/>"></li>
+			<!--추가 이미지  -->
+			<li><img src="<c:url value='/images/bookProduct/bookMain1.jpg'/>"></li>
+			<li><img src="<c:url value='/images/bookProduct/bookMain2.jpg'/>"></li>
+			<li><img src="<c:url value='/images/bookProduct/bookMain3.jpg'/>"></li>
+			<!--  -->
 		</ul>
 	</div>
 	<div style="padding-left: 240px; margin-bottom:20px;">
@@ -348,5 +353,4 @@
 		</div>
 	</div>
 </nav>	
-
 <%@ include file="../inc/bottom.jsp"%>

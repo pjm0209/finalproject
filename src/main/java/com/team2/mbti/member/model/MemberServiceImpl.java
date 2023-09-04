@@ -103,39 +103,52 @@ public class MemberServiceImpl implements MemberService {
 		return cnt;
 	}
 	
-	//회원정보 수정
 	@Override
 	public int updateMember(MemberVO vo) {
 		return memberDao.updateMember(vo);
 	}
 	
-	//회원탈퇴
 	@Override
 	public int updateMemberOut(String userid) {
 		return memberDao.updateMemberOut(userid);
 	}
 
-	//아이디 찾기 - 이름, 이메일
 	@Override
 	public MemberVO getMemberByNameAndEmail(String name, String email) {
 		return memberDao.getMemberByNameAndEmail(name, email);
 	}
 
-	//아이디찾기 - 이름, 전화번호
 	@Override
 	public MemberVO getMemberByNameAndHp(String name, String hp) {
 		return memberDao.getMemberByNameAndHp(name, hp);
 	}
 	
-	//비밀번호 확인
+	@Override
+	public int emailCheck(Map<String, Object>map) {
+		String email = memberDao.emailCheck(map);
+		int result=0;
+		if(email==null || email.isEmpty()) {
+			result=EMAIL_DISAGREE;
+		}else {
+			result=EMAIL_OK;
+		}
+					
+		return result;
+	}
+		
+	
 	@Override
 	public String pwdCheck(String userid) {
 		return memberDao.pwdCheck(userid);
 	}
 
-	//비밀번호 변경
 	@Override
 	public int updatePassword(MemberVO membervo) {
 		return memberDao.updatePassword(membervo);
 	}
+
+
+
+
+
 }

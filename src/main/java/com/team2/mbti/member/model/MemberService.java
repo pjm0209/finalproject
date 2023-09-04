@@ -14,6 +14,9 @@ public interface MemberService {
 	int LOGIN_OK=1;
 	int PWD_DISAGREE=2; 
 	int USERID_NONE=3; 
+	
+	int EMAIL_OK=2;
+	int EMAIL_DISAGREE=3;
 		
 	int insertMember(MemberVO membervo); 
 	
@@ -35,6 +38,8 @@ public interface MemberService {
 	MemberVO getMemberByNameAndEmail(String name, String email); // 아이디찾기 - 이름, 이메일
 	MemberVO getMemberByNameAndHp(String name, String hp); //아이디찾기 - 이름, 전화번호
 	
+	int emailCheck(Map<String, Object>map); //비번찾기 메일 확인
+
 	String pwdCheck(String userid); //비밀번호 확인
 	int updatePassword(MemberVO membervo); //비밀번호 변경
 

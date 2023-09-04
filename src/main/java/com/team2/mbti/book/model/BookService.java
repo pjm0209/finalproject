@@ -7,4 +7,12 @@ public interface BookService {
 	List<Map<String, Object>> selectBookAll(StockBookVO vo);
 	List<StockBookVO> selectBookAllAjax(StockBookVO vo);
 	int selectBookCnt(StockBookVO vo);
+	
+	int insertBook(StockBookVO vo);
+	
+	StockBookVO selectBookByNo(int bookNo);
+	
+	int updateBook(StockBookVO vo);
+	
+	int deleteMulti(List<StockBookVO> list);
 }

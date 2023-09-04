@@ -27,7 +27,7 @@
 			from
 			(
 				select * from admin
-				<include refid="searchManager"/>
+				<include refid="searchManager"></include>
 				order by admin_no
 			) A
 		)

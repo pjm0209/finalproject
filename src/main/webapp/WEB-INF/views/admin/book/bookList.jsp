@@ -23,6 +23,17 @@
 				$("#frmPageIdBookFlag").val(bf);
 			}
 			
+			$('input[name=currentPage]').val("1");
+			ajaxFunc(); // ajax 함수
+			
+			//기본 이벤트 제거
+			/* event.preventDefault(); */
+			
+		});
+		
+		$('#bookDeleteBtn').click(function(){
+			
+			$('input[name=currentPage]').val("1");
 			ajaxFunc(); // ajax 함수
 			
 			//기본 이벤트 제거
@@ -41,8 +52,7 @@
 			} 
 		});
 		
-		$("#searchByKeywordBtn").click();
-		var list = [];
+		$("#searchByKeywordBtn").trigger('click');
 		
 	});
 	
@@ -60,34 +70,32 @@
 			dataType:"json",
 			data: $('form[name=serach]').serializeArray(), // 입력 양식의 내용을 객체로 만든다
 			success:function(res){
-				
 	 //{"searchCondition":"","searchKeyword":"","searchUseYn":"","currentPage":1,"blockSize":0,"firstRecordIndex":1,"lastRecordIndex":1,"recordCountPerPage":0,"bookNo":30023,"bookTitle":"16가지 성격유형 도표","bookPrice":8500,"bookPublisher":"어세스타","bookRegdate":"2023-08-22 01:09:25","bookImgName":null,"bookImgSize":0,"bookImgOriginalname":null,"bookCategory":"기타","bookWriter":"어세스타","bookUseflag":"Y","bookExplains":"A1사이즈로 코팅된 종이로 그룹의 결과 유형 분포표를 한 눈에 보기 쉽게 확인할 수 있는 자료입니다","bookDetails":"A1사이즈로 코팅된 종이로 그룹의 결과 유형 분포표를 한 눈에 보기 쉽게 확인할 수 있는 자료입니다","stockQty":100,"orderBy":null,"bookFlag":null,"perRecord":0,"keywordCategory":null,"keywordNo":null,"keywordTitle":null,"keywordPublisher":null,"keywordUseflag":null,"keywordRegdate":null,"keywordRegdate2":null} */
 				 if(res.list.length > 0){
-					 alert("tqtqtqt");
 						var result=makeListJson(res.list);
-					
 						$('#bookTbody').html(result);
-						/* var firstPage = res.pagingInfo.firstPage;
-						var lastPage = res.pagingInfo.lastPage;
-						var currentPage = res.pagingInfo.currentPage;
-						var totalPage = res.pagingInfo.totalPage; */
-						/* $("#bookPaging").html(makePage(firstPage,lastPage,currentPage,totalPage)); */
-						$("#bookPaging").html(makePage(res.pagingInfo));
-						alert(makePage(res.pagingInfo));
+						
+						result=makePage(res.pagingInfo);
+						$("#bookPaging").html(result);
+						
+						$("#captionBook").text("TOTAL " + res.pagingInfo.totalRecord + " ROWS");
+						
 				} else {
 					var str = "<tr>";
 					str += "<th colspan='10' style='color:gray;'>해당 상품은 존재하지 않습니다.</th>";
 					str += "</tr>";
 					$("#bookTbody").html(str);
+					$("#bookPaging").html("");
 				} 
-				
 			},
 			error:function(xhr, status, error){
 				alert(status + " : " + error);
 			}
 		});//ajax
 	}
-	
+	function openEdit(bookNo){
+		location.href="bookEdit?bookNo=" + bookNo;
+	}
 	function makeListJson(list){
 		var htmlStr = "";
 		
@@ -106,7 +114,7 @@
 			htmlStr += "<td>" + this.bookNo + "</td>";
 			htmlStr += "<td>" + this.bookTitle + "</td>";
 			htmlStr += "<td>";
-			htmlStr += "<img class='shadow-sm rounded' width='100px' height='150px' src=\"<c:url value='/images/bookProduct/" + this.bookNo + ".jpg'/>\" alt=\"" + this.bookTitle + "\">";
+			htmlStr += "<img class='shadow-sm rounded' width='100px' height='150px' src=\"<c:url value='/images/bookProduct/" + this.bookImgOriginalname + "'/>\" alt=\"" + this.bookTitle + "\">";
 			htmlStr += "</td>";
 			htmlStr += "<td>";
 			htmlStr += this.bookCategory;
@@ -132,14 +140,15 @@
 			htmlStr += "</td>";
 			htmlStr += "<c:if test='${param.bookFlag == \"Inventory\" or param.bookFlag == \"InventoryByKeyword\"}'>";
 			htmlStr += "<td>";
-			htmlStr += "<button class=\"btn btn-info btn-xs blue\" onclick=\"location.href='bookRegister?bookNo='\"" + this.bookNo + " type='button' title='재고저장'><i class='fas fa-save'></i></button>'";
+			htmlStr += "<button class=\"btn btn-success btn-xs blue\" onclick=\"location.href='bookRegister?bookNo='\"" + this.bookNo + " type='button' title='재고저장'><i class='fas fa-save'></i></button>";
 			htmlStr += "</td>";
 			htmlStr += "</c:if>";
 			htmlStr += "<c:if test='${param.bookFlag == \"bookList\" or param.bookFlag == \"bookListByKeyword\"}'>";
 			htmlStr += "<td id='tdLast'>";
 			htmlStr += "<a class='btn btn-info btn-xs' href='' target='_blank' title='상품보기'><i class='fas fa-eye'></i></a>";
-			htmlStr += "<button class='btn btn-info btn-xs' onclick=\"location.href='bookRegister?bookNo='\"" + this.bookNo + " type='button' title='복사'><i class='fas fa-copy'></i></button>";
-			htmlStr += "<button class='btn btn-primary btn-xs' onclick=\"location.href='bookEdit?bookNo='\"" + this.bookNo + " type='button' title='수정'><i class='fas fa-edit'></i></button>";
+			htmlStr += "<button class='btn btn-success btn-xs' onclick=\"location.href='bookCopyPaste?bookNo='\"" + this.bookNo + " type='button' title='복사'><i class='fas fa-copy'></i></button>";
+			/* htmlStr += "<button class='btn btn-warning btn-xs' onclick=\"location.href='bookEdit?bookNo='\"" + this.bookNo + " type='button' title='수정'><i class='fas fa-edit'></i></button>"; */
+			htmlStr += "<button class='btn btn-warning btn-xs' onclick=\"openEdit(" +this.bookNo+ ")\" type='button' title='수정'><i class='fas fa-edit'></i></button>";
 			htmlStr += "<button class='btn btn-danger btn-xs' id='delBtn' type='button' title='삭제'><i class='fas fa-trash'></i></button>";
 			htmlStr += "</td>";
 			htmlStr += "</c:if>";
@@ -150,58 +159,51 @@
 	function makePage(pageInfo){
 		var pageHtmlStr = "";
 		pageHtmlStr += "<ul class='pagination pagination-lg justify-content-center'>";
-		pageHtmlStr += "이건나율걸";
 		if(pageInfo.firstPage > 1){
 			pageHtmlStr += "<li class='page-item'>";
-			pageHtmlStr += "<a class='page-link' href='#' onclick='bookListPage((" +pageInfo.firstPage+ "-1)' aria-label='Previous'>";
+			pageHtmlStr += "<a class='page-link' href='javascript:void(0);' onclick='bookListPage((" + f(-1) + "))' aria-label='Previous'>";
 			pageHtmlStr += "<span aria-hidden='true'>&laquo;</span>";
 			pageHtmlStr += "</a>";
 			pageHtmlStr += "</li>";
 		}
-		/* pageHtmlStr += "<c:if test='(" + pageInfo.firstPage + "> 1)'>";
-		pageHtmlStr += "<li class='page-item'>";
-		pageHtmlStr += "<a class='page-link' href='#' onclick='bookListPage((" +pageInfo.firstPage+ "-1)' aria-label='Previous'>";
-		pageHtmlStr += "<span aria-hidden="true">&laquo;</span>";
-		pageHtmlStr += "</a>";
-		pageHtmlStr += "</li>";
-		pageHtmlStr += "</c:if>"; */
-		
-		for(var i = pageInfo.firstPage; i<=pageInfo.lastPage; i++){
-			if(i=pageInfo.currentPage){
+		var f = pageInfo.firstPage;
+		var l = pageInfo.lastPage;
+		for(var i=f; i <= l; i++){
+			if(i==pageInfo.currentPage){
 				pageHtmlStr += "<li class='page-item active'>";
-				pageHtmlStr += "<a class='page-link' href='#'>" + i;
-				pageHtmlStr += "</a>";
-				pageHtmlStr += "</li>";	
+				pageHtmlStr += "<a class='page-link' href='javascript:void(0);'>" + i + "</a></li>"; 
 			}
-			 if(i !=pageInfo.currentPage){
+			if(i !== pageInfo.currentPage){
 				pageHtmlStr += "<li class='page-item'>";
-				pageHtmlStr += "<a class='page-link' href='#' onclick='bookListPage(" + i + ")'>" + i + "</a></li>";
-			} 
+				pageHtmlStr += "<a class='page-link' href='javascript:void(0);' onclick='bookListPage(" + i + ")'>" + i + "</a></li>";
+		    }
 		}
+		
 		if((pageInfo.lastPage < pageInfo.totalPage)){
 			pageHtmlStr += "<li class='page-item'>";
-			pageHtmlStr += "<a class='page-link' href=''#' aria-label='Next' onclick='bookListPage(" + (this.lastPage + 1) + "'>";
+			pageHtmlStr += "<a class='page-link' href='javascript:void(0);' aria-label='Next' onclick='bookListPage(" + (l + 1) + "'>";
 			pageHtmlStr += "<span aria-hidden='true'>&raquo;</span>";
 			pageHtmlStr += "</a>";
 			pageHtmlStr += "</li>";
 		}
 		pageHtmlStr += "</ul>";
+		
 		return pageHtmlStr;
 	}
 	
-	function bookListPage(curPage, res){
-		alert('${param.perRecord}');
+	function bookListPage(curPage){
 		$('input[name=currentPage]').val(curPage);
 		$('input[name=perRecord]').val($('#perRecord').val());
-		$('form[id=frmPageId]').submit();
+		ajaxFunc();
+		/* $('form[id=frmPageId]').submit(); */
 	}
 	
 </script>
 
 <!-- Begin Page Content -->
-<%-- <form id="frmPageId" name="frmPage" method="post"
-		action="<c:url value='/admin/book/bookList?bookFlag=${param.bookFlag}'/>"> --%>
-<form id="frmPageId">
+<!-- 
+<form id="frmPageId" name="frmPage" method="post"
+		>
 	frmPageId<input id="frmPageIdBookFlag" type="text" name="bookFlag">
 	<input type="hidden" name="currentPage">
 	<input type="hidden" name="perRecord" value="5">
@@ -212,7 +214,7 @@
 	<input type="hidden" name="keywordRegdate" value="${param.keywordRegdate}">
 	<input type="hidden" name="keywordRegdate2" value="${param.keywordRegdate2}">
 	<input type="hidden" name="keywordCategory" value="${param.keywordCategory}">
-</form>
+</form>-->
 <!-- Page Heading -->
 
 <div class="head-div">
@@ -224,19 +226,20 @@
 <!--  -->
 
 <div class="board-body">
+
 	<div id="board-title">
 		<c:if test="${param.bookFlag != 'Inventory'}">
 			<h5>상품 리스트</h5>
-			<button class="bg-gradient-secondary book-button"
+			<button class="btn btn-warning bg-gradient-secondary book-button"
 				 id="bookRegisterBtn" onclick="location.href='bookRegister'">새 상품 등록</button>
-			<button class="bg-gradient-secondary book-button"  
-				 id="bookDeleteBtn" onclick="location.href='<c:url value='/admin/book/bookDelete'/>'">상품 삭제</button>
+			<button class="btn btn-warning bg-gradient-secondary book-button"  
+				 id="bookDeleteBtn" >상품 삭제</button>
 			
 		</c:if>
 		<c:if test="${param.bookFlag == 'Inventory' or param.bookFlag == 'InventoryByKeyword'}">
 			<h5>상품 재고 관리</h5>
 		</c:if>
-			<button id="toggleBtn" class="bg-gradient-secondary book-button"
+			<button id="toggleBtn" class="btn btn-warning bg-gradient-secondary book-button"
 			 type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
 			  aria-expanded="false" aria-controls="collapseExample">검색창 열기</button>
 	</div>
@@ -249,9 +252,7 @@
 		<!--  -->
 		<div class="board shadow-sm p-3 mb-5 bg-body rounded" style="margin: 10px 0px;background: white;margin-right: 15px">
 			<table class="table">
-				<c:if test="${!empty list}">
-					<caption class="captionBook">TOTAL &nbsp;${pagingInfo.totalRecord}&nbsp; ROWS</caption>
-				</c:if>
+				<caption id="captionBook" class="captionBook"></caption> <!-- TOTAL &nbsp;${res.pagingInfo.totalRecord}&nbsp; ROWS -->
 				<colgroup>
 					<col style="width:5%;" />
 					<col style="width:10%;" />
@@ -289,11 +290,9 @@
 					</tr>
 				</thead>
 				<tbody id="bookTbody">
-					
 				</tbody>
 			</table>
 			<!-- 페이지 번호 추가 -->	
-			<%-- <c:if test="${!empty list}"> --%>
 				<nav id="bookPaging" class="bookPaging" aria-label="Page navigation example">
 				 <%--  <ul class="pagination pagination-lg justify-content-center">
 				  	<c:if test="${pagingInfo.firstPage > 1 }">
@@ -320,11 +319,10 @@
 				    </c:if>
 				  </ul> --%>
 				</nav>
-			<%-- </c:if> --%>
 			<!--  페이지 번호 끝 -->
 		</div>
 	</div>
-	
 </div>
+
 <!-- End of Main Content -->
 <%@ include file="../inc/bottom.jsp"%>

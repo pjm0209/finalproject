@@ -67,5 +67,11 @@ public class MainBookController {
 		return "main/book/bookOrdering";
 	}
 	
+	@RequestMapping("/test/test")
+	public String test(@RequestParam(defaultValue = "0") int bookNo, Model model) {
+		logger.info("책 주문 페이지 - bookOrderMain, 파라미터 bookNo={}", bookNo);
+
+		return "main/book/test/test";
+	}
 	
 }//

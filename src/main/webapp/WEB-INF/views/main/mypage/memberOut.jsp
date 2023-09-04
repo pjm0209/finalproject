@@ -24,7 +24,7 @@ h2{
 .memberOut-agreement{
 	text-align:left;
 	margin-top: 110px;
-	margin-left: 300px;
+	margin-left: 500px;
 	margin-right: 300px;
 }
 

@@ -225,8 +225,7 @@
 			select rownum as RNUM, a.* from
 			(
 				select * from educationview 
-				set edu_app_flag = 'N'
-				where no=#{no}
+				where no=#{no} and edu_app_flag = 'N'
 				<include refid="searchWhere"></include>
 				order by edu_no desc
 			)a
@@ -246,8 +245,7 @@
 			select rownum as RNUM, a.* from
 			(
 				select * from educationview 
-				set edu_app_flag = 'Y'
-				where no=#{no}
+				where no=#{no} and edu_app_flag = 'Y'
 				<include refid="searchWhere"></include>
 				order by edu_no desc
 			)a

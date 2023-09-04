@@ -99,6 +99,12 @@
 		and hp=#{hp}
    </select>
    
+   <select id="emailCheck" parameterType="map" resultType="string" >
+		select email 
+		from member
+		where userid=#{userid} and email=#{email}
+   </select>
+      
    <select id="pwdCheck" parameterType="string" resultType="string">
 		select pwd from member
 		where userid = #{userid}
@@ -110,5 +116,6 @@
    		set pwd=#{pwd}
    		where userid=#{userid} 
    </update>
+   
 	
 </mapper>

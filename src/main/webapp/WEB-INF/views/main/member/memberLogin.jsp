@@ -179,54 +179,15 @@ $(function(){
 </script> 
 
 <!-- 카카오 스크립트 -->
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script>
-Kakao.init('5bdc967d76e3681232d52f0d0c435a2a'); //발급받은 키 중 javascript키를 사용해준다.
-console.log(Kakao.isInitialized()); // sdk초기화여부판단
 //카카오로그인
-function kakaoLogin() {
-    Kakao.Auth.login({
-      success: function (response) {
-       alert(response.access_token)
-       Kakao.Auth.setAccessToken(response.access_token);
-       
-        Kakao.API.request({
-          url: '/v2/user/me',
-          data : {
-             property_keys: ['kakao_profile_nickname', 'kakao_profile_image', 'kakao_account_email'],
-          },
-          
-          success: function (response) {
-             console.log(response)
-          },
-          fail: function (error) {
-            console.log(error)
-          },
-        })
-      },
-      fail: function (error) {
-        console.log(error)
-      },
-    })
-  }
-//카카오로그아웃  
-function kakaoLogout() {
-    if (Kakao.Auth.getAccessToken()) {
-      Kakao.API.request({
-        url: '/v1/user/unlink',
-        success: function (response) {
-           console.log(response)
-        },
-        fail: function (error) {
-          console.log(error)
-        },
-      })
-      Kakao.Auth.setAccessToken(undefined)
-    }
-  }  
+$("#kakaoLogin").click(function(){
+	location.href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id={63aae7bb7049cc37773c9691d2c30682}&redirect_uri=http://localhost:9091/mbti/main/member/memberLogin"
+	
+}
 </script>
 
-
-   
 </head>
 <body>
     <section class="container forms">    
@@ -261,18 +222,13 @@ function kakaoLogout() {
                     </div>
                     <span class="centered-span">또는</span><br>
                     <hr><br>
-					<div onclick="kakaoLogin();">
-				      <a href="javascript:void(0)">
-				          <img src='../../images/kakao_login_large_narrow.png' width=370; height=50;>
+                    
+                   	<div class="kakao" onclick="kakaoLogin();">
+				      <a href="#">
+				          <img src="<c:url value='../../images/kakao_login_large_narrow.png'/>" alt="카카오로그인" class="kakaoBtn" />
 				      </a>
 					</div>
-					
-					<div onclick="naverLogin();">
-				      <a href="javascript:void(0)">
-				          <img src='../../images/btnG_완성형.png' width=370; height=50;>
-				      </a>
-					</div>
-                
+                    		               
                     <div class="field button-field">
                     	<span >계정이 없으신가요?</span>
                     	<input type="button" value="회원가입" id="memberRegister-button">  
