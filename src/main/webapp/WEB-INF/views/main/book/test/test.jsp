@@ -1,224 +1,140 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%@ include file="../../inc/top.jsp"%>
+<script type="text/javascript" src="./testjs.js"></script>
+<script type="text/javascript">
+var fileNo = 0;
+var filesArr = new Array();
+
+/* 첨부파일 추가 */
+function addFile(obj){
+    var maxFileCnt = 5;   // 첨부파일 최대 개수
+    var attFileCnt = document.querySelectorAll('.filebox').length;    // 기존 추가된 첨부파일 개수
+    var remainFileCnt = maxFileCnt - attFileCnt;    // 추가로 첨부가능한 개수
+    var curFileCnt = obj.files.length;  // 현재 선택된 첨부파일 개수
+
+    // 첨부파일 개수 확인
+    if (curFileCnt > remainFileCnt) {
+        alert("첨부파일은 최대 " + maxFileCnt + "개 까지 첨부 가능합니다.");
+    } else {
+        for (const file of obj.files) {
+            // 첨부파일 검증
+            if (validation(file)) {
+                // 파일 배열에 담기
+                var reader = new FileReader();
+                reader.onload = function () {
+                    filesArr.push(file);
+                };
+                reader.readAsDataURL(file);
+
+                // 목록 추가
+                let htmlData = '';
+                htmlData += '<div id="file' + fileNo + '" class="filebox">';
+                htmlData += '   <p class="name">' + file.name + '</p>';
+                htmlData += '   <a class="delete" onclick="deleteFile(' + fileNo + ');"><i class="far fa-minus-square"></i></a>';
+                htmlData += '</div>';
+                $('.file-list').append(htmlData);
+                fileNo++;
+            } else {
+                continue;
+            }
+        }
+    }
+    // 초기화
+    document.querySelector("input[type=file]").value = "";
+}
+
+/* 첨부파일 검증 */
+function validation(obj){
+    const fileTypes = ['application/pdf', 'image/gif', 'image/jpeg', 'image/png', 'image/bmp', 'image/tif', 'application/haansofthwp', 'application/x-hwp'];
+    if (obj.name.length > 100) {
+        alert("파일명이 100자 이상인 파일은 제외되었습니다.");
+        return false;
+    } else if (obj.size > (100 * 1024 * 1024)) {
+        alert("최대 파일 용량인 100MB를 초과한 파일은 제외되었습니다.");
+        return false;
+    } else if (obj.name.lastIndexOf('.') == -1) {
+        alert("확장자가 없는 파일은 제외되었습니다.");
+        return false;
+    } else if (!fileTypes.includes(obj.type)) {
+        alert("첨부가 불가능한 파일은 제외되었습니다.");
+        return false;
+    } else {
+        return true;
+    }
+}
+
+/* 첨부파일 삭제 */
+function deleteFile(num) {
+    document.querySelector("#file" + num).remove();
+    filesArr[num].is_delete = true;
+}
+
+/* 폼 전송 */
+function submitForm() {
+    // 폼데이터 담기
+    var form = document.querySelector("form");
+    var formData = new FormData(form);
+    for (var i = 0; i < filesArr.length; i++) {
+        // 삭제되지 않은 파일만 폼데이터에 담기
+        if (!filesArr[i].is_delete) {
+            formData.append("attach_file", filesArr[i]);
+        }
+    }
+
+    $.ajax({
+        method: 'POST',
+        url: '/register',
+        dataType: 'json',
+        data: formData,
+        async: true,
+        timeout: 30000,
+        cache: false,
+        headers: {'cache-control': 'no-cache', 'pragma': 'no-cache'},
+        success: function () {
+            alert("파일업로드 성공");
+        },
+        error: function (xhr, desc, err) {
+            alert('에러가 발생 하였습니다.');
+            return;
+        }
+    })
+}
+</script>
+
 <style>
-#bookMain{
-	width: 100%;
+	.insert {
+    padding: 20px 30px;
+    display: block;
+    width: 600px;
+    margin: 5vh auto;
+    height: 90vh;
+    border: 1px solid #dbdbdb;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
-
-#topImg{
-	width: 100%;
-	margin: 0;
-	padding: 0;
+.insert .file-list {
+    height: 200px;
+    overflow: auto;
+    border: 1px solid #989898;
+    padding: 10px;
 }
-
-#topImg img{
-	width: 100%;
-	height: 500px;
+.insert .file-list .filebox p {
+    font-size: 14px;
+    margin-top: 10px;
+    display: inline-block;
 }
-
-#pdList{
-	margin-top: 50px;
-	width: 1300px;
-	text-align: center;
+.insert .file-list .filebox .delete i{
+    color: #ff5353;
+    margin-left: 5px;
 }
-#pdList h1{
-	text-align: center;
-	
-}
-#pdList ul{
-	width: 1300px;
-	text-align: center;
-	display: flex;
-    justify-content: space-around;
-}
-
-#pdList ul li img{
-	width: 250px;
-	height: 300px;
-}
-
-#bookMain .container {
-	margin: 0 auto;
-	width: 100%;
-}
-
-#content {
-	width: 100%;
-	border: 2px dotted green;
-	padding: 18px;
-	margin-left: 215px;
-	color: darkgrey;
-}
-
-#sidebar {
-	border: 2px dotted red;
-	float: left;
-	width: 200px;
-	color: #ffbdbd;
-	will-change: min-height;
-}
-
-#sidebar .sidebar__inner {
-	position: relative;
-	transform: translate(0, 0);
-	transform: translate3d(0, 0, 0);
-	will-change: position, transform;
-}
-
-.clearfix:after {
-	display: block;
-	content: "";
-	clear: both;
-}
-
-#sidebar ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  width: 150px;
-  background-color: #f1f1f1;
-}
-
-#sidebar li a {
-  display: block;
-  color: #000;
-  padding: 8px 16px;
-  text-decoration: none;
-}
-
-/* Change the link color on hover */
-#sidebar li a:hover {
-  background-color: #555;
-  color: white;
-}
-
 </style>
+<div class="insert">
+    <form method="POST" onsubmit="return false;" enctype="multipart/form-data">
+        <input id="input_imgs" type="file" onchange="addFile(this);" multiple />
+        <p id="output"></p>
+        <div class="file-list"></div>
+    </form>
+</div>
 
-</head>
-
-<body>
-	<header>
-		<div class="container">
-			<h1>Site Title</h1>
-		</div>
-	</header>
-<section id="bookMain" class="book">
-	<div class="container clearfix" style="position: relative;">
-		<div id="sidebar" class="" style="">
-			<div class="sidebar__inner" style="position: relative;">
-				<div>
-					<ul>
-					  <li><a href="#home">Home</a></li>
-					  <li><a href="#news">News</a></li>
-					  <li><a href="#contact">Contact</a></li>
-					  <li><a href="#about">About</a></li>
-					</ul>
-				</div>
-				<div class="resize-sensor"
-					style="position: absolute; inset: 0px; overflow: hidden; z-index: -1; visibility: hidden;">
-					<div class="resize-sensor-expand"
-						style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; z-index: -1; visibility: hidden;">
-						<div
-							style="position: absolute; left: 0px; top: 0px; transition: all 0s ease 0s; width: 100000px; height: 100000px;">
-						</div>
-					</div>
-					<div class="resize-sensor-shrink"
-						style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; z-index: -1; visibility: hidden;">
-						<div style="position: absolute; left: 0; top: 0; transition: 0s; width: 200%; height: 200%">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div id="content">
-			<div id="topImg" style="text-align: center;">
-				<img src="<c:url value='/images/72939_11192_2044.jpg'/>">
-			</div>
-			<div id="pdList">
-				<h1 class="display-3">도 서 구 매</h1>
-				<ul class="aa-product-catg">
-					<!-- start single product item -->
-					<li>
-						<figure>
-							<a class="aa-product-img" href="<c:url value='/main/book/bookDetail'/>">
-							 <img src="<c:url value='/images/bookProduct/20024.jpg'/>" alt="">
-							</a>
-							<a class="aa-add-card-btn" href="">
-								<span style="display: block;" class="fas fa-shopping-cart"></span>장바구니 담기</a>
-							<figcaption>
-								<h5 class="aa-product-title">
-									<a href="#"></a>
-								</h5>
-								<span class="aa-product-price">1700원</span>
-		
-							</figcaption>
-						</figure>
-					</li>
-					<li>
-						<figure>
-							<a class="aa-product-img" href="">
-							 <img src="<c:url value='/images/bookProduct/20025.jpg'/>" alt="">
-							</a>
-							<a class="aa-add-card-btn" href="">
-								<span style="display: block;" class="fas fa-shopping-cart"></span>장바구니 담기</a>
-							<figcaption>
-								<h5 class="aa-product-title">
-									<a href="#"></a>
-								</h5>
-								<span class="aa-product-price">1700원</span>
-		
-							</figcaption>
-						</figure>
-					</li>
-					<li>
-						<figure>
-							<a class="aa-product-img" href="">
-							 <img src="<c:url value='/images/bookProduct/20026.jpg'/>" alt="">
-							</a>
-							<a class="aa-add-card-btn" href="">
-								<span style="display: block;" class="fas fa-shopping-cart"></span>장바구니 담기</a>
-							<figcaption>
-								<h5 class="aa-product-title">
-									<a href="#"></a>
-								</h5>
-								<span class="aa-product-price">1700원</span>
-		
-							</figcaption>
-						</figure>
-					</li>
-				</ul>
-			</div>
-		</div>
-		<div class="resize-sensor"
-			style="position: absolute; inset: 0px; overflow: hidden; z-index: -1; visibility: hidden;">
-			<div class="resize-sensor-expand"
-				style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; z-index: -1; visibility: hidden;">
-				<div
-					style="position: absolute; left: 0px; top: 0px; transition: all 0s ease 0s; width: 100000px; height: 100000px;">
-				</div>
-			</div>
-			<div class="resize-sensor-shrink"
-				style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; z-index: -1; visibility: hidden;">
-				<div style="position: absolute; left: 0; top: 0; transition: 0s; width: 200%; height: 200%"></div>
-			</div>
-		</div>
-	</div>
-
-	
-	
-	<script type="text/javascript" src="<c:url value='/js/rAF.js'/>"></script>
-	<script type="text/javascript" src="<c:url value='/js/ResizeSensor.js'/>"></script>
-	<script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>
-	<script type="text/javascript" src="<c:url value='/js/sticky-sidebar.js'/>"></script>
-	<script type="text/javascript">
-		var a = new StickySidebar('#sidebar', {
-			topSpacing : 200,
-			containerSelector: '.container'
-		});
-		
-	</script>
-</section>
-
-<%@ include file="../../inc/bottom.jsp"%>

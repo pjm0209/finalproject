@@ -6,11 +6,42 @@
 <link type="text/css" rel="stylesheet" href="<c:url value='/admin-css-js/css/bookMain.css'/>">
 
 <script type="text/javascript" src="<c:url value='/admin-css-js/js/bookMain.js'/>"></script>
+<style>
+	
+.sideBarBestBook3{
+	position: absolute;
+    right: 0;
+     /*top: 760px;*/
+    margin-right: 10px;
+    text-align: center;
+}
 
+.sideBarBestBook3 #sidebar li img{
+	width: 80px;
+	vertical-align: middle;
+}
+
+.sideBarBestBook3 #sidebar ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	width: 150px;
+	background-color: #efefef;
+}
+
+.sideBarBestBook3 #sidebar li  {
+	display: block;
+	color: #ee7843;
+	padding: 8px 16px;
+	font-weight: bold;
+	text-decoration: none;
+}
+	
+</style>
 <section>
 
-	<div id='bookSellMainImg' class=" bookslide">
-			<ul class="gallery">
+	<div id='bookSellMainImg' class=" bookslide shadow-sm p-3 mb-5 bg-body rounded">
+			<ul class="gallery ">
 				<li><img src="<c:url value='/images/bookProduct/slide_01.jpg'/>"></li>
 				<li><img src="<c:url value='/images/bookProduct/slide_02.jpg'/>"></li>
 				<li><img src="<c:url value='/images/bookProduct/slide_03.jpg'/>"></li>
@@ -151,6 +182,7 @@
 					</li>
 				</ul>
 			</div>
+			
 			<div class="resize-sensor" style="position: absolute; inset: 0px; overflow: hidden; z-index: -1; visibility: 	hidden;">
 				<div class="resize-sensor-expand" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; 		overflow: hidden; z-index: -1; visibility: hidden;">
 					<div style="position: absolute; left: 0px; top: 0px; transition: all 0s ease 0s; width: 100000px; 				height: 100000px;">
@@ -166,12 +198,39 @@
 			<script type="text/javascript" src="<c:url value='/js/sticky-sidebar.js'/>"></script>
 			<script type="text/javascript">
 				var a = new StickySidebar('#sidebar', {
-					topSpacing : 400
+					topSpacing : 500
 				});
 				
 			</script>
 		</div>
 	</div>
 </section>
+<!-- 직접 만든 sidebar -->
+ <nav class="sideBarBestBook3" style="top:835px;">
+	<div id="sidebar" class="" style="">
+		<div class="sidebar__inner shadow-sm bg-body rounded" style="position: relative;">
+			<div>
+				<ul>
+					<li>이 분야 베스트3</li><br>
+					<li>
+						<i class="bi bi-1-square-fill"></i><br>
+						<img src="<c:url value='/images/bookProduct/1.jpg'/>">
+						<div>책 이름 넣기</div>
+					</li>
+					<li>
+						<i class="bi bi-2-square-fill"></i></i><br>
+						<img src="<c:url value='/images/bookProduct/1.jpg'/>" >
+						<div>책 이름 넣기</div>
+					</li>
+					<li>
+						<i class="bi bi-3-square-fill"></i></i><br>
+						<img src="<c:url value='/images/bookProduct/1.jpg'/>">
+						<div>책 이름 넣기</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</nav> 
 
 <%@ include file="../inc/bottom.jsp"%>

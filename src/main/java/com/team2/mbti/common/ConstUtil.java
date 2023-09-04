@@ -10,7 +10,6 @@ public interface ConstUtil {
 	
 	//파일 업로드 처리 관련 상수
 	String FILE_UPLOAD_TYPE = "test";
-	//String FILE_UPLOAD_TYPE = "deploy";
 	
 	//
 	String FILE_UPLOAD_PATH = "fileUpload";
@@ -19,6 +18,9 @@ public interface ConstUtil {
 	//관리자 페이지
 	String IMAGE_FILE_UPLOAD_PATH = "pd_images";
 	String IMAGE_FILE_UPLOAD_PATH_TEST = "C:\\finalproject\\finalproject\\src\\main\\webapp\\fileUpload";
+	//book관리자
+	String BOOKIMAGE_FILE_UPLOAD_PATH = "pd_images";
+	String BOOKIMAGE_FILE_UPLOAD_PATH_TEST = "C:\\finalproject\\finalproject\\src\\main\\webapp\\images\\bookProduct\\upload_img";
 	
 	//자료실 업로드인지, 상품 등록시 업로드인지 구분값
 	int UPLOAD_FILE_FLAG = 1; //자료실 업로드

@@ -16,6 +16,8 @@ import com.team2.mbti.message.model.MessageService;
 import com.team2.mbti.message.model.SendDmListVO;
 import com.team2.mbti.message.model.SendDmVO;
 
+import jakarta.servlet.http.HttpSession;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -38,22 +40,24 @@ public class MessageController {
 	}
 	
 	@PostMapping("/message")
-	public String message_post(@ModelAttribute SendDmListVO sendDmListVo,Model model) {
+	public String message_post(@ModelAttribute SendDmListVO sendDmListVo, HttpSession session,Model model) {
+		int adminNo=(int)session.getAttribute("adminNo");
 		logger.info("쪽지 보내기 처리, 파라미터 sendDmListVo={}", sendDmListVo);
 		
-		int cnt=messageService.insertSendDm(sendDmListVo);
+		String msg="",url="/admin/message/message";
+		List<SendDmVO> list=sendDmListVo.getSendItems();
+		int cnt=messageService.insertSendDmToAdmin(sendDmListVo, adminNo);
 		logger.info("쪽지 보내기 결과 cnt={}",cnt);
 		
-		String msg="",url="redirect:/admin/message/message";
 		if(cnt>0) {
 			msg="쪽지를 보냈습니다.";
 		}else {
 			msg="쪽지를 보내는중 에러가 발생했습니다.";
 		}
-		
 		model.addAttribute("msg", msg);
 		model.addAttribute("url", url);
 
 		return "common/message";
 	}
+	
 }

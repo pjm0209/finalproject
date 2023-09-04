@@ -132,8 +132,7 @@ public class MemberServiceImpl implements MemberService {
 		}else {
 			result=EMAIL_OK;
 		}
-			
-		
+					
 		return result;
 	}
 		

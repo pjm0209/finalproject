@@ -39,7 +39,7 @@
 				<c:forEach var="memVo" items="${list}">
 					<c:set var="questionType" value="${mbtiSurveyVo.questionTypeNo}"/>
 					<tr>
-						<th scope="row"><input type="checkbox" name="memItems[${idx}].no" class="board-checkbox check" value="${memVo.no}"></th>
+						<th scope="row"><input type="checkbox" name="sendItems[${idx}].receiveNo" class="board-checkbox check" value="${memVo.no}"></th>
 						<td>${memVo.no}</td>
 						<td>${memVo.userid}</td>
 						<td id="name${memVo.no}">${memVo.name}</td>

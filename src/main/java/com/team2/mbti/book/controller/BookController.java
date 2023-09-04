@@ -1,6 +1,7 @@
 package com.team2.mbti.book.controller;
 
-import java.util.ArrayList;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,22 +19,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team2.mbti.book.model.BookService;
 import com.team2.mbti.book.model.StockBookVO;
-import com.team2.mbti.book.model.orderBookVO;
+import com.team2.mbti.book.model.StockBookVOList;
 import com.team2.mbti.common.ConstUtil;
 import com.team2.mbti.common.PaginationInfo;
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/admin/book")
+
 public class BookController {
 
 	private static final Logger logger = LoggerFactory.getLogger(BookController.class);
 	private final BookService bookService;
-
+	private final FileUploadUtil2 fileUploadUtil2;
 	/*
 	 * @RequestMapping("/bookList") public String bookList(@ModelAttribute
 	 * StockBookVO vo, HttpServletRequest request , Model model) { // 1
@@ -118,7 +119,10 @@ public class BookController {
 		PaginationInfo pagingInfo = new PaginationInfo();
 		pagingInfo.setBlockSize(ConstUtil.BLOCK_SIZE);
 		pagingInfo.setCurrentPage(vo.getCurrentPage());
-
+		
+		logger.info("vo.getCurrentPage()={}", vo.getCurrentPage());
+		logger.info("pagingInfo.getCurrentPage()={}", pagingInfo.getCurrentPage());
+		
 		String bookFlag = request.getParameter("bookFlag");
 		/*
 		 * if( (bookFlag != null && !bookFlag.isEmpty()) && (
@@ -184,18 +188,140 @@ public class BookController {
 		return "admin/book/bookRegister";
 	}
 
+	
 	@PostMapping("/bookRegister")
-	public String bookRegister_post(Model model) {
+	public String bookRegister_post(@ModelAttribute StockBookVO vo, HttpServletRequest request, Model model) {
+		logger.info("책관리 페이지 - 책 상품 등록 처리하기, 파라미터 vo={}", vo);
+		
+		List<Map<String, Object>> fileList = null;
+		try {
+			fileList = fileUploadUtil2.fileupload(request, ConstUtil.UPLOAD_IMAGE_FLAG);
+
+			String bookImgName = "", bookImgOriginalname = "";
+			long bookImgSize = 0;
+			for (Map<String, Object> map : fileList) {
+				bookImgName = (String) map.get("fileName");
+				logger.info("bookImgName={}", bookImgName);
+				bookImgOriginalname = (String) map.get("originalFileName");
+				logger.info("bookImgOriginalname={}", bookImgOriginalname);
+				bookImgSize = (long) map.get("fileSize");
+				logger.info("bookImgSize={}", bookImgSize);
+				
+				vo.setBookImgName(bookImgName);
+				vo.setBookImgOriginalname(bookImgOriginalname);
+				vo.setBookImgSize(bookImgSize);
+			} // for
+			logger.info("변경 후1 vo={}", vo);
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		logger.info("변경 후2 vo={}", vo);
+		int cnt = bookService.insertBook(vo);
+		logger.info("상품 등록 처리결과 cnt={}", cnt);
+		logger.info("파일업로드 처리결과 list.size()={}", fileList.size());
+		if(cnt > 0) {
+			/*
+			 * Map<String, Integer> map = new HashMap<>(); map.put("book_No",
+			 * vo.getBookNo()); map.put("intostock_Qty", vo.getStockQty());
+			 */
+
+			/*
+			 * logger.info("intoStock 입력 파라미터, map={}", map);
+			 * bookService.insertIntoStock(map);
+			 */
+			
+			model.addAttribute("url", "/admin/book/bookList?bookFlag=bookList");
+			model.addAttribute("msg", "상품등록이 완료되었습니다.");
+		} else {
+			model.addAttribute("url", "/admin/book/bookRegister");
+			model.addAttribute("msg", "상품등록 실패...");
+		}
+		
+		
+		return "common/message";
+	}
+	
+	@GetMapping("/bookEdit")
+	public String bookEdit_get(@RequestParam(defaultValue = "0")int bookNo, HttpServletRequest request ,Model model) {
+		logger.info("책관리 페이지 - 책 상품 수정 페이지입니다, 파라미터 bookNo={}", bookNo);
+		if(bookNo == 0) {
+			model.addAttribute("url", "/admin/index");
+			model.addAttribute("msg", "잘못된 url입니다.");
+			return "common/message";
+		}
+		StockBookVO sbVo = bookService.selectBookByNo(bookNo);
+		logger.info("책관리 페이지 - 책 상품 수정 - 번호로 조회결과, sbVo={}", sbVo);
+		
+		String sdfRegdate = sbVo.getBookRegdate().substring(0, 10);
+		sbVo.setBookRegdate(sdfRegdate);
+		
+		model.addAttribute("title", "책 수정 페이지");
+		model.addAttribute("vo", sbVo);
+		
+		return "admin/book/bookRegister";
+	}
+
+	@PostMapping("/bookEdit")
+	public String bookEdit_post(@ModelAttribute StockBookVO sbVo, HttpServletRequest request, Model model) {
 		// 1
-		logger.info("책관리 페이지 - 책 상품 등록 처리하기");
+		logger.info("책관리 페이지 - 책 상품 수정 처리하기 파라미터 sbVo={}", sbVo);
 
 		// 2
+		String oldFileName = sbVo.getBookImgName();
+		logger.info("책 상품 수정 처리하기 - 기존 파일 이름 oldFileName={}", oldFileName);
+		String updatedFileName = "", updatedOriginalFileName = "";
+		long updatedFileSize = 0;
+		try {
 
+			List<Map<String, Object>> updatedFileList = fileUploadUtil2.fileupload(request, ConstUtil.UPLOAD_IMAGE_FLAG);
+
+			for (Map<String, Object> map : updatedFileList) {
+				updatedFileName = (String) map.get("fileName");
+				updatedOriginalFileName = (String) map.get("originalFileName");
+				updatedFileSize = (long) map.get("fileSize");
+				
+				sbVo.setBookImgName(updatedFileName);
+				sbVo.setBookImgOriginalname(updatedOriginalFileName);
+				sbVo.setBookImgSize(updatedFileSize);
+			} // for
+
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		String msg = "수정 처리완료", url = "/admin/book/bookEdit?bookNo=" + sbVo.getBookNo();
+		int cnt = bookService.updateBook(sbVo);
+
+		if (cnt > 0) {
+
+			// 새로 업로드했고 기존 파일이 존재한다면 업로드폴더에서 기존 파일 삭제하기
+			if (updatedFileName != null && !updatedFileName.isEmpty()) {// 새로 첨부했고
+				if (oldFileName != null && !oldFileName.isEmpty()) { // 기존 파일이 존재한다면
+					String fileUploadPath = fileUploadUtil2.getUploadPath(request, ConstUtil.UPLOAD_IMAGE_FLAG);
+					File file = new File(fileUploadPath, oldFileName);
+					if (file.exists()) {
+						Boolean bool = file.delete();
+						logger.info("삭제함? : bool={}, 삭제한 기존 파일명 oldFileName={}", bool, oldFileName);
+					}
+				}
+			}
+
+		} else {
+			url = "/admin/book/bookEdit?bookNo=" + sbVo.getBookNo();
+			msg = "수정 실패...";
+		}
 		// 3
-		model.addAttribute("title", "책 등록 페이지");
+		model.addAttribute("title", "책 수정 처리 중");
+		model.addAttribute("url", url);
+		model.addAttribute("msg", msg);
 
 		// 4
-		return "redirect:/admin/book/bookList";
+		/* return "redirect:/admin/book/bookList"; */
+		return "common/message";
 	}
 
 	@RequestMapping("/bookSummingUp")
@@ -207,18 +333,51 @@ public class BookController {
 		return "admin/book/bookSummingUp";
 	}
 
-	@RequestMapping("/bookDelete")
-	public String bookDelete(@RequestParam(defaultValue = "0") int bookNo, Model model) {
-		logger.info("책관리 페이지 - 책 상품 삭제하기, 파라미터 bookNo={}", bookNo);
-
-		return "redirect:/admin/book/bookList";
+	@RequestMapping("/deleteMulti")
+	public String deleteMulti(@ModelAttribute StockBookVOList listvo,
+			HttpServletRequest request, Model model) {
+		//1
+		logger.info("선택한 책 삭제, 파라미터 listvo={}", listvo);
+		
+		//2. db
+		List<StockBookVO> list = listvo.getStockBookVoList(); 
+		int cnt = bookService.deleteMulti(list);
+		logger.info("선택한 상품 삭제 결과, cnt={}", cnt);
+		String msg = "", url="/admin/book/bookList?bookFlag=bookList";
+		
+		if(cnt > 0) {
+			msg = "선택한 상품들을 삭제했습니다";
+			
+			String uploadPath = fileUploadUtil2.getUploadPath(request, ConstUtil.UPLOAD_IMAGE_FLAG);
+			
+			for(int i = 0; i < list.size(); i++) {
+				StockBookVO vo = list.get(i);
+				
+				int bookNo = vo.getBookNo();
+				String fileName = vo.getBookImgName();
+				
+				logger.info("i={}, bookNo={}", i, bookNo);
+				logger.info("i={}, fileName={}", i, fileName);
+				
+				//업로드한 이미지 파일 삭제 처리
+				if(bookNo != 0) { // 선택한 상품만 삭제
+					File file = new File(uploadPath, fileName);
+					if(file.exists()) {
+						boolean bool = file.delete();
+						logger.info("파일 삭제 여부 : {}", bool);
+					}
+				}//if
+			}//for
+		} else {
+			msg = "선택한 상품 삭제 중 에러가 발생했습니다.";
+		}
+		//3
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		//4
+		return "common/message";
 	}
-
-	@RequestMapping("/bookEdit")
-	public String bookEdit(@RequestParam(defaultValue = "0") int bookNo, Model model) {
-		logger.info("책관리 페이지 - 책 상품 수정하기, 파라미터 bookNo={}", bookNo);
-
-		return "redirect:/admin/book/bookRegister";
-	}
+	
 
 }//

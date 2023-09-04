@@ -7,7 +7,6 @@
 <div class="head-div">
 	<h2 class="text-gray-800">주문 취소 관리</h2>
 </div>
-<%@ include file="../order/orderSideBody.jsp"%>
 <div class="board-body">
 	<div id="board-title">
 		<c:choose> 
@@ -36,7 +35,7 @@
 				<h5>전체 주문 취소 내역</h5>
 			</c:otherwise> 
 		</c:choose>
-		<button id="toggleBtn" class="bg-gradient-secondary book-button"
+		<button id="toggleBtn" class="btn btn-warning bg-gradient-secondary book-button"
 			 type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
 			  aria-expanded="false" aria-controls="collapseExample">검색창 열기</button>
 	</div>
