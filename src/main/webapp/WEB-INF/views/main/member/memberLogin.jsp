@@ -179,37 +179,13 @@ $(function(){
 </script> 
 
 <!-- 카카오 스크립트 -->
-<script src = "https://developers.kakao.com/sdk/js/kakao.min.js"></script>
-<script type="text/javascript">
-Kakao.init('d65e0cfc403eb24ae905648f7b9656bd');
-
-$("#kakao-login-btn").on("click", function(){
-    //1. 로그인 시도
-    Kakao.Auth.login({
-        success: function(authObj) {
-         
-          //2. 로그인 성공시, API 호출
-          Kakao.API.request({
-            url: '/v2/user/me',
-            success: function(res) {
-              console.log(res);
-              var id = res.id;
-			  scope : 'account_email';
-			alert('로그인성공');
-              location.href="callback주소";             
-        }
-          })
-          console.log(authObj);
-          var token = authObj.access_token;
-        },
-        fail: function(err) {
-          alert(JSON.stringify(err));
-        }
-      });
-        
-}) //
-
-
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script>
+//카카오로그인
+$("#kakaoLogin").click(function(){
+	location.href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id={63aae7bb7049cc37773c9691d2c30682}&redirect_uri=http://localhost:9091/mbti/main/member/memberLogin"
+	
+}
 </script>
 
 </head>
@@ -246,18 +222,13 @@ $("#kakao-login-btn").on("click", function(){
                     </div>
                     <span class="centered-span">또는</span><br>
                     <hr><br>
-					<div onclick="kakaoLogin();">
-				      <a href="javascript:void(0)">
-				          <img src='../../images/kakao_login_large_narrow.png' width=370; height=50;>
+                    
+                   	<div class="kakao" onclick="kakaoLogin();">
+				      <a href="#">
+				          <img src="<c:url value='../../images/kakao_login_large_narrow.png'/>" alt="카카오로그인" class="kakaoBtn" />
 				      </a>
 					</div>
-					
-					<div onclick="naverLogin();">
-				      <a href="javascript:void(0)">
-				          <img src='../../images/btnG_완성형.png' width=370; height=50;>
-				      </a>
-					</div>
-                
+                    		               
                     <div class="field button-field">
                     	<span >계정이 없으신가요?</span>
                     	<input type="button" value="회원가입" id="memberRegister-button">  
