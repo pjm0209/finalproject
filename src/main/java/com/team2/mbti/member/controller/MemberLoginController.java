@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -157,12 +158,13 @@ public class MemberLoginController {
     }
 		
 	@GetMapping(value="/member/forgot-pwd")
-	public String forgot_pwd_get() {
+	public String forgot_pwd_get(Model model) {
 		logger.info("비밀번호 찾기 화면");
 		
 		return "main/member/forgot-pwd";
 	}
 	
+	@Transactional
 	@PostMapping(value="/member/forgot-pwd")
 	public String forgot_pwd_post(@ModelAttribute MemberVO membervo, HttpServletResponse response) {
 		logger.info("비밀번호 찾기 처리");
