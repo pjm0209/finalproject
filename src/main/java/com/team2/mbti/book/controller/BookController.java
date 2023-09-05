@@ -35,6 +35,7 @@ public class BookController {
 	private static final Logger logger = LoggerFactory.getLogger(BookController.class);
 	private final BookService bookService;
 	private final FileUploadUtil2 fileUploadUtil2;
+
 	/*
 	 * @RequestMapping("/bookList") public String bookList(@ModelAttribute
 	 * StockBookVO vo, HttpServletRequest request , Model model) { // 1
@@ -113,16 +114,16 @@ public class BookController {
 		logger.info("책관리 페이지 - 책 리스트 페이지입니다.,파라미터 vo={}", vo);
 		logger.info("ajax 이용 - ajaxList");
 
-		Map<String, Object> map= new HashMap<>();
+		Map<String, Object> map = new HashMap<>();
 		// 2
 		//
 		PaginationInfo pagingInfo = new PaginationInfo();
 		pagingInfo.setBlockSize(ConstUtil.BLOCK_SIZE);
 		pagingInfo.setCurrentPage(vo.getCurrentPage());
-		
+
 		logger.info("vo.getCurrentPage()={}", vo.getCurrentPage());
 		logger.info("pagingInfo.getCurrentPage()={}", pagingInfo.getCurrentPage());
-		
+
 		String bookFlag = request.getParameter("bookFlag");
 		/*
 		 * if( (bookFlag != null && !bookFlag.isEmpty()) && (
@@ -160,19 +161,16 @@ public class BookController {
 		pagingInfo.setTotalRecord(totalRecord);
 		logger.info("pagingInfo 객체, pagingInfo={}", pagingInfo);
 
-		
 		// 3
 		/*
 		 * model.addAttribute("pagingInfo", pagingInfo); model.addAttribute("list",
 		 * list); model.addAttribute("title", "책관리 페이지"); logger.info("bookFlag={}",
 		 * bookFlag);
 		 */
-		map.put("list",list);
-		map.put("bookFlag",bookFlag);
-		map.put("pagingInfo",pagingInfo);
-		
-		
-		
+		map.put("list", list);
+		map.put("bookFlag", bookFlag);
+		map.put("pagingInfo", pagingInfo);
+
 		// 4
 		/* return "admin/book/bookList"; */
 		return map;
@@ -188,11 +186,10 @@ public class BookController {
 		return "admin/book/bookRegister";
 	}
 
-	
 	@PostMapping("/bookRegister")
 	public String bookRegister_post(@ModelAttribute StockBookVO vo, HttpServletRequest request, Model model) {
 		logger.info("책관리 페이지 - 책 상품 등록 처리하기, 파라미터 vo={}", vo);
-		
+
 		List<Map<String, Object>> fileList = null;
 		try {
 			fileList = fileUploadUtil2.fileupload(request, ConstUtil.UPLOAD_IMAGE_FLAG);
@@ -206,7 +203,7 @@ public class BookController {
 				logger.info("bookImgOriginalname={}", bookImgOriginalname);
 				bookImgSize = (long) map.get("fileSize");
 				logger.info("bookImgSize={}", bookImgSize);
-				
+
 				vo.setBookImgName(bookImgName);
 				vo.setBookImgOriginalname(bookImgOriginalname);
 				vo.setBookImgSize(bookImgSize);
@@ -218,48 +215,39 @@ public class BookController {
 			e.printStackTrace();
 		}
 		logger.info("변경 후2 vo={}", vo);
+
 		int cnt = bookService.insertBook(vo);
+
 		logger.info("상품 등록 처리결과 cnt={}", cnt);
 		logger.info("파일업로드 처리결과 list.size()={}", fileList.size());
-		if(cnt > 0) {
-			/*
-			 * Map<String, Integer> map = new HashMap<>(); map.put("book_No",
-			 * vo.getBookNo()); map.put("intostock_Qty", vo.getStockQty());
-			 */
-
-			/*
-			 * logger.info("intoStock 입력 파라미터, map={}", map);
-			 * bookService.insertIntoStock(map);
-			 */
-			
+		if (cnt > 0) {
 			model.addAttribute("url", "/admin/book/bookList?bookFlag=bookList");
 			model.addAttribute("msg", "상품등록이 완료되었습니다.");
 		} else {
 			model.addAttribute("url", "/admin/book/bookRegister");
 			model.addAttribute("msg", "상품등록 실패...");
 		}
-		
-		
+
 		return "common/message";
 	}
-	
+
 	@GetMapping("/bookEdit")
-	public String bookEdit_get(@RequestParam(defaultValue = "0")int bookNo, HttpServletRequest request ,Model model) {
+	public String bookEdit_get(@RequestParam(defaultValue = "0") int bookNo, HttpServletRequest request, Model model) {
 		logger.info("책관리 페이지 - 책 상품 수정 페이지입니다, 파라미터 bookNo={}", bookNo);
-		if(bookNo == 0) {
+		if (bookNo == 0) {
 			model.addAttribute("url", "/admin/index");
 			model.addAttribute("msg", "잘못된 url입니다.");
 			return "common/message";
 		}
 		StockBookVO sbVo = bookService.selectBookByNo(bookNo);
 		logger.info("책관리 페이지 - 책 상품 수정 - 번호로 조회결과, sbVo={}", sbVo);
-		
+
 		String sdfRegdate = sbVo.getBookRegdate().substring(0, 10);
 		sbVo.setBookRegdate(sdfRegdate);
-		
+
 		model.addAttribute("title", "책 수정 페이지");
 		model.addAttribute("vo", sbVo);
-		
+
 		return "admin/book/bookRegister";
 	}
 
@@ -275,13 +263,14 @@ public class BookController {
 		long updatedFileSize = 0;
 		try {
 
-			List<Map<String, Object>> updatedFileList = fileUploadUtil2.fileupload(request, ConstUtil.UPLOAD_IMAGE_FLAG);
+			List<Map<String, Object>> updatedFileList = fileUploadUtil2.fileupload(request,
+					ConstUtil.UPLOAD_IMAGE_FLAG);
 
 			for (Map<String, Object> map : updatedFileList) {
 				updatedFileName = (String) map.get("fileName");
 				updatedOriginalFileName = (String) map.get("originalFileName");
 				updatedFileSize = (long) map.get("fileSize");
-				
+
 				sbVo.setBookImgName(updatedFileName);
 				sbVo.setBookImgOriginalname(updatedOriginalFileName);
 				sbVo.setBookImgSize(updatedFileSize);
@@ -292,7 +281,7 @@ public class BookController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		String msg = "수정 처리완료", url = "/admin/book/bookEdit?bookNo=" + sbVo.getBookNo();
 		int cnt = bookService.updateBook(sbVo);
 
@@ -334,50 +323,99 @@ public class BookController {
 	}
 
 	@RequestMapping("/deleteMulti")
-	public String deleteMulti(@ModelAttribute StockBookVOList listvo,
-			HttpServletRequest request, Model model) {
-		//1
+	public String deleteMulti(@ModelAttribute StockBookVOList listvo, HttpServletRequest request, Model model) {
+		// 1
 		logger.info("선택한 책 삭제, 파라미터 listvo={}", listvo);
-		
-		//2. db
-		List<StockBookVO> list = listvo.getStockBookVoList(); 
+
+		// 2. db
+		List<StockBookVO> list = listvo.getStockBookItems();
 		int cnt = bookService.deleteMulti(list);
 		logger.info("선택한 상품 삭제 결과, cnt={}", cnt);
-		String msg = "", url="/admin/book/bookList?bookFlag=bookList";
-		
-		if(cnt > 0) {
+		String msg = "", url = "/admin/book/bookList?bookFlag=bookList";
+
+		if (cnt > 0) {
 			msg = "선택한 상품들을 삭제했습니다";
-			
+
 			String uploadPath = fileUploadUtil2.getUploadPath(request, ConstUtil.UPLOAD_IMAGE_FLAG);
-			
-			for(int i = 0; i < list.size(); i++) {
+
+			for (int i = 0; i < list.size(); i++) {
 				StockBookVO vo = list.get(i);
-				
+
 				int bookNo = vo.getBookNo();
 				String fileName = vo.getBookImgName();
-				
+
 				logger.info("i={}, bookNo={}", i, bookNo);
 				logger.info("i={}, fileName={}", i, fileName);
-				
-				//업로드한 이미지 파일 삭제 처리
-				if(bookNo != 0) { // 선택한 상품만 삭제
+
+				// 업로드한 이미지 파일 삭제 처리
+				if (bookNo != 0) { // 선택한 상품만 삭제
 					File file = new File(uploadPath, fileName);
-					if(file.exists()) {
+					if (file.exists()) {
 						boolean bool = file.delete();
 						logger.info("파일 삭제 여부 : {}", bool);
 					}
-				}//if
-			}//for
+				} // if
+			} // for
 		} else {
 			msg = "선택한 상품 삭제 중 에러가 발생했습니다.";
 		}
-		//3
+		// 3
 		model.addAttribute("msg", msg);
 		model.addAttribute("url", url);
-		
-		//4
+
+		// 4
 		return "common/message";
 	}
 	
+	@RequestMapping("/updateMulti")
+	public String updateMulti(@ModelAttribute StockBookVOList listvo, HttpServletRequest request, Model model) {
+		// 1
+		logger.info("선택한 책 qty수정, 파라미터 listvo={}", listvo);
+
+		// 2. db
+		List<StockBookVO> list = listvo.getStockBookItems();
+		int cnt = bookService.deleteMulti(list);
+		logger.info("선택한 상품 qty 수정 결과, cnt={}", cnt);
+		String msg = "", url = "/admin/book/bookList?bookFlag=Inventory";
+
+		if (cnt > 0) {
+			msg = "선택한 상품들의 qty를 수정했습니다";
+
+		} else {
+			msg = "선택한 상품 qty 수정 중 에러가 발생했습니다.";
+		}
+		// 3
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+
+		// 4
+		return "common/message";
+	}
+
+	@ResponseBody
+	@RequestMapping("/bookAjaxUpdateQty")
+	public int bookAjaxUpdateQty(@ModelAttribute StockBookVO vo, HttpServletRequest request, Model model) {
+		// 1
+		logger.info("선택한 상품 QTY 수정하기, 파라미터 vo={}", vo);
+
+		// 2. db
+		int cnt = bookService.updateQty(vo);
+		logger.info("선택한 상품 QTY 수정 결과, cnt={}", cnt);
+		
+		// 3
+		// 4
+		
+		return cnt;
+	}
+
+	@ResponseBody
+	@RequestMapping("/bookAjaxDelete")
+	public int bookAjaxDelete(@RequestParam(defaultValue = "0") int bookNo) {
+		logger.info("상품 개별 삭제하기, 파라미터 bookNo={}", bookNo);
+		
+		int cnt = bookService.deleteBook(bookNo);
+
+		return cnt;
+	}
 
 }//

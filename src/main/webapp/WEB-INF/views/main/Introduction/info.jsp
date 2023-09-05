@@ -2,6 +2,24 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp" %>
 <style>
+.sub_visual_wrap{
+	position: relative;
+	width: 100% !important;
+	height: 180px !important;
+
+}
+
+.tabType1{
+	height: 50px;
+	border-bottom: 1px solid #262626;
+}
+
+.con_1200{
+	width: 1200px;
+	margin: 0 auto;
+}
+
+
 .sub_title{
 	padding-top: 30px;
 	text-align: center;
@@ -34,8 +52,14 @@ img{
 </script>
 
 <div class="PageContent">
-	<div class="title">
-		<img src="" alt>
+	<div class="sub_visual_wrap" id="sub_visual">
+		
+		
+	</div>
+	
+	<div class="tabType1 con_1200">
+	
+	
 	</div>
 		
 	<div class="sub_title">
@@ -53,9 +77,6 @@ img{
 			</dl>
 		</div>
 	</div>
-	
-	
-	
 </div>
 
 

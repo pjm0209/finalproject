@@ -6,5 +6,5 @@ import lombok.Data;
 
 @Data
 public class StockBookVOList {
-	private List<StockBookVO> stockBookVoList;
+	private List<StockBookVO> stockBookItems;
 }

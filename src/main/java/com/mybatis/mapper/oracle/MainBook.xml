@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team2.mbti.main.book.model.MainBookDAO">
+	<sql id="searchWhere">
+		<where>
+			<if test="keywordCategory!=null and keywordCategory!=''">
+				b.book_category like '%' || #{keywordCategory} || '%'
+			</if>
+			<if test="keywordNo!=null and keywordNo!=''">
+				and b.book_no like '%' || #{keywordNo} || '%'
+			</if>
+			<if test="keywordTitle!=null and keywordTitle!=''">
+				and b.book_title like '%' || #{keywordTitle} || '%'
+			</if>
+			<if test="keywordPublisher!=null and keywordPublisher!=''">
+				and b.book_publisher like '%' || #{keywordPublisher} || '%'
+			</if>
+			<if test="keywordUseflag!=null and keywordUseflag!=''">
+				and b.book_useflag like '%' || #{keywordUseflag} || '%'
+			</if>
+			<if test="keywordRegdate!=null and keywordRegdate!=''">
+				and b.book_regdate >= #{keywordRegdate}
+			</if>
+			<if test="keywordRegdate2!=null and keywordRegdate2!=''">
+				<![CDATA[and b.book_regdate <= to_date(#{keywordRegdate2})+1]]>
+			</if>
+		</where>
+	</sql>
+	
+	<select id="selectBookAll" parameterType="string" resultType="mainStockBookVo" >
+		SELECT *
+		FROM
+		(
+		    select rownum as RNUM, A.* from
+		    (
+			   select b.*, s.stock_qty from 
+			   book b join stock s
+			   on b.book_no = s.book_no
+			   where b.book_writer like '%' || #{searchKeyword} || '%'
+			   or
+			   book_title like '%' || #{searchKeyword} || '%'
+		    )A
+		)
+   	 <![CDATA[
+		WHERE RNUM > #{firstRecordIndex}
+		and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}]]>
+	</select>
+	<select id="selectByCategory" parameterType="mainBookVo" resultType="mainBookVo">
+		SELECT *
+		FROM
+		(
+		    select rownum as RNUM, A.* from
+		    (
+			   select *
+			   from book
+			   where (
+			   	book_title like '%' || #{searchKeyword} || '%'
+               or
+               	book_writer like '%' || #{searchKeyword} || '%'
+               )
+               and book_category = #{bookCategory}
+		    )A
+		)
+   	 <![CDATA[
+		WHERE RNUM > #{firstRecordIndex}
+		and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}]]>
+	</select>
+	<select id="selectBest4" parameterType="int" resultType="map">
+		select * 
+		from
+		(
+			select o.productno, p.productname, sum(quantity) totalQty
+			from ORDERS_DETAIL o join book b
+			on o.productno = p.productno
+			and b.categoryno = (select book_category from book
+			                    where book_no = #{book_no})
+			group by o.book_no, b.book_title
+			ORDER BY totalQty DESC
+		)
+		<![CDATA[
+		where rownum <= 4]]>
+	</select>
+	<select id="selectBookByNo" parameterType="int" resultType="MainBookVo">
+		select * from book
+		where book_no=#{bookNo}
+	</select>
+	
+
+</mapper>

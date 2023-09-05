@@ -140,7 +140,7 @@
 	</select>
 	
 	<insert id="insertBook" parameterType="stockBookVo">
-		<selectKey keyColumn="bookNo" order="BEFORE" resultType="int">
+		<selectKey keyProperty="bookNo" order="BEFORE" resultType="int">
 			select book_seq.nextval from dual
 		</selectKey>
 		INSERT INTO BOOK(book_no, book_title, book_price, book_publisher, book_img_name, book_img_size, book_img_originalname, book_category, book_writer, book_useflag, book_explains, book_details)
@@ -180,4 +180,10 @@
 		insert into intostock
 		values(#{intoStockNo}, ?, ?, sysdate);
 	</insert> -->
+	<select id="selectIntoStockQty" parameterType="int" resultType="int">
+		select stock_qty
+		from book b join stock s
+		on b.book_no = s.book_no
+		and b.book_no = #{bookNo}
+	</select>
 </mapper>

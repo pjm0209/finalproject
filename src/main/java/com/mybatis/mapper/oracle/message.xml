@@ -31,24 +31,10 @@
 		order by no desc
 	</select>
 	
-	<select id="messageViewByNo" parameterType="sendDmVo" resultType="map">
-		select sd.* , rd.read_date, rd.receive_dm_no,
-			<if test="receiveManagerFlag==N"> 
-				m.userid as receive_id
-			</if>
-			<if test="receiveManagerFlag==Y">
-				ad.admin_id as receive_id
-			</if>	
-		from send_dm sd left join receive_dm rd
-		on sd.send_dm_no = rd.send_dm_no
-		<if test="receiveManagerFlag==N">
-			join member m
-			on sd.receive_no = m.no;
-		</if>
-		<if test="receiveManagerFlag==Y">
-			join admin ad
-			on sd.receive_no = ad.admin_no
-		</if>
+	<select id="messageViewById" parameterType="string" resultType="map">
+		select * from messageview
+		where receive_id=#{userid}
+		order by send_dm_no desc
 	</select>
 	
 </mapper>
