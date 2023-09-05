@@ -2,6 +2,11 @@ $(function() {
 
 	$('#bookDeleteBtn').click(function() {
 		var cnt = $("table input[type='checkbox']:checked").length;
+		if(cnt < 1){
+			$('#alertModalBody').html("삭제할 제품을 체크하세요");
+			$('#alertModalBtn').trigger('click');
+			return false;
+		}
 		//유효성 검사
 		var result = '';
 		$("table input[type='checkbox']:checked:not(#check-All)").each(function(idx, item) {

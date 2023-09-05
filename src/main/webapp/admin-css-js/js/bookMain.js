@@ -80,13 +80,15 @@ $(function(){
 /**/
 
 /*bookList1.jsp*/
-/*$(function(){
-	function slideImg(){
-		$('.gallery').animate({left:'-100%'},1500,function(){
-			$('.gallery li:first').appendTo('.gallery');
-			$('.gallery').css({left:'0%'});
-		});
-	}
-	setInterval(slideImg,10000);
-});*/
+$(function(){
+	 if($("#frmPageCategory").val() == '검사자료'){
+			$("#sbl1 a").css("background-color","silver");
+		}
+		if($("#frmPageCategory").val() == '도서'){
+			$("#sbl2 a").css("background-color","silver");
+		}
+	    if($("#frmPageCategory").val() == '기타'){
+	    	$("#sbl3 a").css("background-color","silver");
+	    }
+});
 /**/
