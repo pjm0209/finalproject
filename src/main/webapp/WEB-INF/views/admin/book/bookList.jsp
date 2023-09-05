@@ -116,30 +116,37 @@
 
 	function updateQtyEach(oBookNo, oQty, idx){
 		var uQty = $(idx).parent().parent().find("td[name=qtyTd]").find("input").val();
-		console.log(uQty +", " + idx);
-		alert(oBookNo + ", " + oQty + ", " + uQty);
-		if (confirm("기존 " + oQty +" → " + uQty + "로 변경할까요?")) {
-			alert("123123");
-			$.ajax({		
-				url:"<c:url value='/admin/book/bookAjaxUpdateQty'/>",
-				type:'POST',
-				data:{
-					bookNo: oBookNo,
-					stockQty: uQty 
-				},
-				success:function(cnt){
-					if(cnt > 0){
-						alert(oQty + " → " + uQty + " 수정 성공했습니다.");
-						ajaxFunc();
-					} else {
-						alert("재고량 수정 실패했습니다...");
-					} 
-				},
-				error:function(xhr, status, error){
-					alert(status + " : " + error);
-				}
-			})
+		console.log(oBookNo + ", " + oQty + ", " + uQty);
+		if(oQty == uQty){
+			$('#alertModalBody').html("동일한 값입니다. 변경할 재고수를 다시 입력하세요.");
+			$('#alertModalBtn').trigger('click');
+			return false;
 		}
+		$('#confirmModalBody').html("기존 " + oQty +" → " + uQty + "(으)로 변경할까요?");
+		$('#confirmOk').attr("onclick","ajaxUpdateQty("+oBookNo +", "+ oQty+", "+ idx+")");
+		$('#confirmModalBtn').trigger('click');
+	}
+	
+	function ajaxUpdateQty(oBookNo, oQty, idx){
+		$.ajax({		
+			url:"<c:url value='/admin/book/bookAjaxUpdateQty'/>",
+			type:'POST',
+			data:{
+				bookNo: oBookNo,
+				stockQty: uQty 
+			},
+			success:function(cnt){
+				if(cnt > 0){
+					alert(oQty + " → " + uQty + " 수정 성공했습니다.");
+					ajaxFunc();
+				} else {
+					alert("재고량 수정 실패했습니다...");
+				} 
+			},
+			error:function(xhr, status, error){
+				alert(status + " : " + error);
+			}
+		})
 	}
 	
 	function openEdit(bookNo){
@@ -408,6 +415,22 @@
 				</nav>
 			<!--  페이지 번호 끝 -->
 		</div>
+	</div>
+	<div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h1 class="modal-title fs-5" id="alertModalLabel">알림</h1>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	        <p id="alertModalBody"></p>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" id="mbti-modal-close" onclick="opener.window.close()" class="btn bg-orange-primary" data-bs-dismiss="modal">확인</button>
+	      </div>
+	    </div>
+	  </div>
 	</div>
 	
 </div>

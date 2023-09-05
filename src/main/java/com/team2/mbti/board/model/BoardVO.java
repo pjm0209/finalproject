@@ -25,6 +25,7 @@ public class BoardVO extends SearchVO {
 	private String boardDelFlag;
 	private int mbtiNo;
 	private int adminNo;
+	private String boardSecreate;
 	
 	@Override
 	public String toString() {
@@ -32,6 +33,7 @@ public class BoardVO extends SearchVO {
 				+ ", boardBody=" + boardBody + ", no=" + no + ", boardRegdate=" + boardRegdate + ", boardReadcount="
 				+ boardReadcount + ", rcmdCount=" + rcmdCount + ", boardGroupNo=" + boardGroupNo + ", boardStep="
 				+ boardStep + ", boardSort=" + boardSort + ", boardDelFlag=" + boardDelFlag + ", mbtiNo=" + mbtiNo
-				+ ", adminNo=" + adminNo + ", toString()=" + super.toString() + "]";
+				+ ", adminNo=" + adminNo + ", boardSecreate=" + boardSecreate + ", toString()=" + super.toString()
+				+ "]";
 	}
 }

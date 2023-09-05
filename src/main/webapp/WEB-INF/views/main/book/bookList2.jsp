@@ -9,6 +9,7 @@
 	
 <script type="text/javascript">
 
+
 function bookListPage(curPage){
 	$('input[name=currentPage]').val(curPage);
 	$('form[id=frmPageId]').submit();
@@ -25,12 +26,13 @@ function sendSearchKeyword(){
 }
 </script>
 <section>
-	<form id="frmPageId" name="frmPage" method="post"
-	 action="<c:url value='/main/book/bookList1'/>">
+	<!-- Begin Page Content -->
+	<form id="frmPageId" name="frmPage" method="post" action="<c:url value='/main/book/bookList1'/>">
 		<input id="frmPageCategory" type="hidden" name="bookCategory" value="${param.bookCategory}">
-		<input id="searchKeyword" type="hidden" name="searchKeyword" value="${searchKeyword}">
+		<input id="searchKeyword" type="hidden" name="searchKeyword">
 		<input type="hidden" name="currentPage" value="1">
 	</form>
+	<!-- Page Heading -->
 	<div id='bookSellMainImg' class=" bookslide shadow-sm p-3 mb-5 bg-body rounded">
 			<ul class="gallery ">
 				<li><img src="<c:url value='/images/bookProduct/slide_01.jpg'/>"></li>
@@ -42,38 +44,25 @@ function sendSearchKeyword(){
 	<div style="padding-left: 240px;margin-top: 50px;">
 		<a href="/mbti/main/index"><i class="bi bi-house-door-fill"></i></a>
 		/
-		<a href="/mbti/main/book/bookMain">도서 및 자료 구매</a>
+		<a href="/mbti/main/book/bookMain">도서 / 자료 구매</a>
 		/
 		<a href="/mbti/main/book/bookList1?bookCategory=${param.bookCategory}">${param.bookCategory}</a>
 	</div>
 	<div class="flex title_search">
 		<h2 style="margin-top: 20px">검사자료 구매</h2>
 		<div class="booksearch flex">
-			<input type="text" name="inputKeyword" value="${searchKeyword}" placeholder="저자 또는 상품명">
-			<button id="searchCategory" type="button" onclick="sendSearchKeyword()">
-				<span class="material-symbols-outlined">search</span>
-			</button>
+			<input type="text" name="inputKeyword" value="${searchKeyword}">
+				<button id="searchCategory" type="button" onclick="sendSearchKeyword()">
+					<span class="material-symbols-outlined">search</span>
+				</button>
 		</div>
 	</div>
 	<div id="containerWrap" class="container clearfix" style="margin-left: 0;margin-right: 0;position: relative">
 		<%@ include file="./BookSideBarLeft.jsp"%>
 		
 		<div id="section">
-			<p>${pagingInfo.totalRecord} 개의 검색 결과가 있습니다.</p>
 			<div id="content">
 				<ul class="booklist" style="padding-left:0;">
-					<c:if test="${empty list }">
-						<li class="flex">
-							<div style="height: 500px; text-align: center;">
-								<div style="margin-left: 500px;margin-top: 110px;">
-									<p>검색 결과 해당 제품은 없습니다.</p>
-									<img src="<c:url value='/images/empty.jpg'/>" alt="해당 제품이 현재 없습니다."
-									 class="">
-								</div>
-							</div>
-						</li>
-					</c:if>
-					<c:if test="${!empty list }">
 					<c:forEach var="vo" items="${list}">
 						<li class="flex">
 							<div class="flex title">
@@ -95,7 +84,6 @@ function sendSearchKeyword(){
 							</div>
 						</li>
 					</c:forEach>
-					</c:if>
 				</ul>
 			</div>
 			

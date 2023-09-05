@@ -36,10 +36,30 @@ public class MyMessageController {
 		return "main/mypage/myMessage";
 	}
 	
-	@GetMapping("/myMessage/messageWrite")
+	@GetMapping("/myMessage/messageDetail")
 	public String myMessageWrite_get(@RequestParam(defaultValue = "0") int sendDmNo, Model model) {
-		logger.info("회원 - 쪽지 쓰기 페이지, 파라미터 sendDmNo={}", sendDmNo);
+		logger.info("회원 - 쪽지 상세 페이지, 파라미터 sendDmNo={}", sendDmNo);
 		
-		return "main/mypage/myMessage/messageWrite";
+		Map<String, Object> map=messageService.selectMessageViewBySendDmNo(sendDmNo);
+		logger.info("쪽지 상세보기 결과, map={}",map);
+		
+		model.addAttribute("map", map);
+		
+		return "main/mypage/myMessage/messageDetail";
+	}
+	
+	@RequestMapping("/myMessage/messageDelete")
+	public String messageDelete(@RequestParam(defaultValue = "0") int sendDmNo) {
+		logger.info("회원 - 쪽지 삭제 처리, 파라미터 sendDmNo={}", sendDmNo);
+		
+		int cnt=messageService.deleteSendDmBySendDmNo(sendDmNo);
+		logger.info("쪽지 삭제 결과, cnt={}",cnt);
+		
+		String msg="",url="/main/mypage/myMessage";
+		if(cnt>0) {
+			msg="쪽지 삭제 성공";
+		}
+		
+		return "common/message";
 	}
 }

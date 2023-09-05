@@ -54,13 +54,17 @@
 				<c:if test="${!empty list }">
 					<c:forEach var="educationVo" items="${list}">
 						<c:set var="educationNo" value="${educationVo.eduNo}"/>
-						<tr onclick="eduModal()">
+						<tr>
 							<th scope="row"><input type="checkbox" class="board-checkbox" name="educationItems[${idx }].eduNo" value="${educationVo.eduNo }"/></th>
 							<td>${educationVo.eduNo }</td>
 							<td>${educationVo.eduName }</td>
 							<td>${educationVo.eduTeaName }</td>
 							<td>${educationVo.eduCom }</td>
-							<td>${educationVo.qty }</td>	
+							<td>
+								<a href="#"  onclick="eduModal(${educationVo.eduNo})">
+									${educationVo.qty }
+								</a>
+							</td>	
 							<td>${educationVo.eduPeopleNumber }</td>
 							<td><fmt:formatNumber value="${educationVo.eduPrice }" pattern="#,###"/>
 							<td>${educationVo.epName }</td>
@@ -109,7 +113,7 @@
 				<button type="button" class="btn-close" data-bs-dismiss="modal"
 					aria-label="Close"></button>
 			</div>
-			<div style="margin-left: 15px;margin-top: 20px">
+			<div id="modalTable" style="margin-left: 15px;margin-top: 20px">
 				<span>회원 : &nbsp;</span>
 			</div>
 			<form name="messageFrm" method="post" action="<c:url value='/admin/education/list'/>">

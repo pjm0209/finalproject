@@ -118,29 +118,15 @@ public class MainEducationController {
 		
 		int no = (int) session.getAttribute("no");
 		vo.setNo(no);
-		
-		/*
-		 * PaginationInfo pagingInfo = new PaginationInfo();
-		 * 
-		 * pagingInfo.setBlockSize(ConstUtil.BLOCK_SIZE);
-		 * pagingInfo.setCurrentPage(vo.getCurrentPage());
-		 * pagingInfo.setRecordCountPerPage(ConstUtil.MBTI_RECORD_COUNT);
-		 * 
-		 * vo.setBlockSize(ConstUtil.BLOCK_SIZE);
-		 * vo.setRecordCountPerPage(ConstUtil.MBTI_RECORD_COUNT);
-		 * vo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
-		 */
-		
+
 		List<EducationVO> list = educationService.selectMyAllEdu(vo);
 		List<EducationVO> payList = educationService.myPayEdu(vo);
+		List<EducationVO> finList = educationService.myFinishEdu(vo);
 
-		int totalRecord=educationService.getTotalRecordEduList(vo);
-		logger.info("교육 전체 검색 결과 totalRecord={}",totalRecord);
-		/* pagingInfo.setTotalRecord(totalRecord); */
 		
 		model.addAttribute("list", list);
 		model.addAttribute("payList", payList);
-		/* model.addAttribute("pagingInfo", pagingInfo); */
+		model.addAttribute("finList", finList);
 	
 		
 		return "main/mypage/education";
@@ -168,5 +154,25 @@ public class MainEducationController {
 	}
 	
 	
+	@ResponseBody
+	@RequestMapping("/mypage/payAjax")
+	public String applyFinish(@RequestParam(defaultValue = "0") int eduAppNo) {
+		logger.info("신청 교육 결제 완료 처리, 파라미터 eduAppNo={}", eduAppNo);
+		
+		int cnt = educationService.applyPayFinish(eduAppNo);
+		
+		String msg="";
+		if(cnt>0) {
+			msg="신청한 교육의 결제가 완료되었습니다.";
+		}else {
+			msg="신청한 교육의 결제를 진행하는 도중 에러가 발생하였습니다.";
+		}
+		
+		
+		return msg;
+	}
+	
+	
+
 	
 }	

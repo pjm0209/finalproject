@@ -12,6 +12,32 @@ $(function(){
   		config.resize_enabled = false;
 	};
 	
+	/*게시판화면 자동스크롤*/
+	var offset = $('.boardContent').offset();  
+	window.scrollTo(0, 300);
+	
+	/*게시판 글쓰기 체크박스*/
+	$('.secreate').click(function(){
+		if($(this).is(':checked')) {
+			$(this).val('Y');
+		} else {
+			$(this).val('N');
+		}
+	});
+	
+	/*비로그인 글쓰기 버튼클릭시 알림창*/
+	$('.boardWriteBtn').click(function(){		
+		if($('input[name=user]').val().length < 1) { //비로그인 클릭시
+			$('#confirmModalBody').html('글쓰기는 로그인 해야만 이용가능합니다.<br> 로그인하시겠습니까?');
+			$('#confirmOk').attr('onclick', 'location.href=\"' + contextPath + '/main/member/memberLogin\"');
+			$('#confirmModalBtn').trigger('click');	
+		} else { //로그인상태로 클릭시
+			var boardFormNo = $('input[name=boardFormNo]').val();
+		
+			location.href= contextPath + "/main/board/boardWrite?boardFormNo=" + boardFormNo + "&boardWriteType=write";
+		}
+	});
+	
 	/*게시글 상세보기 첨부파일 슬라이드 효과*/
 	$('.file-list').hide();
 	
@@ -33,31 +59,22 @@ $(function(){
 	//좋아요 클릭이벤트
 	$('div.board-like').click(function() {
 		if($('.session-userId').val().length > 0) {		
-			if($('.u_icon').is('.like') === true) {
+			if($('.u_icon').is('.like')) {
 				likeDel();
 			} else {
 				likeIns();
 			}
 		} else {
 			$('#confirmModalBody').html('좋아요는 로그인 해야만 이용가능합니다.<br> 로그인하시겠습니까?');
-			$('#confirmOk').attr('onclick', 'location.href=\"' + contextPath + '/main/member/memberLogin' + "\"" + '');
+			$('#confirmOk').attr('onclick', 'location.href=\"' + contextPath + '/main/member/memberLogin\"');
 			$('#confirmModalBtn').trigger('click');	
 		}
 	});
 	
+	/*게시글쓰기 저장버튼*/
 	$('.boardSubmitBtn').click(function(){
 		$('form[name=boardWriteForm]').submit();
 	});
-	
-	if($('.session-userId').val() === $('.member-userId').val()) {
-		var boardNo = $('.boardNo').val();
-		var str = "";
-		
-		str += '<input type="button" class="bg-orange-primary" onclick="location.href=\"/main/board/boardEdit?boardNo=' + boardNo + '\"" value="수정">';
-		str += '<input type="button" class="bg-orange-primary" value="삭제">';
-		
-		$('.boardListBtn').after().html(str);
-	}
 	
 	//게시글리스트 검색
 	$('.bi.bi-search').click(function(){
@@ -69,7 +86,7 @@ $(function(){
 		$('form[name=searchForm]').submit();
 	});
 	
-	//게시글 글쓰기 게시판 선택시 MBTI종류 보이기 유무
+	//게시글 리스트 MBTI게시판 글쓰기시 파라미터
 	$('#board-write-button').click(function(){
 		var mbtiNo = $('select[name=mbtiNo]').val();
 		var boardFormNo = $('input[name=boardFormNo]').val();
@@ -89,6 +106,13 @@ $(function(){
 			$('select[name=mbtiNo]').hide();
 		} else {
 			$('select[name=mbtiNo]').show();
+		}
+		
+		//게시글 글쓰기 QnA 게시판선택시 비밀글여부 체크박스 표시여부
+		if(board == 3) {
+			$('.form-check').css('visibility', 'visible');
+		} else {
+			$('.form-check').css('visibility', 'hidden');
 		}
 	});
 	
@@ -111,9 +135,62 @@ $(function(){
 		$('#confirmModalBtn').trigger('click');
 	});
 	
+	//게시글상세보기 이동
+	$('.boardDetailA').click(function(){
+		var boardSecreate = $(this).nextAll('input[name=boardSecreate]').val();
+		var user = $('.boardContent').find('input[name=user]').val();		
+		var writer = $(this).parent().nextAll('.boardPostWriter').find('input[name=userId]').val();		
+		var boardNo = $(this).nextAll('input[name=boardNo]').val();
+		
+		if(boardSecreate == 'N') {
+			location.href=contextPath + "/main/board/boardDetail?boardNo=" + boardNo;			
+		} else if (boardSecreate == 'Y' ) {
+			if(user == writer) {				
+				location.href=contextPath + "/main/board/boardDetail?boardNo=" + boardNo;
+			} else {
+				$('#alertModalBody').html('비밀글입니다.');
+				$('#alertModalBtn').trigger('click');
+			}
+		}
+	});
+	
+	$('#select_board').change(function(){
+		var boardFormNo = $('input[name=boardFormNo]').val();
+		
+		if(boardFormNo != 5) {
+			if($(this).val() == 5) {
+				mbtiSelect();
+			}			
+		}
+	});
+	
 	const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
 	const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
 });
+
+//게시글작성 MBTI게시판 셀렉트
+function mbtiSelect() {
+	$.ajax({
+		url:contextPath + "/main/board/mbtiSel",
+		type:"GET",
+		success:function(result) {
+			console.log("result: " + result);
+			var str = "";
+			
+			str += '<select class="form-select writembti" aria-label="Default select example" name="mbtiNo">';
+			for(var i = 0; i < result.length; i++) {
+				var vo = result[i];
+				str += '<option value=\"' + vo.mbtiNo + '\">' + vo.mbtiType + '</option>';
+			}
+			str += '</select>';
+			
+			$('.mbtiSelectDiv').html(str);
+		},
+		error:function(xhr, status, error) {
+			alert(status + ": " + error);
+		}
+	});
+}
 
 //파일삭제 함수
 function fileDel(element){		
@@ -175,13 +252,13 @@ function likeIns() {
 //좋아요 취소
 function likeDel() {
 	var boardNo = $('input[name=boardNo').val();
-	var adminNo = $('input[name=adminNo]').val();
+	var no = $('input[name=no]').val();
 	
 	$.ajax({
 		url:contextPath + '/boardLike/likeDel',
 		type:'POST',
 		data:{boardNo:boardNo,
-			  adminNo:adminNo},
+			  no:no},
 		success:function(result) {			
 			$('.u_icon').removeClass('like');
 			likeCountSelect();
@@ -376,7 +453,7 @@ function commentReply(element) {
 		}
 	} else {
 		$('#confirmModalBody').html('답글은 로그인 해야만 이용가능합니다.<br> 로그인하시겠습니까?');
-		$('#confirmOk').attr('onclick', 'location.href=\"' + contextPath + '/main/member/memberLogin' + "\"" + '');
+		$('#confirmOk').attr('onclick', 'location.href=\"' + contextPath + '/main/member/memberLogin\"');
 		$('#confirmModalBtn').trigger('click');	
 	}
 }

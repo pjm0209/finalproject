@@ -18,7 +18,7 @@
 
 .pdList{
 	margin-top: 50px;
-	width: 1300px;
+	width: 1415px;
 	
 }
 .pdList>a{
@@ -277,15 +277,16 @@ ul, li {
 	justify-content: space-between;
 }
 
+#detailMain{background:#fff;}
 	
 .pdList {
 	margin: 0 auto;
 	padding: 20px 0;
-
 }
 .pdList.flex{	border-top: 1px solid #aaa;
 	border-bottom: 1px solid #aaa;}
 .pdList .pdimg {
+	margin-left: 20px;
 	width: 40%;
 	display: flex;
 	align-items: center;
@@ -559,6 +560,9 @@ ul, li {
 	text-align: center;
 }
 
+.smallCategory{
+	font-size: small;background: #ee7843;color: white;vertical-align: super;
+}
 /**/
 
 /*bookList1.jsp*/

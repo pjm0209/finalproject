@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
-
+<script type="text/javascript">
+$(function(){
+	$('.name:first').find('#ep-name').trigger('click');
+	$('.name:first').find('#sibal').trigger('click');
+});
+</script>
 <section id="edu-main-location" class="edu-main-location">
 <div id="education-main">
 	<pre>MBTI에 대해 더 자세히 알고 싶다면
@@ -15,7 +20,10 @@
 		<ul class="map-list">
 		<c:forEach var="educationVo" items="${list}">
 			<c:set var="educationNo" value="${educationVo.epNo}"/>
-				<li class="name"><a onclick="setCenter(${educationVo.epLatitude}, ${educationVo.epLongitude})"><button type="button" id="ep-name" onclick="showepinfo('${educationVo.epNo}')">${educationVo.epName }</button></a></li>
+				<li class="name"><a id="sibal"onclick="setCenter(${educationVo.epLatitude}, ${educationVo.epLongitude})">
+				<button type="button" id="ep-name" onclick="showepinfo('${educationVo.epNo}')">${educationVo.epName }</button>
+				</a>
+				</li>
 		</c:forEach> 
 		</ul>
 		

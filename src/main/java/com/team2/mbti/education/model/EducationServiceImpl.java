@@ -209,4 +209,26 @@ public class EducationServiceImpl implements EducationService{
 		return educationDao.applyMemInfo(vo);
 	}
 
+	@Override
+	public List<Integer> selectMemNo(int eduNo) {
+		return educationDao.selectMemNo(eduNo);
+	}
+
+	@Override
+	public EducationVO selectAllMemInfo(EducationVO vo) {
+		return educationDao.selectAllMemInfo(vo);
+	}
+
+	@Override
+	public List<EducationVO> myFinishEdu(EducationVO vo) {
+		return educationDao.myFinishEdu(vo);
+	}
+
+	@Override
+	public int applyPayFinish(int eduAppNo) {
+		return educationDao.applyPayFinish(eduAppNo);
+	}
+
+
+
 }

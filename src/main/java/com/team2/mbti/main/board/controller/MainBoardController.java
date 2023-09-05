@@ -107,12 +107,12 @@ public class MainBoardController {
 	public String boardDetail(@RequestParam int boardNo, Model model) {
 		logger.info("게시판 상세보기 파라미터 baordNo:{}", boardNo);
 		
-		Map<String, Object> boardMap = boardService.selectBoardByNo(boardNo);
-		logger.info("게시판 상세보기 검색결과 boardMap: {}", boardMap);
-		
 		int cnt = boardService.addReadCount(boardNo);
 		logger.info("조회수 증가 결과 cnt: {}", cnt);
 		
+		Map<String, Object> boardMap = boardService.selectBoardByNo(boardNo);
+		logger.info("게시판 상세보기 검색결과 boardMap: {}", boardMap);
+				
 		List<BoardFileVO> fileList = null;
 		
 		if(boardMap.get("BOARD_FILE_ADD_FLAG").equals("Y")) {
@@ -151,9 +151,13 @@ public class MainBoardController {
 		logger.info("게시판 검색결과 boardFormVo: {}", boardFormVo);
 		
 		List<MbtiVO> mbtiList = mbtiService.selectAllMbti();
-		logger.info("mbti종류 전체조회 결과 mbtiList.size(): {}", mbtiList.size());			
+		logger.info("mbti종류 전체조회 결과 mbtiList.size(): {}", mbtiList.size());		
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("BOARD_FORM_NO", vo.getBoardFormNo());		
 		
 		model.addAttribute("boardList", list);	
+		model.addAttribute("map", map);
 		model.addAttribute("mbtiList", mbtiList);
 		model.addAttribute("boardFormVo", boardFormVo);
 		
@@ -163,8 +167,12 @@ public class MainBoardController {
 	@PostMapping("/boardWrite")
 	public String boardWrite(@ModelAttribute BoardVO vo, HttpServletRequest request) {
 		logger.info("게시글 쓰기처리 파라미터 vo:{}", vo);
-		
 		List<Map<String, Object>> fileList = new ArrayList<>();
+		
+		int boardFormNo=vo.getBoardFormNo();
+		if(boardFormNo!=3) {
+			vo.setBoardSecreate("N");
+		}
 		
 		try {
 			fileList = fileUploadUtil.fileupload(request, ConstUtil.UPLOAD_FILE_FLAG);
@@ -326,5 +334,13 @@ public class MainBoardController {
 		model.addAttribute("url", url);
 		
 		return "common/message";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/mbtiSel")
+	public List<MbtiVO> mbtiSel() {
+		List<MbtiVO> mbtiList = mbtiService.selectAllMbti();
+		
+		return mbtiList;
 	}
 }
