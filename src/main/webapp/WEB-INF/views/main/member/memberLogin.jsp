@@ -182,12 +182,11 @@ $(function(){
 <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.3.0/kakao.min.js"
   integrity="sha384-70k0rrouSYPWJt7q9rSTKpiTfX6USlMYjZUtr1Du+9o4cGvhPAWxngdtVZDdErlh" crossorigin="anonymous"></script>
 <script>
-  Kakao.init('42018aab691c499b8b554100c11af209'); // 사용하려는 앱의 JavaScript 키 입력
+  Kakao.init('492cfd61b5b9e8677ad3f4db8cfedbdf'); // 사용하려는 앱의 JavaScript 키 입력
   
-  function loginWithKakao() {
+  function loginWithKakao() { 
     Kakao.Auth.authorize({
       redirectUri: 'http://localhost:9091/mbti/main/mbti/kakaoLogin',
-      id="werqeqwr",
     });
   }
 
@@ -266,9 +265,6 @@ $(function(){
                     <hr><br>
                     
                    	<div class="kakao" onclick="kakaoLogin()">
-				      <a href="#" >
-				          <img src="<c:url value='../../images/kakao_login_large_narrow.png'/>" alt="카카오로그인" class="kakaoBtn" />
-				      </a>
 				      <a id="kakao-login-btn" href="javascript:loginWithKakao()">
 						  <img src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" width="222"
 						    alt="카카오 로그인 버튼" />
