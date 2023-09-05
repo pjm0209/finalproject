@@ -26,11 +26,15 @@ section.boardSection {
     background: url(../../images/education/education_main.jpg) no-repeat;
 }
 
-.boardContent {
-    width: 50%;
+.boardContentR {
+    width: 100%;
     border: 1px solid #e1e1e1;
     border-radius: 15px;
     background: white;
+}
+
+.boardContent {
+    width: 50%;
 }
 
 .boardContent-head {
