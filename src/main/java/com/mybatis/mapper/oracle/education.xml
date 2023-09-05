@@ -82,6 +82,17 @@
 	</select>
 	
 	
+	<select id="selectMemNo" parameterType="int" resultType="int">
+		select no from education_application
+		where edu_no=#{eduNo}
+	</select>
+	
+	<select id="selectAllMemInfo" parameterType="educationVo" resultType="educationVo">
+		select * from edu_app_mem_view
+		where no=#{no} and edu_no=#{eduNo}
+	</select>
+	
+	
 	<!-- location -->
 	<insert id="insertLocation" parameterType="educationVo">
 		<selectKey keyProperty="epNo" order="BEFORE" resultType="int">
@@ -230,18 +241,26 @@
 		)
 	</select>
 	
-	<select id="getTotalRecordEduList" parameterType="educationVo" resultType="int">
-		select count(*) from educationview
-		<include refid="searchWhere"></include> 
-	</select>
-	
 	<select id="myPayEdu" parameterType="educationVo" resultType="educationVo">
 		select * from
 		(
 			select rownum as RNUM, a.* from
 			(
 				select * from educationview 
-				where no=#{no} and edu_app_flag = 'Y'
+				where no=#{no} and edu_app_flag = 'Y' and edu_app_pay = '결제 대기'
+				<include refid="searchWhere"></include>
+				order by edu_no desc
+			)a
+		)
+	</select>
+	
+	<select id="myFinishEdu" parameterType="educationVo" resultType="educationVo">
+		select * from
+		(
+			select rownum as RNUM, a.* from
+			(
+				select * from educationview 
+				where no=#{no} and edu_app_pay = '결제 완료'
 				<include refid="searchWhere"></include>
 				order by edu_no desc
 			)a
@@ -257,6 +276,14 @@
 		select * from edu_app_mem_view
 		where edu_app_no=#{no}
 	</select>
+	
+	
+	<update id="applyPayFinish" parameterType="int">
+		update education_application
+		set edu_app_pay = '결제 완료'
+		where edu_app_no=#{eduAppNo}
+	</update>
+	
 	
 	
 </mapper>

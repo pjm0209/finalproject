@@ -27,8 +27,21 @@
 		        buyer_email : "email@naver.com", 
 		        buyer_name : "이름",
 		        buyer_tel : "전화번호",
-		    }, function (rsp) { // callback
+		    }, function (rsp) { // callback\
+		    	var eduAppNo = $('#edu-pay-tb').find('input[type=checkbox]:checked');
 		    	if(rsp.success) {
+		    		$.ajax({
+		    			url:contextPath + "/main/mypage/payAjax",
+		    			data:{"eduAppNo" : eduAppNo.val()},
+		    			type:"POST",
+		    			dataType:"text",
+		    			success:function(res){
+		    				alert(res);
+		    			},
+		    			error:function(xhr, status, error){
+		    				alert(status+" : "+error);
+		    			}
+		    		});
 		    		location.href="<c:url value='/main/mypage/education'/>";
 		    	}else{
 		    		$('#alertModalBody').html("결제 실패");
@@ -64,7 +77,7 @@
 
 <section id="myEduPage">
 <div class="board-body" style="width:87%">
-	<div class="board" style="margin-top: 35px;">
+	<div class="myEduBoard" style="margin-top: 35px;">
 	<div class="board-head">
 	<div id="eduApply-title">
 		<h4>교육 신청 현황</h4>
@@ -115,7 +128,7 @@
 		<div id="eduApply-title">
 			<h4>결제 대기</h4>
 		</div>
-		<table class="table" id="educationtb" style="margin-top:30px;">
+		<table class="table" id="edu-pay-tb" style="margin-top:30px;">
 			<thead>
 				<tr class="board-table-colum">
 					<th scope="col"><input type="checkbox" id="check-All-my"></th>
@@ -124,7 +137,8 @@
 					<th scope="col">교육 기간</th>
 					<th scope="col">교육비</th>
 					<th scope="col">교육장</th>
-					<th scope="col">신청 현황</th>
+					<th scope="col">교육장</th>
+					<th scope="col">결제 상태</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -143,13 +157,51 @@
 							<td>${educationVo.eduCom }</td>
 							<td id="eduPrice"><fmt:formatNumber value="${educationVo.eduPrice }" pattern="#,###"/>
 							<td>${educationVo.epName }</td>
-							<td>${educationVo.eduAppFlag }</td>
+							<td>${educationVo.eduAppPay }</td>
 						</tr>
 					</c:forEach>
 				</c:if>
 			</tbody>
 		</table>
 		<button type="button" class="myAppPayBtn" id="my-app-payBtn" onclick="requestPay()">결제하기</button>
+		</form>	
+		<!-- 결제 완료 목록 -->
+		<form name="frmDelete" method="post" id="myAppFinFrm">
+		<div id="eduApply-title">
+			<h4>결제 완료</h4>
+		</div>
+		<table class="table" id="educationtb" style="margin-top:30px;">
+			<thead>
+				<tr class="board-table-colum">
+					<th scope="col">교육 이름</th>
+					<th scope="col">강사명</th>
+					<th scope="col">교육 기간</th>
+					<th scope="col">교육비</th>
+					<th scope="col">교육장</th>
+					<th scope="col">결제 상태</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:if test="${empty finList }">
+					<tr>
+						<td colspan="9">결제 완료된 교육이 없습니다.</td>
+					</tr>
+				</c:if>
+				<c:if test="${!empty finList }">
+					<c:forEach var="educationVo" items="${finList}">
+						<c:set var="educationNo" value="${educationVo.eduAppNo}"/>
+						<tr>
+							<td id="eduName">${educationVo.eduName }</td>
+							<td>${educationVo.eduTeaName }</td>
+							<td>${educationVo.eduCom }</td>
+							<td id="eduPrice"><fmt:formatNumber value="${educationVo.eduPrice }" pattern="#,###"/>
+							<td>${educationVo.epName }</td>
+							<td>${educationVo.eduAppPay }</td>
+						</tr>
+					</c:forEach>
+				</c:if>
+			</tbody>
+		</table>
 		</form>	
 	</div>
 	</div>
