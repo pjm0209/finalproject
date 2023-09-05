@@ -13,6 +13,9 @@ public interface BookService {
 	StockBookVO selectBookByNo(int bookNo);
 	
 	int updateBook(StockBookVO vo);
-	
+	int updateQty(StockBookVO vo);
+	int deleteBook(int bookNo);
 	int deleteMulti(List<StockBookVO> list);
+	
+	int updateMulti(List<StockBookVO> list);
 }
