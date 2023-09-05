@@ -3,17 +3,36 @@
 <%@ include file="../inc/top.jsp"%>
 
 <style>
-button#add-newBoard-button{
-	background: #eb5d1e;
-}
-
 .head-div {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
+button#add-manager-button{
+	font-weight: bold;
+	background-color: #eb5d1e;
+	float:  right;
+	border: 0;
+	border-radius: 5px;
+	padding: 6px 41px;
+	margin-top: -6px;
+	margin-right: 9px;
+	color: white;
+}
+
 button#manager-delete-button {
+	float:  right;
+	border: 0;
+	border-radius: 5px;
+	padding: 6px 41px;
+	margin-top: -6px;
+	margin-right: 9px;
+	color: white;
+	background-color: #eb5d1e;
+}
+
+button#manager-edit-button {
 	float:  right;
 	border: 0;
 	border-radius: 5px;
@@ -31,7 +50,7 @@ select#manager-search-select {
     margin-bottom: 0;
     border: 1px solid #d8dce5;
     border-radius: 6px;
-    margin-left: 840px;
+    margin-left: 1095px;
 }
 
 
@@ -75,13 +94,14 @@ select#manager-search-select {
 <!-- Page Heading -->
 <div class="head-div">
 	<h2 class="text-gray-800">관리자 관리</h2>
-	<button type="button" class="bg-gradient-primary"
-		id="add-newBoard-button">관리자 추가</button>
+	<button type="button" class="add-manager-button"
+		id="add-manager-button"onclick="location.href='managerAdditional'">관리자 등록</button>	
 </div>
 <div class="board-body">
 	<div id="board-title">
 		<h5>관리자 리스트</h5>		
 		<button class="manager-button" id="manager-delete-button">삭제</button>
+		<button class="manager-button" id="manager-edit-button">수정</button>
 	</div>
 	<div class="board">
 		<div class="board-head">

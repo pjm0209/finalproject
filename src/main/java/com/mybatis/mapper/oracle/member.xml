@@ -28,7 +28,7 @@
 			(
 				select * from member
 				<include refid="searchMember"></include>
-				order by no 
+				order by no desc
 			)A
 		)
 		<![CDATA[

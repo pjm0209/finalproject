@@ -28,7 +28,7 @@
 			(
 				select * from admin
 				<include refid="searchManager"></include>
-				order by admin_no
+				order by admin_no desc
 			) A
 		)
 		<![CDATA[
