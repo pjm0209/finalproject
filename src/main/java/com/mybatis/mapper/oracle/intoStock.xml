@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team2.mbti.intoStock.model.IntoStockDAO">
+	<insert id="insertIntoStock" parameterType="intoStockVo">
+		<selectKey keyProperty="intoStockNo" order="BEFORE" resultType="int">
+			select intostock_seq.nextval from dual
+		</selectKey>
+		insert into intostock
+		values(#{intoStockNo}, #{bookNo}, #{intoStockQty}, sysdate)
+	</insert>
+	
+	<update id="updateIntoStockQty" parameterType="intoStockVo">
+		update intostock
+		set intostock_qty = #{intoStockQty}
+		where book_no=#{bookNo}
+	</update>
+</mapper>

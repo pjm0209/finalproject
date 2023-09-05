@@ -79,9 +79,7 @@ function deleteImageAction(index){
 		</c:if>
 	</h2>
 </div>
-<c:if test="${!empty param.bookNo}">
-		<input type="text" name="bookNo" id="bookNo" value="${param.bookNo}">
-	 </c:if>
+
 <form id="frmBookRegister" name="frmBookRegister" method="post" enctype="multipart/form-data"
 	<c:if test="${empty param.bookNo}">
 		action="<c:url value='/admin/book/bookRegister'/>"
@@ -90,6 +88,10 @@ function deleteImageAction(index){
 		action="<c:url value='/admin/book/bookEdit'/>"
 	</c:if>
  >
+ 
+ 	<c:if test="${!empty param.bookNo}">
+		<input type="hidden" name="bookNo" id="bookNo" value="${param.bookNo}">
+	</c:if>
 	<!--  -->
 	<div class="wrap shadow-sm p-3 mb-5 bg-body rounded" style="margin: 15px 15px;background: white;">
 		<div class="x_title">
@@ -209,7 +211,7 @@ function deleteImageAction(index){
 			<div class="bookQTY">
 				<label class="" for="INTOSTOCK_QTY">재고</label>
 				<div class="inputBookQTY">
-					<input class="form-control" id="INTOSTOCK_QTY" name="INTOSTOCK_QTY" placeholder="재고"
+					<input class="form-control" id="INTOSTOCK_QTY" name="stockQty" placeholder="재고"
 					 type="number" value="${vo.stockQty}">
 				</div>
 			</div>

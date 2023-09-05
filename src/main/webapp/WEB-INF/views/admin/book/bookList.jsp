@@ -31,16 +31,6 @@
 			
 		});
 		
-		$('#bookDeleteBtn').click(function(){
-			
-			$('input[name=currentPage]').val("1");
-			ajaxFunc(); // ajax 함수
-			
-			//기본 이벤트 제거
-			/* event.preventDefault(); */
-			
-		});
-		
 		$('#toggleBtn').click(function(){
 			var a = $('#toggleBtn').text()
 		 	var b = '검색창 열기';
@@ -55,6 +45,13 @@
 		$("#searchByKeywordBtn").trigger('click');
 		
 	});
+	
+	function checkAll(evt){
+		
+		var checked=$(evt).prop("checked");
+		$('input[type=checkbox]').prop("checked",checked);
+		
+	}
 	
 	function ajaxFunc (){
 		var result='';
@@ -93,6 +90,58 @@
 			}
 		});//ajax
 	}
+	function deleteEach(originalBookNo){
+		if (confirm("상품번호 : " + originalBookNo+"을 삭제할까요?")) {
+			/* $('form[name=frmList]').submit(); */
+			$.ajax({
+			url:"<c:url value='/admin/book/bookAjaxDelete'/>",
+			type:"post",
+			data:{
+				bookNo: originalBookNo
+			},
+			success:function(cnt){
+				if(cnt > 0){
+					alert("상품번호 : " + originalBookNo + " 삭제 성공했습니다.");
+					ajaxFunc();
+				} else {
+					alert("상품번호 : " + originalBookNo + " 삭제 실패입니다. 다시 시도해주세요.");
+				} 
+			},
+			error:function(xhr, status, error){
+				alert(status + " : " + error);
+			}
+		});//ajax
+		}
+	}
+
+	function updateQtyEach(oBookNo, oQty, idx){
+		var uQty = $(idx).parent().parent().find("td[name=qtyTd]").find("input").val();
+		console.log(uQty +", " + idx);
+		alert(oBookNo + ", " + oQty + ", " + uQty);
+		if (confirm("기존 " + oQty +" → " + uQty + "로 변경할까요?")) {
+			alert("123123");
+			$.ajax({		
+				url:"<c:url value='/admin/book/bookAjaxUpdateQty'/>",
+				type:'POST',
+				data:{
+					bookNo: oBookNo,
+					stockQty: uQty 
+				},
+				success:function(cnt){
+					if(cnt > 0){
+						alert(oQty + " → " + uQty + " 수정 성공했습니다.");
+						ajaxFunc();
+					} else {
+						alert("재고량 수정 실패했습니다...");
+					} 
+				},
+				error:function(xhr, status, error){
+					alert(status + " : " + error);
+				}
+			})
+		}
+	}
+	
 	function openEdit(bookNo){
 		location.href="bookEdit?bookNo=" + bookNo;
 	}
@@ -106,16 +155,18 @@
 			
 			var num = this.bookRegdate;
 			var bookRegdate = num.substring(0, 10);
-			
+			console.log("확인용 bookNp="+this.bookNo);
 			htmlStr += "<tr>";
-			htmlStr += "<th scope='row'>";
-			htmlStr += "<input type='checkbox' class='book-checkbox'>";
-			htmlStr += "</th>";
-			htmlStr += "<td>" + this.bookNo + "</td>";
-			htmlStr += "<td>" + this.bookTitle + "</td>";
-			htmlStr += "<td>";
-			htmlStr += "<img class='shadow-sm rounded' width='100px' height='150px' src=\"<c:url value='/images/bookProduct/" + this.bookImgOriginalname + "'/>\" alt=\"" + this.bookTitle + "\">";
+			htmlStr += "<td scope='row'>";
+			htmlStr += "<input type='checkbox' name='stockBookItems["+idx+"].bookNo' class='book-checkbox' value='"+this.bookNo+"'>";
 			htmlStr += "</td>";
+			htmlStr += "<td>" + this.bookNo + "</td>";
+			htmlStr += "<td style='vertical-align: middle'>" + this.bookTitle + "</td>";
+			htmlStr += "<td>";
+			htmlStr += "<img class='shadow-sm rounded' width='100px' height='150px' src=\"<c:url value='/images/bookProduct/upload_img/" + this.bookImgName + "'/>\" alt=\"" + this.bookTitle + "\">";
+			htmlStr += "</td>";
+			htmlStr += "<input name='stockBookItems["+idx+"].bookImgName' id='bookImgName2' type='hidden' value='"+this.bookImgName+"'>";
+			htmlStr += "<input name='stockBookItems["+idx+"].stockQty' id='stockQty2' type='hidden' value='"+this.stockQty+"'>";
 			htmlStr += "<td>";
 			htmlStr += this.bookCategory;
 			htmlStr += "</td>";
@@ -128,8 +179,8 @@
 			htmlStr += "</td>";						
 			htmlStr += "</c:if>";
 	        htmlStr += "<c:if test='${param.bookFlag == \"Inventory\" or param.bookFlag == \"InventoryByKeyword\"}'>";
-			htmlStr += "<td>";
-			htmlStr += "<input class='form-control' name='' type='number' value='" + this.stockQty + "'>";
+			htmlStr += "<td name='qtyTd'>";
+			htmlStr += "<input id='InputQty["+idx+"]' class='form-control' name='stockQty' type='number' value='" + this.stockQty + "'>";
 			htmlStr += "</td>";	
 			htmlStr += "</c:if>";
 			htmlStr += "<td>";
@@ -140,16 +191,16 @@
 			htmlStr += "</td>";
 			htmlStr += "<c:if test='${param.bookFlag == \"Inventory\" or param.bookFlag == \"InventoryByKeyword\"}'>";
 			htmlStr += "<td>";
-			htmlStr += "<button class=\"btn btn-success btn-xs blue\" onclick=\"location.href='bookRegister?bookNo='\"" + this.bookNo + " type='button' title='재고저장'><i class='fas fa-save'></i></button>";
+			/* htmlStr += "<button class=\"btn btn-success btn-xs blue\" onclick=\"location.href='bookUpdate?bookNo='\"" + this.bookNo + " type='button' title='재고저장' id='editQty'><i class='fas fa-save'></i></button>"; */
+			htmlStr += "<button class=\"btn btn-success btn-xs blue\" type='button' title='재고저장' id='editQty' onclick='updateQtyEach("+this.bookNo+","+this.stockQty+", this)'><i class='fas fa-save'></i></button>";
 			htmlStr += "</td>";
 			htmlStr += "</c:if>";
 			htmlStr += "<c:if test='${param.bookFlag == \"bookList\" or param.bookFlag == \"bookListByKeyword\"}'>";
 			htmlStr += "<td id='tdLast'>";
 			htmlStr += "<a class='btn btn-info btn-xs' href='' target='_blank' title='상품보기'><i class='fas fa-eye'></i></a>";
 			htmlStr += "<button class='btn btn-success btn-xs' onclick=\"location.href='bookCopyPaste?bookNo='\"" + this.bookNo + " type='button' title='복사'><i class='fas fa-copy'></i></button>";
-			/* htmlStr += "<button class='btn btn-warning btn-xs' onclick=\"location.href='bookEdit?bookNo='\"" + this.bookNo + " type='button' title='수정'><i class='fas fa-edit'></i></button>"; */
 			htmlStr += "<button class='btn btn-warning btn-xs' onclick=\"openEdit(" +this.bookNo+ ")\" type='button' title='수정'><i class='fas fa-edit'></i></button>";
-			htmlStr += "<button class='btn btn-danger btn-xs' id='delBtn' type='button' title='삭제'><i class='fas fa-trash'></i></button>";
+			htmlStr += "<button class='btn btn-danger btn-xs' id='delBtn' type='button' title='삭제' onclick='deleteEach("+this.bookNo+")'><i class='fas fa-trash'></i></button>";
 			htmlStr += "</td>";
 			htmlStr += "</c:if>";
 		});
@@ -192,6 +243,7 @@
 	}
 	
 	function bookListPage(curPage){
+		$("#check-All").prop("checked", false);
 		$('input[name=currentPage]').val(curPage);
 		$('input[name=perRecord]').val($('#perRecord').val());
 		ajaxFunc();
@@ -236,12 +288,40 @@
 				 id="bookDeleteBtn" >상품 삭제</button>
 			
 		</c:if>
-		<c:if test="${param.bookFlag == 'Inventory' or param.bookFlag == 'InventoryByKeyword'}">
-			<h5>상품 재고 관리</h5>
-		</c:if>
-			<button id="toggleBtn" class="btn btn-warning bg-gradient-secondary book-button"
+		<button id="toggleBtn" class="btn btn-warning bg-gradient-secondary book-button"
 			 type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
 			  aria-expanded="false" aria-controls="collapseExample">검색창 열기</button>
+		<c:if test="${param.bookFlag == 'Inventory' or param.bookFlag == 'InventoryByKeyword'}">
+			<h5>상품 재고 관리</h5>
+			<button class="btn btn-warning bg-gradient-secondary book-button"  
+			 id="bookQtyBatchInit" onclick="qtyUpdate()" data-bs-toggle="modal" data-bs-target="#exampleModal">재고 일괄 초기화</button>
+			
+			<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="exampleModalLabel">상품 재고 일괄 수정하기</h5>
+			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			      </div>
+			      <div class="modal-body">
+			        <form>
+			          <div class="mb-3">
+			            <label for="recipient-name" class="col-form-label">일괄 모두 수정하시겠습니까?</label>
+			          </div>
+			          <div class="mb-3">
+			            <input type="number" class="form-control" id="message-text" placeholder="수량 입력...">
+			          </div>
+			        </form>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+			        <button type="button" class="btn btn-primary">수정 하기</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		</c:if>
+			
 	</div>
 	<!--  -->
 	<div>
@@ -250,7 +330,7 @@
 		</div>
 		
 		<!--  -->
-		<div class="board shadow-sm p-3 mb-5 bg-body rounded" style="margin: 10px 0px;background: white;margin-right: 15px">
+		<div id="eventQty" class="board shadow-sm p-3 mb-5 bg-body rounded" style="margin: 10px 0px;background: white;margin-right: 15px">
 			<table class="table">
 				<caption id="captionBook" class="captionBook"></caption> <!-- TOTAL &nbsp;${res.pagingInfo.totalRecord}&nbsp; ROWS -->
 				<colgroup>
@@ -272,7 +352,7 @@
 				</colgroup>
 				<thead>
 					<tr class="book-table-colum">
-						<th scope="col"><input type="checkbox" id="check-All" class="book-checkbox"></th>
+						<th scope="col"><input type="checkbox" id="check-All" class="book-checkbox" onclick="checkAll(this)"></th>
 						<th scope="col" class="bookNo">상품코드</th>
 						<th scope="col" class="bookTitle">상품명</th>
 						<th scope="col" class="bookImage">상품이미지</th>
@@ -289,9 +369,16 @@
 						<th scope="col" class="bookManage">관리</th>
 					</tr>
 				</thead>
+				
+					 
 				<tbody id="bookTbody">
 				</tbody>
+				
+				
 			</table>
+			<form id="frmDeleteMulti" name="frmDeleteMulti" method="post"  action="<c:url value='/admin/book/deleteMulti'/>">
+			<form id="frmUpdateQtyMulti" name="frmUpdateQtyMulti" method="post"  action="<c:url value='/admin/book/updateMulti'/>">
+			</form>
 			<!-- 페이지 번호 추가 -->	
 				<nav id="bookPaging" class="bookPaging" aria-label="Page navigation example">
 				 <%--  <ul class="pagination pagination-lg justify-content-center">
@@ -322,6 +409,7 @@
 			<!--  페이지 번호 끝 -->
 		</div>
 	</div>
+	
 </div>
 
 <!-- End of Main Content -->

@@ -16,4 +16,8 @@ public interface BookDAO {
 	int updateBook(StockBookVO vo);
 	
 	int deleteBook(int bookNo);
+	
+	int selectIntoStockQty(int bookNo);
+	
+	
 }//
