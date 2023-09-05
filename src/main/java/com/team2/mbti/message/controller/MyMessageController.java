@@ -1,5 +1,6 @@
 package com.team2.mbti.message.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -8,10 +9,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.team2.mbti.message.model.MessageService;
+import com.team2.mbti.message.model.SendDmListVO;
+import com.team2.mbti.message.model.SendDmVO;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -49,16 +53,31 @@ public class MyMessageController {
 	}
 	
 	@RequestMapping("/myMessage/messageDelete")
-	public String messageDelete(@RequestParam(defaultValue = "0") int sendDmNo) {
-		logger.info("회원 - 쪽지 삭제 처리, 파라미터 sendDmNo={}", sendDmNo);
-		
-		int cnt=messageService.deleteSendDmBySendDmNo(sendDmNo);
-		logger.info("쪽지 삭제 결과, cnt={}",cnt);
-		
-		String msg="",url="/main/mypage/myMessage";
-		if(cnt>0) {
-			msg="쪽지 삭제 성공";
+	public String messageDelete(@ModelAttribute SendDmListVO sendDmListVo, @RequestParam(defaultValue = "0",required = false) int sendDmNo ,Model model) {
+		logger.info("회원 - 쪽지 삭제 처리, 파라미터 sendDmListVo={},sendDmNo={}", sendDmListVo,sendDmNo);
+		int cnt=0;
+		if(sendDmNo!=0) {
+			SendDmListVO sendDmListVo2=new SendDmListVO();
+			List<SendDmVO> list=new ArrayList<>();
+			SendDmVO vo=new SendDmVO();
+			vo.setSendDmNo(sendDmNo);
+			list.add(vo);
+			
+			sendDmListVo2.setSendItems(list);
+			
+			cnt=messageService.deleteSendDmBySendDmNo(sendDmListVo2);
+			logger.info("쪽지 삭제 결과, cnt={}",cnt);
+		}else {
+			cnt=messageService.deleteSendDmBySendDmNo(sendDmListVo);
+			logger.info("쪽지 삭제 결과, cnt={}",cnt);
 		}
+		String msg="쪽지 삭제를 실패하였습니다.",url="/main/mypage/myMessage";
+		if(cnt>0) {
+			msg="쪽지가 삭제되었습니다.";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
 		
 		return "common/message";
 	}

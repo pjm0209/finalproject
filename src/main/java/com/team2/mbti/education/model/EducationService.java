@@ -44,4 +44,8 @@ public interface EducationService {
 	int cancelApplicant(int [] eduAppNo);
 	
 	List<EducationVO> applyMemInfo(EducationVO vo);
+	List<Integer> selectMemNo(int eduNo);
+	EducationVO selectAllMemInfo(EducationVO vo);
+	List<EducationVO> myFinishEdu(EducationVO vo);
+	int applyPayFinish(int eduAppNo);
 }

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team2.mbti.board.model.BoardFileVO;
 import com.team2.mbti.common.ConstUtil;
@@ -145,6 +146,25 @@ public class EducationController {
 		
 		return "admin/education/list";
 		
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping("/listAjax")
+	public List<EducationVO> listAppMemInfo(@RequestParam(defaultValue = "0") int eduNo) {
+		logger.info("신청자 목록 띄우기 처리, 파라미터 eduNo={}", eduNo);
+		
+		List<Integer> list = educationService.selectMemNo(eduNo);
+		EducationVO vo = new EducationVO();
+		vo.setEduNo(eduNo);
+		List<EducationVO> memList = new ArrayList<>();
+		for(int i=0 ; i<list.size() ; i++) {
+			vo.setNo(list.get(i));
+			EducationVO vo2 = educationService.selectAllMemInfo(vo);
+			memList.add(vo2);
+		}
+		
+		return memList;
 	}
 	
 	

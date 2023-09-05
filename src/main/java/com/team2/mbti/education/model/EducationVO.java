@@ -27,7 +27,10 @@ public class EducationVO extends SearchVO {
 	//education_application
 	private int eduAppNo;
 	private int no;
+	private String userid;
+	private String hp;
 	private String eduAppFlag;
+	private String eduAppPay;
 	
 	//education_teacher
 	private int eduTeaNo;

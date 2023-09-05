@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team2.mbti.mbtiResult.model.MbtiResultListVO;
 import com.team2.mbti.mbtiResult.model.MbtiResultService;
@@ -244,6 +245,13 @@ public class MainMbtiController {
 		model.addAttribute("list", list);
 		
 		return "main/mbti/mbtiStatistics";
+	}
+	
+	@RequestMapping("/kakaoLogin")
+	public String kakaoLogin() {
+		logger.info("카카오 로그인");
+		
+		return "";
 	}
 
 

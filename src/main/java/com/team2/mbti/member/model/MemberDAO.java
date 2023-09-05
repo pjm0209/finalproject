@@ -33,7 +33,8 @@ public interface MemberDAO {
 	String pwdCheck(String userid); //비밀번호 확인
 	int updatePassword(MemberVO membervo); //비밀번호 변경
 
-	
+	int insertKakaoMember(MemberVO memberVo); //카카오톡 회원가입
+	int getKakaoIdCount(MemberVO memberVo); //카카오톡 회원가입 여부
 	
 	
 	
