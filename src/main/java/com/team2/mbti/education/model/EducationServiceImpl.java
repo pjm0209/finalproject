@@ -193,4 +193,20 @@ public class EducationServiceImpl implements EducationService{
 		return educationDao.myPayEdu(vo);
 	}
 
+	@Override
+	public int cancelApplicant(int [] eduAppNo) {
+		int cnt = 0;
+		
+		for(int i=0 ; i<eduAppNo.length ; i++) {
+			cnt = educationDao.cancelApplicant(eduAppNo[i]);
+		}
+		
+		return cnt;
+	}
+
+	@Override
+	public List<EducationVO> applyMemInfo(EducationVO vo) {
+		return educationDao.applyMemInfo(vo);
+	}
+
 }

@@ -3,6 +3,26 @@
 <%@include file="../inc/top.jsp" %>
 <%@include file="../inc/mypage.jsp" %>
 <section id="myPage">
-	
+	<table>
+		<tr>
+			<th>
+				<input type="checkbox" name="check-All">
+			</th>
+			<th>보낸 사람</th>
+			<th>내용</th>
+			<th>날짜</th>
+		</tr>
+		<c:forEach var="map" items="${list}">
+			<tr>
+				<td type="checkbox" value="${map['RECEIVE_DM_NO']}"></td>
+				<c:if test="${map['NO']==null || map['NO']=='' || map['NO']==0}">
+					<td>${map["RECEIVE_ID"]}(관리자)</td>
+				</c:if>
+				<c:if test="${map['ADMIN_NO']==null || map['ADMIN_NO']=='' || map['ADMIN_NO']==0}">
+					<td>${map["RECEIVE_ID"]}</td>
+				</c:if>
+			</tr>
+		</c:forEach>
+	</table>
 </section>
 <%@include file="../inc/bottom.jsp" %>
