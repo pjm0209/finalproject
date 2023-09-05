@@ -243,7 +243,7 @@ body.dark .switch::before{
 		<header>
 			<div class="image-text">
 				<span class="image">
-					<img src="../../images/KakaoTalk_20230817_223902506_02.jpg" alt="logo">
+					<img src="<c:url value="/images/KakaoTalk_20230817_223902506_02.jpg"/>" alt="logo">
 				</span>
 				
 				<div class="text header-text">
@@ -257,10 +257,6 @@ body.dark .switch::before{
 		
 		<div class="menu-bar">
 			<div class="menu">	
-				<li class="search-box">	 		
-					<i class='bx bx-search icons'></i>
-						<input type="search" placeholder="Search...">	
-				</li>
 				<ul class="menu-links" id="menu-links">
 					<li class="nav-link2">
 						<a href="<c:url value='/main/mypage/memberEditPwd'/>">

@@ -137,7 +137,6 @@
 					<th scope="col">교육 기간</th>
 					<th scope="col">교육비</th>
 					<th scope="col">교육장</th>
-					<th scope="col">교육장</th>
 					<th scope="col">결제 상태</th>
 				</tr>
 			</thead>

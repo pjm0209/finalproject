@@ -70,9 +70,9 @@
 			<div class="sidebar__inner shadow-sm bg-body rounded"  style="position: relative;">
 				<div>
 					<ul>
-					  <li><a href="<c:url value='/main/book/bookList1'/>">검 사 자 료</a></li>
-					  <li><a href="#news">도 서</a></li>
-					  <li><a href="#contact">기 타 교 구</a></li>
+					  <li><a href="<c:url value='/main/book/bookList1?bookCategory=검사자료'/>">검 사 자 료</a></li>
+					  <li><a href="<c:url value='/main/book/bookList1?bookCategory=도서'/>">도 서</a></li>
+					  <li><a href="<c:url value='/main/book/bookList1?bookCategory=기타'/>">기 타 교 구</a></li>
 					</ul>
 				</div>
 				<div class="resize-sensor"
