@@ -20,7 +20,9 @@ a:hover {
 </head>
 <body>
 	<c:forEach var="vo" items="${boardFormList }">
-		<li><a href="<c:url value='/main/board/boardList?boardFormNo=${vo.boardFormNo }'/>">${vo.boardFormName }</a></li>
+		<c:if test="${vo.boardFlag == 'Y' }">
+			<li><a href="<c:url value='/main/board/boardList?boardFormNo=${vo.boardFormNo }'/>">${vo.boardFormName }</a></li>
+		</c:if>
 	</c:forEach>
 </body>
 </html>

@@ -10,6 +10,7 @@ public interface MessageService {
 	int insertSendDmToMember(SendDmListVO sendDmListVo, int no);
 	List<MemberVO> selectAllMemberbyDm();
 	
-	List<Map<String, Object>> messageViewByNo(int no);
-	
+	List<Map<String, Object>> messageViewById(String id);
+	Map<String, Object> selectMessageViewBySendDmNo(int sendDmNo);
+	int deleteSendDmBySendDmNo(int sendDmNo);
 }
