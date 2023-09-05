@@ -58,13 +58,13 @@
 							<c:forEach var="vo" items="${fileList }">
 								<c:choose>
 							        <c:when test="${fn:length(vo.originalFileName) > 13}">
-							        	<a href="<c:url value='/admin/board/fileDown?fileName=${vo.fileName }'/>" data-toggle="tooltip" data-html="true" title="${vo.originalFileName }">
+							        	<a href="<c:url value='/main/board/fileDown?fileName=${vo.fileName }'/>" data-toggle="tooltip" data-html="true" title="${vo.originalFileName }">
 									        <c:out value="${fn:substring(vo.originalFileName, 0, 12)}">
 									        </c:out>...
 								        </a><br>
 							        </c:when>
 							        <c:otherwise>
-							        	<a href="<c:url value='/admin/board/fileDown?fileName=${vo.fileName }'/>" data-bs-toggle="tooltip" data-bs-title="${vo.originalFileName }">
+							        	<a href="<c:url value='/main/board/fileDown?fileName=${vo.fileName }'/>" data-bs-toggle="tooltip" data-bs-title="${vo.originalFileName }">
 									        <c:out value="${vo.originalFileName}">
 									        </c:out>
 								        </a><br>
