@@ -36,5 +36,13 @@
 		where receive_id=#{userid}
 		order by send_dm_no desc
 	</select>
+	<select id="selectMessageViewBySendDmNo" parameterType="int" resultType="map">
+		select * from messageview
+		where send_dm_no=#{send_dm_no}
+	</select>
 	
+	<delete id="deleteSendDmBySendDmNo" parameterType="int">
+		delete from send_dm
+		where send_dm_no = ${sendDmNo}
+	</delete>
 </mapper>

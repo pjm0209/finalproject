@@ -46,9 +46,18 @@
 		});
 	});
 	 
-	 $('#messageOkBtn').click(function(){
+	$('#messageOkBtn').click(function(){
 		$('form[name=messageFrm]').submit(); 
-	 });
-		 
+	});
+	
+	$("#messageDetailBtn").click(function(){
+		$('#confirmModalBody').html('선택한 쪽지를 삭제하시겠습니까?');
+		$('#confirmOk').attr('onclick','messageDeleteloc()');
+		$('#confirmModalBtn').trigger('click');
+	});
 	 
  });
+ 
+ function messageDeleteloc(){
+	 location.href=contextPath+'/main/mypage/myMessage/messageDelete?sendDmNo='+$("#sendDmNo").val();
+ }
