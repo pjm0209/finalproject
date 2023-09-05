@@ -10,6 +10,7 @@
 	<input type="hidden" value="${boardMap.BOARD_NO }" class="boardNo">
 	<input type="hidden" value="${boardMap.BOARD_GROUP_NO }" name="boardGroupNo">
 	<input type="hidden" value="${boardMap.BOARD_STEP }" name="boardStep">
+	<input type="hidden" value="${sessionScope.no }" name="no">
 
 	<div class="boardContent">
 		<div class="boardContent-head">

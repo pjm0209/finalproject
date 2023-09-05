@@ -331,4 +331,12 @@ public class MainBoardController {
 		
 		return "common/message";
 	}
+	
+	@ResponseBody
+	@RequestMapping("/mbtiSel")
+	public List<MbtiVO> mbtiSel() {
+		List<MbtiVO> mbtiList = mbtiService.selectAllMbti();
+		
+		return mbtiList;
+	}
 }

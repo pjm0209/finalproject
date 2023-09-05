@@ -67,22 +67,24 @@
 										<option value="${map['BOARD_FORM_NO'] }">${map['BOARD_FORM_NAME'] }</option>
 									</c:if>
 								</select>
-								<c:if test="${param.boardFormNo == 5 }">
-									<select class="form-select writembti" aria-label="Default select example" name="mbtiNo">
-										<c:if test="${param.boardWriteType != 'reply' }">
-											<c:forEach var="mbtiVo" items="${mbtiList }">
-												<option value="${mbtiVo.mbtiNo }" <c:if test="${mbtiVo.mbtiNo == param.mbtiNo }"> selected = "selected"</c:if>>${mbtiVo.mbtiType }</option>								
-											</c:forEach>
-										</c:if>
-										<c:if test="${param.boardWriteType == 'reply' }">
-											<c:forEach var="mbtiVo" items="${mbtiList }">
-												<c:if test="${map['MBTI_NO'] == mbtiVo.mbtiNo }">
-													<option value="${map['MBTI_NO'] }">${mbtiVo.mbtiType }</option>
-												</c:if>
-											</c:forEach>
-										</c:if>
-									</select>
-								</c:if>
+								<div class="mbtiSelectDiv">
+									<c:if test="${param.boardFormNo == 5 }">
+										<select class="form-select writembti" aria-label="Default select example" name="mbtiNo">
+											<c:if test="${param.boardWriteType != 'reply' }">
+												<c:forEach var="mbtiVo" items="${mbtiList }">
+													<option value="${mbtiVo.mbtiNo }" <c:if test="${mbtiVo.mbtiNo == param.mbtiNo }"> selected = "selected"</c:if>>${mbtiVo.mbtiType }</option>								
+												</c:forEach>
+											</c:if>
+											<c:if test="${param.boardWriteType == 'reply' }">
+												<c:forEach var="mbtiVo" items="${mbtiList }">
+													<c:if test="${map['MBTI_NO'] == mbtiVo.mbtiNo }">
+														<option value="${map['MBTI_NO'] }">${mbtiVo.mbtiType }</option>
+													</c:if>
+												</c:forEach>
+											</c:if>
+										</select>
+									</c:if>
+								</div>
 								<div class="form-check" <c:if test="${map.BOARD_FORM_NO != 3 }"> style="visibility: hidden;"</c:if>
 									<c:if test="${map.BOARD_SECREATE == 'Y' }"> checked="checked"</c:if>>
 									<input class="form-check-input secreate" type="checkbox" 

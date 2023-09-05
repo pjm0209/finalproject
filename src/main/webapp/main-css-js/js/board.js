@@ -59,7 +59,7 @@ $(function(){
 	//좋아요 클릭이벤트
 	$('div.board-like').click(function() {
 		if($('.session-userId').val().length > 0) {		
-			if($('.u_icon').is('.like') === true) {
+			if($('.u_icon').is('.like')) {
 				likeDel();
 			} else {
 				likeIns();
@@ -154,26 +154,43 @@ $(function(){
 		}
 	});
 	
+	$('#select_board').change(function(){
+		var boardFormNo = $('input[name=boardFormNo]').val();
+		
+		if(boardFormNo != 5) {
+			if($(this).val() == 5) {
+				mbtiSelect();
+			}			
+		}
+	});
+	
 	const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
 	const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
 });
 
-/*게시글목록 게시글상세보기 이동 함수*/
-/*function boardDetail(this) {
-	var boardSecreate = $(this).nextAll('input[name=boardSecreate]').val();
-	var user = $(this).nextAll('input[name=user]').val();
-	var writer = $(this).nextAll('input[name=userId]').val();
-	
-	if(boardSecreate = 'Y') {
-		if(user == writer) {
-			var boardNo = $(this).nextAll('input[name=boardNo]').val();
+//게시글작성 MBTI게시판 셀렉트
+function mbtiSelect() {
+	$.ajax({
+		url:contextPath + "/main/board/mbtiSel",
+		type:"GET",
+		success:function(result) {
+			console.log("result: " + result);
+			var str = "";
 			
-			location.href=contextPath + "/main/board/boardDetail?boardNo=" + boardNo;
-		} else {
-			$('#alertModalBody').html('비밀글입니다.');
+			str += '<select class="form-select writembti" aria-label="Default select example" name="mbtiNo">';
+			for(var i = 0; i < result.length; i++) {
+				var vo = result[i];
+				str += '<option value=\"' + vo.mbtiNo + '\">' + vo.mbtiType + '</option>';
+			}
+			str += '</select>';
+			
+			$('.mbtiSelectDiv').html(str);
+		},
+		error:function(xhr, status, error) {
+			alert(status + ": " + error);
 		}
-	}
-}*/
+	});
+}
 
 //파일삭제 함수
 function fileDel(element){		
@@ -235,13 +252,13 @@ function likeIns() {
 //좋아요 취소
 function likeDel() {
 	var boardNo = $('input[name=boardNo').val();
-	var adminNo = $('input[name=adminNo]').val();
+	var no = $('input[name=no]').val();
 	
 	$.ajax({
 		url:contextPath + '/boardLike/likeDel',
 		type:'POST',
 		data:{boardNo:boardNo,
-			  adminNo:adminNo},
+			  no:no},
 		success:function(result) {			
 			$('.u_icon').removeClass('like');
 			likeCountSelect();

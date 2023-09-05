@@ -259,6 +259,10 @@ ul.file-list {
 
 /*게시글 글쓰기*/
 
+.mbtiSelectDiv {
+    display: inline-block;
+}
+
 .form-check {
     display: inline-block;
     margin-left: 30px;
