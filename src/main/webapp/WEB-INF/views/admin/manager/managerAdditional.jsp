@@ -128,6 +128,21 @@ $(function(){
          }                  
       });
    });
+   
+	$('#managerTel').on('input', function() {
+	    var inputTel = $(this).val();
+	    
+	    var cleanedTel = inputTel.replace(/-/g, '');
+
+	    if (cleanedTel.length >= 4) {
+	        cleanedTel = cleanedTel.substring(0, 3) + '-' + cleanedTel.substring(3);
+	    }
+	    if (cleanedTel.length >= 9) {
+	        cleanedTel = cleanedTel.substring(0, 8) + '-' + cleanedTel.substring(8);
+	    }
+	    
+	    $(this).val(cleanedTel);
+	});   
       
 });
 </script>

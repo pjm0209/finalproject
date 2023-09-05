@@ -39,8 +39,7 @@ select#manager-search-select {
 </style>
 
 <script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>
-<script type="text/javascript"></script>
-<script>
+<script type="text/javascript">
 	$(function(){
         $('#add-newBoard-button').click(function(){
             var popupWidth = 600;
