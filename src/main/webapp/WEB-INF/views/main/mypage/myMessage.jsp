@@ -6,14 +6,18 @@
 	$(function(){
 		$('section#myMessage div a').first().css('color','#eb5d1e');
 		
+		$('.messageEditDelDiv').hide();
+		
 		$('.myMessageCheck-All').click(function(){
 			var checked=$(this).prop('checked');
 			$(this).parent().parent().nextAll('tr').find('input[type=checkbox]').prop('checked',checked);
 		});
 		
-		$('#sendId1').click(function(){
-			$(this).next('.messageEditDelDiv').toggle();
+		$('td[name=sendName]').click(function(){
+			$('.messageEditDelDiv').hide();
+			$(this).find('.messageEditDelDiv').toggle();
 		});
+		
 	});
 
 	function messageF(idx,evt){
@@ -54,7 +58,7 @@
     	line-height: 40px;
     	text-decoration: none;
     }
-    section#myMessage div a:first-child{
+    section#myMessage #messageDiv1 a:first-child{
     	margin-left: 50px;
     }
     
@@ -103,7 +107,7 @@
 	
 	.messageEditDelDiv{
 	    position: absolute;
-	    right: 80px;
+	    left: 450px;
 	    top: auto;
 	    background: white;
 	    box-shadow: 0 1px 12px 0 rgba(0, 0, 0, .06);
@@ -135,11 +139,22 @@
 			<tr>
 				<td><input class="board-checkbox" type="checkbox" name="sendDmNo" value="${map['SEND_DM_NO']}"></td>
 				<c:if test="${map['ADMIN_NO']!=null && map['ADMIN_NO']!=''}">
-					<td id="sendId1">${map["SEND_ID"]}(관리자)</td>
+					<td name="sendName">${map["SEND_ID"]}(관리자)
+						<div class="messageEditDelDiv" id="messageEditDelDiv">
+							<a href="/mbti/main/mypage/myMessage/messageWrite?receiveNo=${map['ADMIN_NO']}">쪽지 보내기</a>
+							<a name="messageDelA" href="/mbti/main/mypage/myMessage/messageDelete?sendDmNo=${map['SEND_DM_NO']}">쪽지 삭제</a>
+						</div>
+					</td>
 				</c:if>
 				<c:if test="${map['NO']!=null && map['NO']!=''}">
-					<td id="sendId1">${map["SEND_ID"]}</td>
+					<td name="sendName">${map["SEND_ID"]}
+						<div class="messageEditDelDiv" id="messageEditDelDiv">
+							<a href="/mbti/main/mypage/myMessage/messageWrite?receiveNo=${map['NO']}">쪽지 보내기</a>
+							<a name="messageDelA" href="/mbti/main/mypage/myMessage/messageDelete?sendDmNo=${map['SEND_DM_NO']}">쪽지 삭제</a>
+						</div>
+					</td>
 				</c:if>
+
 				<td onclick="lochref(${map['SEND_DM_NO']})" style="cursor: pointer;">${map["SEND_BODY"]}</td>
 				<td><fmt:formatDate value="${map['SEND_REGDATE']}" pattern="yyyy-MM-dd[HH:mm]" /></td>
 			</tr>
@@ -155,25 +170,48 @@
 			<th>보낸 날짜</th>
 			<th>읽은 날짜</th>
 		</tr>
+		<c:set var="myMessagesCnt" value="0" />
 		<c:forEach var="map" items="${list}">
-			<tr>
-				<td><input class="board-checkbox" type="checkbox" name="sendDmNo" value="${map['SEND_DM_NO']}"></td>
-				<c:if test="${map['RECEIVE_MANAGER_FLAG']=='Y'}">
-					<td id="sendId2">${map["RECEIVE_ID"]}(관리자)</td>
-				</c:if>
-				<c:if test="${map['RECEIVE_MANAGER_FLAG']=='N'}">
-					<td id="sendId2">${map["RECEIVE_ID"]}</td>
-				</c:if>
-				<td onclick="lochref(${map['SEND_DM_NO']})" style="cursor: pointer;">${map["SEND_BODY"]}</td>
-				<td><fmt:formatDate value="${map['SEND_REGDATE']}" pattern="yyyy-MM-dd[HH:mm]" /></td>
-				<td>
-					<c:if test="${map['READ_REGDATE']==null || map['READ_REGDATE']==''}">
-						<span>읽지 않음</span>
+			<c:if test="${map['SEND_ID']==sessionScope.userid}">
+				<tr>
+					<td><input class="board-checkbox" type="checkbox" name="sendDmNo" value="${map['SEND_DM_NO']}"></td>
+					<c:if test="${map['RECEIVE_MANAGER_FLAG']=='Y'}">
+						<td name="sendName">${map["RECEIVE_ID"]}(관리자)
+							<div class="messageEditDelDiv" id="messageEditDelDiv">
+								<a href="/mbti/main/mypage/myMessage/messageWrite?receiveNo=${map['ADMIN_NO']}">쪽지 보내기</a>
+								<a name="messageDelA" href="/mbti/main/mypage/myMessage/messageDelete?sendDmNo=${map['SEND_DM_NO']}">쪽지 삭제</a>
+							</div>
+						</td>
 					</c:if>
-					<fmt:formatDate value="${map['READ_REGDATE']}" pattern="yyyy-MM-dd[HH:mm]" />
-				</td>
-			</tr>
+					<c:if test="${map['RECEIVE_MANAGER_FLAG']=='N'}">
+						<td name="sendName">${map["RECEIVE_ID"]}
+							<div class="messageEditDelDiv" id="messageEditDelDiv">
+								<a href="/mbti/main/mypage/myMessage/messageWrite?receiveNo=${map['NO']}">쪽지 보내기</a>
+								<a name="messageDelA" href="/mbti/main/mypage/myMessage/messageDelete?sendDmNo=${map['SEND_DM_NO']}">쪽지 삭제</a>
+							</div>
+						</td>
+					</c:if>
+					
+					<td onclick="lochref(${map['SEND_DM_NO']})" style="cursor: pointer;">${map["SEND_BODY"]}</td>
+					<td><fmt:formatDate value="${map['SEND_REGDATE']}" pattern="yyyy-MM-dd[HH:mm]" /></td>
+					<td>
+						<c:if test="${map['READ_REGDATE']==null || map['READ_REGDATE']==''}">
+							<span>읽지 않음</span>
+						</c:if>
+						<fmt:formatDate value="${map['READ_REGDATE']}" pattern="yyyy-MM-dd[HH:mm]" />
+					</td>
+				</tr>
+				<c:set var="myMessagesCnt" value="${myMessagesCnt+1}" />
+			</c:if>
+			<c:if test="${map['SEND_ID']!=sessionScope.userid}">
+				<c:set var="hasMessage" value="true" />
+			</c:if>
 		</c:forEach>
+		<c:if test="${hasMessage && myMessagesCnt==0}">
+			<tr>
+		        <td colspan="4">쪽지가 없습니다.</td>
+		    </tr>
+	    </c:if>
 	</table>
 	<table width="1800px" style="border: 1px solid lightgray;margin-left: 50px;display: none;">
 		<tr>
@@ -192,11 +230,22 @@
 					<tr>
 						<td><input class="board-checkbox" type="checkbox" name="sendDmNo" value="${map['SEND_DM_NO']}"></td>
 						<c:if test="${map['RECEIVE_MANAGER_FLAG']=='Y'}">
-							<td id="sendId3">${map["SEND_ID"]}(관리자)</td>
+							<td name="sendName">${map["SEND_ID"]}(관리자)
+								<div class="messageEditDelDiv" id="messageEditDelDiv">
+									<a href="/mbti/main/mypage/myMessage/messageWrite?receiveNo=${map['ADMIN_NO']}">쪽지 보내기</a>
+									<a name="messageDelA" href="/mbti/main/mypage/myMessage/messageDelete?sendDmNo=${map['SEND_DM_NO']}">쪽지 삭제</a>
+								</div>
+							</td>
 						</c:if>
 						<c:if test="${map['RECEIVE_MANAGER_FLAG']=='N'}">
-							<td id="sendId3">${map["SEND_ID"]}</td>
+							<td name="sendName">${map["SEND_ID"]}
+								<div class="messageEditDelDiv" id="messageEditDelDiv">
+									<a href="/mbti/main/mypage/myMessage/messageWrite?receiveNo=${map['NO']}">쪽지 보내기</a>
+									<a name="messageDelA" href="/mbti/main/mypage/myMessage/messageDelete?sendDmNo=${map['SEND_DM_NO']}">쪽지 삭제</a>
+								</div>
+							</td>
 						</c:if>
+						
 						<td onclick="lochref(${map['SEND_DM_NO']})" style="cursor: pointer;">${map["SEND_BODY"]}</td>
 						<td>
 							<fmt:formatDate value="${map['READ_REGDATE']}" pattern="yyyy-MM-dd[HH:mm]" />
@@ -215,9 +264,6 @@
 		    </tr>
 		</c:if>
 	</table>
-	<div class="messageEditDelDiv" id="messageEditDelDiv">
-		<p>쪽지 보내기</p>
-		<p>쪽지 삭제</p>
-	</div>
+	
 </section>
 <%@include file="../inc/bottom.jsp" %>
