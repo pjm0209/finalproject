@@ -2,7 +2,7 @@ create table board
 (
 	no		        number		primary key,	--��ȣ
 	name		varchar2(20)	not null,			--�̸�	
-	pwd			varchar2(20)    not null,            --��й��?
+	pwd			varchar2(20)    not null,            --��й��?
 	title			varchar2(100)	 not null,			--����
 	email		varchar2(80)    null,            --�̸���
 	regdate 		date			default  sysdate,	--�ۼ���
@@ -53,6 +53,8 @@ create or replace procedure DELETEBOARD
 )
 is
     cnt number;
+    boardcnt number;
+    boardcnt1 number;
 begin
     if m_step = 0 then
         select count(*) into cnt from board
@@ -67,19 +69,24 @@ begin
     else
         delete board where board_no = m_no;
         
-        select count(*) into cnt from board
+        select count(*) into boardcnt from board
         where board_group_no = m_groupno;
-        
-        if cnt = 1 then
-            delete board where board_no = m_groupno;
+
+        if boardcnt = 1 then
+            select count(*) into boardcnt1 from board
+            where board_Del_Flag = 'Y';
+
+            if boardcnt1 = 1 then
+                delete board where board_no = m_groupno;
+            end if;
         end if;
     end if;
-
+    
     commit;
 
 EXCEPTION
     WHEN OTHERS THEN
-	raise_application_error(-20001, ' ?�패!');
+	raise_application_error(-20001, ' ?�패!');
         ROLLBACK;
 end;
 
@@ -117,7 +124,7 @@ begin
 
 EXCEPTION
     WHEN OTHERS THEN
-	raise_application_error(-20001, ' ?�패!');
+	raise_application_error(-20001, ' ?�패!');
         ROLLBACK;
 end;
 

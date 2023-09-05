@@ -13,6 +13,10 @@
 	font-size:15px;
 }
 
+.content{
+	margin-top: 100px;
+}
+
 h1{
 	margin-top: 30px;
 	margin-bottom: 30px;
@@ -27,18 +31,7 @@ p{
 	font-size: 15px;
 }
 
-html {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    padding-top: 300px;
-    padding-bottom: 20px;
-}
 
-body {
-    width: 30%;
-    border: 1px solid black;
-}
 
 input{
 	font-size: 15px;
@@ -57,7 +50,7 @@ div {
 
 label{
 	font-weight: bold;
-	margin-left: 80px;
+	margin-left: 750px;
 }
 
 .btnSearch {
@@ -126,7 +119,7 @@ form {
             if (confirmed) {
                 window.location.href = '<c:url value="/main/index"/>';
             }
-        }); 
+        });// 
         
         $('.tab-button').click(function() {
             $('.tab-button').removeClass('active');
@@ -135,69 +128,69 @@ form {
             var tabIndex = $(this).index();
             $('.tab-content').removeClass('active');
             $('.tab-content').eq(tabIndex).addClass('active');
-        });
+        });//
         
-        $("#btnSubmit").click(function(){
+        $("#sendEmailBtn").click(function(){
+        	var userid=$('#id').val();
+			var email=$('#email').val();
+			
+        	if(userid.length < 1){
+				alert("아이디를 입력해주세요.");
+				$("#id").focus;
+				return false;
+	      	}  
+        	
+        	if(email.length < 1){
+				alert("이메일을 입력해주세요.");
+				$("#email").focus;
+				return false;
+	      	} 
+        		     
+	    	
+        	
         	$.ajax({
-        		url : "/main/member/forgot-pwd",
-        		type : "POST",
+        		url : "<c:url value='/main/member/ajaxsendEmail'/>",
+        		type : 'post',
         		data : {
-        				id : $("#name").val(),
-        				email : $("#email").val()
+        				userid : userid,
+        				email : email
         		},
+        		dateType:'json',
         		success : function(result){
-        				alert(result);
+        			if(result>0){
+        				alert("임시 비밀번호 발송 완료!! 이메일을 확인해주세요");
+        				location.href="<c:url value=''/>";
+        			}        				
         		},
-        	});
-        });
+	            error:function(xhr,status,error){
+  	                alert(status+" : "+error);
+	            }    
+        	});//ajax
+        });//
     });
 </script>
 
-</head>
-<body>
+<div class="content">
 <h1>비밀번호 찾기</h1>	
 	<div class="tab">
-        <div class="tab-button active">휴대폰번호로 찾기</div>
         <div class="tab-button">이메일로 찾기</div>
     </div>
-    
-	<form name = "form-forgot-id" method="post" action="<c:url value='main/member/forgot-id'/>">	
-		<div class="tab-content active">
-			<p>회원가입 시 입력한 휴대폰 번호로 임시 비밀번호를 전송해드립니다. </p>			
-				<div class="findTel-name">
-					<label>*&nbsp;이름 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-						<input type="text" name="name" id="name" placeholder="이름을 입력하세요">	
-				</div><br>													
-				
-				<div class="findTel-tel">
-					<label>*&nbsp;휴대폰 : &nbsp;</label>
-						<input type="text" name="hp" id="tel" placeholder="휴대폰번호를 입력하세요">		
-				</div><br>
-				
-				<div class="btnSearch"><br>
-					<button class="btn btn-primary" type="submit">찾기</button>	
-					<button class="btn btn-info" type="button" onclick="history.back();">취소</button>					
-				</div>
-		</div>	
-				
-		<div class="tab-content">
-			<p>회원가입 시 입력한 이메일 주소로 임시 비밀번호를 전송해드립니다.</p>	
-				<div class="findEmail-name">
-					<label>*&nbsp;이름 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-						<input type="text" name="name" id="name" placeholder="이름을 입력하세요">	
-				</div><br>		
-			
-				<div class="findEmail-email">
-					<label>*&nbsp;E-mail : &nbsp;</label>
-						<input type="text" name="email" id="email" placeholder="이메일을 입력하세요">		
-				</div><br>
-													
-				<div class="btnSearch"><br>
-					<button class="btn btn-primary" type="submit">찾기</button>	
-					<button class="btn btn-info" type="button" onclick="history.back();">취소</button>					
-				</div>
-		</div>				
-	</form>    
-</body>
-</html>
-
+    			
+	<div class="tab-content">
+		<p>회원가입 시 입력한 이메일 주소로 임시 비밀번호를 전송해드립니다.</p>	
+			<div class="findEmail-id">
+				<label>*&nbsp;아이디 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+					<input type="text" name="userid" id="id" placeholder="아이디를 입력하세요">	
+			</div><br>		
+		
+			<div class="findEmail-email">
+				<label>*&nbsp;E-mail : &nbsp;</label>
+					<input type="text" name="email" id="email" placeholder="이메일을 입력하세요">		
+			</div><br>
+												
+			<div class="btnSearch"><br>
+				<button class="btn btn-primary" type="submit" name="submit" id="sendEmailBtn">전송</button>	
+				<button class="btn btn-info" type="button" onclick="history.back();">취소</button>					
+			</div>
+	</div>				
+<%@ include file="../inc/bottom.jsp" %>   

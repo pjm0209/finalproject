@@ -27,9 +27,7 @@
 		(
 		    select rownum as RNUM, a.* from
 		    (
-		        select v.*,(select count(*) from education_application e where e.edu_no=v.edu_no) qty,
-		        (select ep_name from education_place e where e.ep_no=v.ep_no) epName,
-		        (select edu_tea_name from education_teacher e where e.edu_tea_no=v.edu_tea_no) eduTeaName
+		        select v.*,(select count(*) from education_application e where e.edu_no=v.edu_no) qty
 		        from eduListview v
 		        <include refid="searchWhere"></include>
 		        order by edu_no desc
@@ -230,8 +228,6 @@
 				order by edu_no desc
 			)a
 		)
-		<![CDATA[
-		where RNUM > #{firstRecordIndex} and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}]]>
 	</select>
 	
 	<select id="getTotalRecordEduList" parameterType="educationVo" resultType="int">
@@ -250,8 +246,16 @@
 				order by edu_no desc
 			)a
 		)
-		<![CDATA[
-		where RNUM > #{firstRecordIndex} and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}]]>
+	</select>
+	
+	<delete id="cancelApplicant" parameterType="int" >
+		delete from education_application
+		where edu_app_no=#{eduAppNo} 
+	</delete>
+	
+	<select id="applyMemInfo" parameterType="educationVo" resultType="educationVo">
+		select * from edu_app_mem_view
+		where edu_app_no=#{no}
 	</select>
 	
 	

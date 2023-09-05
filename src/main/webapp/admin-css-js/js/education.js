@@ -224,5 +224,16 @@ var contextPath = "/mbti"
                                
             }
         }).open();
-    } 
+        
+        
+        //교육 신청한 인원의 정보 모달창으로 보여주기
+        $('#educationModalBtn').click(function(){
+				
+			
+	    });
+	}
+	
+	function eduModal(){
+		$('#educationModalBtn').trigger('click');
+	}
 	

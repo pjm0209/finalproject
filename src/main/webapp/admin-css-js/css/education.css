@@ -393,7 +393,37 @@ section#myEduPage {
     height: 20px;
 }
 
+input#applyDelBtn {
+    width: 109px;
+    margin: 0 auto;
+    display: block;
+    background-color: #eb5d1e;
+    border: none;
+    color: white;
+    border-radius: 50px;
+    height: 40px;
+}
 
+button#my-app-payBtn {
+    width: 109px;
+    margin: 0 auto;
+    display: block;
+    background-color: #eb5d1e;
+    border: none;
+    color: white;
+    border-radius: 50px;
+    height: 40px;
+    margin-bottom: 35px;
+}
+
+
+
+
+
+
+
+
+/******/
 /* 관리자 페이지 */
 
 input[type=checkbox] {
