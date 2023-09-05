@@ -66,19 +66,21 @@ begin
         else
             delete board where board_no = m_no;
         end if;
-    else
-        delete board where board_no = m_no;
-        
+    else 
         select count(*) into boardcnt from board
-        where board_group_no = m_groupno;
+        where board_group_no = m_groupno and board_del_flag = 'Y';
 
         if boardcnt = 1 then
             select count(*) into boardcnt1 from board
-            where board_Del_Flag = 'Y';
+            where board_step > 0 and board_group_no = m_groupno;
 
-            if boardcnt1 = 1 then
-                delete board where board_no = m_groupno;
+            if boardcnt1 > 1 then
+                delete board where board_no = m_no;
+            else
+                delete board where board_group_no = m_groupno;
             end if;
+        else
+            delete board where board_no = m_no;
         end if;
     end if;
     
@@ -98,6 +100,8 @@ create or replace procedure DELETECOMMENTS
 )
 is
     cnt number;
+    cnt1 number;
+    cnt2 number;
 begin
     if m_step = 0 then
         select count(*) into cnt from comments
@@ -109,14 +113,22 @@ begin
         else 
             delete comments where comments_no = m_no;
         end if;
-    else        
-        delete comments where comments_no = m_no;
+    else            
+        select count(*) into cnt1 from comments
+        where comments_del_flag = 'Y' and comments_group_no = m_groupno;
         
-        select count(*) into cnt from comments
-        where comments_group_No = m_groupno;
-        
-        if cnt = 1 then
-            delete comments where comments_no = m_groupno;
+        if cnt1 = 1 then
+            
+            select count(*) into cnt2 from comments
+            where comments_step > 0 and comments_group_no = m_groupno;
+            
+            if cnt2 > 1 then
+                delete comments where comments_no = m_no;
+            else                
+                delete comments where comments_group_no = m_groupno;
+            end if;
+        else
+            delete comments where comments_no = m_no;        
         end if;
     end if;
 

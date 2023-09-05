@@ -24,7 +24,7 @@
 				</div>
 				<div class="head-content-box2">
 					<input type="button" class="boardListBtn btn" onclick="location.href='<c:url value="/main/board/boardList?boardFormNo=${boardMap['BOARD_FORM_NO'] }"/>'" value="목록">
-					<c:if test="${boardMap['USERID'] == sessionScope.userid }">
+					<c:if test="${boardMap['USERID'] == sessionScope.userid and empty boardMap.ADMIN_ID}">
 						<input type="button" class="btn-outline-secondary btn boardDelBtn" value="삭제">
 						<input type="button" class="bg-orange-primary btn boardListBtn" onclick="location.href='<c:url value="/main/board/boardEdit?boardNo=${boardMap['BOARD_NO'] }&boardWriteType=edit"/>'" value="수정">
 					</c:if>

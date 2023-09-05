@@ -15,6 +15,7 @@
 </form>
 <section class="boardSection">
 	<div class="boardContent">
+		<input type="hidden" value="${sessionScope.userid }" name="user">
 		<form name="searchForm" method="POST" action="<c:url value='/main/board/boardList'/>">
 			<c:if test="${!empty param.boardFormNo }">
 				<input type="hidden" value="${param.boardFormNo }" name="boardFormNo">
@@ -54,7 +55,7 @@
 					</select>
 				</c:if>
 				<c:if test="${!empty param.boardFormNo and param.boardFormNo != 1 and param.boardFormNo != 2 }">
-					<button type="button" class="boardWriteBtn"	onclick="location='<c:url value="/main/board/boardWrite?boardFormNo=${param.boardFormNo }&boardWriteType=write"/>'">
+					<button type="button" class="boardWriteBtn">
 						<span class="boardWrite">게시글작성</span>
 					</button>
 				</c:if>
@@ -90,10 +91,15 @@
 										</c:forEach>
 										<i class="bi bi-arrow-return-right"></i>
 									</c:if>
-										<a href="<c:url value='/main/board/boardDetail?boardNo=${map["BOARD_NO"] }'/>"> ${map['BOARD_TITLE']}</a>	
-										<c:if test="${map['FILECOUNT'] != 0 and map['BOARD_FILE_ADD_FLAG'] == 'Y'}">
-											<img alt="파일이미지" src="<c:url value='/images/file.gif'/>">
-										</c:if>																									
+									<a class="boardDetailA"> ${map['BOARD_TITLE']}</a>	
+									<input type="hidden" value="${map.BOARD_NO }" name="boardNo">
+									<c:if test="${map['FILECOUNT'] != 0 and map['BOARD_FILE_ADD_FLAG'] == 'Y'}">
+										<img alt="파일이미지" src="<c:url value='/images/file.gif'/>">
+									</c:if>	
+									<c:if test="${map.BOARD_SECREATE == 'Y' }">
+										<i class="bi bi-lock"></i>
+									</c:if>		
+									<input type="hidden" name="boardSecreate" value="${map.BOARD_SECREATE }">
 								</div>
 								<div class="boardPostComments">
 									<c:if test="${map['COMMENT_FLAG'] == 'Y'}">
@@ -108,6 +114,7 @@
 									<c:if test="${empty map['NAME'] }">
 										${map['ADMIN_ID'] }
 									</c:if>
+									<input type="hidden" value="${map.USERID }" name="userId">
 								</div>
 							</c:if>
 							<c:if test="${map['BOARD_DEL_FLAG'] == 'Y' }">

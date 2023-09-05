@@ -1,5 +1,14 @@
 @charset "UTF-8";
 
+a {
+	cursor: pointer;
+}
+
+.form-check-input:checked {
+    background-color: #eb5d1e;
+    border-color: #eb5d1e;
+}
+
 .head-content-box2 .btn {
     margin-right: 15px;
 }
@@ -11,19 +20,21 @@
 
 section.boardSection {
     margin-top: 30px;
-    padding-top: 200px;
+    padding-top: 500px;
     display: flex;
     justify-content: center;
+    background: url(../../images/education/education_main.jpg) no-repeat;
 }
 
 .boardContent {
     width: 50%;
-    border: 1px solid black;
+    border: 1px solid #e1e1e1;
     border-radius: 15px;
+    background: white;
 }
 
 .boardContent-head {
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #e1e1e1;
 }
 
 .head-content {
@@ -247,6 +258,12 @@ ul.file-list {
 }
 
 /*게시글 글쓰기*/
+
+.form-check {
+    display: inline-block;
+    margin-left: 30px;
+    color: black;
+}
 
 .boardWrite-body dt {
     font-size: 14px;
