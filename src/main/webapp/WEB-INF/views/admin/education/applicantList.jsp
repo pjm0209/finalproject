@@ -39,9 +39,9 @@
 				<form name="frmSearch" method="post" action="<c:url value='/admin/education/applicantList'/>">
 				<div class="input-group mb-3" id="board-search-div">
 					<select class="form-select form-select-lg" aria-label=".form-select-lg example" name="searchCondition" id="edu-search-select">					  	
-					  	<option value="edu_app_flag" <c:if test="${param.searchCondition=='edu_app_flag'}"> selected="selected" </c:if>>승인 상태</option>
 					  	<option value="name" <c:if test="${param.searchCondition=='name'}"> selected="selected" </c:if>>신청자</option>
-					  	<option value="ep_name" <c:if test="${param.searchCondition=='ep_name'}"> selected="selected" </c:if>>교육장</option>
+					  	<option value="edu_app_flag" <c:if test="${param.searchCondition=='edu_app_flag'}"> selected="selected" </c:if>>승인 상태</option>
+					  	<option value="edu_app_pay" <c:if test="${param.searchCondition=='edu_app_pay'}"> selected="selected" </c:if>>결제 상태</option>
 					</select>
 					
 				 	<input type="text" class="form-control education-search" name="searchKeyword" placeholder="검색어를 입력하세요." aria-label="Recipient's username" aria-describedby="button-addon2" id="board-search-area">
@@ -64,6 +64,7 @@
 					<th scope="col">교육비</th>
 					<th scope="col">교육장</th>
 					<th scope="col">승인 상태</th>
+					<th scope="col">결제 상태</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -87,6 +88,7 @@
 							<td>${educationVo.eduPrice }</td>
 							<td>${educationVo.epName }</td>
 							<td>${educationVo.eduAppFlag }</td>
+							<td>${educationVo.eduAppPay }</td>
 						</tr>
 						<c:set var="idx" value="${idx + 1 }" />
 					</c:forEach>

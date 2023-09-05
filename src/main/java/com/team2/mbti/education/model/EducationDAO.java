@@ -1,6 +1,7 @@
 package com.team2.mbti.education.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -43,9 +44,12 @@ public interface EducationDAO {
 	
 	List<EducationVO> selectMyAllEdu(EducationVO vo);
 	List<EducationVO> myPayEdu(EducationVO vo);
+	List<EducationVO> myFinishEdu(EducationVO vo);
 	int getTotalRecordEduList(EducationVO vo);
 	int cancelApplicant(int eduAppNo);
 	
 	List<EducationVO> applyMemInfo(EducationVO vo);
-	
+	List<Integer> selectMemNo(int eduNo);
+	EducationVO selectAllMemInfo(EducationVO vo);
+	int applyPayFinish(int eduAppNo);
 }

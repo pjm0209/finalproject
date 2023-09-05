@@ -225,15 +225,45 @@ var contextPath = "/mbti"
             }
         }).open();
         
-        
-        //교육 신청한 인원의 정보 모달창으로 보여주기
-        $('#educationModalBtn').click(function(){
+      }  
+
+	
+	function eduModal(eduNo){
+		$.ajax({
+			url:contextPath + "/admin/education/listAjax",
+			data:{"eduNo" : eduNo},
+			type:"POST",
+			dataType:"json",
+			success:function(res){
+				if(res.length == 0){
+					var str = "현재 신청 인원이 없습니다.";
+				}else{
+					var str = "<table class='table'>";
+					str += "<tr>";
+					str += "<td>이름</td>";
+					str += "<td>아이디</td>";
+					str += "<td>핸드폰 번호</td>";
+					str += "</tr>";
+						
+					for(var i=0 ; i<res.length ; i++) {
+						var vo = res[i];
+						var name = vo.name;
+						var userid = vo.userid;
+						var hp = vo.hp;
+						str += "<tr>";
+						str += "<td>"+name+"</td>";
+						str += "<td>"+userid+"</td>";
+						str += "<td>"+hp+"</td>";
+						str += "</tr>";
+					}
+						str += "</table>";
+				}
+				$('#modalTable').html(str);
+				$('#educationModalBtn').trigger('click');
 				
-			
-	    });
+			},
+			error:function(xhr, status, error){
+				alert(status+" : "+error);
+			}
+		})
 	}
-	
-	function eduModal(){
-		$('#educationModalBtn').trigger('click');
-	}
-	
