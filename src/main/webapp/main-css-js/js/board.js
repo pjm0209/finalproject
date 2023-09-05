@@ -12,6 +12,23 @@ $(function(){
   		config.resize_enabled = false;
 	};
 	
+	/*게시판화면 자동스크롤*/
+	var offset = $('.boardContent').offset();  
+	window.scrollTo(0, 300);
+	
+	/*비로그인 글쓰기 버튼클릭시 알림창*/
+	$('.boardWriteBtn').click(function(){		
+		if($('input[name=user]').val().length < 1) { //비로그인 클릭시
+			$('#confirmModalBody').html('글쓰기는 로그인 해야만 이용가능합니다.<br> 로그인하시겠습니까?');
+			$('#confirmOk').attr('onclick', 'location.href=\"' + contextPath + '/main/member/memberLogin\"');
+			$('#confirmModalBtn').trigger('click');	
+		} else { //로그인상태로 클릭시
+			var boardFormNo = $('input[name=boardFormNo]').val();
+		
+			location.href= contextPath + "/main/board/boardWrite?boardFormNo=" + boardFormNo + "&boardWriteType=write";
+		}
+	});
+	
 	/*게시글 상세보기 첨부파일 슬라이드 효과*/
 	$('.file-list').hide();
 	
@@ -40,7 +57,7 @@ $(function(){
 			}
 		} else {
 			$('#confirmModalBody').html('좋아요는 로그인 해야만 이용가능합니다.<br> 로그인하시겠습니까?');
-			$('#confirmOk').attr('onclick', 'location.href=\"' + contextPath + '/main/member/memberLogin' + "\"" + '');
+			$('#confirmOk').attr('onclick', 'location.href=\"' + contextPath + '/main/member/memberLogin\"');
 			$('#confirmModalBtn').trigger('click');	
 		}
 	});
@@ -53,7 +70,7 @@ $(function(){
 		var boardNo = $('.boardNo').val();
 		var str = "";
 		
-		str += '<input type="button" class="bg-orange-primary" onclick="location.href=\"/main/board/boardEdit?boardNo=' + boardNo + '\"" value="수정">';
+		str += '<input type="button" class="bg-orange-primary" onclick="location.href=\"/main/board/boardEdit?boardNo=' + boardNo + '\" value="수정">';
 		str += '<input type="button" class="bg-orange-primary" value="삭제">';
 		
 		$('.boardListBtn').after().html(str);
@@ -376,7 +393,7 @@ function commentReply(element) {
 		}
 	} else {
 		$('#confirmModalBody').html('답글은 로그인 해야만 이용가능합니다.<br> 로그인하시겠습니까?');
-		$('#confirmOk').attr('onclick', 'location.href=\"' + contextPath + '/main/member/memberLogin' + "\"" + '');
+		$('#confirmOk').attr('onclick', 'location.href=\"' + contextPath + '/main/member/memberLogin\"');
 		$('#confirmModalBtn').trigger('click');	
 	}
 }

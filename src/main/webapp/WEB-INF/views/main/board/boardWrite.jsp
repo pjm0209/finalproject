@@ -58,7 +58,9 @@
 								<select id="select_board" name="boardFormNo">		
 									<c:if test="${empty param.boardNo }">					
 										<c:forEach var="vo" items="${boardList }">
-											<option value="${vo.boardFormNo }" <c:if test="${vo.boardFormNo == param.boardFormNo }"> selected = "selected"</c:if>>${vo.boardFormName }</option>
+											<c:if test="${vo.boardFlag == 'Y' }">
+												<option value="${vo.boardFormNo }" <c:if test="${vo.boardFormNo == param.boardFormNo }"> selected = "selected"</c:if>>${vo.boardFormName }</option>
+											</c:if>
 										</c:forEach>
 									</c:if>
 									<c:if test="${!empty param.boardNo }">

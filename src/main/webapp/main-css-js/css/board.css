@@ -11,19 +11,21 @@
 
 section.boardSection {
     margin-top: 30px;
-    padding-top: 200px;
+    padding-top: 500px;
     display: flex;
     justify-content: center;
+    background: url(../../images/education/education_main.jpg) no-repeat;
 }
 
 .boardContent {
     width: 50%;
-    border: 1px solid black;
+    border: 1px solid #e1e1e1;
     border-radius: 15px;
+    background: white;
 }
 
 .boardContent-head {
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #e1e1e1;
 }
 
 .head-content {

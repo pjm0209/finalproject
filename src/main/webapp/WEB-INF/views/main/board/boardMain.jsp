@@ -30,17 +30,19 @@
 					<c:if test="${empty map.BOARDCOUNT}">
 						<c:set var="count" value="0"/>
 					</c:if>
-					<li class="boardFormItem">
-						<div class="boardCategoryTitleImg"></div>
-						<div class="boardCategoryContent">
-							<a class="boardCategoryContentTitle" href="<c:url value='/main/board/boardList?boardFormNo=${map.BOARD_FORM_NO }'/>">${map.BOARD_FORM_NAME }</a>
-							<p class="boardCategoryContentIntro">${map.BOARD_FORM_INTRO }</p>
-						</div>
-						<div class="boardCategoryWriteCount">
-							<i class="bi bi-chat-square" data-bs-toggle="tooltip" data-bs-placement="top" title="게시판에 작성된 게시글개수."></i>
-							<span class="boardWriteCount">${count }</span>
-						</div>						
-					</li>
+					<c:if test="${map.BOARD_FLAG == 'Y' }">
+						<li class="boardFormItem">
+							<div class="boardCategoryTitleImg"></div>
+							<div class="boardCategoryContent">
+								<a class="boardCategoryContentTitle" href="<c:url value='/main/board/boardList?boardFormNo=${map.BOARD_FORM_NO }'/>">${map.BOARD_FORM_NAME }</a>
+								<p class="boardCategoryContentIntro">${map.BOARD_FORM_INTRO }</p>
+							</div>
+							<div class="boardCategoryWriteCount">
+								<i class="bi bi-chat-square" data-bs-toggle="tooltip" data-bs-placement="top" title="게시판에 작성된 게시글개수."></i>
+								<span class="boardWriteCount">${count }</span>
+							</div>						
+						</li>
+					</c:if>
 				</c:forEach>
 			</ul>
 		</div>

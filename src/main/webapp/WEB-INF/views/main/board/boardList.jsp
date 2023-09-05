@@ -15,6 +15,7 @@
 </form>
 <section class="boardSection">
 	<div class="boardContent">
+		<input type="hidden" value="${sessionScope.userid }" name="user">
 		<form name="searchForm" method="POST" action="<c:url value='/main/board/boardList'/>">
 			<c:if test="${!empty param.boardFormNo }">
 				<input type="hidden" value="${param.boardFormNo }" name="boardFormNo">
@@ -54,7 +55,7 @@
 					</select>
 				</c:if>
 				<c:if test="${!empty param.boardFormNo and param.boardFormNo != 1 and param.boardFormNo != 2 }">
-					<button type="button" class="boardWriteBtn"	onclick="location='<c:url value="/main/board/boardWrite?boardFormNo=${param.boardFormNo }&boardWriteType=write"/>'">
+					<button type="button" class="boardWriteBtn">
 						<span class="boardWrite">게시글작성</span>
 					</button>
 				</c:if>
