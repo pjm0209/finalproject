@@ -22,7 +22,7 @@
 	
 	
 	function lochref(sendDmNo){
-		location.href=contextPath+"/main/mypage/myMessage/messageWrite?sendDmNo="+sendDmNo;
+		location.href=contextPath+"/main/mypage/myMessage/messageDetail?sendDmNo="+sendDmNo;
 	}
 	
 </script>
@@ -96,7 +96,6 @@
 		text-align: left;
 		padding-left: 20px;
 	}
-	
 </style>
 <section id="myMessage">
 	<div>

@@ -257,10 +257,6 @@ body.dark .switch::before{
 		
 		<div class="menu-bar">
 			<div class="menu">	
-				<li class="search-box">	 		
-					<i class='bx bx-search icons'></i>
-						<input type="search" placeholder="Search...">	
-				</li>
 				<ul class="menu-links" id="menu-links">
 					<li class="nav-link2">
 						<a href="<c:url value='/main/mypage/memberEditPwd'/>">

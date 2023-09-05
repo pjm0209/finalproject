@@ -105,5 +105,15 @@ public class MessageServiceImpl implements MessageService {
 	public List<Map<String, Object>> messageViewById(String id) {
 		return messageDao.messageViewById(id);
 	}
+
+	@Override
+	public Map<String, Object> selectMessageViewBySendDmNo(int sendDmNo) {
+		return messageDao.selectMessageViewBySendDmNo(sendDmNo);
+	}
+
+	@Override
+	public int deleteSendDmBySendDmNo(int sendDmNo) {
+		return messageDao.deleteSendDmBySendDmNo(sendDmNo);
+	}
 	
 }

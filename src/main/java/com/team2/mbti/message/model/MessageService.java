@@ -11,5 +11,6 @@ public interface MessageService {
 	List<MemberVO> selectAllMemberbyDm();
 	
 	List<Map<String, Object>> messageViewById(String id);
-	
+	Map<String, Object> selectMessageViewBySendDmNo(int sendDmNo);
+	int deleteSendDmBySendDmNo(int sendDmNo);
 }
