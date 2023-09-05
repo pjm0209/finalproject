@@ -14,5 +14,5 @@ public interface MessageDao {
 	int insertSendDmToMember(SendDmVO sendDmVo);
 	List<MemberVO> selectAllMemberbyDm();
 	
-	List<Map<String, Object>> messageViewByNo(int no);
+	List<Map<String, Object>> messageViewById(String id);
 }

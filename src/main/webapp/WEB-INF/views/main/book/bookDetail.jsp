@@ -75,13 +75,15 @@
 					<img src="https:/i.ibb.co/yhbwLJR/1.png" alt="1">
 				</div>
 				<div class="textbox">
-					<h1>MBTI Form M 자가채점용</h1>
+					<h1>${vo.bookTitle}</h1>
 					<table width="100%" border="0" cellpadding="0" cellspacing="0">
 						<tbody>
 							<tr>
 								<td width="100" height="22">가격</td>
 								<td width="30" align="center">:</td>
-								<td width="410" class="b Goods_Price" style="font-weight: bold">6,000 원</td>
+								<td width="410" class="b Goods_Price" style="font-weight: bold">
+									<fmt:formatNumber value="${vo.bookPrice}" pattern="#,###"/>원
+								</td>
 							</tr>
 
 
@@ -117,7 +119,7 @@
 							<tr>
 								<td height="22">상품코드</td>
 								<td align="center">:</td>
-								<td>1</td>
+								<td>${vo.bookNo}</td>
 							</tr>
 
 						</tbody>
@@ -137,7 +139,8 @@
 				</div>
 				<ul>
 					<span>* 상세정보</span>
-					<p></p>
+					<p>${vo.bookDetails}</p>
+					<p>${vo.bookExplains}</p>
 				</ul>
 
 			</section>

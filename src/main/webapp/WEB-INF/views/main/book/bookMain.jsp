@@ -32,9 +32,9 @@
 			<div class="sidebar__inner shadow-sm bg-body rounded"  style="position: relative;">
 				<div>
 					<ul>
-					  <li><a href="<c:url value='/main/book/bookList1'/>">검 사 자 료</a></li>
-					  <li><a href="<c:url value='/main/book/bookList1'/>">도 서</a></li>
-					  <li><a href="<c:url value='/main/book/bookList1'/>">기 타 교 구</a></li>
+					  <li><a href="<c:url value='/main/book/bookList1?bookCategory=검사자료'/>">검 사 자 료</a></li>
+					  <li><a href="<c:url value='/main/book/bookList1?bookCategory=도서'/>">도 서</a></li>
+					  <li><a href="<c:url value='/main/book/bookList1?bookCategory=기타'/>">기 타 교 구</a></li>
 					</ul>
 				</div>
 				<div class="resize-sensor"
@@ -56,20 +56,20 @@
 			</div> --%>
 			<div class="flex">
 				<div class="bestbook flex">
-					 <img src="<c:url value='/images/bookProduct/20025.jpg'/>" alt="">
+					 <img src="<c:url value='/images/bookProduct/1.jpg'/>" alt="">
 					 <div class="textbox">
-					 	<p>MBTI Form M 자가채점용</p>
-					 	<p>MBTI Form M 자가채점용은 검사지, 답안지, 프로파...</p>
+					 	<p>MBTI Form M<br> 자가채점용</p>
+					 	<p>MBTI Form M 자가채점용은<br> 검사지, 답안지, 프로파...</p>
 					 	<p>18,000원</p>
-					 	<button>구매하기</button>
+					 	<button onclick="location.href='bookDetail?bookNo=1'">구매하기</button>
 					 </div>
 				</div>
 				<div class="booksearch">
 					<img src="<c:url value='/images/searchBook2.jpg'/>" alt="책검색이미지">
-					<input type="text">
-						<button type="submit">
-							<span class="material-symbols-outlined">search</span>
-						</button>
+					<input name="searchKeyword" type="text"style="margin-top: 26px;" placeholder="저자 또는 상품명">
+					<button type="submit" style="margin-top: 26px;">
+						<span class="material-symbols-outlined">search</span>
+					</button>
 				</div>
 			</div>  
 			<div class="pdList">
@@ -79,74 +79,28 @@
 				</a>
 				<ul class="aa-product-catg">
 					<!-- start single product item -->
-					<li>
-						<figure>
-							<a class="aa-product-img" href="<c:url value='/main/book/bookDetail'/>">
-								<img src="<c:url value='/images/bookProduct/20024.jpg'/>" alt="">
-							</a>
-							<a class="aa-add-card-btn" href="">
-								<span style="display: block;" class="fas fa-shopping-cart"></span>
-								장바구니 담기
-							</a>
-							<figcaption>
-								<h5 class="aa-product-title">
-									<a href="#"></a>
-								</h5>
-								<span class="aa-product-price">1700원</span>
-							</figcaption>
-						</figure>
-					</li>
-					<li>
-						<figure>
-							<a class="aa-product-img" href="">
-								<img src="<c:url value='/images/bookProduct/20025.jpg'/>" alt="">
-							</a>
-							<a class="aa-add-card-btn" href="">
-								<span style="display: block;" class="fas fa-shopping-cart"></span>
-								장바구니 담기
-							</a>
-							<figcaption>
-								<h5 class="aa-product-title">
-									<a href="#"></a>
-								</h5>
-								<span class="aa-product-price">1700원</span>
-							</figcaption>
-						</figure>
-					</li>
-					<li>
-						<figure>
-							<a class="aa-product-img" href="">
-								<img src="<c:url value='/images/bookProduct/20026.jpg'/>" alt="">
-							</a>
-							<a class="aa-add-card-btn" href="">
-								<span style="display: block;" class="fas fa-shopping-cart"></span>
-								장바구니 담기
-							</a>
-							<figcaption>
-								<h5 class="aa-product-title">
-									<a href="#"></a>
-								</h5>
-								<span class="aa-product-price">1700원</span>
-							</figcaption>
-						</figure>
-					</li>
-					<li>
-						<figure>
-							<a class="aa-product-img" href="">
-								<img src="<c:url value='/images/bookProduct/20027.jpg'/>" alt="">
-							</a>
-							<a class="aa-add-card-btn" href="">
-								<span style="display: block;" class="fas fa-shopping-cart"></span>
+					<c:forEach var="bookVo1" items="${bookList1}">
+						<li>
+							<figure>
+								<a class="aa-product-img"
+								 href="<c:url value='/main/book/bookDetail?bookNo=${bookVo1.bookNo}'/>">
+									<img
+									 src="<c:url value='/images/bookProduct/upload_img/${bookVo1.bookImgName}'/>"
+									 alt="${bookVo1.bookTitle}이미지">
+								</a>
+								<a class="aa-add-card-btn" href="">
+									<span style="display: block;" class="fas fa-shopping-cart"></span>
 									장바구니 담기
-							</a>
-							<figcaption>
-								<h5 class="aa-product-title">
-									<a href="#"></a>
-								</h5>
-								<span class="aa-product-price">1700원</span>
-							</figcaption>
-						</figure>
-					</li>
+								</a>
+								<figcaption>
+									<h5 class="aa-product-title">
+										<a href="#"></a>
+									</h5>
+									<span class="aa-product-price">${bookVo1.bookPrice}</span>
+								</figcaption>
+							</figure>
+						</li>
+					</c:forEach>
 				</ul>
 			</div>
 			<div class="pdList">
@@ -157,77 +111,28 @@
 					</span>
 				</a>
 				<ul class="aa-product-catg">
-					<!-- start single product item -->
-					<li>
-						<figure>
-							<a class="aa-product-img" href="">
-								<img src="<c:url value='/images/bookProduct/20028.jpg'/>" alt="">
-							</a>
-							<a class="aa-add-card-btn" href="">
-								<span style="display: block;" class="fas fa-shopping-cart"></span>
+					<c:forEach var="bookVo" items="${bookList2}">
+						<li>
+							<figure>
+								<a class="aa-product-img"
+								 href="<c:url value='/main/book/bookDetail?bookNo=${bookVo2.bookNo}'/>">
+									<img
+									 src="<c:url value='/images/bookProduct/upload_img/${bookVo2.bookImgName}'/>"
+									 alt="${bookVo2.bookTitle}이미지">
+								</a>
+								<a class="aa-add-card-btn" href="">
+									<span style="display: block;" class="fas fa-shopping-cart"></span>
 									장바구니 담기
-							</a>
-							<figcaption>
-								<h5 class="aa-product-title">
-									<a href="#"></a>
-								</h5>
-								<span class="aa-product-price">1700원</span>
-		
-							</figcaption>
-						</figure>
-					</li>
-					<li>
-						<figure>
-							<a class="aa-product-img" href="">
-								<img src="<c:url value='/images/bookProduct/20029.jpg'/>" alt="">
-							</a>
-							<a class="aa-add-card-btn" href="">
-								<span style="display: block;" class="fas fa-shopping-cart"></span>
-									장바구니 담기
-							</a>
-							<figcaption>
-								<h5 class="aa-product-title">
-									<a href="#"></a>
-								</h5>
-								<span class="aa-product-price">1700원</span>
-		
-							</figcaption>
-						</figure>
-					</li>
-					<li>
-						<figure>
-							<a class="aa-product-img" href="">
-								<img src="<c:url value='/images/bookProduct/20030.jpg'/>" alt="">
-							</a>
-							<a class="aa-add-card-btn" href="">
-								<span style="display: block;" class="fas fa-shopping-cart"></span>
-									장바구니 담기
-							</a>
-							<figcaption>
-								<h5 class="aa-product-title">
-									<a href="#"></a>
-								</h5>
-								<span class="aa-product-price">1700원</span>
-							</figcaption>
-						</figure>
-					</li>
-					<li>
-						<figure>
-							<a class="aa-product-img" href="">
-								<img src="<c:url value='/images/bookProduct/20031.jpg'/>" alt="">
-							</a>
-							<a class="aa-add-card-btn" href="">
-								<span style="display: block;" class="fas fa-shopping-cart"></span>
-								장바구니 담기
-							</a>
-							<figcaption>
-								<h5 class="aa-product-title">
-									<a href="#"></a>
-								</h5>
-								<span class="aa-product-price">1700원</span>
-							</figcaption>
-						</figure>
-					</li>
+								</a>
+								<figcaption>
+									<h5 class="aa-product-title">
+										<a href="#"></a>
+									</h5>
+									<span class="aa-product-price">${bookVo2.bookPrice}</span>
+								</figcaption>
+							</figure>
+						</li>
+					</c:forEach>
 				</ul>
 			</div>
 			<div class="pdList">
@@ -238,67 +143,28 @@
 					</span>
 				</a>
 				<ul class="aa-product-catg">
-					<!-- start single product item -->
-					<li>
-						<figure>
-							<a class="aa-product-img" href="<c:url value='/main/book/bookDetail'/>">
-								<img src="<c:url value='/images/bookProduct/20032.jpg'/>" alt="">
-							</a>
-							<a class="aa-add-card-btn" href="">
-								<span style="display: block;" class="fas fa-shopping-cart"></span>장바구니 담기</a>
-							<figcaption>
-								<h5 class="aa-product-title">
-									<a href="#"></a>
-								</h5>
-								<span class="aa-product-price">1700원</span>
-							</figcaption>
-						</figure>
-					</li>
-					<li>
-						<figure>
-							<a class="aa-product-img" href="">
-								<img src="<c:url value='/images/bookProduct/20033.jpg'/>" alt="">
-							</a>
-							<a class="aa-add-card-btn" href="">
-								<span style="display: block;" class="fas fa-shopping-cart"></span>장바구니 담기</a>
-							<figcaption>
-								<h5 class="aa-product-title">
-									<a href="#"></a>
-								</h5>
-								<span class="aa-product-price">1700원</span>
-							</figcaption>
-						</figure>
-					</li>
-					<li>
-						<figure>
-							<a class="aa-product-img" href="">
-								<img src="<c:url value='/images/bookProduct/20034.jpg'/>" alt="">
-							</a>
-							<a class="aa-add-card-btn" href="">
-								<span style="display: block;" class="fas fa-shopping-cart"></span>장바구니 담기</a>
-							<figcaption>
-								<h5 class="aa-product-title">
-									<a href="#"></a>
-								</h5>
-								<span class="aa-product-price">1700원</span>
-							</figcaption>
-						</figure>
-					</li>
-					<li>
-						<figure>
-							<a class="aa-product-img" href="">
-								<img src="<c:url value='/images/bookProduct/20026.jpg'/>" alt="">
-							</a>
-							<a class="aa-add-card-btn" href="">
-								<span style="display: block;" class="fas fa-shopping-cart"></span>장바구니 담기</a>
-							<figcaption>
-								<h5 class="aa-product-title">
-									<a href="#"></a>
-								</h5>
-								<span class="aa-product-price">1700원</span>
-							</figcaption>
-						</figure>
-					</li>
+					<c:forEach var="bookVo3" items="${bookList3}">
+						<li>
+							<figure>
+								<a class="aa-product-img"
+								 href="<c:url value='/main/book/bookDetail?bookNo=${bookVo3.bookNo}'/>">
+									<img
+									 src="<c:url value='/images/bookProduct/upload_img/${bookVo3.bookImgName}'/>"
+									 alt="${bookVo3.bookTitle}이미지">
+								</a>
+								<a class="aa-add-card-btn" href="">
+									<span style="display: block;" class="fas fa-shopping-cart"></span>
+									장바구니 담기
+								</a>
+								<figcaption>
+									<h5 class="aa-product-title">
+										<a href="#"></a>
+									</h5>
+									<span class="aa-product-price">${bookVo3.bookPrice}</span>
+								</figcaption>
+							</figure>
+						</li>
+					</c:forEach>
 				</ul>
 			</div>
 		</div>

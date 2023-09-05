@@ -243,7 +243,7 @@ body.dark .switch::before{
 		<header>
 			<div class="image-text">
 				<span class="image">
-					<img src="../../images/KakaoTalk_20230817_223902506_02.jpg" alt="logo">
+					<img src="<c:url value="/images/KakaoTalk_20230817_223902506_02.jpg"/>" alt="logo">
 				</span>
 				
 				<div class="text header-text">
