@@ -1,5 +1,14 @@
 @charset "UTF-8";
 
+a {
+	cursor: pointer;
+}
+
+.form-check-input:checked {
+    background-color: #eb5d1e;
+    border-color: #eb5d1e;
+}
+
 .head-content-box2 .btn {
     margin-right: 15px;
 }
@@ -249,6 +258,12 @@ ul.file-list {
 }
 
 /*게시글 글쓰기*/
+
+.form-check {
+    display: inline-block;
+    margin-left: 30px;
+    color: black;
+}
 
 .boardWrite-body dt {
     font-size: 14px;

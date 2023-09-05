@@ -28,22 +28,22 @@
 	<sql id="insertBoardType">
 		<if test="no == 0 or no == null">
 			<if test="mbtiNo == 0">
-				insert into board(board_no, board_form_no, board_title, board_body, board_group_no, admin_no)
-				values(#{boardNo}, #{boardFormNo}, #{boardTitle}, #{boardBody}, #{boardNo}, #{adminNo})
+				insert into board(board_no, board_form_no, board_title, board_body, board_group_no, admin_no, board_secreate)
+				values(#{boardNo}, #{boardFormNo}, #{boardTitle}, #{boardBody}, #{boardNo}, #{adminNo}, #{boardSecreate})
 			</if>
 			<if test="mbtiNo != 0">
-				insert into board(board_no, board_form_no, board_title, board_body, board_group_no, admin_no, mbti_no)
-				values(#{boardNo}, #{boardFormNo}, #{boardTitle}, #{boardBody}, #{boardNo}, #{adminNo}, #{mbtiNo})
+				insert into board(board_no, board_form_no, board_title, board_body, board_group_no, admin_no, mbti_no, board_secreate)
+				values(#{boardNo}, #{boardFormNo}, #{boardTitle}, #{boardBody}, #{boardNo}, #{adminNo}, #{mbtiNo}, #{boardSecreate})
 			</if>
 		</if>
 		<if test="no != 0 and no != null">
 			<if test="mbtiNo == 0">
-				insert into board(board_no, board_form_no, board_title, board_body, no, board_group_no)
-				values(#{boardNo}, #{boardFormNo}, #{boardTitle}, #{boardBody}, #{no}, #{boardNo})
+				insert into board(board_no, board_form_no, board_title, board_body, no, board_group_no, board_secreate)
+				values(#{boardNo}, #{boardFormNo}, #{boardTitle}, #{boardBody}, #{no}, #{boardNo}, #{boardSecreate})
 			</if>
 			<if test="mbtiNo != 0">
-				insert into board(board_no, board_form_no, board_title, board_body, no, board_group_no, mbti_no)
-				values(#{boardNo}, #{boardFormNo}, #{boardTitle}, #{boardBody}, #{no}, #{boardNo}, #{mbtiNo})
+				insert into board(board_no, board_form_no, board_title, board_body, no, board_group_no, mbti_no, board_secreate)
+				values(#{boardNo}, #{boardFormNo}, #{boardTitle}, #{boardBody}, #{no}, #{boardNo}, #{mbtiNo}, #{boardSecreate})
 			</if>
 		</if>
 	</sql>
@@ -51,21 +51,21 @@
 	<sql id="insertBoardReplyType">
 		<if test="no == 0 or no == null">
 			<if test="mbtiNo == 0">
-				insert into board(board_no, board_form_no, board_title, board_body, board_group_no, board_step, board_sort, admin_no)
-				values(#{boardNo}, #{boardFormNo}, #{boardTitle}, #{boardBody}, #{boardGroupNo}, #{boardStep} + 1, #{boardSort} + 1, #{adminNo})
+				insert into board(board_no, board_form_no, board_title, board_body, board_group_no, board_step, board_sort, admin_no, board_secreate)
+				values(#{boardNo}, #{boardFormNo}, #{boardTitle}, #{boardBody}, #{boardGroupNo}, #{boardStep} + 1, #{boardSort} + 1, #{adminNo}, #{boardSecreate})
 			</if>
 			<if test="mbtiNo != 0">
-				insert into board(board_no, board_form_no, board_title, board_body, board_group_no, board_step, board_sort, admin_no, mbti_no)
-				values(#{boardNo}, #{boardFormNo}, #{boardTitle}, #{boardBody}, #{boardGroupNo}, #{boardStep} + 1, #{boardSort} + 1, #{adminNo}, #{mbtiNo})
+				insert into board(board_no, board_form_no, board_title, board_body, board_group_no, board_step, board_sort, admin_no, mbti_no, board_secreate)
+				values(#{boardNo}, #{boardFormNo}, #{boardTitle}, #{boardBody}, #{boardGroupNo}, #{boardStep} + 1, #{boardSort} + 1, #{adminNo}, #{mbtiNo}, #{boardSecreate})
 			</if>
 		</if>
 		<if test="no != 0 and no != null">
 			<if test="mbtiNo == 0">
-				insert into board(board_no, board_form_no, board_title, board_body, no, board_group_no, board_step, board_sort)
-				values(#{boardNo}, #{boardFormNo}, #{boardTitle}, #{boardBody}, #{no}, #{boardGroupNo}, #{boardStep} + 1, #{boardSort} + 1)
+				insert into board(board_no, board_form_no, board_title, board_body, no, board_group_no, board_step, board_sort, board_secreate)
+				values(#{boardNo}, #{boardFormNo}, #{boardTitle}, #{boardBody}, #{no}, #{boardGroupNo}, #{boardStep} + 1, #{boardSort} + 1, #{boardSecreate})
 			</if>
 			<if test="mbtiNo != 0">
-				insert into board(board_no, board_form_no, board_title, board_body, no, board_group_no, board_step, board_sort, mbti_no)
+				insert into board(board_no, board_form_no, board_title, board_body, no, board_group_no, board_step, board_sort, mbti_no, board_secreate, #{boardSecreate})
 				values(#{boardNo}, #{boardFormNo}, #{boardTitle}, #{boardBody}, #{no}, #{boardGroupNo}, #{boardStep} + 1, #{boardSort} + 1, #{mbtiNo})
 			</if>
 		</if>
@@ -180,7 +180,7 @@
 	
 	<update id="updateBoard" parameterType="boardVo">
 		update board
-		set board_form_no = #{boardFormNo}, board_title = #{boardTitle}, board_body = #{boardBody}
+		set board_form_no = #{boardFormNo}, board_title = #{boardTitle}, board_body = #{boardBody}, board_secreate = #{boardSecreate}
 		where board_no = #{boardNo}
 	</update>
 	

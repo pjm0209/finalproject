@@ -83,6 +83,20 @@
 										</c:if>
 									</select>
 								</c:if>
+								<div class="form-check" <c:if test="${map.BOARD_FORM_NO != 3 }"> style="visibility: hidden;"</c:if>
+									<c:if test="${map.BOARD_SECREATE == 'Y' }"> checked="checked"</c:if>>
+									<input class="form-check-input secreate" type="checkbox" 
+										<c:if test="${map.BOARD_FORM_NO != 3 }">
+											value="${map.BOARD_SECREATE }" 
+										</c:if>
+										<c:if test="${empty map.BOARD_FORM_NO }">
+											value="N"
+										</c:if>
+										id="flexCheckDefault" name="boardSecreate">
+									<label class="form-check-label" for="flexCheckDefault">
+										비밀
+									</label>
+								</div>
 							</dd>
 							<dt>제목</dt>
 							<dd>

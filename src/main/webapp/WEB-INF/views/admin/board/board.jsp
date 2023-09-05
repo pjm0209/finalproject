@@ -95,7 +95,10 @@
 										<a href="<c:url value='/admin/board/boardDetail?boardNo=${map["BOARD_NO"] }'/>"> ${map['BOARD_TITLE']}</a>	
 										<c:if test="${map['COMMENTCOUNT'] != 0 and map['COMMENT_FLAG'] == 'Y'}">
 											<span>[${map['COMMENTCOUNT'] }]</span>
-										</c:if>																
+										</c:if>		
+										<c:if test="${map.BOARD_SECREATE = 'Y' }">
+											<i class="bi bi-lock"></i>
+										</c:if>														
 									</c:if>
 									<c:if test="${map['BOARD_DEL_FLAG'] == 'Y' }">
 										<span>삭제된 글입니다.</span>
