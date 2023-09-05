@@ -20,7 +20,7 @@
 		</div>
 		<div class="boardContent-body">
 			<div class="boardWritediv">
-				<button type="button" class="boardWriteBtn"><span class="boardWrite">게시글작성</span></button>
+				<!-- <button type="button" class="boardWriteBtn"><span class="boardWrite">게시글작성</span></button> -->
 			</div>
 			<ul class="boardFormList">
 				<c:forEach var="map" items="${boardCategoryList }">
@@ -36,12 +36,17 @@
 							<a class="boardCategoryContentTitle" href="<c:url value='/main/board/boardList?boardFormNo=${map.BOARD_FORM_NO }'/>">${map.BOARD_FORM_NAME }</a>
 							<p class="boardCategoryContentIntro">${map.BOARD_FORM_INTRO }</p>
 						</div>
-						<div class="boardCategoryWriteCount"><i class="bi bi-chat-square"></i><span class="boardWriteCount">${count }</span></div>						
+						<div class="boardCategoryWriteCount">
+							<i class="bi bi-chat-square" data-bs-toggle="tooltip" data-bs-placement="top" title="게시판에 작성된 게시글개수."></i>
+							<span class="boardWriteCount">${count }</span>
+						</div>						
 					</li>
 				</c:forEach>
 			</ul>
 		</div>
 	</div>
 </section>
+
+<script type="text/javascript" src="<c:url value='/main-css-js/js/board.js'/>"></script>
 
 <%@ include file="../inc/bottom.jsp"%>

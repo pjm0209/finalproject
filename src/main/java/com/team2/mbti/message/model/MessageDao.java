@@ -1,6 +1,7 @@
 package com.team2.mbti.message.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -12,4 +13,6 @@ public interface MessageDao {
 	int insertReceiveDm(ReceiveDmVO receiveDmVo);
 	int insertSendDmToMember(SendDmVO sendDmVo);
 	List<MemberVO> selectAllMemberbyDm();
+	
+	List<Map<String, Object>> messageViewByNo(int no);
 }

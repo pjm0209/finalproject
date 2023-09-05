@@ -54,13 +54,13 @@
 				<c:if test="${!empty list }">
 					<c:forEach var="educationVo" items="${list}">
 						<c:set var="educationNo" value="${educationVo.eduNo}"/>
-						<tr>
+						<tr onclick="eduModal()">
 							<th scope="row"><input type="checkbox" class="board-checkbox" name="educationItems[${idx }].eduNo" value="${educationVo.eduNo }"/></th>
 							<td>${educationVo.eduNo }</td>
 							<td>${educationVo.eduName }</td>
 							<td>${educationVo.eduTeaName }</td>
 							<td>${educationVo.eduCom }</td>
-							<td>${educationVo.qty }</td>
+							<td>${educationVo.qty }</td>	
 							<td>${educationVo.eduPeopleNumber }</td>
 							<td><fmt:formatNumber value="${educationVo.eduPrice }" pattern="#,###"/>
 							<td>${educationVo.epName }</td>
@@ -100,6 +100,28 @@
 		</form>
 	</div>
 </div>
+<input type="button" style="display: none" id="educationModalBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#educationModal"/>
+<div class="modal fade" id="educationModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="alertModalLabel" ></h1>
+				<button type="button" class="btn-close" data-bs-dismiss="modal"
+					aria-label="Close"></button>
+			</div>
+			<div style="margin-left: 15px;margin-top: 20px">
+				<span>회원 : &nbsp;</span>
+			</div>
+			<form name="messageFrm" method="post" action="<c:url value='/admin/education/list'/>">
+				<div class="modal-body" style="margin:0 auto">
+					
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+				</div>
+			</form>
+		</div>
+	</div>
 </div>
 <!-- End of Main Content -->
 <%@ include file="../inc/bottom.jsp"%>

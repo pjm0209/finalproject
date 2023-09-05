@@ -49,7 +49,7 @@
 							  	<option value="name" <c:if test="${param.searchCondition == 'name' }">selected="selected"</c:if>>작성자</option>
 							</select>
 						 	<input type="text" class="form-control" name="searchKeyword" value="${param.searchKeyword }" placeholder="검색어를 입력하세요" aria-label="Recipient's username" aria-describedby="button-addon2" id="board-search-area">
-						 	<button class="btn btn-outline-secondary" type="submit" id="button-addon2">검색</button>
+						 	<button class="btn btn-outline-secondary" type="submit" id="button-addon2-board">검색</button>
 						</div>
 					</div>
 				</form>

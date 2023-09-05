@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team2.mbti.common.ConstUtil;
 import com.team2.mbti.common.PaginationInfo;
+import com.team2.mbti.education.model.EducationListVO;
 import com.team2.mbti.education.model.EducationService;
 import com.team2.mbti.education.model.EducationVO;
 
@@ -76,9 +77,9 @@ public class MainEducationController {
 		int cnt=educationService.insertApply(vo);
 		logger.info("신청 등록 처리 결과 cnt={}", cnt);
 		
-		String msg="신청 등록에 실패하였습니다.",url="/main/education/list";
+		String msg="신청을 실패하였습니다.",url="/main/education/list";
 		if(cnt>0) {
-			msg="신청이 성공적으로 등록되었습니다.";
+			msg="신청이 완료되었습니다.";
 			url="/main/education/list?eduNo="+vo.getEduNo();
 		}
 		
@@ -118,31 +119,54 @@ public class MainEducationController {
 		int no = (int) session.getAttribute("no");
 		vo.setNo(no);
 		
-		PaginationInfo pagingInfo = new PaginationInfo();
-
-		pagingInfo.setBlockSize(ConstUtil.BLOCK_SIZE);
-		pagingInfo.setCurrentPage(vo.getCurrentPage());
-		pagingInfo.setRecordCountPerPage(ConstUtil.MBTI_RECORD_COUNT);
-		
-		vo.setBlockSize(ConstUtil.BLOCK_SIZE);
-		vo.setRecordCountPerPage(ConstUtil.MBTI_RECORD_COUNT);
-		vo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		/*
+		 * PaginationInfo pagingInfo = new PaginationInfo();
+		 * 
+		 * pagingInfo.setBlockSize(ConstUtil.BLOCK_SIZE);
+		 * pagingInfo.setCurrentPage(vo.getCurrentPage());
+		 * pagingInfo.setRecordCountPerPage(ConstUtil.MBTI_RECORD_COUNT);
+		 * 
+		 * vo.setBlockSize(ConstUtil.BLOCK_SIZE);
+		 * vo.setRecordCountPerPage(ConstUtil.MBTI_RECORD_COUNT);
+		 * vo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		 */
 		
 		List<EducationVO> list = educationService.selectMyAllEdu(vo);
 		List<EducationVO> payList = educationService.myPayEdu(vo);
-		logger.info("리스트 list.size={}", list.size());
 
 		int totalRecord=educationService.getTotalRecordEduList(vo);
 		logger.info("교육 전체 검색 결과 totalRecord={}",totalRecord);
-		pagingInfo.setTotalRecord(totalRecord);
+		/* pagingInfo.setTotalRecord(totalRecord); */
 		
 		model.addAttribute("list", list);
 		model.addAttribute("payList", payList);
-		model.addAttribute("pagingInfo", pagingInfo);
+		/* model.addAttribute("pagingInfo", pagingInfo); */
 	
 		
 		return "main/mypage/education";
 	}
+	
+	
+	@RequestMapping("/mypage/applyCan")
+	public String applyCancel(@RequestParam (defaultValue = "0") int [] eduAppNo, Model model) {
+		logger.info("신청한 교육 취소 처리, 파라미터 eduAppNo={}", eduAppNo);
+
+		int cnt = educationService.cancelApplicant(eduAppNo);
+		
+		String msg="", url="/main/mypage/education";
+		if(cnt>0) {
+			msg="선택한 교육 신청이 취소되었습니다.";
+		}else {
+			msg="선택한 교육 신청을 취소하는 도중 에러가 발생하였습니다.";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
+		
+	}
+	
 	
 	
 }	
