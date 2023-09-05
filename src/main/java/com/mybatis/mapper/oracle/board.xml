@@ -42,8 +42,8 @@
 				values(#{boardNo}, #{boardFormNo}, #{boardTitle}, #{boardBody}, #{no}, #{boardNo}, #{boardSecreate})
 			</if>
 			<if test="mbtiNo != 0">
-				insert into board(board_no, board_form_no, board_title, board_body, no, board_group_no, mbti_no, board_secreate)
-				values(#{boardNo}, #{boardFormNo}, #{boardTitle}, #{boardBody}, #{no}, #{boardNo}, #{mbtiNo}, #{boardSecreate})
+				insert into board(board_no, board_form_no, board_title, board_body, no, board_group_no, mbti_no)
+				values(#{boardNo}, #{boardFormNo}, #{boardTitle}, #{boardBody}, #{no}, #{boardNo}, #{mbtiNo})
 			</if>
 		</if>
 	</sql>

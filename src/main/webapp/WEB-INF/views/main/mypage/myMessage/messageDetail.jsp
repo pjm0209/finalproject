@@ -34,7 +34,7 @@
 	<div>
 		<button id="messageDetailBtn" class="firstM">삭제</button>
 		<hr>
-		<span class="bold firstM">
+		<span class="bold firstM" onclick="commentMore(this)">
 			${map['SEND_ID']}
 			<c:if test="${map['ADMIN_NO']!=null && map['ADMIN_NO']!=''}">
 				(관리자)

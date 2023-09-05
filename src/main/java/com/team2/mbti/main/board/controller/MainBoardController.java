@@ -167,8 +167,12 @@ public class MainBoardController {
 	@PostMapping("/boardWrite")
 	public String boardWrite(@ModelAttribute BoardVO vo, HttpServletRequest request) {
 		logger.info("게시글 쓰기처리 파라미터 vo:{}", vo);
-		
 		List<Map<String, Object>> fileList = new ArrayList<>();
+		
+		int boardFormNo=vo.getBoardFormNo();
+		if(boardFormNo!=3) {
+			vo.setBoardSecreate("N");
+		}
 		
 		try {
 			fileList = fileUploadUtil.fileupload(request, ConstUtil.UPLOAD_FILE_FLAG);
