@@ -8,6 +8,32 @@
 <script type="text/javascript" src="<c:url value='/admin-css-js/js/bookMain.js'/>"></script>
 <script type="text/javascript">
 
+	$(function(){
+		var i = $("#bookCnt input[name=ordersQty]").val();
+		
+		$("#add").click(function(){
+			i++;
+			$("#bookCnt input[name=ordersQty]").val(i);
+			var totalPrice = (i*${vo.bookPrice});
+			$("#totalPrice").text(totalPrice);
+		});
+		
+		$("#remove").click(function(){
+			i=(i-1);
+			if(i < 1) i=0;
+			$("#bookCnt input[name=pop_out]").val(i);
+			var totalPrice = (i*${vo.bookPrice});
+			$("#totalPrice").text(totalPrice);
+		});
+		
+	});
+	
+	function gotoBasket(){
+		var cnt = $("#bookCnt input[name=pop_out]").val();
+		$("input[name=ordersQty]").val(cnt);
+		$("#frmOrder").submit();
+	}
+
 </script>
 
 <section id="q" class="detail_tbox" style="">
@@ -19,69 +45,67 @@
 		</ul>
 	</div>
 </section>
-
+<form id="frmOrder" method="post" action="<c:url value='/main/book/basketInsert'/>">
+	<input type="hidden" name="ordersQty">
+	<input type="hidden" name="bookNo" value="${vo.bookNo}">
+</form>
 <div class="fixbox flex">
 	<ul class="flex left">
 		<li>총 상품 금액</li>
-		<li>0</li>
+		<li id="totalPrice">0</li>
 		<li>원</li>
 	</ul>
 	<ul class="flex right">
 		<li class="flex">
-			<button class="plus">
+			<button id="remove">
 				<span class="material-symbols-outlined"> remove </span>
 			</button>
-			<p class="tt">0</p>
-			<button class="remove">
+			<p id="bookCnt" class="tt">
+				<input type="number" name="ordersQty" value="0" style="text-align: center; border: 0;width: 50px;text-align: center;">
+			</p>
+			<button id="add">
 				<span class="material-symbols-outlined"> add </span>
 			</button>
+			
 		</li>
-		<li><button type="submit" style="background: none;border: 0;">장바구니</button></li>
-		<li><button type="submit" style="background: none;border: 0;color:white;">바로구매</button></li>
+		<li><button id="toBasket" type="button" style="background: none;border: 0;" onclick="gotoBasket()">장바구니</button></li>
+		<li><button id="toOrdering" type="submit" style="background: none;border: 0;color:white;">바로구매</button></li>
 	</ul>
 </div>
 
 <section id="bookMain" class="book">
+	<input id="frmPageCategory" type="hidden" name="bookCategory" value="${param.bookCategory}">
 	<div id="containerWrap" class="container clearfix" style="margin-left: 0; margin-right: 0; position: relative">
-		<div id="sidebar" class="" style="">
-			<div class="sidebar__inner shadow-sm bg-body rounded" style="position: relative;">
-				<div>
-					<ul>
-						<li><a href="<c:url value='/main/book/bookList1'/>">검 사 자 료</a></li>
-						<li><a href="<c:url value='/main/book/bookList1'/>">도 서</a></li>
-						<li><a href="<c:url value='/main/book/bookList1'/>">기 타 교 구</a></li>
-					</ul>
+		<%@ include file="./BookSideBarLeft.jsp"%>
+		<div style="padding-left: 222px;margin-top: 50px;margin-bottom: 10px">
+		<a href="/mbti/main/index"><i class="bi bi-house-door-fill"></i></a>
+		/
+		<a href="/mbti/main/book/bookMain">도서 및 자료 구매</a>
+		/
+		<a href="/mbti/main/book/bookList1?bookCategory=${param.bookCategory}">${param.bookCategory}</a>
+	</div>
+		<div id="content" style="margin-left: 216px;">
+			<div id="detailMain" class="pdList flex shadow-sm rounded" style="border: 0;">
+				<div class="pdimg shadow-sm rounded">
+					<img class="shadow-sm rounded" src="<c:url value='/images/bookProduct/upload_img/${vo.bookImgName}'/>" alt="${vo.bookImgOriginalname}">
 				</div>
-				<div class="resize-sensor"
-					style="position: absolute; inset: 0px; overflow: hidden; z-index: -1; visibility: hidden;">
-					<div class="resize-sensor-expand"
-						style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; z-index: -1; visibility: hidden;">
-						<div
-							style="position: absolute; left: 0px; top: 0px; transition: all 0s ease 0s; width: 100000px; height: 100000px;">
-						</div>
-					</div>
-					<div class="resize-sensor-shrink"
-						style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; z-index: -1; visibility: hidden;">
-						<div style="position: absolute; left: 0; top: 0; transition: 0s; width: 200%; height: 200%">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div id="content" style="margin-top: 30px;margin-left: 278px;">
-			<div class="pdList flex ">
-				<div class="pdimg">
-					<img src="https:/i.ibb.co/yhbwLJR/1.png" alt="1">
-				</div>
-				<div class="textbox">
-					<h1>${vo.bookTitle}</h1>
+				<div class="textbox ">
+				<c:set var="title" value="${vo.bookTitle}"/>
+				<c:set var="length" value="${fn:length(title)}"/>
+				<c:if test="${length > 21}">
+					<c:set var="title1" value="${fn:substring(title, 0, 22)}"/>
+					<c:set var="title2" value="${fn:substring(title, 22, length)}"/>
+					<h1>${title1}<br>${title2}<span class="smallCategory">${vo.bookCategory}</span></h1>
+				</c:if>
+				<c:if test="${length <= 21}">
+					<h1>${vo.bookTitle}<span class="smallCategory">${vo.bookCategory}</span></h1>
+				</c:if>
 					<table width="100%" border="0" cellpadding="0" cellspacing="0">
 						<tbody>
 							<tr>
 								<td width="100" height="22">가격</td>
 								<td width="30" align="center">:</td>
-								<td width="410" class="b Goods_Price" style="font-weight: bold">
+								<td width="410" class="b Goods_Price" style="font-weight: bold;" id="tdTP">
 									<fmt:formatNumber value="${vo.bookPrice}" pattern="#,###"/>원
 								</td>
 							</tr>

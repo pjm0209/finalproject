@@ -15,8 +15,8 @@ public class MainBookServiceImpl implements MainBookService{
 	private static final Logger logger = LoggerFactory.getLogger(MainBookServiceImpl.class);
 	
 	@Override
-	public List<MainStockBookVO> selectBookAll(String searchKeyword) {
-		return mainBookDao.selectBookAll(searchKeyword);
+	public List<MainBookVO> selectBookAll(MainBookVO vo) {
+		return mainBookDao.selectBookAll(vo);
 	}
 	@Override
 	public List<MainBookVO> selectByCategory(MainBookVO vo) {
@@ -25,6 +25,14 @@ public class MainBookServiceImpl implements MainBookService{
 	@Override
 	public MainBookVO selectBookByNo(int bookNo) {
 		return mainBookDao.selectBookByNo(bookNo);
+	}
+	@Override
+	public int selectByCategoryCnt(MainBookVO vo) {
+		return mainBookDao.selectByCategoryCnt(vo);
+	}
+	@Override
+	public int selectBookAllCnt(MainBookVO vo) {
+		return mainBookDao.selectBookAllCnt(vo);
 	}
 	
 	

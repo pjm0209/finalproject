@@ -17,6 +17,36 @@
 	$(function(){
 		$("#upfile").on("change", handleImgFileSelect);
 		$('#imgLb').text("");
+		
+		$("#submitBtn").click(function(){
+			if($("#bookTitle").val().length < 1){
+				$('#alertModalBody').html("제목을 입력하세요");
+				$('#alertModalBtn').trigger('click');
+				return false;
+			}
+			if($("#bookPrice").val().length < 1){
+				$('#alertModalBody').html("판매가를 입력하세요");
+				$('#alertModalBtn').trigger('click');
+				return false;
+			}
+			if($("#bookWriter").val().length < 1){
+				$('#alertModalBody').html("저자를 입력하세요");
+				$('#alertModalBtn').trigger('click');
+				return false;
+			}
+			if($("#bookPublisher").val().length < 1){
+				$('#alertModalBody').html("출판,제조사를 입력하세요");
+				$('#alertModalBtn').trigger('click');
+				return false;
+			}
+			if($("#bookUseflag:checked").length < 1){
+				$('#alertModalBody').html("사용여부를 체크하세요");
+				$('#alertModalBtn').trigger('click');
+				return false;
+			}
+			
+		});
+		
 	});
 	
 	function fileUploadAction(){
@@ -79,7 +109,22 @@ function deleteImageAction(index){
 		</c:if>
 	</h2>
 </div>
-
+<div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h1 class="modal-title fs-5" id="alertModalLabel">알림</h1>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	        <p id="alertModalBody"></p>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" id="mbti-modal-close" onclick="opener.window.close()" class="btn bg-orange-primary" data-bs-dismiss="modal">확인</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 <form id="frmBookRegister" name="frmBookRegister" method="post" enctype="multipart/form-data"
 	<c:if test="${empty param.bookNo}">
 		action="<c:url value='/admin/book/bookRegister'/>"
@@ -106,11 +151,11 @@ function deleteImageAction(index){
 		</div>
 		
 		<div class="bookContent">
-			<div class="category red">
+			<div class="category">
 				<label class="" for="select1">상품카테고리</label>
 				<div class="flex">
 					<div class="c1">
-						<select class="form-select red" aria-label="Default select example" id="select1"
+						<select class="form-select" aria-label="Default select example" id="select1"
 						name="bookCategory">
 							<option value=""
 								<c:if test="${vo.bookCategory == null and vo.bookCategory == ''}">
@@ -144,8 +189,8 @@ function deleteImageAction(index){
 					</div> -->
 				</div>									
 			</div>
-			<div class="bookTitle">
-				<label class="" for="bookExplains">상품 이름</label>
+			<div class="bookTitle red">
+				<label class="red" for="bookExplains">상품 이름</label>
 				<div class="inputBookTitle">
 					<input class="form-control" id="bookTitle" name="bookTitle" placeholder="책 이름" type="text" value="${vo.bookTitle}">
 				</div>
@@ -159,7 +204,7 @@ function deleteImageAction(index){
 			</div>
 			
 			<div class="bookPrice">
-				<label class="" for="bookPrice">판매가</label>
+				<label class="red" for="bookPrice">판매가</label>
 				<div class="inputBookPrice">
 					<input class="form-control" id="bookPrice" name="bookPrice" placeholder="판매가 예) 12000"
 					 type="number" value="${vo.bookPrice}">
@@ -191,7 +236,7 @@ function deleteImageAction(index){
 				</c:if>
 			</div>
 			<br>
-			<div class="bookWriter" style="margin-top: 35px;">
+			<div class="bookWriter red" style="margin-top: 35px;">
 				<label class="" for="bookWriter">저 자</label>
 				<div class="inputBookWriter">
 					<input class="form-control" id="bookWriter" name="bookWriter"
@@ -200,7 +245,7 @@ function deleteImageAction(index){
 			</div>
 			
 			<div class="bookPublisher red">
-				<label class="" for="bookPublisher">제조사</label>
+				<label class="red" for="bookPublisher">출판 및 제조사</label>
 				<div class="inputBookPublisher">
 					<input class="form-control red" id="bookPublisher" name="bookPublisher"
 					 placeholder="제조사" type="text" value="${vo.bookPublisher}">
@@ -247,14 +292,14 @@ function deleteImageAction(index){
 				<label class="" for="inputBookFlag">사용여부</label>
 				<div class="inputBookFlag">
 					<label class="radio-inline">
-						<input name="bookUseflag" placeholder="사용여부" type="radio" value="Y"
+						<input id="bookUseflag" name="bookUseflag" placeholder="사용여부" type="radio" value="Y"
 						<c:if test="${vo.bookUseflag == 'Y'}">
 						 	checked="checked"
 						 </c:if>
 						 >YES
 					</label>
 					<label class="radio-inline">
-						<input name="bookUseflag" placeholder="사용여부" type="radio" value="N"
+						<input id="bookUseflag" name="bookUseflag" placeholder="사용여부" type="radio" value="N"
 							<c:if test="${vo.bookUseflag == 'N'}">
 						 		checked="checked"
 						 	</c:if>
