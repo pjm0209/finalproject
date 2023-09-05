@@ -17,7 +17,7 @@ public class MvcConfiguration implements WebMvcConfigurer{
 
 		
 		 registry.addInterceptor(new LoginInterceptor2())
-		 .addPathPatterns("/main/mypage/**");
+		 .addPathPatterns("/main/mypage/**", "/main/book/basket/**");
 		
 		 registry.addInterceptor(new LoginInterceptor())
 		 .excludePathPatterns("/admin/login")
