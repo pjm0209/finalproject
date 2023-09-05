@@ -182,7 +182,6 @@ $(function(){
 <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.3.0/kakao.min.js"
   integrity="sha384-70k0rrouSYPWJt7q9rSTKpiTfX6USlMYjZUtr1Du+9o4cGvhPAWxngdtVZDdErlh" crossorigin="anonymous"></script>
 <script>
-<<<<<<< HEAD
 <!-- 카카오 스크립트 -->
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script>
@@ -195,54 +194,7 @@ $(function() {
            +"&redirect_uri=http://localhost:9091/mbti/oauth/kakao&response_type=code";
     });
 });
-=======
-  Kakao.init('42018aab691c499b8b554100c11af209'); // 사용하려는 앱의 JavaScript 키 입력
-  
-  function loginWithKakao() {
-    Kakao.Auth.authorize({
-      redirectUri: 'http://localhost:9091/mbti/main/mbti/kakaoLogin',
-      id="werqeqwr",
-    });
-  }
 
-  // 아래는 데모를 위한 UI 코드입니다.
-  displayToken()
-  function displayToken() {
-    var token = getCookie('authorize-access-token');
-
-    if(token) {
-      Kakao.Auth.setAccessToken(token);
-      Kakao.Auth.getStatusInfo()
-        .then(function(res) {
-          if (res.status === 'connected') {
-            document.getElementById('token-result').innerText
-              = 'login success, token: ' + Kakao.Auth.getAccessToken();
-          }
-        })
-        .catch(function(err) {
-          Kakao.Auth.setAccessToken(null);
-        });
-    }
-  }
-  function requestUserInfo() {
-    Kakao.API.request({
-      url: '/v2/user/me',
-    })
-      .then(function(res) {
-        alert(JSON.stringify(res));
-      })
-      .catch(function(err) {
-        alert(
-          'failed to request user information: ' + JSON.stringify(err)
-        );
-      });
-  }
-
-  function getCookie(name) {
-    var parts = document.cookie.split(name + '=');
-    if (parts.length === 2) { return parts[1].split(';')[0]; }
-  }
->>>>>>> branch 'main' of https://github.com/pjm0209/finalproject.git
 </script>
 
 </head>
@@ -280,24 +232,13 @@ $(function() {
                     <span class="centered-span">또는</span><br>
                     <hr><br>
                     
-<<<<<<< HEAD
+
 			      	<div class="Login" id="kakaoLogin" >
 				     	<a href="#" >
 							<img src="<c:url value='../../images/kakao_login_large_narrow.png'/>" alt="카카오로그인" class="snsBt" />
 						</a>
 			      	</div>						
-=======
-                   	<div class="kakao" onclick="kakaoLogin()">
-				      <a href="#" >
-				          <img src="<c:url value='../../images/kakao_login_large_narrow.png'/>" alt="카카오로그인" class="kakaoBtn" />
-				      </a>
-				      <a id="kakao-login-btn" href="javascript:loginWithKakao()">
-						  <img src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" width="222"
-						    alt="카카오 로그인 버튼" />
-						</a>
-					</div>
->>>>>>> branch 'main' of https://github.com/pjm0209/finalproject.git
-                    		               
+
                     <div class="field button-field">
                     	<span >계정이 없으신가요?</span>
                     	<input type="button" value="회원가입" id="memberRegister-button">  
