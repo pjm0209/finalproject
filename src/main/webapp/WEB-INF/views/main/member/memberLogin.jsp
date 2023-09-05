@@ -181,11 +181,18 @@ $(function(){
 <!-- 카카오 스크립트 -->
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script>
+<!-- 카카오 스크립트 -->
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script>
+Kakao.init('035501bf619011eb50f98a3c82eaec7a'); //자바스크립 키
 //카카오로그인
-$("#kakaoLogin").click(function(){
-	location.href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id={63aae7bb7049cc37773c9691d2c30682}&redirect_uri=http://localhost:9091/mbti/main/member/memberLogin"
-	
-}
+$(function() { 
+    $("#kakaoLogin").click(function(){
+    	location.href=
+        	"https://kauth.kakao.com/oauth/authorize?client_id=63aae7bb7049cc37773c9691d2c30682&prompt=login"
+           +"&redirect_uri=http://localhost:9091/mbti/oauth/kakao&response_type=code";
+    });
+});
 </script>
 
 </head>
@@ -223,11 +230,11 @@ $("#kakaoLogin").click(function(){
                     <span class="centered-span">또는</span><br>
                     <hr><br>
                     
-                   	<div class="kakao" onclick="kakaoLogin();">
-				      <a href="#">
-				          <img src="<c:url value='../../images/kakao_login_large_narrow.png'/>" alt="카카오로그인" class="kakaoBtn" />
-				      </a>
-					</div>
+			      	<div class="Login" id="kakaoLogin" >
+				     	<a href="#" >
+							<img src="<c:url value='../../images/kakao_login_large_narrow.png'/>" alt="카카오로그인" class="snsBt" />
+						</a>
+			      	</div>						
                     		               
                     <div class="field button-field">
                     	<span >계정이 없으신가요?</span>

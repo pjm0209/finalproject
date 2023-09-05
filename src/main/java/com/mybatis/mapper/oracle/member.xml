@@ -117,5 +117,18 @@
    		where userid=#{userid} 
    </update>
    
+   <insert id="insertKakaoMember" parameterType="memberVo">
+   		<selectKey keyProperty="no" order="BEFORE" resultType="int">
+   			select member_seq.nextval from dual
+   		</selectKey>
+   		insert into member(no,userid,pwd,name)
+		values(#{no},#{userid},#{pwd},#{name})
+   </insert>
+   
+   <select id="getKakaoIdCount" parameterType="memberVo" resultType="int">
+   		select count(*) from member
+		where userid=#{userid} and name=#{name}
+		and outdate is null
+   </select>
 	
 </mapper>

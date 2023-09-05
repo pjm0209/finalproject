@@ -11,16 +11,24 @@ import java.util.HashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.team2.mbti.member.model.MemberDAO;
+import com.team2.mbti.member.model.MemberVO;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class KakaoService {
-	
 	private static final Logger logger = LoggerFactory.getLogger(KakaoService.class);
+	
+	private final MemberDAO memberDao;
+	private final PasswordEncoder passwordEncoder;
 	
     public String getKakaoAccessToken (String code) {
         String access_Token = "";
@@ -57,7 +65,7 @@ public class KakaoService {
             while ((line = br.readLine()) != null) {
                 result += line;
             }
-            System.out.println("response body : " + result);
+            System.out.println("response body1 : " + result);
 
             //Gson 라이브러리에 포함된 클래스로 JSON파싱 객체 생성
             JsonParser parser = new JsonParser();
@@ -102,8 +110,34 @@ public class KakaoService {
             while ((line = br.readLine()) != null) {
                 result += line;
             }
-            System.out.println("response body : " + result);
+            System.out.println("response body2 : " + result);
             
+            //카카오톡 회원가입
+            MemberVO vo = new MemberVO();
+            String id=result.substring(6, result.indexOf(','));
+            int idx=result.indexOf("nickname");
+            System.out.println("idx="+idx);
+            int idx2=result.indexOf("kakao_account");
+            System.out.println("idx2="+idx2);
+            
+            String pwd=passwordEncoder.encode("123");
+            String name=result.substring(idx+11, idx2-4);
+            vo.setUserid(id);
+            vo.setName(name);
+            
+            logger.info("id={}, name={}",id,name);
+			
+			int count=memberDao.getKakaoIdCount(vo);
+			logger.info("카카오톡 아이디 회원가입 여부 결과 count={}",count);
+			
+			vo.setPwd(pwd);
+			if(count==0) { //회원가입한 아이디가 없을때 int
+				int cnt=memberDao.insertKakaoMember(vo);
+				logger.info("카카오톡 회원가입 결과 cnt={}",cnt);
+			}else {
+				logger.info("카카오톡 로그인 성공 id={},name={}",id,name);
+			}
+			
             JsonParser parser = new JsonParser();
             JsonElement element = parser.parse(result);
             
@@ -111,10 +145,12 @@ public class KakaoService {
             JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
             
             String nickname = properties.getAsJsonObject().get("nickname").getAsString();
-            String email = kakao_account.getAsJsonObject().get("email").getAsString();
+            //String email = kakao_account.getAsJsonObject().get("email").getAsString();
             
             userInfo.put("nickname", nickname);
-            userInfo.put("email", email);
+            userInfo.put("userid", id);
+            userInfo.put("name", name);
+            //userInfo.put("email", email);
             
         } catch (IOException e) {
             e.printStackTrace();
