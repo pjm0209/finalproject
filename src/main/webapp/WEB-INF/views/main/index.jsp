@@ -1,11 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="inc/top.jsp" %>
+
+<style>
+button.main-button1 {
+    background-color: #eb5d1e;
+    height: 70px;
+    width: 235px;
+    font-size: 24px;
+    border: 0;
+    border-radius: 100px;
+    padding: 6px 41px;
+    margin-top: 450px;
+    margin-right: -305px;
+    color: white;
+}
+</style>
+
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex align-items-center">
 
     <div class="container">
       <div class="row gy-4">
+      <form name="frm-mbti1" id="frm-mbti1" method="post" action="<c:url value='/main/mbti/mbti'/>">
+			<input type="hidden" name="questionTypeNo" value="1"/>
+			<button type="submit" class="main-button1" id="mbti-free-button">검사하러 가기</button>
+	  </form>
         <%-- <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
           <h1>Bettter digital experience with Ninestars</h1>
           <h2>We are team of talented designers making websites with Bootstrap</h2>
@@ -428,7 +448,7 @@
 
         <div class="section-title" data-aos="fade-up">
           <h2>Instructor</h2>
-          <p>Our instructor is always here to best education</p>
+          <p>교육 강사</p>
         </div>
 
         <div class="row">
@@ -450,14 +470,33 @@
               </div>
             </div>
           </div>
-
-          <div class="col-xl-3 col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+          
+           <div class="col-xl-3 col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
             <div class="member">
-              <img src="${path }/assets/img/team/min_1.jpg" class="img-fluid" alt="">
+              <img src="${path }/assets/img/team/hyun.jpg" class="img-fluid" alt="">
               <div class="member-info">
                 <div class="member-info-content">
-                  <h4>박정민</h4>
-                  <span>Jeongmin Park</span>
+                  <h4>황민현</h4>
+                  <span>Minhyun Hwang</span>
+                </div>
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-xl-3 col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
+            <div class="member">
+              <img src="${path }/assets/img/team/mingi_1.jpg" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>김민기</h4>
+                  <span>Mingi Kim</span>
                 </div>
                 <div class="social">
                   <a href=""><i class="bi bi-twitter"></i></a>
@@ -471,11 +510,11 @@
 
           <div class="col-xl-3 col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
             <div class="member">
-              <img src="${path }/assets/img/team/mingi_1.jpg" class="img-fluid" alt="">
+              <img src="${path }/assets/img/team/suzy.jpg" class="img-fluid" alt="">
               <div class="member-info">
                 <div class="member-info-content">
-                  <h4>김민기</h4>
-                  <span>Mingi Kim</span>
+                  <h4>배수지</h4>
+                  <span>Suji Bae</span>
                 </div>
                 <div class="social">
                   <a href=""><i class="bi bi-twitter"></i></a>
@@ -512,6 +551,42 @@
                 <div class="member-info-content">
                   <h4>김영준</h4>
                   <span>Youngjun Kim</span>
+                </div>
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-xl-3 col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
+            <div class="member">
+              <img src="${path }/assets/img/team/in.jpg" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>설인아</h4>
+                  <span>Inah Seol</span>
+                </div>
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+			
+			 <div class="col-xl-3 col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+            <div class="member">
+              <img src="${path }/assets/img/team/min_1.jpg" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>박정민</h4>
+                  <span>Jeongmin Park</span>
                 </div>
                 <div class="social">
                   <a href=""><i class="bi bi-twitter"></i></a>
@@ -560,7 +635,7 @@
 
         <div class="section-title">
           <h2>Head office location</h2>
-          <p>강남 본점</p>
+          <p>강남 본사</p>
         </div>
 
         <div class="row">
