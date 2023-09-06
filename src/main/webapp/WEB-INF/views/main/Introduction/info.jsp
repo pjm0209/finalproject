@@ -286,7 +286,8 @@ dt{
 	<div class="siste_info">
 	<div class="footer_logo"><img src="https://img.assesta.com/assesta/common/footer_logo.png" alt="어세스타"/></div>
 		<address>서울시 영등포구 국회대로 68길 11, 삼보호청빌딩 5,6층</address>
-		<p>
+		<p>TEL 02)787-1400(평일 9am-6pm) FAX 02)787-1408<br />
+		
 	
 	</div>
 	

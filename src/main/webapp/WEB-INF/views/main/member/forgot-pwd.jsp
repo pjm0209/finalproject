@@ -158,6 +158,7 @@ form {
         		dateType:'json',
         		success : function(result){
        				alert("임시 비밀번호 발송 완료!! 이메일을 확인해주세요");
+       				location.href="<c:url value='/main/member/memberLogin'/>";       				
         		},
 	            error:function(xhr,status,error){
   	                alert(status+" : "+error);
