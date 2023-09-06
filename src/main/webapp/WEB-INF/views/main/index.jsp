@@ -6,7 +6,7 @@
 button.main-button1 {
     background-color: #eb5d1e;
     height: 70px;
-    width: 300px;
+    width: 235px;
     font-size: 24px;
     border: 0;
     border-radius: 100px;
@@ -24,7 +24,7 @@ button.main-button1 {
       <div class="row gy-4">
       <form name="frm-mbti1" id="frm-mbti1" method="post" action="<c:url value='/main/mbti/mbti'/>">
 			<input type="hidden" name="questionTypeNo" value="1"/>
-			<button type="submit" class="main-button1" id="mbti-free-button">MBTI 검사하러 가기</button>
+			<button type="submit" class="main-button1" id="mbti-free-button">검사하러 가기</button>
 	  </form>
         <%-- <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
           <h1>Bettter digital experience with Ninestars</h1>
