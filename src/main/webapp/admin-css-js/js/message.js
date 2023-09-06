@@ -141,7 +141,6 @@ var contextPath="/mbti";
 			$('#user_id').html("받는 회원 : ");
 			$('#reSendMessage').hide();
 			$('#sendMessage').show();
-			$('#reSendMessage').attr('id','sendMessage');
 			$('textarea').html("").attr('readonly',false);
 			
 			$('#messageDetailModal').modal('show');
@@ -168,6 +167,7 @@ var contextPath="/mbti";
 		}
 		var result="<input type='hidden' name='adminMessageFlag' value='Y'>";
 		$('#input').html(result);
+		
 		$('form[name=adminMessageFrm]').submit();
 	});
 	

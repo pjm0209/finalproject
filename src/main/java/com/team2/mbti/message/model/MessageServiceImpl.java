@@ -111,10 +111,17 @@ public class MessageServiceImpl implements MessageService {
 	}
 
 	@Override
-	public Map<String, Object> selectMessageViewBySendDmNo(int sendDmNo) {
-		//int cnt=messageDao.updateReceiveDmReadDate(sendDmNo);
+	public Map<String, Object> selectMessageViewBySendDmNo(int sendDmNo, String receiveFlag) {
+		int cnt=0;
+		if(receiveFlag.equals("Y")) {
+			//읽은 날짜 업데이트
+			cnt=messageDao.updateReceiveDmReadDate(sendDmNo);
+		}
 		
-		return messageDao.selectMessageViewBySendDmNo(sendDmNo);
+		Map<String, Object> map=messageDao.selectMessageViewBySendDmNo(sendDmNo);
+		map.put("cnt", cnt);
+		
+		return map;
 	}
 
 	@Override

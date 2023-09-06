@@ -13,7 +13,7 @@ public interface MessageService {
 	List<MemberVO> selectAllMemberbyDmSearch(MemberVO memberVo);
 	
 	List<Map<String, Object>> messageViewById(String id);
-	Map<String, Object> selectMessageViewBySendDmNo(int sendDmNo);
+	Map<String, Object> selectMessageViewBySendDmNo(int sendDmNo,String receiveFlag);
 	int deleteSendDmBySendDmNo(SendDmListVO sendDmListVo);
 	int insertSendDmToMemberMyMessage(SendDmVO sendDmVo);
 	List<Map<String, Object>> selectMessageViewByAdmin();
