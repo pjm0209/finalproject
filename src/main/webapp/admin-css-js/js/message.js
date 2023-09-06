@@ -109,10 +109,14 @@ var contextPath="/mbti";
 	});
 	
 	$('td[name=messageDetail]').click(function(){
-		var sendDmNo=$(this).parent().find('input[name=sendDmNo]').val();
-		var readDate=$(this).parent().find('input[name=readDate]').val();
+		var sendDmNo=$(this).parent().find('input').eq(0).val();
+		var readDate=$(this).parent().find('input').eq(1).val();
 		var id=$(this).parent().find('td').eq(1).text();
 		var body=$(this).parent().find('td').eq(2).text();
+		
+		alert(sendDmNo);
+		alert(readDate);
+		
 		$('#alertModalLabel').html('쪽지 상세보기');
 		$('#memberNameModal').text(id);
 		$('textarea').html(body);
@@ -130,7 +134,58 @@ var contextPath="/mbti";
 				}
 			});
 		}
+	});
+	
+	$('#reSendMessage').click(function(){
+		$('#messageDetailModal').modal('hide');
 		
+		$('#messageDetailModal').on('hidden.bs.modal', function (e) {
+			$('#alertModalLabel').html('쪽지 답장');
+			$('#user_id').html("받는 회원 : ");
+			$('#reSendMessage').hide();
+			$('#sendMessage').show();
+			$('#reSendMessage').attr('id','sendMessage');
+			$('textarea').html("").attr('readonly',false);
+			
+			$('#messageDetailModal').modal('show');
+			
+		});
+		
+		
+	});
+	
+	$('#modalClose').click(function(){
+		$('#messageDetailModal').off();
+		$('#messageDetailModal').modal('hide');
+	});
+	
+	$('#sendMessage').click(function(){
+		var len=$('#sendBody').val().length;
+		
+		if(len<1){
+			$('#alertModalBody').html("쪽지 내용을 입력해주세요");
+			$('#alertModalBtn').trigger('click');
+			
+			$('#messageDetailModal').off();
+			return false;
+		}
+		var result="<input type='hidden' name='adminMessageFlag' value='Y'>";
+		$('#input').html(result);
+		$('form[name=adminMessageFrm]').submit();
+	});
+	
+	$('#messateCDelete').click(function(){
+		var idx=$('input[type=checkbox]:checked').not('#check-All').length;
+		
+		if(idx<1){
+			$('#alertModalBody').html("삭제할 쪽지를 선택해주세요");
+			$('#alertModalBtn').trigger('click');
+			
+			return false;
+		}
+		
+		$('form[name=adminMessageFrm2]').prop('action',contextPath+'/admin/message/messageDelete');
+		$('form[name=adminMessageFrm2]').submit();
 	});
 	
  });
