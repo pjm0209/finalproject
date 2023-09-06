@@ -107,7 +107,7 @@
 
         <div class="section-title">
           <h2>What's your MBTI?</h2>
-          <p>MBTI 16 types of characters</p>
+          <p>16가지 MBTI 유형을 만나보세요</p>
         </div>
 
         <!-- <div class="row" data-aos="fade-up" data-aos-delay="100">
@@ -528,7 +528,7 @@
       </div>
     </section><!-- End Team Section -->
 
-    <!-- ======= Clients Section ======= -->
+    <%-- <!-- ======= Clients Section ======= -->
     <section id="clients" class="clients section-bg">
       <div class="container" data-aos="fade-up">
 
@@ -552,15 +552,15 @@
         </div>
 
       </div>
-    </section><!-- End Clients Section -->
+    </section><!-- End Clients Section --> --%>
 
     <!-- ======= Contact Us Section ======= -->
     <section id="contact" class="contact">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-          <h2>Contact Us</h2>
-          <p>Contact us the get started</p>
+          <h2>Head office location</h2>
+          <p>강남 본점</p>
         </div>
 
         <div class="row">
@@ -569,8 +569,8 @@
             <div class="info">
               <div class="address">
                 <i class="bi bi-geo-alt"></i>
-                <h4>Location:</h4>
-                <p>A108 Adam Street, New York, NY 535022</p>
+                <h4>주소:</h4>
+                <p>서울특별시 서초구 서초대로77길 55 (에이프로스퀘어3층)</p>
               </div>
 
               <div class="email">
@@ -581,16 +581,42 @@
 
               <div class="phone">
                 <i class="bi bi-phone"></i>
-                <h4>Call:</h4>
-                <p>+1 5589 55488 55s</p>
+                <h4>전화번호:</h4>
+                <p>02-532-6509</p>
               </div>
 
-              <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" style="border:0; width: 100%; height: 290px;" allowfullscreen></iframe>
+			  <div id="map" style="width:100%;height:300px;"></div>
+			  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2666b9d92b136acbf73b4b00a4f508ff&libraries=services,clusterer,drawing"></script>
+			  <script type="text/javascript">
+				
+				var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+			    mapOption = { 
+			        center: new kakao.maps.LatLng(37.502034, 127.024520), // 지도의 중심좌표
+			        level: 2 // 지도의 확대 레벨
+			    };
+		
+				var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+				
+				// 마커가 표시될 위치입니다 
+				var markerPosition  = new kakao.maps.LatLng(37.502034, 127.024520); 
+				
+				// 마커를 생성합니다
+				var marker = new kakao.maps.Marker({
+				    position: markerPosition
+				});
+
+				// 마커가 지도 위에 표시되도록 설정합니다
+				marker.setMap(map);
+				
+				
+				</script>
+				
+              <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" style="border:0; width: 100%; height: 290px;" allowfullscreen></iframe> -->
             </div>
 
           </div>
 
-          <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+         <!--  <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
             <form action="forms/contact.php" method="post" role="form" class="php-email-form">
               <div class="row">
                 <div class="form-group col-md-6">
@@ -618,7 +644,7 @@
               <div class="text-center"><button type="submit">Send Message</button></div>
             </form>
           </div>
-        </div>
+        </div> -->
       </div>
   </section><!-- End Contact Us Section -->
 
