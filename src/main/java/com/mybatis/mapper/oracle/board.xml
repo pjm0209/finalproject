@@ -196,4 +196,9 @@
 		select * from boardFormview
 		order by board_Form_No
 	</select>
+	
+	<select id="selectUserBoardList" parameterType="int" resultType="map">
+		select * from boardview
+		where no = #{no}
+	</select>
 </mapper>
