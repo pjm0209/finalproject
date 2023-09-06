@@ -14,10 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.team2.mbti.member.model.MemberVO;
 import com.team2.mbti.message.model.MessageService;
 import com.team2.mbti.message.model.SendDmListVO;
-import com.team2.mbti.message.model.SendDmVO;
 
 import jakarta.servlet.http.HttpSession;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -40,12 +38,23 @@ public class MessageController {
 	}
 	
 	@PostMapping("/message")
-	public String message_post(@ModelAttribute SendDmListVO sendDmListVo, HttpSession session,Model model) {
+	public String message_post(@ModelAttribute MemberVO memberVo, Model model) {
+		logger.info("쪽지 관리 검색 처리, 파라미터 memberVo={}",memberVo);
+		
+		List<MemberVO> list=messageService.selectAllMemberbyDmSearch(memberVo);
+		
+		model.addAttribute("list", list);
+		
+		return "admin/message/message";
+	}
+	
+	@RequestMapping("/messageWrite")
+	public String messageWrite(@ModelAttribute SendDmListVO sendDmListVo, HttpSession session,Model model) {
 		int adminNo=(int)session.getAttribute("adminNo");
 		logger.info("쪽지 보내기 처리, 파라미터 sendDmListVo={}", sendDmListVo);
 		
 		String msg="",url="/admin/message/message";
-		List<SendDmVO> list=sendDmListVo.getSendItems();
+		
 		int cnt=messageService.insertSendDmToAdmin(sendDmListVo, adminNo);
 		logger.info("쪽지 보내기 결과 cnt={}",cnt);
 		

@@ -25,26 +25,29 @@ public class MessageServiceImpl implements MessageService {
 	public int insertSendDmToAdmin(SendDmListVO sendDmListVo, int adminNo) {
 		List<SendDmVO> list=sendDmListVo.getSendItems();
 		int cnt=0;
+		int idx=0;
 		try {
-			if(sendDmListVo.getSendItems().get(0).getReceiveNo()!=0) {
-				for(int i=0;i<list.size();i++) {
-					SendDmVO vo=list.get(i);
-					vo.setAdminNo(adminNo);
-					String sendBody=list.get(0).getSendBody();
-					
-					if(i>0) {
-						vo.setSendBody(sendBody);
-					}
-					
-					if(vo.getReceiveNo()!=0) {
-						cnt=messageDao.insertSendDmToAdmin(vo);
-						ReceiveDmVO receiveDmVo= new ReceiveDmVO();
-						
-						receiveDmVo.setSendDmNo(vo.getSendDmNo());
-						cnt=messageDao.insertReceiveDm(receiveDmVo);
-					}
+			for(int i=0;i<list.size();i++) {
+				SendDmVO vo=list.get(i);
+				vo.setAdminNo(adminNo);
+				String sendBody=list.get(0).getSendBody();
+				
+				if(i>0) {
+					vo.setSendBody(sendBody);
 				}
-			}else {
+				
+				if(vo.getReceiveNo()!=0) {
+					cnt=messageDao.insertSendDmToAdmin(vo);
+					ReceiveDmVO receiveDmVo= new ReceiveDmVO();
+					
+					receiveDmVo.setSendDmNo(vo.getSendDmNo());
+					cnt=messageDao.insertReceiveDm(receiveDmVo);
+					
+					idx++;
+				}
+			}
+			
+			if(idx==0) {
 				List<MemberVO> memList=messageDao.selectAllMemberbyDm();
 				for(int i=0;i<memList.size();i++) {
 					MemberVO memberVo=memList.get(i);
@@ -108,6 +111,8 @@ public class MessageServiceImpl implements MessageService {
 
 	@Override
 	public Map<String, Object> selectMessageViewBySendDmNo(int sendDmNo) {
+		int cnt=messageDao.updateReceiveDmReadDate(sendDmNo);
+		
 		return messageDao.selectMessageViewBySendDmNo(sendDmNo);
 	}
 
@@ -124,6 +129,29 @@ public class MessageServiceImpl implements MessageService {
 		}
 		
 		return cnt;
+	}
+
+	@Override
+	public int insertSendDmToMemberMyMessage(SendDmVO sendDmVo) {
+		int cnt=0;
+		try {
+			cnt=messageDao.insertSendDmToMemberMyMessage(sendDmVo);
+			
+			ReceiveDmVO receiveDmVo = new ReceiveDmVO();
+			receiveDmVo.setSendDmNo(sendDmVo.getSendDmNo());
+			
+			cnt=messageDao.insertReceiveDm(receiveDmVo);
+		}catch (RuntimeException e) {
+			e.printStackTrace();
+			cnt=-1;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+		}
+		return cnt;
+	}
+
+	@Override
+	public List<MemberVO> selectAllMemberbyDmSearch(MemberVO memberVo) {
+		return messageDao.selectAllMemberbyDmSearch(memberVo);
 	}
 	
 }
