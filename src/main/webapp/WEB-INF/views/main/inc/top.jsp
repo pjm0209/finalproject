@@ -92,7 +92,7 @@
 			  <li><a href="<c:url value='/main/education/list'/>">비젼</a></li>            
 			  <li><a href="<c:url value='/main/education/location'/>">위치</a></li>            
             </ul>
-          <li><a class="nav-link scrollto" href="#about">About Us</a></li>
+         
           <li class="dropdown"><a class="nav-link scrollto" href="#"><span>MBTI 교육</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
 			  <li><a href="<c:url value='/main/education/info'/>">교육 소개</a></li>            

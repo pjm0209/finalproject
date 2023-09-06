@@ -565,7 +565,7 @@
 
         <div class="row">
 
-          <div class="col-lg-5 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+          <div class="col-lg-12 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
             <div class="info">
               <div class="address">
                 <i class="bi bi-geo-alt"></i>

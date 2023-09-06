@@ -7,12 +7,11 @@
         <div class="row">
 
           <div class="col-lg-3 col-md-6 footer-contact">
-            <h3>Ninestars</h3>
+            <h3>Essential MBTI</h3>
             <p>
-              A108 Adam Street <br>
-              New York, NY 535022<br>
-              United States <br><br>
-              <strong>Phone:</strong> +1 5589 55488 55<br>
+              서울특별시 서초구 서초대로77길 55 (에이프로스퀘어3층)<br>
+              06611 <br><br>
+              <strong>Phone:</strong> 02-532-6509<br>
               <strong>Email:</strong> info@example.com<br>
             </p>
           </div>
@@ -20,22 +19,19 @@
           <div class="col-lg-3 col-md-6 footer-links">
             <h4>Useful Links</h4>
             <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="/mbti/main/index">Home</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="/mbti/main/Introduction/info">소개</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="/mbti/main/education/info">MBTI 교육</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="/mbti/main/mbti/mbti">MBTI 검사</a></li>
             </ul>
           </div>
 
           <div class="col-lg-3 col-md-6 footer-links">
             <h4>Our Services</h4>
             <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="/mbti/main/book/bookMain">도서/자료</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="/mbti/main/board/boardMain">커뮤니티</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="/mbti/main/mypage/mypage">마이페이지</a></li>
             </ul>
           </div>
 
