@@ -47,7 +47,6 @@
 				</form>
 			</div>
 		</div>
-		<form name="frmDelete" method="post">
 		<table class="table" id="mbtitb">
 			<thead>
 				<tr class="board-table-colum">
@@ -61,16 +60,23 @@
 			<c:set var="idx" value="0"/>
 			<tbody>
 				<c:forEach var="memVo" items="${list}">
-					<c:set var="questionType" value="${mbtiSurveyVo.questionTypeNo}"/>
-					<tr>
-						<th scope="row"><input type="checkbox" name="sendItems[${idx}].receiveNo" class="board-checkbox check" value="${memVo.no}"></th>
-						<td>${memVo.no}</td>
-						<td>${memVo.userid}</td>
-						<td id="name${memVo.no}">${memVo.name}</td>
-						<td>${memVo.hp}</td>
-					</tr>
+					<c:if test="${!empty list}">
+						<c:set var="questionType" value="${mbtiSurveyVo.questionTypeNo}"/>
+						<tr>
+							<th scope="row"><input type="checkbox" name="sendItems[${idx}].receiveNo" class="board-checkbox check" value="${memVo.no}"></th>
+							<td>${memVo.no}</td>
+							<td>${memVo.userid}</td>
+							<td id="name${memVo.no}">${memVo.name}</td>
+							<td>${memVo.hp}</td>
+						</tr>
+					</c:if>
 					<c:set var="idx" value="${idx+1}"/>
 				</c:forEach>
+				<c:if test="${empty list}">
+					<tr>
+						<td colspan="5">해당 검색 내용이 없습니다.</td>
+					</tr>
+				</c:if>
 			</tbody>
 		</table>
 	</div>
@@ -89,14 +95,15 @@
 			<div style="margin-left: 15px;margin-top: 20px">
 				<span>받는 회원 : &nbsp;</span><span id="memberNameModal"></span>
 			</div>
-			<form name="messageFrm" method="post" action="<c:url value='/admin/message/messageWrite'/>">
+			<form name="adminMessageFrm" method="post" action="<c:url value='/admin/message/messageWrite'/>">
 				<div class="modal-body" style="margin:0 auto">
+					<p id="input"></p>
 					<p>보낼 내용</p>
 					<textarea name="sendItems[0].sendBody" id="sendBody" rows="20" cols="84" style="margin:0 auto"></textarea>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-					<button type="submit" class="btn bg-orange-primary" id="messageOkBtn" >확인</button>
+					<button type="submit" class="btn bg-orange-primary" id="messageOkBtn">확인</button>
 				</div>
 			</form>
 		</div>
