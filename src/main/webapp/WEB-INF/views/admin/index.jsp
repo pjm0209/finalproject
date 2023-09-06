@@ -1,7 +1,48 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>   
-<%@include file="inc/top.jsp" %>    
+<%@include file="inc/top.jsp" %>  
 
+<!-- 데이터 -->
+<input type="hidden" id="memMinus1" value="${memMinus1}">
+<input type="hidden" id="memMinus2" value="${memMinus2}">
+<input type="hidden" id="memMinus3" value="${memMinus3}">
+<input type="hidden" id="memMinus4" value="${memMinus4}">
+<input type="hidden" id="memMinus5" value="${memMinus5}">
+<input type="hidden" id="memToday" value="${memToday}">
+  
+<script type="text/javascript">
+var ctx = document.getElementById("myChart");
+const myChart = new Chart(ctx,{
+	type: 'line',
+	data: {
+		labels: ["5일전", "4일전", "3일전", "2일전", "1일전", "오늘"],
+		datasets:[{
+			label: '회원가입 수',
+			data: ['${memMinus1}', '${memMinus2}', '${memMinus3}', '${memMinus4}', '${memMinus5}', '${memToday}'],
+			fill: false,
+			lineTension: 0,
+			borderColor: "rgba(255, 201, 14, 1)",
+			backgroundColor: "rgba(255, 201, 14, 0.5)",
+			borderWidth: 2
+		}]
+	},
+	options: {
+		responsive: true,
+		scales:{
+			yAxes:[{
+				ticks:{
+					beginAtZero:true
+				}
+			}]
+		},
+		label:{
+			font:{
+				family:"jua"
+			}
+		}
+	}
+})
+</script>
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 

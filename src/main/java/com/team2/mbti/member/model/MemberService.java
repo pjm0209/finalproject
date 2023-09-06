@@ -42,6 +42,10 @@ public interface MemberService {
 
 	String pwdCheck(String userid); //비밀번호 확인
 	int updatePassword(MemberVO membervo); //비밀번호 변경
+	
+	int getTotalMember(MemberVO membervo); //총 회원수 확인
+	int getTodayMember(MemberVO membervo); //오늘 가입자수 확인
+	int getWeekMember(MemberVO membervo); //이번주 가입자 수 확인
 
 
 }

@@ -19,6 +19,7 @@ import com.team2.mbti.admin.model.AdminVO;
 import com.team2.mbti.common.ConstUtil;
 import com.team2.mbti.common.PaginationInfo;
 import com.team2.mbti.common.SearchVO;
+import com.team2.mbti.member.model.MemberService;
 import com.team2.mbti.member.model.MemberVO;
 
 import lombok.RequiredArgsConstructor;
@@ -30,10 +31,14 @@ public class AdminController {
 	private static final Logger logger=LoggerFactory.getLogger(AdminController.class);
 	
 	private final AdminService adminService;
+	private final MemberService memberService;
 		
 	@GetMapping("/index")
-	public String index_get(Model model) {
+	public String index_get(Model model, MemberVO membervo) {
 		model.addAttribute("title", "관리자 페이지");
+		model.addAttribute("memTotal", memberService.getTotalMember(membervo));
+		model.addAttribute("memToday", memberService.getTodayMember(membervo));
+		model.addAttribute("memWeek", memberService.getWeekMember(membervo));
 		
 		return "admin/index";
 	}
@@ -208,6 +213,7 @@ public class AdminController {
 		model.addAttribute("url", url);
 		
 		return "common/message";
-	}		
+	}	
+	
 	
 }
