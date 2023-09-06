@@ -2,10 +2,14 @@ package com.team2.mbti.member.model;
 
 import java.sql.Timestamp;
 
-import lombok.Data;
+import com.team2.mbti.common.SearchVO;
 
-@Data
-public class MemberVO {
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
+public class MemberVO extends SearchVO {
 	private int no;
 	private String userid;
 	private String pwd;
@@ -19,4 +23,14 @@ public class MemberVO {
 	private String activatable;
 	private Timestamp outdate;
 	private int mbtiNo;
+	
+	@Override
+	public String toString() {
+		return "MemberVO [no=" + no + ", userid=" + userid + ", pwd=" + pwd + ", name=" + name + ", hp=" + hp
+				+ ", email=" + email + ", zipcode=" + zipcode + ", address=" + address + ", addressDetail="
+				+ addressDetail + ", regdate=" + regdate + ", activatable=" + activatable + ", outdate=" + outdate
+				+ ", mbtiNo=" + mbtiNo + ", toString()=" + super.toString() + "]";
+	}
+	
+	
 }
