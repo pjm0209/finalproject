@@ -4,9 +4,11 @@ import java.sql.Timestamp;
 
 import com.team2.mbti.common.SearchVO;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Setter
+@Getter
 public class SendDmVO extends SearchVO{
 	private int sendDmNo;
 	private int no;
@@ -15,4 +17,12 @@ public class SendDmVO extends SearchVO{
 	private int receiveNo;
 	private int adminNo;
 	private String receiveManagerFlag;
+	
+	@Override
+	public String toString() {
+		return "SendDmVO [sendDmNo=" + sendDmNo + ", no=" + no + ", sendBody=" + sendBody + ", sendRegdate="
+				+ sendRegdate + ", receiveNo=" + receiveNo + ", adminNo=" + adminNo + ", receiveManagerFlag="
+				+ receiveManagerFlag + ", toString()=" + super.toString() + "]";
+	}
+	
 }

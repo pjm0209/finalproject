@@ -18,6 +18,7 @@ import com.team2.mbti.common.SearchVO;
 import com.team2.mbti.member.model.MemberVO;
 import com.team2.mbti.message.model.MessageService;
 import com.team2.mbti.message.model.SendDmListVO;
+import com.team2.mbti.message.model.SendDmVO;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -53,7 +54,7 @@ public class MessageController {
 	}
 	
 	@RequestMapping("/messageWrite")
-	public String messageWrite(@ModelAttribute SendDmListVO sendDmListVo, HttpSession session,Model model) {
+	public String messageWrite(@ModelAttribute SendDmListVO sendDmListVo,@RequestParam(required = false) String adminMessageFlag, HttpSession session,Model model) {
 		int adminNo=(int)session.getAttribute("adminNo");
 		logger.info("쪽지 보내기 처리, 파라미터 sendDmListVo={}", sendDmListVo);
 		
@@ -64,6 +65,9 @@ public class MessageController {
 		
 		if(cnt>0) {
 			msg="쪽지를 보냈습니다.";
+			if(adminMessageFlag.equals("Y")) {
+				url="/admin/message/adminMessage";
+			}
 		}else {
 			msg="쪽지를 보내는중 에러가 발생했습니다.";
 		}
@@ -106,4 +110,19 @@ public class MessageController {
 		
 	}
 	
+	@RequestMapping("/messageWrite2")
+	public String messageWrite(@ModelAttribute SendDmVO sendDmVo, HttpSession session,Model model) {
+		logger.info("관리자 쪽지 보내기2 처리, sendDmVo={}",sendDmVo);
+		
+		return "redirect:/admin/message/adminMessage";
+	}
+	
+	@RequestMapping("/messageDelete")
+	public String messageDelete(@ModelAttribute SendDmListVO sendDmListVo) {
+		logger.info("관리자 쪽지 삭제 처리, 파라미터 sendDmListVo={}",sendDmListVo);
+		
+		
+		
+		return "redirect:/admin/message/adminMessage";
+	}
 }
