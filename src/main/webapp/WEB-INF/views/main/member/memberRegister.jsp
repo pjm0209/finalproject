@@ -316,7 +316,7 @@ function validate_hp(ph) {
 			<button id="btnChkId" value="중복 확인" type="button">중복 확인</button>			
 			<span class="error" id="idError"></span>
 		</div>
-		
+			
 		<label>비밀번호</label>
 		<div class="div-register">
 			<input type="password" class="pwd" id="memberPwd" name="pwd" placeholder="비밀번호 입력(문자,숫자,특수문자 포함 8~20자)">

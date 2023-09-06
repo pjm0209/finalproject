@@ -141,8 +141,8 @@
 		and hp=#{hp}
    </select>
    
-   <select id="emailCheck" parameterType="map" resultType="string" >
-		select email 
+   <select id="emailCheck" parameterType="map" resultType="int" >
+		select count(*) 
 		from member
 		where userid=#{userid} and email=#{email}
    </select>

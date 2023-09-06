@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>   
 <%@ include file="../inc/top.jsp" %>
 <style>
 img{
@@ -72,10 +71,11 @@ a{
 	<div class="tabMenu">
 		<ul>
 			<li class="on">
-				<a href="/mbti/main/Introduction/info">에세스타</a>
+				<a href="<c:url value='/main/Introduction/info'/>">에세스타</a>
+				
 			</li>
 			<li>
-				<a href="/mbti/main/Introduction/Introduction">미션과 비전</a>
+			<a href="<c:url value='/main/Introduction/Vision'/>">비전</a>
 			</li>
 			<li>
 				<a href="">연혁/프로젝트</a>
