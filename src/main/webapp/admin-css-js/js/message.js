@@ -109,13 +109,10 @@ var contextPath="/mbti";
 	});
 	
 	$('td[name=messageDetail]').click(function(){
-		var sendDmNo=$(this).parent().find('input').eq(0).val();
-		var readDate=$(this).parent().find('input').eq(1).val();
+		var sendDmNo=$(this).parent().parent().find('input[type=hidden]').eq(0).val();
+		var readDate=$(this).parent().parent().find('input[type=hidden]').eq(1).val();
 		var id=$(this).parent().find('td').eq(1).text();
 		var body=$(this).parent().find('td').eq(2).text();
-		
-		alert(sendDmNo);
-		alert(readDate);
 		
 		$('#alertModalLabel').html('쪽지 상세보기');
 		$('#memberNameModal').text(id);
