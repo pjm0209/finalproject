@@ -7,7 +7,7 @@ var contextPath="/mbti";
 	$('.message-button').click(function(){
 		$('#memberNoModal').html("");
 		$('#memberNameModal').html("");
-		$('#input').html("");
+		$('#input2').html("");
 		if($(this).text()=='쪽지 보내기'){
 			$('#alertModalLabel').html('쪽지 보내기');
 			
@@ -28,7 +28,7 @@ var contextPath="/mbti";
 					result="<input type='text' name='sendItems["+idx+"].receiveNo' value='"+no+"'>";
 				}
 				
-				$('#input').append(result);
+				$('#input2').append(result);
 				$('#memberNameModal').append(name);
 			});
 			
@@ -109,8 +109,9 @@ var contextPath="/mbti";
 	});
 	
 	$('td[name=messageDetail]').click(function(){
-		var sendDmNo=$(this).parent().parent().find('input[type=hidden]').eq(0).val();
-		var readDate=$(this).parent().parent().find('input[type=hidden]').eq(1).val();
+		var sendDmNo=$(this).parent().prev().prev().val();
+		var readDate=$(this).parent().prev().val();
+		var no=$(this).parent().find('td[name=no]').text();
 		var id=$(this).parent().find('td').eq(1).text();
 		var body=$(this).parent().find('td').eq(2).text();
 		
@@ -118,7 +119,8 @@ var contextPath="/mbti";
 		$('#memberNameModal').text(id);
 		$('textarea').html(body);
 		$('#messageDetailModal').modal('show');
-		
+		var result="<input type='hidden' name='receiveNo' value='"+no+"'>";
+		$('#input1').html(result);
 		if(readDate==null || readDate==''){
 			$.ajax({
 				url:contextPath+'/admin/message/readDateUpdate',
@@ -135,20 +137,21 @@ var contextPath="/mbti";
 	
 	$('#reSendMessage').click(function(){
 		$('#messageDetailModal').modal('hide');
+	});
+	$('#messageDetailModal').on('hidden.bs.modal', function (e) {
+		$('#alertModalLabel').html('쪽지 답장');
+		$('#user_id').html("받는 회원 : ");
+		$('#reSendMessage').hide();
+		$('#sendMessage').show();
+		$('textarea').html("").attr('readonly',false);
+		var result="<input type='hidden' name='adminMessageFlag' value='Y'>";
+		$('#input2').html(result);
+		$('#messageDetailModal').modal('show');
 		
-		$('#messageDetailModal').on('hidden.bs.modal', function (e) {
-			$('#alertModalLabel').html('쪽지 답장');
-			$('#user_id').html("받는 회원 : ");
-			$('#reSendMessage').hide();
-			$('#sendMessage').show();
-			$('textarea').html("").attr('readonly',false);
-			
-			$('#messageDetailModal').modal('show');
-			
-		});
-		
+		return false;
 		
 	});
+		
 	
 	$('#modalClose').click(function(){
 		$('#messageDetailModal').off();
@@ -165,8 +168,6 @@ var contextPath="/mbti";
 			$('#messageDetailModal').off();
 			return false;
 		}
-		var result="<input type='hidden' name='adminMessageFlag' value='Y'>";
-		$('#input').html(result);
 		
 		$('form[name=adminMessageFrm]').submit();
 	});

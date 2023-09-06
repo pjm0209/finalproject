@@ -8,6 +8,7 @@ import com.team2.mbti.member.model.MemberVO;
 
 public interface MessageService {
 	int insertSendDmToAdmin(SendDmListVO sendDmListVo, int adminNo);
+	int insertSendDmToAdmin(SendDmVO sendDmVo);
 	int insertSendDmToMember(SendDmListVO sendDmListVo, int no);
 	List<MemberVO> selectAllMemberbyDm();
 	List<MemberVO> selectAllMemberbyDmSearch(MemberVO memberVo);
@@ -19,4 +20,5 @@ public interface MessageService {
 	List<Map<String, Object>> selectMessageViewByAdmin();
 	List<Map<String, Object>> selectMessageViewByAdminSearch(SearchVO searchVo);
 	int updateReceiveDmReadDate(int sendDmNo);
+	int getAdminMessageCount();
 }

@@ -64,9 +64,9 @@
 						<c:if test="${!empty list}">
 							<tr>
 								<th scope="row">
-									<input type="checkbox" name="sendItems[${idx}].receiveNo" class="board-checkbox check" value="${map['SEND_DM_NO']}">
+									<input type="checkbox" name="sendItems[${idx}].sendDmNo" class="board-checkbox check" value="${map['SEND_DM_NO']}">
 								</th>
-								<td>${map["NO"]}</td>
+								<td name="no">${map["NO"]}</td>
 								<td>${map["SEND_ID"]}</td>
 								<td name="messageDetail" style="cursor: pointer;"><span style="float:left;">${map["SEND_BODY"]}</span></td>
 								<td><fmt:formatDate value="${map['SEND_REGDATE']}" pattern="yyyy-MM-dd [HH:mm]"/></td>
@@ -100,9 +100,10 @@
 			</div>
 			<form name="adminMessageFrm" method="post" action="<c:url value='/admin/message/messageWrite2'/>">
 				<div class="modal-body" style="margin:0 auto">
-					<p id="input"></p>
+					<p id="input1"></p>
+					<p id="input2"></p>
 					<p>쪽지 내용</p>
-					<textarea readonly="readonly" name="sendItems[0].sendBody" id="sendBody" rows="20" cols="88" style="margin:0 auto;"></textarea>
+					<textarea readonly="readonly" name="sendBody" id="sendBody" rows="20" cols="88" style="margin:0 auto;"></textarea>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="modalClose">닫기</button>

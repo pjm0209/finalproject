@@ -176,5 +176,15 @@ public class MessageServiceImpl implements MessageService {
 	public int updateReceiveDmReadDate(int sendDmNo) {
 		return messageDao.updateReceiveDmReadDate(sendDmNo);
 	}
+
+	@Override
+	public int insertSendDmToAdmin(SendDmVO sendDmVo) {
+		return messageDao.insertSendDmToAdmin(sendDmVo);
+	}
+
+	@Override
+	public int getAdminMessageCount() {
+		return messageDao.getAdminMessageCount();
+	}
 	
 }

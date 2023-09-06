@@ -10,6 +10,7 @@ import com.team2.mbti.member.model.MemberVO;
 
 @Mapper
 public interface MessageDao {
+	//관리자 - 쪽지 보내기
 	int insertSendDmToAdmin(SendDmVO sendDmVo);
 	int insertReceiveDm(ReceiveDmVO receiveDmVo);
 	int insertSendDmToMember(SendDmVO sendDmVo);
@@ -31,4 +32,7 @@ public interface MessageDao {
 	
 	//관리자 - 쪽지 읽은날짜 업데이트
 	int updateReceiveDmReadDate(int sendDmNo);
+	
+	//관리자 - 쪽지 온 갯수(읽지 않은 쪽지의 수)
+	int getAdminMessageCount();
 }
