@@ -3,3 +3,7 @@
 .message-checkbox, .message-no{
 	width: 50px;
 }
+
+.message-body{
+	width: 300px; 
+}

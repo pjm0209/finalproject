@@ -188,10 +188,18 @@
                 </div>
             </li>
             <li class="nav-item">
-            	<a class="nav-link" href="<c:url value='/admin/message/message'/>">
-                    <i class="fas fa-fw fa-wrench"></i>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#message"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-shopping-cart"></i>
                     <span>쪽지 관리</span>
                 </a>
+                <div id="message" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="<c:url value='/admin/message/message'/>">회원에게 쪽지 보내기</a>
+                        <a class="collapse-item" href="<c:url value='/admin/message/adminMessage'/>">관리자 쪽지 목록</a>
+                    </div>
+                </div>
             </li>
 
             <!-- Divider -->
