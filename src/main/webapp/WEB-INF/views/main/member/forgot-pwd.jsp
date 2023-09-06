@@ -157,10 +157,7 @@ form {
         		},
         		dateType:'json',
         		success : function(result){
-        			if(result>0){
-        				alert("임시 비밀번호 발송 완료!! 이메일을 확인해주세요");
-        				location.href="<c:url value=''/>";
-        			}        				
+       				alert("임시 비밀번호 발송 완료!! 이메일을 확인해주세요");
         		},
 	            error:function(xhr,status,error){
   	                alert(status+" : "+error);
