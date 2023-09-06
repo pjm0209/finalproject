@@ -1,11 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="inc/top.jsp" %>
+
+<style>
+button.main-button1 {
+    background-color: #eb5d1e;
+    height: 70px;
+    width: 300px;
+    font-size: 24px;
+    border: 0;
+    border-radius: 100px;
+    padding: 6px 41px;
+    margin-top: 450px;
+    margin-right: -305px;
+    color: white;
+}
+</style>
+
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex align-items-center">
 
     <div class="container">
       <div class="row gy-4">
+      <form name="frm-mbti1" id="frm-mbti1" method="post" action="<c:url value='/main/mbti/mbti'/>">
+			<input type="hidden" name="questionTypeNo" value="1"/>
+			<button type="submit" class="main-button1" id="mbti-free-button">MBTI 검사하러 가기</button>
+	  </form>
         <%-- <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
           <h1>Bettter digital experience with Ninestars</h1>
           <h2>We are team of talented designers making websites with Bootstrap</h2>
