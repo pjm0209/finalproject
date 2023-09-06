@@ -178,6 +178,7 @@ $(function(){
 });  	    	
 </script> 
 
+<script>
 <!-- 카카오 스크립트 -->
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script>
@@ -189,6 +190,7 @@ $(function() {
         	"https://kauth.kakao.com/oauth/authorize?client_id=63aae7bb7049cc37773c9691d2c30682&prompt=login"
            +"&redirect_uri=http://localhost:9091/mbti/oauth/kakao&response_type=code";
     });
+
 });
 </script>
 
@@ -226,13 +228,23 @@ $(function() {
                     </div>
                     <span class="centered-span">또는</span><br>
                     <hr><br>
+<<<<<<< HEAD
                     
+=======
+                    
+
+>>>>>>> branch 'main' of https://github.com/pjm0209/finalproject.git
 			      	<div class="Login" id="kakaoLogin" >
 				     	<a href="#" >
 							<img src="<c:url value='../../images/kakao_login_large_narrow.png'/>" alt="카카오로그인" class="snsBt" />
 						</a>
+<<<<<<< HEAD
 			      	</div>						
                   		               
+=======
+			      	</div>						
+
+>>>>>>> branch 'main' of https://github.com/pjm0209/finalproject.git
                     <div class="field button-field">
                     	<span >계정이 없으신가요?</span>
                     	<input type="button" value="회원가입" id="memberRegister-button">  

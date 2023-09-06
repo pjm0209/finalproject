@@ -135,32 +135,6 @@ public class MainBookController {
 		return "main/book/bookList1";
 	}
 
-	@RequestMapping("/bookBasket")
-	public String bookBasket(@RequestParam(defaultValue = "0") int bookNo, Model model) {
-		logger.info("책 주문 페이지 - bookBasket, 파라미터 bookNo={}", bookNo);
 
-		return "main/book/bookBasket";
-	}
-
-	@RequestMapping("/bookOrderMain")
-	public String bookOrderMain(@RequestParam(defaultValue = "0") int bookNo, Model model) {
-		logger.info("책 주문 페이지 - bookOrderMain, 파라미터 bookNo={}", bookNo);
-
-		return "main/book/bookOrderMain";
-	}
-
-	@RequestMapping("/bookOrdering")
-	public String bookOrdering(@RequestParam(defaultValue = "0") int bookNo, Model model) {
-		logger.info("책 주문 페이지 - bookOrderMain, 파라미터 bookNo={}", bookNo);
-
-		return "main/book/bookOrdering";
-	}
-
-	@RequestMapping("/test/test")
-	public String test(@RequestParam(defaultValue = "0") int bookNo, Model model) {
-		logger.info("책 주문 페이지 - bookOrderMain, 파라미터 bookNo={}", bookNo);
-
-		return "main/book/test/test";
-	}
 
 }//

@@ -1,7 +1,7 @@
 /**
  * 
  */
-
+var contextPath="/mbti";
  $(function(){
 	$('.message-button').click(function(){
 		$('#memberNoModal').html("");
@@ -56,7 +56,23 @@
 		$('#confirmModalBtn').trigger('click');
 	});
 	 
+	$("#myMessageDelBtn").click(function(){
+		var len=$('input[type=checkbox]:checked').not('.myMessageCheck-All').length;
+		if(len<1){
+			$('#alertModalBody').html("삭제할 쪽지를 선택해주세요");
+			$('#alertModalBtn').trigger('click');
+			
+			return false;
+		}
+		$('#confirmModalBody').html('선택한 쪽지들를 삭제하시겠습니까?');
+		$('#confirmOk').attr('onclick','myMessageFormSubmit()');
+		$('#confirmModalBtn').trigger('click');
+	});
  });
+ function myMessageFormSubmit(){
+	 $('form[name=messageFrm]').prop('action',contextPath+'/main/mypage/myMessage/messageDelete');
+	 $('form[name=messageFrm]').submit();
+ }
  
  function messageDeleteloc(){
 	 location.href=contextPath+'/main/mypage/myMessage/messageDelete?sendDmNo='+$("#sendDmNo").val();

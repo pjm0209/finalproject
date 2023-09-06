@@ -83,14 +83,14 @@ function sendSearchKeyword(){
 								<div>
 									<p class="box">${vo.bookCategory}</p>
 									<a href="<c:url value='/main/book/bookDetail?bookNo=${vo.bookNo}&bookCategory=${param.bookCategory}'/>">${vo.bookTitle}</a>
-									<p><span>가격 | </span><fmt:formatNumber value="${vo.bookPrice}" pattern="#,###"/>원</p>
-									<p><span>작가 | </span>${vo.bookWriter}<span style="padding-left:5px">출판사 | </span>${vo.bookPublisher}</p>
+									<p><span>가격 : </span><fmt:formatNumber value="${vo.bookPrice}" pattern="#,###"/>원</p>
+									<p><span>작가 : ${vo.bookWriter}</span> | <span style="padding-left:5px">출판사 : ${vo.bookPublisher}</span></p>
 									
 								</div>
 								
 							</div>
 							<div class="btn">
-								<a href="<c:url value='/main/book/bookOrderMain'/>">장바구니</a>
+								<a href="<c:url value='/main/book/basket/bookOrderMain'/>">장바구니</a>
 								<a href="#">바로구매</a>
 							</div>
 						</li>

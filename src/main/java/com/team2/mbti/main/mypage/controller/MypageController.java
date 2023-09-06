@@ -71,6 +71,15 @@ public class MypageController {
 		int count=0;
 		
 		List<MbtiResultVO> list=mbtiResultService.getResultVal(no);
+		logger.info("내 mbti 검사 조회 결과, list.size()={},list={}",list.size(),list);
+		
+		if(list.size()==0) {
+			model.addAttribute("msg", "MBTI 검사를 하셔야 확인이 가능합니다.");
+			model.addAttribute("url", "/main/mbti/mbti");
+			
+			return "common/message";
+		}
+		
 		for(int i=0;i<list.size();i++) {
 			MbtiResultVO mbtiResultVo=list.get(i);
 			
@@ -195,7 +204,6 @@ public class MypageController {
 		model.addAttribute("resultP", resultP);
 		model.addAttribute("resultJ", resultJ);
 		model.addAttribute("mbtiVo", mbtiVo);
-		
 		
 		return "main/mypage/mbtiResult";
 	}

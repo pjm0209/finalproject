@@ -112,8 +112,18 @@ public class MessageServiceImpl implements MessageService {
 	}
 
 	@Override
-	public int deleteSendDmBySendDmNo(int sendDmNo) {
-		return messageDao.deleteSendDmBySendDmNo(sendDmNo);
+	public int deleteSendDmBySendDmNo(SendDmListVO sendDmListVo) {
+		int cnt=0;
+		
+		List<SendDmVO> list=sendDmListVo.getSendItems();
+		for(SendDmVO vo : list) {
+			int sendDmNo=vo.getSendDmNo();
+			if(sendDmNo!=0) {
+				cnt=messageDao.deleteSendDmBySendDmNo(sendDmNo);
+			}
+		}
+		
+		return cnt;
 	}
 	
 }

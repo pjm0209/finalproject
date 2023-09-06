@@ -25,4 +25,8 @@ public interface ConstUtil {
 	//자료실 업로드인지, 상품 등록시 업로드인지 구분값
 	int UPLOAD_FILE_FLAG = 1; //자료실 업로드
 	int UPLOAD_IMAGE_FLAG = 2; //상품 등록시 이미지 업로드
+	
+	//장바구니, 주문 관련 상수
+	int DELIVERY = 3000;
+	int TOTAL_PRICE = 0;
 }

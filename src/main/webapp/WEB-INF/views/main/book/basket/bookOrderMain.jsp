@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="../inc/top.jsp"%>
+<%@ include file="../../inc/top.jsp"%>
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 <link type="text/css" rel="stylesheet" href="<c:url value='/admin-css-js/css/bookMain.css'/>">
 
 <script type="text/javascript" src="<c:url value='/admin-css-js/js/bookMain.js'/>"></script>
 
-<%@ include file="../book/bookBasket.jsp"%>
+<%@ include file="./bookBasket.jsp"%>
 
 <section class="booklist_right">
 	<ul class="flex">
@@ -54,4 +54,4 @@ $(function(){
 	});
 });
 </script>
-<%@ include file="../inc/bottom.jsp"%>
+<%@ include file="../../inc/bottom.jsp"%>

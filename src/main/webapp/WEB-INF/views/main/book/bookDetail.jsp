@@ -21,18 +21,42 @@
 		$("#remove").click(function(){
 			i=(i-1);
 			if(i < 1) i=0;
-			$("#bookCnt input[name=pop_out]").val(i);
+			$("#bookCnt input[name=ordersQty]").val(i);
 			var totalPrice = (i*${vo.bookPrice});
 			$("#totalPrice").text(totalPrice);
 		});
 		
+		$(".gogo").click(function(){
+			alert(123);
+			var qty = $("#bookCnt input[name=ordersQty]").val();
+			if(qty < 1){
+				$('#alertModalBody').html("수량을 1이상으로 입력해주세요.");
+				$('#alertModalBtn').trigger('click');
+				return false;
+			}
+			alert("qty = " + qty);
+			$("#frmOrder input[name=basketQty]").val(qty);
+			var type="";
+			if($(this).attr('id') == 'toBasket'){ //장바구니 담기
+				type="cart";
+			} else if($(this).attr('id') == 'toPurchase'){ // 바로 구매
+				type="order";
+			}
+			alert(type + ' 123');
+			$('#frmOrder').prop('action',
+					"<c:url value='/main/book/basket/basketInsert?mode=" + type + "'/>");
+			alert('form의 action prop 수정됨');
+			$('#frmOrder').submit();
+			alert(' 서브밋 됨');
+		});
+		
 	});
 	
-	function gotoBasket(){
+	/* function gotoBasket(){
 		var cnt = $("#bookCnt input[name=pop_out]").val();
 		$("input[name=ordersQty]").val(cnt);
 		$("#frmOrder").submit();
-	}
+	} */
 
 </script>
 
@@ -46,7 +70,7 @@
 	</div>
 </section>
 <form id="frmOrder" method="post" action="<c:url value='/main/book/basketInsert'/>">
-	<input type="hidden" name="ordersQty">
+	<input type="hidden" name="basketQty">
 	<input type="hidden" name="bookNo" value="${vo.bookNo}">
 </form>
 <div class="fixbox flex">
@@ -61,15 +85,15 @@
 				<span class="material-symbols-outlined"> remove </span>
 			</button>
 			<p id="bookCnt" class="tt">
-				<input type="number" name="ordersQty" value="0" style="text-align: center; border: 0;width: 50px;text-align: center;">
+				<input type="text" readonly="readonly"  name="ordersQty" value="0" style="text-align: center; border: 0;width: 50px;text-align: center;">
 			</p>
 			<button id="add">
 				<span class="material-symbols-outlined"> add </span>
 			</button>
 			
 		</li>
-		<li><button id="toBasket" type="button" style="background: none;border: 0;" onclick="gotoBasket()">장바구니</button></li>
-		<li><button id="toOrdering" type="submit" style="background: none;border: 0;color:white;">바로구매</button></li>
+		<li><button class="gogo" id="toBasket" type="button" style="background: none;border: 0;">장바구니</button></li>
+		<li><button class="gogo" id="toPurchase" type="submit" style="background: none;border: 0;color:white;">바로구매</button></li>
 	</ul>
 </div>
 
@@ -255,7 +279,7 @@
 						</tr>
 						<tr>
 							<td class="bor_right b" align="center" colspan="2">교환/환불 방법</td>
-							<td class="pl_10 lh_con">자료구매 주문/배송 조회페이지에서 [교환접수] / [환불접수] 신청, 고객지원센터 02)787-1400 접수</td>
+							<td class="pl_10 lh_con">자료구매 주문/배송 조회페이지에서 [교환접수] / [환불접수] 신청, 고객지원센터 02)000-0000 접수</td>
 						</tr>
 					</tbody>
 				</table>

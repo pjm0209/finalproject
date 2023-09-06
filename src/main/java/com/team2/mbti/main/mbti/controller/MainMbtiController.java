@@ -248,12 +248,8 @@ public class MainMbtiController {
 	}
 	
 	@RequestMapping("/kakaoLogin")
-	public String kakaoLogin(@ModelAttribute Map<String, Object> map) {
-		
+	public String kakaoLogin() {
 		logger.info("카카오 로그인");
-		logger.info("카카오 로그인 파라미터 찍히냐? id={}",map.get("id"));
-		
-	
 		
 		return "";
 	}
