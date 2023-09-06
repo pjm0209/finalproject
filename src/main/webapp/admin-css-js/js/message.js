@@ -108,6 +108,31 @@ var contextPath="/mbti";
 		$('form[name=myMessageFrm]').submit();
 	});
 	
+	$('td[name=messageDetail]').click(function(){
+		var sendDmNo=$(this).parent().find('input[name=sendDmNo]').val();
+		var readDate=$(this).parent().find('input[name=readDate]').val();
+		var id=$(this).parent().find('td').eq(1).text();
+		var body=$(this).parent().find('td').eq(2).text();
+		$('#alertModalLabel').html('쪽지 상세보기');
+		$('#memberNameModal').text(id);
+		$('textarea').html(body);
+		$('#messageDetailModal').modal('show');
+		
+		if(readDate==null || readDate==''){
+			$.ajax({
+				url:contextPath+'/admin/message/readDateUpdate',
+				data: {sendDmNo:sendDmNo},
+				type: "GET",
+				success:function(res){
+				},
+				error:function(xhr,status,error){
+					alert(status + ": " + error);
+				}
+			});
+		}
+		
+	});
+	
  });
  
  

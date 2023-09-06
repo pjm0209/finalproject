@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
+import com.team2.mbti.common.SearchVO;
 import com.team2.mbti.member.model.MemberVO;
 
 import lombok.RequiredArgsConstructor;
@@ -111,7 +112,7 @@ public class MessageServiceImpl implements MessageService {
 
 	@Override
 	public Map<String, Object> selectMessageViewBySendDmNo(int sendDmNo) {
-		int cnt=messageDao.updateReceiveDmReadDate(sendDmNo);
+		//int cnt=messageDao.updateReceiveDmReadDate(sendDmNo);
 		
 		return messageDao.selectMessageViewBySendDmNo(sendDmNo);
 	}
@@ -152,6 +153,21 @@ public class MessageServiceImpl implements MessageService {
 	@Override
 	public List<MemberVO> selectAllMemberbyDmSearch(MemberVO memberVo) {
 		return messageDao.selectAllMemberbyDmSearch(memberVo);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectMessageViewByAdmin() {
+		return messageDao.selectMessageViewByAdmin();
+	}
+
+	@Override
+	public List<Map<String, Object>> selectMessageViewByAdminSearch(SearchVO searchVo) {
+		return messageDao.selectMessageViewByAdminSearch(searchVo);
+	}
+
+	@Override
+	public int updateReceiveDmReadDate(int sendDmNo) {
+		return messageDao.updateReceiveDmReadDate(sendDmNo);
 	}
 	
 }
