@@ -247,12 +247,6 @@ public class MainMbtiController {
 		return "main/mbti/mbtiStatistics";
 	}
 	
-	@RequestMapping("/kakaoLogin")
-	public String kakaoLogin() {
-		logger.info("카카오 로그인");
-		
-		return "";
-	}
 
 
 }
