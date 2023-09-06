@@ -1,6 +1,7 @@
 package com.team2.mbti.main.mypage.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.team2.mbti.board.model.BoardService;
 import com.team2.mbti.mbtiResult.model.MbtiResultService;
 import com.team2.mbti.mbtiResult.model.MbtiResultVO;
 import com.team2.mbti.mbtisurvey.model.MbtiSurveyService;
@@ -37,6 +39,7 @@ public class MypageController {
 	private final MbtiSurveyService mbtiSurveyService;
 	private final MbtiResultService mbtiResultService;
 	private final MemberService memberService;
+	private final BoardService boardService;
 	
 	private final PasswordEncoder passwordEncoder;
 	
@@ -412,8 +415,13 @@ public class MypageController {
 	}
 	
 	@RequestMapping("/myBoardList")
-	public String myBoardList() {
+	public String myBoardList(HttpSession session, Model model) {
 		logger.info("내 게시글 리스트 조회 페이지");
+		
+		List<Map<String , Object>> myBoardList = boardService.selectUserBoardList((int)session.getAttribute("no"));
+		logger.info("내 게시글 리스트조회 결과 myBoardList: {}", myBoardList);
+		
+		model.addAttribute("myBoardList", myBoardList);
 		
 		return "main/mypage/myBoardList";
 	}
