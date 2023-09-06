@@ -1,6 +1,7 @@
 package com.team2.mbti.message.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +11,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.team2.mbti.common.SearchVO;
 import com.team2.mbti.member.model.MemberVO;
 import com.team2.mbti.message.model.MessageService;
 import com.team2.mbti.message.model.SendDmListVO;
@@ -67,6 +71,39 @@ public class MessageController {
 		model.addAttribute("url", url);
 
 		return "common/message";
+	}
+	
+	@GetMapping("/adminMessage")
+	public String adminMessage_get(Model model) {
+		logger.info("관리자 쪽지 목록");
+		
+		List<Map<String, Object>> list=messageService.selectMessageViewByAdmin();
+		logger.info("관리자 - 쪽지 목록 결과, list.size()={}",list.size());
+		
+		model.addAttribute("list", list);
+		
+		return "admin/message/adminMessage";
+	}
+	
+	@PostMapping("/adminMessage")
+	public String adminMessage_post(@ModelAttribute SearchVO searchVo ,Model model) {
+		logger.info("관리자 쪽지 목록 검색 처리, searchVo={}",searchVo);
+		
+		List<Map<String, Object>> list=messageService.selectMessageViewByAdminSearch(searchVo);
+		
+		model.addAttribute("list", list);
+		
+		return "admin/message/adminMessage";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/readDateUpdate")
+	public void readDateUpdate(@RequestParam int sendDmNo) {
+		logger.info("ajax - 읽은 날짜 업데이트 처리, 파라미터");
+		
+		int cnt=messageService.updateReceiveDmReadDate(sendDmNo);
+		logger.info("읽은 날짜 업데이트 결과 cnt={}",cnt);
+		
 	}
 	
 }
