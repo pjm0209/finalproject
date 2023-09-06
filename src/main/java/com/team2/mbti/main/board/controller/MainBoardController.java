@@ -343,4 +343,16 @@ public class MainBoardController {
 		
 		return mbtiList;
 	}
+	
+	@RequestMapping("/myBoardList")
+	public String myBoardList(@RequestParam int no, Model model) {
+		logger.info("사용자별 게시글 리스트 파라미터 no: {}", no);
+		
+		List<Map<String, Object>> boardList = boardService.selectUserBoardList(no);
+		logger.info("사용자별 게시글 리스트 조회결과 boardList.size(): {}", boardList.size());
+		
+		model.addAttribute("boardList", boardList);
+		
+		return "main/mypage/myBoardList";
+	}
 }

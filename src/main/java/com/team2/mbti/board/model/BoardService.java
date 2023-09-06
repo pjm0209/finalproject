@@ -40,4 +40,6 @@ public interface BoardService {
 	int insertBoardReply(BoardVO vo);
 	
 	List<Map<String, Object>> selectMainBoardFormCategory();
+	
+	List<Map<String , Object>> selectUserBoardList(int no);
 }

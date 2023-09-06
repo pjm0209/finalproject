@@ -411,4 +411,10 @@ public class MypageController {
 		return "main/mypage/orderList";			
 	}
 	
+	@RequestMapping("/myBoardList")
+	public String myBoardList() {
+		logger.info("내 게시글 리스트 조회 페이지");
+		
+		return "main/mypage/myBoardList";
+	}
 }
