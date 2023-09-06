@@ -84,6 +84,64 @@ div.managerAdditional-setting-body dt {
 }
 </style>
 
+<script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>
+<script type="text/javascript">
+function validate_userid(uid) {
+   console.log(uid);
+   var pattern = new RegExp(/^[a-zA-Z0-9_]+$/g);
+   return pattern.test(uid);
+}
+
+function validate_hp(ph) {
+   var pattern = new RegExp(/^[0-9]*$/g);
+   return pattern.test(ph); 
+}
+
+$(function(){
+	$('#save-managerAdditional').click(function()){
+		//아이디 입력
+		if($('admin_id').val().length < 1){
+			alert("먼저 아이디를 입력하세요");
+			$('#admin_id').focus();
+			return false;
+		}
+		
+		//아이디 조건
+		if(!validate_userid($('admin_id').val())){
+	         alert("아이디는 영문, 숫자, _(밑줄문자)만 가능합니다");
+	         $('#admin_id').focus();
+	         return false;
+		}
+		
+	      $.ajax({
+	          url:"<c:url value='/admin/manager/checkId'/>",
+	          type: "get",
+	          data: "adminId=" + $('#admin_id').val(),
+	          dataType: 'json',
+	          success:function(res){
+	             console.log(res);
+	             if(res==1){
+	                $('#idError').html("이미 존재하는 아이디입니다.");
+	                $('#idError').css('color', 'red'); 
+	             } else if(res == 2) {
+	                $('#idError').html("사용가능한 아이디입니다.");
+	                $('#idError').css('color', 'blue');
+	                $('#save-managerAdditional').val('Y'); 
+	             }
+	          },
+	          error:function(xhr, status, error){
+	             alert(status+" : " + error);
+	          }                  
+	       });
+	    });		
+	}
+	
+	
+});
+
+</script>
+
+
 <c:if test="${empty vo}">
 	<c:set var="str" value="등록"/>
 	<c:set var="pageTitle" value="관리자 등록" />
@@ -117,7 +175,7 @@ div.managerAdditional-setting-body dt {
 					<dt>아이디</dt>
 					<dd>
 						<div class="input_group v2">
-							<input class="form-control" value="${vo.adminId }" type="text" name="adminId" id="admin_id" maxlength="60">
+							<input class="form-control" value="${vo.adminId }" type="text" name="adminId" id="admin_id" style="width:200px; float:left">	
 							${memberVo.adminId }
 						</div>
 					</dd>
@@ -147,27 +205,6 @@ div.managerAdditional-setting-body dt {
 						<div class="input_group v2">
 							<input class="form-control" value="${vo.adminTel }" type="text" name="adminTel" id="admin_tel" maxlength="60">
 							${memberVo.adminTel }
-						</div>
-					</dd>
-					<dt>우편번호</dt>
-					<dd>
-						<div class="input_group v2">
-							<input class="form-control" value="${vo.adminZipcode }" type="text" name="adminZipcode" id="admin_zipcode" maxlength="60">
-							${memberVo.adminZipcode }					
-						</div>
-					</dd>	
-					<dt>주소</dt>
-					<dd>
-						<div class="input_group v2">
-							<input class="form-control" value="${vo.adminAddress }" type="text" name="adminAddress" id="admin_address" maxlength="60">
-							${memberVo.adminAddress }
-						</div>
-					</dd>
-					<dt>상세주소</dt>
-					<dd>
-						<div class="input_group v2">
-							<input class="form-control" value="${vo.adminAddressDetail }" type="text" name="adminAddressDetail" id="admin_address_detail" maxlength="60">
-							${memberVo.adminAddressDetail }
 						</div>
 					</dd>																			
 				</div>

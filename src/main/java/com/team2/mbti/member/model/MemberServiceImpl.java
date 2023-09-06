@@ -147,8 +147,19 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.updatePassword(membervo);
 	}
 
+	@Override
+	public int getTotalMember(MemberVO membervo) {
+		return memberDao.getTotalMember(membervo);
+	}
 
+	@Override
+	public int getTodayMember(MemberVO membervo) {
+		return memberDao.getTodayMember(membervo);
+	}
 
-
+	@Override
+	public int getWeekMember(MemberVO membervo) {
+		return memberDao.getWeekMember(membervo);
+	}
 
 }

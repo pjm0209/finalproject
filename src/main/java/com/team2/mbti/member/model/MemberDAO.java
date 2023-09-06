@@ -36,6 +36,10 @@ public interface MemberDAO {
 	int insertKakaoMember(MemberVO memberVo); //카카오톡 회원가입
 	int getKakaoIdCount(MemberVO memberVo); //카카오톡 회원가입 여부
 	
+	int getTotalMember(MemberVO membervo); //총 회원수 확인
+	int getTodayMember(MemberVO membervo); //오늘 가입자 수 확인
+	int getWeekMember(MemberVO membervo); //이번주 가입자 수 확인
+	
 	
 	
 	
