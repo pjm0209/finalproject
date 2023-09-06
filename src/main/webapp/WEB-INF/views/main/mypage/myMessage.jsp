@@ -270,11 +270,32 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-						<button type="submit" class="btn bg-orange-primary" id="myMessageOkBtn">확인</button>
+						<button type="button" class="btn bg-orange-primary" id="myMessageOkBtn" onclick="$.myMessageSend()">확인</button>
 					</div>
 				</form>
 			</div>
 		</div>
+	</div>
+	
+	
+	<button type="button" style="display: none" id="confirmModalBtn2" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirmModal"></button>
+    
+    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h1 class="modal-title fs-5" id="confirmModalLabel">알림</h1>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	        <p id="confirmModalBody2"></p>
+	      </div>
+	      <div class="modal-footer">
+	      	<button class="btn btn-secondary" type="button" data-bs-dismiss="modal">취소</button>
+	        <button type="button" class="btn bg-orange-primary" id="confirmOk2">확인</button>
+	      </div>
+	    </div>
+	  </div>
 	</div>
 </section>
 <%@include file="../inc/bottom.jsp" %>

@@ -21,11 +21,11 @@ var contextPath="/mbti";
 				if(idx!=$('input[type=checkbox]:checked:not(input[id=check-All])').length-1){
 					var no=$(this).val();
 					var name= $('#name'+no).text()+", ";
-					result="<input type='hidden' name='sendItems["+idx+"].receiveNo' value='"+no+"'>";
+					result="<input type='text' name='sendItems["+idx+"].receiveNo' value='"+no+"'>";
 				}else{
 					var no=$(this).val();
 					var name= $('#name'+no).text();
-					result="<input type='hidden' name='sendItems["+idx+"].receiveNo' value='"+no+"'>";
+					result="<input type='text' name='sendItems["+idx+"].receiveNo' value='"+no+"'>";
 				}
 				
 				$('#input').append(result);
@@ -48,7 +48,8 @@ var contextPath="/mbti";
 	});
 	 
 	$('#messageOkBtn').click(function(){
-		$('form[name=messageFrm]').submit();
+		$('form[name=adminMessageFrm]').prop('action',contextPath+'/admin/message/messageWrite');
+		$('form[name=adminMessageFrm]').submit();
 	});
 	
 	
@@ -66,9 +67,13 @@ var contextPath="/mbti";
 			
 			return false;
 		}
-		$('#confirmModalBody').html('선택한 쪽지들를 삭제하시겠습니까?');
-		$('#confirmOk').attr('onclick','myMessageFormSubmit()');
-		$('#confirmModalBtn').trigger('click');
+		$('input[type=checkbox]:checked').each(function(idx,item){
+			var sendDmNo=$(this).val();
+		});
+		
+		$('#confirmModalBody2').html('선택한 쪽지들를 삭제하시겠습니까?');
+		$('#confirmOk2').attr('onclick',"myMessageFormSubmit()");
+		$('#confirmModalBtn2').trigger('click');
 	});
 	
 	/* 내 쪽지함 - 쪽지 보내기 */
@@ -98,18 +103,18 @@ var contextPath="/mbti";
 		
 	});
 	
-	
+	//마이페이지 쪽지 보내기
 	$('#myMessageOkBtn').click(function(){
-		alert("옴?");
 		$('form[name=myMessageFrm]').submit();
 	});
 	
  });
  
+ 
  /* 마이페이지 - 내 쪽지함 삭제 버튼 */
  function myMessageFormSubmit(){
-	 $('form[name=myMessageFrm]').prop('action',contextPath+'/main/mypage/myMessage/messageDelete');
-	 $('form[name=myMmessageFrm]').submit();
+	 $('form[name=messageFrm]').prop('action',contextPath+'/main/mypage/myMessage/messageDelete');
+	 $('form[name=messageFrm]').submit();
  }
  
  /* 마이페이지 - 쪽지함 상세페이지 삭제 버튼 */
