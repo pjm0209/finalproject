@@ -11,19 +11,25 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th scope="col">#</th>
-					<th scope="col">First</th>
-					<th scope="col">Last</th>
-					<th scope="col">Handle</th>
+					<th scope="col" class="ck"><input type="checkbox" class="chkAll"></th>
+					<th scope="col" class="title">제목</th>
+					<th scope="col" class="boardForm">게시판</th>					
+					<th scope="col" class="readCount">조회수</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<th scope="row">1</th>
-					<td>Mark</td>
-					<td>Otto</td>
-					<td>@mdo</td>
-				</tr>
+				<c:if test="${!empty myBoardList }">
+					<c:set var="i" value="0" />
+					<c:forEach var="map" items="${myBoardList }">
+						<tr>
+							<th scope="row" class="ck"><input type="checkbox" name="boardItems[${i }].boardNo" value="${map.BOARD_NO }"></th>
+							<td class="title row">${map.BOARD_TITLE }</td>
+							<td class="boardForm">${map.BOARD_FORM_NAME }</td>
+							<td class="comments">${map.COMMENTCOUNT }</td>
+						</tr>
+						<c:set var="i" value="${i + 1 }"/>
+					</c:forEach>
+				</c:if>
 			</tbody>
 		</table>
 	</div>

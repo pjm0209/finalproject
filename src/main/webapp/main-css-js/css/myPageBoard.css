@@ -16,3 +16,7 @@ h1 {
     float: right;
     margin: 40px;
 }
+
+th.ck {
+    width: 20px;
+}
