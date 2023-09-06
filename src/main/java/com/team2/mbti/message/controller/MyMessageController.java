@@ -81,4 +81,12 @@ public class MyMessageController {
 		
 		return "common/message";
 	}
+	
+	@RequestMapping("/myMessage/messageWrite")
+	public String messageWrite(@ModelAttribute SendDmVO sendDmVo) {
+		logger.info("회원 - 쪽지 보내기, 파라미터 sendDmVo={}",sendDmVo);
+		
+		
+		return "";
+	}
 }

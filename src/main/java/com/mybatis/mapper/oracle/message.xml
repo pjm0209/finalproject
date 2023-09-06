@@ -34,6 +34,7 @@
 	<select id="messageViewById" parameterType="string" resultType="map">
 		select * from messageview
 		where receive_id=#{userid}
+		or send_id=#{userid}
 		order by send_dm_no desc
 	</select>
 	<select id="selectMessageViewBySendDmNo" parameterType="int" resultType="map">
@@ -45,4 +46,15 @@
 		delete from send_dm
 		where send_dm_no = ${sendDmNo}
 	</delete>
+	
+	<update id="updateReceiveDmReadDate" parameterType="int">
+		update receive_dm
+		set read_date= sysdate
+		where send_dm_no=#{sendDmNo}
+	</update>
+	
+	<insert id="">
+		insert into send_dm(send_dm_no, no, send_body,receive_no, receive_manager_flag)
+		values(send_dm_seq.nextval,41,'쪽지SQL','1','Y')
+	</insert>
 </mapper>

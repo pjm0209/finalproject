@@ -45,7 +45,8 @@ public class MessageController {
 		logger.info("쪽지 보내기 처리, 파라미터 sendDmListVo={}", sendDmListVo);
 		
 		String msg="",url="/admin/message/message";
-		List<SendDmVO> list=sendDmListVo.getSendItems();
+		
+		
 		int cnt=messageService.insertSendDmToAdmin(sendDmListVo, adminNo);
 		logger.info("쪽지 보내기 결과 cnt={}",cnt);
 		

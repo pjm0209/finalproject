@@ -67,7 +67,6 @@
 			</div>
 			<form name="messageFrm" method="post" action="<c:url value='/admin/message/message'/>">
 				<div class="modal-body" style="margin:0 auto">
-					<p id="input">인풋태그</p>
 					<p>보낼 내용</p>
 					<textarea name="sendItems[0].sendBody" id="sendBody" rows="20" cols="84" style="margin:0 auto"></textarea>
 				</div>
