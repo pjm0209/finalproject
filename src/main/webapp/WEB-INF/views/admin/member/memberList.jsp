@@ -20,7 +20,7 @@ select#member-search-select {
     margin-bottom: 0;
     border: 1px solid #d8dce5;
     border-radius: 6px;
-    margin-left: 840px;
+    margin-left: 1095px;
 }
 </style>
 <script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>

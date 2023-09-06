@@ -130,5 +130,28 @@ public class MessageServiceImpl implements MessageService {
 		
 		return cnt;
 	}
+
+	@Override
+	public int insertSendDmToMemberMyMessage(SendDmVO sendDmVo) {
+		int cnt=0;
+		try {
+			cnt=messageDao.insertSendDmToMemberMyMessage(sendDmVo);
+			
+			ReceiveDmVO receiveDmVo = new ReceiveDmVO();
+			receiveDmVo.setSendDmNo(sendDmVo.getSendDmNo());
+			
+			cnt=messageDao.insertReceiveDm(receiveDmVo);
+		}catch (RuntimeException e) {
+			e.printStackTrace();
+			cnt=-1;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+		}
+		return cnt;
+	}
+
+	@Override
+	public List<MemberVO> selectAllMemberbyDmSearch(MemberVO memberVo) {
+		return messageDao.selectAllMemberbyDmSearch(memberVo);
+	}
 	
 }

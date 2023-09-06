@@ -83,10 +83,22 @@ public class MyMessageController {
 	}
 	
 	@RequestMapping("/myMessage/messageWrite")
-	public String messageWrite(@ModelAttribute SendDmVO sendDmVo) {
-		logger.info("회원 - 쪽지 보내기, 파라미터 sendDmVo={}",sendDmVo);
+	public String messageWrite(@ModelAttribute SendDmVO sendDmVo, HttpSession session,Model model) {
+		int no = (int)session.getAttribute("no");
+		logger.info("회원 - 쪽지 보내기, 파라미터 sendDmVo={}, no={}", sendDmVo, no);
+		sendDmVo.setNo(no);
 		
+		int cnt=messageService.insertSendDmToMemberMyMessage(sendDmVo);
+		logger.info("마이페이지 - 쪽지보내기 결과 cnt={}",cnt);
 		
-		return "";
+		String msg="쪽지를 보내는 중에 에러가 발생했습니다.",url="/main/mypage/myMessage";
+		if(cnt>0) {
+			msg="쪽지를 보냈습니다.";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
 	}
 }

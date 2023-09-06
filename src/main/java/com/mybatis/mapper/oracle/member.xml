@@ -28,7 +28,7 @@
 			(
 				select * from member
 				<include refid="searchMember"></include>
-				order by no 
+				order by no desc
 			)A
 		)
 		<![CDATA[
@@ -45,6 +45,29 @@
 		select userid from member
 		where name = #{name}
 		and email = #{email}
+	</select>
+	
+	<select id="getTotalMember" resultType="int">
+		select count(*) from member
+	</select>
+	
+	<select id="getTodayMember" resultType="int">
+		select 
+		(
+			select count(*)
+			from member
+			where regdate >= to_char(trunc(sysdate), 'yyyy/mm/dd')
+		)
+	</select>
+		
+	<select id="getWeekMember" resultType="int">
+		select
+		(
+			select count(*)
+			from member
+			where regdate > to_char(trunc(sysdate, 'iw'), 'yyyy/mm/dd'))
+			from dual
+		)		
 	</select>
 	
 	<delete id="deleteMember" parameterType="int">

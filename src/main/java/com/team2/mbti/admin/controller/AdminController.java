@@ -19,6 +19,7 @@ import com.team2.mbti.admin.model.AdminVO;
 import com.team2.mbti.common.ConstUtil;
 import com.team2.mbti.common.PaginationInfo;
 import com.team2.mbti.common.SearchVO;
+import com.team2.mbti.member.model.MemberVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -207,6 +208,6 @@ public class AdminController {
 		model.addAttribute("url", url);
 		
 		return "common/message";
-	}
+	}		
 	
 }

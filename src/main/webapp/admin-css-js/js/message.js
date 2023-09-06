@@ -89,7 +89,7 @@ var contextPath="/mbti";
 			result+="<input type='hidden' name='receiveManagerFlag' value='N'>";
 		}
 		
-		$('#memberNameModal').html(result);
+		$('#receiveModal').html(result);
 		$('#messageModal').modal('show');
 		
 		$("#messageModal").on("shown.bs.modal", function () {
@@ -98,7 +98,9 @@ var contextPath="/mbti";
 		
 	});
 	
+	
 	$('#myMessageOkBtn').click(function(){
+		alert("옴?");
 		$('form[name=myMessageFrm]').submit();
 	});
 	
@@ -106,8 +108,8 @@ var contextPath="/mbti";
  
  /* 마이페이지 - 내 쪽지함 삭제 버튼 */
  function myMessageFormSubmit(){
-	 $('form[name=messageFrm]').prop('action',contextPath+'/main/mypage/myMessage/messageDelete');
-	 $('form[name=messageFrm]').submit();
+	 $('form[name=myMessageFrm]').prop('action',contextPath+'/main/mypage/myMessage/messageDelete');
+	 $('form[name=myMmessageFrm]').submit();
  }
  
  /* 마이페이지 - 쪽지함 상세페이지 삭제 버튼 */

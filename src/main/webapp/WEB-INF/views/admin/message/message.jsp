@@ -1,20 +1,44 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp" %>
+<style type="text/css">
+	#messateB{
+		float: right;
+		background-color: #eb5d1e;
+	    border:0;
+		border-radius: 5px;
+		padding: 6px 15px;
+		margin-top: -6px;
+		margin-right: 9px;
+		color: white;
+	}
+	#messateA{
+		float: right;
+		background-color: #eb5d1e;
+	    border:0;
+		border-radius: 5px;
+		padding: 6px 15px;
+		margin-top: -6px;
+		margin-right: 9px;
+		color: white;
+	}
+</style>
 <div class="board-body">
 	<div id="board-title">
 		<h5>쪽지 관리</h5>
-		<button class="message-button">쪽지 보내기</button>
-		<button class="message-button">전체 쪽지 보내기</button>
+		<button class="message-button" id="messateA">전체 쪽지 보내기</button>
+		<button class="message-button" id="messateB">쪽지 보내기</button>
 	</div>
 	<div class="board">
 		<div class="board-head">
 			<div class="">
-				<form name="frmSearch" method="post" action="<c:url value='/admin/mbti/mbti'/>">
+				<form name="frmSearch" method="post" action="<c:url value='/admin/message/message'/>">
 					<div class="input-group mb-3" id="mbti-search-div">
 						<select class="form-select form-select-lg" name="searchCondition" aria-label=".form-select-lg example" id="mbti-search-select">					  	
-						  	<option value="question_type_no" <c:if test="${param.searchCondition=='question_type_no'}"> selected="selected" </c:if> >문제 유형</option>
-						  	<option value="question" <c:if test="${param.searchCondition=='question'}"> selected="selected" </c:if>>질문지</option>
+						  	<option value="no" <c:if test="${param.searchCondition=='no'}"> selected="selected" </c:if>>회원번호</option>
+						  	<option value="userid" <c:if test="${param.searchCondition=='userid'}"> selected="selected" </c:if>>아이디</option>
+						  	<option value="name" <c:if test="${param.searchCondition=='name'}"> selected="selected" </c:if>>회원 이름</option>
+						  	<option value="hp" <c:if test="${param.searchCondition=='hp'}"> selected="selected" </c:if>>전화번호</option>
 						</select>
 					 	<input type="text"  class="form-control" name="searchKeyword" placeholder="검색어를 입력하세요"
 					 		aria-label="Recipient's username" aria-describedby="button-addon2" id="mbti-search-area" value="${param.searchKeyword}">
@@ -65,7 +89,7 @@
 			<div style="margin-left: 15px;margin-top: 20px">
 				<span>받는 회원 : &nbsp;</span><span id="memberNameModal"></span>
 			</div>
-			<form name="messageFrm" method="post" action="<c:url value='/admin/message/message'/>">
+			<form name="messageFrm" method="post" action="<c:url value='/admin/message/messageWrite'/>">
 				<div class="modal-body" style="margin:0 auto">
 					<p>보낼 내용</p>
 					<textarea name="sendItems[0].sendBody" id="sendBody" rows="20" cols="84" style="margin:0 auto"></textarea>

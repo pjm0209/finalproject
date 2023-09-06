@@ -52,14 +52,7 @@ public class MemberController {
 		
 		return "admin/member/memberList";
 	}
-	
-	@RequestMapping("/member")
-	public String member() {
-		logger.info("회원 관리 페이지");
-		
-		return "admin/member/memberList";
-	}
-		
+			
 	@RequestMapping("/memberDelete")
 	public String memberDelete(@ModelAttribute MemberListVO listVo, Model model){
 		logger.info("회원 삭제 처리, 파라미터 listVo={}", listVo);

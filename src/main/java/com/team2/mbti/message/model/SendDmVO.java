@@ -2,10 +2,12 @@ package com.team2.mbti.message.model;
 
 import java.sql.Timestamp;
 
+import com.team2.mbti.common.SearchVO;
+
 import lombok.Data;
 
 @Data
-public class SendDmVO {
+public class SendDmVO extends SearchVO{
 	private int sendDmNo;
 	private int no;
 	private String sendBody;

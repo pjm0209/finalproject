@@ -404,4 +404,11 @@ public class MypageController {
 		return "main/mypage/mypageBasket";
 	}
 	
+	@RequestMapping("/orderList")
+	public String orderList(HttpSession session, Model model) {
+		logger.info("주문 내역 조회 페이지");
+		
+		return "main/mypage/orderList";			
+	}
+	
 }
