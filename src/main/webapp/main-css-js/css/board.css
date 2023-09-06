@@ -20,10 +20,16 @@ a {
 
 section.boardSection {
     margin-top: 30px;
-    padding-top: 500px;
+    padding-top: 300px;
     display: flex;
     justify-content: center;
     background: url(../../images/education/education_main.jpg) no-repeat;
+}
+
+.boardContent > h1 {
+    font-family: cursive;
+    text-align: center;
+    margin-bottom: 60px;
 }
 
 .boardContentR {

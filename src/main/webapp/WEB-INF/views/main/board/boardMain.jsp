@@ -4,7 +4,7 @@
 
 <section class="boardSection">
 	<div class="boardContent">
-		<h2>커뮤니티</h2>
+		<h1>커뮤니티</h1>
 		<div class="boardContentR">
 			<div class="boardContent-head">
 				<div class="head-content">

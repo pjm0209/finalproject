@@ -26,7 +26,7 @@
 
 <section class="boardSection">
 	<div class="boardContent">
-		<h2>커뮤니티</h2>
+		<h1>커뮤니티</h1>
 		<div class="boardContentR">
 			<div class="boardContent-head">
 				<div class="head-content">
@@ -61,12 +61,14 @@
 									<c:if test="${empty param.boardNo }">					
 										<c:forEach var="vo" items="${boardList }">
 											<c:if test="${vo.boardFlag == 'Y' }">
-												<option value="${vo.boardFormNo }" <c:if test="${vo.boardFormNo == param.boardFormNo }"> selected = "selected"</c:if>>${vo.boardFormName }</option>
+												<c:if test="${vo.boardFormNo != 1 and vo.boardFormNo != 2 }">
+													<option value="${vo.boardFormNo }" <c:if test="${vo.boardFormNo == param.boardFormNo }"> selected = "selected"</c:if>>${vo.boardFormName }</option>
+												</c:if>
 											</c:if>
 										</c:forEach>
 									</c:if>
-									<c:if test="${!empty param.boardNo }">
-										<option value="${map['BOARD_FORM_NO'] }">${map['BOARD_FORM_NAME'] }</option>
+									<c:if test="${!empty param.boardNo }">										
+										<option value="${map['BOARD_FORM_NO'] }">${map['BOARD_FORM_NAME'] }</option>								
 									</c:if>
 								</select>
 								<div class="mbtiSelectDiv">
