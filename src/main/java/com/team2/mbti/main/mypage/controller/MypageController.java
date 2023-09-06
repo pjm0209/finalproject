@@ -55,14 +55,14 @@ public class MypageController {
 		int no=(int)session.getAttribute("no");
 		logger.info("마이페이지 - 나의 mbti 결과 페이지, 파리미터 no={}",no);
 		
-		int questionCategory1Val=0;
-		int questionCategory2Val=0;
-		int questionCategory3Val=0;
-		int questionCategory4Val=0;
-		int questionCategory5Val=0;
-		int questionCategory6Val=0;
-		int questionCategory7Val=0;
-		int questionCategory8Val=0;
+		double questionCategory1Val=0.0;
+		double questionCategory2Val=0.0;
+		double questionCategory3Val=0.0;
+		double questionCategory4Val=0.0;
+		double questionCategory5Val=0.0;
+		double questionCategory6Val=0.0;
+		double questionCategory7Val=0.0;
+		double questionCategory8Val=0.0;
 		double iVal=0;
 		double eVal=0;
 		double sVal=0;
@@ -72,19 +72,11 @@ public class MypageController {
 		double pVal=0;
 		double jVal=0;
 		int count=0;
+		List<MbtiResultVO> resultList=mbtiResultService.getResultVal(no);
+		logger.info("mbti 검사 합산 결과, resultList.size()={}",resultList.size());
 		
-		List<MbtiResultVO> list=mbtiResultService.getResultVal(no);
-		logger.info("내 mbti 검사 조회 결과, list.size()={},list={}",list.size(),list);
-		
-		if(list.size()==0) {
-			model.addAttribute("msg", "MBTI 검사를 하셔야 확인이 가능합니다.");
-			model.addAttribute("url", "/main/mbti/mbti");
-			
-			return "common/message";
-		}
-		
-		for(int i=0;i<list.size();i++) {
-			MbtiResultVO mbtiResultVo=list.get(i);
+		for(int i=0;i<resultList.size();i++) {
+			MbtiResultVO mbtiResultVo=resultList.get(i);
 			
 			if(mbtiResultVo.getQuestionCategoryNo()==1) {
 				questionCategory1Val=mbtiResultVo.getMbtiVal();
@@ -145,46 +137,46 @@ public class MypageController {
 		double resultF=0;
 		double resultP=0;
 		double resultJ=0;
-		
+
 		String resultMbti="";
 		if(iVal>eVal) {
 			resultMbti+="I";
-			resultI=(iVal/(iVal+eVal)*100);
-			resultE=100-resultI;
+			resultI=Math.round(iVal/(iVal+eVal)*100*10)/10.0;
+			resultE=Math.round((100-resultI)*10)/10.0;
 		}else {
 			resultMbti+="E";
-			resultE=(eVal/(iVal+eVal)*100);
-			resultI=100-resultE;
+			resultE=Math.round(eVal/(iVal+eVal)*100*10)/10.0;
+			resultI=Math.round((100-resultE)*10)/10.0;
 		}
 		
 		if(sVal>nVal) {
 			resultMbti+="S";
-			resultS=(sVal/(sVal+nVal)*100);
-			resultN=100-resultS;
+			resultS=Math.round(sVal/(sVal+nVal)*100*10)/10.0;
+			resultN=Math.round((100-resultS)*10)/10.0;
 		}else {
 			resultMbti+="N";
-			resultN=(nVal/(sVal+nVal)*100);
-			resultS=100-resultN;
+			resultN=Math.round(nVal/(sVal+nVal)*100*10)/10.0;
+			resultS=Math.round((100-resultN)*10)/10.0;
 		}
 		
 		if(tVal>fVal) {
 			resultMbti+="T";
-			resultT=(int)(tVal/(tVal+fVal)*100);
-			resultF=100-resultT;
+			resultT=Math.round(tVal/(tVal+fVal)*100*10)/10.0;
+			resultF=Math.round((100-resultT)*10)/10.0;
 		}else {
 			resultMbti+="F";
-			resultF=(int)(fVal/(tVal+fVal)*100);
-			resultT=100-resultF;
+			resultF=Math.round(fVal/(tVal+fVal)*100*10)/10.0;
+			resultT=Math.round((100-resultF)*10)/10.0;
 		}
 		
 		if(pVal>jVal) {
 			resultMbti+="P";
-			resultP=(int)(pVal/(pVal+jVal)*100);
-			resultJ=100-resultP;
+			resultP=Math.round(pVal/(pVal+jVal)*100*10)/10.0;
+			resultJ=Math.round((100-resultP)*10)/10.0;
 		}else {
 			resultMbti+="J";
-			resultJ=(int)(jVal/(pVal+jVal)*100);
-			resultP=100-resultJ;
+			resultJ=Math.round(jVal/(pVal+jVal)*100*10)/10.0;
+			resultP=Math.round((100-resultJ)*10)/10.0;
 		}
 		
 		MbtiVO mbtiVo=mbtiSurveyService.selectMbti(resultMbti);
