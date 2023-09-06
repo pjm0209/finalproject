@@ -314,8 +314,8 @@ section#mbtiSurvey{
 	margin: 0 auto;
 	margin-top: 200px;
 	padding-top: 50px;
+	padding-bottom: 700px;
 	width: 1400px;
-	height: 600px;
 	position: relative;
 }
 #mbti-compatibility span{
@@ -337,6 +337,7 @@ section#mbtiSurvey{
 #mbti-compatibility #best{
 	padding-left: 30px;
 	padding-top: 30px;
+	padding-bottom: 30px;
 	width: 500px;
  	float: left;
  	margin-top: 20px;

@@ -15,7 +15,7 @@
 </form>
 <section class="boardSection">
 	<div class="boardContent">
-		<h2>커뮤니티</h2>
+		<h1>커뮤니티</h1>
 		<div class="boardContentR">
 			<input type="hidden" value="${sessionScope.userid }" name="user">
 			<form name="searchForm" method="POST" action="<c:url value='/main/board/boardList'/>">

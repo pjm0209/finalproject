@@ -297,7 +297,7 @@ function validate_hp(ph) {
 		            $('#memberEmail3').css('visibility', 'hidden');
 		        }
 		    });
-		});	
+		});		
 	});	
 </script>
 
@@ -331,7 +331,7 @@ function validate_hp(ph) {
 		
 		<label>이메일</label>
 		<div class="div-register">
-			<input type="text" class="email" id="memberEmail1" name="email" placeholder="이메일 주소">&nbsp;@&nbsp;
+			<input type="text" class="email" id="memberEmail1" name="email1" placeholder="이메일 주소">&nbsp;@&nbsp;
 				<select name="email2" id="memberEmail2">
 					<option value="naver.com">naver.com</option>
 					<option value="nate.com">nate.com</option>
@@ -340,7 +340,7 @@ function validate_hp(ph) {
 					<option value="google.com">google.com</option>
 					<option value="etc">직접입력</option>
 				</select>&nbsp;
-			<input type="text" id="memberEmail3" style="visibility:hidden;">
+			<input type="text" id="memberEmail3" name="email3" style="visibility:hidden;">
 			<div class="error" id="emailError"></div>
 		</div>
 		

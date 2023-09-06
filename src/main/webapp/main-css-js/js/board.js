@@ -14,7 +14,7 @@ $(function(){
 	
 	/*게시판화면 자동스크롤*/
 	var offset = $('.boardContent').offset();  
-	window.scrollTo(0, 300);
+	window.scrollTo(0, 170);
 	
 	/*게시판 글쓰기 체크박스*/
 	$('.secreate').click(function(){
