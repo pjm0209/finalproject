@@ -13,21 +13,21 @@
 	margin-bottom: 20px;
 }
 
-h1{
-	margin-top: 30px;
-	margin-bottom: 30px;
+.content h1{
+	margin-top: 180px;
+	margin-bottom: 10px;
 	text-align: center;
 	font-size: 30px;
 	font-weight: bold;
 }
 
-p{
+.content p{
 	margin-bottom: 30px;
 	text-align: center;
 	font-size: 15px;
 }
 
-input{
+.content input{
 	font-size: 15px;
     border: 1px solid black;
     border-radius: 3px;
@@ -37,12 +37,12 @@ input{
     width: 280px;
 }
 
-div {
+.content div {
     padding-top: 3px;
     padding-bottom: 8px;
 }
 
-label{
+.content label{
 	font-weight: bold;
 	margin-left: 750px;
 }
@@ -50,16 +50,17 @@ label{
 .btnSearch {
     text-align: center;	
     justify-content: space-between; 
+    margin-bottom: 100px;
 }
 
-button[type="submit"]{
+.btnSearch button[type="submit"]{
   	width: 180px;
  	height: 50px;
 	font-weight: bold;	
 	color: white;
 }
 
-button[type="button"]{
+.btnSearch button[type="button"]{
 	width: 180px;
  	height: 50px;
 	font-weight: bold;	
@@ -120,13 +121,17 @@ form {
 			var email=$('#email').val();
 			
         	if(userid.length < 1){
-				alert("아이디를 입력해주세요.");
+				//alert("아이디를 입력해주세요.");
+				$('#alertModalBody').html('아이디를 입력해주세요.');
+				$('#alertModalBtn').trigger('click');
 				$("#id").focus;
 				return false;
 	      	}  
         	
         	if(email.length < 1){
-				alert("이메일을 입력해주세요.");
+				//alert("이메일을 입력해주세요.");
+				$('#alertModalBody').html('이메일을 입력해주세요.');
+				$('#alertModalBtn').trigger('click');				
 				$("#email").focus;
 				return false;
 	      	} 
@@ -140,8 +145,21 @@ form {
         		},
         		dateType:'json',
         		success : function(result){
-       				alert("임시 비밀번호 발송 완료!! 이메일을 확인해주세요");	
-       				location.href="<c:url value='/main/member/memberLogin'/>";       				
+        			if(result==1){
+      					//alert("임시 비밀번호 발송 완료!! 이메일을 확인해주세요");
+						$('#alertModalBody').html('임시 비밀번호 발송 완료!! 이메일을 확인해주세요');
+						$('#alertModal').modal('show');	 
+						
+						$('#alertModal').on("hidden.bs.modal",function(){
+	      					location.href="<c:url value='/main/member/memberLogin'/>";       				
+							
+						});
+        			}else if(result==0){
+      					//alert("임시 비밀번호 발송 실패!!");
+						$('#alertModalBody').html('임시 비밀번호 발송 실패!! 아이디와 이메일을 다시확인해주세요');
+						$('#alertModalBtn').trigger('click');
+        			}
+        			
         		},
 	            error:function(xhr,status,error){
   	                alert(status+" : "+error);
@@ -169,4 +187,42 @@ form {
 				<button class="btn btn-info" type="button" onclick="history.back();">취소</button>					
 			</div>
 </div>				
+  <button type="button" style="display: none" id="alertModalBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#alertModal"></button>
+    
+    <div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h1 class="modal-title fs-5" id="alertModalLabel">알림</h1>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	        <p id="alertModalBody"></p>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn bg-orange-primary" data-bs-dismiss="modal">확인</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
+    <button type="button" style="display: none" id="confirmModalBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirmModal"></button>
+    
+    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h1 class="modal-title fs-5" id="confirmModalLabel">알림</h1>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	        <p id="confirmModalBody"></p>
+	      </div>
+	      <div class="modal-footer">
+	      	<button class="btn btn-secondary" type="button" data-bs-dismiss="modal">취소</button>
+	        <button type="button" class="btn bg-orange-primary" id="confirmOk" data-bs-dismiss="modal">확인</button>
+	      </div>
+	    </div>
+	  </div>
+	</div> 
 <%@ include file="../inc/bottom.jsp" %>   
