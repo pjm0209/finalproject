@@ -21,4 +21,5 @@ public interface MainBasketDAO {
 	int deleteBasket(int bookNo);
 	int deleteCartByNo(int no);
 	MainBasketVO selectCartByCartNo(int basketNo);
+	
 }//

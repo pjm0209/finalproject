@@ -41,11 +41,14 @@ $(function(){
 	}
 	
 	$(".booklist_area ul:eq(0) li:eq(0)").find('p span').text(notDeliTotal);
-	var realDeli = $("#deli").text();
-	$(".booklist_area ul:eq(1) li p span").text(notDeliTotal + realDeli);
+	var realDeli = parseInt($("#deli").text());
+	$(".booklist_area ul:eq(1) li p span").text(parseInt(notDeliTotal) + realDeli);
+	
 	
 	$(".selfClose").click(function(){
 		$("#exampleModal").modal('hide');
+		$(this).removeAttr("data-bs-toggle");
+		
 	});
 	
 	$("#recipient").change(function(){
@@ -66,7 +69,7 @@ $(function(){
     
 });
 
-function sample4_execDaumPostcode() {
+function sample4_execDaumPostcode2() {
     new daum.Postcode({
         oncomplete: function(data) {
 
@@ -93,8 +96,9 @@ function sample4_execDaumPostcode() {
 } 
 
 var id=0;
+var realTotal = $(".booklist_area ul:eq(1) li p span").text();
 
-function requestPay(t, t2) {
+function requestPay_book(t, t2) {
     // IMP.request_pay(param, callback) 결제창 호출
     var login= "${sessionScope.userid}";
     if(login!=null && login!=''){
@@ -103,15 +107,16 @@ function requestPay(t, t2) {
 	    IMP.request_pay({ // param
 	        pg: 'kakaopay',
 	        pay_method: "card",
-	        merchant_uid: id, //가맹점 주문번호 (아임포트를 사용하는 가맹점에서 중복되지 않은 임의의 문자열을 입력)
-	        name: t2+" 외 "+t+"개", //결제창에 노출될 상품명
-	        amount: "50000", //금액
-	        buyer_email : "email@naver.com", 
-	        buyer_name : "이름",
+	        merchant_uid: 'merchant_book_buyer'+id, //가맹점 주문번호 (아임포트를 사용하는 가맹점에서 중복되지 않은 임의의 문자열을 입력)
+	        name: "책 결제 테스트",
+	        amount: 10000, //금액
+	        buyer_name : "${sessionScope.name}",
 	        buyer_tel : "전화번호",
 	    }, function (rsp) { // callback
 	    	if(rsp.success) {
-	    		location.href="<c:url value='/main/book/basekt/bookOrderComplete'/>";
+	    		$('#alertModalBody').html("결제 성공");
+				$('#alertModalBtn').trigger('click');
+	    		$('form[name=frmOrderInput]').submit();
 	    	}else{
 	    		$('#alertModalBody').html("결제 실패");
 				$('#alertModalBtn').trigger('click');
@@ -155,10 +160,11 @@ function requestPay(t, t2) {
 			    <div class="modal-dialog shadow-sm bg-body rounded" style="margin: 50px 50px 50px 50px;width: 500px">
 				    <div class="modal-content">
 				      <div class="modal-header">
-				        <h1 class="modal-title fs-5" id="exampleModalLabel">입력된 주소</h1>
+				        <h1 class="modal-title fs-5" id="exampleModalLabel">수령인 주소</h1>
 				      </div>
 				      <div class="modal-body">
-				        <form>
+				      
+				        <form name="frmOrderInput" method="post" action="<c:url value='/main/book/basket/bookOrderComplete'/>">
 				          <div class="mb-3 div-register">
 				            <label for="recipient2" class="col-form-label">수령인 이름 :</label>
 				            <input type="text" class="form-control" id="recipient2" name="recipient" placeholder="성함 입력">&nbsp;
@@ -166,19 +172,18 @@ function requestPay(t, t2) {
 				            <input type="text" class="form-control" id="reHp2" name="reHp" placeholder="010-0000-0000">&nbsp;	
 				          </div>
 				          <div class="mb-3 div-register">
-				            <label for="reZipcode" class="col-form-label">우편번호 :</label>
-				            <input type="text" class="postalCode form-control" id="reZipcode2" name="reZipcode" placeholder="우편번호를 검색하세요">&nbsp;	
-							<input type="Button" class="form-control btn-primary" value="우편번호 찾기" id="btnZipcode" title="새창열림" onclick="sample4_execDaumPostcode()">	
-				          </div>
-				          <div class="mb-3 div-register">
-				            <label for="reAddress" class="col-form-label">주소 :</label>
-				            <input type="text" class="address form-control" id="reAddress2" name="reAddress" placeholder="주소를 입력하세요">
-				          </div>
-				          <div class="mb-3 div-register">
-				            <label for="reAddressDetail2" class="col-form-label">상세주소 :</label>
+				            <label for="reZipcode" class="col-form-label">수령인 우편번호 :</label>
+				            <input type="text" class="postalCode form-control" id="reZipcode2" name="reZipcode" placeholder="우편번호를 검색하세요" readonly="readonly">&nbsp;	
+				            <label for="reAddress" class="col-form-label">수령인 주소 :</label>
+				            <input type="text" class="address form-control" id="reAddress2" name="reAddress" placeholder="주소를 입력하세요" readonly="readonly">
+				            <label for="reAddressDetail2" class="col-form-label">수령인 상세주소 :</label>
 				            <input type="text" class="addressDetail form-control" id="reAddressDetail2" name="reAddressDetail" placeholder="상세주소를 입력하세요">
+				            <input type="hidden" name="sumPrice">
+				            <input type="hidden" name="paymentMehod">
+				            <input type="hidden" name="salesCategoryNo" value="1">
 				          </div>
 				        </form>
+				        
 				      </div>
 				      <div class="modal-footer">
 				      </div>
@@ -260,13 +265,13 @@ function requestPay(t, t2) {
 				<ul>
 					<li class="flex">
 						<p>총 금액</p>
-						<p><span>0</span>원</p>
+						<p><span></span>원</p>
 					</li>
 					
 				</ul>
 				<c:set var="t" value="${fn:length(mapList)}"/>
 				<c:set var="t2" value="${mapList[0].BOOK_TITLE}"/>
-				<button type="submit" onclick="requestPay(${t}, ${t2})">결제하기</button>
+				<button type="button" onclick="requestPay_book('${t}','${t2}')" >결제하기</button>
 		</div>
 		
 		
@@ -288,7 +293,7 @@ function requestPay(t, t2) {
 		          <div class="mb-3 div-register">
 		            <label for="reZipcode" class="col-form-label">우편번호 :</label>
 		            <input type="text" class="postalCode form-control" id="reZipcode"  placeholder="우편번호를 검색하세요">&nbsp;	
-					<input type="Button" class="form-control btn-primary" value="우편번호 찾기" id="btnZipcode" title="새창열림" onclick="sample4_execDaumPostcode()">	
+					<input type="Button" class="form-control btn-primary" value="우편번호 찾기" id="btnZipcode" title="새창열림" onclick="sample4_execDaumPostcode2()">	
 		          </div>
 		          <div class="mb-3 div-register">
 		            <label for="reAddress" class="col-form-label">주소 :</label>
