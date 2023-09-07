@@ -400,6 +400,8 @@ public class MypageController {
 		List<Map<String, Object>> orderList = orderService.selectOrderList((int)session.getAttribute("no"));
 		logger.info("주문내역조회 결과 orderList: {}", orderList);
 		
+		model.addAttribute("orderList", orderList);
+		
 		return "main/mypage/mypageOrderList";
 	}
 	
