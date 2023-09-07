@@ -229,6 +229,11 @@ public class EducationServiceImpl implements EducationService{
 		return educationDao.applyPayFinish(eduAppNo);
 	}
 
+	@Override
+	public int insertSalesByEdu(EducationVO vo) {
+		return educationDao.insertSalesByEdu(vo);
+	}
+
 
 
 }
