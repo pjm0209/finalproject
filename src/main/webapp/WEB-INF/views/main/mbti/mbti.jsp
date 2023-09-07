@@ -16,12 +16,10 @@ function requestPay() {
 	        pay_method: "card",
 	        merchant_uid: id, //가맹점 주문번호 (아임포트를 사용하는 가맹점에서 중복되지 않은 임의의 문자열을 입력)
 	        name: "MBTI 정식검사", //결제창에 노출될 상품명
-	        amount: "50000", //금액
-	        buyer_email : "email@naver.com", 
-	        buyer_name : "이름",
-	        buyer_tel : "전화번호",
+	        amount: "20000", //금액
 	    }, function (rsp) { // callback
 	    	if(rsp.success) {
+	    		
 	    		location.href="<c:url value='/main/mbti/question?questionTypeNo=2'/>";
 	    	}else{
 	    		$('#alertModalBody').html("결제 실패");

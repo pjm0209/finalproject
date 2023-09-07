@@ -23,7 +23,7 @@ public class MessageServiceImpl implements MessageService {
 
 	//관리자가 쪽지 보내기
 	@Override
-	public int insertSendDmToAdmin(SendDmListVO sendDmListVo, int adminNo) {
+	public int insertSendDmToAdmin(SendDmListVO sendDmListVo, int adminNo,String adminMessageFlag) {
 		List<SendDmVO> list=sendDmListVo.getSendItems();
 		int cnt=0;
 		int idx=0;
@@ -33,6 +33,7 @@ public class MessageServiceImpl implements MessageService {
 				vo.setAdminNo(adminNo);
 				String sendBody=list.get(0).getSendBody();
 				
+				vo.setReceiveManagerFlag(adminMessageFlag);
 				if(i>0) {
 					vo.setSendBody(sendBody);
 				}
@@ -57,6 +58,7 @@ public class MessageServiceImpl implements MessageService {
 					vo.setAdminNo(adminNo);
 					vo.setReceiveNo(memberVo.getNo());
 					vo.setSendBody(sendDmListVo.getSendItems().get(0).getSendBody());
+					vo.setReceiveManagerFlag(adminMessageFlag);
 					
 					cnt=messageDao.insertSendDmToAdmin(vo);
 					
