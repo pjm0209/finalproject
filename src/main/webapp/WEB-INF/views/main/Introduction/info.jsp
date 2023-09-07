@@ -1,296 +1,115 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
-<%@ include file="../inc/top.jsp" %>    
-
+<%@ include file="../inc/top.jsp" %>
 <style>
-.PageContent > img{
-	margin-top: 100px;
-	width: 100%;
-	height: 200px;
-
+.info{
+	margin-top: 75px;
+	margin-bottom: 900px;
 }
 
-.sub_visual_wrap{
-	position: relative;
-	width: 100% !important;
-	height: 180px !important;
-}
-
-.path_wrap{
-	position : absolute;
-	right: 50ox;
-	top: 150px;
-	z-index: 10
-}
-
-ul, li, dl, menu, ol{
-	list-style: none;
-}
-
-ul, li, dd{
-	margin:0;
-	padding:0;
-}
-
-ul{
-	display:block;
-	margin-block-start: 1em;
-	margin-block-end: 1em;
-	margin-inline-start: 0px;
-	margin-inline-end: 0px;
-	padding-inline-start: 40px;
-}
-
-.tabType1{
-	height: 50px;
-	border-bottom: 1px solid #eb5d1e;
-
-}
-
-.con_1000{	
-	width: 1200px;
-	margin: 0 auto;
-
-}
-
-div{
-	padding: 0;
-}
-
-div{
-	display: block;
-}
-
-.tabType1 li.on{
-	height: 50px;
-}
-
-.tabType1 li:first-child{
-	background: none;
-}
-
-.tabType1 li{
-	float: left;
-	width: 25%;
-	text-align: center;
-	font-size: 14px;
-	
-}
-
-li{
-	display: list-item;
-} 
-
-.tabType1 li.on a{
-	color: #eb5d1e;
-	font-weight: bold;
-	font-size: 20px;
-	background: url(https://img.assesta.com/assesta/common/tab_arrow.png)no-repeat center 35px;
-}
-
-.tabType1 li a{
-	display: block;
-	height: 50px;
-	line-height: 50px;
-}
-
-a{
-	text-decoration: none;
-	border-left: 1px solid #eb5d1e;
-	border-right: 1px solid #eb5d1e;
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    background: #eb5d1e;	
 }
 
 .sub_title{
-	padding-top: 30px;
-	text-align: center;
-}
-
-.sub_tit > strong{
-	color: #eb5d1e;;
-	font-size: 50px;
-	font-weight: bold;
-	line-height: 1.3;
-}
-
-.sub_tit{
-	text-align: center;
 	margin-top: 50px;
-	margin-bottom: 60px;
-}
-
-.whoweare > dl > dt img{
-	vertical-align: top;
-	margin-top: 15px;
-}
-
-img{
-	max-width:100%;
-	font-size: 0;
-	width: 100px;
-	height: 100px;
-}
-
-img{
-	overflow-clip-margin: content-box;
-	overflow: clip;
-}
-
-.whoweare > dl > dt{
-	font-size: 18px;
-	font-weight: bold;
-	width: 20%;
-	float: left;
-}
-
-dl{
-	display:block;
-	margin-block-start: 1em;
-	margin-block-end: 1em;
-	margin-inline-start: 0px;
-	margin-inline-end: 0px;
-}
-
-.whoweare > dl{
-	float: none;
-	clear: both;
-}
-
-dd{
-	display: block;
-	margin-inline-start: 40px;
-}
-
-.whoweare > dl > dd{
-	float: right;
-	width: 75%;
-	font-size: 20px;
-	line-height: 1.6;	
-	border-left: 1px solid #eb5d1e;
-	padding-left: 20px;
 	margin-bottom: 50px;
+	text-align: center;
+	color:#eb5d1e;
 }
 
-dt{
-	display:block;
-}
-
-.whoweare{
-	width: auto;
-	position: relative;
+h2{
+	font-size: 50px;
 }
 
 .real_con{
-	margin-left: 50px;
+	margin-top: 8px;
+	margin-left: 100px;
 }
 
-.whoweare > dl > dt .tit{
-	display: inline-block;
-	padding: 10px 0 0 20px;
-	width: 120px;
-	line-height: 1.2;
+.whoweare > dl > dt {
+	float: left;
+	margin-bottom: 40px;
 }
 
+.whoweare > dl > dd{
+	line-height: 1.6;
+	width: 75%;	
+	font-size: 20px;
+	font-weight: bold;
+	float:right;
+	margin-bottom: 50px;
+	margin-right: 80px;
+	border-left: 3px solid #ccc;
+	padding-left: 30px;
+}
 
+.tit{
+	margin-left: 20px;
+	font-size: 20px;
+	color: #eb5d1e;
+}
 
+.dt2{
+	margin-top: 30px;	
+}
+
+.dt3{
+	margin-top:50px;
+}
+
+.dt4{
+	margin-top: 150px;
+}
+
+.dt5{
+	margin-top: 30px;
+}
 </style>
 
-
-<script type="text/javascript">
-
-</script>
-
-
-<!--  컨텐츠 영역 -->
-<div class="PageContent">
-
-	<!--  서브 비주얼 영역 -->
-	<div class="sub_visual_wrap" id="sub_visual">
-	
-	<ul class="path_wrap">
-		<li><i class="fa fa-home" aria-hidden="true"></i></li>
-		<li> > <span>회사소개</span> > <span>어세스타</span></li>
-	</ul>
-	
-	<ul class="sub_visual">
-		<li style="background:url('https://img.assesta.com/assesta/common/sub_visual01.jpg')no-repeat center center;">
-			<div class="txt">
-				<div>
-					<em>회사소개</em>
-				</div>
-			</div>
-		</li>
-	</ul>
-	</div>
-	
-	
-	<!-- 탭 메뉴 -->
-	<div class="tabType1 con_1200">
-		<ul>
-			<li class="on"><a href="<c:url value='/main/Introduction/Info'/>">소개</a></li>
-			<li><a href="<c:url value='/main/Introduction/Vision'/>">비젼</a></li>
-			<li><a href="<c:url value='/main/Introduction/Project'/>">프로젝트</a></li>
-			<li><a href="<c:url value='/main/Introduction/Company'/>">위치</a></li>				
-		</ul>
-	</div>
-	<!-- //탭 메뉴 -->
-	
-	<!-- 내용시작 -->
-	<div class="sub_section">
-		<div class="sub_section_inner">
-		
-		<!-- 서브 타이틀 -->
-		<div class="sub_tit">
-			<strong>소개</strong>
+<div class="info">
+    <header>
+        <h1>ESSENTIAL MBTI</h1>
+    </header>
+    
+    <div class="sub_title">
+    	<h2>Who we are</h2>  
+    </div>
+  
+    <div class="real_con">
+		<div class="whoweare">
+			<dl>
+				<dt class="dt1"><img src="https://img.assesta.com/assesta/contents/assesta_icon01.png" alt=""> <span class="tit"><span style="white-space: nowrap">ESSENTIAL MBTI</span> </span></dt>
+				<dd>올바른 심리평가, 교육, 활용을 통해 개인, 조직, 사회의 성장을 돕는 ESSENTIAL MBTI입니다. <br>
+					ESSENTIAL MBTI는 인간의 생각과 마음을 연구하는 심리평가 및 서비스 기관입니다. 심리평가를 통해 사람의 좋고 나쁨을 가리기보다, 개인이 타인과 얼마나 어떻게 다른가를 연구합니다. </dd>
+			</dl>
+			<dl>
+				<dt class="dt2"><img src="https://img.assesta.com/assesta/contents/assesta_icon02.png" alt=""> <span class="tit"><span style="white-space: nowrap">새로운 이름</span></span></dt>
+				<dd>심리평가는 결과 해석을 통해 ‘인간이해’라는 가치를 전달하므로 우리는 반드시 전문가 교육을 받은 사람만이 심리평가를 할 수 있도록 제한하고 있습니다. ASSESsment(검증된 심리평가), Training(전문가 자격교육), Application(올바른 활용)을 조합하여 만든 ESSENTIAL MBTI는 2008년 우리의 새로운 이름이 되었습니다.</dd>
+			</dl>
+			<dl>
+				<dt class="dt3"><img src="https://img.assesta.com/assesta/contents/assesta_icon03.png" alt=""> <span class="tit"><span style="white-space: nowrap">다양한</span> <span style="white-space: nowrap">심리서비스</span> </span></dt>
+				<dd>ESSENTIAL MBTI는 자체 연구 인력을 통해 심리평가 도구를 개발하거나 해외의 검증된 도구를 국내화하고, 올바르게 사용하는 전문가를 양성하는 교육과 현장에 적용하는 방법을 제시하는 적용프로그램을 체계화하여 운영하고 있습니다.<br>
+					심리평가는 ‘인간이해’에 가치를 두고 있으므로 그 대상은 ‘누구나’입니다.<br>
+					생각하고 마음 쓰는 주체가 다를 뿐, 다양한 고객이 ESSENTIAL MBTI의 심리평가 도구 및 서비스를 이용합니다.<br>
+					 우리는 심리평가 도구를 활용하여 초중고 학습, 인성, 진로 코칭부터 개인 또는 조직 내 상담, 기업·기관 역량평가, 역량개발 부문 등에 광범하게 심리 서비스를 제공하고 있습니다.<br>
+					 또한 최근에는 NCS(국가직무능력표준)의 공공기관 전면 도입으로 심리평가의 한 영역이기도 한 ‘역량평가’에 관심이 높아져 10년 이상 축적된 ESSENTIAL MBTI의 역량평가 노하우를 공유하기 위해 컨설팅도 함께 하고 있습니다.</dd>
+			</dl>
+			<dl>
+				<dt class="dt4"><img src="https://img.assesta.com/assesta/contents/assesta_icon04.png" alt=""> <span class="tit"><span style="white-space: nowrap">글로벌</span> <span style="white-space: nowrap">파트너</span> </span></dt>
+				<dd>ESSENTIAL MBTI는 해외 우수 심리평가기관과 파트너십을 체결하여 세계적으로 검증된 심리평가 도구도 국내에 보급합니다. 미국의 The Myers-Briggs Company와 영국 PSI社를 파트너로 선정하여 각각 세계적으로 가장 많이 사용되는 검사 중 하나인 MBTI의 보급과 활용에 기여하였고, 가장 많은 평가센터 시나리오를 보유하고 있는 평가센터의 Global Standard를 제공하고 있습니다.</dd>
+			</dl>
+			<dl>
+				<dt class="dt5"><img src="https://img.assesta.com/assesta/contents/assesta_icon05.png" alt=""> <span class="tit"><span style="white-space: nowrap">검증된</span> <span style="white-space: nowrap">심리평가</span> </span></dt>
+				<dd>더욱 타당하고 신뢰로운 심리평가 도구를 개발·보급하고, 자격을 갖춘 전문가만이 사용하도록 시스템을 강화하여 심리평가 도구가 다양한 분야에서 유익하게 활용될 수 있도록 노력하겠습니다. </dd>
+			</dl>
 		</div>
-		
-			<!-- 어세스타 -->
-			<div class="real_con">
-				<div class="whoweare">
-					<dl>
-						<dt><img src="../../images/돋보기.png" alt=""><span class="tit">어세스타</span></dt>
-						<dd><strong>올바른 심리평가, 교육, 활용을 통해 개인, 조직, 사회의 성장을 돕는 어세스타입니다.<br></strong>
-						어세스타는 인간의 생각과 마음을 연구하는 심리평가 및 서비스 기관입니다. 심리평가를 통해 사람의 좋고 나쁨을 가리기보다, 개인이 타인과 얼마나 어떻게 다른가를 연구합니다.
-					</dl>
-					<dl>
-						<dt><img src="../../images/돋보기.png" alt=""><span class="tit">다양한 심리서비스</span><br>
-						<dd>올바른 심리평가, 교육, 활용을 통해 개인, 조직, 사회의 성장을 돕는 어세스타입니다.
-							어세스타는 인간의 생각과 마음을 연구하는 심리평가 및 서비스 기관입니다. 심리평가를 통해 사람의 좋고 나쁨을 가리기보다, 개인이 타인과 얼마나 어떻게 다른가를 연구합니다.</dd>
-					</dl>	
-					<dl>
-						<dt><img src="../../images/mingi.jpg" alt=""><span class="tit">글로벌 파트너</span></dt>
-						<dd>더욱 타당하고 신뢰로운 심리평가 도구를 개발.보급하고, 자격을 갖춘 전문가만이 사용하도록 시스템을 강화하여 심리평가 도구가 다양한 분야에서 유익하게 활용
-							에서 유익학세 활용될 수 있도록 노력하겠습니다.</dd>		
-					</dl>															
-				</div>
-			</div>
-			</div><!-- //inner 끝 -->
-		</div><!-- //내용끝 -->
-	</div>	
-	
-	<!-- 푸터 -->
-	<div class="footer">
-	
-	<p class="top"><a href="#"><img src="https://img.assesta.com/assesta/common/icon_top.png" alt="위로"/></a></p>
-	<div class="foot_inner">
-	<!-- SNS버튼 -->
-	<div class="snsBox">
-		<ul>
-			<li><a href="https:www.youtube.com/assestashare" target="_blank"><img src="https:///img.assesta.com/assesta/common/btn_youtube.png" alt="유투브"></a></li>
-			<li><a href="https:www.istagram.com/assesta_official" target="_blank"><img src="https:///img.assesta.com/assesta/common/btn_ins.png" alt="인스타그램"></a></li>
-			<li><a href="https:www.istagram.com/assesta_official" target="_blank"><img src="https:///img.assesta.com/assesta/common/btn_facebook.png" alt="페이스북"></a></li>
-			<li><a href="https:www.youtube.com/assestashare" target="_blank"><img src="https:///img.assesta.com/assesta/common/btn_youtube.png" alt="카카오톡"></a></li>			
-		</ul>
-	</div>
-	<!-- //SNS버튼 -->
-	<div class="siste_info">
-	<div class="footer_logo"><img src="https://img.assesta.com/assesta/common/footer_logo.png" alt="어세스타"/></div>
-		<address>서울시 영등포구 국회대로 68길 11, 삼보호청빌딩 5,6층</address>
-		<p>TEL 02)787-1400(평일 9am-6pm) FAX 02)787-1408<br />
-		
-	
-	</div>
-	
-	
-	</div>
-	</div>
+	</div> 
+</div>
+
+
+<%@ include file="../inc/bottom.jsp" %>
