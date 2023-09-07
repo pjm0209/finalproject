@@ -962,6 +962,9 @@ position:relative;
 .order_step a:hover{color:#222; text-decoration: none;}
 
 /*bookordercomplete.jsp*/
+strong{
+	font-size: 1.5em;
+}
 #order_complete {width:1400px; margin:0 auto;}
 #order_complete h2{padding:30px 0;}
 #order_complete>ul {border:1px #ddd solid; border-radius: 10px; padding:30px; margin-bottom:30px;}
