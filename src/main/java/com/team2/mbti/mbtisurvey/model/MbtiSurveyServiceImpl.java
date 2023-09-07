@@ -120,4 +120,9 @@ public class MbtiSurveyServiceImpl implements MbtiSurveyService{
 		}
 		return cnt;
 	}
+
+	@Override
+	public int insertSalesByMbti() {
+		return mbtiSurveyDao.insertSalesByMbti();
+	}
 }

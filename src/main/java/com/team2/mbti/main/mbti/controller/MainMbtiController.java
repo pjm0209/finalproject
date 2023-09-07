@@ -45,6 +45,11 @@ public class MainMbtiController {
 	public String question(@RequestParam(defaultValue = "0") int questionTypeNo,Model model) {
 		logger.info("mbti 검사 페이지, 파라미터 questionTypeNo={}",questionTypeNo);
 		
+		if(questionTypeNo==2) {
+			int cnt=mbtiSurveyService.insertSalesByMbti();
+			logger.info("MBTI 정식검사 결제 결과 cnt={}",cnt);
+		}
+		
 		List<MbtiSurveyVO> list=mbtiSurveyService.selectByQuestionTypeNoMbtiSurvey(questionTypeNo);
 		logger.info("mbti 질문지 검색 결과 list.size()={}",list.size());
 		int num=(int)Math.ceil(list.size()/10);

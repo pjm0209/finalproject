@@ -28,4 +28,7 @@ public interface MbtiSurveyDAO {
 	
 	List<Map<String, Object>>selectMbtiStatistics();
 	int deleteMbtiResult(MbtiResultVO mbtiResultVo);
+	
+	//정식검사시 매출테이블 인서트
+	int insertSalesByMbti();
 }

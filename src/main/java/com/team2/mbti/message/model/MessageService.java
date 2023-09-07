@@ -7,7 +7,7 @@ import com.team2.mbti.common.SearchVO;
 import com.team2.mbti.member.model.MemberVO;
 
 public interface MessageService {
-	int insertSendDmToAdmin(SendDmListVO sendDmListVo, int adminNo);
+	int insertSendDmToAdmin(SendDmListVO sendDmListVo, int adminNo,String adminMessageFlag);
 	int insertSendDmToAdmin(SendDmVO sendDmVo);
 	int insertSendDmToMember(SendDmListVO sendDmListVo, int no);
 	List<MemberVO> selectAllMemberbyDm();
