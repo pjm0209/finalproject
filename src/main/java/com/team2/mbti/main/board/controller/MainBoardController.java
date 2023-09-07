@@ -239,6 +239,11 @@ public class MainBoardController {
 	
 	@PostMapping("/boardEdit")
 	public String boardEdit(@ModelAttribute BoardVO vo, HttpServletRequest request) {
+		int boardFormNo=vo.getBoardFormNo();
+		if(boardFormNo!=3) {
+			vo.setBoardSecreate("N");
+		}
+		
 		logger.info("게시글 수정처리 파라미터 vo: {}", vo);
 		
 		List<Map<String, Object>> fileList = new ArrayList<>();
@@ -281,6 +286,11 @@ public class MainBoardController {
 	
 	@PostMapping("/writeReply")
 	public String boardWriteReply_post(@ModelAttribute BoardVO vo, HttpServletRequest request) {
+		int boardFormNo=vo.getBoardFormNo();
+		if(boardFormNo!=3) {
+			vo.setBoardSecreate("N");
+		}
+		
 		logger.info("게시글 답변 처리 파라미터 vo: {}", vo);
 		
 		List<Map<String, Object>> fileList = new ArrayList<>();
