@@ -10,9 +10,9 @@
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script type="text/javascript">
 $(function(){
-	$('.order_step .step3 .pay_box a').click(function(){
+	$('.order_step .step3 .pay_box button').click(function(){
 
-		$('.order_step .step3 .pay_box a').removeClass('on');
+		$('.order_step .step3 .pay_box button').removeClass('on');
 		$(this).addClass('on');
 	})
 	
@@ -99,7 +99,7 @@ function sample4_execDaumPostcode_book() {
     }).open();
 } 
 
-var id=0;
+var id=Math.random();
 var realTotal = $(".booklist_area ul:eq(1) li p span").text();
 
 function requestPay_book(t, t2) {
@@ -111,7 +111,7 @@ function requestPay_book(t, t2) {
 	    IMP.request_pay({ // param
 	        pg: 'kakaopay',
 	        pay_method: "card",
-	        merchant_uid: 'essential mbti'+(id++), //가맹점 주문번호 (아임포트를 사용하는 가맹점에서 중복되지 않은 임의의 문자열을 입력)
+	        merchant_uid: 'essential mbti'+id, //가맹점 주문번호 (아임포트를 사용하는 가맹점에서 중복되지 않은 임의의 문자열을 입력)
 	        name: "책 결제 테스트",
 	        amount: 10000, //금액
 	        buyer_name : "${sessionScope.name}",
@@ -124,11 +124,9 @@ function requestPay_book(t, t2) {
 	    	}else{
 	    		$('#alertModalBody').html("결제 실패");
 				$('#alertModalBtn').trigger('click');
-				id=id+10;
 	    	}
 		});
     }else{
-    	id=id+1;
 		$('#alertModalBody').html("먼저 로그인 하세요");
 		$('#alertModalBtn').trigger('click');
 		$('#btnClose').click(function(){
@@ -218,6 +216,7 @@ function requestPay_book(t, t2) {
 						<input type="hidden" name="mainBookItems[${i}].ordersQty" value="${map['BASKET_QTY']}">
 						<input type="hidden" name="mainBookItems[${i}].bookPrice" value="${map['BOOK_PRICE']}">
 						<a href="javascript:void(0);"><img width="100px" alt="${map['BOOK_IMG_ORIGINALNAME']}" src="/mbti/images/bookProduct/upload_img/${map['BOOK_IMG_NAME']}" ></a>
+						<input type="hidden" name="mainBookItems[${i}].eachBookSum" value="${map['BOOK_PRICE'] * map['BASKET_QTY']}">
 						<p class="title">${map['BOOK_TITLE']}</p>
 						<p class="book_count"><span>${map['BASKET_QTY']}</span>개</p>
 						<p><span>${map['BOOK_PRICE']}</span>원</p>

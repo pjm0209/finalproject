@@ -25,6 +25,7 @@ public class MainBookVO extends SearchVO {
 	private int ordersQty;
 	private int ordersNo;
 	private int salesNo;
+	private int eachBookSum;
 
 	@Override
 	public String toString() {
