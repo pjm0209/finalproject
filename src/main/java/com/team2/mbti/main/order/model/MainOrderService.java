@@ -5,4 +5,6 @@ import java.util.Map;
 
 public interface MainOrderService {
 	List<Map<String, Object>> selectOrderList(int no);
+	int findCurrentOrdersNo(int no);
+	List<Map<String, Object>> selectMyCurrentOrder(int ordersNo);
 }
