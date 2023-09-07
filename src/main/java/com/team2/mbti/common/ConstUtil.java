@@ -28,5 +28,5 @@ public interface ConstUtil {
 	
 	//장바구니, 주문 관련 상수
 	int DELIVERY = 3000;
-	int TOTAL_PRICE = 0;
+	int TOTAL_PRICE = 30000;
 }

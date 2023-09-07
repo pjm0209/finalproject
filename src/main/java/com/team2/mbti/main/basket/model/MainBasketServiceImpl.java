@@ -35,8 +35,8 @@ public class MainBasketServiceImpl implements MainBasketService {
 	}
 
 	@Override
-	public List<Map<String, Object>> selectBasketBookView(int memberNo) {
-		return mainBasketDao.selectBasketBookView(memberNo);
+	public List<Map<String, Object>> selectBasketBookView(int no) {
+		return mainBasketDao.selectBasketBookView(no);
 	}
 
 	@Override
@@ -44,11 +44,17 @@ public class MainBasketServiceImpl implements MainBasketService {
 		return mainBasketDao.selectCountBasket(vo);
 	}
 
+	
 	@Override
 	public int updateBasketQty(MainBasketVO vo) {
 		return mainBasketDao.updateBasketQty(vo);
 	}
-
+	@Override
+	public int deleteByBasketNo(int basketNo) {
+		return mainBasketDao.deleteByBasketNo(basketNo);
+	}
+	
+	
 	@Override
 	public int editBasketQty(MainBasketVO vo) {
 		return mainBasketDao.editBasketQty(vo);
@@ -60,13 +66,15 @@ public class MainBasketServiceImpl implements MainBasketService {
 	}
 
 	@Override
-	public int deleteCartByNo(int memberNo) {
-		return mainBasketDao.deleteCartByNo(memberNo);
+	public int deleteCartByNo(int no) {
+		return mainBasketDao.deleteCartByNo(no);
 	}
 
 	@Override
 	public MainBasketVO selectCartByCartNo(int basketNo) {
 		return mainBasketDao.selectCartByCartNo(basketNo);
 	}
+
+	
 
 };
