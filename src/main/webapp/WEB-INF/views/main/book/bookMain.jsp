@@ -80,10 +80,10 @@ function sendSearchKeyword(){
 							<li>
 								<figure>
 									<a class="aa-product-img"
-									 href="<c:url value='/main/book/bookDetail?bookNo=${bookVo1.bookNo}'/>">
+									 href="<c:url value='/main/book/bookDetail?bookNo=${bookVo1.BOOK_NO}'/>">
 										<img
-										 src="<c:url value='/images/bookProduct/upload_img/${bookVo1.bookImgName}'/>"
-										 alt="${bookVo1.bookTitle}이미지">
+										 src="<c:url value='/images/bookProduct/upload_img/${bookVo1.BOOK_IMG_NAME}'/>"
+										 alt="${bookVo1.BOOK_TITLE}이미지">
 									</a>
 									<a class="aa-add-card-btn" href="">
 										<span style="display: block;" class="fas fa-shopping-cart"></span>
@@ -93,7 +93,7 @@ function sendSearchKeyword(){
 										<h5 class="aa-product-title">
 											<a href="#"></a>
 										</h5>
-										<span class="aa-product-price">${bookVo1.bookPrice}</span>
+										<span class="aa-product-price">${bookVo1.BOOK_PRICE}</span>
 									</figcaption>
 								</figure>
 							</li>
@@ -108,14 +108,14 @@ function sendSearchKeyword(){
 						</span>
 					</a>
 					<ul class="aa-product-catg">
-						<c:forEach var="bookVo" items="${bookList2}">
+						<c:forEach var="bookVo2" items="${bookList2}">
 							<li>
 								<figure>
 									<a class="aa-product-img"
-									 href="<c:url value='/main/book/bookDetail?bookNo=${bookVo2.bookNo}'/>">
+									 href="<c:url value='/main/book/bookDetail?bookNo=${bookVo2.BOOK_NO}'/>">
 										<img
-										 src="<c:url value='/images/bookProduct/upload_img/${bookVo2.bookImgName}'/>"
-										 alt="${bookVo2.bookTitle}이미지">
+										 src="<c:url value='/images/bookProduct/upload_img/${bookVo2.BOOK_IMG_NAME}'/>"
+										 alt="${bookVo2.BOOK_TITLE}이미지">
 									</a>
 									<a class="aa-add-card-btn" href="">
 										<span style="display: block;" class="fas fa-shopping-cart"></span>
@@ -125,7 +125,7 @@ function sendSearchKeyword(){
 										<h5 class="aa-product-title">
 											<a href="#"></a>
 										</h5>
-										<span class="aa-product-price">${bookVo2.bookPrice}</span>
+										<span class="aa-product-price">${bookVo2.BOOK_PRICE}</span>
 									</figcaption>
 								</figure>
 							</li>
@@ -144,10 +144,10 @@ function sendSearchKeyword(){
 							<li>
 								<figure>
 									<a class="aa-product-img"
-									 href="<c:url value='/main/book/bookDetail?bookNo=${bookVo3.bookNo}'/>">
-										<img
-										 src="<c:url value='/images/bookProduct/upload_img/${bookVo3.bookImgName}'/>"
-										 alt="${bookVo3.bookTitle}이미지">
+									 href="<c:url value='/main/book/bookDetail?bookNo=${bookVo3.BOOK_NO}'/>">
+										<img style="margin: 10px 0;"
+										 src="<c:url value='/images/bookProduct/upload_img/${bookVo3.BOOK_IMG_NAME}'/>"
+										 alt="${bookVo3.BOOK_TITLE}이미지">
 									</a>
 									<a class="aa-add-card-btn" href="">
 										<span style="display: block;" class="fas fa-shopping-cart"></span>
@@ -157,7 +157,7 @@ function sendSearchKeyword(){
 										<h5 class="aa-product-title">
 											<a href="#"></a>
 										</h5>
-										<span class="aa-product-price">${bookVo3.bookPrice}</span>
+										<span class="aa-product-price">${bookVo3.BOOK_PRICE}</span>
 									</figcaption>
 								</figure>
 							</li>

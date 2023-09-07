@@ -1,6 +1,7 @@
 package com.team2.mbti.main.book.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -66,7 +67,22 @@ public class MainBookController {
 		title = "책 판매 페이지";
 		// 3
 		model.addAttribute("title", title);
-
+		List<Map<String, Object>> bookList1 = mainBookService.selectBest4("도서"); 
+		logger.info("bookList1 , bookList1.size()={}", bookList1.size());
+		List<Map<String, Object>> bookList2 = mainBookService.selectBest4("검사자료");
+		logger.info("bookList2, bookList2.size()={}", bookList2.size());
+		List<Map<String, Object>> bookList3 = mainBookService.selectBest4("기타");
+		logger.info("bookList3, bookList3.size()={}", bookList3.size());
+		
+		List<Map<String, Object>> best3 = mainBookService.best3("");
+		logger.info("best3, best3.size()={}", best3.size());
+		
+		model.addAttribute("bookList1", bookList1);
+		model.addAttribute("bookList2", bookList2);
+		model.addAttribute("bookList3", bookList3);
+		
+		model.addAttribute("best3", best3);
+		
 		return "main/book/bookMain";
 	}
 
@@ -134,7 +150,5 @@ public class MainBookController {
 
 		return "main/book/bookList1";
 	}
-
-
 
 }//
