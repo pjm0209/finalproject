@@ -1,11 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp" %>    
-<!DOCTYPE html>
-<html>
-<head>
-<title>아이디 찾기 페이지</title>
-
 <style>
 *{
 	margin: 0px;
@@ -15,6 +10,7 @@
 
 .content{
 	margin-top: 100px;
+	margin-bottom: 20px;
 }
 
 h1{
@@ -30,8 +26,6 @@ p{
 	text-align: center;
 	font-size: 15px;
 }
-
-
 
 input{
 	font-size: 15px;
@@ -119,16 +113,7 @@ form {
             if (confirmed) {
                 window.location.href = '<c:url value="/main/index"/>';
             }
-        });// 
-        
-        $('.tab-button').click(function() {
-            $('.tab-button').removeClass('active');
-            $(this).addClass('active');
-
-            var tabIndex = $(this).index();
-            $('.tab-content').removeClass('active');
-            $('.tab-content').eq(tabIndex).addClass('active');
-        });//
+        }); 
         
         $("#sendEmailBtn").click(function(){
         	var userid=$('#id').val();
@@ -145,9 +130,7 @@ form {
 				$("#email").focus;
 				return false;
 	      	} 
-        		     
-	    	
-        	
+   	
         	$.ajax({
         		url : "<c:url value='/main/member/ajaxsendEmail'/>",
         		type : 'post',
@@ -157,7 +140,7 @@ form {
         		},
         		dateType:'json',
         		success : function(result){
-       				alert("임시 비밀번호 발송 완료!! 이메일을 확인해주세요");
+       				alert("임시 비밀번호 발송 완료!! 이메일을 확인해주세요");	
        				location.href="<c:url value='/main/member/memberLogin'/>";       				
         		},
 	            error:function(xhr,status,error){
@@ -170,19 +153,14 @@ form {
 
 <div class="content">
 <h1>비밀번호 찾기</h1>	
-	<div class="tab">
-        <div class="tab-button">이메일로 찾기</div>
-    </div>
-    			
-	<div class="tab-content">
 		<p>회원가입 시 입력한 이메일 주소로 임시 비밀번호를 전송해드립니다.</p>	
 			<div class="findEmail-id">
-				<label>*&nbsp;아이디 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+				<label>*&nbsp;아이디 : &nbsp;&nbsp;&nbsp;</label>
 					<input type="text" name="userid" id="id" placeholder="아이디를 입력하세요">	
 			</div><br>		
 		
 			<div class="findEmail-email">
-				<label>*&nbsp;E-mail : &nbsp;</label>
+				<label>*&nbsp;E-mail : &nbsp;&nbsp;&nbsp;</label>
 					<input type="text" name="email" id="email" placeholder="이메일을 입력하세요">		
 			</div><br>
 												
@@ -190,5 +168,5 @@ form {
 				<button class="btn btn-primary" type="submit" name="submit" id="sendEmailBtn">전송</button>	
 				<button class="btn btn-info" type="button" onclick="history.back();">취소</button>					
 			</div>
-	</div>				
+</div>				
 <%@ include file="../inc/bottom.jsp" %>   

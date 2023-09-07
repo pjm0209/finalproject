@@ -376,15 +376,15 @@ public class MypageController {
 	                model.addAttribute("url", "/main/index");
 	            } else {
 	                model.addAttribute("msg", "비밀번호 변경 실패!!.");
-	                model.addAttribute("url", "/mypage/newPwd");
+	                model.addAttribute("url", "/main/mypage/newPwd");
 	            }
 	        } else {
 	            model.addAttribute("msg", "현재 비밀번호가 일치하지 않습니다.");
-	            model.addAttribute("url", "/mypage/newPwd");
+	            model.addAttribute("url", "/main/mypage/newPwd");
 	        }
 	    } else {
 	        model.addAttribute("msg", "사용자 정보를 찾을 수 없습니다.");
-	        model.addAttribute("url", "/mypage/newPwd");
+	        model.addAttribute("url", "/main/mypage/newPwd");
 	    }
 
 	    return "common/message";

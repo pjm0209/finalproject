@@ -28,8 +28,8 @@
 <h2>아이디 중복 검사</h2><br>
 <form name="frmId" method="post" action="<c:url value='/admin/manager/checkId'/>">
 
-	<input type="text" name="adminid" id="managerId" title="아이디입력" 
-		value="${param.adminId}" >	
+	<input type="text" name="adminId" id="managerId" title="아이디입력" 
+		value="${param.adminId}">	
 	<input type="submit"  id="submit" value="아이디 확인">
 	<span class="errorMessage" style="display: none">아이디를 입력하세요</span>
 	

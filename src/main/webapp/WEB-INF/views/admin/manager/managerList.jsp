@@ -52,9 +52,6 @@ select#manager-search-select {
     border-radius: 6px;
     margin-left: 1095px;
 }
-
-
-
 </style>
 
 <script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>
@@ -73,7 +70,9 @@ select#manager-search-select {
 	        
 		$('#manager-delete-button').click(function(){
 			if($('input[type=checkbox]:checked').length<1){
-				alert('삭제할 관리자를 선택하세요.');
+				//alert('삭제할 관리자를 선택하세요.');
+				$('#alertModalBody').html("삭제할 관리자를 선택하세요.");
+			    $('#alertModal').modal('show');
 				return;
 			}
 			
@@ -185,5 +184,6 @@ select#manager-search-select {
 </div>
 </div>
 <!-- End of Main Content -->
+
 
 <%@ include file="../inc/bottom.jsp"%>
