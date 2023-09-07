@@ -26,7 +26,7 @@
 							<tr>
 								<th scope="row" class="ck"><input type="checkbox" name="boardItems[${i }].boardNo" value="${map.BOARD_NO }"></th>
 								<td class="title">									
-									<a href="#" onclick="<c:url value='/main/board/boardDetail?boardNo=${map.BOARD_NO }'/>">
+									<a href="<c:url value='/main/board/boardDetail?boardNo=${map.BOARD_NO }'/>">
 										<c:if test="${map.BOARD_STEP > 0 }">
 											답변 - 
 										</c:if>
@@ -40,7 +40,7 @@
 									</c:if>									
 								</td>
 								<td class="boardForm">
-									<a href="#" onclick="<c:url value='/main/board/boardList?boardFormNo=${map.BOARD_FORM_NO }'/>">${map.BOARD_FORM_NAME }</a>
+									<a href="<c:url value='/main/board/boardList?boardFormNo=${map.BOARD_FORM_NO }'/>">${map.BOARD_FORM_NAME }</a>
 								</td>
 								<td class="commentCount">${map.COMMENTCOUNT }</td>
 								<td class="readCount">${map.BOARD_READCOUNT }</td>
@@ -53,5 +53,7 @@
 		</table>
 	</div>
 </section>
+
+<script type="text/javascript" src="<c:url value='/main-css-js/js/myPage.js'/>"></script>
     
 <%@include file="../inc/bottom.jsp" %>
