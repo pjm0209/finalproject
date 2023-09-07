@@ -9,11 +9,19 @@ import org.apache.ibatis.annotations.Mapper;
 public interface MainBasketDAO {
 	
 	int insertBasket(MainBasketVO vo);
-	List<Map<String, Object>> selectBasketBookView(int memberNo);
+	List<Map<String, Object>> selectBasketBookView(int no);
 	int selectCountBasket(MainBasketVO vo);
 	int updateBasketQty(MainBasketVO vo);
+	
+	/*ajax*/
 	int editBasketQty(MainBasketVO vo);
-	int deleteBasket(int bookNo);
-	int deleteCartByNo(int memberNo);
+	int deleteByBasketNo(int basketNo);
+	/*ajax*/
+	
+	int deleteBasketBook(MainBasketVO vo);
+	int deleteCartByNo(int no);
+	
+	int completeOrders(int no);
 	MainBasketVO selectCartByCartNo(int basketNo);
+	
 }//

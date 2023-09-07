@@ -52,9 +52,6 @@ select#manager-search-select {
     border-radius: 6px;
     margin-left: 1095px;
 }
-
-
-
 </style>
 
 <script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>
@@ -71,23 +68,42 @@ select#manager-search-select {
             window.open('managerAdditional', '_blank', popupFeatures);
         });
 	        
-		$('#manager-delete-button').click(function(){
+/* 		$('#manager-delete-button').click(function(){
 			if($('input[type=checkbox]:checked').length<1){
-				alert('삭제할 관리자를 선택하세요.');
+				//alert('삭제할 관리자를 선택하세요.');
+				$('#alertModalBody').html("삭제할 관리자를 선택하세요.");
+			    $('#alertModal').modal('show');
 				return;
 			}
 			
 			if(confirm('선택한 관리자를 삭제하시겠습니까?')){
-				$('form[name=form-Delete]').prop('action',contextPath+'/admin/manager/managerDelete');
-				$('form[name=form-Delete]').submit();
+				//$('form[name=form-Delete]').prop('action',contextPath+'/admin/manager/managerDelete');
+				//$('form[name=form-Delete]').submit();
+				$('#confirmModalBody').html('선택한 관리자를 삭제하시겠습니까?');
+				$('#confirmOk').attr('onclick', 'managerDel()');	 		 
+	         	$('#confirmModalBtn').trigger('click')
 			}
-	});
+	}); */
 	
+	$('#manager-delete-button').click(function(){
+		var count = $('input[type=checkbox]:checked').length;
+		
+		if(count < 1) {
+			$('#alertModalBody').html('삭제 관리자를 선택하세요.');
+			$('#alertModalBtn').trigger('click');
+			return false;
+		}
+
+		 $('#confirmModalBody').html('선택한 관리자를 삭제하시겠습니까?');		
+		 $('#confirmOk').attr('onclick', 'managerDel()');	 		 
+         $('#confirmModalBtn').trigger('click');
+	});
+			
+	});	
 	function managerDel() {
 		$('#selectManagerDelete').attr('action', contextPath + '/admin/manager/managerDelete');
 		$('form[name=form-Delete]').submit();
 	}
-	});	
 </script>
 
 <!-- Begin Page Content -->
@@ -108,7 +124,7 @@ select#manager-search-select {
 			<div class="board-search-result">
 				<form name="frmSearch" method="post" action="<c:url value='/admin/manager/managerList'/>">
 				<div class="input-group mb-3" id="board-search-div">
-					<select class="form-select form-select-lg" aria-label=".form-select-lg example" name="searchcondition" id="manager-search-select">					  						  
+					<select class="form-select form-select-lg" aria-label=".form-select-lg example" name="searchCondition" id="manager-search-select">					  						  
 					  	<option value="admin_id" <c:if test="${param.searchCondition=='adminId'}"> selected="selected" </c:if>>아이디</option>
 					  	<option value="admin_email" <c:if test="${param.searchCondition=='adminEmail'}"> selected="selected" </c:if>>이메일</option>					  	
 					  	<option value="admin_tel" <c:if test="${param.searchCondition=='adminTel'}"> selected="selected" </c:if>>전화번호</option>
@@ -185,5 +201,25 @@ select#manager-search-select {
 </div>
 </div>
 <!-- End of Main Content -->
+    <button type="button" style="display: none" id="confirmModalBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirmModal"></button>
+    
+    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h1 class="modal-title fs-5" id="confirmModalLabel">알림</h1>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	        <p id="confirmModalBody"></p>
+	      </div>
+	      <div class="modal-footer">
+	      	<button class="btn btn-secondary" type="button" data-bs-dismiss="modal">취소</button>
+	        <button type="button" class="btn bg-orange-primary" id="confirmOk" data-bs-dismiss="modal">확인</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
 
 <%@ include file="../inc/bottom.jsp"%>

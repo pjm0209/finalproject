@@ -215,11 +215,9 @@ $(function() {
                 		<input type="checkbox" name="chkSave" id="remember-check"
                 			<c:if test="${!empty cookie.ck_userid }">  
                 				    checked="checked"   
-                			</c:if>
-                		>&nbsp; 아이디 저장하기
-                			  
+                			</c:if>>&nbsp; 아이디 저장하기              			  
                 		<a class="forgot-id" href="<c:url value='/main/member/forgot-id'/>">아이디 찾기</a>
-                		<span style="color:blue;">|</span>
+                			<span style="color:blue;">|</span>
                 		<a class="forgot-password" href="<c:url value='/main/member/forgot-pwd'/>">비밀번호 찾기</a>
             		</div>
                   
@@ -228,23 +226,14 @@ $(function() {
                     </div>
                     <span class="centered-span">또는</span><br>
                     <hr><br>
-<<<<<<< HEAD
-                    
-=======
-                    
 
->>>>>>> branch 'main' of https://github.com/pjm0209/finalproject.git
 			      	<div class="Login" id="kakaoLogin" >
 				     	<a href="#" >
 							<img src="<c:url value='../../images/kakao_login_large_narrow.png'/>" alt="카카오로그인" class="snsBt" />
 						</a>
-<<<<<<< HEAD
-			      	</div>						
-                  		               
-=======
+			      	</div>						                 		               
 			      	</div>						
 
->>>>>>> branch 'main' of https://github.com/pjm0209/finalproject.git
                     <div class="field button-field">
                     	<span >계정이 없으신가요?</span>
                     	<input type="button" value="회원가입" id="memberRegister-button">  

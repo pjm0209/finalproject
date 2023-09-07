@@ -19,7 +19,9 @@ import com.team2.mbti.admin.model.AdminVO;
 import com.team2.mbti.common.ConstUtil;
 import com.team2.mbti.common.PaginationInfo;
 import com.team2.mbti.common.SearchVO;
+import com.team2.mbti.member.model.MemberService;
 import com.team2.mbti.member.model.MemberVO;
+import com.team2.mbti.message.model.MessageService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -30,10 +32,19 @@ public class AdminController {
 	private static final Logger logger=LoggerFactory.getLogger(AdminController.class);
 	
 	private final AdminService adminService;
+	private final MemberService memberService;
+	private final MessageService messageService;
 		
 	@GetMapping("/index")
-	public String index_get(Model model) {
+	public String index_get(Model model, MemberVO membervo) {
+		logger.info("관리자 index 페이지");
+		
+		
+		
 		model.addAttribute("title", "관리자 페이지");
+		model.addAttribute("memTotal", memberService.getTotalMember(membervo));
+		model.addAttribute("memToday", memberService.getTodayMember(membervo));
+		model.addAttribute("memWeek", memberService.getWeekMember(membervo));
 		
 		return "admin/index";
 	}
@@ -148,13 +159,13 @@ public class AdminController {
 	
 	@ResponseBody
 	@RequestMapping("/manager/checkId")
-	public int checkId(@RequestParam String adminid, Model model) {
+	public int checkId(@RequestParam String adminId, Model model) {
 		//1
-		logger.info("아이디 중복확인 파라미터, adminid={}", adminid);
+		logger.info("아이디 중복확인 파라미터, adminid={}", adminId);
 
 		//2
 		int result=0;
-		result = adminService.checkAdminId(adminid);
+		result = adminService.checkAdminId(adminId);
 		logger.info("중복확인 결과 result={}", result);
 		
 		//4
@@ -172,7 +183,7 @@ public class AdminController {
 	      
 	      if(cnt > 0) {
 	         msg = "관리자 등록에 성공하였습니다.";
-	         url = "/admin/manager/managerAdditional";
+	         url = "/admin/index";
 	      }
 	      
 	      model.addAttribute("msg",msg);
@@ -208,6 +219,17 @@ public class AdminController {
 		model.addAttribute("url", url);
 		
 		return "common/message";
-	}		
+	}	
+	
+	
+	@RequestMapping("/messageCount")
+	public String messageCount(Model model) {
+		int messageCount=messageService.getAdminMessageCount();
+		logger.info("읽지 않은 쪽지 수 결과 messageCount={}",messageCount);
+		
+		model.addAttribute("messageCount", messageCount);
+		
+		return "admin/messageCount";
+	}
 	
 }

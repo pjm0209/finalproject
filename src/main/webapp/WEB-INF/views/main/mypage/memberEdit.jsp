@@ -175,7 +175,7 @@ article {
 			<div class="div-memberEdit">
 				<input type="text" class="address" id="memberAddress" name="address" value="${membervo.address}">
 			</div>
-			
+				
 			<label>상세주소</label>
 			<div class="div-memberEdit">
 				<input type="text" class="addressDetail" id="memberAddressDetail" name="addressDetail" value="${membervo.addressDetail}">

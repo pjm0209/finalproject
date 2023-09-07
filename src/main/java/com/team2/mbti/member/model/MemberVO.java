@@ -16,6 +16,9 @@ public class MemberVO extends SearchVO {
 	private String name;
 	private String hp;
 	private String email;
+	private String email1;
+	private String email2;
+	private String email3;
 	private String zipcode;
 	private String address;
 	private String addressDetail;
@@ -23,14 +26,15 @@ public class MemberVO extends SearchVO {
 	private String activatable;
 	private Timestamp outdate;
 	private int mbtiNo;
+	private String kakaoIdFlag;
 	
 	@Override
 	public String toString() {
 		return "MemberVO [no=" + no + ", userid=" + userid + ", pwd=" + pwd + ", name=" + name + ", hp=" + hp
-				+ ", email=" + email + ", zipcode=" + zipcode + ", address=" + address + ", addressDetail="
-				+ addressDetail + ", regdate=" + regdate + ", activatable=" + activatable + ", outdate=" + outdate
-				+ ", mbtiNo=" + mbtiNo + ", toString()=" + super.toString() + "]";
+				+ ", email=" + email + ", email1=" + email1 + ", email2=" + email2 + ", email3=" + email3 + ", zipcode="
+				+ zipcode + ", address=" + address + ", addressDetail=" + addressDetail + ", regdate=" + regdate
+				+ ", activatable=" + activatable + ", outdate=" + outdate + ", mbtiNo=" + mbtiNo + ", kakaoIdFlag="
+				+ kakaoIdFlag + ", toString()=" + super.toString() + "]";
 	}
-	
 	
 }

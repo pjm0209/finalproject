@@ -47,29 +47,48 @@
 		and email = #{email}
 	</select>
 	
-	<select id="getTotalMember" resultType="int">
+	<select id="getTotalMember" parameterType="memberVo" resultType="int">
 		select count(*) from member
 	</select>
 	
-	<select id="getTodayMember" resultType="int">
-		select 
+	<select id="getTodayMember" parameterType="memberVo" resultType="int">
+		select
 		(
-			select count(*)
-			from member
-			where regdate >= to_char(trunc(sysdate), 'yyyy/mm/dd')
-		)
+		    select count(*)
+		    from member
+		    where regdate >= to_char(trunc(sysdate), 'yyyy/mm/dd'))
+		from dual
 	</select>
 		
-	<select id="getWeekMember" resultType="int">
+	<select id="getWeekMember" parameterType="memberVo" resultType="int">
 		select
 		(
 			select count(*)
 			from member
 			where regdate > to_char(trunc(sysdate, 'iw'), 'yyyy/mm/dd'))
-			from dual
-		)		
+			from dual	
 	</select>
 	
+	<select id="oneDayBack" parameterType="memberVo" resultType="string">
+		select to_char(sysdate-1,'yyyy-mm-dd') as 하루전 from member;
+	</select>
+	
+	<select id="twoDayBack" parameterType="memberVo" resultType="string">
+		select to_char(sysdate-2,'yyyy-mm-dd') as 이틀전 from member;
+	</select>	
+	
+	<select id="threeDayBack" parameterType="memberVo" resultType="string">
+		select to_char(sysdate-3,'yyyy-mm-dd') as 삼일전 from member;
+	</select>
+
+	<select id="fourDayBack" parameterType="memberVo" resultType="string">
+		select to_char(sysdate-4,'yyyy-mm-dd') as 사일전 from member;
+	</select>	
+	
+	<select id="fiveDayBack" parameterType="memberVo" resultType="string">
+		select to_char(sysdate-5,'yyyy-mm-dd') as 오일전 from member;
+	</select>	
+		
 	<delete id="deleteMember" parameterType="int">
 		delete from member
 		where no=#{no}
@@ -122,8 +141,8 @@
 		and hp=#{hp}
    </select>
    
-   <select id="emailCheck" parameterType="map" resultType="string" >
-		select email 
+   <select id="emailCheck" parameterType="map" resultType="int" >
+		select count(*) 
 		from member
 		where userid=#{userid} and email=#{email}
    </select>

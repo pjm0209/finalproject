@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team2.mbti.mbtiResult.model.MbtiResultListVO;
 import com.team2.mbti.mbtiResult.model.MbtiResultService;
@@ -23,7 +22,6 @@ import com.team2.mbti.mbtisurvey.model.MbtiVO;
 import com.team2.mbti.member.model.MemberVO;
 
 import jakarta.servlet.http.HttpSession;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -47,6 +45,11 @@ public class MainMbtiController {
 	public String question(@RequestParam(defaultValue = "0") int questionTypeNo,Model model) {
 		logger.info("mbti 검사 페이지, 파라미터 questionTypeNo={}",questionTypeNo);
 		
+		if(questionTypeNo==2) {
+			int cnt=mbtiSurveyService.insertSalesByMbti();
+			logger.info("MBTI 정식검사 결제 결과 cnt={}",cnt);
+		}
+		
 		List<MbtiSurveyVO> list=mbtiSurveyService.selectByQuestionTypeNoMbtiSurvey(questionTypeNo);
 		logger.info("mbti 질문지 검색 결과 list.size()={}",list.size());
 		int num=(int)Math.ceil(list.size()/10);
@@ -66,14 +69,14 @@ public class MainMbtiController {
 		int cnt=mbtiResultService.insertMbtiResultList(mbtiResultListVo,no);
 		logger.info("mbti 검사 결과, cnt={}",cnt);
 		
-		int questionCategory1Val=0;
-		int questionCategory2Val=0;
-		int questionCategory3Val=0;
-		int questionCategory4Val=0;
-		int questionCategory5Val=0;
-		int questionCategory6Val=0;
-		int questionCategory7Val=0;
-		int questionCategory8Val=0;
+		double questionCategory1Val=0.0;
+		double questionCategory2Val=0.0;
+		double questionCategory3Val=0.0;
+		double questionCategory4Val=0.0;
+		double questionCategory5Val=0.0;
+		double questionCategory6Val=0.0;
+		double questionCategory7Val=0.0;
+		double questionCategory8Val=0.0;
 		double iVal=0;
 		double eVal=0;
 		double sVal=0;
@@ -140,54 +143,54 @@ public class MainMbtiController {
 			}
 		}
 		
-		int resultI=0;
-		int resultE=0;
-		int resultS=0;
-		int resultN=0;
-		int resultT=0;
-		int resultF=0;
-		int resultP=0;
-		int resultJ=0;
-		
+		double resultI=0;
+		double resultE=0;
+		double resultS=0;
+		double resultN=0;
+		double resultT=0;
+		double resultF=0;
+		double resultP=0;
+		double resultJ=0;
+
 		String resultMbti="";
 		if(iVal>eVal) {
 			resultMbti+="I";
-			resultI=(int)(iVal/(iVal+eVal)*100);
-			resultE=100-resultI;
+			resultI=Math.round(iVal/(iVal+eVal)*100*10)/10.0;
+			resultE=Math.round((100-resultI)*10)/10.0;
 		}else {
 			resultMbti+="E";
-			resultE=(int)(eVal/(iVal+eVal)*100);
-			resultI=100-resultE;
+			resultE=Math.round(eVal/(iVal+eVal)*100*10)/10.0;
+			resultI=Math.round((100-resultE)*10)/10.0;
 		}
 		
 		if(sVal>nVal) {
 			resultMbti+="S";
-			resultS=(int)(sVal/(sVal+nVal)*100);
-			resultN=100-resultS;
+			resultS=Math.round(sVal/(sVal+nVal)*100*10)/10.0;
+			resultN=Math.round((100-resultS*10))/10.0;
 		}else {
 			resultMbti+="N";
-			resultN=(int)(nVal/(sVal+nVal)*100);
-			resultS=100-resultN;
+			resultN=Math.round(nVal/(sVal+nVal)*100*10)/10.0;
+			resultS=Math.round((100-resultN)*10)/10.0;
 		}
 		
 		if(tVal>fVal) {
 			resultMbti+="T";
-			resultT=(int)(tVal/(tVal+fVal)*100);
-			resultF=100-resultT;
+			resultT=Math.round(tVal/(tVal+fVal)*100*10)/10.0;
+			resultF=Math.round((100-resultT)*10)/10.0;
 		}else {
 			resultMbti+="F";
-			resultF=(int)(fVal/(tVal+fVal)*100);
-			resultT=100-resultF;
+			resultF=Math.round(fVal/(tVal+fVal)*100*10)/10.0;
+			resultT=Math.round((100-resultF)*10)/10.0;
 		}
 		
 		if(pVal>jVal) {
 			resultMbti+="P";
-			resultP=(int)(pVal/(pVal+jVal)*100);
-			resultJ=100-resultP;
+			resultP=Math.round(pVal/(pVal+jVal)*100*10)/10.0;
+			resultJ=Math.round((100-resultP)*10)/10.0;
 		}else {
 			resultMbti+="J";
-			resultJ=(int)(jVal/(pVal+jVal)*100);
-			resultP=100-resultJ;
+			resultJ=Math.round(jVal/(pVal+jVal)*100*10)/10.0;
+			resultP=Math.round((100-resultJ)*10)/10.0;
 		}
 		
 		MbtiVO mbtiVo=mbtiSurveyService.selectMbti(resultMbti);
@@ -214,7 +217,6 @@ public class MainMbtiController {
 		return "main/mbti/mbtiResult";
 	}
 	
-	/** 임시 메서드*/
 	@GetMapping("/mbtiResult")
 	public String mbtiResult_get(@RequestParam String mbtiType, Model model) {
 		logger.info("mbti 결과 페이지, 파라미터 mbtiType={}",mbtiType);

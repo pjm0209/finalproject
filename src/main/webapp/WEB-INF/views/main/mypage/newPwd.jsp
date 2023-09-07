@@ -6,7 +6,7 @@
 <style>
 .container {
     margin-top: 100px;
-    margin-left: 400px;
+    margin-left: 500px;
 }
 
 h2 {

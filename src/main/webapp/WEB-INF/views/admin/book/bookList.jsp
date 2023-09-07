@@ -123,11 +123,11 @@
 			return false;
 		}
 		$('#confirmModalBody').html("기존 " + oQty +" → " + uQty + "(으)로 변경할까요?");
-		$('#confirmOk').attr("onclick","ajaxUpdateQty("+oBookNo +", "+ oQty+", "+ idx+")");
+		$('#confirmOk').attr("onclick","ajaxUpdateQty("+oBookNo +", "+ oQty+ ", "+ uQty+")");
 		$('#confirmModalBtn').trigger('click');
 	}
 	
-	function ajaxUpdateQty(oBookNo, oQty, idx){
+	function ajaxUpdateQty(oBookNo, oQty, uQty){
 		$.ajax({		
 			url:"<c:url value='/admin/book/bookAjaxUpdateQty'/>",
 			type:'POST',
@@ -199,12 +199,12 @@
 			htmlStr += "<c:if test='${param.bookFlag == \"Inventory\" or param.bookFlag == \"InventoryByKeyword\"}'>";
 			htmlStr += "<td>";
 			/* htmlStr += "<button class=\"btn btn-success btn-xs blue\" onclick=\"location.href='bookUpdate?bookNo='\"" + this.bookNo + " type='button' title='재고저장' id='editQty'><i class='fas fa-save'></i></button>"; */
-			htmlStr += "<button class=\"btn btn-success btn-xs blue\" type='button' title='재고저장' id='editQty' onclick='updateQtyEach("+this.bookNo+","+this.stockQty+", this)'><i class='fas fa-save'></i></button>";
+			htmlStr += "<button class=\"btn btn-success btn-xs blue editQty\" type='button' title='재고저장' onclick='updateQtyEach("+this.bookNo+","+this.stockQty+", this)'><i class='fas fa-save'></i></button>";
 			htmlStr += "</td>";
 			htmlStr += "</c:if>";
 			htmlStr += "<c:if test='${param.bookFlag == \"bookList\" or param.bookFlag == \"bookListByKeyword\"}'>";
 			htmlStr += "<td id='tdLast'>";
-			htmlStr += "<a class='btn btn-info btn-xs' href='' target='_blank' title='상품보기'><i class='fas fa-eye'></i></a>";
+			htmlStr += "<a class='btn btn-info btn-xs' target='_blank' title='상품보기' href='/mbti/main/book/bookDetail?bookNo="+this.bookNo+"'><i class='fas fa-eye'></i></a>";
 			htmlStr += "<button class='btn btn-success btn-xs' onclick=\"location.href='bookCopyPaste?bookNo='\"" + this.bookNo + " type='button' title='복사'><i class='fas fa-copy'></i></button>";
 			htmlStr += "<button class='btn btn-warning btn-xs' onclick=\"openEdit(" +this.bookNo+ ")\" type='button' title='수정'><i class='fas fa-edit'></i></button>";
 			htmlStr += "<button class='btn btn-danger btn-xs' id='delBtn' type='button' title='삭제' onclick='deleteEach("+this.bookNo+")'><i class='fas fa-trash'></i></button>";

@@ -51,9 +51,10 @@ public class KakaoController{
 		MemberVO vo2=memberDao.selectByUserid(id);
 		logger.info("회원 번호 뽑아오기 결과 vo2={}",vo2);
 		
-		String msg="로그인 실페",url="/main/index";
+		String msg="로그인 실패",url="/main/index";
 		if(cnt>0) {
 			msg="로그인 성공";
+			url="/main/index?kakaoIdFlag=Y";
 			HttpSession session =request.getSession();
 			
 			session.setAttribute("no", vo2.getNo());

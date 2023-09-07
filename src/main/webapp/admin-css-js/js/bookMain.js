@@ -43,12 +43,12 @@ $(function(){
 		var sc = $(this).scrollTop();
 		
 		
-		if( sc >= $('#detail').offset().top ){
+		if( sc >= $('#detail').offset().top){
 			$("#q").show();
 			$('#detail_ul').hide();
 		}
 		
-		if( sc >= $('#notice').offset().top -5 ){
+		if( sc >= $('#notice').offset().top - 5 ){
 			$("#q .tab_menu ul li").removeClass();
 			$("#q .tab_menu ul li:eq(0), #q .tab_menu ul li:eq(2)").addClass('off');
 			$("#q .tab_menu ul li:eq(1)").addClass('on');

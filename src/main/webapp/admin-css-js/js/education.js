@@ -228,6 +228,7 @@ var contextPath = "/mbti"
       }  
 
 	
+	//교육 신청 인원 보여주기 모달창
 	function eduModal(eduNo){
 		$.ajax({
 			url:contextPath + "/admin/education/listAjax",

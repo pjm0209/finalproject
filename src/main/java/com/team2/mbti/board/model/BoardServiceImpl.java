@@ -159,4 +159,9 @@ public class BoardServiceImpl implements BoardService {
 	public List<Map<String, Object>> selectUserBoardList(int no) {
 		return boardDao.selectUserBoardList(no);
 	}
+
+	@Override
+	public List<Map<String, Object>> selectFaqList() {
+		return boardDao.selectFaqList();
+	}
 }

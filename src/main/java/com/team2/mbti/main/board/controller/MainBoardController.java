@@ -47,7 +47,7 @@ public class MainBoardController {
 		logger.info("게시판 종류 조회");
 		
 		List<BoardFormVO> boardFormList = boardService.selectAllBoard();
-		logger.info("게시판 종류 조회결과 boardFormList: {}", boardFormList);
+		logger.info("게시판 종류 조회결과 boardFormList.size(): {}", boardFormList.size());
 		
 		model.addAttribute("boardFormList", boardFormList);
 		
@@ -59,7 +59,7 @@ public class MainBoardController {
 		logger.info("커뮤니티 메인페이지");
 		
 		List<Map<String, Object>> boardCategoryList = boardService.selectMainBoardFormCategory();
-		logger.info("게시판목록 조회결과 boardCategoryList: {}", boardCategoryList);
+		logger.info("게시판목록 조회결과 boardCategoryList.size(): {}", boardCategoryList.size());
 		
 		model.addAttribute("boardCategoryList", boardCategoryList);
 		
@@ -79,7 +79,7 @@ public class MainBoardController {
 		vo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
 		
 		List<Map<String, Object>> boardList = boardService.selectAll(vo);
-		logger.info("게시판 리스트 조회결과 boardList: {}", boardList);
+		logger.info("게시판 리스트 조회결과 boardList.size(): {}", boardList.size());
 		
 		BoardFormVO boardFormVo = boardService.selectBoard(vo.getBoardFormNo());
 		logger.info("게시판 검색결과 board: {}", boardFormVo);
@@ -239,6 +239,11 @@ public class MainBoardController {
 	
 	@PostMapping("/boardEdit")
 	public String boardEdit(@ModelAttribute BoardVO vo, HttpServletRequest request) {
+		int boardFormNo=vo.getBoardFormNo();
+		if(boardFormNo!=3) {
+			vo.setBoardSecreate("N");
+		}
+		
 		logger.info("게시글 수정처리 파라미터 vo: {}", vo);
 		
 		List<Map<String, Object>> fileList = new ArrayList<>();
@@ -281,6 +286,11 @@ public class MainBoardController {
 	
 	@PostMapping("/writeReply")
 	public String boardWriteReply_post(@ModelAttribute BoardVO vo, HttpServletRequest request) {
+		int boardFormNo=vo.getBoardFormNo();
+		if(boardFormNo!=3) {
+			vo.setBoardSecreate("N");
+		}
+		
 		logger.info("게시글 답변 처리 파라미터 vo: {}", vo);
 		
 		List<Map<String, Object>> fileList = new ArrayList<>();

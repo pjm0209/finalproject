@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.team2.mbti.main.order.model.MainOrderDAO">
+
+	<insert id="insertOrders" parameterType="mainOrderVo">
+		<selectKey keyProperty="ordersNo" order="BEFORE" resultType="int">
+			select orders_seq.nextval from dual
+		</selectKey>
+		insert into orders
+		values(#{ordersNo}, #{no}, #{recipient}, #{reZipcode}, #{reAddress}, #{reAddressDetail}, #{reHp},
+		#{sumPrice}, #{paymentMethod}, SYSDATE)
+	</insert>
+	<insert id="insertOrderDetails" parameterType="mainBookVo">
+		insert into ORDERS_DETAIL(ORDERS_NO, BOOK_NO, ORDERS_QTY, ORDERS_STATE)
+		values(#{ordersNo}, #{bookNo}, #{ordersQty}, '결제 완료')
+	</insert>
+	<insert id="insertSales" parameterType="mainBookVo">
+		<selectKey keyProperty="salesNo" order="BEFORE" resultType="int">
+			select SALES_SEQ.nextval from dual
+		</selectKey>
+		insert into sales
+		values(#{salesNo}, 1, #{bookTitle}, #{eachBookSum}, SYSDATE)
+	</insert>
+
+	<select id="selectOrderDetailList" parameterType="int" resultType="map">
+		select * from orders_Detail
+		where orders_no = #{ordersNo}
+	</select>
+
+	
+	<select id="selectOrderList" parameterType="int" resultMap="orderListResultMap">
+		select * from orders
+		where no = #{no}
+	</select>
+	
+	<resultMap type="mainOrderAllVo" id="orderListResultMap">
+		<association property="mainOrderVo" column="orders_No" javaType="mainOrderVo">
+			<id property="ordersNo" column="orders_No" jdbcType="BIGINT"></id>
+			<result property="no" column="no" jdbcType="BIGINT"/>
+			<result property="recipient" column="recipient" jdbcType="VARCHAR"/>
+			<result property="reZipcode" column="re_Zipcode" jdbcType="VARCHAR"/>
+			<result property="reAddress" column="re_Address" jdbcType="VARCHAR"/>
+			<result property="reAddressDetail" column="re_AddressDetail" jdbcType="VARCHAR"/>
+			<result property="reHp" column="re_Hp" jdbcType="VARCHAR"/>
+			<result property="sumPrice" column="sum_Price" jdbcType="BIGINT"/>
+			<result property="paymentMethod" column="payment_Method" jdbcType="VARCHAR"/>
+			<result property="ordersRegdate" column="orders_Regdate" jdbcType="VARCHAR"/>
+		</association>
+		<collection property="orderDetailList" javaType="ArrayList" column="orders_No" ofType="map" 
+			select="selectOrderDetailList"></collection>
+	</resultMap>
+</mapper>

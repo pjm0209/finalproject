@@ -52,4 +52,6 @@ public interface EducationDAO {
 	List<Integer> selectMemNo(int eduNo);
 	EducationVO selectAllMemInfo(EducationVO vo);
 	int applyPayFinish(int eduAppNo);
+	
+	int insertSalesByEdu(EducationVO vo);
 }

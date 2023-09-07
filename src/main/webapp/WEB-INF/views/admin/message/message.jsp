@@ -25,7 +25,7 @@
 </style>
 <div class="board-body">
 	<div id="board-title">
-		<h5>쪽지 관리</h5>
+		<h5>회원에게 쪽지 보내기</h5>
 		<button class="message-button" id="messateA">전체 쪽지 보내기</button>
 		<button class="message-button" id="messateB">쪽지 보내기</button>
 	</div>
@@ -99,11 +99,11 @@
 				<div class="modal-body" style="margin:0 auto">
 					<p id="input"></p>
 					<p>보낼 내용</p>
-					<textarea name="sendItems[0].sendBody" id="sendBody" rows="20" cols="84" style="margin:0 auto"></textarea>
+					<textarea name="sendItems[0].sendBody" id="sendBody" rows="20" cols="88" style="margin:0 auto"></textarea>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-					<button type="submit" class="btn bg-orange-primary" id="messageOkBtn">확인</button>
+					<button type="button" class="btn bg-orange-primary" id="messageOkBtn">확인</button>
 				</div>
 			</form>
 		</div>

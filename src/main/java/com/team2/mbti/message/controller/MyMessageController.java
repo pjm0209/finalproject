@@ -41,11 +41,12 @@ public class MyMessageController {
 	}
 	
 	@GetMapping("/myMessage/messageDetail")
-	public String myMessageWrite_get(@RequestParam(defaultValue = "0") int sendDmNo, Model model) {
-		logger.info("회원 - 쪽지 상세 페이지, 파라미터 sendDmNo={}", sendDmNo);
+	public String myMessageWrite_get(@RequestParam(defaultValue = "0") int sendDmNo,@RequestParam String receiveFlag, Model model) {
+		logger.info("회원 - 쪽지 상세 페이지, 파라미터 sendDmNo={},receiveFlag={}", sendDmNo, receiveFlag);
 		
-		Map<String, Object> map=messageService.selectMessageViewBySendDmNo(sendDmNo);
+		Map<String, Object> map=messageService.selectMessageViewBySendDmNo(sendDmNo, receiveFlag);
 		logger.info("쪽지 상세보기 결과, map={}",map);
+		logger.info("읽은 날짜 업데이트 결과, cnt={}",map.get("cnt"));
 		
 		model.addAttribute("map", map);
 		
@@ -53,7 +54,8 @@ public class MyMessageController {
 	}
 	
 	@RequestMapping("/myMessage/messageDelete")
-	public String messageDelete(@ModelAttribute SendDmListVO sendDmListVo, @RequestParam(defaultValue = "0",required = false) int sendDmNo ,Model model) {
+	public String messageDelete(@ModelAttribute SendDmListVO sendDmListVo, @RequestParam(defaultValue = "0",required = false) int sendDmNo 
+			,Model model) {
 		logger.info("회원 - 쪽지 삭제 처리, 파라미터 sendDmListVo={},sendDmNo={}", sendDmListVo,sendDmNo);
 		int cnt=0;
 		if(sendDmNo!=0) {

@@ -18,12 +18,12 @@
 			</div>
 			<div class="flex">
 				<p>베송비</p>
-				<p><span>0</span>원</p>
+				<p><span>3000</span>원</p>
 			</div>
 		</li>
 		<li class="flex">
 			<p><strong>총 결제 금액</strong></p>
-			<p><strong><span>10,000</span>원</strong></p>
+			<p><strong><span>13,000</span>원</strong></p>
 		</li>
 		
 	</ul>
@@ -51,7 +51,7 @@
 			</ul>
 		</li>
 	</ul>
-	<a href="#" class="list_btn">주문목록가기</a>
+	<a href="<c:url value='/mbti/main/mypage/mypageOrderList'/>" class="list_btn">주문목록가기</a>
 </section>
 
 <section class="booklist_right">
