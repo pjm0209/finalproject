@@ -432,7 +432,7 @@ public class MypageController {
 		logger.info("내 게시글 리스트 조회 페이지");
 		
 		List<Map<String , Object>> myBoardList = boardService.selectUserBoardList((int)session.getAttribute("no"));
-		logger.info("내 게시글 리스트조회 결과 myBoardList: {}", myBoardList);
+		logger.info("내 게시글 리스트조회 결과 myBoardList.size(): {}", myBoardList.size());
 		
 		model.addAttribute("myBoardList", myBoardList);
 		

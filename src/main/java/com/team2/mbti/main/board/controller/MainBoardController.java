@@ -79,7 +79,7 @@ public class MainBoardController {
 		vo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
 		
 		List<Map<String, Object>> boardList = boardService.selectAll(vo);
-		logger.info("게시판 리스트 조회결과 boardList: {}", boardList);
+		logger.info("게시판 리스트 조회결과 boardList.size(): {}", boardList.size());
 		
 		BoardFormVO boardFormVo = boardService.selectBoard(vo.getBoardFormNo());
 		logger.info("게시판 검색결과 board: {}", boardFormVo);
