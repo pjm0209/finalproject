@@ -391,6 +391,14 @@ public class MypageController {
 	}
 
 	
+	@RequestMapping("/mypageOrderList")
+	public String mypageOrderList(HttpSession session, Model model) {
+		
+		logger.info("마이페이지 - 나의 주문 내역 조회 페이지, 파리미터 ???={}");
+		
+		return "main/mypage/mypageOrderList";
+	}
+	
 	@RequestMapping("/mypageBasket")
 	public String mypageBasket(HttpSession session, Model model) {
 		

@@ -1,82 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../inc/top.jsp"%>
+    
+<%@include file="../inc/top.jsp" %>
+<%@include file="../inc/mypage.jsp" %>
+
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 
 <link type="text/css" rel="stylesheet" href="<c:url value='/admin-css-js/css/bookMain.css'/>">
 
 <script type="text/javascript" src="<c:url value='/admin-css-js/js/bookMain.js'/>"></script>
-	
-<script type="text/javascript">
-$(function(){
-	
-	$(".cartBtn").click(function(){
-		alert("cart");
-		$("form[name=frmBuy]").prop("action", "<c:url value='/main/book/basket/basketInsert?mode=cart'/>");
-		alert("action수정 성공!");
-		$("form[name=frmBuy]").submit();
-		alert("submit 성공!");
-	});
-	
-	function goOrder(order){
-		alert(order);
-		$("form[name=frmBuy]").prop("action", "<c:url value='/main/book/basket/basketInsert?mode=" + order + "'/>");
-		alert("action수정 성공!");
-		$("form[name=frmBuy]").submit();
-		alert("submit 성공!");
-	}
-	
-});
-function bookListPage(curPage){
-	$('input[name=currentPage]').val(curPage);
-	$('form[id=frmPageId]').submit();
-}
-function sendSearchKeyword(){
-	var searchKeyword = $("input[name=inputKeyword]").val();
-	if(searchKeyword == null || searchKeyword == ''){
-		$("#searchKeyword").val("");
-		alert("검색어를 입력하세요");
-		return false;
-	}
-	$("#searchKeyword").val(searchKeyword);
-	$("#frmPageId").submit();
-}
 
-	
-</script>
 <section>
-	<form id="frmPageId" name="frmPage" method="post"
-	 action="<c:url value='/main/book/bookList1'/>">
-		<input id="frmPageCategory" type="hidden" name="bookCategory" value="${param.bookCategory}">
-		<input id="searchKeyword" type="hidden" name="searchKeyword" value="${searchKeyword}">
-		<input type="hidden" name="currentPage" value="1">
-	</form>
-	<div id='bookSellMainImg' class=" bookslide shadow-sm p-3 mb-5 bg-body rounded">
-			<ul class="gallery ">
-				<li><img src="<c:url value='/images/bookProduct/slide_01.jpg'/>"></li>
-				<li><img src="<c:url value='/images/bookProduct/slide_02.jpg'/>"></li>
-				<li><img src="<c:url value='/images/bookProduct/slide_03.jpg'/>"></li>
-				<li><img src="<c:url value='/images/bookProduct/slide_04.jpg'/>"></li>
-			</ul>
-	</div>
-	<div style="padding-left: 240px;margin-top: 50px;">
-		<a href="/mbti/main/index"><i class="bi bi-house-door-fill"></i></a>
-		/
-		<a href="/mbti/main/book/bookMain">도서 및 자료 구매</a>
-		/
-		<a href="/mbti/main/book/bookList1?bookCategory=${param.bookCategory}">${param.bookCategory}</a>
-	</div>
-	<div class="flex title_search">
-		<h2 style="margin-top: 20px">검사자료 구매</h2>
-		<div class="booksearch flex">
-			<input type="text" name="inputKeyword" value="${searchKeyword}" placeholder="저자 또는 상품명">
-			<button id="searchCategory" type="button" onclick="sendSearchKeyword()">
-				<span class="material-symbols-outlined">search</span>
-			</button>
-		</div>
-	</div>
+	
 	<div id="containerWrap" class="container clearfix" style="margin-left: 0;margin-right: 0;position: relative">
-		<%@ include file="./BookSideBarLeft.jsp"%>
 		
 		<div id="section">
 			<p>${pagingInfo.totalRecord} 개의 검색 결과가 있습니다.</p>
@@ -133,16 +69,7 @@ function sendSearchKeyword(){
 					<div style="position: absolute; left: 0; top: 0; transition: 0s; width: 200%; height: 200%"></div>
 				</div>
 			</div>
-			<script type="text/javascript" src="<c:url value='/js/rAF.js'/>"></script>
-			<script type="text/javascript" src="<c:url value='/js/ResizeSensor.js'/>"></script>
-			<script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>
-			<script type="text/javascript" src="<c:url value='/js/sticky-sidebar.js'/>"></script>
-			<script type="text/javascript">
-				var a = new StickySidebar('#sidebar', {
-					topSpacing : 500
-				});
-				
-			</script>
+			
 		</div>
 	</div>
 	<!-- 페이지 번호 추가 -->	
@@ -174,6 +101,5 @@ function sendSearchKeyword(){
 	</nav>
 	<!--  페이지 번호 끝 -->
 </section>
-<!-- 직접 만든 sidebar -->
-<%@ include file="./BookSideBar.jsp"%>
-<%@ include file="../inc/bottom.jsp"%>
+
+<%@include file="../inc/bottom.jsp" %>

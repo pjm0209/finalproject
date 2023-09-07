@@ -729,7 +729,7 @@ ul, li {
 /**/
 
 /*bookOrderMain.jsp*/
-
+#myPage{height: 50%;}
 #basket{
 
 	position: relative;
@@ -835,9 +835,9 @@ position:relative;
     padding: 25px;
     max-height:360px;
     position:fixed;
-    top: 180px;
+    top: 207px;
     right:260px;
-    }
+}
 .booklist_area>ul{padding:0; font-size:22px; margin:0;}
 
 .booklist_area>ul li p span{font-size:30px; font-weight: bold;}
