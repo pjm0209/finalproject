@@ -1,5 +1,9 @@
 package com.team2.mbti.sales.model;
 
-public interface SalesService {
+import java.util.List;
+import java.util.Map;
 
+public interface SalesService {
+	List<Map<String, Object>> selectSalesByCategoryView(int salesCategoryNo);
+	List<Map<String, Object>> selectSalesAllView();
 }

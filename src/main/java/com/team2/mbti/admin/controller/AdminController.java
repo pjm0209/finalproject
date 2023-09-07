@@ -1,6 +1,7 @@
 package com.team2.mbti.admin.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +23,7 @@ import com.team2.mbti.common.SearchVO;
 import com.team2.mbti.member.model.MemberService;
 import com.team2.mbti.member.model.MemberVO;
 import com.team2.mbti.message.model.MessageService;
+import com.team2.mbti.sales.model.SalesService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -34,12 +36,28 @@ public class AdminController {
 	private final AdminService adminService;
 	private final MemberService memberService;
 	private final MessageService messageService;
+	private final SalesService salesService;
 		
 	@GetMapping("/index")
 	public String index_get(Model model, MemberVO membervo) {
 		logger.info("관리자 index 페이지");
 		
+		List<Map<String, Object>> bookSalesList=salesService.selectSalesByCategoryView(1);
+		logger.info("책 매출 조회 결과, bookSalesList={}",bookSalesList);
 		
+		List<Map<String, Object>> mbtiSalesList=salesService.selectSalesByCategoryView(2);
+		logger.info("mbti 검사 매출 조회 결과, mbtiSalesList={}",mbtiSalesList);
+		
+		List<Map<String, Object>> eduSalesList=salesService.selectSalesByCategoryView(3);
+		logger.info("교육 매출 조회 결과, eduSalesList={}",eduSalesList);
+		
+		List<Map<String, Object>> allSalesList=salesService.selectSalesAllView();
+		logger.info("전체 매출 조회 결과, allSalesList={}",allSalesList);
+		
+		model.addAttribute("bookSalesList", bookSalesList);
+		model.addAttribute("mbtiSalesList", mbtiSalesList);
+		model.addAttribute("eduSalesList", eduSalesList);
+		model.addAttribute("allSalesList", allSalesList);
 		
 		model.addAttribute("title", "관리자 페이지");
 		model.addAttribute("memTotal", memberService.getTotalMember(membervo));
