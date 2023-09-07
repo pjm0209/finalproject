@@ -261,27 +261,34 @@ public class MypageController {
 		String userid = (String)session.getAttribute("userid");
 		membervo.setUserid(userid);
 
-		logger.info("개인 정보 수정 처리, 파라미터 vo={},", membervo);
-		membervo.setPwd(passwordEncoder.encode(membervo.getPwd()));
-
-		int result = memberService.loginCheck(membervo.getUserid(), membervo.getPwd());
-		logger.info("비밀번호 체크 결과, result={}", result);
-
-		String msg = "정보 수정 실패!", url = "/mypage/memberEdit";
+		logger.info("회원 수정 처리, 파라미터 membervo={}", membervo);
+			
+		//이메일 처리
+		if(membervo.getEmail()==null || membervo.getEmail().isEmpty()) {
+			membervo.setEmail("");
+		}
 		
-		if(result==MemberService.LOGIN_OK) {
-			
-			int cnt = memberService.updateMember(membervo);
-			logger.info("개인 정보 수정 결과, cnt={}", cnt);
-			
-			if(cnt>0) {
-				msg = "정보 수정 성공!";
-				url = "/main/mypage/mypage";
-			}
-		}else if(result==MemberService.PWD_DISAGREE) {
-			msg="비밀번호가 일치하지 않습니다.";
-		} 
-
+		//전화번호 처리
+		if(membervo.getHp()==null || membervo.getHp().isEmpty()){
+			membervo.setHp("");
+		}
+		
+		//주소 처리
+		if(membervo.getAddress()==null || membervo.getAddress().isEmpty() || membervo.getAddressDetail()== null
+				|| membervo.getAddressDetail().isEmpty()){
+			membervo.setAddress("");
+			membervo.setAddressDetail("");
+		}
+		
+		String msg = "회원 수정 실패!", url = "/main/mypage/memberEdit";
+		
+		int cnt = memberService.updateMember(membervo);
+		logger.info("회원정보 수정 결과, cnt={}", cnt);
+		
+		if(cnt > 0) {
+			msg = "회원 수정 성공!";
+			url= "/main/index";
+		}
 		model.addAttribute("msg", msg);
 		model.addAttribute("url", url);
 
@@ -378,15 +385,15 @@ public class MypageController {
 	                model.addAttribute("url", "/main/index");
 	            } else {
 	                model.addAttribute("msg", "비밀번호 변경 실패!!.");
-	                model.addAttribute("url", "/mypage/newPwd");
+	                model.addAttribute("url", "/main/mypage/newPwd");
 	            }
 	        } else {
 	            model.addAttribute("msg", "현재 비밀번호가 일치하지 않습니다.");
-	            model.addAttribute("url", "/mypage/newPwd");
+	            model.addAttribute("url", "/main/mypage/newPwd");
 	        }
 	    } else {
 	        model.addAttribute("msg", "사용자 정보를 찾을 수 없습니다.");
-	        model.addAttribute("url", "/mypage/newPwd");
+	        model.addAttribute("url", "/main/mypage/newPwd");
 	    }
 
 	    return "common/message";
@@ -425,7 +432,7 @@ public class MypageController {
 		logger.info("내 게시글 리스트 조회 페이지");
 		
 		List<Map<String , Object>> myBoardList = boardService.selectUserBoardList((int)session.getAttribute("no"));
-		logger.info("내 게시글 리스트조회 결과 myBoardList: {}", myBoardList);
+		logger.info("내 게시글 리스트조회 결과 myBoardList.size(): {}", myBoardList.size());
 		
 		model.addAttribute("myBoardList", myBoardList);
 		

@@ -6,6 +6,12 @@ import java.util.Map;
 import com.team2.mbti.common.SearchVO;
 
 public interface AdminService {
+	int EXIST_ID=1; 
+	int NONE_EXIST_ID=2; 
+
+	int LOGIN_OK=1;
+	int PWD_DISAGREE=2; 
+	int USERID_NONE=3; 
 	
 	int insertManager(AdminVO adminvo); 
 	List<AdminVO> selectAllManager(SearchVO vo);

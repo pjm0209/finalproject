@@ -22,7 +22,6 @@ var contextPath="/mbti";
 					var no=$(this).val();
 					var name= $('#name'+no).text()+", ";
 					result="<input type='hidden' name='sendItems["+idx+"].receiveNo' value='"+no+"'>";
-					result+="<input type='hidden' name='adminMessageFlag' value='N'>";
 				}else{
 					var no=$(this).val();
 					var name= $('#name'+no).text();
@@ -49,6 +48,14 @@ var contextPath="/mbti";
 	});
 	 
 	$('#messageOkBtn').click(function(){
+		var len=$('#sendBody').val().length;
+		if(len <1){
+			$('#alertModalBody').html("쪽지 내용을 입력하세요");
+			$('#alertModal').modal('show');
+			
+			return false;
+		}
+		
 		$('form[name=adminMessageFrm]').prop('action',contextPath+'/admin/message/messageWrite');
 		$('form[name=adminMessageFrm]').submit();
 	});
@@ -106,6 +113,13 @@ var contextPath="/mbti";
 	
 	//마이페이지 쪽지 보내기
 	$('#myMessageOkBtn').click(function(){
+		var len=$('#sendBody').val().length;
+		if(len<1){
+			$('#alertModalBody').html("쪽지 내용을 입력하세요");
+			$('#alertModal').modal('show');
+			
+			return false;
+		}
 		$('form[name=myMessageFrm]').submit();
 	});
 	
@@ -121,7 +135,8 @@ var contextPath="/mbti";
 		$('textarea').html(body);
 		$('#messageDetailModal').modal('show');
 		var result="<input type='hidden' name='receiveNo' value='"+no+"'>";
-		$('#input1').html(result);
+		result+="<input type='hidden' name='adminMessageFlag' value='N'>";
+		$('#input2').html(result);
 		if(readDate==null || readDate==''){
 			$.ajax({
 				url:contextPath+'/admin/message/readDateUpdate',
@@ -145,7 +160,7 @@ var contextPath="/mbti";
 		$('#reSendMessage').hide();
 		$('#sendMessage').show();
 		$('textarea').html("").attr('readonly',false);
-		var result="<input type='hidden' name='adminMessageFlag' value='Y'>";
+		var result="<input type='hidden' name='adminMessageFlag' value='N'>";
 		$('#input2').html(result);
 		$('#messageDetailModal').modal('show');
 		

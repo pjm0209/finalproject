@@ -1,8 +1,6 @@
 package com.team2.mbti.admin.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,6 +37,10 @@ public class AdminController {
 		
 	@GetMapping("/index")
 	public String index_get(Model model, MemberVO membervo) {
+		logger.info("관리자 index 페이지");
+		
+		
+		
 		model.addAttribute("title", "관리자 페이지");
 		model.addAttribute("memTotal", memberService.getTotalMember(membervo));
 		model.addAttribute("memToday", memberService.getTodayMember(membervo));
@@ -157,13 +159,13 @@ public class AdminController {
 	
 	@ResponseBody
 	@RequestMapping("/manager/checkId")
-	public int checkId(@RequestParam String adminid, Model model) {
+	public int checkId(@RequestParam String adminId, Model model) {
 		//1
-		logger.info("아이디 중복확인 파라미터, adminid={}", adminid);
+		logger.info("아이디 중복확인 파라미터, adminid={}", adminId);
 
 		//2
 		int result=0;
-		result = adminService.checkAdminId(adminid);
+		result = adminService.checkAdminId(adminId);
 		logger.info("중복확인 결과 result={}", result);
 		
 		//4
@@ -181,7 +183,7 @@ public class AdminController {
 	      
 	      if(cnt > 0) {
 	         msg = "관리자 등록에 성공하였습니다.";
-	         url = "/admin/manager/managerAdditional";
+	         url = "/admin/index";
 	      }
 	      
 	      model.addAttribute("msg",msg);
