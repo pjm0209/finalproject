@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+<link type="text/css" rel="stylesheet" href="<c:url value='/admin-css-js/css/bookMain.css'/>">
 
+<script type="text/javascript" src="<c:url value='/admin-css-js/js/bookMain.js'/>"></script>
 <div class="check_box flex">
 	<div class="inner flex">
 		<div class="check_all flex">

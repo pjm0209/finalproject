@@ -10,13 +10,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team2.mbti.common.ConstUtil;
 import com.team2.mbti.main.basket.model.MainBasketService;
 import com.team2.mbti.main.basket.model.MainBasketVO;
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -43,7 +43,7 @@ public class MainBasketController {
 
 		String resultPage = "";
 		if (mode.equals("cart")) { // 장바구니 담기
-			resultPage = "redirect:/main/book/basket/bookOrderMain";
+			resultPage = "redirect:/main/book/basket/basketList";
 		} else if (mode.equals("order")) { // 바로 구매
 			resultPage = "redirect:/main/book/basket/bookOrdering";
 		}
@@ -53,19 +53,19 @@ public class MainBasketController {
 	}
 
 	@RequestMapping("/basketList")
-	public String basketList(HttpSession session,Model model) {
+	public String basketList(HttpServletRequest request,Model model) {
 		//1
-		String no = (String) session.getAttribute("no");
+		int no = (int)request.getSession().getAttribute("no");
 		logger.info("장바구니 리스트, 파라미터 회원번호 no={}", no);
 		//2
 		List<Map<String, Object>> list
-		= mainBasketService.selectBasketBookView(Integer.parseInt(no));
+		= mainBasketService.selectBasketBookView(no);
 		logger.info("장바구니 리스트 조회 결과, list.size()={}", list.size());
 		//3
-		model.addAttribute("list", list);
+		model.addAttribute("mapList", list);
 	  
 		model.addAttribute("DELIVERY", ConstUtil.DELIVERY);
-		model.addAttribute("TOTAL_PRICE", ConstUtil.TOTAL_PRICE); //4
+		model.addAttribute("TOTAL_PRICE", ConstUtil.TOTAL_PRICE);
 		return "main/book/basket/bookOrderMain";
 	  
 	  }
@@ -88,30 +88,32 @@ public class MainBasketController {
 		//4
 		return qty;
 	}
-	
-	@RequestMapping("/editCartQty")
-	public String editCartQty(@ModelAttribute CartVO vo) {
+	*/
+	@ResponseBody
+	@RequestMapping("/bookAjaxQty")
+	public int bookAjaxQty(@ModelAttribute MainBasketVO vo) {
 		//1
-		logger.info("장바구니 수량 수정처리하기, 파라미터 vo={}", vo);
+		logger.info("장바구니 수량 ajax 수정처리하기, 파라미터 vo={}", vo);
 		//2
-		int cnt = cartService.editCartQty(vo);
+		int cnt = mainBasketService.editBasketQty(vo);
 		logger.info("장바구니 수량 수정  결과, cnt={}", cnt);
 		//3
 		//4
-		return "redirect:/shop/cart/cartList";
+		return cnt;
 	}
 	
-	@RequestMapping("/deleteCart")
-	public String deleteCart(@RequestParam(defaultValue = "0")int cartNo) {
+	@ResponseBody
+	@RequestMapping("/bookAjaxDelete")
+	public int bookAjaxDelete(@RequestParam(defaultValue = "0")int basketNo) {
 		//1
-		logger.info("장바구니 삭제 처리하기, 파라미터 cartNo={}", cartNo);
+		logger.info("장바구니 ajax 삭제 처리하기, 파라미터 basketNo={}", basketNo);
 		//2
-		int cnt = cartService.deleteCart(cartNo);
+		int cnt = mainBasketService.deleteByBasketNo(basketNo);
 		logger.info("장바구니 삭제 처리 결과, cnt={}", cnt);
 		//3
 		//4
-		return "redirect:/shop/cart/cartList";
-	}*/
+		return cnt;
+	}
 	
 	@RequestMapping("/bookBasket")
 	public String bookBasket(@RequestParam(defaultValue = "0") int bookNo, Model model) {
@@ -123,21 +125,34 @@ public class MainBasketController {
 	
 	@RequestMapping("/bookOrderMain")
 	public String bookOrderMain(@RequestParam(defaultValue = "0") int bookNo, Model model) {
-		logger.info("책 주문 페이지 - bookOrderMain, 파라미터 bookNo={}", bookNo);
-
+		logger.info("책 주문 페이지 1단계(장바구니) - bookOrderMain, 파라미터 bookNo={}", bookNo);
+		List<Map<String, Object>> list = mainBasketService.selectBasketBookView(bookNo); 
+		model.addAttribute("mapList", list);
 		return "main/book/basket/bookOrderMain";
 	}
 
 	@RequestMapping("/bookOrdering")
-	public String bookOrdering(@RequestParam(defaultValue = "0") int bookNo, Model model) {
-		logger.info("책 주문 페이지 - bookOrderMain, 파라미터 bookNo={}", bookNo);
-
+	public String bookOrdering(HttpServletRequest request, Model model) {
+		logger.info("책 주문 페이지 2단계(결제 전 주문 확인) - bookOrderMain");
+		// 1
+		int no = (int)request.getSession().getAttribute("no");
+		logger.info("2단계(결제 전 주문 확인), 파라미터 회원번호 no={}", no);
+		//2
+		List<Map<String, Object>> list
+		= mainBasketService.selectBasketBookView(no);
+		logger.info("장바구니 조회 결과, list.size()={}", list.size());
+		//3
+		model.addAttribute("mapList", list);
+	  
+		model.addAttribute("DELIVERY", ConstUtil.DELIVERY);
+		model.addAttribute("TOTAL_PRICE", ConstUtil.TOTAL_PRICE);
+		
 		return "main/book/basket/bookOrdering";
 	}
 	
 	@RequestMapping("/bookOrderComplete")
 	public String bookOrderComplete(@RequestParam(defaultValue = "0") int bookNo, Model model) {
-		logger.info("책 주문 페이지 - bookOrderComplete, 파라미터 bookNo={}", bookNo);
+		logger.info("책 주문 페이지 3단계(결제 내역 확인) - bookOrderComplete, 파라미터 bookNo={}", bookNo);
 
 		return "main/book/basket/bookOrderComplete";
 	}

@@ -3,6 +3,6 @@
 <%@include file="../inc/top.jsp" %>
 <%@include file="../inc/mypage.jsp" %>
 <section id="myPage">
-	<%@include file="../../main/book/bookBasket.jsp" %>
+	<%@include file="../../main/book/basket/bookOrderMain.jsp"%>
 </section>
 <%@include file="../inc/bottom.jsp" %>

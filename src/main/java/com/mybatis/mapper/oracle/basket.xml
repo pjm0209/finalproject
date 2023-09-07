@@ -13,7 +13,7 @@
 	</insert>
 	
 	<select id="selectBasketBookView" parameterType="int" resultType="map">
-		select * from baseketBookView
+		select * from basketBookView
 		where no = #{no}
 	</select>
 	
@@ -35,6 +35,10 @@
 		set basket_qty = #{basketQty}
 		where basket_no = #{basketNo}
 	</update>
+	<delete id="deleteByBasketNo" parameterType="int">
+		delete from basket
+		where basket_no=#{basketNo}
+	</delete>
 	
 	<delete id="deleteBasket" parameterType="int">
 		delete from basket

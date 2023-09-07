@@ -57,7 +57,7 @@ function sendSearchKeyword(){
 					 	<p>MBTI Form M<br> 자가채점용</p>
 					 	<p>MBTI Form M 자가채점용은<br> 검사지, 답안지, 프로파...</p>
 					 	<p>6,800원</p>
-					 	<button onclick="location.href='bookDetail?bookNo=1&bookCategory=도서'">자세히 보기</button>
+					 	<button onclick="location.href='bookDetail?bookNo=1&bookCategory=검사자료'">자세히 보기</button>
 					 </div>
 				</div>
 				<div class="booksearch shadow-sm bg-body rounded">
@@ -171,30 +171,46 @@ function sendSearchKeyword(){
 				<input type="hidden" name="currentPage" value="1">
 			</form>
 			<c:if test="${!empty searchKeyword}">
+				<section style="border-top: 2px #ee7843 solid;border-bottom: 2px #ee7843 solid;padding: 10px 0;
+				margin: 30px 0;">
 					<ul class="booklist" style="padding-left:0;">
 						${pagingInfo.totalRecord}개의 결과가 있습니다.
-						<c:forEach var="vo" items="${list}">
+						<c:if test="${empty list}">
 							<li class="flex">
-								<div class="flex title">
-									<a href="<c:url value='/main/book/bookDetail?bookNo=${vo.bookNo}&bookCategory=${vo.bookCategory}'/>">
-										<img class="shadow-sm bg-body rounded" alt="${vo.bookImgOriginalname}" src="<c:url value='/images/bookProduct/upload_img/${vo.bookImgName}'/>" style="width: 120px;">
-									</a>
-									<div>
-										<p class="box">${vo.bookCategory}</p>
-										<a href="<c:url value='/main/book/bookDetail?bookNo=${vo.bookNo}&bookCategory=${vo.bookCategory}'/>">${vo.bookTitle}</a>
-										<p><span>가격 | </span><fmt:formatNumber value="${vo.bookPrice}" pattern="#,###"/>원</p>
-										<p><span>작가 | </span>${vo.bookWriter}<span style="padding-left:5px">출판사 | </span>${vo.bookPublisher}</p>
-										
+								<div style="height: 300px; text-align: center;">
+									<div style="margin-left: 500px;margin-top: 50px;">
+										<p>검색 결과 해당 제품은 없습니다.</p>
+										<img src="<c:url value='/images/empty.jpg'/>" alt="해당 제품이 현재 없습니다."
+										 class="">
 									</div>
-									
-								</div>
-								<div class="btn">
-									<a href="<c:url value='/main/book/bookOrderMain'/>">장바구니</a>
-									<a href="#">바로구매</a>
 								</div>
 							</li>
-						</c:forEach>
+						</c:if>
+						<c:if test="${!empty list}">
+							<c:forEach var="vo" items="${list}">
+								<li class="flex">
+									<div class="flex title">
+										<a href="<c:url value='/main/book/bookDetail?bookNo=${vo.bookNo}&bookCategory=${vo.bookCategory}'/>">
+											<img class="shadow-sm bg-body rounded" alt="${vo.bookImgOriginalname}" src="<c:url value='/images/bookProduct/upload_img/${vo.bookImgName}'/>" style="width: 120px;">
+										</a>
+										<div>
+											<p class="box">${vo.bookCategory}</p>
+											<a href="<c:url value='/main/book/bookDetail?bookNo=${vo.bookNo}&bookCategory=${vo.bookCategory}'/>">${vo.bookTitle}</a>
+											<p><span>가격 | </span><fmt:formatNumber value="${vo.bookPrice}" pattern="#,###"/>원</p>
+											<p><span>작가 | </span>${vo.bookWriter}<span style="padding-left:5px">출판사 | </span>${vo.bookPublisher}</p>
+											
+										</div>
+										
+									</div>
+									<div class="btn">
+										<a href="<c:url value='/main/book/bookOrderMain'/>">장바구니</a>
+										<a href="#">바로구매</a>
+									</div>
+								</li>
+							</c:forEach>
+						</c:if>
 					</ul>
+				</section>
 				<!-- 페이지 번호 추가 -->	
 				<nav id="bookPaging" class="bookPaging" aria-label="Page navigation example" style="margin-top: 50px;">
 				  <ul class="pagination pagination-lg justify-content-center">
