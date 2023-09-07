@@ -389,7 +389,7 @@ button.main-button1 {
 						${map.BOARD_TITLE } <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i>
 					</div>
 					<div id="faq${i }" class="collapse" data-bs-parent=".faq-list">
-						<p>${map.BOARD_BODY }</p>
+						${map.BOARD_BODY }
 					</div>
 				</li>
 				<c:set var="i" value="${i + 1 }"/>
