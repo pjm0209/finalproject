@@ -22,4 +22,6 @@ public interface MainBasketService {
 	int completeOrders(int no);
 	
 	int insertOrdersAndEditOthers(List<Map<String, Object>> list);
+	
+	List<Map<String, Object>> selectMyCurrentOrder(int ordersNo);
 }//
