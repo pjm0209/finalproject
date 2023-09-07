@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+<<<<<<< HEAD
                                                                             
     
+=======
+<<<<<<< HEAD
+                                                                    
+=======
+                                                                        
+>>>>>>> branch 'main' of https://github.com/pjm0209/finalproject.git
     
+>>>>>>> branch 'main' of https://github.com/pjm0209/finalproject.git
     
     
     
@@ -18,9 +26,17 @@
     
     
     <wb-module deploy-name="mbti-0.0.1-SNAPSHOT">
+<<<<<<< HEAD
                                                                                                                                                         
         
+=======
+<<<<<<< HEAD
+                                                                                                                                        
+=======
+                                                                                                                                                
+>>>>>>> branch 'main' of https://github.com/pjm0209/finalproject.git
         
+>>>>>>> branch 'main' of https://github.com/pjm0209/finalproject.git
         
         
         
@@ -37,9 +53,17 @@
         
         
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+<<<<<<< HEAD
                                                                                                                                                         
         
+=======
+<<<<<<< HEAD
+                                                                                                                                        
+=======
+                                                                                                                                                
+>>>>>>> branch 'main' of https://github.com/pjm0209/finalproject.git
         
+>>>>>>> branch 'main' of https://github.com/pjm0209/finalproject.git
         
         
         
@@ -56,9 +80,17 @@
         
         
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+<<<<<<< HEAD
                                                                                                                                                         
         
+=======
+<<<<<<< HEAD
+                                                                                                                                        
+=======
+                                                                                                                                                
+>>>>>>> branch 'main' of https://github.com/pjm0209/finalproject.git
         
+>>>>>>> branch 'main' of https://github.com/pjm0209/finalproject.git
         
         
         
@@ -75,9 +107,17 @@
         
         
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+<<<<<<< HEAD
                                                                                                                                                         
         
+=======
+<<<<<<< HEAD
+                                                                                                                                        
+=======
+                                                                                                                                                
+>>>>>>> branch 'main' of https://github.com/pjm0209/finalproject.git
         
+>>>>>>> branch 'main' of https://github.com/pjm0209/finalproject.git
         
         
         
@@ -94,10 +134,28 @@
         
         
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+                                        
+        
+        
+        
+>>>>>>> branch 'main' of https://github.com/pjm0209/finalproject.git
+>>>>>>> branch 'main' of https://github.com/pjm0209/finalproject.git
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/target/generated-sources/annotations"/>
+<<<<<<< HEAD
                                                                                                                                                         
         
+=======
+<<<<<<< HEAD
+                                                                                                                                        
+=======
+                                                                                                                                                
+>>>>>>> branch 'main' of https://github.com/pjm0209/finalproject.git
         
+>>>>>>> branch 'main' of https://github.com/pjm0209/finalproject.git
         
         
         
@@ -114,9 +172,17 @@
         
         
         <property name="context-root" value="mbti"/>
+<<<<<<< HEAD
                                                                                                                                                         
         
+=======
+<<<<<<< HEAD
+                                                                                                                                        
+=======
+                                                                                                                                                
+>>>>>>> branch 'main' of https://github.com/pjm0209/finalproject.git
         
+>>>>>>> branch 'main' of https://github.com/pjm0209/finalproject.git
         
         
         
@@ -133,9 +199,17 @@
         
         
         <property name="java-output-path" value="/FinalProject/target/classes"/>
+<<<<<<< HEAD
                                                                                                                                                     
     
+=======
+<<<<<<< HEAD
+                                                                                                                                    
+=======
+                                                                                                                                            
+>>>>>>> branch 'main' of https://github.com/pjm0209/finalproject.git
     
+>>>>>>> branch 'main' of https://github.com/pjm0209/finalproject.git
     
     
     
@@ -152,9 +226,17 @@
     
     
     </wb-module>
+<<<<<<< HEAD
                                                                         
 
+=======
+<<<<<<< HEAD
+                                                                
+=======
+                                                                    
+>>>>>>> branch 'main' of https://github.com/pjm0209/finalproject.git
 
+>>>>>>> branch 'main' of https://github.com/pjm0209/finalproject.git
 
 
 
