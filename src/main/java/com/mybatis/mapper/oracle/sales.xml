@@ -9,4 +9,8 @@
 	<select id="selectSalesAllView" resultType="map">
 		select * from salesbycategoryview
 	</select>
+	<select id="selectRegdateSalesView" resultType="map">
+		select sales_category_no, sumprice, to_char(regdate,'yyyy-MM-dd')as REGDATE from regdatesalesview
+		order by regdate
+	</select>
 </mapper>

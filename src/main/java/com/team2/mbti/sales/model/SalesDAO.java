@@ -9,4 +9,5 @@ import org.apache.ibatis.annotations.Mapper;
 public interface SalesDAO {
 	List<Map<String, Object>> selectSalesByCategoryView(int salesCategoryNo);
 	List<Map<String, Object>> selectSalesAllView();
+	List<Map<String, Object>>selectRegdateSalesView();
 }
