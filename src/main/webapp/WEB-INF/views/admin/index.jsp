@@ -11,37 +11,7 @@
 <input type="hidden" id="memToday" value="${memToday}">
   
 <script type="text/javascript">
-var ctx = document.getElementById("myChart");
-const myChart = new Chart(ctx,{
-	type: 'line',
-	data: {
-		labels: ["5일전", "4일전", "3일전", "2일전", "1일전", "오늘"],
-		datasets:[{
-			label: '회원가입 수',
-			data: ['${memMinus1}', '${memMinus2}', '${memMinus3}', '${memMinus4}', '${memMinus5}', '${memToday}'],
-			fill: false,
-			lineTension: 0,
-			borderColor: "rgba(255, 201, 14, 1)",
-			backgroundColor: "rgba(255, 201, 14, 0.5)",
-			borderWidth: 2
-		}]
-	},
-	options: {
-		responsive: true,
-		scales:{
-			yAxes:[{
-				ticks:{
-					beginAtZero:true
-				}
-			}]
-		},
-		label:{
-			font:{
-				family:"jua"
-			}
-		}
-	}
-})
+
 </script>
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
