@@ -1,6 +1,8 @@
 package com.team2.mbti.admin.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +23,7 @@ import com.team2.mbti.common.PaginationInfo;
 import com.team2.mbti.common.SearchVO;
 import com.team2.mbti.member.model.MemberService;
 import com.team2.mbti.member.model.MemberVO;
+import com.team2.mbti.message.model.MessageService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -32,6 +35,7 @@ public class AdminController {
 	
 	private final AdminService adminService;
 	private final MemberService memberService;
+	private final MessageService messageService;
 		
 	@GetMapping("/index")
 	public String index_get(Model model, MemberVO membervo) {
@@ -215,5 +219,15 @@ public class AdminController {
 		return "common/message";
 	}	
 	
+	
+	@RequestMapping("/messageCount")
+	public String messageCount(Model model) {
+		int messageCount=messageService.getAdminMessageCount();
+		logger.info("읽지 않은 쪽지 수 결과 messageCount={}",messageCount);
+		
+		model.addAttribute("messageCount", messageCount);
+		
+		return "admin/messageCount";
+	}
 	
 }

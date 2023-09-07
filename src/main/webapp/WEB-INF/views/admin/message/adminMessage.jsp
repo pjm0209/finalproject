@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp" %>
 <style type="text/css">
-	#messateD{
+	#messateDSend{
 		float: right;
 		background-color: #eb5d1e;
 	    border:0;
@@ -12,7 +12,7 @@
 		margin-right: 9px;
 		color: white;
 	}
-	#messateC{
+	#messateCDelete{
 		float: right;
 		background-color: #eb5d1e;
 	    border:0;
@@ -26,8 +26,7 @@
 <div class="board-body">
 	<div id="board-title">
 		<h5>관리자 쪽지 목록</h5>
-		<button class="message-button" id="messateC">삭제</button>
-		<button class="message-button" id="messateD">쪽지 보내기</button>
+		<button class="message-button" id="messateCDelete">삭제</button>
 	</div>
 	<div class="board">
 		<div class="board-head">
@@ -46,39 +45,43 @@
 				</form>
 			</div>
 		</div>
-		<table class="table" id="mbtitb">
-			<thead>
-				<tr class="board-table-colum">
-					<th scope="col" class="message-checkbox"><input type="checkbox" id="check-All" class="board-checkbox"></th>
-					<th scope="col" class="message-no">회원 번호</th>
-					<th scope="col" class="message-no">아이디</th>
-					<th scope="col" class="message-body">쪽지 내용</th>
-					<th scope="col" class="message-no">날짜</th>
-				</tr>
-			</thead>
-			<c:set var="idx" value="0"/>
-			<tbody>
-				<c:forEach var="map" items="${list}">
-					<c:if test="${!empty list}">
+		<form name="adminMessageFrm2" method="post">
+			<table class="table" id="mbtitb">
+				<thead>
+					<tr class="board-table-colum">
+						<th scope="col" class="message-checkbox"><input type="checkbox" id="check-All" class="board-checkbox"></th>
+						<th scope="col" class="message-no">회원 번호</th>
+						<th scope="col" class="message-no">아이디</th>
+						<th scope="col" class="message-body">쪽지 내용</th>
+						<th scope="col" class="message-no">날짜</th>
+					</tr>
+				</thead>
+				<c:set var="idx" value="0"/>
+				<tbody>
+					<c:forEach var="map" items="${list}">
+						<input type="hidden" name="sendItems[${idx}].sendDmNo" value="${map['SEND_DM_NO']}" />
+						<input type="hidden" name="sendItems[${idx}].readDate" value="${map['READ_DATE']}" />
+						<c:if test="${!empty list}">
+							<tr>
+								<th scope="row">
+									<input type="checkbox" name="sendItems[${idx}].sendDmNo" class="board-checkbox check" value="${map['SEND_DM_NO']}">
+								</th>
+								<td name="no">${map["NO"]}</td>
+								<td>${map["SEND_ID"]}</td>
+								<td name="messageDetail" style="cursor: pointer;"><span style="float:left;">${map["SEND_BODY"]}</span></td>
+								<td><fmt:formatDate value="${map['SEND_REGDATE']}" pattern="yyyy-MM-dd [HH:mm]"/></td>
+							</tr>
+						</c:if>
+						<c:set var="idx" value="${idx+1}"/>
+					</c:forEach>
+					<c:if test="${empty list}">
 						<tr>
-							<input type="hidden" name="sendDmNo" value="${map['SEND_DM_NO']}" />
-							<input type="hidden" name="readDate" value="${map['READ_DATE']}" />
-							<th scope="row"><input type="checkbox" name="sendItems[${idx}].receiveNo" class="board-checkbox check" value="${map['SEND_DM_NO']}"></th>
-							<td>${map["NO"]}</td>
-							<td>${map["SEND_ID"]}</td>
-							<td name="messageDetail" style="cursor: pointer;"><span style="float:left;">${map["SEND_BODY"]}</span></td>
-							<td><fmt:formatDate value="${map['SEND_REGDATE']}" pattern="yyyy-MM-dd [HH:mm]"/></td>
+							<td colspan="5">해당 검색 내용이 없습니다.</td>
 						</tr>
 					</c:if>
-					<c:set var="idx" value="${idx+1}"/>
-				</c:forEach>
-				<c:if test="${empty list}">
-					<tr>
-						<td colspan="5">해당 검색 내용이 없습니다.</td>
-					</tr>
-				</c:if>
-			</tbody>
-		</table>
+				</tbody>
+			</table>
+		</form>	
 	</div>
 </div>
 
@@ -93,16 +96,20 @@
 					aria-label="Close"></button>
 			</div>
 			<div style="margin-left: 15px;margin-top: 20px">
-				<span>보낸 회원 : &nbsp;</span><span id="memberNameModal"></span>
+				<span id="user_id">보낸 회원 : &nbsp;</span><span id="memberNameModal"></span>
 			</div>
-			<form name="adminMessageFrm" method="post" action="<c:url value='/admin/message/messageWrite'/>">
+			<form name="adminMessageFrm" method="post" action="<c:url value='/admin/message/messageWrite2'/>">
 				<div class="modal-body" style="margin:0 auto">
-					<p id="input"></p>
+					<p id="input1"></p>
+					<p id="input2"></p>
 					<p>쪽지 내용</p>
-					<textarea readonly="readonly" name="sendItems[0].sendBody" id="sendBody" rows="20" cols="88" style="margin:0 auto;"></textarea>
+					<textarea readonly="readonly" name="sendBody" id="sendBody" rows="20" cols="88" style="margin:0 auto;"></textarea>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="modalClose">닫기</button>
+					<button type="button" class="btn bg-orange-primary" id="reSendMessage">답장</button>
+					<button type="button" class="btn bg-orange-primary" id="sendMessage" style="display: none;">보내기</button>
+					
 				</div>
 			</form>
 		</div>
