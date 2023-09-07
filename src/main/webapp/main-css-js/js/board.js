@@ -72,8 +72,13 @@ $(function(){
 	});
 	
 	/*게시글쓰기 저장버튼*/
-	$('.boardSubmitBtn').click(function(){
-		$('form[name=boardWriteForm]').submit();
+	$('.boardSubmitBtn').click(function(){		
+		if($('#board-write-title').val().length < 1) {
+			$('#alertModalBody').html('제목을 입력해주세요');
+			$('#alertModalBtn').trigger('click');
+		} else {					
+			$('form[name=boardWriteForm]').submit();			
+		}
 	});
 	
 	//게시글리스트 검색
@@ -129,9 +134,10 @@ $(function(){
 		var boardNo = $('input[name=boardNo]').val();
 		var boardGroupNo = $('input[name=boardGroupNo]').val();
 		var boardStep = $('input[name=boardStep]').val();
+		var boardFormNo = $('input[name=boardFormNo]').val();
 		
 		$('#confirmModalBody').html('게시글을 삭제하시겠습니까?');
-		$('#confirmOk').attr('onclick', 'location.href=\"' + contextPath + '/main/board/boardDel?boardNo=' + boardNo + '&boardGroupNo=' + boardGroupNo + '&boardStep=' + boardStep + '\"');
+		$('#confirmOk').attr('onclick', 'location.href=\"' + contextPath + '/main/board/boardDel?boardNo=' + boardNo + '&boardGroupNo=' + boardGroupNo + '&boardStep=' + boardStep + '$boardFormNo=' + boardFormNo + '\"');
 		$('#confirmModalBtn').trigger('click');
 	});
 	
@@ -369,7 +375,7 @@ function comments(comment) {
 					str += "<p class='comment-writer'>" + vo.name;
 				}
 				
-				if(boardWriter === vo.name) {
+				if(boardWriter === vo.userId) {
 					str += "<span class='boardWriter-commentWrite'>작성자</span>"; 
 				} else if(boardWriter === vo.adminId) {
 					str += "<span class='boardWriter-commentWrite'>작성자</span>";

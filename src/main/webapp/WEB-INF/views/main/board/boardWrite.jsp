@@ -48,6 +48,7 @@
 				<input type="hidden" name="no" value="${sessionScope.no }">
 				<c:if test="${!empty param.boardNo }">
 					<input type="hidden" name="boardNo" value="${param.boardNo }">
+					<input type="hidden" name="boardSecreate" value="${map.BOARD_SECREATE }">
 				</c:if>
 				<c:if test="${param.boardWriteType == 'reply' }">
 					<input type="hidden" name="boardGroupNo" value="${map.BOARD_GROUP_NO }">

@@ -18,5 +18,22 @@ h1 {
 }
 
 th.ck {
-    width: 20px;
+    width: 80px;
+}
+
+.title a {
+    text-align: left;
+    float: left;
+    width: auto;
+}
+
+.title i {
+	float: left;
+}
+
+.title img {
+    width: 15px;
+    height: 15px;
+    margin: 6px;
+    float: left;
 }
