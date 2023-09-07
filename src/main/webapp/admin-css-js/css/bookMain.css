@@ -732,7 +732,7 @@ ul, li {
 /*bookOrderMain.jsp*/
 #myPage{height: 50%;}
 #basket{
-
+	margin-left: 100px;
 	position: relative;
     left: 50%;
     transform: translateX(-50%);
@@ -837,7 +837,7 @@ position:relative;
     max-height:360px;
     position:fixed;
     top: 207px;
-    right:260px;
+    right:110px;
 }
 .booklist_area>ul{padding:0; font-size:22px; margin:0;}
 
@@ -854,7 +854,7 @@ position:relative;
     font-weight: bold;
     margin-top:10px;
 }
-.check_box{	margin-top: 93px; width:1420px; position:relative; left: 50%; transform: translateX(-50%);}
+.check_box{ margin-left: 100px;	margin-top: 93px; width:1420px; position:relative; left: 50%; transform: translateX(-50%);}
 .check_box .inner{
 	width:69%; margin-top: 0px; margin-bottom:10px;
     background: #efefef;
@@ -873,7 +873,7 @@ position:relative;
     section.booklist_right {    width: 23%;
     position: absolute;
     top: 50px;
-    right: 240px;}
+    right: 90px;}
     
     section.booklist_right>ul.flex li span{vertical-align:bottom; font-size:30px;}
     section.booklist_right>ul.flex li{font-size:22px;}
@@ -975,3 +975,8 @@ strong{
 #order_complete>ul .flex.list .text_box{padding-left:30px;}
 #order_complete .list_btn{display: block; padding:10px 10px; margin:0 auto; background:#ee7843; color:#fff; width:200px; text-align: center;}
 /*bookordercomplete.jsp*/
+
+/*mypageOrderList.jsp*/
+
+
+/*mypageOrderList.jsp*/
