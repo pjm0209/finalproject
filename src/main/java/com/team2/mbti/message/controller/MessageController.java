@@ -54,12 +54,12 @@ public class MessageController {
 	}
 	
 	@RequestMapping("/messageWrite")
-	public String messageWrite(@ModelAttribute SendDmListVO sendDmListVo,@RequestParam(required = false) String adminMessageFlag, HttpSession session,Model model) {
+	public String messageWrite(@ModelAttribute SendDmListVO sendDmListVo,@RequestParam(required = false, defaultValue = "N") String adminMessageFlag, HttpSession session,Model model) {
 		int adminNo=(int)session.getAttribute("adminNo");
-		logger.info("쪽지 보내기 처리, 파라미터 sendDmListVo={}", sendDmListVo);
+		logger.info("쪽지 보내기 처리, 파라미터 sendDmListVo={},adminMessageFlag={}", sendDmListVo,adminMessageFlag);
 		
 		String msg="",url="/admin/message/message";
-		int cnt=messageService.insertSendDmToAdmin(sendDmListVo, adminNo);
+		int cnt=messageService.insertSendDmToAdmin(sendDmListVo, adminNo, adminMessageFlag);
 		logger.info("쪽지 보내기 결과 cnt={}",cnt);
 		
 		if(cnt>0) {

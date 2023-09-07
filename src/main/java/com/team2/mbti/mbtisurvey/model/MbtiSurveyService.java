@@ -27,4 +27,5 @@ public interface MbtiSurveyService {
 	
 	List<Map<String, Object>>selectMbtiStatistics();
 	public int deleteMbtiResult(MbtiResultListVO mbtiResultListVo);
+	int insertSalesByMbti();
 }

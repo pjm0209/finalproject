@@ -108,4 +108,9 @@
 		where no=#{no} and question_type_no=#{questionTypeNo}
 	</delete>
 	
+	<insert id="insertSalesByMbti">
+		insert into sales
+		values(sales_seq.nextval,2,'MBTI 정식검사',20000,SYSDATE)
+	</insert>
+	
 </mapper>
