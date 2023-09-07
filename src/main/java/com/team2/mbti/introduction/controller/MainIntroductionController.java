@@ -12,19 +12,12 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MainIntroductionController {
 	private static final Logger logger = LoggerFactory.getLogger(MainIntroductionController.class);
-	
-	@RequestMapping("/info")
-	public String info() {
-		logger.info("소개 화면");
 		
-		return "main/Introduction/info";	
-	}
-	
-	@RequestMapping("/Vision")
+	@RequestMapping("/info")
 	public String Vision() {
 		logger.info("비전  화면");
 		
-		return "main/Introduction/Vision";	
+		return "main/Introduction/info";	
 	}
 	
 
