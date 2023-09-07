@@ -208,6 +208,11 @@ public class BoardController {
 		
 		List<Map<String, Object>> fileList = new ArrayList<>();
 		
+		int boardFormNo=vo.getBoardFormNo();
+		if(boardFormNo!=3) {
+			vo.setBoardSecreate("N");
+		}
+		
 		try {
 			fileList = fileUploadUtil.fileupload(request, ConstUtil.UPLOAD_FILE_FLAG);
 		} catch (IllegalStateException e) {

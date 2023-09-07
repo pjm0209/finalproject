@@ -97,7 +97,8 @@ div#board-title h5 {
 }
 
 button#button-addon2-board {
-    width: 80px;
+    width: 75px;
+    height: 40px;
 }
 
 button#board-write-button {

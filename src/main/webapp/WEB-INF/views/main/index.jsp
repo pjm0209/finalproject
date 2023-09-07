@@ -1,12 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="inc/top.jsp" %>
+
+<style>
+button.main-button1 {
+    background-color: #eb5d1e;
+    height: 70px;
+    width: 235px;
+    font-size: 24px;
+    border: 0;
+    border-radius: 100px;
+    padding: 6px 41px;
+    margin-top: 450px;
+    margin-right: -305px;
+    color: white;
+}
+</style>
+
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex align-items-center">
 
     <div class="container">
       <div class="row gy-4">
-        <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
+      <form name="frm-mbti1" id="frm-mbti1" method="post" action="<c:url value='/main/mbti/mbti'/>">
+			<input type="hidden" name="questionTypeNo" value="1"/>
+			<button type="submit" class="main-button1" id="mbti-free-button">검사하러 가기</button>
+	  </form>
+        <%-- <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
           <h1>Bettter digital experience with Ninestars</h1>
           <h2>We are team of talented designers making websites with Bootstrap</h2>
           <div>
@@ -15,7 +35,7 @@
         </div>
         <div class="col-lg-6 order-1 order-lg-2 hero-img">
           <img src="${path }/assets/img/hero-img.svg" class="img-fluid animated" alt="">
-        </div>
+        </div> --%>
       </div>
     </div>
 
@@ -23,7 +43,7 @@
 
   <main id="main">
 
-    <!-- ======= About Section ======= -->
+    <%-- <!-- ======= About Section ======= -->
     <section id="about" class="about">
       <div class="container">
 
@@ -99,18 +119,18 @@
         </div>
 
       </div>
-    </section><!-- End Services Section -->
+    </section><!-- End Services Section --> --%>
 
     <!-- ======= Portfolio Section ======= -->
     <section id="portfolio" class="portfolio">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-          <h2>Portfolio</h2>
-          <p>Check out our beautifull portfolio</p>
+          <h2>What's your MBTI?</h2>
+          <p>16가지 MBTI 유형을 만나보세요</p>
         </div>
 
-        <div class="row" data-aos="fade-up" data-aos-delay="100">
+        <!-- <div class="row" data-aos="fade-up" data-aos-delay="100">
           <div class="col-lg-12">
             <ul id="portfolio-flters">
               <li data-filter="*" class="filter-active">All</li>
@@ -119,132 +139,230 @@
               <li data-filter=".filter-web">Web</li>
             </ul>
           </div>
-        </div>
+        </div> -->
 
         <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
 
           <div class="col-lg-4 col-md-6 portfolio-item filter-app">
             <div class="portfolio-wrap">
-              <img src="${path }/assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
+              <img src="${path }/assets/img/portfolio/ENFJ.jpg" class="img-fluid" alt="">
               <div class="portfolio-links">
-                <a href="${path }/assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bi bi-plus"></i></a>
-                <a href="${path }/portfolio-details" title="More Details"><i class="bi bi-link"></i></a>
+                <a href="${path }/assets/img/portfolio/ENFJ.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="ENFJ"><i class="bi bi-plus"></i></a>
+                <a href="/mbti/main/mbti/mbtiResult?mbtiType=ENFJ" title="More Details"><i class="bi bi-link"></i></a>
               </div>
               <div class="portfolio-info">
-                <h4>App 1</h4>
-                <p>App</p>
+                <h4>ENFJ</h4>
+                <p>선도자 유형</p>
               </div>
             </div>
           </div>
 
           <div class="col-lg-4 col-md-6 portfolio-item filter-web">
             <div class="portfolio-wrap">
-              <img src="${path }/assets/img/portfolio/portfolio-2.jpg" class="img-fluid" alt="">
+              <img src="${path }/assets/img/portfolio/ENFP.jpg" class="img-fluid" alt="">
               <div class="portfolio-links">
-                <a href="${path }/assets/img/portfolio/portfolio-2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 3"><i class="bi bi-plus"></i></a>
-                <a href="${path }/portfolio-details" title="More Details"><i class="bi bi-link"></i></a>
+                <a href="${path }/assets/img/portfolio/ENFP.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="ENFP"><i class="bi bi-plus"></i></a>
+                <a href="/mbti/main/mbti/mbtiResult?mbtiType=ENFP" title="More Details"><i class="bi bi-link"></i></a>
               </div>
               <div class="portfolio-info">
-                <h4>Web 3</h4>
-                <p>Web</p>
+                <h4>ENFP</h4>
+                <p>활동가 유형</p>
               </div>
             </div>
           </div>
 
           <div class="col-lg-4 col-md-6 portfolio-item filter-app">
             <div class="portfolio-wrap">
-              <img src="${path }/assets/img/portfolio/portfolio-3.jpg" class="img-fluid" alt="">
+              <img src="${path }/assets/img/portfolio/ENTJ.jpg" class="img-fluid" alt="">
               <div class="portfolio-links">
-                <a href="${path }/assets/img/portfolio/portfolio-3.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 2"><i class="bi bi-plus"></i></a>
-                <a href="${path }/portfolio-details" title="More Details"><i class="bi bi-link"></i></a>
+                <a href="${path }/assets/img/portfolio/ENTJ.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="ENTJ"><i class="bi bi-plus"></i></a>
+                <a href="/mbti/main/mbti/mbtiResult?mbtiType=ENTJ" title="More Details"><i class="bi bi-link"></i></a>
               </div>
               <div class="portfolio-info">
-                <h4>App 2</h4>
-                <p>App</p>
+                <h4>ENTJ</h4>
+                <p>통솔자 유형</p>
               </div>
             </div>
           </div>
 
           <div class="col-lg-4 col-md-6 portfolio-item filter-card">
             <div class="portfolio-wrap">
-              <img src="${path }/assets/img/portfolio/portfolio-4.jpg" class="img-fluid" alt="">
+              <img src="${path }/assets/img/portfolio/ENTP.jpg" class="img-fluid" alt="">
               <div class="portfolio-links">
-                <a href="${path }/assets/img/portfolio/portfolio-4.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 2"><i class="bi bi-plus"></i></a>
-                <a href="${path }/portfolio-details" title="More Details"><i class="bi bi-link"></i></a>
+                <a href="${path }/assets/img/portfolio/ENTP.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="ENTP"><i class="bi bi-plus"></i></a>
+                <a href="/mbti/main/mbti/mbtiResult?mbtiType=ENTP" title="More Details"><i class="bi bi-link"></i></a>
               </div>
               <div class="portfolio-info">
-                <h4>Card 2</h4>
-                <p>Card</p>
+                <h4>ENTP</h4>
+                <p>변론가 유형</p>
               </div>
             </div>
           </div>
 
           <div class="col-lg-4 col-md-6 portfolio-item filter-web">
             <div class="portfolio-wrap">
-              <img src="${path }/assets/img/portfolio/portfolio-5.jpg" class="img-fluid" alt="">
+              <img src="${path }/assets/img/portfolio/ESFJ.jpg" class="img-fluid" alt="">
               <div class="portfolio-links">
-                <a href="${path }/assets/img/portfolio/portfolio-5.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 2"><i class="bi bi-plus"></i></a>
-                <a href="${path }/portfolio-details" title="More Details"><i class="bi bi-link"></i></a>
+                <a href="${path }/assets/img/portfolio/ESFJ.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="ESFJ"><i class="bi bi-plus"></i></a>
+                <a href="/mbti/main/mbti/mbtiResult?mbtiType=ESFJ" title="More Details"><i class="bi bi-link"></i></a>
               </div>
               <div class="portfolio-info">
-                <h4>Web 2</h4>
-                <p>Web</p>
+                <h4>ESFJ</h4>
+                <p>사교적인 외교관 유형ㄴ</p>
               </div>
             </div>
           </div>
 
           <div class="col-lg-4 col-md-6 portfolio-item filter-app">
             <div class="portfolio-wrap">
-              <img src="${path }/assets/img/portfolio/portfolio-6.jpg" class="img-fluid" alt="">
+              <img src="${path }/assets/img/portfolio/ESFP.jpg" class="img-fluid" alt="">
               <div class="portfolio-links">
-                <a href="${path }/assets/img/portfolio/portfolio-6.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 3"><i class="bi bi-plus"></i></a>
-                <a href="${path }/portfolio-details" title="More Details"><i class="bi bi-link"></i></a>
+                <a href="${path }/assets/img/portfolio/ESFP.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="ESFP"><i class="bi bi-plus"></i></a>
+                <a href="/mbti/main/mbti/mbtiResult?mbtiType=ESFP" title="More Details"><i class="bi bi-link"></i></a>
               </div>
               <div class="portfolio-info">
-                <h4>App 3</h4>
-                <p>App</p>
+                <h4>ESFP</h4>
+                <p>연예인 유형</p>
               </div>
             </div>
           </div>
 
           <div class="col-lg-4 col-md-6 portfolio-item filter-card">
             <div class="portfolio-wrap">
-              <img src="${path }/assets/img/portfolio/portfolio-7.jpg" class="img-fluid" alt="">
+              <img src="${path }/assets/img/portfolio/ESTJ.jpg" class="img-fluid" alt="">
               <div class="portfolio-links">
-                <a href="${path }/assets/img/portfolio/portfolio-7.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 1"><i class="bi bi-plus"></i></a>
-                <a href="${path }/portfolio-details" title="More Details"><i class="bi bi-link"></i></a>
+                <a href="${path }/assets/img/portfolio/ESTJ.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="ESTJ"><i class="bi bi-plus"></i></a>
+                <a href="/mbti/main/mbti/mbtiResult?mbtiType=ESTJ" title="More Details"><i class="bi bi-link"></i></a>
               </div>
               <div class="portfolio-info">
-                <h4>Card 1</h4>
-                <p>Card</p>
+                <h4>ESTJ</h4>
+                <p>경영자 유형</p>
               </div>
             </div>
           </div>
 
           <div class="col-lg-4 col-md-6 portfolio-item filter-card">
             <div class="portfolio-wrap">
-              <img src="${path }/assets/img/portfolio/portfolio-8.jpg" class="img-fluid" alt="">
+              <img src="${path }/assets/img/portfolio/ESTP.jpg" class="img-fluid" alt="">
               <div class="portfolio-links">
-                <a href="${path }/assets/img/portfolio/portfolio-8.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 3"><i class="bi bi-plus"></i></a>
-                <a href="${path }/portfolio-details" title="More Details"><i class="bi bi-link"></i></a>
+                <a href="${path }/assets/img/portfolio/ESTP.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="ESTP"><i class="bi bi-plus"></i></a>
+                <a href="/mbti/main/mbti/mbtiResult?mbtiType=ESTP" title="More Details"><i class="bi bi-link"></i></a>
               </div>
               <div class="portfolio-info">
-                <h4>Card 3</h4>
-                <p>Card</p>
+                <h4>ESTP</h4>
+                <p>사업가 유형</p>
               </div>
             </div>
           </div>
 
           <div class="col-lg-4 col-md-6 portfolio-item filter-web">
             <div class="portfolio-wrap">
-              <img src="${path }/assets/img/portfolio/portfolio-9.jpg" class="img-fluid" alt="">
+              <img src="${path }/assets/img/portfolio/INFJ.jpg" class="img-fluid" alt="">
               <div class="portfolio-links">
-                <a href="${path }/assets/img/portfolio/portfolio-9.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 3"><i class="bi bi-plus"></i></a>
-                <a href="${path }/portfolio-details" title="More Details"><i class="bi bi-link"></i></a>
+                <a href="${path }/assets/img/portfolio/INFJ.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="INFJ"><i class="bi bi-plus"></i></a>
+                <a href="/mbti/main/mbti/mbtiResult?mbtiType=INFJ" title="More Details"><i class="bi bi-link"></i></a>
               </div>
               <div class="portfolio-info">
-                <h4>Web 3</h4>
-                <p>Web</p>
+                <h4>INFJ</h4>
+                <p>옹호자 유형</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+            <div class="portfolio-wrap">
+              <img src="${path }/assets/img/portfolio/INFP.jpg" class="img-fluid" alt="">
+              <div class="portfolio-links">
+                <a href="${path }/assets/img/portfolio/INFP.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="INFP"><i class="bi bi-plus"></i></a>
+                <a href="/mbti/main/mbti/mbtiResult?mbtiType=INFP" title="More Details"><i class="bi bi-link"></i></a>
+              </div>
+              <div class="portfolio-info">
+                <h4>INFP</h4>
+                <p>중재자 유형</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+            <div class="portfolio-wrap">
+              <img src="${path }/assets/img/portfolio/INTJ.jpg" class="img-fluid" alt="">
+              <div class="portfolio-links">
+                <a href="${path }/assets/img/portfolio/INTJ.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="INTJ"><i class="bi bi-plus"></i></a>
+                <a href="/mbti/main/mbti/mbtiResult?mbtiType=INTJ" title="More Details"><i class="bi bi-link"></i></a>
+              </div>
+              <div class="portfolio-info">
+                <h4>INTJ</h4>
+                <p>전략가 유형</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+            <div class="portfolio-wrap">
+              <img src="${path }/assets/img/portfolio/INTP.jpg" class="img-fluid" alt="">
+              <div class="portfolio-links">
+                <a href="${path }/assets/img/portfolio/INTP.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="INTP"><i class="bi bi-plus"></i></a>
+                <a href="/mbti/main/mbti/mbtiResult?mbtiType=INTP" title="More Details"><i class="bi bi-link"></i></a>
+              </div>
+              <div class="portfolio-info">
+                <h4>INTP</h4>
+                <p>논리술사 유형</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+            <div class="portfolio-wrap">
+              <img src="${path }/assets/img/portfolio/ISFJ.jpg" class="img-fluid" alt="">
+              <div class="portfolio-links">
+                <a href="${path }/assets/img/portfolio/ISFJ.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="ISFJ"><i class="bi bi-plus"></i></a>
+                <a href="/mbti/main/mbti/mbtiResult?mbtiType=ISFJ" title="More Details"><i class="bi bi-link"></i></a>
+              </div>
+              <div class="portfolio-info">
+                <h4>ISFJ</h4>
+                <p>수호자 유형</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+            <div class="portfolio-wrap">
+              <img src="${path }/assets/img/portfolio/ISFP.jpg" class="img-fluid" alt="">
+              <div class="portfolio-links">
+                <a href="${path }/assets/img/portfolio/ISFP.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="ISFP"><i class="bi bi-plus"></i></a>
+                <a href="/mbti/main/mbti/mbtiResult?mbtiType=ISFP" title="More Details"><i class="bi bi-link"></i></a>
+              </div>
+              <div class="portfolio-info">
+                <h4>ISFP</h4>
+                <p>모험가 유형</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+            <div class="portfolio-wrap">
+              <img src="${path }/assets/img/portfolio/ISTJ.jpg" class="img-fluid" alt="">
+              <div class="portfolio-links">
+                <a href="${path }/assets/img/portfolio/ISTJ.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="ISTJ"><i class="bi bi-plus"></i></a>
+                <a href="/mbti/main/mbti/mbtiResult?mbtiType=ISTJ" title="More Details"><i class="bi bi-link"></i></a>
+              </div>
+              <div class="portfolio-info">
+                <h4>ISTJ</h4>
+                <p>현실주의자 유형</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+            <div class="portfolio-wrap">
+              <img src="${path }/assets/img/portfolio/ISTP.jpg" class="img-fluid" alt="">
+              <div class="portfolio-links">
+                <a href="${path }/assets/img/portfolio/ISTP.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="ISTP"><i class="bi bi-plus"></i></a>
+                <a href="/mbti/main/mbti/mbtiResult?mbtiType=ISTP" title="More Details"><i class="bi bi-link"></i></a>
+              </div>
+              <div class="portfolio-info">
+                <h4>ISTP</h4>
+                <p>만능 재주꾼 유형</p>
               </div>
             </div>
           </div>
@@ -329,19 +447,37 @@
       <div class="container">
 
         <div class="section-title" data-aos="fade-up">
-          <h2>Team</h2>
-          <p>Our team is always here to help</p>
+          <h2>Instructor</h2>
+          <p>교육 강사</p>
         </div>
 
         <div class="row">
 
           <div class="col-xl-3 col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="100">
             <div class="member">
-              <img src="${path }/assets/img/team/team-1.jpg" class="img-fluid" alt="">
+              <img src="${path }/assets/img/team/na_1.jpg" class="img-fluid" alt="">
               <div class="member-info">
                 <div class="member-info-content">
-                  <h4>Walter White</h4>
-                  <span>Chief Executive Officer</span>
+                  <h4>나다미</h4>
+                  <span>Dami Na</span>
+                </div>
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+           <div class="col-xl-3 col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
+            <div class="member">
+              <img src="${path }/assets/img/team/hyun.jpg" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>황민현</h4>
+                  <span>Minhyun Hwang</span>
                 </div>
                 <div class="social">
                   <a href=""><i class="bi bi-twitter"></i></a>
@@ -353,13 +489,14 @@
             </div>
           </div>
 
-          <div class="col-xl-3 col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+
+          <div class="col-xl-3 col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
             <div class="member">
-              <img src="${path }/assets/img/team/team-2.jpg" class="img-fluid" alt="">
+              <img src="${path }/assets/img/team/mingi_1.jpg" class="img-fluid" alt="">
               <div class="member-info">
                 <div class="member-info-content">
-                  <h4>Sarah Jhonson</h4>
-                  <span>Product Manager</span>
+                  <h4>김민기</h4>
+                  <span>Mingi Kim</span>
                 </div>
                 <div class="social">
                   <a href=""><i class="bi bi-twitter"></i></a>
@@ -373,11 +510,11 @@
 
           <div class="col-xl-3 col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
             <div class="member">
-              <img src="${path }/assets/img/team/team-3.jpg" class="img-fluid" alt="">
+              <img src="${path }/assets/img/team/suzy.jpg" class="img-fluid" alt="">
               <div class="member-info">
                 <div class="member-info-content">
-                  <h4>William Anderson</h4>
-                  <span>CTO</span>
+                  <h4>배수지</h4>
+                  <span>Suji Bae</span>
                 </div>
                 <div class="social">
                   <a href=""><i class="bi bi-twitter"></i></a>
@@ -391,11 +528,11 @@
 
           <div class="col-xl-3 col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
             <div class="member">
-              <img src="${path }/assets/img/team/team-4.jpg" class="img-fluid" alt="">
+              <img src="${path }/assets/img/team/yong_1.jpg" class="img-fluid" alt="">
               <div class="member-info">
                 <div class="member-info-content">
-                  <h4>Amanda Jepson</h4>
-                  <span>Accountant</span>
+                  <h4>방용진</h4>
+                  <span>Yongjin Bang</span>
                 </div>
                 <div class="social">
                   <a href=""><i class="bi bi-twitter"></i></a>
@@ -406,13 +543,67 @@
               </div>
             </div>
           </div>
-
+		  
+		  <div class="col-xl-3 col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
+            <div class="member">
+              <img src="${path }/assets/img/team/jun_1.png" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>김영준</h4>
+                  <span>Youngjun Kim</span>
+                </div>
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-xl-3 col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
+            <div class="member">
+              <img src="${path }/assets/img/team/in.jpg" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>설인아</h4>
+                  <span>Inah Seol</span>
+                </div>
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+			
+			 <div class="col-xl-3 col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+            <div class="member">
+              <img src="${path }/assets/img/team/min_1.jpg" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>박정민</h4>
+                  <span>Jeongmin Park</span>
+                </div>
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          
         </div>
 
       </div>
     </section><!-- End Team Section -->
 
-    <!-- ======= Clients Section ======= -->
+    <%-- <!-- ======= Clients Section ======= -->
     <section id="clients" class="clients section-bg">
       <div class="container" data-aos="fade-up">
 
@@ -436,25 +627,25 @@
         </div>
 
       </div>
-    </section><!-- End Clients Section -->
+    </section><!-- End Clients Section --> --%>
 
     <!-- ======= Contact Us Section ======= -->
     <section id="contact" class="contact">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-          <h2>Contact Us</h2>
-          <p>Contact us the get started</p>
+          <h2>Head office location</h2>
+          <p>강남 본사</p>
         </div>
 
         <div class="row">
 
-          <div class="col-lg-5 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+          <div class="col-lg-12 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
             <div class="info">
               <div class="address">
                 <i class="bi bi-geo-alt"></i>
-                <h4>Location:</h4>
-                <p>A108 Adam Street, New York, NY 535022</p>
+                <h4>주소:</h4>
+                <p>서울특별시 서초구 서초대로77길 55 (에이프로스퀘어3층)</p>
               </div>
 
               <div class="email">
@@ -465,16 +656,42 @@
 
               <div class="phone">
                 <i class="bi bi-phone"></i>
-                <h4>Call:</h4>
-                <p>+1 5589 55488 55s</p>
+                <h4>전화번호:</h4>
+                <p>02-532-6509</p>
               </div>
 
-              <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" style="border:0; width: 100%; height: 290px;" allowfullscreen></iframe>
+			  <div id="map" style="width:100%;height:300px;"></div>
+			  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2666b9d92b136acbf73b4b00a4f508ff&libraries=services,clusterer,drawing"></script>
+			  <script type="text/javascript">
+				
+				var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+			    mapOption = { 
+			        center: new kakao.maps.LatLng(37.502034, 127.024520), // 지도의 중심좌표
+			        level: 2 // 지도의 확대 레벨
+			    };
+		
+				var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+				
+				// 마커가 표시될 위치입니다 
+				var markerPosition  = new kakao.maps.LatLng(37.502034, 127.024520); 
+				
+				// 마커를 생성합니다
+				var marker = new kakao.maps.Marker({
+				    position: markerPosition
+				});
+
+				// 마커가 지도 위에 표시되도록 설정합니다
+				marker.setMap(map);
+				
+				
+				</script>
+				
+              <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" style="border:0; width: 100%; height: 290px;" allowfullscreen></iframe> -->
             </div>
 
           </div>
 
-          <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+         <!--  <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
             <form action="forms/contact.php" method="post" role="form" class="php-email-form">
               <div class="row">
                 <div class="form-group col-md-6">
@@ -502,7 +719,7 @@
               <div class="text-center"><button type="submit">Send Message</button></div>
             </form>
           </div>
-        </div>
+        </div> -->
       </div>
   </section><!-- End Contact Us Section -->
 

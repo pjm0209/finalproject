@@ -3,23 +3,26 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.team2.mbti.message.model.MessageDao">
 	<insert id="insertSendDmToAdmin" parameterType="sendDmVo">
-		<selectKey keyProperty="sendDmNo" order="BEFORE" resultType="int">
+		<selectKey keyProperty="sendDmNo" order="BEFORE"
+			resultType="int">
 			select send_dm_seq.nextval from dual
 		</selectKey>
 		insert into send_dm(send_dm_no, admin_no, send_body, receive_no)
 		values(#{sendDmNo},#{adminNo},#{sendBody},#{receiveNo})
 	</insert>
-	
+
 	<insert id="insertReceiveDm" parameterType="receiveDmVo">
-		<selectKey keyProperty="receiveDmNo" order="BEFORE" resultType="int">
+		<selectKey keyProperty="receiveDmNo" order="BEFORE"
+			resultType="int">
 			select RECEIVE_DM_SEQ.nextval from dual
 		</selectKey>
 		insert into receive_dm(receive_dm_no, send_dm_no)
 		values(#{receiveDmNo}, #{sendDmNo})
 	</insert>
-	
+
 	<insert id="insertSendDmToMember" parameterType="sendDmVo">
-		<selectKey keyProperty="sendDmNo" order="BEFORE" resultType="int">
+		<selectKey keyProperty="sendDmNo" order="BEFORE"
+			resultType="int">
 			select send_dm_seq.nextval from dual
 		</selectKey>
 		insert into send_dm(send_dm_no, no, send_body, receive_no)
@@ -27,22 +30,73 @@
 	</insert>
 
 	<select id="selectAllMemberbyDm" resultType="memberVo">
-		select * from member where outdate is null
+		select * from member
+		where outdate is null
 		order by no desc
 	</select>
-	
-	<select id="messageViewById" parameterType="string" resultType="map">
+
+	<select id="selectAllMemberbyDmSearch" parameterType="memberVo"
+		resultType="memberVo">
+		select * from member where outdate is null
+		<if test="searchKeyword!=null and searchKeyword!=''">
+			and ${searchCondition} like '%' || #{searchKeyword} || '%'
+		</if>
+		order by no desc
+	</select>
+
+	<select id="messageViewById" parameterType="string"
+		resultType="map">
 		select * from messageview
 		where receive_id=#{userid}
+		or
+		send_id=#{userid}
 		order by send_dm_no desc
 	</select>
-	<select id="selectMessageViewBySendDmNo" parameterType="int" resultType="map">
+	<select id="selectMessageViewBySendDmNo" parameterType="int"
+		resultType="map">
 		select * from messageview
 		where send_dm_no=#{send_dm_no}
 	</select>
-	
+
 	<delete id="deleteSendDmBySendDmNo" parameterType="int">
-		delete from send_dm
+		delete from
+		send_dm
 		where send_dm_no = ${sendDmNo}
 	</delete>
+
+	<update id="updateReceiveDmReadDate" parameterType="int">
+		update
+		receive_dm
+		set read_date= sysdate
+		where send_dm_no=#{sendDmNo}
+	</update>
+
+	<insert id="insertSendDmToMemberMyMessage"
+		parameterType="sendDmVo">
+		<selectKey keyProperty="sendDmNo" order="BEFORE"
+			resultType="int">
+			select send_dm_seq.nextval from dual
+		</selectKey>
+		insert into send_dm(send_dm_no, no, send_body,receive_no,
+		receive_manager_flag)
+		values(#{sendDmNo},#{no},#{sendBody},#{receiveNo},#{receiveManagerFlag})
+	</insert>
+	<select id="selectMessageViewByAdmin" resultType="map">
+		select * from messageView
+		where receive_manager_flag='Y'
+	</select>
+	
+	<select id="selectMessageViewByAdminSearch" parameterType="searchVo" resultType="map">
+		select * from messageView
+		where receive_manager_flag='Y'
+		<if test="searchKeyword!=null and searchKeyword!=''">
+			and ${searchCondition} like '%'|| #{searchKeyword} ||'%'
+		</if>
+	</select>
+	
+	<select id="getAdminMessageCount" resultType="int">
+		select count(*) from messageView
+		where receive_manager_flag='Y'
+		and read_date is null
+	</select>
 </mapper>

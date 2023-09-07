@@ -3,10 +3,11 @@
  */
 var contextPath="/mbti";
  $(function(){
+	/* 관리자 쪽지 보내기 */
 	$('.message-button').click(function(){
 		$('#memberNoModal').html("");
 		$('#memberNameModal').html("");
-		$('#input').html("");
+		$('#input2').html("");
 		if($(this).text()=='쪽지 보내기'){
 			$('#alertModalLabel').html('쪽지 보내기');
 			
@@ -27,7 +28,7 @@ var contextPath="/mbti";
 					result="<input type='text' name='sendItems["+idx+"].receiveNo' value='"+no+"'>";
 				}
 				
-				$('#input').append(result);
+				$('#input2').append(result);
 				$('#memberNameModal').append(name);
 			});
 			
@@ -47,8 +48,10 @@ var contextPath="/mbti";
 	});
 	 
 	$('#messageOkBtn').click(function(){
-		$('form[name=messageFrm]').submit(); 
+		$('form[name=adminMessageFrm]').prop('action',contextPath+'/admin/message/messageWrite');
+		$('form[name=adminMessageFrm]').submit();
 	});
+	
 	
 	$("#messageDetailBtn").click(function(){
 		$('#confirmModalBody').html('선택한 쪽지를 삭제하시겠습니까?');
@@ -64,16 +67,135 @@ var contextPath="/mbti";
 			
 			return false;
 		}
-		$('#confirmModalBody').html('선택한 쪽지들를 삭제하시겠습니까?');
-		$('#confirmOk').attr('onclick','myMessageFormSubmit()');
-		$('#confirmModalBtn').trigger('click');
+		$('input[type=checkbox]:checked').each(function(idx,item){
+			var sendDmNo=$(this).val();
+		});
+		
+		$('#confirmModalBody2').html('선택한 쪽지들를 삭제하시겠습니까?');
+		$('#confirmOk2').attr('onclick',"myMessageFormSubmit()");
+		$('#confirmModalBtn2').trigger('click');
 	});
+	
+	/* 내 쪽지함 - 쪽지 보내기 */
+	$(".myMessage-button").click(function(){
+		var result = "";
+		var sendId = $(this).parent().find('input[name=sendId]').val();
+		
+		$('#receiveUser').text(sendId);
+		
+		var no = $(this).parent().find('input[name=no]').val();
+		var adminNo = $(this).parent().find('input[name=adminNo]').val();
+		
+		if(no==null || no==''){
+			result+="<input type='hidden' name='receiveNo' value='"+adminNo+"'>";
+			result+="<input type='hidden' name='receiveManagerFlag' value='Y'>";
+		}else{
+			result+="<input type='hidden' name='receiveNo' value='"+no+"'>";
+			result+="<input type='hidden' name='receiveManagerFlag' value='N'>";
+		}
+		
+		$('#receiveModal').html(result);
+		$('#messageModal').modal('show');
+		
+		$("#messageModal").on("shown.bs.modal", function () {
+			$('textarea').focus();
+		});
+		
+	});
+	
+	//마이페이지 쪽지 보내기
+	$('#myMessageOkBtn').click(function(){
+		$('form[name=myMessageFrm]').submit();
+	});
+	
+	$('td[name=messageDetail]').click(function(){
+		var sendDmNo=$(this).parent().prev().prev().val();
+		var readDate=$(this).parent().prev().val();
+		var no=$(this).parent().find('td[name=no]').text();
+		var id=$(this).parent().find('td').eq(1).text();
+		var body=$(this).parent().find('td').eq(2).text();
+		
+		$('#alertModalLabel').html('쪽지 상세보기');
+		$('#memberNameModal').text(id);
+		$('textarea').html(body);
+		$('#messageDetailModal').modal('show');
+		var result="<input type='hidden' name='receiveNo' value='"+no+"'>";
+		$('#input1').html(result);
+		if(readDate==null || readDate==''){
+			$.ajax({
+				url:contextPath+'/admin/message/readDateUpdate',
+				data: {sendDmNo:sendDmNo},
+				type: "GET",
+				success:function(res){
+				},
+				error:function(xhr,status,error){
+					alert(status + ": " + error);
+				}
+			});
+		}
+	});
+	
+	$('#reSendMessage').click(function(){
+		$('#messageDetailModal').modal('hide');
+	});
+	$('#messageDetailModal').on('hidden.bs.modal', function (e) {
+		$('#alertModalLabel').html('쪽지 답장');
+		$('#user_id').html("받는 회원 : ");
+		$('#reSendMessage').hide();
+		$('#sendMessage').show();
+		$('textarea').html("").attr('readonly',false);
+		var result="<input type='hidden' name='adminMessageFlag' value='Y'>";
+		$('#input2').html(result);
+		$('#messageDetailModal').modal('show');
+		
+		return false;
+		
+	});
+		
+	
+	$('#modalClose').click(function(){
+		$('#messageDetailModal').off();
+		$('#messageDetailModal').modal('hide');
+	});
+	
+	$('#sendMessage').click(function(){
+		var len=$('#sendBody').val().length;
+		
+		if(len<1){
+			$('#alertModalBody').html("쪽지 내용을 입력해주세요");
+			$('#alertModalBtn').trigger('click');
+			
+			$('#messageDetailModal').off();
+			return false;
+		}
+		
+		$('form[name=adminMessageFrm]').submit();
+	});
+	
+	$('#messateCDelete').click(function(){
+		var idx=$('input[type=checkbox]:checked').not('#check-All').length;
+		
+		if(idx<1){
+			$('#alertModalBody').html("삭제할 쪽지를 선택해주세요");
+			$('#alertModalBtn').trigger('click');
+			
+			return false;
+		}
+		
+		$('form[name=adminMessageFrm2]').prop('action',contextPath+'/admin/message/messageDelete');
+		$('form[name=adminMessageFrm2]').submit();
+	});
+	
  });
+ 
+ 
+ /* 마이페이지 - 내 쪽지함 삭제 버튼 */
  function myMessageFormSubmit(){
 	 $('form[name=messageFrm]').prop('action',contextPath+'/main/mypage/myMessage/messageDelete');
 	 $('form[name=messageFrm]').submit();
  }
  
+ /* 마이페이지 - 쪽지함 상세페이지 삭제 버튼 */
  function messageDeleteloc(){
 	 location.href=contextPath+'/main/mypage/myMessage/messageDelete?sendDmNo='+$("#sendDmNo").val();
  }

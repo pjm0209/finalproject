@@ -4,24 +4,29 @@
 <%@include file="../inc/mypage.jsp" %>    
 
 <style>
-.container {
-  max-width: 500px;
-  margin-top: 200px;	
-  margin-bottom: 100px;
-  background-color: white;
-  border: 1px solid #ccc;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0px 0px 5px 0px #aaa;
+.memberEditPwd {
+  text-align: center;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px; 
+  height: 500px;
+  padding: 40px;
+  border: 2px solid #3498db;
+  background-color: #f9f9f9;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 300px;
 }
 
 h2 {
-  text-align: center;
+  text-align: center;	
   margin-bottom: 20px;
 }
 
 label {
   font-weight: bold;
+  display: block;
 }
 
 input {
@@ -42,6 +47,7 @@ button {
   border-radius: 3px;
   font-size: 16px;
   cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 button:hover {
@@ -64,7 +70,7 @@ $(function() {
 	   });
 	});
 </script>
-<article>
+<section class="memberEditPwd">
 <div class="container">
   <h2>비밀번호 확인</h2>
   <form name="form-memberEditPwd" method="post" action="<c:url value='/main/mypage/memberEditPwd'/>">
@@ -74,6 +80,6 @@ $(function() {
     <button type="submit" id="btnCheck" >확인</button>
   </form>
 </div>
-</article>  
+</section>
 
 <%@include file="../inc/bottom.jsp" %>

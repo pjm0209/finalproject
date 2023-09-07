@@ -57,24 +57,24 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
+          <%--   <li class="nav-item active">
                 <a class="nav-link" href="<c:url value='/admin/index'/>">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>대시보드</span></a>
-            </li>
+            </li> --%>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
 
             <!-- Heading -->
-            <div class="sidebar-heading">
+           <!--  <div class="sidebar-heading">
                 Interface
             </div>
             
-            <!-- Heading -->
+            Heading
             <div class="sidebar-heading">
                 게시판
-            </div>
+            </div> -->
 
             <!-- Nav Item - Pages Collapse Menu -->             
             <li class="nav-item">
@@ -188,16 +188,24 @@
                 </div>
             </li>
             <li class="nav-item">
-            	<a class="nav-link" href="<c:url value='/admin/message/message'/>">
-                    <i class="fas fa-fw fa-wrench"></i>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#message"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-shopping-cart"></i>
                     <span>쪽지 관리</span>
                 </a>
+                <div id="message" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="<c:url value='/admin/message/message'/>">회원에게 쪽지 보내기</a>
+                        <a class="collapse-item" href="<c:url value='/admin/message/adminMessage'/>">관리자 쪽지 목록</a>
+                    </div>
+                </div>
             </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
 
-            <!-- Heading -->
+           <%--  <!-- Heading -->
             <div class="sidebar-heading">
                 Addons
             </div>
@@ -235,7 +243,7 @@
                 <a class="nav-link" href="<c:url value='/admin/tables'/>">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Tables</span></a>
-            </li>
+            </li> --%>
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -263,7 +271,7 @@
                     </button>
 
                     <!-- Topbar Search -->
-                    <form
+                   <!--  <form
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
                             <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
@@ -273,19 +281,19 @@
                                     <i class="fas fa-search fa-sm"></i>
                                 </button>
                             </div>
-                        </div>
-                    </form>
+                        </div> 
+                    </form> -->
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+<!-- 
+                        Nav Item - Search Dropdown (Visible Only XS)
                         <li class="nav-item dropdown no-arrow d-sm-none">
                             <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-search fa-fw"></i>
                             </a>
-                            <!-- Dropdown - Messages -->
+                            Dropdown - Messages
                             <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
                                 aria-labelledby="searchDropdown">
                                 <form class="form-inline mr-auto w-100 navbar-search">
@@ -301,17 +309,17 @@
                                     </div>
                                 </form>
                             </div>
-                        </li>
+                        </li> -->
 
                         <!-- Nav Item - Alerts -->
-                        <li class="nav-item dropdown no-arrow mx-1">
+                        <!-- <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell fa-fw"></i>
-                                <!-- Counter - Alerts -->
+                                Counter - Alerts
                                 <span class="badge badge-danger badge-counter">3+</span>
                             </a>
-                            <!-- Dropdown - Alerts -->
+                            Dropdown - Alerts
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="alertsDropdown">
                                 <h6 class="dropdown-header">
@@ -352,35 +360,32 @@
                                 </a>
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
                             </div>
-                        </li>
-
+                        </li> -->
+						
                         <!-- Nav Item - Messages -->
                         <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-envelope fa-fw"></i>
                                 <!-- Counter - Messages -->
-                                <span class="badge badge-danger badge-counter">7</span>
+                                <span class="badge badge-danger badge-counter">
+									<c:import url="/admin/messageCount"></c:import>
+								</span>
                             </a>
                             <!-- Dropdown - Messages -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="messagesDropdown">
-                                <h6 class="dropdown-header">
+                                <!-- <h6 class="dropdown-header">
                                     Message Center
-                                </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="<c:url value='/admin-css-js/img/undraw_profile_1.svg'/>"
-                                            alt="...">
-                                        <div class="status-indicator bg-success"></div>
-                                    </div>
+                                </h6> -->
+                                <a class="dropdown-item d-flex align-items-center" href="<c:url value='/admin/message/adminMessage'/>">
                                     <div class="font-weight-bold">
-                                        <div class="text-truncate">Hi there! I am wondering if you can help me with a
-                                            problem I've been having.</div>
-                                        <div class="small text-gray-500">Emily Fowler · 58m</div>
+                                        <div class="asdf">
+                                        	읽지 않은 알람 수 : <c:import url="/admin/messageCount"></c:import>
+                                        </div>
                                     </div>
                                 </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                <%-- <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
                                         <img class="rounded-circle" src="<c:url value='/admin-css-js/img/undraw_profile_2.svg'/>"
                                             alt="...">
@@ -417,7 +422,7 @@
                                     </div>
                                 </a>
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
-                            </div>
+                            </div> --%>
                         </li>
 
                         <div class="topbar-divider d-none d-sm-block"></div>

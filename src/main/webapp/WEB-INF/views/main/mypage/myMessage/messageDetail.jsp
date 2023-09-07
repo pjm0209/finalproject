@@ -28,6 +28,15 @@
 		padding-bottom: 30px;
 	}
 	
+	button#messageDetailBtn{
+		background-color: #eb5d1e;
+	    border:0;
+		border-radius: 5px;
+		padding: 6px 15px;
+		margin-top: -6px;
+		margin-right: 9px;
+		color: white;
+	}
 </style>
 <section id="myMessageWrite">
 	<input type="hidden" name="sendDmNo" id="sendDmNo" value="${map['SEND_DM_NO']}">

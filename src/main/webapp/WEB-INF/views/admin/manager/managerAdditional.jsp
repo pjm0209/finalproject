@@ -1,80 +1,86 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
-<title>관리자 추가</title>
+<%@ include file="../inc/top.jsp"%>
 <style>
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f7f7f7;
+.manager-Additional-head-button {
+	width: max-content;
+	display: inline-block;
+	float: right;
+	margin-right: 15px;
 }
 
-.container {
-  max-width: 500px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: white;
-  border: 1px solid #dddddd;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
+.managerAdditional-head input {
+	border: 0;
+	border-radius: 5px;
+	padding: 5px 20px 5px 20px;
+	color: white;
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 10px;
+.managerAdditional-head {
+	border-bottom: 1px solid #d8dce5;
+	padding: 0px 20px 10px 32px;
 }
 
-th, td {
-  padding: 10px;
-  border: 1px solid #dddddd;
+h2#managerCreate-title {
+	font-weight: bold;
+	display: inline-block;
 }
 
-th {
-  background-color: #f2f2f2;
+input#save-managerAdditional {
+	margin-left: 10px;
+	background: #eb5d1e;
 }
 
-input[type="text"], input[type="password"], input[type="email"] {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  margin: 5px 0;
-  box-sizing: border-box;
+.managerAdditional-body {
+	display: flex;
+	justify-content: space-evenly;
+	width: 100%;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 30px;
+	
 }
 
-
-#btnChkId {
-  background-color: #eb5d1e;
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 3px;
-  cursor: pointer;
+div.managerAdditional-setting {
+	border: 1px solid #e1e1e1;
+	background: white;
+	border-radius: 5px;
+	width: 60%;
+	margin-top: 30px;
 }
 
-button#signUpButton {
-    background-color: #eb5d1e; 
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 3px;
-    cursor: pointer;
+div.managerAdditional-setting-head {
+	border-bottom: 1px solid #e1e1e1;
 }
 
-.error-message {
-  color: red;
-  font-size: 14px;
-  margin-top: 5px;
+div.managerAdditional-setting-head h3 {
+	display: inline-block;
+	font-weight: bold;
+	color: black;
+	font-size: 17px;
+	margin: 13px 73px 10px 20px;
 }
 
-.success-message {
-  color: green;
-  font-size: 14px;
-  margin-top: 5px;
+.managerAdditional-setting-body {
+	padding: 20px 30px;
 }
 
-.hidden {
-  visibility: hidden;
+.managerAdditional-body dd {
+	margin-left: 190px;
+	padding: 10px 22px 10px 0;
+}
+
+div.managerAdditional-setting-body dt {
+	font-size: 14px;
+	color: black;
+	float: left;
+	width: 190px;
+	padding: 17px 0;
+}
+
+#adminZipcode{
+	width: 50%;
+	
 }
 </style>
 
@@ -90,108 +96,122 @@ function validate_hp(ph) {
    var pattern = new RegExp(/^[0-9]*$/g);
    return pattern.test(ph); 
 }
-   
-$(function(){
-   $('#btnChkId').click(function(){
-      //아이디 입력
-        if ($('#managerId').val().length < 1) {
-            alert("먼저 아이디를 입력하세요");
-            $('#managerId').focus();
-            return false;
-        }
-               
-      //아이디 조건
-      if (!validate_userid($('#managerId').val())) {
-         alert("아이디는 영문, 숫자, _(밑줄문자)만 가능합니다");
-         $('#managerId').focus();
-         return false;
-      }
-      
-      $.ajax({
-         url:"<c:url value='/admin/manager/checkId'/>",
-         type: "get",
-         data: "adminId=" + $('#managerId').val(),
-         dataType: 'json',
-         success:function(res){
-            console.log(res);
-            if(res==1){
-               $('#idError').html("이미 존재하는 아이디입니다.");
-               $('#idError').css('color', 'red'); 
-            } else if(res == 2) {
-               $('#idError').html("사용가능한 아이디입니다.");
-               $('#idError').css('color', 'blue');
-               $('#btnChkId').val('Y'); 
-            }
-         },
-         error:function(xhr, status, error){
-            alert(status+" : " + error);
-         }                  
-      });
-   });
-   
-	$('#managerTel').on('input', function() {
-	    var inputTel = $(this).val();
-	    
-	    var cleanedTel = inputTel.replace(/-/g, '');
 
-	    if (cleanedTel.length >= 4) {
-	        cleanedTel = cleanedTel.substring(0, 3) + '-' + cleanedTel.substring(3);
-	    }
-	    if (cleanedTel.length >= 9) {
-	        cleanedTel = cleanedTel.substring(0, 8) + '-' + cleanedTel.substring(8);
-	    }
-	    
-	    $(this).val(cleanedTel);
-	});   
-      
+$(function(){
+	$('#save-managerAdditional').click(function()){
+		//아이디 입력
+		if($('admin_id').val().length < 1){
+			alert("먼저 아이디를 입력하세요");
+			$('#admin_id').focus();
+			return false;
+		}
+		
+		//아이디 조건
+		if(!validate_userid($('admin_id').val())){
+	         alert("아이디는 영문, 숫자, _(밑줄문자)만 가능합니다");
+	         $('#admin_id').focus();
+	         return false;
+		}
+		
+	      $.ajax({
+	          url:"<c:url value='/admin/manager/checkId'/>",
+	          type: "get",
+	          data: "adminId=" + $('#admin_id').val(),
+	          dataType: 'json',
+	          success:function(res){
+	             console.log(res);
+	             if(res==1){
+	                $('#idError').html("이미 존재하는 아이디입니다.");
+	                $('#idError').css('color', 'red'); 
+	             } else if(res == 2) {
+	                $('#idError').html("사용가능한 아이디입니다.");
+	                $('#idError').css('color', 'blue');
+	                $('#save-managerAdditional').val('Y'); 
+	             }
+	          },
+	          error:function(xhr, status, error){
+	             alert(status+" : " + error);
+	          }                  
+	       });
+	    });		
+	}
+	
+	
 });
+
 </script>
 
-<div class="container">
-   <form name="form-ManagerAdditional" method="post" action="<c:url value='/admin/manager/managerAdditional'/>">
-      <table class="table table-bordered table-hover" style="text-align:center; border: 1px solid #dddddd">
-         <thead>
-            <tr>
-               <th colspan="3"><h4>관리자 등록 </h4></th>
-            </tr>
-         </thead>      
-      <tbody>
-         <tr>
-             <td style="width:100px;"><h5>아이디</h5></td>
-             <td>
-                 <div style="display: flex;">
-                     <input class="form-control" type="text" id="managerId" name="adminId" maxLength="20" style="flex: 1;">&nbsp;
-                     <button id="btnChkId" value="중복 확인" type="button">중복 확인</button>
-                     <span class="error" id="idError"></span>    
-                 </div>                      
-             </td>
-         </tr>
-         
-         <tr>
-            <td style="width:100px;"><h5>비밀번호</h5></td>
-            <td><input class="form-control" type="password" id="managerPwd" name="adminPwd" maxLength="20"></td>                     
-         </tr>
-         
-         <tr>
-            <td style="width:100px;"><h5>비밀번호 확인</h5></td>
-            <td><input class="form-control" type="password" id="managerCheckPwd" name="managerCheckPwd" maxLength="20"></td>                     
-         </tr>
-         
-         <tr>
-            <td style="width:100px;"><h5>전화번호</h5></td>
-            <td><input class="form-control" type="text" id="managerTel" name="adminTel"  maxLength="20"></td>                     
-         </tr>
-                  
-         <tr>
-            <td style="width:100px;"><h5>이메일</h5></td>
-            <td colspan="2"><input class="form-control" type="email" id="managerEmail" name="adminEmail"  maxLength="20"></td>                     
-         </tr>
-                  
-         <tr>
-            <td colspan="3"> <button class="submit" id="signUpButton">등록</button></td>                      
-         </tr>      
-                                                                                                
-      </tbody>
-      </table>
-   </form>
+
+<c:if test="${empty vo}">
+	<c:set var="str" value="등록"/>
+	<c:set var="pageTitle" value="관리자 등록" />
+	<c:set var="url" value="/admin/manager/managerAdditional" />
+	<c:set var="no" value="${param.adminNo }" />	
+</c:if>
+<c:if test="${!empty vo}">
+	<c:set var="str" value="수정"/>
+	<c:set var="pageTitle" value="관리자 수정" />
+	<c:set var="url" value="/admin/manager/managerEdit" />
+	<c:set var="no" value="0" />	
+</c:if>
+<div class=manager-Additional>
+	<form name="managerAdditional-frm" method="post" action="<c:url value='${url}'/>" enctype="multipart/form-data">
+	<c:if test="${!empty vo}">
+		<input type="hidden" value="${vo.adminNo }" name="adminNo">
+	</c:if>
+	<div class="managerAdditional-head">
+		<h2 class="text-gray-800" id="managerCreate-title">${pageTitle}</h2>
+		<div class="manager-Additional-head-button">
+			<input type="button" class="bg-gradient-secondary" onclick="location.href='<c:url value="/admin/manager/managerList"/>'" value="취소">
+			<input type="submit" class="bg-gradient-primary" id="save-managerAdditional" value="${str}">
+		</div>
+	</div>
+		<div class="managerAdditional-body">
+			<div class="managerAdditional-setting">
+				<div class="managerAdditional-setting-head">
+					<h3>관리자 정보</h3>
+				</div>
+				<div class="managerAdditional-setting-body" >
+					<dt>아이디</dt>
+					<dd>
+						<div class="input_group v2">
+							<input class="form-control" value="${vo.adminId }" type="text" name="adminId" id="admin_id" style="width:200px; float:left">	
+							${memberVo.adminId }
+						</div>
+					</dd>
+					<dt>비밀번호</dt>
+					<dd>
+						<div class="input_group v2">
+							<input class="form-control" value="${vo.eduTeaPwd }" type="text" name="eduTeaPwd" id="teacher_pwd" maxlength="60">
+							${educationVo.eduTeaPwd }
+						</div>
+					</dd>	
+					<dt>비밀번호 확인</dt>
+					<dd>
+						<div class="input_group v2">
+							<input class="form-control" value="${vo.eduTeaPwd }" type="text" name="eduTeaPwd" id="teacher_pwd" maxlength="60">
+							${educationVo.eduTeaPwd }
+						</div>
+					</dd>									
+					<dt>이메일</dt>
+					<dd>
+						<div class="input_group v2">
+							<input class="form-control" value="${vo.adminEmail }" type="text" name="adminEmail" id="admin_email" maxlength="60">
+							${memberVo.adminEmail }
+						</div>
+					</dd>
+					<dt>전화번호</dt>
+					<dd>
+						<div class="input_group v2">
+							<input class="form-control" value="${vo.adminTel }" type="text" name="adminTel" id="admin_tel" maxlength="60">
+							${memberVo.adminTel }
+						</div>
+					</dd>																			
+				</div>
+			</div>
+		</div>
+	</form>
 </div>
+</div>
+
+<%@ include file="../inc/bottom.jsp"%>

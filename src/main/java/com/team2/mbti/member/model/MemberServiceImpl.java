@@ -125,9 +125,10 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Override
 	public int emailCheck(Map<String, Object>map) {
-		String email = memberDao.emailCheck(map);
+		int email = memberDao.emailCheck(map);
+		System.out.println("이메일 처리 확인 email" + email);
 		int result=0;
-		if(email==null || email.isEmpty()) {
+		if(email==0) {
 			result=EMAIL_DISAGREE;
 		}else {
 			result=EMAIL_OK;
@@ -147,8 +148,19 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.updatePassword(membervo);
 	}
 
+	@Override
+	public int getTotalMember(MemberVO membervo) {
+		return memberDao.getTotalMember(membervo);
+	}
 
+	@Override
+	public int getTodayMember(MemberVO membervo) {
+		return memberDao.getTodayMember(membervo);
+	}
 
-
+	@Override
+	public int getWeekMember(MemberVO membervo) {
+		return memberDao.getWeekMember(membervo);
+	}
 
 }

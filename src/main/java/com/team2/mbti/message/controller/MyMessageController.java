@@ -41,11 +41,12 @@ public class MyMessageController {
 	}
 	
 	@GetMapping("/myMessage/messageDetail")
-	public String myMessageWrite_get(@RequestParam(defaultValue = "0") int sendDmNo, Model model) {
-		logger.info("회원 - 쪽지 상세 페이지, 파라미터 sendDmNo={}", sendDmNo);
+	public String myMessageWrite_get(@RequestParam(defaultValue = "0") int sendDmNo,@RequestParam String receiveFlag, Model model) {
+		logger.info("회원 - 쪽지 상세 페이지, 파라미터 sendDmNo={},receiveFlag={}", sendDmNo, receiveFlag);
 		
-		Map<String, Object> map=messageService.selectMessageViewBySendDmNo(sendDmNo);
+		Map<String, Object> map=messageService.selectMessageViewBySendDmNo(sendDmNo, receiveFlag);
 		logger.info("쪽지 상세보기 결과, map={}",map);
+		logger.info("읽은 날짜 업데이트 결과, cnt={}",map.get("cnt"));
 		
 		model.addAttribute("map", map);
 		
@@ -53,7 +54,8 @@ public class MyMessageController {
 	}
 	
 	@RequestMapping("/myMessage/messageDelete")
-	public String messageDelete(@ModelAttribute SendDmListVO sendDmListVo, @RequestParam(defaultValue = "0",required = false) int sendDmNo ,Model model) {
+	public String messageDelete(@ModelAttribute SendDmListVO sendDmListVo, @RequestParam(defaultValue = "0",required = false) int sendDmNo 
+			,Model model) {
 		logger.info("회원 - 쪽지 삭제 처리, 파라미터 sendDmListVo={},sendDmNo={}", sendDmListVo,sendDmNo);
 		int cnt=0;
 		if(sendDmNo!=0) {
@@ -74,6 +76,26 @@ public class MyMessageController {
 		String msg="쪽지 삭제를 실패하였습니다.",url="/main/mypage/myMessage";
 		if(cnt>0) {
 			msg="쪽지가 삭제되었습니다.";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
+	}
+	
+	@RequestMapping("/myMessage/messageWrite")
+	public String messageWrite(@ModelAttribute SendDmVO sendDmVo, HttpSession session,Model model) {
+		int no = (int)session.getAttribute("no");
+		logger.info("회원 - 쪽지 보내기, 파라미터 sendDmVo={}, no={}", sendDmVo, no);
+		sendDmVo.setNo(no);
+		
+		int cnt=messageService.insertSendDmToMemberMyMessage(sendDmVo);
+		logger.info("마이페이지 - 쪽지보내기 결과 cnt={}",cnt);
+		
+		String msg="쪽지를 보내는 중에 에러가 발생했습니다.",url="/main/mypage/myMessage";
+		if(cnt>0) {
+			msg="쪽지를 보냈습니다.";
 		}
 		
 		model.addAttribute("msg", msg);

@@ -271,9 +271,15 @@ body.dark .switch::before{
 						</a>
 					</li>					
 					<li class="nav-link2">
-						<a href="#">
+						<a href="<c:url value='/main/mypage/orderList'/>">
 							<i class='bx bx-bell icon'></i>
 							<span class="text nav-text">주문 내역</span>						
+						</a>
+					</li>
+					<li class="nav-link2">
+						<a href="<c:url value='/main/mypage/myBoardList'/>">
+							<i class='bx bx-bell icon'></i>
+							<span class="text nav-text">내 게시글</span>						
 						</a>
 					</li>
 					<li class="nav-link2">
