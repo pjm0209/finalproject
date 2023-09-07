@@ -14,4 +14,5 @@ public class MainOrderVO {
 	private int sumPrice;//SUM_PRICE	NUMBER
 	private String paymentMethod;//PAYMENT_METHOD	VARCHAR2(20 BYTE)
 	private String ordersRegdate;//ORDERS_REGDATE	DATE
+	
 }

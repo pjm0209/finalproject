@@ -204,7 +204,7 @@
 			htmlStr += "</c:if>";
 			htmlStr += "<c:if test='${param.bookFlag == \"bookList\" or param.bookFlag == \"bookListByKeyword\"}'>";
 			htmlStr += "<td id='tdLast'>";
-			htmlStr += "<a class='btn btn-info btn-xs' href='' target='_blank' title='상품보기'><i class='fas fa-eye'></i></a>";
+			htmlStr += "<a class='btn btn-info btn-xs' target='_blank' title='상품보기' href='/mbti/main/book/bookDetail?bookNo="+this.bookNo+"'><i class='fas fa-eye'></i></a>";
 			htmlStr += "<button class='btn btn-success btn-xs' onclick=\"location.href='bookCopyPaste?bookNo='\"" + this.bookNo + " type='button' title='복사'><i class='fas fa-copy'></i></button>";
 			htmlStr += "<button class='btn btn-warning btn-xs' onclick=\"openEdit(" +this.bookNo+ ")\" type='button' title='수정'><i class='fas fa-edit'></i></button>";
 			htmlStr += "<button class='btn btn-danger btn-xs' id='delBtn' type='button' title='삭제' onclick='deleteEach("+this.bookNo+")'><i class='fas fa-trash'></i></button>";

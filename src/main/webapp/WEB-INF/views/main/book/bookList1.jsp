@@ -8,25 +8,15 @@
 <script type="text/javascript" src="<c:url value='/admin-css-js/js/bookMain.js'/>"></script>
 	
 <script type="text/javascript">
-$(function(){
-	
-	$(".cartBtn").click(function(){
-		alert("cart");
-		$("form[name=frmBuy]").prop("action", "<c:url value='/main/book/basket/basketInsert?mode=cart'/>");
-		alert("action수정 성공!");
-		$("form[name=frmBuy]").submit();
-		alert("submit 성공!");
-	});
-	
-	function goOrder(order){
-		alert(order);
-		$("form[name=frmBuy]").prop("action", "<c:url value='/main/book/basket/basketInsert?mode=" + order + "'/>");
-		alert("action수정 성공!");
-		$("form[name=frmBuy]").submit();
-		alert("submit 성공!");
-	}
-	
-});
+function goCart(){
+	$("form[name=frmBuy]").prop("action", "<c:url value='/main/book/basket/basketInsert?mode=cart'/>");
+	$("form[name=frmBuy]").submit();
+}
+
+function goOrder(){
+	$("form[name=frmBuy]").prop("action", "<c:url value='/main/book/basket/basketInsert?mode=order'/>");
+	$("form[name=frmBuy]").submit();
+}
 function bookListPage(curPage){
 	$('input[name=currentPage]').val(curPage);
 	$('form[id=frmPageId]').submit();
@@ -111,10 +101,9 @@ function sendSearchKeyword(){
 							</div>
 							<form name="frmBuy" method="post">
 								<div class="btn">
-									<button class="cartBtn" type="button">장바구니</button>
-									
-									<button class="orderBtn" type="button">바로구매</button>
-									<input type="hidden" name="bookNo" value="${vo.bookNo}">
+									<button class="cartBtn" type="button" onclick="goCart()">장바구니</button>
+									<button class="orderBtn" type="button" onclick="goOrder()">바로구매</button>
+									<input type="text" name="bookNo" value="${vo.bookNo}">
 									<input type="hidden" name="basketQty" value="1">
 								</div>
 							</form>
