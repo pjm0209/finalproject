@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team2.mbti.board.model.BoardService;
+import com.team2.mbti.main.order.model.MainOrderService;
 import com.team2.mbti.mbtiResult.model.MbtiResultService;
 import com.team2.mbti.mbtiResult.model.MbtiResultVO;
 import com.team2.mbti.mbtisurvey.model.MbtiSurveyService;
@@ -39,7 +40,8 @@ public class MypageController {
 	private final MbtiSurveyService mbtiSurveyService;
 	private final MbtiResultService mbtiResultService;
 	private final MemberService memberService;
-	private final BoardService boardService;
+	private final BoardService boardService;	
+	private final MainOrderService orderService;
 	
 	private final PasswordEncoder passwordEncoder;
 	
@@ -392,9 +394,11 @@ public class MypageController {
 
 	
 	@RequestMapping("/mypageOrderList")
-	public String mypageOrderList(HttpSession session, Model model) {
-		
+	public String mypageOrderList(HttpSession session, Model model) {		
 		logger.info("마이페이지 - 나의 주문 내역 조회 페이지, 파리미터 ???={}");
+		
+		List<Map<String, Object>> orderList = orderService.selectOrderList((int)session.getAttribute("no"));
+		logger.info("주문내역조회 결과 orderList: {}", orderList);
 		
 		return "main/mypage/mypageOrderList";
 	}

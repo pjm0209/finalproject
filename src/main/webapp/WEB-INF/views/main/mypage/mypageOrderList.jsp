@@ -12,17 +12,17 @@
 
 <section>
 	
-	<div id="containerWrap" class="container clearfix" style="margin-left: 0;margin-right: 0;position: relative">
+	<div id="containerWrap" class="container clearfix" style="margin-left: 230px;margin-right: 0;position: relative">
 		
-		<div id="section">
-			<p>${pagingInfo.totalRecord} 개의 검색 결과가 있습니다.</p>
+		<div id="section" style="margin:30px 0 0 0;">
+			<h2>주문/배송목록</h2>
 			<div id="content">
 				<ul class="booklist" style="padding-left:0;">
 					<c:if test="${empty list }">
 						<li class="flex">
 							<div style="height: 500px; text-align: center;">
 								<div style="margin-left: 500px;margin-top: 110px;">
-									<p>검색 결과 해당 제품은 없습니다.</p>
+									<p>주문내역이 없습니다..</p>
 									<img src="<c:url value='/images/empty.jpg'/>" alt="해당 제품이 현재 없습니다."
 									 class="">
 								</div>
