@@ -12,6 +12,7 @@
 	<input type="hidden" value="${boardMap.BOARD_STEP }" name="boardStep">
 	<input type="hidden" value="${sessionScope.no }" name="no">
 	<input type="hidden" value="${boardMap.BOARD_FORM_NO }" name="boardFormNo">
+	<input type="hidden" value="boardDetail" id="boardDetail">
 
 	<div class="boardContent">
 		<h1>커뮤니티</h1>
