@@ -47,7 +47,7 @@ $(function(){
 		
 	/*게시글 상세보기 페이지 댓글, 좋아요 로딩*/
 	if($('.board_comment_flag').val() == 'Y') {
-		commentsList($('.boardNo').val());
+		commentsList($('input[name=boardNo]').val());
 		
 		likeCountSelect();
 		
@@ -137,7 +137,7 @@ $(function(){
 		var boardFormNo = $('input[name=boardFormNo]').val();
 		
 		$('#confirmModalBody').html('게시글을 삭제하시겠습니까?');
-		$('#confirmOk').attr('onclick', 'location.href=\"' + contextPath + '/main/board/boardDel?boardNo=' + boardNo + '&boardGroupNo=' + boardGroupNo + '&boardStep=' + boardStep + '$boardFormNo=' + boardFormNo + '\"');
+		$('#confirmOk').attr('onclick', 'location.href=\"' + contextPath + '/main/board/boardDel?boardNo=' + boardNo + '&boardGroupNo=' + boardGroupNo + '&boardStep=' + boardStep + '&boardFormNo=' + boardFormNo + '\"');
 		$('#confirmModalBtn').trigger('click');
 	});
 	
@@ -257,7 +257,7 @@ function likeIns() {
 
 //좋아요 취소
 function likeDel() {
-	var boardNo = $('input[name=boardNo').val();
+	var boardNo = $('input[name=boardNo]').val();
 	var no = $('input[name=no]').val();
 	
 	$.ajax({
@@ -278,6 +278,7 @@ function likeDel() {
 /*좋아요 개수 검색함수*/
 function likeCountSelect() {
 	var boardNo = $('input[name=boardNo]').val();
+	
 	$.ajax({
 		url:contextPath + '/boardLike/count',
 		type:'GET',
