@@ -25,15 +25,14 @@
 						<c:if test="${map.BOARD_DEL_FLAG == 'N' }">
 							<tr>
 								<th scope="row" class="ck"><input type="checkbox" name="boardItems[${i }].boardNo" value="${map.BOARD_NO }"></th>
-								<td class="title">
-									<c:if test="${map['BOARD_STEP'] > 0 }">
-										<c:forEach var="i" begin="0" end="${map['BOARD_STEP'] }">
-											&nbsp;
-										</c:forEach>
-										답변 - 
-									</c:if>
-									<a href="#" onClick="<c:url value='/main/board/boardDetail?boardNo=${map.BOARD_NO }'/>">${map.BOARD_TITLE }</a>
-									<c:if test="${map['FILECOUNT'] != 0 and map['BOARD_FILE_ADD_FLAG'] == 'Y'}">
+								<td class="title">									
+									<a href="#" onclick="<c:url value='/main/board/boardDetail?boardNo=${map.BOARD_NO }'/>">
+										<c:if test="${map.BOARD_STEP > 0 }">
+											답변 - 
+										</c:if>
+										${map.BOARD_TITLE }
+									</a>
+									<c:if test="${map.FILECOUNT != 0 and map.BOARD_FILE_ADD_FLAG == 'Y'}">
 										<img alt="파일이미지" src="<c:url value='/images/file.gif'/>">
 									</c:if>
 									<c:if test="${map.BOARD_SECREATE == 'Y' }">
