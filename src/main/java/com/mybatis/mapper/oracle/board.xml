@@ -201,4 +201,13 @@
 		select * from boardview
 		where no = #{no}
 	</select>
+	
+	<select id="selectFaqList" resultType="map">
+		select * from boardview
+		<![CDATA[
+			where rownum <= 5	
+		]]>
+		and board_form_no = 2
+		order by board_regdate
+	</select>
 </mapper>
