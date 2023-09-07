@@ -50,11 +50,47 @@ button:hover {
 	font-weight: bold;
 }
 
+.error-text {
+  color: red;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
 
 </style>
 
 <script type="text/javascript">
-
+$(document).ready(function() { 
+	//비밀번호 조건
+	$('#managerPwd').keyup(function() {
+	    var memberPwd = $('#managerPwd').val();
+	    var pwdError = $('#PwdError');
+	
+	    if (memberPwd.length < 8 || memberPwd.length > 20 ||
+	        !/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]+$/.test(memberPwd)) {
+	        pwdError.html("비밀번호는 문자, 숫자, 특수문자를 포함한 8~20자여야 합니다");
+	        pwdError.css('color', 'red');
+	    } else {
+	        pwdError.html("");
+	    }
+	});
+	
+	//비밀번호 일치/불일치
+	$('#managerCheckPwd').keyup(function() {
+	    var memberPwd = $('#managerPwd').val();
+	    var memberpwdCheck = $(this).val();
+	    var pwdCheckError = $('#PwdCheckError');
+	
+	    if (memberPwd !== memberpwdCheck) {
+	    	pwdCheckError.html("비밀번호가 일치하지 않습니다.");
+	    	pwdCheckError.css('color', 'red');
+	    } else {
+	    	pwdCheckError.html("비밀번호가 일치합니다");
+	    	pwdCheckError.css('color', 'blue');
+	    }
+	});
+});
 </script>
 
 <section>
