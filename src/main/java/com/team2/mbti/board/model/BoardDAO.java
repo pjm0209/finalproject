@@ -42,4 +42,6 @@ public interface BoardDAO {
 	List<Map<String, Object>> selectMainBoardFormCategory();
 	
 	List<Map<String , Object>> selectUserBoardList(int no);
+	
+	List<Map<String, Object>> selectFaqList();
 }

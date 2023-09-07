@@ -21,14 +21,16 @@ var contextPath="/mbti";
 				if(idx!=$('input[type=checkbox]:checked:not(input[id=check-All])').length-1){
 					var no=$(this).val();
 					var name= $('#name'+no).text()+", ";
-					result="<input type='text' name='sendItems["+idx+"].receiveNo' value='"+no+"'>";
+					result="<input type='hidden' name='sendItems["+idx+"].receiveNo' value='"+no+"'>";
+					result+="<input type='hidden' name='adminMessageFlag' value='N'>";
 				}else{
 					var no=$(this).val();
 					var name= $('#name'+no).text();
-					result="<input type='text' name='sendItems["+idx+"].receiveNo' value='"+no+"'>";
+					result="<input type='hidden' name='sendItems["+idx+"].receiveNo' value='"+no+"'>";
+					result+="<input type='hidden' name='adminMessageFlag' value='N'>";
 				}
 				
-				$('#input2').append(result);
+				$('#input').append(result);
 				$('#memberNameModal').append(name);
 			});
 			
@@ -39,7 +41,6 @@ var contextPath="/mbti";
 			$('#alertModalLabel').html('전체 쪽지 보내기');
 			$('#memberNameModal').html("전체");
 			$('#messageModal').modal('show');
-			
 		}
 		
 		$("#messageModal").on("shown.bs.modal", function () {

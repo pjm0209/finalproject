@@ -48,4 +48,6 @@ public interface EducationService {
 	EducationVO selectAllMemInfo(EducationVO vo);
 	List<EducationVO> myFinishEdu(EducationVO vo);
 	int applyPayFinish(int eduAppNo);
+	
+	int insertSalesByEdu(EducationVO vo);
 }

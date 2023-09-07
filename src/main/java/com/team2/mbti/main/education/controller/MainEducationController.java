@@ -156,14 +156,21 @@ public class MainEducationController {
 	
 	@ResponseBody
 	@RequestMapping("/mypage/payAjax")
-	public String applyFinish(@RequestParam(defaultValue = "0") int eduAppNo) {
-		logger.info("신청 교육 결제 완료 처리, 파라미터 eduAppNo={}", eduAppNo);
+	public String applyFinish(@RequestParam int eduAppNo,@RequestParam String eduName,@RequestParam int eduPrice) {
+		logger.info("신청 교육 결제 완료 처리, 파라미터 eduAppNo={},eduName={},eduPrice={}", eduAppNo,eduName,eduPrice);
 		
 		int cnt = educationService.applyPayFinish(eduAppNo);
+		
+		EducationVO vo= new EducationVO();
+		vo.setEduAppNo(eduAppNo);
+		vo.setEduName(eduName);
+		vo.setEduPrice(eduPrice);
 		
 		String msg="";
 		if(cnt>0) {
 			msg="신청한 교육의 결제가 완료되었습니다.";
+			int cnt2 = educationService.insertSalesByEdu(vo);
+			logger.info("교육 결제 매출 넘겨주기, cnt2={}", cnt2);
 		}else {
 			msg="신청한 교육의 결제를 진행하는 도중 에러가 발생하였습니다.";
 		}

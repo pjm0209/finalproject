@@ -7,8 +7,8 @@
 			resultType="int">
 			select send_dm_seq.nextval from dual
 		</selectKey>
-		insert into send_dm(send_dm_no, admin_no, send_body, receive_no)
-		values(#{sendDmNo},#{adminNo},#{sendBody},#{receiveNo})
+		insert into send_dm(send_dm_no, admin_no, send_body, receive_no, receive_manager_flag)
+		values(#{sendDmNo},#{adminNo},#{sendBody},#{receiveNo},#{receiveManagerFlag})
 	</insert>
 
 	<insert id="insertReceiveDm" parameterType="receiveDmVo">

@@ -11,9 +11,10 @@
 	    // IMP.request_pay(param, callback) 결제창 호출
 	    var login= "${sessionScope.userid}";
 	    var name=$('input[type=checkbox]:checked:not(#check-All-my)').parent().parent().find('#eduName').html();
-	    var price=$('input[type=checkbox]:checked:not(#check-All-my)').parent().parent().find('#eduPrice').html();
+	    var price=$('input[type=checkbox]:checked:not(#check-All-my)').parent().parent().parent().find('input[name=eduPrice]').val();
 	    
-	    alert("교육명 = "+ name+", 가격 = "+ price);
+	    var eduAppNo = $('#edu-pay-tb').find('input[type=checkbox]:checked').val();
+	    alert("교육번호 = " + eduAppNo +", 교육명 = "+ name+", 가격 = "+ price);
 	    
 	    if(login!=null && login!=''){
 		    var uid = '';
@@ -27,14 +28,17 @@
 		        buyer_email : "email@naver.com", 
 		        buyer_name : "이름",
 		        buyer_tel : "전화번호",
-		    }, function (rsp) { // callback\
-		    	var eduAppNo = $('#edu-pay-tb').find('input[type=checkbox]:checked');
+		    }, function (rsp) { // callback
+		    	
 		    	if(rsp.success) {
 		    		$.ajax({
-		    			url:contextPath + "/main/mypage/payAjax",
-		    			data:{"eduAppNo" : eduAppNo.val()},
+		    			url:"/mbti/main/mypage/payAjax",
+		    			data:{eduAppNo : eduAppNo,
+		    				  eduName : name, 
+		    				  eduPrice : price
+						},
+						dataType:"TEXT",
 		    			type:"POST",
-		    			dataType:"text",
 		    			success:function(res){
 		    				alert(res);
 		    			},
@@ -158,6 +162,7 @@
 							<td>${educationVo.epName }</td>
 							<td>${educationVo.eduAppPay }</td>
 						</tr>
+						<input type="hidden" name="eduPrice" value="${educationVo.eduPrice}">
 					</c:forEach>
 				</c:if>
 			</tbody>

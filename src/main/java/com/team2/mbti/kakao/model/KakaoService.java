@@ -124,7 +124,7 @@ public class KakaoService {
             String name=result.substring(idx+11, idx2-4);
             vo.setUserid(id);
             vo.setName(name);
-            
+            vo.setKakaoIdFlag("Y");
             logger.info("id={}, name={}",id,name);
 			
 			int count=memberDao.getKakaoIdCount(vo);
