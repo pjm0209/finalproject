@@ -3,6 +3,8 @@ package com.team2.mbti.main.basket.model;
 import java.util.List;
 import java.util.Map;
 
+import com.team2.mbti.main.order.model.MainOrderVO;
+
 public interface MainBasketService {
 	
 	int insertBasket(MainBasketVO vo);
@@ -13,7 +15,11 @@ public interface MainBasketService {
 	int deleteByBasketNo(int basketNo);
 	
 	int editBasketQty(MainBasketVO vo);
-	int deleteBasket(int bookNo);
+	int deleteBasketBook(MainBasketVO vo);
 	int deleteCartByNo(int no);
 	MainBasketVO selectCartByCartNo(int basketNo);
+	
+	int completeOrders(int no);
+	
+	int insertOrdersAndEditOthers(List<Map<String, Object>> list);
 }//

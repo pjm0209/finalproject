@@ -36,7 +36,6 @@ $(function(){
 	var limit = $("input[name=limit]").val();
 	var notDeliTotal = $(".notDeliTotal").text();
 	if(notDeliTotal < limit){
-		$(".notDeliTotal").text(notDeliTotal + deli);
 		$("#deli").text(deli);
 	}
 	
@@ -44,6 +43,7 @@ $(function(){
 	var realDeli = parseInt($("#deli").text());
 	$(".booklist_area ul:eq(1) li p span").text(parseInt(notDeliTotal) + realDeli);
 	
+	$('input[name=sumPrice]').val($(".booklist_area ul:eq(1) li p span").text());
 	
 	$(".selfClose").click(function(){
 		$("#exampleModal").modal('hide');
@@ -67,9 +67,13 @@ $(function(){
     	$('#reAddressDetail2').val($(this).val());
 	});
     
+	$(".method").click(function(){
+		$("input[name=paymentMethod]").val($(this).text());
+	})
+    
 });
 
-function sample4_execDaumPostcode2() {
+function sample4_execDaumPostcode_book() {
     new daum.Postcode({
         oncomplete: function(data) {
 
@@ -107,7 +111,7 @@ function requestPay_book(t, t2) {
 	    IMP.request_pay({ // param
 	        pg: 'kakaopay',
 	        pay_method: "card",
-	        merchant_uid: 'merchant_book_buyer'+id, //가맹점 주문번호 (아임포트를 사용하는 가맹점에서 중복되지 않은 임의의 문자열을 입력)
+	        merchant_uid: 'essential mbti'+(id++), //가맹점 주문번호 (아임포트를 사용하는 가맹점에서 중복되지 않은 임의의 문자열을 입력)
 	        name: "책 결제 테스트",
 	        amount: 10000, //금액
 	        buyer_name : "${sessionScope.name}",
@@ -120,6 +124,7 @@ function requestPay_book(t, t2) {
 	    	}else{
 	    		$('#alertModalBody').html("결제 실패");
 				$('#alertModalBtn').trigger('click');
+				id=id+10;
 	    	}
 		});
     }else{
@@ -143,6 +148,7 @@ function requestPay_book(t, t2) {
 <input type="hidden" name="DELIVERY" value="${DELIVERY}">
 <input type="hidden" name="limit" value="${TOTAL_PRICE}">
 
+<form name="frmOrderInput" method="post" action="<c:url value='/main/book/basket/bookOrderComplete'/>">
 <section id="order_step" class="order_step" >
 	<h2>주문/결제</h2>
 	<ul class="step">
@@ -164,7 +170,6 @@ function requestPay_book(t, t2) {
 				      </div>
 				      <div class="modal-body">
 				      
-				        <form name="frmOrderInput" method="post" action="<c:url value='/main/book/basket/bookOrderComplete'/>">
 				          <div class="mb-3 div-register">
 				            <label for="recipient2" class="col-form-label">수령인 이름 :</label>
 				            <input type="text" class="form-control" id="recipient2" name="recipient" placeholder="성함 입력">&nbsp;
@@ -178,11 +183,9 @@ function requestPay_book(t, t2) {
 				            <input type="text" class="address form-control" id="reAddress2" name="reAddress" placeholder="주소를 입력하세요" readonly="readonly">
 				            <label for="reAddressDetail2" class="col-form-label">수령인 상세주소 :</label>
 				            <input type="text" class="addressDetail form-control" id="reAddressDetail2" name="reAddressDetail" placeholder="상세주소를 입력하세요">
-				            <input type="hidden" name="sumPrice">
-				            <input type="hidden" name="paymentMehod">
-				            <input type="hidden" name="salesCategoryNo" value="1">
+				            <input type="hidden" name="sumPrice" >
+				            <input type="hidden" name="paymentMethod">
 				          </div>
-				        </form>
 				        
 				      </div>
 				      <div class="modal-footer">
@@ -207,14 +210,20 @@ function requestPay_book(t, t2) {
 					</div>
 				</c:if>
 				<c:if test="${!empty mapList}">
+					<c:set var="i" value="0"/>
 					<c:forEach var="map" items="${mapList}">
 					<li class="flex">
+						<input type="hidden" name="mainBookItems[${i}].bookNo" value="${map['BOOK_NO']}">
+						<input type="hidden" name="mainBookItems[${i}].bookTitle" value="${map['BOOK_TITLE']}">
+						<input type="hidden" name="mainBookItems[${i}].ordersQty" value="${map['BASKET_QTY']}">
+						<input type="hidden" name="mainBookItems[${i}].bookPrice" value="${map['BOOK_PRICE']}">
 						<a href="javascript:void(0);"><img width="100px" alt="${map['BOOK_IMG_ORIGINALNAME']}" src="/mbti/images/bookProduct/upload_img/${map['BOOK_IMG_NAME']}" ></a>
-						<p class="title">${map['BOOK_TITLE']} ${t}${t2}</p>
+						<p class="title">${map['BOOK_TITLE']}</p>
 						<p class="book_count"><span>${map['BASKET_QTY']}</span>개</p>
 						<p><span>${map['BOOK_PRICE']}</span>원</p>
 						<p class="total"><span>${map['BOOK_PRICE'] * map['BASKET_QTY']}</span>원</p>
 					</li>
+					<c:set var="i" value="${i+1}"/>
 					</c:forEach>
 				</c:if>
 			</ul>
@@ -222,11 +231,11 @@ function requestPay_book(t, t2) {
 		<li class="step3 shadow-sm bg-body rounded">
 			<p class="box_tit">결제 수단</p>
 			<div class="pay_box flex">
-				<a href="javascript:void(0);">신용카드</a>
-				<a href="javascript:void(0);">카카오페이</a>
-				<a href="javascript:void(0);">온라인입금</a>
-				<a href="javascript:void(0);">휴대폰결제</a>
-				<a href="javascript:void(0);">무통장입금</a>
+				<button class="method" type="button" >신용카드</button>
+				<button class="method" type="button" >카카오페이</button>
+				<button class="method" type="button" >온라인입금</button>
+				<button class="method" type="button" >휴대폰결제</button>
+				<button class="method" type="button" >무통장입금</button>
 			</div>
 		</li>
 		
@@ -293,7 +302,7 @@ function requestPay_book(t, t2) {
 		          <div class="mb-3 div-register">
 		            <label for="reZipcode" class="col-form-label">우편번호 :</label>
 		            <input type="text" class="postalCode form-control" id="reZipcode"  placeholder="우편번호를 검색하세요">&nbsp;	
-					<input type="Button" class="form-control btn-primary" value="우편번호 찾기" id="btnZipcode" title="새창열림" onclick="sample4_execDaumPostcode2()">	
+					<input type="Button" class="form-control btn-primary" value="우편번호 찾기" id="btnZipcode" title="새창열림" onclick="sample4_execDaumPostcode_book()">	
 		          </div>
 		          <div class="mb-3 div-register">
 		            <label for="reAddress" class="col-form-label">주소 :</label>
@@ -314,8 +323,6 @@ function requestPay_book(t, t2) {
 		  </div>
 		</div>
 		<!--  -->
-		
-		
 </section>
-
+ </form>
 <%@ include file="../../inc/bottom.jsp"%>

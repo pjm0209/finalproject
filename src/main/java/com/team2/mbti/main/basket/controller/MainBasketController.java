@@ -1,5 +1,7 @@
 package com.team2.mbti.main.basket.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,8 +17,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.team2.mbti.common.ConstUtil;
 import com.team2.mbti.main.basket.model.MainBasketService;
 import com.team2.mbti.main.basket.model.MainBasketVO;
+import com.team2.mbti.main.book.model.MainBookVO;
+import com.team2.mbti.main.book.model.MainBookVOList;
+import com.team2.mbti.main.order.model.MainOrderVO;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -153,19 +159,38 @@ public class MainBasketController {
 	}
 	
 	@RequestMapping("/bookOrderComplete")
-	public String bookOrderComplete(@RequestParam(defaultValue = "0") int bookNo, Model model) {
-		logger.info("책 주문 페이지 3단계(결제 내역 확인) - bookOrderComplete, 파라미터 bookNo={}", bookNo);
+	public String bookOrderComplete(@ModelAttribute MainOrderVO orderVo,
+			@ModelAttribute MainBookVOList bookListVo, Model model, HttpSession session) {
+		logger.info("책 주문 페이지 3단계(결제 내역 확인) - bookOrderComplete, 파라미터 orderVo={}", orderVo);
+		logger.info("파라미터 bookListVo={}", bookListVo);
+		int no = (int)session.getAttribute("no");
+		logger.info("3단계(결제 완료 처리 중), 파라미터 회원번호 no={}", no);
 		
 		//전부 트랜젝션으로
+		List<Map<String, Object>> list = new ArrayList<>();
+		List<MainBookVO> bookList= bookListVo.getMainBookItems();
+		orderVo.setNo(no);
+		Map<String, Object> map = new HashMap<>();
+		map.put("bookList", bookList);
+		map.put("orderVo", orderVo);
+		list.add(map);
 		
 		//1. insert
 		// - orders
 		// - orders_detail
 		// - sales(SALES_CATEGORY_NO, SALES_PRICE, SALES_NAME) * 구매한 제품마다 각각
 		// - intoStock 구매한 제품마다 각각
+		int cnt = mainBasketService.insertOrdersAndEditOthers(list);
+		logger.info("최종 insertOrdersAndEditOthers 결과 cnt={}",cnt);
 		
 		//2. delete
 		// - basket
+		if(cnt >= 1) {
+			cnt = mainBasketService.completeOrders(no); // delete basket where no=?
+			logger.info("장바구니 삭제 completeOrders 결과 cnt={}",cnt);
+		} else {
+			logger.info("장바구니 삭제 completeOrders 미실시");
+		}
 		
 		return "main/book/basket/bookOrderComplete";
 	}
