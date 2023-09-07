@@ -381,7 +381,7 @@
                                 <a class="dropdown-item d-flex align-items-center" href="<c:url value='/admin/message/adminMessage'/>">
                                     <div class="font-weight-bold">
                                         <div class="asdf">
-                                        	읽지 않은 알람 수 : <c:import url="/admin/messageCount"></c:import>
+                                        	읽지 않은 쪽지 수 : <c:import url="/admin/messageCount"></c:import>
                                         </div>
                                     </div>
                                 </a>

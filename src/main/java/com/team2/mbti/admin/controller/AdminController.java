@@ -1,8 +1,6 @@
 package com.team2.mbti.admin.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,6 +37,10 @@ public class AdminController {
 		
 	@GetMapping("/index")
 	public String index_get(Model model, MemberVO membervo) {
+		logger.info("관리자 index 페이지");
+		
+		
+		
 		model.addAttribute("title", "관리자 페이지");
 		model.addAttribute("memTotal", memberService.getTotalMember(membervo));
 		model.addAttribute("memToday", memberService.getTodayMember(membervo));
