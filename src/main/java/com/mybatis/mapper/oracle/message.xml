@@ -3,8 +3,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.team2.mbti.message.model.MessageDao">
 	<insert id="insertSendDmToAdmin" parameterType="sendDmVo">
-		<selectKey keyProperty="sendDmNo" order="BEFORE"
-			resultType="int">
+		<selectKey keyProperty="sendDmNo" order="BEFORE" resultType="int">
 			select send_dm_seq.nextval from dual
 		</selectKey>
 		insert into send_dm(send_dm_no, admin_no, send_body, receive_no, receive_manager_flag)
@@ -99,4 +98,12 @@
 		where receive_manager_flag='Y'
 		and read_date is null
 	</select>
+	
+	<!-- <select id="selectSalesBySalesCategoryNo" parameterType="">
+		select sales_category_no ,sales_name, sum(sales_price) sumprice, trunc(sales_regdate) regdate
+		from sales
+		where sales_category_no =#{salesCategoryNo}
+		group by sales_category_no ,sales_name, sales_regdate
+		order by sales_category_no ,sales_name, regdate desc
+	</select> -->
 </mapper>

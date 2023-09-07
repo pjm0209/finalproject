@@ -110,10 +110,12 @@ public class MessageController {
 	}
 	
 	@RequestMapping("/messageWrite2")
-	public String messageWrite(@ModelAttribute SendDmVO sendDmVo, HttpSession session,Model model) {
+	public String messageWrite(@ModelAttribute SendDmVO sendDmVo,@RequestParam(required = false, defaultValue = "N") String adminMessageFlag, HttpSession session,Model model) {
 		int adminNo=(int)session.getAttribute("adminNo");
-		logger.info("관리자 쪽지 보내기2 처리, sendDmVo={},adminNo={}",sendDmVo,adminNo);
+		logger.info("관리자 쪽지 보내기2 처리, sendDmVo={},adminNo={},adminMessageFlag={}",sendDmVo,adminNo,adminMessageFlag);
+		
 		sendDmVo.setAdminNo(adminNo);
+		sendDmVo.setReceiveManagerFlag(adminMessageFlag);
 		
 		String msg="쪽지를 보내는중에 에러가 발생했습니다",url="/admin/message/adminMessage";
 		int cnt=messageService.insertSendDmToAdmin(sendDmVo);
