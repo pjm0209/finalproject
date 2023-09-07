@@ -1,6 +1,8 @@
 package com.team2.mbti.admin.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +21,9 @@ import com.team2.mbti.admin.model.AdminVO;
 import com.team2.mbti.common.ConstUtil;
 import com.team2.mbti.common.PaginationInfo;
 import com.team2.mbti.common.SearchVO;
+import com.team2.mbti.member.model.MemberService;
 import com.team2.mbti.member.model.MemberVO;
+import com.team2.mbti.message.model.MessageService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -30,10 +34,15 @@ public class AdminController {
 	private static final Logger logger=LoggerFactory.getLogger(AdminController.class);
 	
 	private final AdminService adminService;
+	private final MemberService memberService;
+	private final MessageService messageService;
 		
 	@GetMapping("/index")
-	public String index_get(Model model) {
+	public String index_get(Model model, MemberVO membervo) {
 		model.addAttribute("title", "관리자 페이지");
+		model.addAttribute("memTotal", memberService.getTotalMember(membervo));
+		model.addAttribute("memToday", memberService.getTodayMember(membervo));
+		model.addAttribute("memWeek", memberService.getWeekMember(membervo));
 		
 		return "admin/index";
 	}
@@ -208,6 +217,17 @@ public class AdminController {
 		model.addAttribute("url", url);
 		
 		return "common/message";
-	}		
+	}	
+	
+	
+	@RequestMapping("/messageCount")
+	public String messageCount(Model model) {
+		int messageCount=messageService.getAdminMessageCount();
+		logger.info("읽지 않은 쪽지 수 결과 messageCount={}",messageCount);
+		
+		model.addAttribute("messageCount", messageCount);
+		
+		return "admin/messageCount";
+	}
 	
 }

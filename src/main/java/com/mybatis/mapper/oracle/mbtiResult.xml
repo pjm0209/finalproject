@@ -24,7 +24,7 @@
 		select question_type_no, question_category_no, sum(mbti_val) mbti_val from mbti_result
 		where no=#{no}
 		group by question_type_no, question_category_no
-		order by question_type_no, question_category_no
+		order by question_type_no desc, question_category_no
 	</select>
 	
 </mapper>

@@ -116,8 +116,27 @@ public class MemberLoginController {
 	public String memberRegister_post(@ModelAttribute MemberVO membervo, Model model){
 		logger.info("회원가입 처리, 파라미터 membervo={}",membervo);
 		 membervo.setPwd(passwordEncoder.encode(membervo.getPwd()));
-		 int cnt = memberService.insertMember(membervo);	
 		
+	
+		String email ="";
+		String email1 = membervo.getEmail1();
+		String email2 = membervo.getEmail2();
+		String email3 = membervo.getEmail3();
+		
+		if(email1!=null && !email1.isEmpty()){
+		   if(email2.equals("etc")){
+			  if(email3!=null && !email3.isEmpty()){
+		      	email=email1+"@"+email3;
+			  }
+		   }else{	
+		      email =email1+"@"+email2;
+		   }
+		}
+		membervo.setEmail(email);
+		 int cnt = memberService.insertMember(membervo);	
+		logger.info("cnt={}", cnt);
+			
+		logger.info("membervo={},", membervo.getEmail());
 		logger.info("회원 가입 완료, result = {}",cnt);		
 		String msg = "회원 가입에 실패하였습니다.", url = "/member/memberRegister";
 		

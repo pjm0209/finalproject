@@ -19,4 +19,5 @@ public interface AdminDAO {
 	int selectAdminNo(String adminId);
 	
 	int deleteMultiAdmin(int adminNo);
+	
 }

@@ -93,4 +93,10 @@
 			and ${searchCondition} like '%'|| #{searchKeyword} ||'%'
 		</if>
 	</select>
+	
+	<select id="getAdminMessageCount" resultType="int">
+		select count(*) from messageView
+		where receive_manager_flag='Y'
+		and read_date is null
+	</select>
 </mapper>
