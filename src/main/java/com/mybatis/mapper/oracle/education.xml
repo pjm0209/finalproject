@@ -278,12 +278,17 @@
 	</select>
 	
 	
-	<update id="applyPayFinish" parameterType="int">
+	<update id="applyPayFinish" parameterType="educationVo">
 		update education_application
 		set edu_app_pay = '결제 완료'
 		where edu_app_no=#{eduAppNo}
 	</update>
 	
+	
+	<insert id="insertSalesByEdu" parameterType="educationVo">
+		insert into sales(sales_no, sales_category_no, sales_name, sales_price)
+		values(sales_seq.nextval, 3, #{eduName}, #{eduPrice})
+	</insert>
 	
 	
 </mapper>

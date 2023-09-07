@@ -18,8 +18,10 @@ public interface MainBasketDAO {
 	int deleteByBasketNo(int basketNo);
 	/*ajax*/
 	
-	int deleteBasket(int bookNo);
+	int deleteBasketBook(MainBasketVO vo);
 	int deleteCartByNo(int no);
+	
+	int completeOrders(int no);
 	MainBasketVO selectCartByCartNo(int basketNo);
 	
 }//

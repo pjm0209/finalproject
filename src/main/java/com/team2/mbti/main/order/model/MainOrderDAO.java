@@ -1,5 +1,19 @@
 package com.team2.mbti.main.order.model;
 
-public class MainOrderDAO {
 
+import org.apache.ibatis.annotations.Mapper;
+
+import com.team2.mbti.main.book.model.MainBookVO;
+
+import org.apache.ibatis.annotations.Mapper;
+import java.util.List;
+import java.util.Map;
+
+@Mapper
+public interface MainOrderDAO {
+	int insertOrders(MainOrderVO ovo);
+	int insertOrderDetails(MainBookVO Vo);
+	int insertSales(MainBookVO Vo);
+	List<MainOrderVO> selectOrderDetailList(int ordersNo);
+	List<Map<String, Object>> selectOrderList(int no);
 }

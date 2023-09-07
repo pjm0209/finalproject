@@ -27,14 +27,12 @@
 		});
 		
 		$(".gogo").click(function(){
-			alert(123);
 			var qty = $("#bookCnt input[name=ordersQty]").val();
 			if(qty < 1){
 				$('#alertModalBody').html("수량을 1이상으로 입력해주세요.");
 				$('#alertModalBtn').trigger('click');
 				return false;
 			}
-			alert("qty = " + qty);
 			$("#frmOrder input[name=basketQty]").val(qty);
 			var type="";
 			if($(this).attr('id') == 'toBasket'){ //장바구니 담기
@@ -42,12 +40,9 @@
 			} else if($(this).attr('id') == 'toPurchase'){ // 바로 구매
 				type="order";
 			}
-			alert(type + ' 123');
 			$('#frmOrder').prop('action',
 					"<c:url value='/main/book/basket/basketInsert?mode=" + type + "'/>");
-			alert('form의 action prop 수정됨');
 			$('#frmOrder').submit();
-			alert(' 서브밋 됨');
 		});
 		
 	});

@@ -16,12 +16,13 @@ var contextPath = "/mbti";
 		$("#totalPriceSpan").text(total);
 		var delivery = parseInt($("input[name=delivery]").val());
 		var limit = parseInt($("input[name=limit]").val());
-		if($("#totalPriceSpan").text() > limit){
+		if($("#totalPriceSpan").text() >= limit){
 			$("#delTax").text(0);
 		}else{
 			$("#delTax").text(delivery);
-			$("#totalPrice").text(delivery + total);
 		}
+		
+		$("#totalPrice").text(parseInt($("#delTax").text()) + total);
 		
 		var price1 = 0;
 		var price2 = 0;
@@ -54,8 +55,8 @@ var contextPath = "/mbti";
 			}else{
 				$("#delTax").text(0);
 			}
-			$("#totalPrice").text(delivery + total);
-			var a = $("#totalPrice").text(delivery + total);
+			$("#totalPrice").text(parseInt($("#delTax").text()) + total);
+			var a = $("#totalPrice").text(parseInt($("#delTax").text()) + total);
 			$("#frmBasket input[name=sumPrice]").val(a);
 			
 			var basketNo=$(this).parents('.box2').prev('.box1').find("input[name=basketNo]").val();
@@ -89,8 +90,8 @@ var contextPath = "/mbti";
 			}else{
 				$("#delTax").text(0);
 			}
-			$("#totalPrice").text(delivery + total);
-			var a = $("#totalPrice").text(delivery + total);
+			$("#totalPrice").text(parseInt($("#delTax").text()) + total);
+			var a = $("#totalPrice").text(parseInt($("#delTax").text()) + total);
 			$("#frmBasket input[name=sumPrice]").val(a);
 			
 			var basketNo=$(this).parents('.box2').prev('.box1').find("input[name=basketNo]").val();
@@ -148,6 +149,7 @@ var contextPath = "/mbti";
 			}
 		});	
 	}
+	
 	
 </script>
 
@@ -237,7 +239,7 @@ var contextPath = "/mbti";
 						<p>배송비</p>
 						<INPUT name="delivery" type="hidden" value="${DELIVERY}"/>
 						<INPUT name="limit" type="hidden" value="${TOTAL_PRICE}"/>
-a<p><span id="delTax">0</span>원</p>
+						<p><span id="delTax">0</span>원</p>
 					</li>
 				</ul>
 				<hr>

@@ -21,6 +21,10 @@ public class MainBookVO extends SearchVO {
 	private String bookUseflag;// BOOK_USEFLAG CHAR(1 BYTE)
 	private String bookExplains;// BOOK_EXPLAINS VARCHAR2(200 BYTE)
 	private String bookDetails;// BOOK_DETAILS CLOB
+	
+	private int ordersQty;
+	private int ordersNo;
+	private int salesNo;
 
 	@Override
 	public String toString() {
