@@ -123,11 +123,11 @@
 			return false;
 		}
 		$('#confirmModalBody').html("기존 " + oQty +" → " + uQty + "(으)로 변경할까요?");
-		$('#confirmOk').attr("onclick","ajaxUpdateQty("+oBookNo +", "+ oQty+", "+ idx+")");
+		$('#confirmOk').attr("onclick","ajaxUpdateQty("+oBookNo +", "+ oQty+ ", "+ uQty+")");
 		$('#confirmModalBtn').trigger('click');
 	}
 	
-	function ajaxUpdateQty(oBookNo, oQty, idx){
+	function ajaxUpdateQty(oBookNo, oQty, uQty){
 		$.ajax({		
 			url:"<c:url value='/admin/book/bookAjaxUpdateQty'/>",
 			type:'POST',
@@ -199,7 +199,7 @@
 			htmlStr += "<c:if test='${param.bookFlag == \"Inventory\" or param.bookFlag == \"InventoryByKeyword\"}'>";
 			htmlStr += "<td>";
 			/* htmlStr += "<button class=\"btn btn-success btn-xs blue\" onclick=\"location.href='bookUpdate?bookNo='\"" + this.bookNo + " type='button' title='재고저장' id='editQty'><i class='fas fa-save'></i></button>"; */
-			htmlStr += "<button class=\"btn btn-success btn-xs blue\" type='button' title='재고저장' id='editQty' onclick='updateQtyEach("+this.bookNo+","+this.stockQty+", this)'><i class='fas fa-save'></i></button>";
+			htmlStr += "<button class=\"btn btn-success btn-xs blue editQty\" type='button' title='재고저장' onclick='updateQtyEach("+this.bookNo+","+this.stockQty+", this)'><i class='fas fa-save'></i></button>";
 			htmlStr += "</td>";
 			htmlStr += "</c:if>";
 			htmlStr += "<c:if test='${param.bookFlag == \"bookList\" or param.bookFlag == \"bookListByKeyword\"}'>";

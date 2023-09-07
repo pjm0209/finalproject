@@ -13,11 +13,6 @@ public class MainOrderServiceImpl implements MainOrderService {
 	private final MainOrderDAO mainOrderDao;
 
 	@Override
-	public List<MainOrderVO> selectOrderDetailList(int ordersNo) {
-		return mainOrderDao.selectOrderDetailList(ordersNo);
-	}
-
-	@Override
 	public List<Map<String, Object>> selectOrderList(int no) {
 		return mainOrderDao.selectOrderList(no);
 	}

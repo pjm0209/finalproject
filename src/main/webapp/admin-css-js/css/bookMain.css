@@ -714,15 +714,16 @@ ul, li {
 	padding-top: 10px;
 }
 
-.booklist li .btn a {
+.booklist li .btn button {
 	display: block;
 	padding: 15px;
 	border-radius: 5px;
+	border: 1px white solid;
 	background: #666;
 	color: white;
 }
 
-.booklist li .btn a:nth-child(2) {
+.booklist li .btn button:nth-child(2) {
 	background: #ee7843;
 	margin-top: 5px;
 }
@@ -947,13 +948,13 @@ position:relative;
 .order_step .step3 .box_tit{padding: 30px;
     border-bottom: 1px #aaa solid;}
 .order_step .step3 .pay_box{padding:30px;}
-.order_step .step3 .pay_box a{border: 1px #ddd solid;
+.order_step .step3 .pay_box button{border: 1px #ddd solid;
     border-radius: 10px;
     padding: 20px;
     font-weight: bold;
     text-align: center;
     width: 19%;}
-.order_step .step3 .pay_box a.on{
+.order_step .step3 .pay_box button.on{
 	border: 1px #ee7843 solid;
     color: #ee7843;
     background: #ee78430a;

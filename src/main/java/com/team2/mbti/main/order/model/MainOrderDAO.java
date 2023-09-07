@@ -12,8 +12,8 @@ import java.util.Map;
 @Mapper
 public interface MainOrderDAO {
 	int insertOrders(MainOrderVO ovo);
-	int insertOrderDetails(MainBookVO Vo);
+	int insertOrderDetails(MainBookVO detailVo);
 	int insertSales(MainBookVO Vo);
-	List<MainOrderVO> selectOrderDetailList(int ordersNo);
+	List<Map<String, Object>> selectOrderDetailList(int ordersNo);
 	List<Map<String, Object>> selectOrderList(int no);
 }
