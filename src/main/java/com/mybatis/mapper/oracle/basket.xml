@@ -40,12 +40,13 @@
 		where basket_no=#{basketNo}
 	</delete>
 	
-	<delete id="deleteBasket" parameterType="int">
+	<delete id="deleteBasketBook" parameterType="mainBasketVo">
 		delete from basket
 		where book_no=#{bookNo}
+		and no=#{no}
 	</delete>
 	
-	<delete id="deleteCartByNo" parameterType="int">
+	<delete id="completeOrders" parameterType="int">
 		delete from basket
 		where no=#{no}
 	</delete>
@@ -54,5 +55,7 @@
 		select * from basket
 		where basket_no = #{basketNo}
 	</select>
+	
+	
 	
 </mapper>
