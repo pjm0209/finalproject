@@ -92,6 +92,15 @@ button#signUpButton {
   float: left;
 }
 
+.error2 {
+  width: 14rem;
+  color: red;
+  font-size: 15px;
+  margin-top: 15px;
+  font-weight: bold;
+  float: left;
+}
+
 #btAdminChkId{
     background-color: #eb5d1e; 
     border: none;
@@ -316,7 +325,7 @@ $(document).ready(function() {
          <tr>
             <td style="width:100px;" colspan="2" class="td1"><h6>비밀 번호<br>확인</h6></td>
             <td><input class="form-control" type="password" id="managerCheckPwd" name="managerCheckPwd" maxLength="20">
-            	<span class="error" id="PwdCheckError"></span>  
+            	<span class="error2" id="PwdCheckError"></span>  
             </td>                     
          </tr>
          
