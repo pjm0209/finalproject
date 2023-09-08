@@ -1,6 +1,5 @@
 package com.team2.mbti.admin.controller;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -69,7 +68,6 @@ public class AdminController {
 		int mbtiVal=0;
 		int eduVal=0;
 		for(Map<String, Object> map : regdateSalesList) {
-			String regdate=(String)map.get("REGDATE");
 			List<Map<String, Object>> salesList=(List<Map<String, Object>>)map.get("salesList");
 			logger.info("regdate={},salesList={}",regdate,salesList);
 			//BigDecimal bigDecimalCateNo=(BigDecimal)map.get("SALES_CATEGORY_NO");
