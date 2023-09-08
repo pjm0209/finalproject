@@ -164,4 +164,9 @@ public class BoardServiceImpl implements BoardService {
 	public List<Map<String, Object>> selectFaqList() {
 		return boardDao.selectFaqList();
 	}
+
+	@Override
+	public List<Map<String, Object>> selectPrevNextBoard(BoardVO vo) {
+		return boardDao.selectPrevNextBoard(vo);
+	}
 }

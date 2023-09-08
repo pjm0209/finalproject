@@ -25,7 +25,8 @@
 		var count=10;
 		$('#nextMbtiQuestion').click(function(){
 			if($('input[type=radio]:checked').length<count){
-				alert("정확한 성격유형을 위해서 모두 선택해 주셔야 합니다.");
+				$('#alertModalBody').html("정확한 성격유형을 위해서 모두 선택해 주셔야 합니다.");
+				$('#alertModalBtn').trigger('click');
 				bool=false;
 				return false;
 			}
@@ -47,9 +48,10 @@
 			}
 			count=count+10;
 		});
-		$('#resultDivMbti').click(function(){
-			if($('input[type=radio]:checked').length<num){
-				alert("정확한 성격유형을 위해서 모두 체크해 주셔야 합니다.");
+		$('#resultMbtiQuestion').click(function(){
+			if($('input[type=radio]:checked').length<count){
+				$('#alertModalBody').html("정확한 성격유형을 위해서 모두 선택해 주셔야 합니다.");
+				$('#alertModalBtn').trigger('click');
 				bool=false;
 				return false;
 			}

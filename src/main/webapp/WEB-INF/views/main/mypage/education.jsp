@@ -14,7 +14,21 @@
 	    var price=$('input[type=checkbox]:checked:not(#check-All-my)').parent().parent().parent().find('input[name=eduPrice]').val();
 	    
 	    var eduAppNo = $('#edu-pay-tb').find('input[type=checkbox]:checked').val();
-	    alert("교육번호 = " + eduAppNo +", 교육명 = "+ name+", 가격 = "+ price);
+	    
+		var count = $('input[type=checkbox]:checked').length;
+		
+		if($('input[type=checkbox]:checked').length>1){
+			$('#alertModalBody').html("결제할 교육을 하나만 선택하세요.");
+			$('#alertModalBtn').trigger('click');
+			return false;
+		}
+		
+		if(count < 1) {
+			$('#alertModalBody').html('결제할 교육을 선택하세요.');
+			$('#alertModalBtn').trigger('click');
+			return false;
+		}
+
 	    
 	    if(login!=null && login!=''){
 		    var uid = '';
@@ -40,13 +54,16 @@
 						dataType:"TEXT",
 		    			type:"POST",
 		    			success:function(res){
-		    				alert(res);
+		    				$('#alertModalBody').html("결제 완료");
+							$('#alertModalBtn').trigger('click');
+							$('#alertModal').on('hidden.bs.modal',function(){
+				    			location.href="<c:url value='/main/mypage/education'/>";
+							});
 		    			},
 		    			error:function(xhr, status, error){
 		    				alert(status+" : "+error);
 		    			}
 		    		});
-		    		location.href="<c:url value='/main/mypage/education'/>";
 		    	}else{
 		    		$('#alertModalBody').html("결제 실패");
 					$('#alertModalBtn').trigger('click');
@@ -74,7 +91,7 @@
 	}
 	
 	function applyCan() {
-		$('#myAppDelFrm').attr('action', contextPath + '/main/mypage/applyCan');
+		/* $('#myAppDelFrm').attr('action', '/mbti/main/mypage/applyCan'); */
 		$('form[name=frmDelete]').submit();
 	}
 </script>
@@ -86,6 +103,7 @@
 	<div id="eduApply-title">
 		<h4>교육 신청 현황</h4>
 	</div>
+	<!-- 신청 현황 -->
 	<form name="frmDelete" method="post" id="myAppDelFrm" action="<c:url value='/main/mypage/applyCan'/>">
 		<table class="table" id="educationtb" style="margin-top:30px;">
 			<thead>
@@ -128,7 +146,7 @@
 		<input type="button" id="applyDelBtn" value="신청 취소" onclick='applyCancel(this)'/>
 		</form>	
 		<!-- 결제 대기 목록 -->
-		<form name="frmDelete" method="post" id="myAppPayFrm" action="<c:url value='/main/mypage/applyPay'/>">
+		<form name="frmPay" method="post" id="myAppPayFrm" action="<c:url value='/main/mypage/applyPay'/>">
 		<div id="eduApply-title">
 			<h4>결제 대기</h4>
 		</div>
@@ -170,7 +188,7 @@
 		<button type="button" class="myAppPayBtn" id="my-app-payBtn" onclick="requestPay()">결제하기</button>
 		</form>	
 		<!-- 결제 완료 목록 -->
-		<form name="frmDelete" method="post" id="myAppFinFrm">
+		<form name="frmFinish" method="post" id="myAppFinFrm">
 		<div id="eduApply-title">
 			<h4>결제 완료</h4>
 		</div>

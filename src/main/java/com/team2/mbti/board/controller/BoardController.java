@@ -203,7 +203,7 @@ public class BoardController {
 	}
 	
 	@PostMapping("/boardWrite")
-	public String boardWrite_post(@ModelAttribute BoardVO vo, HttpServletRequest request) {
+	public String boardWrite_post(@ModelAttribute BoardVO vo, HttpServletRequest request) {		
 		logger.info("게시판 글쓰기 처리 파라미터 vo: {}", vo);
 		
 		List<Map<String, Object>> fileList = new ArrayList<>();
@@ -252,6 +252,11 @@ public class BoardController {
 	
 	@PostMapping("/boardWriteEdit")
 	public String boardWriteEdit_post(@ModelAttribute BoardVO vo, HttpServletRequest request) {
+		int boardFormNo=vo.getBoardFormNo();
+		if(boardFormNo!=3) {
+			vo.setBoardSecreate("N");
+		}
+		
 		logger.info("게시글 수정처리 파라미터 vo: {}", vo);
 		
 		List<Map<String, Object>> fileList = new ArrayList<>();
@@ -292,6 +297,11 @@ public class BoardController {
 	
 	@PostMapping("/boardWriteReply")
 	public String boardWriteReply_post(@ModelAttribute BoardVO vo, HttpServletRequest request) {
+		int boardFormNo=vo.getBoardFormNo();
+		if(boardFormNo!=3) {
+			vo.setBoardSecreate("N");
+		}
+		
 		logger.info("게시글 답변 처리 파라미터 vo: {}", vo);
 		
 		List<Map<String, Object>> fileList = new ArrayList<>();

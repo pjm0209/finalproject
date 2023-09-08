@@ -59,6 +59,9 @@ public class EducationController {
 	public String eduWrite_post(@ModelAttribute EducationVO vo, Model model){
 		logger.info("교육 등록 처리, 파라미터 vo={}", vo);
 		
+		EducationVO vo2 =  educationService.selectByNoTeacher(vo.getEduTeaNo());
+		vo.setEduTeaName(vo2.getEduTeaName());
+		
 		int cnt=educationService.insertEducation(vo);
 		logger.info("교육 등록 처리 결과 cnt={}", cnt);
 		
@@ -244,7 +247,7 @@ public class EducationController {
 	}
 	
 	@RequestMapping("/appliUpdate")
-	public String appliUpdate(@ModelAttribute EducationListVO listVo) {
+	public String appliUpdate(@ModelAttribute EducationListVO listVo, Model model) {
 		logger.info("신청자 승인 처리, 파라미터 listVo={}", listVo);
 		
 		List<EducationVO> list = listVo.getEducationItems();
@@ -252,7 +255,17 @@ public class EducationController {
 		int cnt = educationService.updateApplicant(list);
 		logger.info("신청자 승인처리 결과 cnt: {}", cnt);
 		
-		return "redirect:/admin/education/applicantList";
+		String msg="", url="/admin/education/applicantList";
+		if(cnt>0) {
+			msg="선택한 신청자가 승인되었습니다.";
+		}else {
+			msg="선택한 신청자를 승인하는 도중 에러가 발생하였습니다.";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
 	}
 	
 	

@@ -1,5 +1,6 @@
 package com.team2.mbti.admin.controller;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +26,7 @@ import com.team2.mbti.mbtisurvey.model.MbtiSurveyService;
 import com.team2.mbti.member.model.MemberService;
 import com.team2.mbti.member.model.MemberVO;
 import com.team2.mbti.message.model.MessageService;
+import com.team2.mbti.sales.model.SalesAllVO;
 import com.team2.mbti.sales.model.SalesService;
 
 import lombok.RequiredArgsConstructor;
@@ -60,14 +62,40 @@ public class AdminController {
 		List<Map<String, Object>> allSalesList=salesService.selectSalesAllView();
 		logger.info("전체 매출 조회 결과, allSalesList={}",allSalesList);
 		
-		List<Map<String, Object>> regdateSalesList=salesService.selectRegdateSalesView();
+		List<SalesAllVO> regdateSalesList=salesService.selectSalesRegdate();
 		logger.info("날짜별 매출 조회 결과, regdateSalesList={}",regdateSalesList);
 		
+		String result="";
+		int bookVal=0;
+		int mbtiVal=0;
+		int eduVal=0;
+		int salesCategoryNo=0;
+		int sumPrice=0;
+		String regdate ="";
+		BigDecimal bigDecimalCateNo=null;
+		BigDecimal bigDecimalVa=null;
+		
+		
+		List<Map<String, Object>> salesList=null;
+		for(SalesAllVO salesAllVo : regdateSalesList) {
+			salesList=salesAllVo.getSalesList();
+
+		}
+		
+		for(int i=0;i<salesList.size();i++) {
+			Map<String, Object> map=salesList.get(i);
+			regdate=(String)map.get("REGDATE");
+			System.out.println("날짜 : "+ regdate);
+			
+		}
+		
 		List<List<Map<String, Object>>> totalSalesList = new ArrayList<>();
+		
 		totalSalesList.add(bookSalesList);
 		totalSalesList.add(eduSalesList);
 		totalSalesList.add(allSalesList);
 		
+		model.addAttribute("result", result);
 		
 		model.addAttribute("pieChartList", pieChartList);
 		

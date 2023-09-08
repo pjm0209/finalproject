@@ -105,9 +105,66 @@
 				</c:if>
 			</div>
 		</div>
+		<div class="boardNextPrevList"></div>
 	</div>
 </section>
 
 <script type="text/javascript" src="<c:url value='/main-css-js/js/board.js'/>"></script>
+<script type="text/javascript">
+	var contextPath = "/mbti";
+	
+	$(function(){
+		
+		var boardNo = $('.boardNo').val();
+		var boardFormNo = $('input[name=boardFormNo]').val();
+		
+		$.ajax({
+			url: contextPath + "/main/board/nextPrevBoard",
+			data: {
+				boardNo:boardNo,
+				boardFormNo:boardFormNo
+			},
+			type: "GET",
+			datatype: "json",
+			success:function(result) {
+				console.log(result);
+				boardNextPrev(result);
+			},
+			error:function(xhr, status, error) {
+				alert(status + ": " + error);
+			}
+		});	
+	});
+	
+	function boardNextPrev(result) {
+		var str = "";
+		var boardNo = $('.boardNo').val();
+				
+		str += "<div class='listItem'>";
+		for(var i = 0; i < result.length; i++) {
+			var map = result[i];			
+			
+			if(result.length == 1) {
+				if(map.BOARD_NO > boardNo) {
+					str += "<a class='boardlink none'><i class='bi bi-arrow-left'></i></a>";
+				}
+			}
+			if(boardNo > map.BOARD_NO) {
+				str += "<a class='boardlink' href='<c:url value='/main/board/boardDetail?boardNo=" + map.BOARD_NO + "'/>'><i class='bi bi-arrow-left'></i></a>";
+			} else {
+				str += "<a class='boardlink' href='<c:url value='/main/board/boardDetail?boardNo=" + map.BOARD_NO + "'/>'><i class='bi bi-arrow-right'></i></a>";
+			}
+
+			if(result.length == 1) {
+				if(map.BOARD_NO < boardNo) {
+					str += "<a class='boardlink none'><i class='bi bi-arrow-right'></i></a>";
+				}
+			}
+		}		
+		str += "</div>";
+		
+		$('.boardNextPrevList').html(str);
+	}
+</script>
 
 <%@ include file="../inc/bottom.jsp"%>

@@ -12,6 +12,11 @@ a {
 	cursor: pointer;
 }
 
+span.boardDelCount {
+    margin-left: 10px;
+    font-size: 14px;
+}
+
 .form-check-input:checked {
     background-color: #eb5d1e;
     border-color: #eb5d1e;
@@ -232,6 +237,24 @@ i.bi.bi-search {
 
 /*게시글상세보기*/
 
+span.writer {
+    width: 20%;
+    margin-left: 264px;
+    display: inline-block;
+}
+
+a.boardlink {
+    width: 300px;
+    text-align: center;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.none, .none * {
+	color: darkgray;
+	cursor: default;
+}
+
 /*첨부파일 박스*/
 div.boardFile button {
 	padding-right: 25px;
@@ -260,6 +283,11 @@ ul.file-list {
     padding: 5px;
     position: absolute;
     width: 137px;
+}
+
+.listItem {
+    text-align: center;
+    margin-top: 20px;
 }
 
 /*댓글*/

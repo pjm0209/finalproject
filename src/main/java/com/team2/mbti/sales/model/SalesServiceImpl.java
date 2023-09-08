@@ -27,4 +27,11 @@ public class SalesServiceImpl implements SalesService{
 		return salesDao.selectRegdateSalesView();
 	}
 
+	@Override
+	public List<SalesAllVO> selectSalesRegdate() {
+		return salesDao.selectSalesRegdate();
+	}
+
+	
+
 }
