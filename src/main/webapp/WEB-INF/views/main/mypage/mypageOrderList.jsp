@@ -50,7 +50,7 @@
     </div>
 
 	<div id="section">
-		<p>${pagingInfo.totalRecord} 개의 검색 결과가 있습니다.</p>
+		<p>${fn:length(orderList)} 개의 주문내역이 있습니다.</p>
 		<div id="content">
 			<ul class="booklist" style="padding-left:0;">
 				<%-- <c:if test="${empty list }">
@@ -66,25 +66,32 @@
 				</c:if>
 				<c:if test="${!empty list }"> 
 				<c:forEach var="vo" items="${list}">--%>
+				<c:forEach var="list" items="${orderList }">
 					<li class="flex">
-						<div class="flex title">
-							<a href="<c:url value='/main/book/bookDetail?bookNo=${vo.bookNo}&bookCategory=${param.bookCategory}'/>">
-								<img class="shadow-sm bg-body rounded" alt="1" src="<c:url value='/images/bookProduct/1.jpg'/>" style="width: 120px;">
-							</a>
-							<div>
-								<p class="box">${vo.bookCategory}</p>
-								<a href="<c:url value='/main/book/bookDetail?bookNo=${vo.bookNo}&bookCategory=${param.bookCategory}'/>">${vo.bookTitle}</a>
-								<p><span>작가 : ${vo.bookWriter}</span> | <span style="padding-left:5px">출판사 : ${vo.bookPublisher}</span></p>
-								
-							</div>
-							
+						<div class="title">
+							<c:forEach var="map" items="${list.orderDetailList }">
+								<div class="orderItems flex">
+									<a href="<c:url value='/main/book/bookDetail?bookNo=${map.BOOK_NO}&bookCategory=${map.BOOK_CATEGORY}'/>">
+										<img class="shadow-sm bg-body rounded" alt="1" src="<c:url value='/images/bookProduct/${map.BOOK_NO }.jpg'/>" style="width: 120px;">
+									</a>
+									<div>
+										<p class="box">${map.BOOK_CATEGORY}</p>
+										<a href="<c:url value='/main/book/bookDetail?bookNo=${map.BOOK_NO}&bookCategory=${map.BOOK_CATEGORY}'/>">${map.BOOK_TITLE}</a>
+										<p><span>작가 : ${map.BOOK_WRITER}</span> | <span style="padding-left:5px">출판사 : ${map.BOOK_PUBLISHER}</span></p>
+										<br>
+										<p><span>가격 : <fmt:formatNumber value="${map.BOOK_PRICE }" pattern="#,###"/>원</span> | <span> 수량 : ${map.ORDERS_QTY }개</span></p>
+										
+									</div>								
+								</div>
+							</c:forEach>							
 						</div>
 						<div class="flex cancel_box">
-							<p><span>가격 : </span><fmt:formatNumber value="${vo.bookPrice}" pattern="#,###"/>원</p>
-							<p>주문완료</p>
+							<p><span>가격 : </span><fmt:formatNumber value="${list.mainOrderVo.sumPrice}" pattern="#,###"/>원</p>
+							<p>${list.orderDetailList[0].ORDERS_STATE }</p>
 							<button>취소 신청</button>
 						</div>
 					</li>
+				</c:forEach>
 				<%--</c:forEach>
 				 </c:if> --%>
 			</ul>
