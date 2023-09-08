@@ -262,6 +262,11 @@ ul.file-list {
     width: 137px;
 }
 
+.listItem {
+    text-align: center;
+    margin-top: 20px;
+}
+
 /*댓글*/
 .editDel {
     position: absolute;
