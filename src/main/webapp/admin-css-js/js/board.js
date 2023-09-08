@@ -585,7 +585,7 @@ function selectFile(element) {
     }
 
     // 3. 파일명 지정   
-    $(element).parent().prev('.fileName').html(file.name);
+    $(element).parents('.file_input').find('.fileName').html(file.name);
 	$(element).parent().prev('.fileName').after('<span class="bi bi-x-lg" onclick="removeFile(this);" class="btns del_btn"></span>');
 }
 

@@ -329,6 +329,7 @@ input[type="file"] {
 
 i.bi.bi-plus-lg {
 	font-size: x-large;
+	cursor: pointer;
 }
 
 .file_input input[type=text] {
