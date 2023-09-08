@@ -142,8 +142,14 @@
 		for(var i = 0; i < result.length; i++) {
 			var map = result[i];
 			str += "<div class='listItem'>";
-			str += "<a class='boardlink' href='<c:url value='/main/board/boardDetail?boardNo=" + map.BOARD_NO + "'/>'>" + map.BOARD_TITLE + "</a>";
-			str += "<span></span>";
+			str += "<a class='boardlink' href='<c:url value='/main/board/boardDetail?boardNo=" + map.BOARD_NO + "'/>'>" + map.BOARD_TITLE;
+			str += "<span class='writer'>";
+			if(map.ADMIN_ID != null) {
+				str += map.ADMIN_ID;
+			} else {
+				str += map.NAME;
+			}
+			str += "</span></a>";
 			str += "</div>";
 		}		
 		
