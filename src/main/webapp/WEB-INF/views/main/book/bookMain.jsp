@@ -9,6 +9,16 @@
 <script type="text/javascript" src="<c:url value='/admin-css-js/js/bookMain.js'/>"></script>
 <script type="text/javascript">
 
+function goCart(element){
+	   $(element).parent().parent().prop("action", "<c:url value='/main/book/basket/basketInsert?mode=cart'/>");
+	   $(element).parent().parent().submit();
+}
+
+function goOrder(element){
+	$(element).parent().parent().prop("action", "<c:url value='/main/book/basket/basketInsert?mode=order'/>");
+	$(element).parent().parent().submit();
+}
+
 function bookListPage(curPage){
 	$('input[name=currentPage]').val(curPage);
 	$('form[id=frmPageId]').submit();
@@ -23,15 +33,44 @@ function sendSearchKeyword(){
 	$("#searchKeyword").val(searchKeyword);
 	$("#frmPageId").submit();
 }
+
+var contextPath = "/mbti";
+
+function ajaxInsertCart(element){
+	var bookNo = $(element).parent().find('input[type=hidden]').val();
+	alert(bookNo);
+	$.ajax({
+		url: contextPath + "/main/book/basket/mainAjaxInsertBasket",
+		type:"post",
+		data: {
+			bookNo: bookNo,
+			basketQty: 1
+		},
+		success:function(result){
+			if(result > 0){
+				$('#confirmModalBody').html("장바구니에 넣었습니다.장바구니로 이동할까요?");
+				$('#confirmOk').attr("onclick","location.href='"+contextPath+"/main/mypage/mypageBasket'");
+				$('#confirmModalBtn').trigger('click');
+			} else {
+				$('#alertModalBody').html("오류로 인해 장바구니에 넣기 실패했습니다.나중에 다시 시도해주세요.");
+				$('#alertModalBtn').trigger('click');
+			}
+		},
+		error:function(xhr, status, error){
+			alert(xhr + status + error);
+		}
+	});	
+}
+
 </script>
 
 <section id="bookMain" class="book">
 	<div id='bookSellMainImg' class=" bookslide shadow-sm p-3 mb-5 bg-body rounded">
 		<ul class="gallery" style="padding-left: 0;">
-			<li><img src="<c:url value='/images/bookProduct/slide_01.jpg'/>"></li>
+			<%-- <li><img src="<c:url value='/images/bookProduct/slide_01.jpg'/>"></li>
 			<li><img src="<c:url value='/images/bookProduct/slide_02.jpg'/>"></li>
 			<li><img src="<c:url value='/images/bookProduct/slide_03.jpg'/>"></li>
-			<li><img src="<c:url value='/images/bookProduct/slide_04.jpg'/>"></li>
+			<li><img src="<c:url value='/images/bookProduct/slide_04.jpg'/>"></li> --%>
 			<!--추가 이미지  -->
 			<li><img src="<c:url value='/images/bookProduct/bookMain1.jpg'/>"></li>
 			<li><img src="<c:url value='/images/bookProduct/bookMain2.jpg'/>"></li>
@@ -79,22 +118,33 @@ function sendSearchKeyword(){
 						<c:forEach var="bookVo1" items="${bookList1}">
 							<li>
 								<figure>
+									<c:set var="title" value="${bookVo1.BOOK_TITLE}"/>
+									<c:set var="len" value="${fn:length(title)}"/>
+									<c:if test="${len > 21}">
+									<c:set var="part" value="${fn:substring(title, 21, len)}"/>
+									<c:set var="part2" value="${fn:substring(title, 0, 21)}"/>
+										<c:set var="title"
+										 value="${fn:replace(title, part, '...')}"/>
+									</c:if>
 									<a class="aa-product-img"
 									 href="<c:url value='/main/book/bookDetail?bookNo=${bookVo1.BOOK_NO}'/>">
-										<img
+										<img style="margin: 10px 0;" class="shadow-sm bg-body rounded"
 										 src="<c:url value='/images/bookProduct/upload_img/${bookVo1.BOOK_IMG_NAME}'/>"
 										 alt="${bookVo1.BOOK_TITLE}이미지">
-									</a>
-									<a class="aa-add-card-btn" href="">
-										<span style="display: block;" class="fas fa-shopping-cart"></span>
-										장바구니 담기
-									</a>
 									<figcaption>
 										<h5 class="aa-product-title">
-											<a href="#"></a>
+											<b>${title}</b>
 										</h5>
-										<span class="aa-product-price">${bookVo1.BOOK_PRICE}</span>
+										<span class="aa-product-price">
+											<fmt:formatNumber value="${bookVo1.BOOK_PRICE}" pattern="#,###"/>
+										</span>원
 									</figcaption>
+									</a>
+									<br>
+									<input type="hidden" value="${bookVo1.BOOK_NO}">
+									<a class="aa-add-card-btn" href="javacript:void(0);" onclick="ajaxInsertCart(this)">
+										<span style="display: block;" class="fas fa-shopping-cart"></span>
+									</a>
 								</figure>
 							</li>
 						</c:forEach>
@@ -111,22 +161,33 @@ function sendSearchKeyword(){
 						<c:forEach var="bookVo2" items="${bookList2}">
 							<li>
 								<figure>
+									<c:set var="title" value="${bookVo2.BOOK_TITLE}"/>
+									<c:set var="len" value="${fn:length(title)}"/>
+									<c:if test="${len > 21}">
+									<c:set var="part" value="${fn:substring(title, 21, len)}"/>
+									<c:set var="part2" value="${fn:substring(title, 0, 21)}"/>
+										<c:set var="title"
+										 value="${fn:replace(title, part, '...')}"/>
+									</c:if>
 									<a class="aa-product-img"
 									 href="<c:url value='/main/book/bookDetail?bookNo=${bookVo2.BOOK_NO}'/>">
-										<img
+										<img style="margin: 10px 0;" class="shadow-sm bg-body rounded"
 										 src="<c:url value='/images/bookProduct/upload_img/${bookVo2.BOOK_IMG_NAME}'/>"
 										 alt="${bookVo2.BOOK_TITLE}이미지">
-									</a>
-									<a class="aa-add-card-btn" href="">
-										<span style="display: block;" class="fas fa-shopping-cart"></span>
-										장바구니 담기
-									</a>
 									<figcaption>
 										<h5 class="aa-product-title">
-											<a href="#"></a>
+											<b>${title}</b>
 										</h5>
-										<span class="aa-product-price">${bookVo2.BOOK_PRICE}</span>
+										<span class="aa-product-price">
+											<fmt:formatNumber value="${bookVo2.BOOK_PRICE}" pattern="#,###"/>
+										</span>원
 									</figcaption>
+									</a>
+									<br>
+									<input type="hidden" value="${bookVo2.BOOK_NO}">
+									<a class="aa-add-card-btn" href="javacript:void(0);" onclick="ajaxInsertCart(this)">
+										<span style="display: block;" class="fas fa-shopping-cart"></span>
+									</a>
 								</figure>
 							</li>
 						</c:forEach>
@@ -143,22 +204,33 @@ function sendSearchKeyword(){
 						<c:forEach var="bookVo3" items="${bookList3}">
 							<li>
 								<figure>
+									<c:set var="title" value="${bookVo3.BOOK_TITLE}"/>
+									<c:set var="len" value="${fn:length(title)}"/>
+									<c:if test="${len > 21}">
+									<c:set var="part" value="${fn:substring(title, 21, len)}"/>
+									<c:set var="part2" value="${fn:substring(title, 0, 21)}"/>
+										<c:set var="title"
+										 value="${fn:replace(title, part, '...')}"/>
+									</c:if>
 									<a class="aa-product-img"
 									 href="<c:url value='/main/book/bookDetail?bookNo=${bookVo3.BOOK_NO}'/>">
-										<img style="margin: 10px 0;"
+										<img style="margin: 10px 0;" class="shadow-sm bg-body rounded"
 										 src="<c:url value='/images/bookProduct/upload_img/${bookVo3.BOOK_IMG_NAME}'/>"
 										 alt="${bookVo3.BOOK_TITLE}이미지">
-									</a>
-									<a class="aa-add-card-btn" href="">
-										<span style="display: block;" class="fas fa-shopping-cart"></span>
-										장바구니 담기
-									</a>
 									<figcaption>
 										<h5 class="aa-product-title">
-											<a href="#"></a>
+											<b>${title}</b>
 										</h5>
-										<span class="aa-product-price">${bookVo3.BOOK_PRICE}</span>
+										<span class="aa-product-price">
+											<fmt:formatNumber value="${bookVo3.BOOK_PRICE}" pattern="#,###"/>
+										</span>원
 									</figcaption>
+									</a>
+									<br>
+									<input type="hidden" value="${bookVo3.BOOK_NO}">
+									<a class="aa-add-card-btn" href="javacript:void(0);" onclick="ajaxInsertCart(this)">
+										<span style="display: block;" class="fas fa-shopping-cart"></span>
+									</a>
 								</figure>
 							</li>
 						</c:forEach>
@@ -202,10 +274,14 @@ function sendSearchKeyword(){
 										</div>
 										
 									</div>
-									<div class="btn">
-										<a href="<c:url value='/main/book/bookOrderMain'/>">장바구니</a>
-										<a href="#">바로구매</a>
-									</div>
+									<form name="frmBuy" method="post">
+										<div class="btn">
+											<button class="cartBtn" type="button" onclick="ajaxInsertCart(this)">장바구니</button>
+											<button class="orderBtn" type="button" onclick="ajaxInsertCart(this)">바로구매</button>
+											<input type="hidden" name="bookNo" value="${vo.bookNo}">
+											<input type="hidden" name="basketQty" value="1">
+										</div>
+									</form>
 								</li>
 							</c:forEach>
 						</c:if>
@@ -266,5 +342,6 @@ function sendSearchKeyword(){
 	<!--  -->
 </section>
 <!-- 직접 만든 sidebar -->
-<%@ include file="./BookSideBar.jsp"%>
+<c:import url="/main/book/BookSideBar"/>
+<%-- <%@ include file="./BookSideBar.jsp"%> --%>
 <%@ include file="../inc/bottom.jsp"%>

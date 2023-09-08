@@ -406,6 +406,8 @@ public class MypageController {
 		
 		List<Map<String, Object>> orderList = orderService.selectOrderList((int)session.getAttribute("no"));
 		logger.info("주문내역조회 결과 orderList: {}", orderList);
+		logger.info("주문내역개수 orderList.size(): {}", orderList.size());
+		
 		
 		model.addAttribute("orderList", orderList);
 		
@@ -426,7 +428,7 @@ public class MypageController {
 		
 		return "main/mypage/orderList";			
 	}
-	
+   
 	@RequestMapping("/myBoardList")
 	public String myBoardList(HttpSession session, Model model) {
 		logger.info("내 게시글 리스트 조회 페이지");
