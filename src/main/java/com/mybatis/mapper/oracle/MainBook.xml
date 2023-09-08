@@ -132,9 +132,7 @@
 		    order by book_no
 		)a join book b
 		on a.book_no= b.book_no
-		<if test="bookCategory!=null and bookCategory!=''">
-			and book_category=#{bookCategory}
-		</if>
+		and book_category like '%' || #{bookCategory} || '%'
 		order by orders_qty desc
 		)
 		<![CDATA[

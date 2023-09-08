@@ -191,5 +191,5 @@ function ajaxInsertCart(element){
 	<!--  페이지 번호 끝 -->
 </section>
 <!-- 직접 만든 sidebar -->
-<%@ include file="./BookSideBar.jsp"%>
+<c:import url="/main/book/BookSideBar"/>
 <%@ include file="../inc/bottom.jsp"%>

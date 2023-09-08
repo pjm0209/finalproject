@@ -147,12 +147,12 @@ public class MainBookController {
 	}
 	
 	@RequestMapping("/BookSideBar")
-	public String sideBarList(@RequestParam(defaultValue = "")String bookCategory, Model model) {
+	public String sideBarList(@RequestParam(required = false, defaultValue = "")String bookCategory, Model model) {
 		
 		logger.info("사이드 바 리스트 만들기 처리하기, 파라미터 bookCategory={}", bookCategory);
 		
 		List<Map<String, Object>> best3 = mainBookService.best3(bookCategory);
-		logger.info("best3, best3.size()={}", best3.size());
+		logger.info("best3={}, best3.size()={}",best3, best3.size());
 		
 		model.addAttribute("best3", best3);
 		
