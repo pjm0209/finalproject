@@ -74,7 +74,7 @@
 	}
 	
 	function applyCan() {
-		$('#myAppDelFrm').attr('action', contextPath + '/main/mypage/applyCan');
+		/* $('#myAppDelFrm').attr('action', '/mbti/main/mypage/applyCan'); */
 		$('form[name=frmDelete]').submit();
 	}
 </script>
@@ -86,6 +86,7 @@
 	<div id="eduApply-title">
 		<h4>교육 신청 현황</h4>
 	</div>
+	<!-- 신청 현황 -->
 	<form name="frmDelete" method="post" id="myAppDelFrm" action="<c:url value='/main/mypage/applyCan'/>">
 		<table class="table" id="educationtb" style="margin-top:30px;">
 			<thead>
@@ -128,7 +129,7 @@
 		<input type="button" id="applyDelBtn" value="신청 취소" onclick='applyCancel(this)'/>
 		</form>	
 		<!-- 결제 대기 목록 -->
-		<form name="frmDelete" method="post" id="myAppPayFrm" action="<c:url value='/main/mypage/applyPay'/>">
+		<form name="frmPay" method="post" id="myAppPayFrm" action="<c:url value='/main/mypage/applyPay'/>">
 		<div id="eduApply-title">
 			<h4>결제 대기</h4>
 		</div>
@@ -170,7 +171,7 @@
 		<button type="button" class="myAppPayBtn" id="my-app-payBtn" onclick="requestPay()">결제하기</button>
 		</form>	
 		<!-- 결제 완료 목록 -->
-		<form name="frmDelete" method="post" id="myAppFinFrm">
+		<form name="frmFinish" method="post" id="myAppFinFrm">
 		<div id="eduApply-title">
 			<h4>결제 완료</h4>
 		</div>
