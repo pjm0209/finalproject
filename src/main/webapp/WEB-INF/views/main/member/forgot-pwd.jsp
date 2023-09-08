@@ -151,7 +151,7 @@ form {
 						$('#alertModal').modal('show');	 
 						
 						$('#alertModal').on("hidden.bs.modal",function(){
-	      					location.href="<c:url value='/main/member/memberLogin'/>";       				
+	      					location.href="<c:url value='/main/member/findPwdResult'/>";       				
 							
 						});
         			}else if(result==0){
@@ -184,7 +184,7 @@ form {
 												
 			<div class="btnSearch"><br>
 				<button class="btn btn-primary" type="submit" name="submit" id="sendEmailBtn">전송</button>	
-				<button class="btn btn-info" type="button" onclick="history.back();">취소</button>					
+				<button class="btn btn-info" type="button" id="btnCancel">취소</button>					
 			</div>
 </div>				
   <button type="button" style="display: none" id="alertModalBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#alertModal"></button>
