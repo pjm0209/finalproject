@@ -21,10 +21,10 @@
 			select SALES_SEQ.nextval from dual
 		</selectKey>
 		insert into sales
-		values(#{salesNo}, 1, #{bookTitle}, #{bookPrice}, SYSDATE)
+		values(#{salesNo}, 1, #{bookTitle}, #{eachBookSum}, SYSDATE)
 	</insert>
 
-	<select id="selectOrderDetailList" parameterType="int" resultType="mainOrderVo">
+	<select id="selectOrderDetailList" parameterType="int" resultType="map">
 		select * from orders_Detail
 		where orders_no = #{ordersNo}
 	</select>
@@ -36,18 +36,42 @@
 	</select>
 	
 	<resultMap type="mainOrderAllVo" id="orderListResultMap">
-		<association property="mainOrderAllVo" column="ordersNo" javaType="mainOrderAllVo">
-			<id property="ordersNo" column="ordersNo" jdbcType="BIGINT"></id>
+		<association property="mainOrderVo" column="orders_No" javaType="mainOrderVo">
+			<id property="ordersNo" column="orders_No" jdbcType="BIGINT"></id>
 			<result property="no" column="no" jdbcType="BIGINT"/>
 			<result property="recipient" column="recipient" jdbcType="VARCHAR"/>
-			<result property="reZipcode" column="reZipcode" jdbcType="VARCHAR"/>
-			<result property="reAddress" column="reAddress" jdbcType="VARCHAR"/>
-			<result property="reAddressDetail" column="reAddressDetail" jdbcType="VARCHAR"/>
-			<result property="reHp" column="reHp" jdbcType="VARCHAR"/>
-			<result property="sumPrice" column="sumPrice" jdbcType="BIGINT"/>
-			<result property="paymentMethod" column="paymentMethod" jdbcType="VARCHAR"/>
-			<result property="orderRegdate" column="orderRegdate" jdbcType="VARCHAR"/>
+			<result property="reZipcode" column="re_Zipcode" jdbcType="VARCHAR"/>
+			<result property="reAddress" column="re_Address" jdbcType="VARCHAR"/>
+			<result property="reAddressDetail" column="re_AddressDetail" jdbcType="VARCHAR"/>
+			<result property="reHp" column="re_Hp" jdbcType="VARCHAR"/>
+			<result property="sumPrice" column="sum_Price" jdbcType="BIGINT"/>
+			<result property="paymentMethod" column="payment_Method" jdbcType="VARCHAR"/>
+			<result property="ordersRegdate" column="orders_Regdate" jdbcType="VARCHAR"/>
 		</association>
-		<collection property="orderDetailList" javaType="ArrayList" column="ordersNo" ofType="Map"></collection>
+		<collection property="orderDetailList" javaType="ArrayList" column="orders_No" ofType="map" 
+			select="selectOrderDetailList"></collection>
 	</resultMap>
+	<select id="selectMyCurrentOrder" parameterType="int" resultType="map">
+		select a.orders_no, a.no, a.recipient, a.re_zipcode,
+		a.re_address, a.re_address_detail, a.re_hp, a.sum_price,
+		a.payment_method, a.orders_regdate, a.orders_qty, b.* 
+		from
+    	(select o1.*,o2.book_no, o2.orders_qty, o2.orders_state
+			from orders o1 join orders_detail o2
+			on o2.orders_no = o1.orders_no
+			where o1.orders_no = ${ordersNo}
+    	)a
+    	join
+    	 book b
+    	 on a.book_no = b.book_no
+	</select>
+	
+	<select id="findCurrentOrdersNo" parameterType="int" resultType="int">
+		select orders_no
+		from
+		(select * from orders
+		 order by orders_regdate desc)
+		 where rownum = 1
+		and no = #{no}
+	</select>
 </mapper>

@@ -714,15 +714,16 @@ ul, li {
 	padding-top: 10px;
 }
 
-.booklist li .btn a {
+.booklist li .btn button {
 	display: block;
 	padding: 15px;
 	border-radius: 5px;
+	border: 1px white solid;
 	background: #666;
 	color: white;
 }
 
-.booklist li .btn a:nth-child(2) {
+.booklist li .btn button:nth-child(2) {
 	background: #ee7843;
 	margin-top: 5px;
 }
@@ -731,7 +732,7 @@ ul, li {
 /*bookOrderMain.jsp*/
 #myPage{height: 50%;}
 #basket{
-
+	margin-left: 100px;
 	position: relative;
     left: 50%;
     transform: translateX(-50%);
@@ -836,7 +837,7 @@ position:relative;
     max-height:360px;
     position:fixed;
     top: 207px;
-    right:260px;
+    right:110px;
 }
 .booklist_area>ul{padding:0; font-size:22px; margin:0;}
 
@@ -853,7 +854,7 @@ position:relative;
     font-weight: bold;
     margin-top:10px;
 }
-.check_box{	margin-top: 93px; width:1420px; position:relative; left: 50%; transform: translateX(-50%);}
+.check_box{ margin-left: 100px;	margin-top: 93px; width:1420px; position:relative; left: 50%; transform: translateX(-50%);}
 .check_box .inner{
 	width:69%; margin-top: 0px; margin-bottom:10px;
     background: #efefef;
@@ -872,7 +873,7 @@ position:relative;
     section.booklist_right {    width: 23%;
     position: absolute;
     top: 50px;
-    right: 240px;}
+    right: 90px;}
     
     section.booklist_right>ul.flex li span{vertical-align:bottom; font-size:30px;}
     section.booklist_right>ul.flex li{font-size:22px;}
@@ -947,13 +948,13 @@ position:relative;
 .order_step .step3 .box_tit{padding: 30px;
     border-bottom: 1px #aaa solid;}
 .order_step .step3 .pay_box{padding:30px;}
-.order_step .step3 .pay_box a{border: 1px #ddd solid;
+.order_step .step3 .pay_box button{border: 1px #ddd solid;
     border-radius: 10px;
     padding: 20px;
     font-weight: bold;
     text-align: center;
     width: 19%;}
-.order_step .step3 .pay_box a.on{
+.order_step .step3 .pay_box button.on{
 	border: 1px #ee7843 solid;
     color: #ee7843;
     background: #ee78430a;
@@ -961,6 +962,9 @@ position:relative;
 .order_step a:hover{color:#222; text-decoration: none;}
 
 /*bookordercomplete.jsp*/
+strong{
+	font-size: 1.5em;
+}
 #order_complete {width:1400px; margin:0 auto;}
 #order_complete h2{padding:30px 0;}
 #order_complete>ul {border:1px #ddd solid; border-radius: 10px; padding:30px; margin-bottom:30px;}
@@ -971,3 +975,8 @@ position:relative;
 #order_complete>ul .flex.list .text_box{padding-left:30px;}
 #order_complete .list_btn{display: block; padding:10px 10px; margin:0 auto; background:#ee7843; color:#fff; width:200px; text-align: center;}
 /*bookordercomplete.jsp*/
+
+/*mypageOrderList.jsp*/
+
+
+/*mypageOrderList.jsp*/

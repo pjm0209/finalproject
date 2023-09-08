@@ -57,7 +57,7 @@
 	<script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>
 	<script type="text/javascript" src="<c:url value='/resources/ckeditor/ckeditor.js'/>"></script>	
 	
-	<!-- chart js css -->
+	<!-- google chart js css -->
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
   <!-- Template Main CSS File -->

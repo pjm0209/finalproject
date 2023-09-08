@@ -19,6 +19,7 @@ import com.team2.mbti.main.basket.model.MainBasketService;
 import com.team2.mbti.main.basket.model.MainBasketVO;
 import com.team2.mbti.main.book.model.MainBookVO;
 import com.team2.mbti.main.book.model.MainBookVOList;
+import com.team2.mbti.main.order.model.MainOrderService;
 import com.team2.mbti.main.order.model.MainOrderVO;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -32,6 +33,7 @@ public class MainBasketController {
 	private static final Logger logger = LoggerFactory.getLogger(MainBasketController.class);
 
 	private final MainBasketService mainBasketService;
+	private final MainOrderService mainOrderService;
 
 	@RequestMapping("/basketInsert")
 	public String basketInsert(@ModelAttribute MainBasketVO basketVo,
@@ -158,6 +160,7 @@ public class MainBasketController {
 		return "main/book/basket/bookOrdering";
 	}
 	
+	
 	@RequestMapping("/bookOrderComplete")
 	public String bookOrderComplete(@ModelAttribute MainOrderVO orderVo,
 			@ModelAttribute MainBookVOList bookListVo, Model model, HttpSession session) {
@@ -191,6 +194,16 @@ public class MainBasketController {
 		} else {
 			logger.info("장바구니 삭제 completeOrders 미실시");
 		}
+		
+		logger.info("내 회원번호 ={}", no);
+		int orderNo = mainOrderService.findCurrentOrdersNo(no);
+		logger.info("방금 주문한 내역의 주문번호 ={}", orderNo);
+		List<Map<String, Object>> currentOrderList = mainOrderService.selectMyCurrentOrder(orderNo);
+		logger.info("주문번호로 조회한 주문 내역 currentOrderList.size()={}", currentOrderList.size());
+		
+		model.addAttribute("list", currentOrderList);
+		model.addAttribute("DELIVERY", ConstUtil.DELIVERY);
+		model.addAttribute("TOTAL_PRICE", ConstUtil.TOTAL_PRICE);
 		
 		return "main/book/basket/bookOrderComplete";
 	}

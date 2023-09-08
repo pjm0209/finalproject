@@ -47,7 +47,7 @@ public class MainBoardController {
 		logger.info("게시판 종류 조회");
 		
 		List<BoardFormVO> boardFormList = boardService.selectAllBoard();
-		logger.info("게시판 종류 조회결과 boardFormList: {}", boardFormList);
+		logger.info("게시판 종류 조회결과 boardFormList.size(): {}", boardFormList.size());
 		
 		model.addAttribute("boardFormList", boardFormList);
 		
@@ -59,7 +59,7 @@ public class MainBoardController {
 		logger.info("커뮤니티 메인페이지");
 		
 		List<Map<String, Object>> boardCategoryList = boardService.selectMainBoardFormCategory();
-		logger.info("게시판목록 조회결과 boardCategoryList: {}", boardCategoryList);
+		logger.info("게시판목록 조회결과 boardCategoryList.size(): {}", boardCategoryList.size());
 		
 		model.addAttribute("boardCategoryList", boardCategoryList);
 		

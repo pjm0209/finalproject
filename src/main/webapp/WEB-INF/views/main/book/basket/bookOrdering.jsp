@@ -10,9 +10,9 @@
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script type="text/javascript">
 $(function(){
-	$('.order_step .step3 .pay_box a').click(function(){
+	$('.order_step .step3 .pay_box button').click(function(){
 
-		$('.order_step .step3 .pay_box a').removeClass('on');
+		$('.order_step .step3 .pay_box button').removeClass('on');
 		$(this).addClass('on');
 	})
 	
@@ -54,19 +54,24 @@ $(function(){
 	$("#recipient").change(function(){
 		$('#recipient2').val($(this).val());
 	});
+		
 	$("#reHp").change(function(){
 		$('#reHp2').val($(this).val());
 	});
+	
 	$('#reZipcode').change(function(){
 		$('#reZipcode2').val($(this).val());
 	});
+	
     $("#reAddress").change(function(){
     	$('#reAddress2').val($(this).val());
 	});
+   
     $("#reAddressDetail").change(function(){
     	$('#reAddressDetail2').val($(this).val());
 	});
     
+	
 	$(".method").click(function(){
 		$("input[name=paymentMethod]").val($(this).text());
 	})
@@ -99,10 +104,50 @@ function sample4_execDaumPostcode_book() {
     }).open();
 } 
 
-var id=0;
+var id=Math.random();
 var realTotal = $(".booklist_area ul:eq(1) li p span").text();
 
 function requestPay_book(t, t2) {
+	
+	if($('#recipient2').val().length < 1){
+		$('#alertModalBody').html("수령인을 입력하세요");
+		$('#alertModalBtn').trigger('click');
+		$('#recipient2').focus();
+		return false;
+	}
+	if($('#reHp2').val().length < 1){
+		$('#alertModalBody').html("수령인 전화번호를 입력하세요");
+		$('#alertModalBtn').trigger('click');
+		$('#reHp2').focus();
+		return false;
+	}
+	if($('#reZipcode2').val().length < 1){
+		$('#alertModalBody').html("수령인 주소를 검색하세요");
+		$('#alertModalBtn').trigger('click');
+		$('#reZipcode2').focus();
+		return false;
+	}
+	if($('#reAddress2').val().length < 1){
+		$('#alertModalBody').html("수령인 주소를 검색하세요");
+		$('#alertModalBtn').trigger('click');
+		$('#reAddress2').focus();
+		return false;
+	}
+	if($('#reAddressDetail2').val().length < 1){
+		$('#alertModalBody').html("수령인 상세주소를 입력하세요");
+		$('#alertModalBtn').trigger('click');
+		$('#reAddressDetail2').focus();
+		return false;
+	}
+	
+	if($("input[name=paymentMethod]").val() !== '카카오페이' || $("input[name=paymentMethod]").val().length<1){
+		$('#alertModalBody').html("결제 수단은 카카오페이만 가능해요.선택해주세요.");
+		$('#alertModalBtn').trigger('click');
+		$('#kakaopayBtn').focus();
+		$('#kakaopayBtn').focus();
+		return false;
+	}
+	
     // IMP.request_pay(param, callback) 결제창 호출
     var login= "${sessionScope.userid}";
     if(login!=null && login!=''){
@@ -111,7 +156,7 @@ function requestPay_book(t, t2) {
 	    IMP.request_pay({ // param
 	        pg: 'kakaopay',
 	        pay_method: "card",
-	        merchant_uid: 'essential mbti'+(id++), //가맹점 주문번호 (아임포트를 사용하는 가맹점에서 중복되지 않은 임의의 문자열을 입력)
+	        merchant_uid: 'essential mbti'+id, //가맹점 주문번호 (아임포트를 사용하는 가맹점에서 중복되지 않은 임의의 문자열을 입력)
 	        name: "책 결제 테스트",
 	        amount: 10000, //금액
 	        buyer_name : "${sessionScope.name}",
@@ -124,11 +169,9 @@ function requestPay_book(t, t2) {
 	    	}else{
 	    		$('#alertModalBody').html("결제 실패");
 				$('#alertModalBtn').trigger('click');
-				id=id+10;
 	    	}
 		});
     }else{
-    	id=id+1;
 		$('#alertModalBody').html("먼저 로그인 하세요");
 		$('#alertModalBtn').trigger('click');
 		$('#btnClose').click(function(){
@@ -218,9 +261,12 @@ function requestPay_book(t, t2) {
 						<input type="hidden" name="mainBookItems[${i}].ordersQty" value="${map['BASKET_QTY']}">
 						<input type="hidden" name="mainBookItems[${i}].bookPrice" value="${map['BOOK_PRICE']}">
 						<a href="javascript:void(0);"><img width="100px" alt="${map['BOOK_IMG_ORIGINALNAME']}" src="/mbti/images/bookProduct/upload_img/${map['BOOK_IMG_NAME']}" ></a>
+						<input type="hidden" name="mainBookItems[${i}].eachBookSum" value="${map['BOOK_PRICE'] * map['BASKET_QTY']}">
 						<p class="title">${map['BOOK_TITLE']}</p>
 						<p class="book_count"><span>${map['BASKET_QTY']}</span>개</p>
+						<p><span>X</span></p>
 						<p><span>${map['BOOK_PRICE']}</span>원</p>
+						<p><span>=</span></p>
 						<p class="total"><span>${map['BOOK_PRICE'] * map['BASKET_QTY']}</span>원</p>
 					</li>
 					<c:set var="i" value="${i+1}"/>
@@ -232,7 +278,7 @@ function requestPay_book(t, t2) {
 			<p class="box_tit">결제 수단</p>
 			<div class="pay_box flex">
 				<button class="method" type="button" >신용카드</button>
-				<button class="method" type="button" >카카오페이</button>
+				<button id="kakaopayBtn" class="method" type="button" >카카오페이</button>
 				<button class="method" type="button" >온라인입금</button>
 				<button class="method" type="button" >휴대폰결제</button>
 				<button class="method" type="button" >무통장입금</button>
@@ -280,7 +326,7 @@ function requestPay_book(t, t2) {
 				</ul>
 				<c:set var="t" value="${fn:length(mapList)}"/>
 				<c:set var="t2" value="${mapList[0].BOOK_TITLE}"/>
-				<button type="button" onclick="requestPay_book('${t}','${t2}')" >결제하기</button>
+				<button id="payBtn" type="button" onclick="requestPay_book('${t}','${t2}')" >결제하기</button>
 		</div>
 		
 		
@@ -301,12 +347,12 @@ function requestPay_book(t, t2) {
 		          </div>
 		          <div class="mb-3 div-register">
 		            <label for="reZipcode" class="col-form-label">우편번호 :</label>
-		            <input type="text" class="postalCode form-control" id="reZipcode"  placeholder="우편번호를 검색하세요">&nbsp;	
+		            <input type="text" class="postalCode form-control" id="reZipcode" readonly="readonly"  placeholder="우편번호를 검색하세요">&nbsp;	
 					<input type="Button" class="form-control btn-primary" value="우편번호 찾기" id="btnZipcode" title="새창열림" onclick="sample4_execDaumPostcode_book()">	
 		          </div>
 		          <div class="mb-3 div-register">
 		            <label for="reAddress" class="col-form-label">주소 :</label>
-		            <input type="text" class="address form-control" id="reAddress"  placeholder="주소를 입력하세요">
+		            <input type="text" class="address form-control" id="reAddress" readonly="readonly"  placeholder="주소를 입력하세요">
 		          </div>
 		          <div class="mb-3 div-register">
 		            <label for="reAddressDetail" class="col-form-label">상세주소 :</label>
