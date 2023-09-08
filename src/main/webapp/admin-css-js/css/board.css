@@ -329,6 +329,7 @@ input[type="file"] {
 
 i.bi.bi-plus-lg {
 	font-size: x-large;
+	cursor: pointer;
 }
 
 .file_input input[type=text] {
@@ -378,6 +379,7 @@ i.bi.bi-plus-lg {
 
 .bi.bi-x-lg {
 	cursor: pointer;
+	color:black;
 }
 
 /*게시판 상세보기*/

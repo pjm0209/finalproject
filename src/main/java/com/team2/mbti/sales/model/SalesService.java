@@ -8,5 +8,5 @@ public interface SalesService {
 	List<Map<String, Object>> selectSalesAllView();
 	List<Map<String, Object>>selectRegdateSalesView();
 	
-	List<Map<String, Object>> selectSalesRegdate();
+	List<SalesAllVO> selectSalesRegdate();
 }
