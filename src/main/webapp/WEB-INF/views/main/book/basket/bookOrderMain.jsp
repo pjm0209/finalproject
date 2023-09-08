@@ -154,7 +154,7 @@ var contextPath = "/mbti";
 	
 </script>
 
-<div style="background: white;margin: 0 30px;" class="shadow-sm p-3 mb-5 bg-body rounded">
+<div style="background: white;margin: 0 30px;" class="">
 <div class="check_box flex">
 	<div class="inner flex">
 		<div class="check_all flex">
