@@ -6,4 +6,7 @@ import java.util.Map;
 public interface SalesService {
 	List<Map<String, Object>> selectSalesByCategoryView(int salesCategoryNo);
 	List<Map<String, Object>> selectSalesAllView();
+	List<Map<String, Object>>selectRegdateSalesView();
+	
+	List<SalesAllVO> selectSalesRegdate();
 }

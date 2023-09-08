@@ -104,27 +104,45 @@
 		)
 	</select>
 	
-	<select id="selectBest4" parameterType="int" resultType="map">
+	<select id="selectBest4" parameterType="string" resultType="map">
 		select * 
 		from
 		(
-			select o.productno, p.productname, sum(quantity) totalQty
-			from ORDERS_DETAIL o join book b
-			on o.productno = p.productno
-			and book_useflag = 'Y'
-			and b.categoryno = (select book_category from book
-			                    where book_no = #{book_no})
-			group by o.book_no, b.book_title
-			ORDER BY totalQty DESC
+		select *
+		from(
+		    select book_no, sum(orders_qty) orders_qty  from orders_detail
+		    group by book_no
+		    order by book_no
+			)a join book b
+			on a.book_no= b.book_no
+			and book_category=#{bookCategory}
+			order by orders_qty desc
 		)
 		<![CDATA[
 		where rownum <= 4]]>
 	</select>
+	<select id="best3" parameterType="string" resultType="map">
+		select * 
+		from
+		(
+		select *
+		from(
+		    select book_no, sum(orders_qty) orders_qty  from orders_detail
+		    group by book_no
+		    order by book_no
+		)a join book b
+		on a.book_no= b.book_no
+		and book_category like '%' || #{bookCategory} || '%'
+		order by orders_qty desc
+		)
+		<![CDATA[
+		where rownum <= 3]]>
+	</select>
+	
 	<select id="selectBookByNo" parameterType="int" resultType="MainBookVo">
 		select * from book
 		where book_no=#{bookNo}
 		and book_useflag = 'Y'
 	</select>
-	
 
 </mapper>

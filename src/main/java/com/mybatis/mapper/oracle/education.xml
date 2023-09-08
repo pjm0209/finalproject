@@ -17,8 +17,8 @@
 		<selectKey keyProperty="eduNo" order="BEFORE" resultType="int">
 			select mbti_education_seq.nextval from dual
 		</selectKey>
-		insert into mbti_education(edu_no, edu_name, edu_com, edu_price, ep_no, edu_people_number, edu_tea_no)
-		values(#{eduNo}, #{eduName}, #{eduCom}, #{eduPrice}, #{epNo}, #{eduPeopleNumber}, #{eduTeaNo})
+		insert into mbti_education(edu_no, edu_name, edu_com, edu_tea_name, edu_price, ep_no, edu_people_number, edu_tea_no)
+		values(#{eduNo}, #{eduName}, #{eduCom}, #{eduTeaName}, #{eduPrice}, #{epNo}, #{eduPeopleNumber}, #{eduTeaNo})
 	</insert>
 	
 	
@@ -186,7 +186,7 @@
 	</update>
 	
 	
-	<!-- applicant -->
+	<!-- 관리자페이지 교육 신청 목록 -->
 	<select id="selectAllApplicant" parameterType="educationVo" resultType="educationVo">
 		select * from
 		(
@@ -215,19 +215,27 @@
 		<include refid="searchWhere"></include> 
 	</select>
 	
+	<!-- 관리자페이지 교육 신청 거절 처리 -->
 	<delete id="deleteApplicant" parameterType="int" >
 		delete from education_application
 		where edu_app_no=#{eduAppNo} 
 	</delete>
 	
+	<!-- 관리자페이지 교육 신청 승인 처리 -->
 	<update id="updateApplicant" parameterType="int">
 		update education_application
 		set edu_app_flag = 'Y'
 		where edu_app_no = #{eduAppNo}
 	</update>
 	
+	<!-- 관리자페이지 교육별 신청 인원 정보 -->
+	<select id="applyMemInfo" parameterType="educationVo" resultType="educationVo">
+		select * from edu_app_mem_view
+		where edu_app_no=#{no}
+	</select>
 	
-	<!-- mypage -->
+	
+	<!-- 마이페이지 신청한 교육 목록 -->
 	<select id="selectMyAllEdu" parameterType="educationVo" resultType="educationVo">
 		select * from
 		(
@@ -241,6 +249,7 @@
 		)
 	</select>
 	
+	<!-- 마이페이지 결제 대기 중인 교육 목록 -->
 	<select id="myPayEdu" parameterType="educationVo" resultType="educationVo">
 		select * from
 		(
@@ -254,6 +263,7 @@
 		)
 	</select>
 	
+	<!-- 마이페이지 결제 완료된 교육 목록 -->
 	<select id="myFinishEdu" parameterType="educationVo" resultType="educationVo">
 		select * from
 		(
@@ -267,24 +277,20 @@
 		)
 	</select>
 	
+	<!-- 마이페이지 신청한 교육 취소 -->
 	<delete id="cancelApplicant" parameterType="int" >
 		delete from education_application
 		where edu_app_no=#{eduAppNo} 
 	</delete>
 	
-	<select id="applyMemInfo" parameterType="educationVo" resultType="educationVo">
-		select * from edu_app_mem_view
-		where edu_app_no=#{no}
-	</select>
-	
-	
+	<!-- 마이페이지 교육 결제 처리 -->
 	<update id="applyPayFinish" parameterType="educationVo">
 		update education_application
 		set edu_app_pay = '결제 완료'
 		where edu_app_no=#{eduAppNo}
 	</update>
 	
-	
+	<!-- 마이페이지 교육 결제 완료 후 매출 테이블에 인서트 -->
 	<insert id="insertSalesByEdu" parameterType="educationVo">
 		insert into sales(sales_no, sales_category_no, sales_name, sales_price)
 		values(sales_seq.nextval, 3, #{eduName}, #{eduPrice})

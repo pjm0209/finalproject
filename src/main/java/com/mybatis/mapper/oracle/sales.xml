@@ -9,4 +9,30 @@
 	<select id="selectSalesAllView" resultType="map">
 		select * from salesbycategoryview
 	</select>
+	<select id="selectRegdateSalesView" parameterType="string" resultType="map">
+		select a.sales_category_no , sum(a.sumprice) sumprice, to_char(a.regdate,'yyyy-MM-dd') regdate
+		from (
+		select sales_category_no, trunc(sales_regdate) regdate
+		, sum(sales_price) sumprice from sales
+		group by sales_category_no, sales_regdate
+		)a
+		where a.regdate=#{regdate}
+		group by a.sales_category_no, a.regdate
+		order by a.sales_category_no, a.regdate desc
+	</select>
+	
+	<resultMap type="salesAllVo" id="salesResultMap">
+		<association property="regdate" column="regdate" javaType="string">
+			<id property="regdate" column="regdate" jdbcType="TIMESTAMP"/>
+		</association>
+		<collection property="salesList" javaType="list" ofType="map"
+			column="regdate" select="selectRegdateSalesView">
+		</collection>
+	</resultMap>
+	
+	<select id="selectSalesRegdate" resultMap="salesResultMap">
+		select to_char(sales_regdate,'yyyy-MM-dd') regdate 
+		from sales
+		group by to_char(sales_regdate,'yyyy-MM-dd')
+	</select>
 </mapper>

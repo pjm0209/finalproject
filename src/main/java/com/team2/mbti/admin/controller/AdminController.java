@@ -1,5 +1,7 @@
 package com.team2.mbti.admin.controller;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -20,9 +22,11 @@ import com.team2.mbti.admin.model.AdminVO;
 import com.team2.mbti.common.ConstUtil;
 import com.team2.mbti.common.PaginationInfo;
 import com.team2.mbti.common.SearchVO;
+import com.team2.mbti.mbtisurvey.model.MbtiSurveyService;
 import com.team2.mbti.member.model.MemberService;
 import com.team2.mbti.member.model.MemberVO;
 import com.team2.mbti.message.model.MessageService;
+import com.team2.mbti.sales.model.SalesAllVO;
 import com.team2.mbti.sales.model.SalesService;
 
 import lombok.RequiredArgsConstructor;
@@ -37,10 +41,14 @@ public class AdminController {
 	private final MemberService memberService;
 	private final MessageService messageService;
 	private final SalesService salesService;
+	private final MbtiSurveyService mbtiSurveyService;
 		
 	@GetMapping("/index")
 	public String index_get(Model model, MemberVO membervo) {
 		logger.info("관리자 index 페이지");
+		
+		List<Map<String, Object>> pieChartList=mbtiSurveyService.selectMbtiStatistics();
+		logger.info("통계 파이차트 결과 pieChartList.size()={}",pieChartList.size());
 		
 		List<Map<String, Object>> bookSalesList=salesService.selectSalesByCategoryView(1);
 		logger.info("책 매출 조회 결과, bookSalesList={}",bookSalesList);
@@ -54,10 +62,51 @@ public class AdminController {
 		List<Map<String, Object>> allSalesList=salesService.selectSalesAllView();
 		logger.info("전체 매출 조회 결과, allSalesList={}",allSalesList);
 		
+		List<SalesAllVO> regdateSalesList=salesService.selectSalesRegdate();
+		logger.info("날짜별 매출 조회 결과, regdateSalesList={}",regdateSalesList);
+		
+		String result="";
+		int bookVal=0;
+		int mbtiVal=0;
+		int eduVal=0;
+		int salesCategoryNo=0;
+		int sumPrice=0;
+		String regdate ="";
+		BigDecimal bigDecimalCateNo=null;
+		BigDecimal bigDecimalVa=null;
+		
+		
+		List<Map<String, Object>> salesList=null;
+		for(SalesAllVO salesAllVo : regdateSalesList) {
+			salesList=salesAllVo.getSalesList();
+
+		}
+		
+		for(int i=0;i<salesList.size();i++) {
+			Map<String, Object> map=salesList.get(i);
+			regdate=(String)map.get("REGDATE");
+			System.out.println("날짜 : "+ regdate);
+			
+		}
+		
+		List<List<Map<String, Object>>> totalSalesList = new ArrayList<>();
+		
+		totalSalesList.add(bookSalesList);
+		totalSalesList.add(eduSalesList);
+		totalSalesList.add(allSalesList);
+		
+		model.addAttribute("result", result);
+		
+		model.addAttribute("pieChartList", pieChartList);
+		
+		model.addAttribute("totalSalesList", totalSalesList);
 		model.addAttribute("bookSalesList", bookSalesList);
 		model.addAttribute("mbtiSalesList", mbtiSalesList);
 		model.addAttribute("eduSalesList", eduSalesList);
 		model.addAttribute("allSalesList", allSalesList);
+		model.addAttribute("regdateSalesList", regdateSalesList);
+		
+		
 		
 		model.addAttribute("title", "관리자 페이지");
 		model.addAttribute("memTotal", memberService.getTotalMember(membervo));

@@ -58,9 +58,8 @@
 	</select>
 
 	<delete id="deleteSendDmBySendDmNo" parameterType="int">
-		delete from
-		send_dm
-		where send_dm_no = ${sendDmNo}
+		delete from send_dm
+		where send_dm_no = #{sendDmNo}
 	</delete>
 
 	<update id="updateReceiveDmReadDate" parameterType="int">
