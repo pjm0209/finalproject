@@ -69,7 +69,7 @@ public class AdminController {
 		int eduVal=0;
 		for(Map<String, Object> map : regdateSalesList) {
 			List<Map<String, Object>> salesList=(List<Map<String, Object>>)map.get("salesList");
-			logger.info("regdate={},salesList={}",regdate,salesList);
+			//logger.info("regdate={},salesList={}",regdate,salesList);
 			//BigDecimal bigDecimalCateNo=(BigDecimal)map.get("SALES_CATEGORY_NO");
 			//int salesCategoryNo=bigDecimalCateNo.intValue();
 			//BigDecimal bigDecimalVal = (BigDecimal)map.get("SUMPRICE");
@@ -86,7 +86,7 @@ public class AdminController {
 //				eduVal=sumPrice;
 //			}
 
-			result+="[\'"+regdate+"\',"+bookVal+","+mbtiVal+","+eduVal+"],";
+			//result+="[\'"+regdate+"\',"+bookVal+","+mbtiVal+","+eduVal+"],";
 		}
 		
 		
