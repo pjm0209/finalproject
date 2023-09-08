@@ -176,7 +176,7 @@ public class MbtiController {
 		int cnt=mbtiSurveyService.deleteMbtiResult(mbtiResultListVo);
 		logger.info("mbti 검사 결과 삭제 결과, cnt={}",cnt);
 		
-		String msg="",url="redirect:/admin/mbti/mbtiStatistics";
+		String msg="",url="/admin/mbti/mbtiStatistics";
 		if(cnt>0) {
 			msg="선택한 검사 결과들을 삭제하였습니다.";
 		}else {
