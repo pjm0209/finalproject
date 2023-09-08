@@ -226,5 +226,6 @@
 		join boardview b
 		on board_no = b.board_no
 		where board_no in(next, prev)
+		order by board_no
 	</select>
 </mapper>

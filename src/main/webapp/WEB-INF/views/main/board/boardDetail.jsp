@@ -138,20 +138,30 @@
 	
 	function boardNextPrev(result) {
 		var str = "";
+		var boardNo = $('.boardNo').val();
 				
+		str += "<div class='listItem'>";
 		for(var i = 0; i < result.length; i++) {
-			var map = result[i];
-			str += "<div class='listItem'>";
-			str += "<a class='boardlink' href='<c:url value='/main/board/boardDetail?boardNo=" + map.BOARD_NO + "'/>'>" + map.BOARD_TITLE;
-			str += "<span class='writer'>";
-			if(map.ADMIN_ID != null) {
-				str += map.ADMIN_ID;
-			} else {
-				str += map.NAME;
+			var map = result[i];			
+			
+			if(result.length == 1) {
+				if(map.BOARD_NO > boardNo) {
+					str += "<a class='boardlink none'><i class='bi bi-arrow-left'></i></a>";
+				}
 			}
-			str += "</span></a>";
-			str += "</div>";
+			if(boardNo > map.BOARD_NO) {
+				str += "<a class='boardlink' href='<c:url value='/main/board/boardDetail?boardNo=" + map.BOARD_NO + "'/>'><i class='bi bi-arrow-left'></i></a>";
+			} else {
+				str += "<a class='boardlink' href='<c:url value='/main/board/boardDetail?boardNo=" + map.BOARD_NO + "'/>'><i class='bi bi-arrow-right'></i></a>";
+			}
+
+			if(result.length == 1) {
+				if(map.BOARD_NO < boardNo) {
+					str += "<a class='boardlink none'><i class='bi bi-arrow-right'></i></a>";
+				}
+			}
 		}		
+		str += "</div>";
 		
 		$('.boardNextPrevList').html(str);
 	}
