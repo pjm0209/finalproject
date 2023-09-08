@@ -27,4 +27,9 @@ public class SalesServiceImpl implements SalesService{
 		return salesDao.selectRegdateSalesView();
 	}
 
+	@Override
+	public List<Map<String, Object>> selectSalesRegdate() {
+		return salesDao.selectSalesRegdate();
+	}
+
 }
