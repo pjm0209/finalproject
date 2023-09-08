@@ -134,9 +134,13 @@ var contextPath="/mbti";
 		$('#memberNameModal').text(id);
 		$('textarea').html(body);
 		$('#messageDetailModal').modal('show');
+		
 		var result="<input type='hidden' name='receiveNo' value='"+no+"'>";
-		result+="<input type='hidden' name='adminMessageFlag' value='N'>";
-		$('#input2').html(result);
+		$('#input1').html(result);
+		var result2="<input type='hidden' name='adminMessageFlag' value='N'>";
+		$('#input2').html(result2);
+		
+		//읽은 날짜 업데이트
 		if(readDate==null || readDate==''){
 			$.ajax({
 				url:contextPath+'/admin/message/readDateUpdate',
@@ -190,6 +194,7 @@ var contextPath="/mbti";
 	
 	$('#messateCDelete').click(function(){
 		var idx=$('input[type=checkbox]:checked').not('#check-All').length;
+		alert($('input[type=checkbox]:checked').val());
 		
 		if(idx<1){
 			$('#alertModalBody').html("삭제할 쪽지를 선택해주세요");
