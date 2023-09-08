@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface MainOrderService {
-	List<MainOrderVO> selectOrderDetailList(int ordersNo);
 	List<Map<String, Object>> selectOrderList(int no);
+	int findCurrentOrdersNo(int no);
+	List<Map<String, Object>> selectMyCurrentOrder(int ordersNo);
 }

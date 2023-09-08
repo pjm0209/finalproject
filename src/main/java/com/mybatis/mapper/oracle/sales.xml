@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team2.mbti.sales.model.SalesDAO">
+	<select id="selectSalesByCategoryView" parameterType="int" resultType="map">
+		select * from salesbycategoryview
+		where sales_category_no=#{salesCategoryNo}
+	</select>
+	<select id="selectSalesAllView" resultType="map">
+		select * from salesbycategoryview
+	</select>
+	<select id="selectRegdateSalesView" resultType="map">
+		select a.sales_category_no , sum(a.sumprice) sumprice, to_char(a.regdate,'yyyy-MM-dd') regdate
+		from (
+		select sales_category_no, trunc(sales_regdate) regdate
+		, sum(sales_price) sumprice from sales
+		group by sales_category_no, sales_regdate
+		)a
+		group by a.sales_category_no, a.regdate
+		order by a.sales_category_no, a.regdate desc
+	</select>
+	
+	<resultMap type="map" id="salesResultMap">
+		<association property="map" column="regdate" javaType="map">
+			<id property="salesCategoryNo" column="sales_category_no" jdbcType="BIGINT" />
+			<result property="sumprice" column="sumprice" jdbcType="BIGINT"/>
+			<result property="regdate" column="regdate" jdbcType="TIMESTAMP"/>
+		</association>
+		<collection property="salesList" javaType="list" ofType="map"
+			column="regdate" select="selectRegdateSalesView">
+		</collection>
+	</resultMap>
+	
+	<select id="selectSalesRegdate" resultMap="salesResultMap">
+		select to_char(sales_regdate,'yyyy-MM-dd') regdate 
+		from sales
+		group by to_char(sales_regdate,'yyyy-MM-dd')
+	</select>
+</mapper>

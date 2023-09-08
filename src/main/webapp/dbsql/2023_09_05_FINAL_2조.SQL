@@ -2,15 +2,56 @@
 CREATE TABLE MBTI (
 	MBTI_NO NUMBER NOT NULL, /* 번호(MBTI) */
 	MBTI_TYPE CHAR(4) NOT NULL, /* MBTI유형 */
-	MBTI_CHARACTER VARCHAR2(2000) NOT NULL, /* 성격설명 */
+    PERSONALITY_TRAIT VARCHAR2(2000) NOT NULL, /* 성격특징 */
+	DEFINING_TRAIT VARCHAR2(2000) NOT NULL, /* 주요특징 */
+    STRENGTH VARCHAR2(2000) NOT NULL, /* 강점 */
+    WEAKNESS VARCHAR2(2000) NOT NULL, /* 약점 */
 	MBTI_JOP VARCHAR2(2000) NOT NULL, /* 관련직업 */
 	COMPATIBILITY VARCHAR2(2000) NOT NULL /* 궁합 */
 );
+CREATE TABLE SALES(
+    SALES_NO NUMBER NOT NULL, /* 매출번호 */
+    SALES_CATEGORY_NO NUMBER,  /* 카테고리 */
+    SALES_NAME VARCHAR2(100), /* 이름 */
+    SALES_PRICE NUMBER, /* 금액 */
+    SALES_REGDATE DATE /* 판매 날짜 */
+);
+
+CREATE UNIQUE INDEX PK_SALES
+	ON SALES (
+		SALES_NO ASC
+	);
+
+ALTER TABLE SALES
+	ADD
+		CONSTRAINT PK_SALES
+		PRIMARY KEY (
+			SALES_NO
+		);
+        
+CREATE TABLE SALES_CATEGORY(
+    SALES_CATEGORY_NO NUMBER NOT NULL, /* 매출 카테고리 번호 */
+    SALES_CATEGORY VARCHAR2(20) NOT NULL /* 매출 카테고리 */
+)
+
+CREATE UNIQUE INDEX PK_SALES_CATEGORY
+	ON SALES_CATEGORY (
+		SALES_CATEGORY_NO ASC
+	);
+
+
+ALTER TABLE SALES_CATEGORY
+	ADD
+		CONSTRAINT PK_SALES_CATEGORY
+		PRIMARY KEY (
+			SALES_CATEGORY_NO
+		);
 
 CREATE UNIQUE INDEX PK_MBTI
 	ON MBTI (
 		MBTI_NO ASC
 	);
+
 
 ALTER TABLE MBTI
 	ADD
@@ -23,10 +64,9 @@ ALTER TABLE MBTI
 CREATE TABLE MBTI_RESULT (
 	MBTI_RESULT_NO NUMBER NOT NULL, /* MBTI결과번호 */
 	NO NUMBER, /* 회원번호 */
-	MBTI_NO NUMBER, /* 번호(MBTI) */
 	MBTI_VAL NUMBER NOT NULL, /* MBTI 성격유형 값 */
 	MBTI_RESULT_REGDATE DATE DEFAULT SYSDATE, /* MBTI검사날짜 */
-    QUESTION_CATEGORY_NO NUMBER
+    MBTI_SURVEY_NO NUMBER
 );
 
 CREATE UNIQUE INDEX PK_MBTI_RESULT
@@ -48,9 +88,18 @@ CREATE TABLE MBTI_EDUCATION (
 	EDU_NO NUMBER NOT NULL, /* 교육 번호 */
 	EDU_NAME VARCHAR2(50) NOT NULL, /* 교육 이름 */
 	EDU_COM VARCHAR2(100) NOT NULL, /* 교육 기간 */
-	EDU_TEACHER VARCHAR2(30) NOT NULL, /* 강사 */
 	EDU_PRICE NUMBER NOT NULL, /* 교육 비용 */
 	EP_NO NUMBER /* 교육장 번호 */
+);
+
+CREATE TABLE EDUCATION_TEACHER (
+    EDU_TEA_NO NUMBER NOT NULL, /* 교육강사번호 */
+    EDU_TEA_NAME NUMBER NOT NULL, /* 강사이름 */
+    EDU_TEA_ID NUMBER NOT NULL, /* 강사아이디 */
+    EDU_TEA_PWD NUMBER NOT NULL, /* 강사비밀번호 */
+    EDU_TEA_EMAIL NUMBER NOT NULL, /* 강사이메일 */
+    EDU_TEA_TEL NUMBER NOT NULL, /* 강사전화번호 */
+    EDU_TEA_IMG NUMBER NOT NULL /* 강사사진 */
 );
 
 CREATE UNIQUE INDEX PK_MBTI_EDUCATION
@@ -119,7 +168,8 @@ CREATE TABLE ORDERS_DETAIL (
 /* 교육 신청 */
 CREATE TABLE EDUCATION_APPLICATION  (
 	EDU_APP_NO NUMBER NOT NULL, /* 교육 신청번호 */
-	NO NUMBER /* 회원번호 */
+	NO NUMBER, /* 회원번호 */
+    EDU_NO NUMBER
 );
 
 CREATE UNIQUE INDEX PK_EDUCATION_APPLICATION 
@@ -182,7 +232,7 @@ ALTER TABLE ADMIN
 
 /* MBTI설문지 */
 CREATE TABLE MBTI_SURVEY (
-	MBTI_SERVEY_NO NUMBER NOT NULL, /* 번호(MBTI설문지) */
+	MBTI_SURVEY_NO NUMBER NOT NULL, /* 번호(MBTI설문지) */
 	QUESTION_TYPE_NO NUMBER, /* 번호(MBTI 문제유형) */
 	QUESTION_CATEGORY_NO NUMBER, /* 번호(MBTI 질문 카테고리) */
     QUESTION VARCHAR2(2000) NOT NULL /* 질문지 */
@@ -190,14 +240,14 @@ CREATE TABLE MBTI_SURVEY (
 
 CREATE UNIQUE INDEX PK_MBTI_SURVEY
 	ON MBTI_SURVEY (
-		MBTI_SERVEY_NO ASC
+		MBTI_SURVEY_NO ASC
 	);
 
 ALTER TABLE MBTI_SURVEY
 	ADD
 		CONSTRAINT PK_MBTI_SURVEY
 		PRIMARY KEY (
-			MBTI_SERVEY_NO
+			MBTI_SURVEY_NO
 		);
 
 /* 회원 */
@@ -213,8 +263,9 @@ CREATE TABLE MEMBER (
 	ADDRESS_DETAIL VARCHAR2(50), /* 상세주소 */
 	REGDATE DATE DEFAULT SYSDATE NOT NULL, /* 회원가입날짜 */
 	ACTIVATABLE CHAR(1) DEFAULT 'Y', /* 회원 활동 가능 여부 */
-	OUTDATE DATE DEFAULT SYSDATE, /* 회원탈퇴날짜 */
-	MBTI_NO NUMBER /* 번호(MBTI) */
+	OUTDATE DATE, /* 회원탈퇴날짜 */
+	MBTI_NO NUMBER, /* 번호(MBTI) */
+    KAKAO_ID_FLAG CHAR(1) DEFAULT 'N'
 );
 
 CREATE UNIQUE INDEX PK_MEMBER
@@ -256,10 +307,10 @@ ALTER TABLE COMMENTS
 		);
 
 /* 쪽지수신 */
-CREATE TABLE RECEIVE (
+CREATE TABLE RECEIVE_DM (
 	RECEIVE_DM_NO NUMBER NOT NULL, /* 쪽지수신번호 */
 	SEND_DM_NO NUMBER, /* 쪽지발신번호 */
-	READ_DATE DATE DEFAULT SYSDATE, /* 읽은 날짜 */
+	READ_DATE DATE, /* 읽은 날짜 */
 	RECEIVE_REGDATE DATE DEFAULT SYSDATE, /* 수신일 */
 	NO NUMBER /* 회원번호 */
 );
@@ -311,6 +362,7 @@ CREATE TABLE BOARD_FORM (
 	COMMENT_FLAG CHAR(1), /* 댓글작성가능여부 */
 	BOARD_FILE_COUNT CHAR(1), /* 첨부가능파일숫자 */
 	BOARD_FILE_SIZE NUMBER, /* 첨부가능파일사이즈 */
+    BOARD_SECRET_FLAG CHAR(1) DEFAULT 'N' NOT NULL, /* 비밀글여부 */
 	BOARD_FLAG CHAR(1) NOT NULL, /* 사용여부 */
 	FIRST_ADMIN_ID VARCHAR2(30), /* 최초등록관리자아이디 */
 	FIRST_REGDATE DATE DEFAULT SYSDATE, /* 최초등록시점 */
@@ -335,7 +387,9 @@ CREATE TABLE SEND_DM (
 	SEND_DM_NO NUMBER NOT NULL, /* 쪽지발신번호 */
 	NO NUMBER, /* 회원번호 */
 	SEND_BODY VARCHAR2(500) NOT NULL, /* 쪽지발신내용 */
-	SEND_REGDATE DATE DEFAULT SYSDATE /* 전송일 */
+	SEND_REGDATE DATE DEFAULT SYSDATE, /* 전송일 */
+    RECEIVE_MANAGER_FLAG CHAR(1) DEFAULT 'N' NOT NULL, /* 수신자 관리자 여부 */
+    ADMIN_NO NUMBER NULL /* 관리자 번호 */
 );
 
 CREATE UNIQUE INDEX PK_SEND_DM
@@ -425,7 +479,8 @@ CREATE TABLE BOARD (
 	BOARD_SORT NUMBER DEFAULT 0, /* 글 정렬순서 */
 	BOARD_DEL_FLAG CHAR(1) DEFAULT 'N', /* 삭제구분 */
 	MBTI_NO NUMBER, /* 번호(MBTI) */
-    ADMIN_NO NUMBER
+    ADMIN_NO NUMBER,
+    BOARD_SECREATE varchar2(2) default 'N' 
 );
 
 CREATE UNIQUE INDEX PK_BOARD
@@ -486,27 +541,8 @@ ALTER TABLE MBTI_RESULT
 		)
 		REFERENCES MEMBER (
 			NO
-		);
-
-ALTER TABLE MBTI_RESULT
-	ADD
-		CONSTRAINT FK_MBTI_TO_MBTI_RESULT
-		FOREIGN KEY (
-			MBTI_NO
-		)
-		REFERENCES MBTI (
-			MBTI_NO
-		);
-        
-ALTER TABLE MBTI_RESULT
-    ADD 
-        CONSTRAINT FK_QUESTION_NO_MBTI_RESULT
-        FOREIGN KEY (
-            QUESTION_CATEGORY_NO
-        )
-        REFERENCES QUESTION_CATEGORY (
-            QUESTION_CATEGORY_NO
-        );
+		)ON DELETE CASCADE;
+ 
 
 ALTER TABLE MBTI_EDUCATION
 	ADD
@@ -516,7 +552,7 @@ ALTER TABLE MBTI_EDUCATION
 		)
 		REFERENCES EDUCATION_PLACE (
 			EP_NO
-		);
+		)ON DELETE CASCADE;
 
 
 ALTER TABLE ORDERS_DETAIL
@@ -527,7 +563,17 @@ ALTER TABLE ORDERS_DETAIL
 		)
 		REFERENCES ORDERS (
 			ORDERS_NO
-		);
+		)ON DELETE CASCADE;
+        
+alter table EDUCATION_APPLICATION
+    add 
+        CONSTRAINT fk_edu_no_education_application
+        FOREIGN KEY(
+            EDU_NO
+            )
+        REFERENCES MBTI_EDUCATION (
+            EDU_NO
+        )ON DELETE CASCADE;
 
 ALTER TABLE ORDERS_DETAIL
 	ADD
@@ -537,8 +583,28 @@ ALTER TABLE ORDERS_DETAIL
 		)
 		REFERENCES BOOK (
 			BOOK_NO
-		);
+		)ON DELETE CASCADE;
 
+ALTER TABLE MBTI_EDUCATION
+	ADD
+		CONSTRAINT FK_MBTI_EDUCATION_TO_EDUCATION_TEACHER
+		FOREIGN KEY (
+			EDU_TEA_NO
+		)
+		REFERENCES EDUCATION_TEACHER (
+			EDU_TEA_NO
+		)ON DELETE CASCADE;
+        
+ALTER TABLE SALES
+	ADD
+		CONSTRAINT FK_SALES_TO_SALES_CATEGORY
+		FOREIGN KEY (
+			SALES_CATEGORY_NO
+		)
+		REFERENCES SALES_CATEGORY (
+			SALES_CATEGORY_NO
+		)ON DELETE CASCADE;
+        
 ALTER TABLE EDUCATION_APPLICATION 
 	ADD
 		CONSTRAINT FK_MEMBER_TO_EDUCATION_APPLICATION 
@@ -547,7 +613,7 @@ ALTER TABLE EDUCATION_APPLICATION
 		)
 		REFERENCES MEMBER (
 			NO
-		);
+		)ON DELETE CASCADE;
 
 ALTER TABLE MBTI_SURVEY
 	ADD
@@ -557,7 +623,7 @@ ALTER TABLE MBTI_SURVEY
 		)
 		REFERENCES QUESTION_TYPE (
 			QUESTION_TYPE_NO
-		);
+		)ON DELETE CASCADE;
 
 ALTER TABLE MBTI_SURVEY
 	ADD
@@ -567,7 +633,7 @@ ALTER TABLE MBTI_SURVEY
 		)
 		REFERENCES QUESTION_CATEGORY (
 			QUESTION_CATEGORY_NO
-		);
+		)ON DELETE CASCADE;
 
 ALTER TABLE MEMBER
 	ADD
@@ -577,7 +643,7 @@ ALTER TABLE MEMBER
 		)
 		REFERENCES MBTI (
 			MBTI_NO
-		);
+		)ON DELETE CASCADE;
 
 ALTER TABLE COMMENTS
 	ADD
@@ -587,7 +653,7 @@ ALTER TABLE COMMENTS
 		)
 		REFERENCES BOARD (
 			BOARD_NO
-		);
+		)ON DELETE CASCADE;
 
 ALTER TABLE COMMENTS
 	ADD
@@ -597,7 +663,7 @@ ALTER TABLE COMMENTS
 		)
 		REFERENCES MEMBER (
 			NO
-		);
+		)ON DELETE CASCADE;
 
 ALTER TABLE RECEIVE
 	ADD
@@ -607,7 +673,7 @@ ALTER TABLE RECEIVE
 		)
 		REFERENCES SEND_DM (
 			SEND_DM_NO
-		);
+		)ON DELETE CASCADE;
 
 ALTER TABLE RECEIVE
 	ADD
@@ -617,7 +683,7 @@ ALTER TABLE RECEIVE
 		)
 		REFERENCES MEMBER (
 			NO
-		);
+		)ON DELETE CASCADE;
 
 ALTER TABLE ORDERS
 	ADD
@@ -627,7 +693,7 @@ ALTER TABLE ORDERS
 		)
 		REFERENCES MEMBER (
 			NO
-		);
+		)ON DELETE CASCADE;
 
 ALTER TABLE SEND_DM
 	ADD
@@ -637,7 +703,17 @@ ALTER TABLE SEND_DM
 		)
 		REFERENCES MEMBER (
 			NO
-		);
+		)ON DELETE CASCADE;
+        
+ALTER TABLE SEND_DM
+	ADD
+		CONSTRAINT FK_ADMIN_TO_SEND_DM
+		FOREIGN KEY (
+			ADMIN_NO
+		)
+		REFERENCES ADMIN (
+			ADMIN_NO
+		)ON DELETE CASCADE;
 
 ALTER TABLE STOCK
 	ADD
@@ -647,7 +723,7 @@ ALTER TABLE STOCK
 		)
 		REFERENCES BOOK (
 			BOOK_NO
-		);
+		)ON DELETE CASCADE;
 
 ALTER TABLE INTOSTOCK
 	ADD
@@ -657,7 +733,7 @@ ALTER TABLE INTOSTOCK
 		)
 		REFERENCES BOOK (
 			BOOK_NO
-		);
+		)ON DELETE CASCADE;
 
 ALTER TABLE BOARD_FILE
 	ADD
@@ -667,7 +743,7 @@ ALTER TABLE BOARD_FILE
 		)
 		REFERENCES BOARD (
 			BOARD_NO
-		);
+		)ON DELETE CASCADE;
 
 ALTER TABLE BOARD
 	ADD
@@ -707,7 +783,7 @@ ALTER TABLE BASKET
 		)
 		REFERENCES BOOK (
 			BOOK_NO
-		);
+		)ON DELETE CASCADE;
 
 ALTER TABLE BASKET
 	ADD
@@ -717,7 +793,7 @@ ALTER TABLE BASKET
 		)
 		REFERENCES MEMBER (
 			NO
-		);
+		)ON DELETE CASCADE;
 ALTER TABLE BOARD
     ADD 
         CONSTRAINT FK_BOARD_ADMIN_NO
@@ -725,7 +801,7 @@ ALTER TABLE BOARD
 			ADMIN_NO
 		) REFERENCES ADMIN (
             ADMIN_NO
-        );
+        )ON DELETE CASCADE;
 CREATE TABLE BOARD_LIKE (
 	NO NUMBER, /* 회원번호 */
 	BOARD_NO NUMBER, /* 게시물번호 */
@@ -750,7 +826,7 @@ ALTER TABLE BOARD_LIKE
 		)
 		REFERENCES BOARD (
 			BOARD_NO
-		);
+		)ON DELETE CASCADE;
         
 CREATE TABLE COMMENTS_LIKE (
 	NO NUMBER, /* 회원번호 */
@@ -766,7 +842,7 @@ ALTER TABLE COMMENTS_LIKE
 		)
 		REFERENCES MEMBER (
 			NO
-		);
+		)ON DELETE CASCADE;
 
 ALTER TABLE COMMENTS_LIKE
 	ADD
@@ -791,7 +867,7 @@ CREATE SEQUENCE SEND_DM_SEQ
 START WITH 1
 INCREMENT BY 1
 NOCACHE;
-CREATE SEQUENCE RECEIVE_SEQ
+CREATE SEQUENCE RECEIVE_DM_SEQ
 START WITH 1
 INCREMENT BY 1
 NOCACHE;
@@ -856,8 +932,7 @@ NOCACHE;
 --유니크
 ALTER TABLE MEMBER
 ADD CONSTRAINT UQ_MEMBER_HP UNIQUE(HP);
-ALTER TABLE ORDERS
-ADD CONSTRAINT UQ_ORDERS_RE_HP UNIQUE(RE_HP);
+
 
 --트리거
 CREATE OR REPLACE TRIGGER TRIGGER_INTOSTOCK_INSERT
@@ -869,10 +944,58 @@ BEGIN
   WHERE BOOK_NO = :NEW.BOOK_NO;
 END;
 
-CREATE OR REPLACE TRIGGER TRIGGER_SEND_DM_INSERT
-AFTER INSERT ON SEND_DM
-FOR EACH ROW
-BEGIN
-  INSERT INTO RECEIVE(RECEIVE_DM_NO,SEND_DM_NO,NO)
-  VALUES(RECEIVE_SEQ.NEXTVAL,:NEW.SEND_DM_NO,:NEW.RECEIVE_NO);
-END;
+--view
+create or replace view mbti_statistics_view
+as
+select mem.no, mem.userid, qt.question_type_name, mr.mbti_result_regdate, mbti.mbti_type
+from(
+    select no, mbti_result_regdate, question_type_no from mbti_result
+    group by no, mbti_result_regdate, question_type_no
+    order by no, mbti_result_regdate, question_type_no
+)mr join member mem
+on mr.no=mem.no
+join question_type qt
+on qt.question_type_no = mr.question_type_no
+join mbti mbti
+on mbti.mbti_no=mem.mbti_no;
+
+create or REPLACE view edu_app_mem_view
+as
+select e.edu_app_no, m.name, m.userid, m.hp
+from education_application e join member m
+on e.no=m.no;
+
+create or replace view eduTeaListview
+as
+select edu.*, tea.edu_tea_id, tea.edu_tea_pwd, tea.edu_tea_email, tea.edu_tea_tel, tea.edu_tea_img,eduplc.ep_name
+from mbti_education edu join education_teacher tea
+on edu.edu_tea_no = tea.edu_tea_no
+join education_place eduplc
+on eduplc.ep_no = edu.ep_no;
+
+create or replace view eduListview
+as
+select edu.*, plc.ep_name
+from mbti_education edu join education_place plc
+on edu.ep_no = plc.ep_no;
+
+create or replace view educationview 
+as
+select edu.*, eduapp.edu_app_no, m.no, m.name, eduplc.ep_name, 
+    eduplc.ep_zipcode, eduplc.ep_address, eduplc.ep_latitude, eduplc.ep_longitude, 
+    eduplc.ep_tel, edutea.edu_tea_id, edutea.edu_tea_pwd, 
+    edutea.edu_tea_email, edutea.edu_tea_tel, edutea.edu_tea_img, eduapp.edu_app_flag
+from mbti_education edu join education_application eduapp
+on edu.edu_no = eduapp.edu_no
+join education_place eduplc
+on eduplc.ep_no = edu.ep_no
+join education_teacher edutea
+on edutea.edu_tea_name = edu.edu_tea_name
+join member m
+on m.no = eduapp.no;
+
+create or replace view messageView
+as
+select sd.send_dm_no,sd.no, sd.send_body, sd.send_regdate, sd.receive_no, sd.admin_no, sd.receive_manager_flag, rd.read_date
+from send_dm sd join receive_dm rd
+on sd.send_dm_no=rd.send_dm_no;

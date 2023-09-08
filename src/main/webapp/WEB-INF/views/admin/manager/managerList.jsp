@@ -117,14 +117,13 @@ select#manager-search-select {
 	<div id="board-title">
 		<h5>관리자 리스트</h5>		
 		<button class="manager-button" id="manager-delete-button">삭제</button>
-		<button class="manager-button" id="manager-edit-button">수정</button>
 	</div>
 	<div class="board">
 		<div class="board-head">
 			<div class="board-search-result">
 				<form name="frmSearch" method="post" action="<c:url value='/admin/manager/managerList'/>">
 				<div class="input-group mb-3" id="board-search-div">
-					<select class="form-select form-select-lg" aria-label=".form-select-lg example" name="searchcondition" id="manager-search-select">					  						  
+					<select class="form-select form-select-lg" aria-label=".form-select-lg example" name="searchCondition" id="manager-search-select">					  						  
 					  	<option value="admin_id" <c:if test="${param.searchCondition=='adminId'}"> selected="selected" </c:if>>아이디</option>
 					  	<option value="admin_email" <c:if test="${param.searchCondition=='adminEmail'}"> selected="selected" </c:if>>이메일</option>					  	
 					  	<option value="admin_tel" <c:if test="${param.searchCondition=='adminTel'}"> selected="selected" </c:if>>전화번호</option>
