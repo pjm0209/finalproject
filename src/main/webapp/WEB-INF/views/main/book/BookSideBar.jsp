@@ -38,22 +38,21 @@
 		<div class="sidebar__inner shadow-sm bg-body rounded" style="position: relative;">
 			<div>
 				<ul>
-					<li>이 분야 베스트3</li><br>
-					<li>
-						<i class="bi bi-1-square-fill"></i><br>
-						<img src="<c:url value='/images/bookProduct/1.jpg'/>">
-						<div>책 이름 넣기</div>
-					</li>
-					<li>
-						<i class="bi bi-2-square-fill"></i></i><br>
-						<img src="<c:url value='/images/bookProduct/1.jpg'/>" >
-						<div>책 이름 넣기</div>
-					</li>
-					<li>
-						<i class="bi bi-3-square-fill"></i></i><br>
-						<img src="<c:url value='/images/bookProduct/1.jpg'/>">
-						<div>책 이름 넣기</div>
-					</li>
+					<c:if test="${empty param.bookCategory}">
+						<li>전체 베스트3</li><br>
+					</c:if>
+					<c:if test="${!empty param.bookCategory}">
+						<li>${param.bookCategory} BEST3</li><br>
+					</c:if>
+					<c:forEach var="map" items="${best3}">
+						<li>
+							<a href="<c:url value='/main/book/bookDetail?bookNo=${map.BOOK_NO}&bookCategory=${param.bookCategory}'/>">
+								<i class="bi bi-1-square-fill"></i><br>
+								<img src="<c:url value='/images/bookProduct/${map.BOOK_IMG_NAME}'/>" alt="${map.BOOK_IMG_ORIGINALNAME}">
+								<div>${map.BOOK_TITLE}</div>
+							</a>
+						</li>
+					</c:forEach>
 				</ul>
 			</div>
 		</div>

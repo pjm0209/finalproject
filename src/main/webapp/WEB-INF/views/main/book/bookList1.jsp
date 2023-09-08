@@ -31,7 +31,31 @@ function sendSearchKeyword(){
 	$("#searchKeyword").val(searchKeyword);
 	$("#frmPageId").submit();
 }
-
+function ajaxInsertCart(element){
+	var bookNo = $(element).parent().find('input[type=hidden]').val();
+	alert(bookNo);
+	$.ajax({
+		url: contextPath + "/main/book/basket/mainAjaxInsertBasket",
+		type:"post",
+		data: {
+			bookNo: bookNo,
+			basketQty: 1
+		},
+		success:function(result){
+			if(result > 0){
+				$('#confirmModalBody').html("장바구니에 넣었습니다.장바구니로 이동할까요?");
+				$('#confirmOk').attr("onclick","location.href='"+contextPath+"/main/mypage/mypageBasket'");
+				$('#confirmModalBtn').trigger('click');
+			} else {
+				$('#alertModalBody').html("오류로 인해 장바구니에 넣기 실패했습니다.나중에 다시 시도해주세요.");
+				$('#alertModalBtn').trigger('click');
+			}
+		},
+		error:function(xhr, status, error){
+			alert(xhr + status + error);
+		}
+	});	
+}
 	
 </script>
 <section>
@@ -43,10 +67,13 @@ function sendSearchKeyword(){
 	</form>
 	<div id='bookSellMainImg' class=" bookslide shadow-sm p-3 mb-5 bg-body rounded">
 			<ul class="gallery ">
-				<li><img src="<c:url value='/images/bookProduct/slide_01.jpg'/>"></li>
+				<%-- <li><img src="<c:url value='/images/bookProduct/slide_01.jpg'/>"></li>
 				<li><img src="<c:url value='/images/bookProduct/slide_02.jpg'/>"></li>
 				<li><img src="<c:url value='/images/bookProduct/slide_03.jpg'/>"></li>
-				<li><img src="<c:url value='/images/bookProduct/slide_04.jpg'/>"></li>
+				<li><img src="<c:url value='/images/bookProduct/slide_04.jpg'/>"></li> --%>
+				<li><img src="<c:url value='/images/bookProduct/bookMain1.jpg'/>"></li>
+				<li><img src="<c:url value='/images/bookProduct/bookMain2.jpg'/>"></li>
+				<li><img src="<c:url value='/images/bookProduct/bookMain3.jpg'/>"></li>
 			</ul>
 	</div>
 	<div style="padding-left: 240px;margin-top: 50px;">
@@ -101,8 +128,8 @@ function sendSearchKeyword(){
 							</div>
 							<form name="frmBuy" method="post">
 								<div class="btn">
-									<button class="cartBtn" type="button" onclick="goCart(this)">장바구니</button>
-									<button class="orderBtn" type="button" onclick="goOrder(this)">바로구매</button>
+									<button class="cartBtn" type="button" onclick="ajaxInsertCart(this)">장바구니</button>
+									<button class="orderBtn" type="button" onclick="ajaxInsertCart(this)">바로구매</button>
 									<input type="hidden" name="bookNo" value="${vo.bookNo}">
 									<input type="hidden" name="basketQty" value="1">
 								</div>
