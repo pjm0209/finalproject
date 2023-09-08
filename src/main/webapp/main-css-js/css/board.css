@@ -232,6 +232,19 @@ i.bi.bi-search {
 
 /*게시글상세보기*/
 
+span.writer {
+    width: 20%;
+    margin-left: 264px;
+    display: inline-block;
+}
+
+a.boardlink {
+    border: 1px solid #e1e1e1;
+    width: 550px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
 /*첨부파일 박스*/
 div.boardFile button {
 	padding-right: 25px;
