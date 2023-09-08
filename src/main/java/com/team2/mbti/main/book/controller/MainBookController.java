@@ -74,14 +74,9 @@ public class MainBookController {
 		List<Map<String, Object>> bookList3 = mainBookService.selectBest4("기타");
 		logger.info("bookList3, bookList3.size()={}", bookList3.size());
 		
-		List<Map<String, Object>> best3 = mainBookService.best3("");
-		logger.info("best3, best3.size()={}", best3.size());
-		
 		model.addAttribute("bookList1", bookList1);
 		model.addAttribute("bookList2", bookList2);
 		model.addAttribute("bookList3", bookList3);
-		
-		model.addAttribute("best3", best3);
 		
 		return "main/book/bookMain";
 	}
@@ -150,5 +145,19 @@ public class MainBookController {
 
 		return "main/book/bookList1";
 	}
-
+	
+	@RequestMapping("/BookSideBar")
+	public String sideBarList(@RequestParam(required = false, defaultValue = "")String bookCategory, Model model) {
+		
+		logger.info("사이드 바 리스트 만들기 처리하기, 파라미터 bookCategory={}", bookCategory);
+		
+		List<Map<String, Object>> best3 = mainBookService.best3(bookCategory);
+		logger.info("best3={}, best3.size()={}",best3, best3.size());
+		
+		model.addAttribute("best3", best3);
+		
+		return "main/book/BookSideBar";
+	}
+	
+	
 }//

@@ -81,10 +81,7 @@
       function drawChart2() {
         var data = google.visualization.arrayToDataTable([
           ['DAY', '책', 'MBTI검사', 'MBTI교육'],
-          <c:forEach var="map" items="${regdateSalesList}">
-          	['${map["REGDATE"]}',${map['SUMPRICE']},${map['SUMPRICE']},${map['SUMPRICE']}],
-          	<c:set var="bookSales" value="${bookSales+1}" />
-          </c:forEach>
+          ${result}
           /*['2014', 1000000, 200000, 500000],
           ['2015', 1170234, 460950, 220550],
           ['2016', 664420, 142120, 3400],
@@ -93,8 +90,7 @@
 
         var options = {
           chart: {
-            title: 'Company Performance',
-            subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+            title: '일별 총매출',
           }
         };
 

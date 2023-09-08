@@ -168,7 +168,7 @@ article {
 			<label>우편번호</label>			
 			<div class="div-memberEdit">
 				<input type="text" class="postalCode" id="memberPostalCode" name="zipcode" value="${membervo.zipcode}">&nbsp;	
-				<input type="Button" value="우편번호 찾기" id="btnZipcode" title="새창열림" onclick="sample4_execDaumPostcode()">	
+				<input type="Button" value="우편번호 찾기" id="btnZipcode" title="새창열림" onclick="sample4_execDaumPostcode2()">	
 			</div>
 			
 			<label>주소</label>
