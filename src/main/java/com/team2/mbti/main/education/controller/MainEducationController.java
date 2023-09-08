@@ -175,7 +175,6 @@ public class MainEducationController {
 			msg="신청한 교육의 결제를 진행하는 도중 에러가 발생하였습니다.";
 		}
 		
-		
 		return msg;
 	}
 	

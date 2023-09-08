@@ -17,8 +17,8 @@
 		<selectKey keyProperty="eduNo" order="BEFORE" resultType="int">
 			select mbti_education_seq.nextval from dual
 		</selectKey>
-		insert into mbti_education(edu_no, edu_name, edu_com, edu_price, ep_no, edu_people_number, edu_tea_no)
-		values(#{eduNo}, #{eduName}, #{eduCom}, #{eduPrice}, #{epNo}, #{eduPeopleNumber}, #{eduTeaNo})
+		insert into mbti_education(edu_no, edu_name, edu_com, edu_tea_name, edu_price, ep_no, edu_people_number, edu_tea_no)
+		values(#{eduNo}, #{eduName}, #{eduCom}, #{eduTeaName}, #{eduPrice}, #{epNo}, #{eduPeopleNumber}, #{eduTeaNo})
 	</insert>
 	
 	
