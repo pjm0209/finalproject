@@ -41,8 +41,34 @@
 		return pattern.test(uid);
 
 	}
-
+	//회원가입 - 우편번호 찾기
     function sample4_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+
+                var roadAddr = data.roadAddress; 
+                var extraRoadAddr = '';
+
+                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                    extraRoadAddr += data.bname;
+                }
+
+                if(data.buildingName !== '' && data.apartment === 'Y'){
+                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                if(extraRoadAddr !== ''){
+                    extraRoadAddr = ' (' + extraRoadAddr + ')';
+                }
+
+                document.getElementById('memberPostalCode').value = data.zonecode;
+                document.getElementById("memberAddress").value = roadAddr;
+                               
+            }
+        }).open();
+    } 
+    
+    //개인정보수정 - 우편번호 찾기
+        function sample4_execDaumPostcode2() {
         new daum.Postcode({
             oncomplete: function(data) {
 

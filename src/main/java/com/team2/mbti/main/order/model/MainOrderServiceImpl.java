@@ -16,4 +16,14 @@ public class MainOrderServiceImpl implements MainOrderService {
 	public List<Map<String, Object>> selectOrderList(int no) {
 		return mainOrderDao.selectOrderList(no);
 	}
+
+	@Override
+	public int findCurrentOrdersNo(int no) {
+		return mainOrderDao.findCurrentOrdersNo(no);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectMyCurrentOrder(int ordersNo) {
+		return mainOrderDao.selectMyCurrentOrder(ordersNo);
+	}
 }

@@ -110,14 +110,15 @@ select#manager-search-select {
 <!-- Page Heading -->
 <div class="head-div">
 	<h2 class="text-gray-800">관리자 관리</h2>
-	<button type="button" class="add-manager-button"
-		id="add-manager-button"onclick="location.href='managerAdditional'">관리자 등록</button>	
+	<c:if test="${sessionScope.adminNo==1 }">
+			<button type="button" class="add-manager-button"
+			id="add-manager-button"onclick="location.href='managerAdditional'">관리자 등록</button>	
+	</c:if>
 </div>
 <div class="board-body">
 	<div id="board-title">
 		<h5>관리자 리스트</h5>		
 		<button class="manager-button" id="manager-delete-button">삭제</button>
-		<button class="manager-button" id="manager-edit-button">수정</button>
 	</div>
 	<div class="board">
 		<div class="board-head">

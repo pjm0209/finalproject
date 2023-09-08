@@ -139,7 +139,8 @@ var contextPath = "/mbti";
 			},
 			success:function(result){
 				if(result > 0){
-					alert("삭제 성공");	
+					alert("삭제 성공");
+					document.location.reload();
 				} else {
 					alert("삭제 실패 ㅠ");
 				}
