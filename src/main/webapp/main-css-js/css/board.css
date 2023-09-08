@@ -12,6 +12,11 @@ a {
 	cursor: pointer;
 }
 
+span.boardDelCount {
+    margin-left: 10px;
+    font-size: 14px;
+}
+
 .form-check-input:checked {
     background-color: #eb5d1e;
     border-color: #eb5d1e;
