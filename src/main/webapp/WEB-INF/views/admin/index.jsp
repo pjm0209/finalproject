@@ -81,13 +81,6 @@
       function drawChart2() {
         var data = google.visualization.arrayToDataTable([
           ['DAY', '책', 'MBTI검사', 'MBTI교육'],
-          <c:forEach var="salesVo" items="${regdateSalesList}">
-          	//['${salesVo.regdate}',
-         /*  	<c:forEach var="map" >
-          		
-          	</c:forEach> */
-          	/*  ['${salesVo.regdate}', 1, 2, 3], */
-          </c:forEach>
           ['2014', 1000000, 200000, 500000],
           ['2015', 1170234, 460950, 220550],
           ['2016', 664420, 142120, 3400],
