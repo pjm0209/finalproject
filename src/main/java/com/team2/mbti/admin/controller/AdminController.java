@@ -1,5 +1,6 @@
 package com.team2.mbti.admin.controller;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +26,7 @@ import com.team2.mbti.mbtisurvey.model.MbtiSurveyService;
 import com.team2.mbti.member.model.MemberService;
 import com.team2.mbti.member.model.MemberVO;
 import com.team2.mbti.message.model.MessageService;
+import com.team2.mbti.sales.model.SalesAllVO;
 import com.team2.mbti.sales.model.SalesService;
 
 import lombok.RequiredArgsConstructor;
@@ -60,35 +62,32 @@ public class AdminController {
 		List<Map<String, Object>> allSalesList=salesService.selectSalesAllView();
 		logger.info("전체 매출 조회 결과, allSalesList={}",allSalesList);
 		
-		List<Map<String, Object>> regdateSalesList=salesService.selectSalesRegdate();
+		List<SalesAllVO> regdateSalesList=salesService.selectSalesRegdate();
 		logger.info("날짜별 매출 조회 결과, regdateSalesList={}",regdateSalesList);
 		
 		String result="";
 		int bookVal=0;
 		int mbtiVal=0;
 		int eduVal=0;
-		for(Map<String, Object> map : regdateSalesList) {
-			List<Map<String, Object>> salesList=(List<Map<String, Object>>)map.get("salesList");
-			//logger.info("regdate={},salesList={}",regdate,salesList);
-			//BigDecimal bigDecimalCateNo=(BigDecimal)map.get("SALES_CATEGORY_NO");
-			//int salesCategoryNo=bigDecimalCateNo.intValue();
-			//BigDecimal bigDecimalVal = (BigDecimal)map.get("SUMPRICE");
-			//int sumPrice=bigDecimalVal.intValue();
-			//logger.info("salesCategoryNo={},sumPrice={}",salesCategoryNo,sumPrice);
-			
-//			if(salesCategoryNo==1){ 
-//				bookVal=sumPrice; 
-//			}
-//			if(salesCategoryNo==2){
-//				mbtiVal=sumPrice; 
-//			}
-//			if(salesCategoryNo==3){ 
-//				eduVal=sumPrice;
-//			}
+		int salesCategoryNo=0;
+		int sumPrice=0;
+		String regdate ="";
+		BigDecimal bigDecimalCateNo=null;
+		BigDecimal bigDecimalVa=null;
+		
+		
+		List<Map<String, Object>> salesList=null;
+		for(SalesAllVO salesAllVo : regdateSalesList) {
+			salesList=salesAllVo.getSalesList();
 
-			//result+="[\'"+regdate+"\',"+bookVal+","+mbtiVal+","+eduVal+"],";
 		}
 		
+		for(int i=0;i<salesList.size();i++) {
+			Map<String, Object> map=salesList.get(i);
+			regdate=(String)map.get("REGDATE");
+			System.out.println("날짜 : "+ regdate);
+			
+		}
 		
 		List<List<Map<String, Object>>> totalSalesList = new ArrayList<>();
 		
