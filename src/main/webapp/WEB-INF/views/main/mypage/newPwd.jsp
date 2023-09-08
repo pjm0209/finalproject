@@ -50,11 +50,11 @@ button:hover {
 	font-weight: bold;
 }
 
-.error-text {
+.error {
   color: red;
-  font-size: 16px;
+  font-size: 25px;
+  margin-top: 20px;
   font-weight: bold;
-  margin-top: 10px;
 }
 
 
@@ -77,8 +77,8 @@ $(document).ready(function() {
 	});
 	
 	//비밀번호 일치/불일치
-	$('#managerCheckPwd').keyup(function() {
-	    var memberPwd = $('#managerPwd').val();
+	$('#confirmPwd').keyup(function() {
+	    var memberPwd = $('#newPwd').val();
 	    var memberpwdCheck = $(this).val();
 	    var pwdCheckError = $('#PwdCheckError');
 	
@@ -104,13 +104,14 @@ $(document).ready(function() {
     
     <div class="mypage-row"> 
       <label>새 비밀번호</label>
-      <input type="password" name="newPwd" placeholder="새로 사용하실 비밀번호를 입력해주세요" maxlength="30" required>
-    </div> 
+      <input type="password" id="newPwd" name="newPwd" placeholder="새로 사용하실 비밀번호를 입력해주세요" maxlength="30" required>
+      </div> 
      
     <div class="mypage-row">  
       <label>새 비밀번호 확인</label>
-      <input type="password" name="confirmPwd" placeholder="새로 사용하실 비밀번호를 재입력해주세요" maxlength="30" required>
+      <input type="password" id="confirmPwd" name="confirmPwd" placeholder="새로 사용하실 비밀번호를 재입력해주세요" maxlength="30" required>
     </div>
+    <span class="error" id="PwdCheckError"></span><br>
      
       <button type="submit">비밀번호 변경</button>
       

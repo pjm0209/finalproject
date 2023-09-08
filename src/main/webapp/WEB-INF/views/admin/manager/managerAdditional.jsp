@@ -4,18 +4,15 @@
 <%@ include file="../inc/top.jsp"%>
 
 <style>
-body {
+.container2 {
   font-family: Arial, sans-serif;
-  background-color: #f7f7f7;
-}
-
-.container {
+  background-color: #f7f7f7;	
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
   background-color: white;
   border: 1px solid #dddddd;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1)
   border-radius: 5px;
   margin-top: 80px;
   margin-bottom: 90px;
@@ -47,6 +44,7 @@ input[type="text"], input[type="password"], input[type="email"] {
   border-radius: 3px;
   margin: 5px 0;
   box-sizing: border-box;
+  float: left;
 }
 
 
@@ -86,10 +84,12 @@ button#signUpButton {
 }
 
 .error {
+  width: 15rem;
   color: red;
   font-size: 15px;
   margin-top: 15px;
   font-weight: bold;
+  float: left;
 }
 
 #btAdminChkId{
@@ -285,7 +285,7 @@ $(document).ready(function() {
 });
 </script>
 
-<div class="container">
+<div class="container2">
    <form name="form-ManagerAdditional" method="post" action="<c:url value='/admin/manager/managerAdditional'/>">
       <table class="table table-bordered table-hover" style="text-align:center; border: 1px solid #dddddd">
          <thead>
@@ -329,7 +329,7 @@ $(document).ready(function() {
                   
          <tr>
             <td style="width:100px;" colspan="2" class="td1"><h6>이메일</h6></td>
-            <td colspan="2"><input class="form-control" type="email" id="managerEmail" name="adminEmail"  maxLength="40">
+            <td colspan="2"><input class="form-control" type="email" id="managerEmail" name="adminEmail"  maxLength="30">
             	<span class="error" id="EmailError"></span> 
             </td>                     
          </tr>

@@ -117,7 +117,6 @@ select#manager-search-select {
 	<div id="board-title">
 		<h5>관리자 리스트</h5>		
 		<button class="manager-button" id="manager-delete-button">삭제</button>
-		<button class="manager-button" id="manager-edit-button">수정</button>
 	</div>
 	<div class="board">
 		<div class="board-head">
