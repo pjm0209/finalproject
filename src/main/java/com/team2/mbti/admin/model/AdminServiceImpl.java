@@ -99,4 +99,31 @@ public class AdminServiceImpl implements AdminService {
 		
 		return cnt;
 	}
+
+	@Override
+	public int updateAdmin(AdminVO adminvo) {
+		return adminDao.updateAdmin(adminvo);
+	}
+
+	@Override
+	public String selectPwd(int adminNo) {
+		return adminDao.selectPwd(adminNo);
+	}
+
+	@Override
+	public boolean checkPwd(int adminNo, String adminPwd) {
+		String dbPwd=adminDao.selectPwd(adminNo);
+		
+		boolean result=false;
+		if(dbPwd.equals(adminPwd)) {
+			result=true;  
+		}
+		
+		return result;
+	}
+
+	@Override
+	public AdminVO selectByAdminNo(int adminNo) {
+		return adminDao.selectByAdminNo(adminNo);
+	}
 }

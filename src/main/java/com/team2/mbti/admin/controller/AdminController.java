@@ -222,26 +222,64 @@ public class AdminController {
 		return result;
 	}
 	
-	   @PostMapping("/manager/managerAdditional")
-	   public String managerAdditional_post(@ModelAttribute AdminVO adminvo, Model model){
-	      logger.info("관리자 등록 처리, 파라미터 membervo={}",adminvo);
-	      
-	      int cnt = adminService.insertManager(adminvo);
-	      
-	      logger.info("관리자 등록 완료, result = {}",cnt);      
-	      String msg = "관리자 등록에 실패하였습니다.", url = "/manager/managerAdditional";
-	      
-	      if(cnt > 0) {
-	         msg = "관리자 등록에 성공하였습니다.";
-	         url = "/admin/index";
-	      }
-	      
-	      model.addAttribute("msg",msg);
-	      model.addAttribute("url",url);
-	      
-	      return "common/message";
+   @PostMapping("/manager/managerAdditional")
+   public String managerAdditional_post(@ModelAttribute AdminVO adminvo, Model model){
+      logger.info("관리자 등록 처리, 파라미터 membervo={}",adminvo);
+      
+      int cnt = adminService.insertManager(adminvo);
+      
+      logger.info("관리자 등록 완료, result = {}",cnt);      
+      String msg = "관리자 등록에 실패하였습니다.", url = "/manager/managerAdditional";
+      
+      if(cnt > 0) {
+         msg = "관리자 등록에 성공하였습니다.";
+         url = "/admin/index";
+      }
+      
+      model.addAttribute("msg",msg);
+      model.addAttribute("url",url);
+      
+      return "common/message";
+   
+   }
+   
+	@GetMapping("/manager/managerEdit")
+	public String managerEdit_get(@RequestParam(defaultValue = "0") int adminNo, Model model) {
+		//1
+		logger.info("관리자 수정 페이지, 파라미터 adminNo={}", adminNo);
+		if(adminNo==0) {
+			model.addAttribute("msg", "잘못된 URL입니다.");
+			model.addAttribute("url", "/manager/managerList");
+
+			return "common/message";
+		}
+
+		AdminVO adminvo = adminService.selectByAdminNo(adminNo);
+		logger.info("관리자 번호로 조회 결과, adminvo={}", adminvo);
+
+		model.addAttribute("adminvo", adminvo);
+
+		return "admin/manager/managerEdit?adminNo";
+	}
+   
 	   
-	   }
+	@PostMapping("/manager/managerEdit")   
+	public String managerEdit_post(@ModelAttribute AdminVO adminvo, Model model) {
+		logger.info("관리자 수정 처리, 파라미터 adminvo={}", adminvo);
+		
+		String msg = "관리자 수정 실패!", url = "/manager/managerEdit?adminNo=" + adminvo.getAdminNo();
+		if(adminService.checkPwd(adminvo.getAdminNo(), adminvo.getAdminPwd())) {
+			int cnt = adminService.updateAdmin(adminvo);
+			if(cnt>0) {
+				msg = "글 수정 성공!";
+				url = "/manager/managerList?adminNo=" + adminvo.getAdminNo();
+			}
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);	
+	}
+		return "common/message";
+		
+	}
 	
 	@RequestMapping("/manager/managerDelete")
 	public String managerDelete(@ModelAttribute AdminListVO listVo, Model model){
