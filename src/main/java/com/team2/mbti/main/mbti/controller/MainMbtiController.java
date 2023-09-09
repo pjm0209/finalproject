@@ -63,9 +63,14 @@ public class MainMbtiController {
 	
 	@PostMapping("/mbtiResult")
 	public String mbtiResult_post(@ModelAttribute MbtiResultListVO mbtiResultListVo,HttpSession session, Model model) {
-		int no=(int)session.getAttribute("no");
-		logger.info("mbti 결과, 파라미터 mbtiResultListVo={},no={}",mbtiResultListVo,no);
-		
+		int type=mbtiResultListVo.getMbtiResultItem().get(0).getQuestionTypeNo();
+		int no=0;
+		if(type==1) {
+			logger.info("mbti 결과, 파라미터 mbtiResultListVo={},no={}",mbtiResultListVo,no);
+		}else {
+			no=(int)session.getAttribute("no");
+			logger.info("mbti 결과, 파라미터 mbtiResultListVo={},no={}",mbtiResultListVo,no);
+		}
 		int cnt=mbtiResultService.insertMbtiResultList(mbtiResultListVo,no);
 		logger.info("mbti 검사 결과, cnt={}",cnt);
 		
@@ -166,7 +171,7 @@ public class MainMbtiController {
 		if(sVal>nVal) {
 			resultMbti+="S";
 			resultS=Math.round(sVal/(sVal+nVal)*100*10)/10.0;
-			resultN=Math.round((100-resultS*10))/10.0;
+			resultN=Math.round((100-resultS)*10)/10.0;
 		}else {
 			resultMbti+="N";
 			resultN=Math.round(nVal/(sVal+nVal)*100*10)/10.0;

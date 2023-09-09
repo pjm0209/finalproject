@@ -6,8 +6,14 @@
 		<selectKey keyProperty="mbtiResultNo" order="BEFORE" resultType="int">
 			select mbti_result_seq.nextval from dual
 		</selectKey>
-		INSERT INTO MBTI_RESULT(MBTI_RESULT_NO, NO, MBTI_VAL, QUESTION_TYPE_NO, QUESTION_CATEGORY_NO)
-		VALUES(#{mbtiResultNo},#{no},#{mbtiVal},#{questionTypeNo},#{questionCategoryNo})
+		<if test="no!=0">
+			INSERT INTO MBTI_RESULT(MBTI_RESULT_NO, NO, MBTI_VAL, QUESTION_TYPE_NO, QUESTION_CATEGORY_NO)
+			VALUES(#{mbtiResultNo},#{no},#{mbtiVal},#{questionTypeNo},#{questionCategoryNo})
+		</if>
+		<if test="no==0">
+			INSERT INTO MBTI_RESULT(MBTI_RESULT_NO, MBTI_VAL, QUESTION_TYPE_NO, QUESTION_CATEGORY_NO)
+			VALUES(#{mbtiResultNo},#{mbtiVal},#{questionTypeNo},#{questionCategoryNo})
+		</if>
 	</insert>
 	
 	<delete id="deleteMbtiResultByQuestionTypeNo" parameterType="mbtiResultVo">
