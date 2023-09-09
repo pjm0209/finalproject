@@ -25,6 +25,16 @@ public class OrdersServiceImpl implements OrdersService{
 	public int selectOrdersCnt(SortOrderViewVO vo) {
 		return ordersDao.selectOrdersCnt(vo);
 	}
+
+	@Override
+	public int updateAjaxState(OrdersDetailVO vo) {
+		return ordersDao.updateAjaxState(vo);
+	}
+
+	@Override
+	public Map<String, Object> selectOrdersByNo(int ordersNo) {
+		return ordersDao.selectOrdersByNo(ordersNo);
+	}
 	
 	
 }//

@@ -86,7 +86,7 @@
 	</delete>
 	
 	<select id="selectCntOrdersState" parameterType="mainOrdersDetailVo" resultType="int">
-		select count(*) from orderview
+		select count(*) from sortorderview
 		where no = ${no}
 		and orders_state = #{ordersState}
 	</select>

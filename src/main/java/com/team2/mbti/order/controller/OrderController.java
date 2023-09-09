@@ -10,11 +10,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team2.mbti.book.controller.BookController;
 import com.team2.mbti.common.ConstUtil;
 import com.team2.mbti.common.PaginationInfo;
+import com.team2.mbti.order.model.OrdersDetailVO;
 import com.team2.mbti.order.model.OrdersService;
 import com.team2.mbti.order.model.SortOrderViewVO;
 
@@ -107,18 +109,22 @@ public class OrderController {
 		return "admin/order/orderList";
 	}
 	
-	@RequestMapping("/orderCancleList")
-	public String orderCancleList(Model model) {
-		logger.info("주문관리 페이지 - 주문 취소 리스트 페이지입니다.");
+	@ResponseBody
+	@RequestMapping("/orderAjaxUpdateState")
+	public int orderAjaxUpdateState(@ModelAttribute OrdersDetailVO vo) {
+		logger.info("주문관리 페이지 - orderAjaxUpdateState 처리하기");
+		int cnt = 0;
 		
-		model.addAttribute("title", "주문 취소 리스트 페이지");
+		cnt = ordersService.updateAjaxState(vo);
 		
-		return "admin/order/orderCancleList";
+		return cnt;
 	}
 	
 	@RequestMapping("/orderDetail")
-	public String orderDetail(Model model) {
+	public String orderDetail(@RequestParam(defaultValue = "0")int ordersNo, Model model) {
 		logger.info("주문관리 페이지 - 주문 상세보기 페이지입니다.");
+		
+		Map<String, Object> map = ordersService.selectOrdersByNo(ordersNo);
 		
 		model.addAttribute("title", "주문 상세보기 페이지");
 		

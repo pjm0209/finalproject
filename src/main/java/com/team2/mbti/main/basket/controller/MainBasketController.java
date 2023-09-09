@@ -175,9 +175,9 @@ public class MainBasketController {
 	
 	@ResponseBody
 	@RequestMapping("/mainAjaxInsertBasket")
-	public int mainAjaxInsertBasket(HttpSession session, @ModelAttribute MainBasketVO vo) {
+	public int mainAjaxInsertBasket(@RequestParam(defaultValue = "") String mode, HttpSession session, @ModelAttribute MainBasketVO vo) {
 		int no = (int)session.getAttribute("no");
-		logger.info("바탕화면에서 인가상품을 장바구니에 넣기 처리하기, 회원 번호 no={}", no);
+		logger.info("바탕화면에서 인가상품을 장바구니에 넣기 처리하기, 회원 번호 no={}, 파라미터 mode={}", no, mode);
 		vo.setNo(no);
 		
 		logger.info("바탕화면에서 인가상품을 장바구니에 넣기 처리하기, 파라미터 vo={}", vo);
