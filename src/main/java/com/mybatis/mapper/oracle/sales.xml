@@ -10,11 +10,21 @@
 		select * from salesbycategoryview
 	</select>
 	<select id="selectRegdateSalesView" parameterType="string" resultType="map">
-		select a.sales_category_no , sum(a.sumprice) sumprice, to_char(a.regdate,'yyyy-MM-dd') regdate
+		select a.sales_category_no , sum(a.sumprice) sumprice, a.regdate
 		from (
-		select sales_category_no, trunc(sales_regdate) regdate
-		, sum(sales_price) sumprice from sales
-		group by sales_category_no, sales_regdate
+			select sales_category_no,
+			<if test='regdate.length()=="10"'>
+				to_char(sales_regdate,'yyyy-MM-dd') regdate
+			</if>
+			<if test='regdate.length()=="7"'>
+				to_char(sales_regdate,'yyyy-MM') regdate
+			</if>
+			<if test='regdate.length()=="4"'>
+				to_char(sales_regdate,'yyyy') regdate
+			</if>
+			, sum(sales_price) sumprice from sales
+			group by sales_category_no, 
+			sales_regdate
 		)a
 		where a.regdate=#{regdate}
 		group by a.sales_category_no, a.regdate
@@ -23,16 +33,41 @@
 	
 	<resultMap type="salesAllVo" id="salesResultMap">
 		<association property="regdate" column="regdate" javaType="string">
-			<id property="regdate" column="regdate" jdbcType="TIMESTAMP"/>
+			<id property="regdate" column="regdate" jdbcType="VARCHAR"/>
 		</association>
 		<collection property="salesList" javaType="list" ofType="map"
 			column="regdate" select="selectRegdateSalesView">
 		</collection>
 	</resultMap>
 	
-	<select id="selectSalesRegdate" resultMap="salesResultMap">
-		select to_char(sales_regdate,'yyyy-MM-dd') regdate 
+	<select id="selectSalesRegdate" parameterType="string" resultMap="salesResultMap">
+		select
+		<if test="date=='day'">
+			to_char(sales_regdate,'yyyy-MM-dd') regdate
+		</if> 
+		<if test="date=='month'">
+			to_char(sales_regdate,'yyyy-MM') regdate
+		</if> 
+		<if test="date=='year'">
+			to_char(sales_regdate,'yyyy') regdate
+		</if> 
 		from sales
-		group by to_char(sales_regdate,'yyyy-MM-dd')
+		group by 
+		<if test="date=='day'">
+			to_char(sales_regdate,'yyyy-MM-dd')
+		</if> 
+		<if test="date=='month'">
+			to_char(sales_regdate,'yyyy-MM')
+		</if> 
+		<if test="date=='year'">
+			to_char(sales_regdate,'yyyy')
+		</if> 
 	</select>
+	
+	<select id="selectSalesRate" resultType="map">
+		SELECT SALES_CATEGORY_NO,SUM(SALES_PRICE) SUMPRICE FROM SALES
+		GROUP BY SALES_CATEGORY_NO
+		ORDER BY SALES_CATEGORY_NO
+	</select>
+	
 </mapper>
