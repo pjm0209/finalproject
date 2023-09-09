@@ -1,6 +1,5 @@
 package com.team2.mbti.admin.controller;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -62,40 +61,14 @@ public class AdminController {
 		List<Map<String, Object>> allSalesList=salesService.selectSalesAllView();
 		logger.info("전체 매출 조회 결과, allSalesList={}",allSalesList);
 		
-		List<SalesAllVO> regdateSalesList=salesService.selectSalesRegdate();
-		logger.info("날짜별 매출 조회 결과, regdateSalesList={}",regdateSalesList);
-		
-		String result="";
-		int bookVal=0;
-		int mbtiVal=0;
-		int eduVal=0;
-		int salesCategoryNo=0;
-		int sumPrice=0;
-		String regdate ="";
-		BigDecimal bigDecimalCateNo=null;
-		BigDecimal bigDecimalVa=null;
-		
-		
-		List<Map<String, Object>> salesList=null;
-		for(SalesAllVO salesAllVo : regdateSalesList) {
-			salesList=salesAllVo.getSalesList();
-
-		}
-		
-		for(int i=0;i<salesList.size();i++) {
-			Map<String, Object> map=salesList.get(i);
-			regdate=(String)map.get("REGDATE");
-			System.out.println("날짜 : "+ regdate);
-			
-		}
+		List<Map<String, Object>> salesRateList=salesService.selectSalesRate();
+		logger.info("총 매출 비율 조회 결과, salesRateList={}",salesRateList);
 		
 		List<List<Map<String, Object>>> totalSalesList = new ArrayList<>();
 		
 		totalSalesList.add(bookSalesList);
 		totalSalesList.add(eduSalesList);
 		totalSalesList.add(allSalesList);
-		
-		model.addAttribute("result", result);
 		
 		model.addAttribute("pieChartList", pieChartList);
 		
@@ -104,9 +77,7 @@ public class AdminController {
 		model.addAttribute("mbtiSalesList", mbtiSalesList);
 		model.addAttribute("eduSalesList", eduSalesList);
 		model.addAttribute("allSalesList", allSalesList);
-		model.addAttribute("regdateSalesList", regdateSalesList);
-		
-		
+		model.addAttribute("salesRateList", salesRateList);
 		
 		model.addAttribute("title", "관리자 페이지");
 		model.addAttribute("memTotal", memberService.getTotalMember(membervo));
@@ -115,6 +86,18 @@ public class AdminController {
 		
 		return "admin/index";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/indexChartAjax", produces="application/json")
+	public List<SalesAllVO> chartAjax(@RequestParam String date){
+		logger.info("막대 차트 ajax, 파라미터 date={}",date);
+		
+		List<SalesAllVO> regdateSalesList=salesService.selectSalesRegdate(date);
+		logger.info("날짜별 매출 조회 결과, regdateSalesList={}",regdateSalesList);
+		
+		return regdateSalesList;
+	}
+	
 
 	@GetMapping("/register")
 	public String register_get(Model model) {

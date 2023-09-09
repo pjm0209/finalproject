@@ -60,26 +60,7 @@ public class MainBasketController {
 
 	}
 
-/*
-	@PostMapping("/editCartQty2")
-	//public String editCartQty(@RequestParam(defaultValue = "0")int cartNo) {
-	public int editCartQty2(@ModelAttribute CartVO vo) {
-		//1
-		logger.info("장바구니 수량 수정처리하기, 파라미터 vo={}", vo);
-		//2
-		int cnt = cartService.editCartQty(vo);
-		logger.info("장바구니 수량 수정 결과, cnt={}", cnt);
-		
-		CartVO cartVo = null;
-		if(cnt > 0) {
-			cartVo = cartService.selectCartByCartNo(cnt);
-		}
-		int qty = cartVo.getQuantity();
-		//3
-		//4
-		return qty;
-	}
-	*/
+
 	@ResponseBody
 	@RequestMapping("/bookAjaxQty")
 	public int bookAjaxQty(@ModelAttribute MainBasketVO vo) {
@@ -105,23 +86,6 @@ public class MainBasketController {
 		//4
 		return cnt;
 	}
-	/*
-	 * @RequestMapping("/bookBasket") public String
-	 * bookBasket(@RequestParam(defaultValue = "0") int bookNo, Model model) {
-	 * logger.info("책 주문 페이지 - bookBasket, 파라미터 bookNo={}", bookNo);
-	 * 
-	 * return "main/book/basket/bookBasket"; }
-	 */
-
-	
-	/*
-	 * @RequestMapping("/bookOrderMain") public String
-	 * bookOrderMain(@RequestParam(defaultValue = "0") int bookNo, Model model) {
-	 * logger.info("책 주문 페이지 1단계(장바구니) - bookOrderMain, 파라미터 bookNo={}", bookNo);
-	 * List<Map<String, Object>> list =
-	 * mainBasketService.selectBasketBookView(bookNo); model.addAttribute("mapList",
-	 * list); return "main/book/basket/bookOrderMain"; }
-	 */
 	
 	@RequestMapping("/bookOrderMain")
 	public String bookOrderMain(HttpServletRequest request,Model model) {
@@ -173,6 +137,7 @@ public class MainBasketController {
 		List<Map<String, Object>> list = new ArrayList<>();
 		List<MainBookVO> bookList= bookListVo.getMainBookItems();
 		orderVo.setNo(no);
+		
 		Map<String, Object> map = new HashMap<>();
 		map.put("bookList", bookList);
 		map.put("orderVo", orderVo);

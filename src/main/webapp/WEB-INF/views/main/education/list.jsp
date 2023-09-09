@@ -59,7 +59,7 @@
 					<article>
 						  <figure>
 							<p class="tea" style="text-align: center; margin-top:10px">
-								<img src="<c:url value='/images/education/${educationVo.eduTeaImg }'/>">
+								<img src="<c:url value='/fileUpload/${educationVo.eduTeaImg }'/>">
 							</p>
 							<p class="tea-name">
 								<span class="name">${educationVo.eduTeaName }<br>강사님</span>	

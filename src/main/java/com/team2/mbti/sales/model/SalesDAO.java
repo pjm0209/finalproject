@@ -11,5 +11,6 @@ public interface SalesDAO {
 	List<Map<String, Object>> selectSalesAllView();
 	List<Map<String, Object>> selectRegdateSalesView();
 	
-	List<SalesAllVO> selectSalesRegdate();
+	List<SalesAllVO> selectSalesRegdate(String date);
+	List<Map<String, Object>> selectSalesRate();
 }
