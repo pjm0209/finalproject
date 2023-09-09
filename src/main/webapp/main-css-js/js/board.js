@@ -623,13 +623,10 @@ function selectFile(element) {
         element.value = '';
         return false;
     }
-
     // 3. 파일명 지정   
-    $(element).parent().prev('.fileName').html(file.name + "&nbsp&nbsp");
+    $(element).parents('.file_input').find('.fileName').html(file.name);
     
-    if($(element).parent().prev('.fileName').html().length > 0) {
-		$(element).parent().prev('.fileName').after('<span class="bi bi-x-lg" onclick="removeFile(this);" class="btns del_btn"></span>');
-	}
+	$(element).parent().prev('.fileName').after('<span class="bi bi-x-lg" onclick="removeFile(this);" class="btns del_btn"></span>');	
 }
 
 // 파일 추가

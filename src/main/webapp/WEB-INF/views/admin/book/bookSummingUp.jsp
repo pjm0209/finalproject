@@ -154,7 +154,7 @@ $(function() {
 	                        <i class="fas fa-fw fa-database greenF"></i>
 	                        <span class="greenF align-right">결제 금액</span>
 	                    </dt>
-	                    <dd id="payment" class="price"><span class="no">0</span><span class="unit">원</span></dd>
+	                    <dd id="payment" class="price"><span class="no">${as}</span><span class="unit">원</span></dd>
 	                </dl>
 	            </li>
 	            <li class="list-group-item">

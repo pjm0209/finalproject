@@ -25,7 +25,7 @@
 	</insert>
 
 	<select id="selectOrderDetailList" parameterType="int" resultType="map">
-		select * from orders_Detail
+		select * from ordersDetailview
 		where orders_no = #{ordersNo}
 	</select>
 
@@ -33,6 +33,7 @@
 	<select id="selectOrderList" parameterType="int" resultMap="orderListResultMap">
 		select * from orders
 		where no = #{no}
+		order by orders_regdate desc
 	</select>
 	
 	<resultMap type="mainOrderAllVo" id="orderListResultMap">
@@ -51,4 +52,44 @@
 		<collection property="orderDetailList" javaType="ArrayList" column="orders_No" ofType="map" 
 			select="selectOrderDetailList"></collection>
 	</resultMap>
+	<select id="selectMyCurrentOrder" parameterType="int" resultType="map">
+		select a.orders_no, a.no, a.recipient, a.re_zipcode,
+		a.re_address, a.re_address_detail, a.re_hp, a.sum_price,
+		a.payment_method, a.orders_regdate, a.orders_qty, b.* 
+		from
+    	(select o1.*,o2.book_no, o2.orders_qty, o2.orders_state
+			from orders o1 join orders_detail o2
+			on o2.orders_no = o1.orders_no
+			where o1.orders_no = ${ordersNo}
+    	)a
+    	join
+    	 book b
+    	 on a.book_no = b.book_no
+	</select>
+	
+	<select id="findCurrentOrdersNo" parameterType="int" resultType="int">
+		select orders_no
+		from
+		(select * from orders
+		 order by orders_regdate desc)
+		 where rownum = 1
+		and no = #{no}
+	</select>
+	
+	<parameterMap type="map" id="ordersDeleteProc">
+		<parameter property="ordersNo" javaType="string"
+			jdbcType="VARCHAR" mode="IN" />
+	</parameterMap>
+	
+	<delete id="deleteOrders" parameterMap="ordersDeleteProc">
+		call DELETEORDERS(?)
+	</delete>
+	
+	<select id="selectCntOrdersState" parameterType="mainOrdersDetailVo" resultType="int">
+		select count(*) from orderview
+		where no = ${no}
+		and orders_state = #{ordersState}
+	</select>
+	
+	
 </mapper>

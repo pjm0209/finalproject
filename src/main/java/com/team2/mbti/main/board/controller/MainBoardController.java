@@ -353,4 +353,15 @@ public class MainBoardController {
 		
 		return mbtiList;
 	}
+	
+	@ResponseBody
+	@RequestMapping("/nextPrevBoard")
+	public List<Map<String, Object>> nextPrevBoard(@ModelAttribute BoardVO vo) {
+		logger.info("이전글, 다음글 조회파라미터 vo: {}", vo);
+		
+		List<Map<String, Object>> boardList = boardService.selectPrevNextBoard(vo);
+		logger.info("이전글, 다음글 조회결과 boardList.size: {}", boardList.size());
+		
+		return boardList;
+	}
 }

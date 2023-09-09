@@ -7,7 +7,6 @@
 	$(function(){
 		
 		$('#perRecord').change(function(){
-			alert($('#perRecord').val());
 			$('input[name=perRecord]').val($('#perRecord').val());
 		});
 		
@@ -162,7 +161,6 @@
 			
 			var num = this.bookRegdate;
 			var bookRegdate = num.substring(0, 10);
-			console.log("확인용 bookNp="+this.bookNo);
 			htmlStr += "<tr>";
 			htmlStr += "<td scope='row'>";
 			htmlStr += "<input type='checkbox' name='stockBookItems["+idx+"].bookNo' class='book-checkbox' value='"+this.bookNo+"'>";

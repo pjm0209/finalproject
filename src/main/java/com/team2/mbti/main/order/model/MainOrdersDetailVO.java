@@ -11,4 +11,6 @@ public class MainOrdersDetailVO {
 	private int invoiceNumber;//INVOICE_NUMBER
 	private String ordersState;//ORDERS_STATE
 	
+	private int no;//NO
+	
 }//

@@ -16,4 +16,11 @@ public interface MainOrderDAO {
 	int insertSales(MainBookVO Vo);
 	List<Map<String, Object>> selectOrderDetailList(int ordersNo);
 	List<Map<String, Object>> selectOrderList(int no);
+	List<Map<String, Object>> selectMyCurrentOrder(int ordersNo);
+	
+	int findCurrentOrdersNo(int no);
+	
+	void deleteOrders(Map<String, String> map);
+	
+	int selectCntOrdersState(MainOrdersDetailVO vo);
 }

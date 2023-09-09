@@ -76,7 +76,6 @@ public class MessageServiceImpl implements MessageService {
 		return cnt; 
 	}
 
-	
 	//회원이 쪽지 보내기
 	@Override
 	public int insertSendDmToMember(SendDmListVO sendDmListVo, int no) {
@@ -119,10 +118,10 @@ public class MessageServiceImpl implements MessageService {
 			//읽은 날짜 업데이트
 			cnt=messageDao.updateReceiveDmReadDate(sendDmNo);
 		}
-		
+
 		Map<String, Object> map=messageDao.selectMessageViewBySendDmNo(sendDmNo);
 		map.put("cnt", cnt);
-		
+
 		return map;
 	}
 

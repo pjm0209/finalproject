@@ -151,13 +151,17 @@ form {
             var tel = $('#tel').val();
 
             if (name.trim() === '') {
-                alert("이름을 입력하세요");
+                //alert("이름을 입력하세요");
+                $('#alertModalBody').html("이름을 입력하세요");
+    			$('#alertModal').modal('show');                
                 $('#name1').focus();
                 return false;
             }
 
             if (tel.trim() === '') {
-                alert("전화번호를 입력하세요");
+                //alert("전화번호를 입력하세요");
+                $('#alertModalBody').html("전화번호를 입력하세요");
+    			$('#alertModal').modal('show');     
                 $('#tel').focus();
                 return false;
             }
@@ -233,3 +237,43 @@ form {
 		</div>				
 	</form>    
 </body>
+
+    <button type="button" style="display: none" id="alertModalBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#alertModal"></button>
+    
+    <div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h1 class="modal-title fs-5" id="alertModalLabel">알림</h1>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	        <p id="alertModalBody"></p>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn bg-orange-primary" data-bs-dismiss="modal">확인</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
+    <button type="button" style="display: none" id="confirmModalBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirmModal"></button>
+    
+    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h1 class="modal-title fs-5" id="confirmModalLabel">알림</h1>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	        <p id="confirmModalBody"></p>
+	      </div>
+	      <div class="modal-footer">
+	      	<button class="btn btn-secondary" type="button" data-bs-dismiss="modal">취소</button>
+	        <button type="button" class="btn bg-orange-primary" id="confirmOk" data-bs-dismiss="modal">확인</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>	
+<%@ include file="../inc/bottom.jsp" %>  

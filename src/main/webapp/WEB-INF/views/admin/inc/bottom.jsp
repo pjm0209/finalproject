@@ -95,12 +95,5 @@
     <!-- Custom scripts for all pages-->
     <script src="<c:url value='/admin-css-js/js/sb-admin-2.min.js'/>"></script>
 
-    <!-- Page level plugins -->
-    <script src="<c:url value='/admin-css-js/vendor/chart.js/Chart.min.js'/>"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="<c:url value='/admin-css-js/js/demo/chart-area-demo.js'/>"></script>
-    <script src="<c:url value='/admin-css-js/js/demo/chart-pie-demo.js'/>"></script>
-    <script type="text/javascript" src="<c:url value='/admin-css-js/js/mbti-pie-chart.js'/>"></script>
 </body>
 </html>

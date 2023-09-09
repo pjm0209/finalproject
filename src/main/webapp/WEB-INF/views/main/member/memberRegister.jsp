@@ -274,6 +274,28 @@ function validate_hp(ph) {
 	            return false;
 	        }
 	        
+	        //전화번호 중복 확인
+	        var phoneNumber = $('#memberTel').val();
+
+	        $.ajax({
+	            url: "<c:url value='/main/member/checkPhoneNumber'/>", 
+	            type: "get",
+	            data: "phoneNumber=" + $('#memberTel').val(),
+	            dataType: 'json',
+	            success: function(res) {
+	                console.log(res);
+	                if (res === 1) {
+	                    alert("이미 사용 중인 전화번호입니다.");
+	                    return false;
+	                } else {
+						alert("사용가능한 번호입니다.");
+	                }
+	            },
+	            error: function(xhr, status, error) {
+	                alert(status + " : " + error);
+	            }
+	        });	        
+	        
 	        //주소 입력
 		    if ($('#memberPostalCode').val().length < 1) {
 		        alert("우편번호를 입력하세요");

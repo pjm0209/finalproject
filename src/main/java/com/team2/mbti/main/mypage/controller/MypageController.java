@@ -1,5 +1,6 @@
 package com.team2.mbti.main.mypage.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team2.mbti.board.model.BoardService;
 import com.team2.mbti.main.order.model.MainOrderService;
+import com.team2.mbti.main.order.model.MainOrdersDetailVO;
 import com.team2.mbti.mbtiResult.model.MbtiResultService;
 import com.team2.mbti.mbtiResult.model.MbtiResultVO;
 import com.team2.mbti.mbtisurvey.model.MbtiSurveyService;
@@ -402,14 +404,54 @@ public class MypageController {
 	
 	@RequestMapping("/mypageOrderList")
 	public String mypageOrderList(HttpSession session, Model model) {		
-		logger.info("마이페이지 - 나의 주문 내역 조회 페이지, 파리미터 ???={}");
-		
-		List<Map<String, Object>> orderList = orderService.selectOrderList((int)session.getAttribute("no"));
+		logger.info("마이페이지 - 나의 주문 내역 조회 페이지");
+		int no = (int)session.getAttribute("no");
+		List<Map<String, Object>> orderList = orderService.selectOrderList(no);
 		logger.info("주문내역조회 결과 orderList: {}", orderList);
+		logger.info("주문내역개수 orderList.size(): {}", orderList.size());
+		
+		MainOrdersDetailVO modVo1 = new MainOrdersDetailVO();
+		modVo1.setNo(no);
+		modVo1.setOrdersState("취소 완료");
+		int cnt1 = orderService.selectCntOrdersState(modVo1);
+		
+		MainOrdersDetailVO modVo2 = new MainOrdersDetailVO();
+		modVo2.setNo(no);
+		modVo2.setOrdersState("결제 완료");
+		int cnt2 = orderService.selectCntOrdersState(modVo2);
+		
+		MainOrdersDetailVO modVo3 = new MainOrdersDetailVO();
+		modVo3.setNo(no);
+		modVo3.setOrdersState("배송중");
+		int cnt3 = orderService.selectCntOrdersState(modVo3);
+		
+		MainOrdersDetailVO modVo4 = new MainOrdersDetailVO();
+		modVo4.setNo(no);
+		modVo4.setOrdersState("배달 완료");
+		int cnt4 = orderService.selectCntOrdersState(modVo4);
+		
+		model.addAttribute("cnt1", cnt1);
+		model.addAttribute("cnt2", cnt2);
+		model.addAttribute("cnt3", cnt3);
+		model.addAttribute("cnt4", cnt4);
 		
 		model.addAttribute("orderList", orderList);
 		
 		return "main/mypage/mypageOrderList";
+	}
+	
+	@RequestMapping("/mypageOrderCancle")
+	public String mypageOrderCancle(@RequestParam(defaultValue = "0")int ordersNo,
+			HttpSession session, Model model) {		
+		logger.info("마이페이지 - 나의 주문 취소 하기, 파리미터 ordersNo={}", ordersNo);
+		Map<String, String> map = new HashMap<>();
+		map.put("ordersNo", ordersNo+"");
+		
+		logger.info("마이페이지 - deleteOrders 호출하기! map={}", map);
+		
+		orderService.deleteOrders(map);
+		
+		return "redirect:/main/mypage/mypageOrderList";
 	}
 	
 	@RequestMapping("/mypageBasket")
@@ -426,7 +468,7 @@ public class MypageController {
 		
 		return "main/mypage/orderList";			
 	}
-	
+   
 	@RequestMapping("/myBoardList")
 	public String myBoardList(HttpSession session, Model model) {
 		logger.info("내 게시글 리스트 조회 페이지");

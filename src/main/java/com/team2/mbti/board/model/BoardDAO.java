@@ -44,4 +44,6 @@ public interface BoardDAO {
 	List<Map<String , Object>> selectUserBoardList(int no);
 	
 	List<Map<String, Object>> selectFaqList();
+	
+	List<Map<String, Object>> selectPrevNextBoard(BoardVO vo);
 }

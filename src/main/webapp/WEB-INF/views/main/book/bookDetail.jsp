@@ -307,33 +307,7 @@
 		</script>
 </section>
 <!--  -->
-<nav class="sideBarBestBook2">
-	<div id="sidebar" class="" style="">
-	<div class="sidebar__inner shadow-sm bg-body rounded" style="position: relative;">
-		<div>
-			<ul>
-				<li>이 분야 베스트3</li><br>
-				<li>
-					<i class="bi bi-1-square-fill"></i><br>
-					<img src="<c:url value='/images/bookProduct/1.jpg'/>">
-					<div>책 이름 넣기</div>
-				</li>
-				<li>
-					<i class="bi bi-2-square-fill"></i></i><br>
-					<img src="<c:url value='/images/bookProduct/1.jpg'/>" >
-					<div>책 이름 넣기</div>
-				</li>
-				<li>
-					<i class="bi bi-3-square-fill"></i></i><br>
-					<img src="<c:url value='/images/bookProduct/1.jpg'/>">
-						<div>책 이름 넣기</div>
-					</li>
-				</ul>
-			</div>
-			
-		</div>
-</div>
-</nav>	
+	
 <!--  -->
-
+<c:import url="/main/book/BookSideBar"/>
 <%@ include file="../inc/bottom.jsp"%>

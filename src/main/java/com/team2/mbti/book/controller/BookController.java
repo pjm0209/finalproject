@@ -103,7 +103,13 @@ public class BookController {
 
 			return "common/message";
 		}
-
+		if(bookFlag.equals("bookList") || bookFlag.equals("bookListByKeyword")) {
+			model.addAttribute("title", "판매 상품 관리");
+		}
+		if(bookFlag.equals("Inventory") || bookFlag.equals("InventoryByKeyword")) {
+			model.addAttribute("title", "상품 재고 관리");
+		}
+		
 		return "admin/book/bookList";
 	}
 
@@ -170,12 +176,13 @@ public class BookController {
 		map.put("list", list);
 		map.put("bookFlag", bookFlag);
 		map.put("pagingInfo", pagingInfo);
-
+		
 		// 4
 		/* return "admin/book/bookList"; */
 		return map;
 
 	}
+	
 
 	@GetMapping("/bookRegister")
 	public String bookRegister_get(Model model) {
