@@ -28,8 +28,13 @@ public class SalesServiceImpl implements SalesService{
 	}
 
 	@Override
-	public List<SalesAllVO> selectSalesRegdate() {
-		return salesDao.selectSalesRegdate();
+	public List<SalesAllVO> selectSalesRegdate(String date) {
+		return salesDao.selectSalesRegdate(date);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectSalesRate() {
+		return salesDao.selectSalesRate();
 	}
 
 	

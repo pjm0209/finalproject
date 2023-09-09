@@ -44,7 +44,7 @@ public class AdminController {
 	private final MbtiSurveyService mbtiSurveyService;
 		
 	@GetMapping("/index")
-	public String index_get(Model model, MemberVO membervo) {
+	public String index_get(@RequestParam(required = false, defaultValue = "day") String date,Model model, MemberVO membervo) {
 		logger.info("관리자 index 페이지");
 		
 		List<Map<String, Object>> pieChartList=mbtiSurveyService.selectMbtiStatistics();
@@ -62,40 +62,17 @@ public class AdminController {
 		List<Map<String, Object>> allSalesList=salesService.selectSalesAllView();
 		logger.info("전체 매출 조회 결과, allSalesList={}",allSalesList);
 		
-		List<SalesAllVO> regdateSalesList=salesService.selectSalesRegdate();
+		List<SalesAllVO> regdateSalesList=salesService.selectSalesRegdate(date);
 		logger.info("날짜별 매출 조회 결과, regdateSalesList={}",regdateSalesList);
 		
-		String result="";
-		int bookVal=0;
-		int mbtiVal=0;
-		int eduVal=0;
-		int salesCategoryNo=0;
-		int sumPrice=0;
-		String regdate ="";
-		BigDecimal bigDecimalCateNo=null;
-		BigDecimal bigDecimalVa=null;
-		
-		
-		List<Map<String, Object>> salesList=null;
-		for(SalesAllVO salesAllVo : regdateSalesList) {
-			salesList=salesAllVo.getSalesList();
-
-		}
-		
-		for(int i=0;i<salesList.size();i++) {
-			Map<String, Object> map=salesList.get(i);
-			regdate=(String)map.get("REGDATE");
-			System.out.println("날짜 : "+ regdate);
-			
-		}
+		List<Map<String, Object>> salesRateList=salesService.selectSalesRate();
+		logger.info("날짜별 매출 조회 결과, salesRateList={}",salesRateList);
 		
 		List<List<Map<String, Object>>> totalSalesList = new ArrayList<>();
 		
 		totalSalesList.add(bookSalesList);
 		totalSalesList.add(eduSalesList);
 		totalSalesList.add(allSalesList);
-		
-		model.addAttribute("result", result);
 		
 		model.addAttribute("pieChartList", pieChartList);
 		
@@ -105,8 +82,7 @@ public class AdminController {
 		model.addAttribute("eduSalesList", eduSalesList);
 		model.addAttribute("allSalesList", allSalesList);
 		model.addAttribute("regdateSalesList", regdateSalesList);
-		
-		
+		model.addAttribute("salesRateList", salesRateList);
 		
 		model.addAttribute("title", "관리자 페이지");
 		model.addAttribute("memTotal", memberService.getTotalMember(membervo));
