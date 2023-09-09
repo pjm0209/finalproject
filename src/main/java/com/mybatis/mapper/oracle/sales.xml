@@ -10,7 +10,7 @@
 		select * from salesbycategoryview
 	</select>
 	<select id="selectRegdateSalesView" parameterType="string" resultType="map">
-		select a.sales_category_no , sum(a.sumprice) sumprice, a.regdate
+		select a.sales_category_no , sum(a.sumprice) sumprice, a.regdate regdate
 		from (
 			select sales_category_no,
 			<if test='regdate.length()=="10"'>

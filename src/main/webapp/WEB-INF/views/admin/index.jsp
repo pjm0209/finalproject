@@ -31,8 +31,26 @@
 <c:set var="mbtiSales" value="0" />
 <c:set var="eduSales" value="0" />
 <c:set var="regdate" value="0" />
-<c:set var="sumCount" value="0"/>
+<c:set var="sumCount" value="0" />
 <script type="text/javascript">
+	$(function(){
+		chartAjax("day");
+	});
+	function chartAjax(d){
+		$.ajax({
+			url:"<c:url value='/admin/indexChartAjax'/>",
+			data: {date : d},
+			type: "GET",
+			dataType: "json",
+			success:function(res){
+				drawChart2(res);
+			},
+			error:function(xhr,status,error){
+				alert(status + " : "+ error);
+			}
+		});
+	}
+
       google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);
 
@@ -71,40 +89,37 @@
 
         chart.draw(data,options);
       }
-      
-      
-      google.charts.load('current', {'packages':['bar']});
-      google.charts.setOnLoadCallback(drawChart2);
-
-      
-      
-      function drawChart2() {
-        var data = google.visualization.arrayToDataTable([
-          ['DAY', '책', 'MBTI검사', 'MBTI교육'],
-          
-          <c:forEach var="salesAllVo" items="${regdateSalesList}">
-          	["${salesAllVo.regdate}",
-          		<c:forEach var="map" items="${salesAllVo.salesList}">
-          			${map.SUMPRICE},
-          		</c:forEach>
-          	],
-          </c:forEach>
-          	
-        ]);
-
-        var options = {
-          chart: {
-            title: '일별 총매출',
-          },vAxis: {
-              format: '#,###원' // 값 뒤에 원(₩) 기호를 붙이고 천 단위 구분 기호를 사용합니다.
-          }
-        };
-
-        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
-
-        chart.draw(data, google.charts.Bar.convertOptions(options));
-      }
-      
+		function drawChart2(res) {
+			google.charts.load('current', { 'packages': ['bar'] });
+			google.charts.setOnLoadCallback(function () {
+				var data = new google.visualization.DataTable();
+				data.addColumn('string', 'DAY');
+				data.addColumn('number', '책');
+				data.addColumn('number', 'MBTI검사');
+				data.addColumn('number', 'MBTI교육');
+		//데이터 추가
+				$.each(res, function (index, item) {
+					data.addRow([
+		                item.regdate,
+		                item.salesList[0].SUMPRICE, // 책 데이터
+		                item.salesList[1].SUMPRICE, // MBTI검사 데이터
+		                item.salesList[2].SUMPRICE  // MBTI교육 데이터
+		            ]);
+				});
+				
+				var options = {
+					chart: {
+						title: '일별 총매출',
+					},vAxis: {
+						format: '#,###원' // 값 뒤에 원(₩) 기호를 붙이고 천 단위 구분 기호를 사용합니다.
+					}
+				};
+				
+				var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+				
+				chart.draw(data, google.charts.Bar.convertOptions(options));
+			});
+		}
       
       <c:set var="totalPrice" value="0"/>
       google.charts.load('current', {'packages':['corechart']});
@@ -152,9 +167,10 @@
 	<!-- Page Heading -->
 	<div class="d-sm-flex align-items-center justify-content-between mb-4">
 		<h1 class="h3 mb-0 text-gray-800">매출 현황</h1>
-<!-- 		<a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+		<!-- 		<a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
- -->	</div>
+ -->
+	</div>
 
 	<!-- Content Row -->
 	<div class="row">
@@ -168,7 +184,8 @@
 								class="text-xs font-weight-bold text-primary text-uppercase mb-1">
 								MBTI 검사</div>
 							<div class="h5 mb-0 font-weight-bold text-gray-800">
-								<fmt:formatNumber value="${mbtiTotalPrice}" pattern="#,###" />원
+								<fmt:formatNumber value="${mbtiTotalPrice}" pattern="#,###" />
+								원
 							</div>
 						</div>
 						<div class="col-auto">
@@ -226,7 +243,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<!-- Earnings (Monthly) Card Example -->
 		<div class="col-xl-3 col-md-6 mb-4">
 			<div class="card border-left-success shadow h-100 py-2">
@@ -270,15 +287,15 @@
 								class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
 								aria-labelledby="dropdownMenuLink">
 								<div class="dropdown-header">Dropdown Header:</div>
-								<a class="dropdown-item" href="#">Action</a> <a
-									class="dropdown-item" href="#">Another action</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#">Something else here</a>
+								<a class="dropdown-item" href="#" onclick='chartAjax("day")'>일별 매출</a>
+								<a class="dropdown-item" href="#" onclick='chartAjax("month")'>월별 매출</a>
+								<a class="dropdown-item" href="#" onclick='chartAjax("year")'>연별 매출</a>
 							</div>
 						</div>
 					</div>
 					<!-- Card Body -->
-					<div id="columnchart_material" style="width: 1000px;height:360px;"></div>
+					<div id="columnchart_material"
+						style="width: 1000px; height: 360px;"></div>
 				</div>
 			</div>
 			<!-- Pie Chart -->
@@ -290,11 +307,12 @@
 						<h6 class="m-0 font-weight-bold text-primary">MBTI별 비율</h6>
 					</div>
 					<!-- Card Body -->
-					<div id="mbtiPiechart" style="width: 470px; height: 360px;margin: 0 auto;margin-left: 30px"></div>
+					<div id="mbtiPiechart"
+						style="width: 470px; height: 360px; margin: 0 auto; margin-left: 30px"></div>
 				</div>
 			</div>
 		</div>
-		<div style="width: 1050px;height: 700px;">
+		<div style="width: 1050px; height: 700px;">
 			<div class="card">
 				<!-- Card Header - Dropdown -->
 				<div
@@ -302,11 +320,12 @@
 					<h6 class="m-0 font-weight-bold text-primary">판매 비율</h6>
 					<div class="dropdown no-arrow">
 						<a class="dropdown-toggle" href="#" role="button"
-							id="dropdownMenuLink" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false"> <i
+							id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+							aria-expanded="false"> <i
 							class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
 						</a>
-						<div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+						<div
+							class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
 							aria-labelledby="dropdownMenuLink">
 							<div class="dropdown-header">Dropdown Header:</div>
 							<a class="dropdown-item" href="#">Action</a> <a
@@ -317,7 +336,8 @@
 					</div>
 				</div>
 				<!-- Card Body -->
-				<div id="salesPiechart" style="width: 1000px; height: 600px;margin: 0 auto;padding-left: 100px"></div>
+				<div id="salesPiechart"
+					style="width: 1000px; height: 600px; margin: 0 auto; padding-left: 100px"></div>
 			</div>
 		</div>
 	</div>
