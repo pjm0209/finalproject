@@ -1,6 +1,7 @@
 package com.team2.mbti.main.education.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +18,8 @@ import com.team2.mbti.common.PaginationInfo;
 import com.team2.mbti.education.model.EducationListVO;
 import com.team2.mbti.education.model.EducationService;
 import com.team2.mbti.education.model.EducationVO;
+import com.team2.mbti.educationLike.model.EducationLikeService;
+import com.team2.mbti.educationLike.model.EducationLikeVO;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +31,7 @@ public class MainEducationController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MainEducationController.class);
 	private final EducationService educationService;
+	private final EducationLikeService educationLikeService;
 
 	@RequestMapping("/education/info")
 	public String eduInfo() {
@@ -113,21 +117,24 @@ public class MainEducationController {
 	
 	
 	@RequestMapping("/mypage/education")
-	public String myEdu(@ModelAttribute EducationVO vo, HttpSession session, Model model) {
+	public String myEdu(@ModelAttribute EducationVO vo, @ModelAttribute EducationLikeVO likeVo,HttpSession session, Model model) {
 		logger.info("마이 교육 페이지 보여주기, vo={}", vo);
 		
 		int no = (int) session.getAttribute("no");
 		vo.setNo(no);
 
 		List<EducationVO> list = educationService.selectMyAllEdu(vo);
+		
 		List<EducationVO> payList = educationService.myPayEdu(vo);
 		List<EducationVO> finList = educationService.myFinishEdu(vo);
+		logger.info("리스트 보여주기, list.size={}", list.size());
+		List<Map<String, Object>> likeList = educationLikeService.selectByNoEduLike(no);
+		logger.info("찜하기 리스트 보여주기, likeList={}", likeList);
 
-		
 		model.addAttribute("list", list);
 		model.addAttribute("payList", payList);
 		model.addAttribute("finList", finList);
-	
+		model.addAttribute("likeList", likeList);
 		
 		return "main/mypage/education";
 	}

@@ -101,10 +101,55 @@
 	<div class="myEduBoard" style="margin-top: 35px;">
 	<div class="board-head">
 	<div id="eduApply-title">
-		<h4>교육 신청 현황</h4>
+		<h4>찜하기 목록</h4>
 	</div>
+	<!-- 찜하기 목록 -->
+	<form name="frmDelete" method="post" id="myAppDelFrm" action="<c:url value='/main/mypage/applyCan'/>">
+		<table class="table" id="educationtb" style="margin-top:30px;">
+			<thead>
+				<tr class="board-table-colum">
+					<th scope="col"><input type="checkbox" id="check-All" class="board-checkbox"></th>
+					<th scope="col">교육 이름</th>
+					<th scope="col">강사명</th>
+					<th scope="col">교육 기간</th>
+					<th scope="col">교육비</th>
+					<th scope="col">교육장</th>
+					<th scope="col">신청 현황</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:set var="idx" value="0"/>
+				<c:if test="${empty likeList }">
+					<tr>
+						<td colspan="9">찜한 교육이 없습니다.</td>
+					</tr>
+				</c:if>
+				<c:if test="${!empty likeList }">
+					<c:forEach var="map" items="${likeList}">
+						<c:set var="educationNo" value="${educationLikeVo.eduNo}"/>
+						<tr>
+							<th scope="row">
+								<input type="checkbox" class="board-checkbox" name="eduNo" value="${educationLikeVo.eduNo }">
+							</th>
+							<td>${map.EDU_NAME }</td>
+							<td>${map.EDU_TEA_NAME }</td>
+							<td>${map.EDU_COM }</td>
+							<td><fmt:formatNumber value="${map.EDU_PRICE }" pattern="#,###"/>
+							<td>${map.EP_NAME }</td>
+							<td>${map.EDU_APP_FLAG }</td>
+						</tr>
+						<c:set var="idx" value="${idx + 1 }" />
+					</c:forEach>
+				</c:if>
+			</tbody>
+		</table>
+		<input type="button" id="applyDelBtn" value="취소하기" onclick='applyCancel(this)'/>
+	</form>	
 	<!-- 신청 현황 -->
 	<form name="frmDelete" method="post" id="myAppDelFrm" action="<c:url value='/main/mypage/applyCan'/>">
+	<div id="eduApply-title">
+			<h4>신청 현황</h4>
+		</div>
 		<table class="table" id="educationtb" style="margin-top:30px;">
 			<thead>
 				<tr class="board-table-colum">
