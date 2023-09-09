@@ -26,7 +26,6 @@
 지금 바로 다양한 교육을 신청해 보세요!</pre>
 </div>
 	<section class="section-list">
-		<input type="hidden" value="${educationVO.eduNo }" name="eduNo">
 		<input type="hidden" value="${sessionScope.no }" name="no">
 		<div class="inner1200">
 			<h2>ESSENTIAL 교육 목록</h2>
@@ -59,6 +58,7 @@
 			<c:set var="educationNo" value="${educationVo.eduNo}"/>
 				<li>
 					<article>
+					<input type="hidden" value="${educationVo.eduNo }" name="eduNo">
 						  <figure>
 							<p class="tea" style="text-align: center; margin-top:10px">
 								<img src="<c:url value='/fileUpload/${educationVo.eduTeaImg }'/>">

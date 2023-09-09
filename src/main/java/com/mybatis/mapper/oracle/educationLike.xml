@@ -15,4 +15,8 @@
 		delete from education_heart
 		where edu_no = #{eduNo}
 	</delete>
+	
+	<select id="selectByNoEduLike" parameterType="int" resultType="map">
+		select * from edu_like_view where no = #{no}
+	</select>
 </mapper>
