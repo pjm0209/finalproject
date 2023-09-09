@@ -10,17 +10,17 @@ public class OrderVO extends OrdersDetailVO{
 	private int ordersNo;//ORDERS_NO	NUMBER
 	private int no;//NO	NUMBER
 	private String recipient;//RECIPIENT	VARCHAR2(30 BYTE)
-	private int reZipcode;//RE_ZIPCODE	CHAR(5 BYTE)
-	private int reAddress;//RE_ADDRESS	VARCHAR2(100 BYTE)
-	private int reAddressDetail;//RE_ADDRESS_DETAIL	VARCHAR2(100 BYTE)
-	private int reHp;//RE_HP	VARCHAR2(30 BYTE)
+	private String reZipcode;//RE_ZIPCODE	CHAR(5 BYTE)
+	private String reAddress;//RE_ADDRESS	VARCHAR2(100 BYTE)
+	private String reAddressDetail;//RE_ADDRESS_DETAIL	VARCHAR2(100 BYTE)
+	private String reHp;//RE_HP	VARCHAR2(30 BYTE)
 	private int sumPrice;//SUM_PRICE	NUMBER
-	private int paymentMethod;//PAYMENT_METHOD	VARCHAR2(20 BYTE)
+	private String paymentMethod;//PAYMENT_METHOD	VARCHAR2(20 BYTE)
 	private String ordersRegdate1;
 	private String ordersRegdate2;
 	
 	
-	private int orderBy;
+	private String orderBy;
 	private int perRecord;
 	
 	

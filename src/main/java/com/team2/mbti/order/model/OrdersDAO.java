@@ -8,6 +8,6 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface OrdersDAO {
 	
-	List<Map<String, Object>> selectAllAjaxOrderList(OrderVO vo);	
-	int selectOrdersCnt(OrderVO vo);
+	List<SortOrderViewVO> selectAllAjaxOrderList(SortOrderViewVO vo);	
+	int selectOrdersCnt(SortOrderViewVO vo);
 }//

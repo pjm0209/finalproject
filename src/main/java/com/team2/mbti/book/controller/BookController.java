@@ -84,7 +84,6 @@ public class BookController {
 	 * logger.info("bookFlag={}", bookFlag); // 4 return "admin/book/bookList"; }
 	 */
 	@RequestMapping("/bookList")
-	/* HttpServletRequest request, HttpSession session, Model model */
 	public String bookList(HttpServletRequest request, Model model) {
 		String bookFlag = request.getParameter("bookFlag");
 		logger.info("책관리 페이지 - 책 리스트 페이지입니다.,파라미터 bookFlag={}", bookFlag);
