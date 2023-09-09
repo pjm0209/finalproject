@@ -12,16 +12,17 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class OrdersServiceImpl implements OrdersService{
-	private OrdersDAO ordersDao;
+	private final OrdersDAO ordersDao;
 	private static final Logger logger = LoggerFactory.getLogger(OrdersServiceImpl.class);
 
 	@Override
-	public List<Map<String, Object>> selectAllAjaxOrderList(OrderVO vo) {
+	public List<SortOrderViewVO> selectAllAjaxOrderList(SortOrderViewVO vo){
+		logger.info("ajax로 주문리스트 불러오기 시작");
 		return ordersDao.selectAllAjaxOrderList(vo);
 	}
 
 	@Override
-	public int selectOrdersCnt(OrderVO vo) {
+	public int selectOrdersCnt(SortOrderViewVO vo) {
 		return ordersDao.selectOrdersCnt(vo);
 	}
 	

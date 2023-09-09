@@ -158,7 +158,7 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#bookPd"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-book"></i>
-                    <span>판매 상품 관리</span>
+                    <span>판매 상품 목록</span>
                 </a>
                 <div id="bookPd" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
@@ -180,14 +180,13 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse-setting-Utilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-shopping-cart"></i>
-                    <span>주문 및 취소 관리</span>
+                    <span>주문 목록</span>
                 </a>
                 <div id="collapse-setting-Utilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">order management</h6>
                         <a class="collapse-item" href="<c:url value='/admin/order/orderList?flag=order'/>">주문 관리</a>
-                        <a class="collapse-item" href="<c:url value='/admin/order/orderCancleList?flag=orderCancle'/>">주문 취소 관리</a>
                     </div>
                 </div>
             </li>

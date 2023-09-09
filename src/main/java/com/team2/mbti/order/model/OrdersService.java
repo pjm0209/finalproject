@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 public interface OrdersService {
-	List<Map<String, Object>> selectAllAjaxOrderList(OrderVO vo);
-	int selectOrdersCnt(OrderVO vo);
+	List<SortOrderViewVO> selectAllAjaxOrderList(SortOrderViewVO vo);	
+	int selectOrdersCnt(SortOrderViewVO vo);
 	
 	
 }//
