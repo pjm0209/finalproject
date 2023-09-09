@@ -3,6 +3,8 @@
 <%@ include file="../inc/top.jsp"%>
 
 <script type="text/javascript">
+	var contextPath = "/mbti";
+
 	//신청하기 버튼을 눌렀을 때 로그인 체크
 	function logincheck(eduNo){
 		var signIn = "${sessionScope.userid}";
@@ -15,8 +17,30 @@
 				return false;
 			})
 		}else {
-			location.href="<c:url value='/main/education/apply?eduNo="+eduNo+"'/>";
+			educationAjax(eduNo)
 		}
+	}
+	
+	function educationAjax(eduNo) {
+		$.ajax({
+			url: contextPath + "/main/education/apply",
+			type: "POST",
+			data: {eduNo:eduNo},
+			success:function(result) {
+				console.log("result: " + result);	
+				
+				if(result == 2) {
+					$('#alertModalBody').html("이미 신청한 교육입니다.");
+					$('#alertModalBtn').trigger('click');
+				} else {
+					$('#alertModalBody').html("신청이 완료되었습니다.");
+					$('#alertModalBtn').trigger('click');					
+				}
+			},
+			error:function(xhr, status, error) {
+				alert(status + ": " + error);
+			}
+		});
 	}
 </script>
 

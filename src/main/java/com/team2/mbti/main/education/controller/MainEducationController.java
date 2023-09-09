@@ -71,26 +71,23 @@ public class MainEducationController {
 		return "main/education/list";
 	}
 	
-	
+	@ResponseBody
 	@RequestMapping("/education/apply")
-	public String eduApply(@ModelAttribute EducationVO vo, HttpSession session, Model model){
+	public int eduApply(@ModelAttribute EducationVO vo, HttpSession session){
 		logger.info("신청 등록 처리, 파라미터 vo={}", vo);
 		int no = (int)session.getAttribute("no");
 		vo.setNo(no);
 		
-		int cnt=educationService.insertApply(vo);
-		logger.info("신청 등록 처리 결과 cnt={}", cnt);
+		int cnt = educationService.selectEducationFlag(vo);
 		
-		String msg="신청을 실패하였습니다.",url="/main/education/list";
-		if(cnt>0) {
-			msg="신청이 완료되었습니다.";
-			url="/main/education/list?eduNo="+vo.getEduNo();
+		if(cnt < 1) {
+			cnt = educationService.insertApply(vo);
+			logger.info("신청 등록 처리 결과 cnt={}", cnt);
+		} else {
+			cnt = 2;
 		}
 		
-		model.addAttribute("msg", msg);
-		model.addAttribute("url", url);
-		
-		return "common/message";
+		return cnt;
 	}
 	
 	
@@ -126,8 +123,9 @@ public class MainEducationController {
 		List<EducationVO> list = educationService.selectMyAllEdu(vo);
 		
 		List<EducationVO> payList = educationService.myPayEdu(vo);
+		logger.info("payList: {}", payList);
 		List<EducationVO> finList = educationService.myFinishEdu(vo);
-		logger.info("리스트 보여주기, list.size={}", list.size());
+		logger.info("finList={}", finList);
 		List<Map<String, Object>> likeList = educationLikeService.selectByNoEduLike(no);
 		logger.info("찜하기 리스트 보여주기, likeList={}", likeList);
 

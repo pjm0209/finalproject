@@ -125,20 +125,24 @@
 					</tr>
 				</c:if>
 				<c:if test="${!empty likeList }">
+					<c:set var="idx" value="0"/>
 					<c:forEach var="map" items="${likeList}">
-						<c:set var="educationNo" value="${educationLikeVo.eduNo}"/>
-						<tr>
-							<th scope="row">
-								<input type="checkbox" class="board-checkbox" name="eduNo" value="${educationLikeVo.eduNo }">
-							</th>
-							<td>${map.EDU_NAME }</td>
-							<td>${map.EDU_TEA_NAME }</td>
-							<td>${map.EDU_COM }</td>
-							<td><fmt:formatNumber value="${map.EDU_PRICE }" pattern="#,###"/>
-							<td>${map.EP_NAME }</td>
-							<td>${map.EDU_APP_FLAG }</td>
-						</tr>
-						<c:set var="idx" value="${idx + 1 }" />
+						<c:set var="i" value="${fn:length(likeList) / 2 }"/>
+						<c:if test="${idx < i }">
+							<c:set var="educationNo" value="${educationLikeVo.eduNo}"/>
+							<tr>
+								<th scope="row">
+									<input type="checkbox" class="board-checkbox" name="eduNo" value="${educationLikeVo.eduNo }">
+								</th>
+								<td>${map.EDU_NAME }</td>
+								<td>${map.EDU_TEA_NAME }</td>
+								<td>${map.EDU_COM }</td>
+								<td><fmt:formatNumber value="${map.EDU_PRICE }" pattern="#,###"/>
+								<td>${map.EP_NAME }</td>
+								<td>${map.EDU_APP_FLAG }</td>
+							</tr>
+							<c:set var="idx" value="${idx + 1 }" />
+						</c:if>
 					</c:forEach>
 				</c:if>
 			</tbody>
