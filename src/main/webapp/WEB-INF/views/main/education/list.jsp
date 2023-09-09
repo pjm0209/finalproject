@@ -3,20 +3,44 @@
 <%@ include file="../inc/top.jsp"%>
 
 <script type="text/javascript">
+	var contextPath = "/mbti";
+
 	//신청하기 버튼을 눌렀을 때 로그인 체크
 	function logincheck(eduNo){
 		var signIn = "${sessionScope.userid}";
 		
 		if(signIn == null || signIn == ""){
-			$('#alertModalBody').html("먼저 로그인 후 신청하세요.");
+			$('#alertModalBody').html("먼저 로그인하세요.");
 			$('#alertModalBtn').trigger('click');
 			$('#btnClose').click(function(){
 				location.href="<c:url value='/main/member/memberLogin'/>";
 				return false;
 			})
 		}else {
-			location.href="<c:url value='/main/education/apply?eduNo="+eduNo+"'/>";
+			educationAjax(eduNo)
 		}
+	}
+	
+	function educationAjax(eduNo) {
+		$.ajax({
+			url: contextPath + "/main/education/apply",
+			type: "POST",
+			data: {eduNo:eduNo},
+			success:function(result) {
+				console.log("result: " + result);	
+				
+				if(result == 2) {
+					$('#alertModalBody').html("이미 신청한 교육입니다.");
+					$('#alertModalBtn').trigger('click');
+				} else {
+					$('#alertModalBody').html("신청이 완료되었습니다.");
+					$('#alertModalBtn').trigger('click');					
+				}
+			},
+			error:function(xhr, status, error) {
+				alert(status + ": " + error);
+			}
+		});
 	}
 </script>
 
@@ -26,6 +50,7 @@
 지금 바로 다양한 교육을 신청해 보세요!</pre>
 </div>
 	<section class="section-list">
+		<input type="hidden" value="${sessionScope.no }" name="no">
 		<div class="inner1200">
 			<h2>ESSENTIAL 교육 목록</h2>
 		</div>
@@ -57,6 +82,7 @@
 			<c:set var="educationNo" value="${educationVo.eduNo}"/>
 				<li>
 					<article>
+					<input type="hidden" value="${educationVo.eduNo }" name="eduNo">
 						  <figure>
 							<p class="tea" style="text-align: center; margin-top:10px">
 								<img src="<c:url value='/fileUpload/${educationVo.eduTeaImg }'/>">
@@ -74,6 +100,10 @@
 						  	<p class="price"><em>가격</em>    <fmt:formatNumber value="${educationVo.eduPrice }" pattern="#,###"/>원</p>
 						  </figcaption>
 						  <div class="btnGroup">
+						  	<div class="edu_like">
+						  		<em class="u_txt" style="font-size:17px; font-style:normal;">찜하기</em>
+							  	<span class="u_icon" style="width:23px; height:23px;"></span>
+						  	</div>
 						  	<input type="button" id="applyBtn" value="신청하기" onclick='logincheck(${educationVo.eduNo})'/>
 						  </div>
 					</article>

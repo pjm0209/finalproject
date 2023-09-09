@@ -170,34 +170,85 @@ var contextPath = "/mbti"
 
 		});
 		
+		//교육 찜하기 클릭 이벤트
+		$('div.edu_like').click(function() {
+			var a = $(this).find('.u_icon');
+			
+			if($(a).is('.like') === true) {
+				eduLikeDel($(a));
+			} else {
+				eduLikeIns($(a));
+			}
+		});
+		
 	});
 	
-
+	//교육 삭제
 	function educationDel() {
 		$('#eduDelFrm').attr('action', contextPath + '/admin/education/eduDelete');
 		$('form[name=frmDelete]').submit();
 	}
 	
+	//교육 신청 거절
 	function educationAppDel() {
 		$('#eduAppDelFrm').attr('action', contextPath + '/admin/education/appliDelete');
 		$('form[name=frmDelete]').submit();
 	}
 	
-	
+	//강사 삭제
 	function educationTeaDel() {
 		$('#eduTeaDelFrm').attr('action', contextPath + '/admin/education/teaDelete');
 		$('form[name=frmDelete]').submit();
 	}
 
-
+	//교육장 삭제
 	function educationLocDel() {
 		$('#eduTeaDelFrm').attr('action', contextPath + '/admin/education/locDelete');
 		$('form[name=frmDelete]').submit();
 	}
 	
+	//교육 신청자 승인
 	function educationAppOk() {
 		$('#eduAppDelFrm').attr('action', contextPath + '/admin/education/appliUpdate');
 		$('form[name=frmDelete]').submit();
+	}
+	
+	//교육 찜하기 처리
+	function eduLikeIns(a){
+		var eduNo = $('input[name=eduNo]').val();
+		var no = $('input[name=no]').val();
+		
+		$.ajax({
+			url:contextPath + '/educationLike/eduLikeIns',
+			type:'POST',
+			data:{eduNo:eduNo,
+				  no:no},
+			success:function(result) {			
+				$(a).addClass('like');
+			},
+			error:function(xhr, status, error) {
+				alert(status + ": " + error);
+			}
+		});
+	}
+	
+	//교육 찜하기 취소
+	function eduLikeDel(a) {
+		var eduNo = $('input[name=eduNo').val();
+		var no = $('input[name=no]').val();
+		
+		$.ajax({
+			url:contextPath + '/educationLike/eduLikeDel',
+			type:'POST',
+			data:{eduNo:eduNo,
+				  no:no},
+			success:function(result) {			
+				$(a).removeClass('like');
+			},
+			error:function(xhr, status, error) {
+				alert(status + ": " + error);
+			}
+		});
 	}
 	
 	

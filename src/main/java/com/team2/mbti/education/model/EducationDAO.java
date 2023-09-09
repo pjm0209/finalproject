@@ -54,4 +54,6 @@ public interface EducationDAO {
 	int applyPayFinish(int eduAppNo);
 	
 	int insertSalesByEdu(EducationVO vo);
+	
+	int selectEducationFlag(EducationVO vo);
 }

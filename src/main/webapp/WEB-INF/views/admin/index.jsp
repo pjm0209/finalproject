@@ -31,8 +31,26 @@
 <c:set var="mbtiSales" value="0" />
 <c:set var="eduSales" value="0" />
 <c:set var="regdate" value="0" />
-<c:set var="sumCount" value="0"/>
+<c:set var="sumCount" value="0" />
 <script type="text/javascript">
+	$(function(){
+		chartAjax("day");
+	});
+	function chartAjax(d){
+		$.ajax({
+			url:"<c:url value='/admin/indexChartAjax'/>",
+			data: {date : d},
+			type: "POST",
+			dataType: "json",
+			success:function(res){
+				drawChart2(res);
+			},
+			error:function(xhr,status,error){
+				alert(status + " : "+ error);
+			}
+		});
+	}
+
       google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);
 
@@ -67,36 +85,91 @@
 	        }
 		};
 
-        var chart = new google.visualization.PieChart(document.getElementById('piechart2'));
+        var chart = new google.visualization.PieChart(document.getElementById('mbtiPiechart'));
+
+        chart.draw(data,options);
+      }
+		function drawChart2(res) {
+			var date = res[0].regdate.length;
+			var title="";
+			if(date==10){
+				title="일별 총 매출";
+			}
+			if(date==7){
+				title="월별 총 매출";
+			}
+			if(date==4){
+				title="연별 총 매출";
+			}
+			google.charts.load('current', { 'packages': ['bar'] });
+			google.charts.setOnLoadCallback(function () {
+				var data = new google.visualization.DataTable();
+				data.addColumn('string', "");
+				data.addColumn('number', '책');
+				data.addColumn('number', 'MBTI검사');
+				data.addColumn('number', 'MBTI교육');
+		//데이터 추가
+				$.each(res, function (index, item) {
+					
+					data.addRow([
+		                item.regdate,
+		                item.salesList[0].SUMPRICE, // 책 데이터
+		                item.salesList[1].SUMPRICE, // MBTI검사 데이터
+		                item.salesList[2].SUMPRICE  // MBTI교육 데이터
+		            ]);
+				});
+				
+				
+				var options = {
+					chart: {
+						title: title,
+					},vAxis: {
+						format: '#,###원' // 값 뒤에 원(₩) 기호를 붙이고 천 단위 구분 기호를 사용합니다.
+					}
+				};
+				
+				var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+				
+				chart.draw(data, google.charts.Bar.convertOptions(options));
+			});
+		}
+      
+      <c:set var="totalPrice" value="0"/>
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart3);
+
+      function drawChart3() {
+        var data = google.visualization.arrayToDataTable([
+          ['MBTI', 'SCORE'],
+          <c:forEach var="map" items="${salesRateList}">
+          	[<c:if test="${map['SALES_CATEGORY_NO']==1}">"책"</c:if>
+          	<c:if test="${map['SALES_CATEGORY_NO']==2}">"MBTI검사"</c:if>
+          	<c:if test="${map['SALES_CATEGORY_NO']==3}">"MBTI교육"</c:if>
+          	,${map["SUMPRICE"]}],
+          	<c:set var="totalPrice" value="${totalPrice + map['SUMPRICE']}"/>
+          </c:forEach>
+        ]);
+
+		var options = {
+			title:"총 매출 : <fmt:formatNumber value="${totalPrice}" pattern="#,###" />원",
+			slices: {
+	            0: { color: '#6c51ff' },
+	            1: { color: '#3ac906' },
+	            2: { color: '#b9b136' }
+	        }
+		};
+
+        var chart = new google.visualization.PieChart(document.getElementById('salesPiechart'));
+        
+        google.visualization.events.addListener(chart, 'ready', function () {
+            var svg = chart.getContainer().getElementsByTagName('svg')[0];
+            svg.setAttribute('width', '2000'); // 원하는 가로 크기로 설정
+            svg.setAttribute('height', '2000'); // 원하는 세로 크기로 설정
+          });
 
         chart.draw(data,options);
       }
       
-      
-      google.charts.load('current', {'packages':['bar']});
-      google.charts.setOnLoadCallback(drawChart2);
-
-      
-      
-      function drawChart2() {
-        var data = google.visualization.arrayToDataTable([
-          ['DAY', '책', 'MBTI검사', 'MBTI교육'],
-          ['2014', 1000000, 200000, 500000],
-          ['2015', 1170234, 460950, 220550],
-          ['2016', 664420, 142120, 3400],
-          ['2017', 1031230, 542320, 354440]
-        ]);
-
-        var options = {
-          chart: {
-            title: '일별 총매출',
-          }
-        };
-
-        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
-
-        chart.draw(data, google.charts.Bar.convertOptions(options));
-      }
 </script>
 
 
@@ -107,8 +180,9 @@
 	<!-- Page Heading -->
 	<div class="d-sm-flex align-items-center justify-content-between mb-4">
 		<h1 class="h3 mb-0 text-gray-800">매출 현황</h1>
-		<!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
+		<!-- 		<a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+ -->
 	</div>
 
 	<!-- Content Row -->
@@ -123,11 +197,10 @@
 								class="text-xs font-weight-bold text-primary text-uppercase mb-1">
 								MBTI 검사</div>
 							<div class="h5 mb-0 font-weight-bold text-gray-800">
-								<fmt:formatNumber value="${mbtiTotalPrice}" pattern="#,###" />원
+								<fmt:formatNumber value="${mbtiTotalPrice}" pattern="#,###" />
+								원
 							</div>
-							
 						</div>
-
 						<div class="col-auto">
 							<i class="fas fa-won-sign fa-2x text-gray-300"></i>
 						</div>
@@ -157,7 +230,6 @@
 				</div>
 			</div>
 		</div>
-		
 
 		<!-- Earnings (Monthly) Card Example -->
 		<div class="col-xl-3 col-md-6 mb-4">
@@ -184,7 +256,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<!-- Earnings (Monthly) Card Example -->
 		<div class="col-xl-3 col-md-6 mb-4">
 			<div class="card border-left-success shadow h-100 py-2">
@@ -228,18 +300,17 @@
 								class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
 								aria-labelledby="dropdownMenuLink">
 								<div class="dropdown-header">Dropdown Header:</div>
-								<a class="dropdown-item" href="#">Action</a> <a
-									class="dropdown-item" href="#">Another action</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#">Something else here</a>
+								<a class="dropdown-item" href="#" onclick='chartAjax("day")'>일별 매출</a>
+								<a class="dropdown-item" href="#" onclick='chartAjax("month")'>월별 매출</a>
+								<a class="dropdown-item" href="#" onclick='chartAjax("year")'>연별 매출</a>
 							</div>
 						</div>
 					</div>
 					<!-- Card Body -->
-					<div id="columnchart_material" style="width: 1000px;height:360px;"></div>
+					<div id="columnchart_material"
+						style="width: 1000px; height: 360px;"></div>
 				</div>
 			</div>
-
 			<!-- Pie Chart -->
 			<div class="col-xl-4 col-lg-5">
 				<div class="card shadow mb-4">
@@ -247,193 +318,42 @@
 					<div
 						class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 						<h6 class="m-0 font-weight-bold text-primary">MBTI별 비율</h6>
-						<div class="dropdown no-arrow">
-							<a class="dropdown-toggle" href="#" role="button"
-								id="dropdownMenuLink" data-toggle="dropdown"
-								aria-haspopup="true" aria-expanded="false"> <i
-								class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-							</a>
-							<div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-								aria-labelledby="dropdownMenuLink">
-								<div class="dropdown-header">Dropdown Header:</div>
-								<a class="dropdown-item" href="#">Action</a> <a
-									class="dropdown-item" href="#">Another action</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#">Something else here</a>
-							</div>
-						</div>
 					</div>
 					<!-- Card Body -->
-					<div id="piechart2" style="width: 470px; height: 360px;margin: 0 auto;margin-left: 30px"></div>
+					<div id="mbtiPiechart"
+						style="width: 470px; height: 360px; margin: 0 auto; margin-left: 30px"></div>
 				</div>
 			</div>
 		</div>
-
-		<!-- Content Row -->
-		<div class="row">
-
-			<!-- Content Column -->
-			<div class="col-lg-6 mb-4">
-
-				<!-- Project Card Example -->
-				<div class="card shadow mb-4">
-					<div class="card-header py-3">
-						<h6 class="m-0 font-weight-bold text-primary">Projects</h6>
-					</div>
-					<div class="card-body">
-						<h4 class="small font-weight-bold">
-							Server Migration <span class="float-right">20%</span>
-						</h4>
-						<div class="progress mb-4">
-							<div class="progress-bar bg-danger" role="progressbar"
-								style="width: 20%" aria-valuenow="20" aria-valuemin="0"
-								aria-valuemax="100"></div>
-						</div>
-						<h4 class="small font-weight-bold">
-							Sales Tracking <span class="float-right">40%</span>
-						</h4>
-						<div class="progress mb-4">
-							<div class="progress-bar bg-warning" role="progressbar"
-								style="width: 40%" aria-valuenow="40" aria-valuemin="0"
-								aria-valuemax="100"></div>
-						</div>
-						<h4 class="small font-weight-bold">
-							Customer Database <span class="float-right">60%</span>
-						</h4>
-						<div class="progress mb-4">
-							<div class="progress-bar" role="progressbar" style="width: 60%"
-								aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-						</div>
-						<h4 class="small font-weight-bold">
-							Payout Details <span class="float-right">80%</span>
-						</h4>
-						<div class="progress mb-4">
-							<div class="progress-bar bg-info" role="progressbar"
-								style="width: 80%" aria-valuenow="80" aria-valuemin="0"
-								aria-valuemax="100"></div>
-						</div>
-						<h4 class="small font-weight-bold">
-							Account Setup <span class="float-right">Complete!</span>
-						</h4>
-						<div class="progress">
-							<div class="progress-bar bg-success" role="progressbar"
-								style="width: 100%" aria-valuenow="100" aria-valuemin="0"
-								aria-valuemax="100"></div>
+		<div style="width: 1050px; height: 700px;">
+			<div class="card">
+				<!-- Card Header - Dropdown -->
+				<div
+					class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+					<h6 class="m-0 font-weight-bold text-primary">판매 비율</h6>
+					<div class="dropdown no-arrow">
+						<a class="dropdown-toggle" href="#" role="button"
+							id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+							aria-expanded="false"> <i
+							class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+						</a>
+						<div
+							class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+							aria-labelledby="dropdownMenuLink">
+							<div class="dropdown-header">Dropdown Header:</div>
+							<a class="dropdown-item" href="#">Action</a> <a
+								class="dropdown-item" href="#">Another action</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="#">Something else here</a>
 						</div>
 					</div>
 				</div>
-
-				<!-- Color System -->
-				<%-- <div class="row">
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-primary text-white shadow">
-                                        <div class="card-body">
-                                            Primary
-                                            <div class="text-white-50 small">#4e73df</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-success text-white shadow">
-                                        <div class="card-body">
-                                            Success
-                                            <div class="text-white-50 small">#1cc88a</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-info text-white shadow">
-                                        <div class="card-body">
-                                            Info
-                                            <div class="text-white-50 small">#36b9cc</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-warning text-white shadow">
-                                        <div class="card-body">
-                                            Warning
-                                            <div class="text-white-50 small">#f6c23e</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-danger text-white shadow">
-                                        <div class="card-body">
-                                            Danger
-                                            <div class="text-white-50 small">#e74a3b</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-secondary text-white shadow">
-                                        <div class="card-body">
-                                            Secondary
-                                            <div class="text-white-50 small">#858796</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-light text-black shadow">
-                                        <div class="card-body">
-                                            Light
-                                            <div class="text-black-50 small">#f8f9fc</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-dark text-white shadow">
-                                        <div class="card-body">
-                                            Dark
-                                            <div class="text-white-50 small">#5a5c69</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="col-lg-6 mb-4">
-
-                            <!-- Illustrations -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="text-center">
-                                        <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
-                                            src="<c:url value='/admin-css-js/img/undraw_posting_photo.svg'/>" alt="...">
-                                    </div>
-                                    <p>Add some quality, svg illustrations to your project courtesy of <a
-                                            target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a
-                                        constantly updated collection of beautiful svg images that you can use
-                                        completely free and without attribution!</p>
-                                    <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on
-                                        unDraw &rarr;</a>
-                                </div>
-                            </div> --%>
-
-				<!-- Approach -->
-				<!--  <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
-                                </div>
-                                <div class="card-body">
-                                    <p>SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to reduce
-                                        CSS bloat and poor page performance. Custom CSS classes are used to create
-                                        custom components and custom utility classes.</p>
-                                    <p class="mb-0">Before working with this theme, you should become familiar with the
-                                        Bootstrap framework, especially the utility classes.</p>
-                                </div>
-                            </div> -->
-
+				<!-- Card Body -->
+				<div id="salesPiechart"
+					style="width: 1000px; height: 600px; margin: 0 auto; padding-left: 100px"></div>
 			</div>
 		</div>
-
 	</div>
-	<!-- /.container-fluid -->
-
 </div>
 <!-- End of Main Content -->
 
