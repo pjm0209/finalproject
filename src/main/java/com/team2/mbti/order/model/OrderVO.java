@@ -7,7 +7,6 @@ import lombok.Setter;
 @Setter
 public class OrderVO extends OrdersDetailVO{
 	
-	private int ordersNo;//ORDERS_NO	NUMBER
 	private int no;//NO	NUMBER
 	private String recipient;//RECIPIENT	VARCHAR2(30 BYTE)
 	private String reZipcode;//RE_ZIPCODE	CHAR(5 BYTE)
@@ -26,13 +25,12 @@ public class OrderVO extends OrdersDetailVO{
 	
 	@Override
 	public String toString() {
-		return "OrderVO [ordersNo=" + ordersNo + ", no=" + no + ", recipient=" + recipient + ", reZipcode=" + reZipcode
-				+ ", reAddress=" + reAddress + ", reAddressDetail=" + reAddressDetail + ", reHp=" + reHp + ", sumPrice="
-				+ sumPrice + ", paymentMethod=" + paymentMethod + ", ordersRegdate1=" + ordersRegdate1
-				+ ", ordersRegdate2=" + ordersRegdate2 + ", orderBy=" + orderBy + ", perRecord=" + perRecord
-				+ ", toString()=" + super.toString() + "]";
+		return "OrderVO [no=" + no + ", recipient=" + recipient + ", reZipcode=" + reZipcode + ", reAddress="
+				+ reAddress + ", reAddressDetail=" + reAddressDetail + ", reHp=" + reHp + ", sumPrice=" + sumPrice
+				+ ", paymentMethod=" + paymentMethod + ", ordersRegdate1=" + ordersRegdate1 + ", ordersRegdate2="
+				+ ordersRegdate2 + ", orderBy=" + orderBy + ", perRecord=" + perRecord + ", toString()="
+				+ super.toString() + "]";
 	}
-	
 	
 	
 }//

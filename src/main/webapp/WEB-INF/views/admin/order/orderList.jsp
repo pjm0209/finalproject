@@ -117,6 +117,8 @@ function makeListJson(list){
 		
 		makeHtml += "<tr>";
 		makeHtml += "<th scope='row'><input type='checkbox' class='book-checkbox'></th>";
+		makeHtml += "<input type='checkbox' name='sortOrderViewItems["+idx+"].ordersNo' value='"+this.ordersNo+"'>";
+		makeHtml += "<input type='hidden' name='sortOrderViewItems["+idx+"].ordersState' value='"+this.ordersState+"'>";
 		makeHtml += "<td>"+this.ordersNo+"</td>";
 		makeHtml += "<td>"+bookTitle+"</td>";
 		makeHtml += "<td style='vertical-align: middle;'>"+this.userid+"</td>";
@@ -132,7 +134,7 @@ function makeListJson(list){
 		else */
 		if(this.ordersState == '결제 완료'){
 			makeHtml += "<a class='green' href='javascript:void(0)' onclick='updateStateAjax("+this.ordersNo+", this)'>배송 준비</a><br>";
-			makeHtml += "<a class='red' href='javascript:void(0)' onclick='updateStateAjax("+this.ordersNo+", this)'>주문 취소</a>";		
+			makeHtml += "<a class='red' href='javascript:void(0)' onclick='updateStateAjax("+this.ordersNo+", this)'>취소 완료</a>";		
 		}
 		else if(this.ordersState == '배송 준비'){
 			makeHtml += "<a class='green' href='javascript:void(0)' onclick='updateStateAjax("+this.ordersNo+", this)'>배송중</a><br>";
@@ -141,25 +143,24 @@ function makeListJson(list){
 			makeHtml += "<a class='green' href='javascript:void(0)' onclick='updateStateAjax("+this.ordersNo+", this)'>배송 완료</a><br>";
 		}
 		else if(this.ordersState == '배송 완료'){
-			makeHtml += "<a class='green' href='javascript:void(0)' onclick='updateStateAjax("+this.ordersNo+", this)'>구매 확정</a><br>";
-			makeHtml += "<a class='red' href='javascript:void(0)' onclick='updateStateAjax("+this.ordersNo+", this)'>주문 취소</a>";		
+			makeHtml += "<a class='red' href='javascript:void(0)' onclick='updateStateAjax("+this.ordersNo+", this)'>취소 완료</a>";		
 		}else if(this.ordersState == '취소 신청'){
-			makeHtml += "<a class='green' href='javascript:void(0)' onclick='updateStateAjax("+this.ordersNo+", this)'>취소 완료</a><br>";
+			makeHtml += "<a class='red' href='javascript:void(0)' onclick='updateStateAjax("+this.ordersNo+", this)'>취소 완료</a><br>";
 		}else if(this.ordersState == '취소 완료'){
 			makeHtml += "&nbsp;";
 		}else if(this.ordersState == '반품 신청'){
 			makeHtml += "<a class='green' href='javascript:void(0)' onclick='updateStateAjax("+this.ordersNo+", this)'>반품 완료</a><br>";
-			makeHtml += "<a class='red' href=javascript:void(0)#' onclick='updateStateAjax("+this.ordersNo+", this)'>주문 취소</a>";
+			makeHtml += "<a class='red' href=javascript:void(0)#' onclick='updateStateAjax("+this.ordersNo+", this)'>취소 완료</a>";
 		}else if(this.ordersState == '반품 완료'){
 			makeHtml += "&nbsp;";
 		}else if(this.ordersState == '교환 신청'){
 			makeHtml += "<a class='green' href='javascript:void(0)' onclick='updateStateAjax("+this.ordersNo+", this)'>교환 완료</a><br>";
-			makeHtml += "<a class='red' href='javascript:void(0)' onclick='updateStateAjax("+this.ordersNo+", this)'>주문 취소</a>";
+			makeHtml += "<a class='red' href='javascript:void(0)' onclick='updateStateAjax("+this.ordersNo+", this)'>취소 완료</a>";
 		}else if(this.ordersState == '교환 완료'){
 			makeHtml += "&nbsp;";
 		}else if(this.ordersState == '환불 신청'){
 			makeHtml += "<a class='green' href='javascript:void(0)' onclick='updateStateAjax("+this.ordersNo+", this)'>환불 완료</a><br>";
-			makeHtml += "<a class='red' href='javascript:void(0)' onclick='updateStateAjax("+this.ordersNo+", this)'>주문 취소</a>";
+			makeHtml += "<a class='red' href='javascript:void(0)' onclick='updateStateAjax("+this.ordersNo+", this)'>취소 완료</a>";
 		}else if(this.ordersState == '환불 완료'){
 			makeHtml += "&nbsp;";
 		}else {
@@ -209,7 +210,8 @@ function ajaxUpdateOrdersState(ordersNo, state){
 }
 
 function openDetail(ordersNo){
-	location.href="orderDetail?orderNo="+ordersNo+"?orderFlag="+flagInput;
+	var flagInput = $("#flagInput").val();
+	location.href="orderDetail?ordersNo="+ordersNo+"&orderFlag="+flagInput;
 }
 function makePage(pageInfo){
 	var pageHtmlStr = "";
@@ -249,22 +251,23 @@ function makeBtn(kos){
 	var text = "";
 	
 	if (kos == '결제 완료'){
-		text+="<button class='btn btn-warning bg-gradient-secondary book-button'>배송 준비</button>";
-		text+="<button class='btn btn-warning bg-gradient-secondary book-button'>주문 취소</button>";
+		text+="<button class='btn btn-warning bg-gradient-secondary book-button' onclick='updateStateMuti(this)'>배송 준비</button>";
+		text+="<button class='btn btn-warning bg-gradient-secondary book-button' onclick='updateStateMuti(this)'>취소 완료</button>";
 	}else if(kos == '배송 준비'){
-		text+="<button class='btn btn-warning bg-gradient-secondary book-button'>배송중</button>";		
-		text+="<button class='btn btn-warning bg-gradient-secondary book-button'>주문 취소</button>";
+		text+="<button class='btn btn-warning bg-gradient-secondary book-button' onclick='updateStateMuti(this)'>배송중</button>";		
+		text+="<button class='btn btn-warning bg-gradient-secondary book-button' onclick='updateStateMuti(this)'>취소 완료</button>";
 	}else if(kos == '배송중'){
-		text+="<button class='btn btn-warning bg-gradient-secondary book-button'>배송완료</button>";
+		text+="<button class='btn btn-warning bg-gradient-secondary book-button' onclick='updateStateMuti(this)'>배송완료</button>";
 	}else if(kos == '배송 완료'){
-		text+="<button class='btn btn-warning bg-gradient-secondary book-button'>구매 확정</button>";
-		text+="<button class='btn btn-warning bg-gradient-secondary book-button'>주문 취소</button>";
+		text+="<button class='btn btn-warning bg-gradient-secondary book-button' onclick='updateStateMuti(this)'>취소 완료</button>";
 	}else if(kos == '반품 신청'){
-		text+="<button class='btn btn-warning bg-gradient-secondary book-button'>반품 완료</button>";
+		text+="<button class='btn btn-warning bg-gradient-secondary book-button' onclick='updateStateMuti(this)'>반품 완료</button>";
 	}else if(kos == '교환 신청'){
-		text+="<button class='btn btn-warning bg-gradient-secondary book-button'>교환 완료</button>";
+		text+="<button class='btn btn-warning bg-gradient-secondary book-button' onclick='updateStateMuti(this)'>교환 완료</button>";
 	}else if(kos == '환불 신청'){
-		text+="<button class='btn btn-warning bg-gradient-secondary book-button'>환불 완료</button>";
+		text+="<button class='btn btn-warning bg-gradient-secondary book-button' onclick='updateStateMuti(this)'>환불 완료</button>";
+	}else if(kos == '취소 신청'){
+		text+="<button class='btn btn-warning bg-gradient-secondary book-button' onclick='updateStateMuti(this)'>취소 완료</button>";
 	}else {
 		text+="";
 	}
@@ -276,6 +279,21 @@ function orderListPage(curPage){
 	$('input[name=currentPage]').val(curPage);
 	$('input[name=perRecord]').val($('#perRecord').val());
 	ajaxFunc();
+}
+
+function updateStateMuti(element){
+	var cnt = $("table input[type='checkbox']:checked").length;
+	var ordersState = $(element).text();
+	if(cnt < 1) {
+		$('#alertModalBody').html("주문을 선택하세요.");
+		$('#alertModalBtn').trigger('click');
+		return false;
+    } else {	
+		$('form[name=serach]').prop('action', "<c:url value='/admin/order/updateStateMulti'/>");
+		if(confirm(ordersState+","+cnt+"개를 수정할까요?")) {
+			$('form[name=serach]').submit();
+		} 
+	}
 }
 
 </script>
@@ -363,11 +381,6 @@ function orderListPage(curPage){
 						 		selected="selected"
 							</c:if>
 						 value="배송 완료">배송 완료</option>
-						<option
-							<c:if test="${param.orderBy eq '구매 확정'}">
-							 		selected="selected"
-							</c:if>
-						 value="구매 확정">구매 확정</option>
 						<option
 							<c:if test="${param.orderBy eq '취소 신청'}">
 						 		selected="selected"

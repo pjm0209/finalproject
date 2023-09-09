@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team2.mbti.board.model.BoardService;
+import com.team2.mbti.common.ConstUtil;
 import com.team2.mbti.main.order.model.MainOrderService;
 import com.team2.mbti.main.order.model.MainOrdersDetailVO;
 import com.team2.mbti.mbtiResult.model.MbtiResultService;
@@ -27,6 +28,7 @@ import com.team2.mbti.mbtisurvey.model.MbtiSurveyService;
 import com.team2.mbti.mbtisurvey.model.MbtiVO;
 import com.team2.mbti.member.model.MemberService;
 import com.team2.mbti.member.model.MemberVO;
+import com.team2.mbti.order.model.OrdersService;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
@@ -44,6 +46,7 @@ public class MypageController {
 	private final MemberService memberService;
 	private final BoardService boardService;	
 	private final MainOrderService orderService;
+	private final OrdersService odService;
 	
 	private final PasswordEncoder passwordEncoder;
 	
@@ -427,7 +430,7 @@ public class MypageController {
 		
 		MainOrdersDetailVO modVo4 = new MainOrdersDetailVO();
 		modVo4.setNo(no);
-		modVo4.setOrdersState("배달 완료");
+		modVo4.setOrdersState("배송 완료");
 		int cnt4 = orderService.selectCntOrdersState(modVo4);
 		
 		model.addAttribute("cnt1", cnt1);
@@ -438,6 +441,28 @@ public class MypageController {
 		model.addAttribute("orderList", orderList);
 		
 		return "main/mypage/mypageOrderList";
+	}
+	
+	@GetMapping("/myOrdersDetail")
+	public String myOrdersDetail(@RequestParam(defaultValue = "0")int ordersNo,
+			HttpSession session, Model model) {
+		logger.info("마이페이지 - myOrdersDetail 페이지(주문 자세히 보기), 파라미터 ordersNo={}", ordersNo);
+		
+		if(ordersNo == 0) {
+			model.addAttribute("msg", "잘못된 url입니다.");
+			model.addAttribute("url", "/main/index");
+
+			return "common/message";
+		}
+		List<Map<String, Object>> mapList = odService.selectOrdersByNo(ordersNo);
+		logger.info("주문관리 페이지 - 검색 결과 mapList.size()={}", mapList.size());
+		
+		model.addAttribute("title", "주문 상세보기 페이지");
+		model.addAttribute("list", mapList);
+		model.addAttribute("DELIVERY", ConstUtil.DELIVERY);
+		model.addAttribute("TOTAL_PRICE", ConstUtil.TOTAL_PRICE);
+		
+		return "main/mypage/myOrdersDetail";
 	}
 	
 	@RequestMapping("/mypageOrderCancle")

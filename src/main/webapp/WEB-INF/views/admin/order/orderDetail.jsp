@@ -6,9 +6,128 @@
 <!-- Begin Page Content -->
 <!-- Page Heading -->
 <link href="<c:url value='/admin-css-js/css/book-order.css'/>" rel="stylesheet" type="text/css">
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
+<script type="text/javascript">
+
+$(function(){
+    $('#d_zipcode').change(function(){
+    	$('#d_addr2').focus();
+    });
+});
 
 
+function sample4_execDaumPostcode_bookDetail() {
+    new daum.Postcode({
+        oncomplete: function(data) {
+
+            var roadAddr = data.roadAddress; 
+            var extraRoadAddr = '';
+
+            if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                extraRoadAddr += data.bname;
+            }
+
+            if(data.buildingName !== '' && data.apartment === 'Y'){
+               extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+            }
+            if(extraRoadAddr !== ''){
+                extraRoadAddr = ' (' + extraRoadAddr + ')';
+            }
+
+            document.getElementById('d_zipcode').value = data.zonecode;
+            document.getElementById("d_addr1").value = roadAddr;
+        }
+    }).open();
+}
+
+function updateRecipientAjax(){
+	var ordersNo = $('#iptOrdersNo').val();
+	var reZipcode = $('input[name=reZipcode]').val();
+	var reHp = $('input[name=reHp]').val();
+	var reAddress = $('input[name=reAddress]').val();
+	var reAddressDetail = $('input[name=reAddressDetail]').val();
+	var recipient = $('input[name=recipient]').val();
+	$('#confirmModalBody').html("배송지 정보를 수정하시겠습니까?");
+	$('#confirmOk').attr("onclick","ajaxUpdateRecipient()");
+	$('#confirmModalBtn').trigger('click');
+}
+
+function ajaxUpdateRecipient(){
+	var ordersNo = $('#iptOrdersNo').val();
+	var reZipcode = $('input[name=reZipcode]').val();
+	var reHp = $('input[name=reHp]').val();
+	var reAddress = $('input[name=reAddress]').val();
+	var reAddressDetail = $('input[name=reAddressDetail]').val();
+	var recipient = $('input[name=recipient]').val();
+	$.ajax({		
+		url:"<c:url value='/admin/order/orderAjaxRecipient'/>",
+		type:'POST',
+		dataType:"json",
+		data: {
+			ordersNo: ordersNo,
+			reZipcode: reZipcode,
+			reHp: reHp,
+			reAddress: reAddress,
+			reAddressDetail: reAddressDetail,
+			recipient: recipient
+		},
+		success:function(cnt){
+			if(cnt > 0){
+				$('#alertModalBody').html("배송지 정보 수정 성공했습니다.");
+				$('#alertModalBtn').trigger('click');
+				ajaxFunc();
+			} else {
+				$('#alertModalBody').html("배송지 정보 수정 실패했습니다...");
+				$('#alertModalBtn').trigger('click');
+			} 
+		},
+		error:function(xhr, status, error){
+			alert(status + " : " + error);
+		}
+	});
+}
+
+function updateStateAjax(element){
+	var state = $(element).text();
+	var ordersNo = $("#iptOrdersNo").val();
+	alert("ordersNo : " + ordersNo, "ordersState : " + state);
+	$('#confirmModalBody').html("ordersNo : " + ordersNo + "의 주문 상태를 \"" +state+ "\" (으)로 바꾸시겠습니까?");
+	$('#confirmOk').attr("onclick","ajaxUpdateOrdersState(" + ordersNo+", " + "'"+state+"'" + ")");
+	$('#confirmModalBtn').trigger('click');
+}
+
+function ajaxUpdateOrdersState(ordersNo, state){
+	$.ajax({		
+		url:"<c:url value='/admin/order/orderAjaxUpdateState'/>",
+		type:'POST',
+		data:{
+			ordersNo: ordersNo,
+			ordersState: state
+		},
+		success:function(cnt){
+			if(cnt > 0){
+				$('#alertModalBody').html("\"" + state+"\" (으)로 주문 상태 수정 성공했습니다.");
+				$('#alertModalBtn').trigger('click');
+				ajaxFunc();
+			} else {
+				$('#alertModalBody').html("주문 상태 수정 실패했습니다...");
+				$('#alertModalBtn').trigger('click');
+			} 
+		},
+		error:function(xhr, status, error){
+			alert(status + " : " + error);
+		}
+	})
+}
+
+
+</script>
+<input type="hidden" id="sample4_postcode" placeholder="우편번호">
+<input type="hidden" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
+<input type="hidden" id="sample4_roadAddress" placeholder="도로명주소">
+<span id="guide" style="color:#999;display:none"></span>
+<input type="hidden" id="sample4_detailAddress" placeholder="상세주소">
 <div class="head-div">
 	<h2 class="text-gray-800">주문 관리</h2>
 </div>
@@ -42,27 +161,29 @@
 									</tr>
 								</thead>
 								<tbody>
-									
+									<c:forEach var="map" items="${list}">
 										<tr>
 											<td style="text-align: center;vertical-align: middle;">
-												<a href="/productsub/fo/4900/10/productview.sd" target="_blank"><img src="/data/img/pr/thumb/1ac164f334004f06872b8584fc5298dd.jpg"></a>
+												<a href="<c:url value='/main/book/bookDetail?bookNo=${map.BOOK_NO}'/> " target="_blank">
+													<img width="140px" src="<c:url value='/images/bookProduct/upload_img/${map.BOOK_IMG_NAME}'/>">
+												</a>
 											</td>
 											<td style="text-align: center;vertical-align: middle;">
-												가슴에 다는 장미
+												${map.BOOK_TITLE}
 											</td>
-											<td style="text-align: center;vertical-align: middle;">SD-0000000010</td>
+											<td style="text-align: center;vertical-align: middle;">${map.BOOK_NO}</td>
 											<td style="text-align: center;vertical-align: middle;">
-												30,000원
-											</td>
-											<td style="text-align: center;vertical-align: middle;">
-												
-												1
+												<fmt:formatNumber value="${map.BOOK_PRICE}" pattern="#,###"/>원
 											</td>
 											<td style="text-align: center;vertical-align: middle;">
-												30,000원
+												<%-- <input style="text-align:center;margin:0 auto;width: 100px;" class="form-control" type="number" name="ordersQty" value="${map.ORDERS_QTY}"> --%>
+												${map.ORDERS_QTY}
+											</td>
+											<td style="text-align: center;vertical-align: middle;">
+												<fmt:formatNumber value="${map.BOOK_PRICE * map.ORDERS_QTY}" pattern="#,###"/>원
 											</td>
 										</tr>
-									
+									</c:forEach>
 								</tbody>
 							</table>
 						</div>
@@ -81,149 +202,127 @@
 
 								<tbody><tr>
 									<th style="text-align: center;">주문번호</th>
-									<td>SD_1521596762750</td>
+									<td>${list[0].ORDERS_NO}</td>
 								</tr>
 								<tr>
 									<th style="text-align: center;">결제타입</th>
 									<td>
-										
-											무통장입금
-											
-											
-											
-										
+										${list[0].PAYMENT_METHOD}
 									</td>
 								</tr>
-								
 								<tr>
 									<th style="text-align: center;">배송비</th>
 									<td>
-										3,000원
+										<c:if test="${list[0].SUM_PRICE >= TOTAL_PRICE}">
+											0원
+										</c:if>
+										<c:if test="${list[0].SUM_PRICE < TOTAL_PRICE}">
+											<fmt:formatNumber value="${DELIVERY}" pattern="#,###"/>
+										</c:if>
 									</td>
 								</tr>
 								<tr>
 									<th style="text-align: center;">결제금액</th>
 									<td>
-										33,000원
+										<fmt:formatNumber value="${list[0].SUM_PRICE}" pattern="#,###"/> 원
 									</td>
 								</tr>
 								<tr>
 									<th style="text-align: center;">주문상태</th>
 									<td>
-										취소신청
+										${list[0].ORDERS_STATE}
 									</td>
 								</tr>
 							</tbody></table>
 						</div>
 					</div>
 				</div>
-				
-<!-- 										<div class="row form-inline"> -->
-				<div class="row">
-					<div class="col-md-12 col-sm-12 col-xs-12">
-						<h2><b>배송정보</b></h2>
-						<div class="table-responsive">
-							<table class="table ">
-								<colgroup>
-									<col style="background-color: #f1f1f1;" width="20%">
-									<col width="80%">
-								</colgroup>
-								<tbody><tr>
-									<th style="text-align: center;vertical-align: middle;">받으시는 분</th>
-									<td>
-										<input class="form-control" id="odma_name" name="odma_name" type="text" value="멤버5">															
-									</td>
-								</tr>
-								<tr>
-									<th style="text-align: center;vertical-align: middle;">휴대전화</th>
-									<td>
-										<input class="form-control" id="odma_phone" name="odma_phone" type="text" value="011-1234-1233">
-									</td>
-								</tr>
-								<tr>
-									<th style="text-align: center;vertical-align: middle;">유선전화</th>
-									<td>
-										<input class="form-control" id="odma_tel" name="odma_tel" type="text" value="02-1234-1228">
-									</td>
-								</tr>
-								<tr>
-									<th style="text-align: center;vertical-align: middle;">배송지</th>
-									<td>
-										<input type="button" class="form-control btn btn-primary zip" onclick="getZipcode();" value="우편번호 검색"><br>
-										<input type="text" class="form-control" placeholder="우편번호" name="odma_zipcode" id="odma_zipcode" value="06271" readonly="readonly">
-										<input type="text" class="form-control" placeholder="기본주소" name="odma_addr1" id="odma_addr1" value="서울 강남구 강남대로 242" readonly="readonly" style="margin-top: 5px;">
-										<input type="text" class="form-control" placeholder="상세주소" name="odma_addr2" value="5" style="margin-top: 5px;">
-									</td>
-								</tr>
-								<tr>
-									<th style="text-align: center;vertical-align: middle;">배송업체</th>
-									<td>
-										<select class="form-control" id="odm_pccseq" name="odm_pccseq">
-											<option value="">선택</option>
-											
-												<option value="1">우체국</option>
-											
-												<option value="2">CJ대한통운</option>
-											
-												<option value="3">한진택배</option>
-											
-												<option value="4">로젠택배</option>
-											
-												<option value="6">KG옐로우캡택배</option>
-											
-												<option value="7">우체국EMS</option>
-											
-												<option value="8">디에이치엘</option>
-											
-												<option value="9">페덱스</option>
-											
-												<option value="10">유피에스</option>
-											
-												<option value="11">하나로택배</option>
-											
-										</select>
-									</td>
-								</tr>
-								<tr>
-									<th style="text-align: center;vertical-align: middle;">송장번호</th>
-									<td class="form-inline">
-										<input class="form-control" id="odm_delinum" name="odm_delinum" type="text" value="" style="margin-left: 18px;">
-										
-									</td>
-								</tr>
-							</tbody></table>
+				<form name="recipientFrm">				
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<h2><b>배송정보</b></h2>
+							<div class="table-responsive">
+								<table class="table ">
+									<colgroup>
+										<col style="background-color: #f1f1f1;" width="20%">
+										<col width="80%">
+									</colgroup>
+									<tbody><tr>
+										<th style="text-align: center;vertical-align: middle;">받으시는 분</th>
+										<td>
+											<input class="form-control" id="odma_name" name="recipient" type="text" value="${list[0].RECIPIENT}">															
+										</td>
+									</tr>
+									<tr>
+										<th style="text-align: center;vertical-align: middle;">휴대전화</th>
+										<td>
+											<input class="form-control" id="odma_phone" name="reHp" type="text" value="${list[0].RE_HP}">
+										</td>
+									</tr>
+									<tr>
+										<th style="text-align: center;vertical-align: middle;">배송지</th>
+										<td>
+											<input type="hidden" id="iptOrdersNo" name="ordersNo" value="${list[0].ORDERS_NO}">
+											<input type="button" class="form-control btn btn-primary zip" onclick="sample4_execDaumPostcode_bookDetail()" value="우편번호 검색"><br>
+											<input type="text" class="form-control" placeholder="우편번호" name="reZipcode" id="d_zipcode" value="${list[0].RE_ZIPCODE}" readonly="readonly">
+											<input type="text" class="form-control" placeholder="기본주소" name="reAddress" id="d_addr1" value="${list[0].RE_ADDRESS}" readonly="readonly" style="margin-top: 5px;">
+											<input type="text" class="form-control" placeholder="상세주소" name="reAddressDetail" value="${list[0].RE_ADDRESS_DETAIL}" style="margin-top: 5px;">
+										</td>
+									</tr>
+								</tbody></table>
+							</div>
 						</div>
 					</div>
-				</div>
-				
-				<div class="row">
-					<div class="col-md-12 col-sm-12 col-xs-12">
-						<h2><b>주문메모</b></h2>
-						<div class="table-responsive">
-							<table class="table ">
-								<colgroup>
-									<col style="background-color: #f1f1f1;" width="20%">
-									<col width="80%">
-								</colgroup>
-								<tbody><tr>
-									<th style="text-align: center;vertical-align: middle;">주문메모</th>
-									<td>
-										<textarea class="form-control" id="odm_memo" name="odm_memo" rows="5" style="width: 100%;"></textarea>															
-									</td>
-								</tr>
-							</tbody></table>
-						</div>
-					</div>
-				</div>
-
+				</form>
 				<div class="form-group">
 					<div class=" text-right">
-						<button style="margin: 0px 5px;" type="button" class="btn btn-success" onclick=""><i class="fas fa-save"></i> 저장</button>
-						<button style="margin: 0px 5px;" type="button" class="btn btn-primary" onclick="location.href=orderList.jsp"><i class="fas fa-list-ul"></i> 리스트</button>
-					<div class=" text-right">
-						<button type="button" class="btn btn-success btn-sm">결제완료</button>
-						<button type="button" class="btn btn-danger btn-sm">주문취소</button>
-					</div>
+						<button style="margin: 0px 5px;" type="button" class="btn btn-success" onclick="updateRecipientAjax()"><i class="fas fa-save"></i>수 정</button>
+						<button style="margin: 0px 5px;" type="button" class="btn btn-primary" onclick="location.href='<c:url value='/admin/order/orderList?flag=order'/>'"><i class="fas fa-list-ul"></i>리스트</button>
+					<c:if test="${list[0].ORDERS_STATE == '결제 완료'}">	
+						<div class=" text-right">
+							<button type="button" class="btn btn-success btn-sm" onclick="updateStateAjax(this)">배송 준비</button>
+							<button type="button" class="btn btn-danger btn-sm" onclick="updateStateAjax(this)">취소 완료</button>
+						</div>
+					</c:if>
+					<c:if test="${list[0].ORDERS_STATE == '배송 준비'}">	
+						<div class=" text-right">
+							<button type="button" class="btn btn-success btn-sm" onclick="updateStateAjax(this)">배송중</button>
+							<button type="button" class="btn btn-danger btn-sm" onclick="updateStateAjax(this)">취소 완료</button>
+						</div>
+					</c:if>
+					<c:if test="${list[0].ORDERS_STATE == '배송중'}">	
+						<div class=" text-right">
+							<button type="button" class="btn btn-success btn-sm" onclick="updateStateAjax(this)">배송 완료</button>
+						</div>
+					</c:if>
+					<c:if test="${list[0].ORDERS_STATE == '배송 완료'}">	
+						<div class=" text-right">
+							<button type="button" class="btn btn-danger btn-sm" onclick="updateStateAjax(this)">취소 완료</button>
+						</div>
+					</c:if>
+					<c:if test="${list[0].ORDERS_STATE == '반품 신청'}">	
+						<div class=" text-right">
+							<button type="button" class="btn btn-success btn-sm" onclick="updateStateAjax(this)">반품 완료</button>
+							<button type="button" class="btn btn-danger btn-sm" onclick="updateStateAjax(this)">취소 완료</button>
+						</div>
+					</c:if>
+					<c:if test="${list[0].ORDERS_STATE == '교환 신청'}">	
+						<div class=" text-right">
+							<button type="button" class="btn btn-success btn-sm" onclick="updateStateAjax(this)">교환 완료</button>
+							<button type="button" class="btn btn-danger btn-sm" onclick="updateStateAjax(this)">취소 완료</button>
+						</div>
+					</c:if>
+					<c:if test="${list[0].ORDERS_STATE == '환불 신청'}">	
+						<div class=" text-right">
+							<button type="button" class="btn btn-success btn-sm" onclick="updateStateAjax(this)">환불 완료</button>
+							<button type="button" class="btn btn-danger btn-sm" onclick="updateStateAjax(this)">취소 완료</button>
+						</div>
+					</c:if>
+					<c:if test="${list[0].ORDERS_STATE == '취소 신청'}">	
+						<div class=" text-right">
+							<button type="button" class="btn btn-danger btn-sm" onclick="updateStateAjax(this)">취소 완료</button>
+						</div>
+					</c:if>
 					</div>
 				</div>
 				

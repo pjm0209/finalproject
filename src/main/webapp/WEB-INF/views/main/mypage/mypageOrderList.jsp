@@ -49,7 +49,7 @@
             </li>
             <li>
                 <p>${cnt4}</p>
-                <p>배송완료</p>
+                <p>배송 완료</p>
             </li>
             <li>
                 <p>${cnt1}</p>
@@ -80,7 +80,7 @@
 					
 					<li class="flex">
 						<div class="title" style="padding-left: 0;">
-						<a class="shadow-sm rounded" style="background: #00FF40;" href="<c:url value='/main/book/basket/bookOrderComplete?flag=mypage'/>">주문번호 : <strong>${list.mainOrderVo.ordersNo}</strong>상세보기</a>
+						<a class="shadow-sm rounded" style="background: #00FF40;" href="<c:url value='/main/mypage/myOrdersDetail?ordersNo=${list.mainOrderVo.ordersNo}'/>">주문번호 : <strong>${list.mainOrderVo.ordersNo}</strong>상세보기</a>
 							<c:forEach var="map" items="${list.orderDetailList }">
 								<div class="orderItems flex" style="display: flex;justify-content: flex-start;">
 									<a href="<c:url value='/main/book/bookDetail?bookNo=${map.BOOK_NO}&bookCategory=${map.BOOK_CATEGORY}'/>">

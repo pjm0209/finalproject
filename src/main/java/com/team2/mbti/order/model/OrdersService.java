@@ -9,6 +9,7 @@ public interface OrdersService {
 	
 	int updateAjaxState(OrdersDetailVO vo);
 	
-	Map<String, Object> selectOrdersByNo(int ordersNo);
-	
+	List<Map<String, Object>> selectOrdersByNo(int ordersNo);
+	int updateAjaxRecipient(OrderVO vo);
+	int updateStateMulti(List<SortOrderViewVO> list, String ordersState);
 }//
