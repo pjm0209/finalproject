@@ -8,7 +8,12 @@
 <script type="text/javascript" src="<c:url value='/admin-css-js/js/bookMain.js'/>"></script>
 
 <section id="order_complete" class="order_complete">
-	<h2>주문 완료</h2>
+	<c:if test="${empty param.flag}">
+		<h2>주문 완료</h2>
+	</c:if>
+	<c:if test="${!empty param.flag}">
+		<h2>주문 상세보기</h2>
+	</c:if>
 	<ul class="complet_list1">
 		<li>
 			<p><strong>결제 정보</strong></p>
@@ -62,12 +67,13 @@
 </section>
 
 <section class="booklist_right">
+	<c:if test="${empty param.flag}">
 	<ul class="flex">
 		<li><span class="material-symbols-outlined"> counter_1 </span> 장바구니</li>
 		<li><span class="material-symbols-outlined  "> counter_2 </span> 주문/결제</li>
 		<li class="on"><span class="material-symbols-outlined  "> counter_3 </span> 주문완료</li>
 	</ul>
-
+	</c:if>
 </section>
 <script>
 	$(function() {

@@ -33,6 +33,7 @@
 	<select id="selectOrderList" parameterType="int" resultMap="orderListResultMap">
 		select * from orders
 		where no = #{no}
+		order by orders_regdate desc
 	</select>
 	
 	<resultMap type="mainOrderAllVo" id="orderListResultMap">
@@ -74,4 +75,21 @@
 		 where rownum = 1
 		and no = #{no}
 	</select>
+	
+	<parameterMap type="map" id="ordersDeleteProc">
+		<parameter property="ordersNo" javaType="string"
+			jdbcType="VARCHAR" mode="IN" />
+	</parameterMap>
+	
+	<delete id="deleteOrders" parameterMap="ordersDeleteProc">
+		call DELETEORDERS(?)
+	</delete>
+	
+	<select id="selectCntOrdersState" parameterType="mainOrdersDetailVo" resultType="int">
+		select count(*) from orderview
+		where no = ${no}
+		and orders_state = #{ordersState}
+	</select>
+	
+	
 </mapper>

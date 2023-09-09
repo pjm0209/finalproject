@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team2.mbti.order.model.OrdersDAO">
+	
+	<sql id="searchWhere">
+		<where>
+			<if test="keywordCategory!=null and keywordCategory!=''">
+				b.book_category like '%' || #{keywordCategory} || '%'
+			</if>
+			<if test="keywordNo!=null and keywordNo!=''">
+				and b.book_no like '%' || #{keywordNo} || '%'
+			</if>
+			<if test="keywordTitle!=null and keywordTitle!=''">
+				and b.book_title like '%' || #{keywordTitle} || '%'
+			</if>
+			<if test="keywordPublisher!=null and keywordPublisher!=''">
+				and b.book_publisher like '%' || #{keywordPublisher} || '%'
+			</if>
+			<if test="keywordUseflag!=null and keywordUseflag!=''">
+				and b.book_useflag like '%' || #{keywordUseflag} || '%'
+			</if>
+			<if test="keywordRegdate!=null and keywordRegdate!=''">
+				and b.book_regdate >= #{keywordRegdate}
+			</if>
+			<if test="keywordRegdate2!=null and keywordRegdate2!=''">
+				<![CDATA[and b.book_regdate <= to_date(#{keywordRegdate2})+1]]>
+			</if>
+		</where>
+	</sql>
+	
+	<select id="selectAllAjaxOrderList" parameterType="orderVo" resultType="map">
+		SELECT *
+		FROM
+		(
+		    select rownum as RNUM, A.* from
+		    (
+			   select * from 
+			   orders
+			   <include refid="searchWhere" />
+			   <if test="orderBy!=null and orderBy!=''">
+					<if test="orderBy=='book_title'">
+						order by b.book_title
+					</if>
+					<if test="orderBy=='book_title_desc'">
+						order by b.book_title desc
+					</if>
+					<if test="orderBy=='book_regdate'">
+						order by b.book_regdate
+					</if>
+					<if test="orderBy=='book_regdate_desc'">
+						order by b.book_regdate desc
+					</if>
+					<if test="orderBy=='book_no'">
+						order by b.book_no
+					</if>
+					<if test="orderBy=='book_no_desc'">
+						order by b.book_no desc
+					</if>
+					<if test="orderBy=='book_price'">
+						order by b.book_price
+					</if>
+					<if test="orderBy=='book_price_desc'">
+						order by b.book_price desc
+					</if>
+					<!-- <if test="orderBy=='out_qty'">
+						order by s.outputQty
+					</if>
+					<if test="orderBy=='out_qty_desc'">
+						order by s.outputQty desc
+					</if> -->
+				</if>
+				<if test="orderBy==null or orderBy==''">
+					order by b.book_no desc
+				</if>
+		    )A
+		)
+   	 <![CDATA[
+		WHERE RNUM > #{firstRecordIndex}
+		and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}]]>
+	</select>
+	
+	<select id="selectOrdersCnt" parameterType="orderVo" resultType="int">
+		select count(*) from orders
+		<include refid="searchWhere" />
+	</select>
+
+</mapper>

@@ -24,25 +24,35 @@
        #mypadge_orderlist #section .cancel_box button{background:#ee7843; color:white; padding:10px 50px; border:0;}
 </style>
 <script type="text/javascript" src="<c:url value='/admin-css-js/js/bookMain.js'/>"></script>
-
+<script type="text/javascript">
+	function ordersInput(element){
+		var i = $(element).parent().parent().find('a strong').text();
+		$('.modal-footer input[name=hiddenOrdersNo]').val(i);
+	}
+	function cancleOrder(){
+		var ordersNo = $('.modal-footer input[name=hiddenOrdersNo]').val();
+		if(confirm("ordersNo = " + ordersNo))
+			location.href="<c:url value='/main/mypage/mypageOrderCancle?ordersNo=" +ordersNo+ "'/>";
+	}
+</script>
 <section id="mypadge_orderlist">
 	<div class="inner shadow-sm p-5 bg-body rounded">
 	<div class="delivery ">
         <ul class="flex">
             <li> 
-                <p>0</p>
+                <p>${cnt2}</p>
                 <p>주문완료</p>
             </li>
             <li>
-                <p>0</p>
+                <p>${cnt3}</p>
                 <p>배송중</p>
             </li>
             <li>
-                <p>0</p>
+                <p>${cnt4}</p>
                 <p>배송완료</p>
             </li>
             <li>
-                <p>0</p>
+                <p>${cnt1}</p>
                 <p>취소</p>
             </li>
         </ul>
@@ -50,7 +60,7 @@
     </div>
 
 	<div id="section">
-		<p>${fn:length(orderList)} 개의 주문내역이 있습니다.</p>
+		<p style="padding-bottom: 20px">${fn:length(orderList)} 개의 주문내역이 있습니다.</p>
 		<div id="content">
 			<ul class="booklist" style="padding-left:0;">
 				<%-- <c:if test="${empty list }">
@@ -67,10 +77,12 @@
 				<c:if test="${!empty list }"> 
 				<c:forEach var="vo" items="${list}">--%>
 				<c:forEach var="list" items="${orderList }">
+					
 					<li class="flex">
-						<div class="title">
+						<div class="title" style="padding-left: 0;">
+						<a class="shadow-sm rounded" style="background: #00FF40;" href="<c:url value='/main/book/basket/bookOrderComplete?flag=mypage'/>">주문번호 : <strong>${list.mainOrderVo.ordersNo}</strong>상세보기</a>
 							<c:forEach var="map" items="${list.orderDetailList }">
-								<div class="orderItems flex">
+								<div class="orderItems flex" style="display: flex;justify-content: flex-start;">
 									<a href="<c:url value='/main/book/bookDetail?bookNo=${map.BOOK_NO}&bookCategory=${map.BOOK_CATEGORY}'/>">
 										<img class="shadow-sm bg-body rounded" alt="1" src="<c:url value='/images/bookProduct/${map.BOOK_NO }.jpg'/>" style="width: 120px;">
 									</a>
@@ -80,15 +92,16 @@
 										<p><span>작가 : ${map.BOOK_WRITER}</span> | <span style="padding-left:5px">출판사 : ${map.BOOK_PUBLISHER}</span></p>
 										<br>
 										<p><span>가격 : <fmt:formatNumber value="${map.BOOK_PRICE }" pattern="#,###"/>원</span> | <span> 수량 : ${map.ORDERS_QTY }개</span></p>
-										
 									</div>								
-								</div>
+								</div><br>
 							</c:forEach>							
 						</div>
 						<div class="flex cancel_box">
 							<p><span>가격 : </span><fmt:formatNumber value="${list.mainOrderVo.sumPrice}" pattern="#,###"/>원</p>
 							<p>${list.orderDetailList[0].ORDERS_STATE }</p>
-							<button>취소 신청</button>
+							<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap"
+								onclick="ordersInput(this)"
+							>취소 신청</button>
 						</div>
 					</li>
 				</c:forEach>
@@ -99,5 +112,35 @@
 	</div>
 	</div>
 </section>
+
+<!-- 취소 신청 모달창 -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">주문 취소하기</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">다시 한번 생각해보세요</label>
+            <p> </p>
+          </div>
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">주의사항</label>
+            <p>주문을 정말로 취소하시겠습니까?<br>취소 후에는 주문내역에서 전부 사라집니다.</p>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+      	<input type="hidden" name="hiddenOrdersNo">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="cancleOrder()">취소 진행하기</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  -->
 
 <%@include file="../inc/bottom.jsp" %>
