@@ -24,36 +24,43 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:if test="${!empty myBoardList }">
-						<c:set var="i" value="0" />
-						<c:forEach var="map" items="${myBoardList }">
-							<c:if test="${map.BOARD_DEL_FLAG == 'N' }">
-								<tr>
-									<th scope="row" class="ck"><input type="checkbox" name="boardItems[${i }].boardNo" value="${map.BOARD_NO }"></th>
-									<td class="title">									
-										<a href="<c:url value='/main/board/boardDetail?boardNo=${map.BOARD_NO }'/>">
-											<c:if test="${map.BOARD_STEP > 0 }">
-												답변 - 
+					<form name="boardDelMultiFrm" method="POST" action="<c:url value='/main/board/boardListDel'/>">
+						<c:if test="${!empty myBoardList }">
+							<c:set var="i" value="0" />
+							<c:forEach var="map" items="${myBoardList }">
+								<c:if test="${map.BOARD_DEL_FLAG == 'N' }">
+									<tr>
+										<th scope="row" class="ck">
+											<input type="checkbox" name="boardItems[${i }].boardNo" value="${map.BOARD_NO }">
+											<input type="hidden" name="boardItems[${i }].boardGroupNo" value="${map.BOARD_GROUP_NO }">										
+											<input type="hidden" name="boardItems[${i }].boardStep" value="${map.BOARD_STEP }">										
+											<input type="hidden" name="boardItems[${i }].boardSort" value="${map.BOARD_SORT }">										
+										</th>
+										<td class="title">									
+											<a href="<c:url value='/main/board/boardDetail?boardNo=${map.BOARD_NO }'/>">
+												<c:if test="${map.BOARD_STEP > 0 }">
+													답변 - 
+												</c:if>
+												${map.BOARD_TITLE }
+											</a>
+											<c:if test="${map.FILECOUNT != 0 and map.BOARD_FILE_ADD_FLAG == 'Y'}">
+												<img alt="파일이미지" src="<c:url value='/images/file.gif'/>">
 											</c:if>
-											${map.BOARD_TITLE }
-										</a>
-										<c:if test="${map.FILECOUNT != 0 and map.BOARD_FILE_ADD_FLAG == 'Y'}">
-											<img alt="파일이미지" src="<c:url value='/images/file.gif'/>">
-										</c:if>
-										<c:if test="${map.BOARD_SECREATE == 'Y' }">
-											<i class="bi bi-lock"></i>
-										</c:if>									
-									</td>
-									<td class="boardForm">
-										<a href="<c:url value='/main/board/boardList?boardFormNo=${map.BOARD_FORM_NO }'/>">${map.BOARD_FORM_NAME }</a>
-									</td>
-									<td class="commentCount">${map.COMMENTCOUNT }</td>
-									<td class="readCount">${map.BOARD_READCOUNT }</td>
-								</tr>
-								<c:set var="i" value="${i + 1 }"/>
-							</c:if>
-						</c:forEach>
-					</c:if>
+											<c:if test="${map.BOARD_SECREATE == 'Y' }">
+												<i class="bi bi-lock"></i>
+											</c:if>									
+										</td>
+										<td class="boardForm">
+											<a href="<c:url value='/main/board/boardList?boardFormNo=${map.BOARD_FORM_NO }'/>">${map.BOARD_FORM_NAME }</a>
+										</td>
+										<td class="commentCount">${map.COMMENTCOUNT }</td>
+										<td class="readCount">${map.BOARD_READCOUNT }</td>
+									</tr>
+									<c:set var="i" value="${i + 1 }"/>
+								</c:if>
+							</c:forEach>
+						</c:if>
+					</form>
 				</tbody>
 			</table>
 		</div>

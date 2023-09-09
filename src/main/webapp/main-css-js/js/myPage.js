@@ -25,7 +25,7 @@ $(function(){
     //게시글 다중삭제 이벤트
     $('#boardMultiDel').click(function() {
 		$('#confirmModalBody').html('해당 게시글을 삭제하겠습니까?');
-		$('#confirmOk').attr('onclick', '$("form[name=boardFrm]").submit();');
+		$('#confirmOk').attr('onclick', '$("form[name=boardDelMultiFrm]").submit();');
 		$('#confirmModalBtn').trigger('click');		
 	});
 });

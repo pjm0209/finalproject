@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.team2.mbti.board.model.BoardFileVO;
 import com.team2.mbti.board.model.BoardFormVO;
+import com.team2.mbti.board.model.BoardListVO;
 import com.team2.mbti.board.model.BoardService;
 import com.team2.mbti.board.model.BoardVO;
 import com.team2.mbti.common.ConstUtil;
@@ -30,6 +31,7 @@ import com.team2.mbti.mbtisurvey.model.MbtiSurveyService;
 import com.team2.mbti.mbtisurvey.model.MbtiVO;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -364,4 +366,28 @@ public class MainBoardController {
 		
 		return boardList;
 	}
+	
+	@RequestMapping("/boardListDel")
+	public String boardListDel(@ModelAttribute BoardListVO listVo, HttpServletRequest request, HttpSession session) {
+		logger.info("게시글 다중삭제 파라미터 listVo: {}", listVo);
+		
+		List<BoardVO> list = listVo.getBoardItems();
+		
+		List<String> fileList = boardService.selectBoardFileList(list);
+		logger.info("파일리스트 fileList: {}", fileList);
+		
+		boardService.deleteBoardMulti(list);
+		
+		for(String fileName : fileList) {
+			String filePath = fileUploadUtil.getUploadPath(request, ConstUtil.UPLOAD_FILE_FLAG);
+			File file = new File(filePath, fileName);
+			if(file.exists()) {
+				boolean result = false;
+				result = file.delete();
+				logger.info("삭제처리 - 파일삭제처리 결과 result: {}", result);
+			}
+		}
+		
+		return "redirect:/main/mypage/myBoardList?no=" + session.getAttribute("no");
+	}	
 }

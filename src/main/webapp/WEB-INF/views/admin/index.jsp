@@ -40,7 +40,7 @@
 		$.ajax({
 			url:"<c:url value='/admin/indexChartAjax'/>",
 			data: {date : d},
-			type: "GET",
+			type: "POST",
 			dataType: "json",
 			success:function(res){
 				drawChart2(res);
@@ -90,15 +90,27 @@
         chart.draw(data,options);
       }
 		function drawChart2(res) {
+			var date = res[0].regdate.length;
+			var title="";
+			if(date==10){
+				title="일별 총 매출";
+			}
+			if(date==7){
+				title="월별 총 매출";
+			}
+			if(date==4){
+				title="연별 총 매출";
+			}
 			google.charts.load('current', { 'packages': ['bar'] });
 			google.charts.setOnLoadCallback(function () {
 				var data = new google.visualization.DataTable();
-				data.addColumn('string', 'DAY');
+				data.addColumn('string', "");
 				data.addColumn('number', '책');
 				data.addColumn('number', 'MBTI검사');
 				data.addColumn('number', 'MBTI교육');
 		//데이터 추가
 				$.each(res, function (index, item) {
+					
 					data.addRow([
 		                item.regdate,
 		                item.salesList[0].SUMPRICE, // 책 데이터
@@ -107,9 +119,10 @@
 		            ]);
 				});
 				
+				
 				var options = {
 					chart: {
-						title: '일별 총매출',
+						title: title,
 					},vAxis: {
 						format: '#,###원' // 값 뒤에 원(₩) 기호를 붙이고 천 단위 구분 기호를 사용합니다.
 					}

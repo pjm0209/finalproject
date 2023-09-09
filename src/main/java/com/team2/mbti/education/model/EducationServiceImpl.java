@@ -234,6 +234,8 @@ public class EducationServiceImpl implements EducationService{
 		return educationDao.insertSalesByEdu(vo);
 	}
 
-
-
+	@Override
+	public int selectEducationFlag(EducationVO vo) {
+		return educationDao.selectEducationFlag(vo);
+	}
 }

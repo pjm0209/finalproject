@@ -52,6 +52,7 @@
 			to_char(sales_regdate,'yyyy') regdate
 		</if> 
 		from sales
+		<![CDATA[where rownum<=5]]>
 		group by 
 		<if test="date=='day'">
 			to_char(sales_regdate,'yyyy-MM-dd')
@@ -61,7 +62,18 @@
 		</if> 
 		<if test="date=='year'">
 			to_char(sales_regdate,'yyyy')
+		</if>
+		order by
+		<if test="date=='day'">
+			to_char(sales_regdate,'yyyy-MM-dd')
 		</if> 
+		<if test="date=='month'">
+			to_char(sales_regdate,'yyyy-MM')
+		</if> 
+		<if test="date=='year'">
+			to_char(sales_regdate,'yyyy')
+		</if>
+		 
 	</select>
 	
 	<select id="selectSalesRate" resultType="map">

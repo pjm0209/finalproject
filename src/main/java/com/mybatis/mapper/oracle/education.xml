@@ -296,5 +296,8 @@
 		values(sales_seq.nextval, 3, #{eduName}, #{eduPrice})
 	</insert>
 	
-	
+	<select id="selectEducationFlag" parameterType="educationVo" resultType="int">
+		select count(*) from education_application
+		where no = #{no} and edu_no = #{eduNo}
+	</select>
 </mapper>
