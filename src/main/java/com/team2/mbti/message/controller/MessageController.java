@@ -138,9 +138,9 @@ public class MessageController {
 		int cnt=messageService.deleteSendDmBySendDmNo(sendDmListVo);
 		logger.info("관리자 쪽지 삭제 결과 cnt={}",cnt);
 		
-		String msg="선택한 쪽지들을 삭제도중 에러가 발생하였습니다",url="/admin/message/adminMessage";
+		String msg="선택한 쪽지를 삭제도중 에러가 발생하였습니다",url="/admin/message/adminMessage";
 		if(cnt>0) {
-			msg="선택한 쪽지들을 삭제하였습니다";
+			msg="선택한 쪽지를 삭제하였습니다";
 		}
 		
 		model.addAttribute("msg", msg);

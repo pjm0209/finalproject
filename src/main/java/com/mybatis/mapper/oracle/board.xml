@@ -210,4 +210,22 @@
 		and board_form_no = 2
 		order by board_regdate
 	</select>
+	
+	<select id="selectPrevNextBoard" parameterType="boardVo" resultType="map">
+		select b.* from(
+		    select next, prev from
+		    (
+		        select board_no, lead(board_no, 1) over (order by board_no) as next,
+		            lag(board_no, 1) over (order by board_no) as prev
+		        from board
+		        where board_form_no = #{boardFormNo}
+		        and board_del_flag != 'Y'
+		    )
+		    where board_no = #{boardNo}
+		)
+		join boardview b
+		on board_no = b.board_no
+		where board_no in(next, prev)
+		order by board_no
+	</select>
 </mapper>

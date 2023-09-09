@@ -26,17 +26,35 @@ select#member-search-select {
 <script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>
 <script type="text/javascript">
 	$(function(){
-		$('#member-delete-button').click(function(){
+/* 		$('#member-delete-button').click(function(){
 			if($('input[type=checkbox]:checked').length<1){
-				alert('탈퇴시킬 회원을 선택하세요.');
+				//alert('탈퇴시킬 회원을 선택하세요.');
+				$('#alertModalBody').html("탈퇴시킬 회원을 선택하세요.");
+			    $('#alertModal').modal('show');
 				return;
 			}
 			
 			if(confirm('선택한 회원을 탈퇴시키겠습니까?')){
-				$('form[name=form-Delete]').prop('action',contextPath+'/admin/member/memberDelete');
-				$('form[name=form-Delete]').submit();
+				 $('#confirmModalBody').html('선택한 회원을 삭제하시겠습니까?');		
+				 $('#confirmOk').attr('onclick', 'memberDel()');	 		 
+		         $('#confirmModalBtn').trigger('click');
 			}
+		}); */
+		
+		$('#member-delete-button').click(function(){
+			var count = $('input[type=checkbox]:checked').length;
+			
+			if(count < 1) {
+				$('#alertModalBody').html('탈퇴할 회원을 선택하세요.');
+				$('#alertModalBtn').trigger('click');
+				return false;
+			}
+
+			 $('#confirmModalBody').html('선택한 회원을 탈퇴시키겠습니까?');		
+			 $('#confirmOk').attr('onclick', 'memberDel()');	 		 
+	         $('#confirmModalBtn').trigger('click');
 		});
+			
 	});
 	
 	function memberDel() {
@@ -141,5 +159,43 @@ select#member-search-select {
 	</div>
 </div>
 <!-- End of Main Content -->
+    <button type="button" style="display: none" id="alertModalBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#alertModal"></button>
+    
+    <div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h1 class="modal-title fs-5" id="alertModalLabel">알림</h1>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	        <p id="alertModalBody"></p>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn bg-orange-primary" data-bs-dismiss="modal">확인</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
+    <button type="button" style="display: none" id="confirmModalBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirmModal"></button>
+    
+    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h1 class="modal-title fs-5" id="confirmModalLabel">알림</h1>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	        <p id="confirmModalBody"></p>
+	      </div>
+	      <div class="modal-footer">
+	      	<button class="btn btn-secondary" type="button" data-bs-dismiss="modal">취소</button>
+	        <button type="button" class="btn bg-orange-primary" id="confirmOk" data-bs-dismiss="modal">확인</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>	
 
 <%@ include file="../inc/bottom.jsp"%>

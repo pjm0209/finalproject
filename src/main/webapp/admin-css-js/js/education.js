@@ -147,7 +147,10 @@ var contextPath = "/mbti"
 				return false;
 			}
 			
-			$('form[name=frmDelete]').submit();
+			$('#confirmModalBody').html('선택한 신청자를 승인하시겠습니까?');		 		 
+         	$('#confirmOk').attr('onclick', 'educationAppOk()');		          
+         	$('#confirmModalBtn').trigger('click');
+			
 			
 		});
 		
@@ -189,6 +192,11 @@ var contextPath = "/mbti"
 
 	function educationLocDel() {
 		$('#eduTeaDelFrm').attr('action', contextPath + '/admin/education/locDelete');
+		$('form[name=frmDelete]').submit();
+	}
+	
+	function educationAppOk() {
+		$('#eduAppDelFrm').attr('action', contextPath + '/admin/education/appliUpdate');
 		$('form[name=frmDelete]').submit();
 	}
 	

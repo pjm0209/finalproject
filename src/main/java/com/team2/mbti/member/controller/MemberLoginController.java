@@ -143,6 +143,8 @@ public class MemberLoginController {
 		if(cnt > 0) {
 			msg = membervo.getUserid()+"님 회원가입을 축하드립니다.";
 			url = "/main/member/memberLogin";
+		}else {
+			url = "/main/member/memberRegister";
 		}
 		
 		model.addAttribute("msg",msg);

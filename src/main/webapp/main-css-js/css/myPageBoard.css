@@ -1,20 +1,37 @@
 @charset "UTF-8";
 
-section#myPageBoardList {
-    min-height: 600px;
-    padding-top: 200px;
-    background: #fff;
+.background {
+    background: white;
+    margin: 10px 10px 0 250px;
+    width: 86%;
+    height: 100%;
+    display: inline-block;
 }
 
-h1 {
+section#myPageBoardList {
+    min-height: 600px;
+    padding-top: 75px;
+    padding-bottom: 30px;
+    background: #f3f3f3;
+}
+
+.myBoardListTable h1 {
     color: black;
     text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    font-style: oblique;
 }
 
 .myBoardListTable table {
-    width: 85%;
+    width: 95%;
     float: right;
     margin: 40px;
+    margin-top: 10px;
+}
+
+.myBoardListTable {
+    padding-top: 80px;
 }
 
 th.ck {
@@ -36,4 +53,9 @@ th.ck {
     height: 15px;
     margin: 6px;
     float: left;
+}
+
+.multiDelDiv {
+    margin-left: 50px;
+    height: 45px;
 }
