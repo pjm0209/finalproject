@@ -43,6 +43,7 @@
 			type: "POST",
 			dataType: "json",
 			success:function(res){
+				console.log(res);
 				drawChart2(res);
 			},
 			error:function(xhr,status,error){
@@ -108,17 +109,20 @@
 				data.addColumn('number', '책');
 				data.addColumn('number', 'MBTI검사');
 				data.addColumn('number', 'MBTI교육');
-		//데이터 추가
-				$.each(res, function (index, item) {
-					
-					data.addRow([
-		                item.regdate,
-		                item.salesList[0].SUMPRICE, // 책 데이터
-		                item.salesList[1].SUMPRICE, // MBTI검사 데이터
-		                item.salesList[2].SUMPRICE  // MBTI교육 데이터
-		            ]);
-				});
 				
+				//데이터 추가
+				$.each(res, function (index, item) {
+				    // salesList 배열의 길이를 확인하고 부족한 부분을 0으로 채웁니다.
+				    while (item.salesList.length < 3) {
+				        item.salesList.push({ SALES_CATEGORY_NO: null, REGDATE: null, SUMPRICE: 0 });
+				    }
+				    data.addRow([
+				        item.regdate,
+				        item.salesList[0].SUMPRICE, // 책 데이터
+				        item.salesList[1].SUMPRICE, // MBTI검사 데이터
+				        item.salesList[2].SUMPRICE  // MBTI교육 데이터
+				    ]);
+				});
 				
 				var options = {
 					chart: {
@@ -331,22 +335,6 @@
 				<div
 					class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 					<h6 class="m-0 font-weight-bold text-primary">판매 비율</h6>
-					<div class="dropdown no-arrow">
-						<a class="dropdown-toggle" href="#" role="button"
-							id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-							aria-expanded="false"> <i
-							class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-						</a>
-						<div
-							class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-							aria-labelledby="dropdownMenuLink">
-							<div class="dropdown-header">Dropdown Header:</div>
-							<a class="dropdown-item" href="#">Action</a> <a
-								class="dropdown-item" href="#">Another action</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="#">Something else here</a>
-						</div>
-					</div>
 				</div>
 				<!-- Card Body -->
 				<div id="salesPiechart"
