@@ -170,7 +170,7 @@ var contextPath = "/mbti"
 
 		});
 		
-		//교육 찜하기 클릭 이벤트
+		/*//교육 찜하기 클릭 이벤트
 		$('div.edu_like').click(function() {
 			var a = $(this).find('.u_icon');
 			
@@ -179,7 +179,7 @@ var contextPath = "/mbti"
 			} else {
 				eduLikeIns($(a));
 			}
-		});
+		});*/
 		
 	});
 	
@@ -214,17 +214,14 @@ var contextPath = "/mbti"
 	}
 	
 	//교육 찜하기 처리
-	function eduLikeIns(a){
-		var eduNo = $('input[name=eduNo]').val();
-		var no = $('input[name=no]').val();
-		
+	function eduLikeIns(eduNo, no){				
 		$.ajax({
 			url:contextPath + '/educationLike/eduLikeIns',
 			type:'POST',
 			data:{eduNo:eduNo,
 				  no:no},
 			success:function(result) {			
-				$(a).addClass('like');
+				console.log(result);
 			},
 			error:function(xhr, status, error) {
 				alert(status + ": " + error);
@@ -233,17 +230,13 @@ var contextPath = "/mbti"
 	}
 	
 	//교육 찜하기 취소
-	function eduLikeDel(a) {
-		var eduNo = $('input[name=eduNo').val();
-		var no = $('input[name=no]').val();
-		
+	function eduLikeDel(eduNo) {		
 		$.ajax({
 			url:contextPath + '/educationLike/eduLikeDel',
 			type:'POST',
-			data:{eduNo:eduNo,
-				  no:no},
+			data:{eduNo:eduNo},
 			success:function(result) {			
-				$(a).removeClass('like');
+				console.log(result);
 			},
 			error:function(xhr, status, error) {
 				alert(status + ": " + error);

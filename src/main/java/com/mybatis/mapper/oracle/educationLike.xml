@@ -19,4 +19,10 @@
 	<select id="selectByNoEduLike" parameterType="int" resultType="map">
 		select * from edu_like_view where no = #{no}
 	</select>
+	
+	<select id="selectEduLikeByNo" parameterType="educationLikeVo" resultType="int">
+		select count(*) from education_heart
+		where no = #{no}
+		and edu_no = #{eduNo}
+	</select>
 </mapper>
