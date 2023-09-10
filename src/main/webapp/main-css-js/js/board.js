@@ -47,7 +47,7 @@ $(function(){
 		
 	/*게시글 상세보기 페이지 댓글, 좋아요 로딩*/
 	if($('.board_comment_flag').val() == 'Y') {
-		commentsList($('input[name=boardNo]').val());		
+		commentsList($('.boardNo').val());		
 	}
 	
 	if($('#boardDetail').val() == 'boardDetail') {
@@ -317,6 +317,7 @@ function likeSelect() {
 
 /*댓글리스트 불러오기 함수*/
 function commentsList(boardNo) {
+	console.log(boardNo);
 	$.ajax({
 		url:contextPath + '/comments/list',
 		type:'GET',
@@ -338,7 +339,10 @@ function comments(comment) {
 		var boardWriter = "";
 		var commentDelCount = 0;
 		var commentCount = 0;
-		var accordianNo = 0;
+		var accordianNo = 0;			
+		var user = ""; 
+		user = $('.session-userId').val();
+
 		
 		if($('.member-userId').val().length < 1) {
 			boardWriter = $('.admin-adminId').val();
@@ -351,7 +355,6 @@ function comments(comment) {
 		for(var i = 0; i < comment.length; i++) {
 			var vo = comment[i];			
 			var date = new Date(vo.commentsRegdate);
-			var user = $('.session-userId').val();
 			const regdate = new Date(date.getTime()).toISOString().split('T')[0] + " " + date.toTimeString().split(' ')[0];
 			
 			if(commentCount % 10 == 0 && comment.length - commentCount >= 10) {
@@ -482,7 +485,7 @@ function commentWrite() {
 		type:"POST",
 		success:function(res) {
 			console.log(res);
-			commentsList($('input[name=boardNo]').val());
+			commentsList($('.boardNo').val());
 			$('#comment-area').val('');
 		},
 		error:function(xhr, status, error) {
@@ -506,7 +509,7 @@ function commentReplyWrite() {
 		type:"POST",
 		success:function(result) {
 			console.log(result);
-			commentsList($('input[name=boardNo]').val());
+			commentsList($('.boardNo').val());
 			$('#comment-area').val('');
 			commentFormMove();
 		},
@@ -531,7 +534,7 @@ function commentWriteEdit() {
 		type:"POST",
 		success:function(result) {
 			console.log(result);
-			commentsList($('input[name=boardNo]').val());
+			commentsList($('.boardNo').val());
 			$('#comment-area').val('');
 			commentFormMove();
 		},
