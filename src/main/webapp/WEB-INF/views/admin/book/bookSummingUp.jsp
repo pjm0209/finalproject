@@ -98,21 +98,21 @@ $(function() {
 						dot = "";
 					}%> 
 	    		{
-					title: '결 제 금 액 : ',
+					title: '결 제 금 액 ',
 					start: "<%=resultDay%>",
 					textColor : 'green',
 					backgroundColor : "white",
 					borderColor  : "white"
 				},
 				{
-					title: '환 불 금 액 : ',
+					title: '환 불 금 액',
 					start: "<%=resultDay%>",
 					textColor : 'red',
 					backgroundColor : "white",
 					borderColor  : "white"
 				},
 				{
-					title: '매 출 액 : ',
+					title: '매 출 액',
 					start: "<%=resultDay%>",
 					textColor : 'blue',
 					backgroundColor : "white",
@@ -130,11 +130,12 @@ $(function() {
 });
 
 function ajaxSumByDay(salesRegdate){
+	var list = "";
 	$.ajax({		
 		url:"<c:url value='/admin/book/showDaySumPrice?salesRegdate="+salesRegdate+"&bookFlag=statistic'/>",
 		type:'POST',
 		success:function(result){
-			var list = result.split("^");
+			list = result.split("^");
 			
 			var sum = list[0].toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 			var refund = list[1].toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
@@ -148,8 +149,10 @@ function ajaxSumByDay(salesRegdate){
 		error:function(xhr, status, error){
 			alert(status + " : " + error);
 		}
-	})
+	});
+	return list;
 }
+
 
 </script>
 <style>
