@@ -126,14 +126,8 @@ public class MainBasketController {
 	
 	
 	@RequestMapping("/bookOrderComplete")
-	public String bookOrderComplete(@ModelAttribute MainOrderVO orderVo, @RequestParam(defaultValue = "0") int ordersNo,
+	public String bookOrderComplete(@ModelAttribute MainOrderVO orderVo, 
 			@ModelAttribute MainBookVOList bookListVo, Model model, HttpSession session) {
-		if(ordersNo == 0) {
-			model.addAttribute("msg", "잘못된 url입니다.");
-			model.addAttribute("url", "/main/index");
-
-			return "common/message";
-		}
 		
 		logger.info("책 주문 페이지 3단계(결제 내역 확인) - bookOrderComplete, 파라미터 orderVo={}", orderVo);
 		logger.info("파라미터 bookListVo={}", bookListVo);
