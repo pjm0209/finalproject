@@ -302,7 +302,7 @@
 	<script type="text/javascript" src="<c:url value='/js/sticky-sidebar.js'/>"></script>
 	<script type="text/javascript">
 			var a = new StickySidebar('#sidebar', {
-				topSpacing : 400
+				topSpacing : 150
 			});
 		</script>
 </section>

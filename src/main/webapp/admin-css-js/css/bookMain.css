@@ -238,7 +238,7 @@ ul, li {
 }
 
 #bookSellMainImg img {
-	width: 1920px;
+	
 	height: 600px;
 	margin: 0;
 	padding: 0;
@@ -629,6 +629,7 @@ ul, li {
 	position: absolute;
 	top: 0;
 	left: 0%;
+	margin:0;padding:0;
 }
 
 .bookslide .gallery li {
