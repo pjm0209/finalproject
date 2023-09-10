@@ -43,20 +43,20 @@ label{
 	margin-left: 750px;
 }
 
-.btnSearch {
+.btnSearch2 {
     text-align: center;	
     justify-content: space-between; 
     margin-bottom: 30px;
 }
 
-#btnSearch{
+#btnSearch2{
   	width: 180px;
  	height: 50px;
 	font-weight: bold;	
 	color: white;
 }
 
-#btnCancel{
+#btnCancel2{
 	width: 180px;
  	height: 50px;
 	font-weight: bold;	
@@ -73,14 +73,7 @@ label{
                 window.location.href = '<c:url value="/main/index"/>';
             }
         }); 
-        
-        $('#btnCancel').click(function(){
-            var confirmed = confirm("메인 화면으로 돌아가시겠습니까?");
-            if (confirmed) {
-                window.location.href = '<c:url value="/main/index"/>';
-            }
-        }); 
-            	
+             	
         $('#btnSearch').click(function(e) {
             e.preventDefault(); 
 
@@ -127,12 +120,16 @@ label{
 </script>
 
 <div class="content">
-<h1 class="title">아이디 찾기</h1>	
-		<form name = "form-find-id" method="get" action="<c:url value='/main/member/findIdResult'/>">		
-			<p class="p">회원가입 시 입력한 이메일을 입력하시면 아이디를 찾을 수 있습니다.</p>	
+<h1 class="title">아이디 찾기</h1>	  
+	<form name = "form-find-id-tel" method="post" action="<c:url value='/main/member/forgot-id'/>">	
+		<div class="tab-content active">													
+		</div>	
+		</form>		
+		<form name = "form-find-id" method="post" action="<c:url value='/main/member/findIdResult'/>">		
+			<p class='p'>회원가입 시 입력한 이메일을 입력하시면 아이디를 찾을 수 있습니다.</p>	
 				<div class="findEmail-name2">
-					<label>*&nbsp;이름 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-						<input type="text" name="name" id="name2" placeholder="이름을 입력하세요">	
+					<label>*&nbsp;이름 :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+						<input type="text" name="name" id="name" placeholder="이름을 입력하세요">	
 				</div><br>		
 			
 				<div class="findEmail-email">
@@ -140,12 +137,12 @@ label{
 						<input type="email" name="email" id="email" placeholder="이메일을 입력하세요">		
 				</div><br>
 													
-				<div class="btnSearch"><br>
-					<button class="btn btn-primary" type="submit" id="btnSearch">찾기</button>	
-					<button class="btn btn-info" type="button" id="btnCancel">취소</button>					
-				</div>			
+				<div class="btnSearch2"><br>
+					<button class="btn btn-primary" type="submit" id="btnSearch2">찾기</button>	
+					<button class="btn btn-info" type="button" id="btnCancel2">취소</button>					
+				</div>
 	</form>    
-</div>
+</div>				
 
     <button type="button" style="display: none" id="alertModalBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#alertModal"></button>
     
