@@ -5,8 +5,17 @@
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script type="text/javascript">
 	$(function(){
-		$("eduLikeDelBtn").click(function(){
-			
+		$("#eduLikeDelBtn").click(function(){
+			$('.eduLike').find('tbody tr').each(function(){
+				var result = $(this).find('input[type=checkbox]').is(':checked');
+				var eduNo = $(this).find('input[name=eduNo]').val();
+				
+				if(result) {
+					eduLikeDel(eduNo);
+					
+					$(this).remove();
+				}
+			});
 		});
 	});
 	
@@ -110,7 +119,7 @@
 		<h4>찜하기 목록</h4>
 	</div>
 	<!-- 찜하기 목록 -->
-	<form name="frmDelete" method="post" id="myAppDelFrm" action="<c:url value='/main/mypage/applyCan'/>">
+	<form name="frmDelete" method="post" class="eduLike" id="myAppDelFrm" action="<c:url value='/main/mypage/applyCan'/>">
 		<table class="table" id="educationtb" style="margin-top:30px;">
 			<thead>
 				<tr class="board-table-colum">
@@ -132,10 +141,9 @@
 				<c:if test="${!empty likeList }">
 					<c:set var="idx" value="0"/>
 					<c:forEach var="map" items="${likeList}">
-							<c:set var="educationNo" value="${educationLikeVo.eduNo}"/>
 							<tr>
 								<th scope="row">
-									<input type="checkbox" class="board-checkbox" name="educationItems[${idx}].eduNo" value="${educationLikeVo.eduNo }">
+									<input type="checkbox" class="board-checkbox" name="eduNo" value="${map.EDU_NO }">
 								</th>
 								<td>${map.EDU_NAME }</td>
 								<td>${map.EDU_TEA_NAME }</td>
