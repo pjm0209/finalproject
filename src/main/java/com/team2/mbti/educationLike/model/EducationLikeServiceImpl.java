@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+import com.team2.mbti.education.model.EducationListVO;
+
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -22,12 +24,13 @@ public class EducationLikeServiceImpl implements EducationLikeService{
 		return educationLikeDao.deleteEduLike(vo);
 	}
 
-
-
 	@Override
 	public List<Map<String, Object>> selectByNoEduLike(int no) {
 		return educationLikeDao.selectByNoEduLike(no);
 	}
 
-
+	@Override
+	public int selectEduLikeByNo(EducationLikeVO vo) {
+		return educationLikeDao.selectEduLikeByNo(vo);
+	}
 }
