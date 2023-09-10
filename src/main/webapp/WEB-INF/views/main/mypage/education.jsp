@@ -126,7 +126,7 @@
 					<th scope="col"><input type="checkbox" id="check-All" class="board-checkbox"></th>
 					<th scope="col">교육 이름</th>
 					<th scope="col">강사명</th>
-					<th scope="col">교육 기간</th>
+					<th scope="col">교육 날짜</th>
 					<th scope="col">교육비</th>
 					<th scope="col">교육장</th>
 				</tr>
@@ -169,7 +169,7 @@
 					<th scope="col"><input type="checkbox" id="check-All" class="board-checkbox"></th>
 					<th scope="col">교육 이름</th>
 					<th scope="col">강사명</th>
-					<th scope="col">교육 기간</th>
+					<th scope="col">교육 날짜</th>
 					<th scope="col">교육비</th>
 					<th scope="col">교육장</th>
 					<th scope="col">신청 현황</th>
@@ -214,7 +214,7 @@
 					<th scope="col"><input type="checkbox" id="check-All-my"></th>
 					<th scope="col">교육 이름</th>
 					<th scope="col">강사명</th>
-					<th scope="col">교육 기간</th>
+					<th scope="col">교육 날짜</th>
 					<th scope="col">교육비</th>
 					<th scope="col">교육장</th>
 					<th scope="col">결제 상태</th>
@@ -255,7 +255,7 @@
 				<tr class="board-table-colum">
 					<th scope="col">교육 이름</th>
 					<th scope="col">강사명</th>
-					<th scope="col">교육 기간</th>
+					<th scope="col">교육 날짜</th>
 					<th scope="col">교육비</th>
 					<th scope="col">교육장</th>
 					<th scope="col">결제 상태</th>
