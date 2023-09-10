@@ -81,11 +81,5 @@
 		GROUP BY SALES_CATEGORY_NO
 		ORDER BY SALES_CATEGORY_NO
 	</select>
-	<select id="selectSalesSumbyDay" parameterType="string" resultType="int">
-		select sum(*) from sales
-		where sales_regdate>=#{salesRegdate}
-		<![CDATA[
-		and sales_regdate < to_date(#{salesRegdate})+1]]>
-		and sales_category_no=1
-	</select>
+	
 </mapper>

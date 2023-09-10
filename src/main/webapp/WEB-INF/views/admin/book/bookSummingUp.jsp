@@ -20,6 +20,7 @@
 
 
 $(function() {
+	
 	var yearFisrtDay = new Date('2023-01-01');
 	var yearFisrtDay2 = yearFisrtDay.getFullYear() + "-"
 		+ ( (yearFisrtDay.getMonth() + 1) < 10 ? "0" + (yearFisrtDay.getMonth() + 1) : (yearFisrtDay.getMonth() + 1) )
@@ -44,14 +45,13 @@ $(function() {
 		dateClick: function(info) {
 			console.log(info.dateStr);
 			$('#dateStr').val(info.dateStr);
-			openModal(info);
 		},
 		/*  navLinks: true, // can click day/week names to navigate views */
 		selectable: true,
 		select: function(info) {
 			/* calendar.unselect() */
 			console.log(info.dateStr);
-			openModal(info);
+			/* openModal(info); */
 		},
 		eventClick: function(info){
 			
@@ -63,7 +63,8 @@ $(function() {
 			$('#dateStr').val(d);
 			
 			console.log(d);
-			openModal(info);
+			openModal();
+			var sum = ajaxSumByDay(d);
 		},
 		editable: true,
 		dayMaxEvents: true, // allow "more" link when too many events
@@ -130,19 +131,19 @@ $(function() {
 
 function ajaxSumByDay(salesRegdate){
 	$.ajax({		
-		url:"<c:url value='/admin/book/showDaySumPrice?bookFlag=statistic'/>",
+		url:"<c:url value='/admin/book/showDaySumPrice?salesRegdate="+salesRegdate+"&bookFlag=statistic'/>",
 		type:'POST',
-		data:{
-			salesRegdate: salesRegdate
-		},
-		success:function(sum){
-			if(cnt > 0){
-				$('#payment .no').html(sum);
-				ajaxFunc();
-			} else {
-				$('#alertModalBody').html("주문 상태 수정 실패했습니다...");
-				$('#alertModalBtn').trigger('click');
-			} 
+		success:function(result){
+			var list = result.split("^");
+			
+			var sum = list[0].toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+			var refund = list[1].toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+			var total = list[2].toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+			
+			$("#modalLabel").text("매출정보( "+salesRegdate+" )");
+			$('#sum').text(sum);
+			$('#refund').text(refund);
+			$('#totalSum').text(total);
 		},
 		error:function(xhr, status, error){
 			alert(status + " : " + error);
@@ -163,10 +164,11 @@ function ajaxSumByDay(salesRegdate){
 <!--  -->
 <%-- <%@ include file="../book/bookSideBody.jsp"%> --%>
 <div class="board-body">
-	<div id="board-title">
-		<h5>매출 현황</h5>
-	</div>
 	<div class="shadow-sm p-3 mb-5 bg-body rounded" style="margin: 15px 0px;margin-right: 15px;background: white">
+		<c:set var="resultStr" value="${fn:split(strSum, '^')}"/>
+		<c:set var="sumsum" value="${resultStr[0]}"/>
+		<c:set var="refundrefund" value="${resultStr[1]}"/>
+		<c:set var="totaltotal" value="${resultStr[2]}"/>
 		<div>
 			<ul class="list-group list-group-horizontal shadow-sm p-3 mb-5 bg-body rounded">
 	            <li class="list-group-item">
@@ -175,7 +177,7 @@ function ajaxSumByDay(salesRegdate){
 	                        <i class="fas fa-fw fa-database greenF"></i>
 	                        <span class="greenF align-right">결제 금액</span>
 	                    </dt>
-	                    <dd id="payment" class="price"><span class="no"></span><span class="unit">원</span></dd>
+	                    <dd id="payment" class="price"><span class="no" id="showSum">${sumsum}</span><span class="unit">원</span></dd>
 	                </dl>
 	            </li>
 	            <li class="list-group-item">
@@ -184,7 +186,7 @@ function ajaxSumByDay(salesRegdate){
 	                        <i class="fas fa-fw fa-reply redF"></i>
 	                        <span class="redF align-right">환불 금액</span> 
 	                    </dt>
-	                    <dd id="refund" class="price"><span class="no">0</span><span class="unit">원</span></dd>
+	                    <dd class="price"><span class="no" id="showRefund">${refundrefund}</span><span class="unit">원</span></dd>
 	                </dl>
 	            </li>
 	            <li class="list-group-item">
@@ -193,46 +195,47 @@ function ajaxSumByDay(salesRegdate){
 	                        <i class="fas fa-fw fa-cubes blueF"></i>
 	                        <span class="blueF">매출액 </span>
 	                    </dt>
-	                    <dd id="sales" class="price"><span class="no">0</span><span class="unit">원</span></dd>
+	                    <dd id="sales" class="price"><span class="no" id="showTotal">${totaltotal}</span><span class="unit">원</span></dd>
 	                </dl>
 	            </li>
 			</ul>
            	<div id="ex1" class="modal" style="display: hidden;">
 					      <div class="modal-header" style="background-image: linear-gradient(316deg, #df7f7f 10%, #FF5722 100%);">
-					      	<h3 id="modalLabel">매출정보 ( ${date} )</h3>
+					      	<h3 id="modalLabel"> </h3>
 					      </div>
 					      <div class="modal-body">
 					      	<table class="table table-striped-columns" id="modalTable">
 							  <tbody class="table-group-divider">
 							    <tr>
 							      <th scope="row">상품 결제금액</th>
-							      <td>
-							      	<fmt:formatNumber value="${money}" pattern="#,###"/>원
+							      <td >
+							      	<b id="sum">
+							      	</b>원
 							      </td>
 							    </tr>
-							    <tr>
+							    <%-- <tr>
 							      <th scope="row">배송비 결제금액</th>
 							      <td>
 							      	<fmt:formatNumber value="${money}" pattern="#,###"/>원
 							      </td>
-							    </tr>
+							    </tr> --%>
 							    <tr>
 							      <th scope="row">상품 환불금액</th>
 							      <td>
-							      	<fmt:formatNumber value="${money}" pattern="#,###"/>원
+							    	<b id="refund">
+							      	</b>원
 							      </td>
 							    </tr>
-							     <tr>
+							     <%-- <tr>
 							      <th scope="row">배송비 환불금액</th>
 							      <td>
 							      	<fmt:formatNumber value="${money}" pattern="#,###"/>원
 							      </td>
-							    </tr>
+							    </tr> --%>
 							     <tr>
 							      <th scope="row">매출액</th>
 							      <td>
-							      	<b>
-							      		<fmt:formatNumber value="1000000" pattern="#,###"/>
+							      	<b id="totalSum">
 							      	</b>원
 							      </td>
 							    </tr>
@@ -243,7 +246,7 @@ function ajaxSumByDay(salesRegdate){
 					        <a href="#" rel="modal:close" type="button" class="btn btn-primary" data-bs-dismiss="modal" style="width: 100%;">닫기</a>
 					      </div>
 					</div>
-	        <br><br><input id="dateStr" type="text">
+	        <br><br><input id="dateStr" type="hidden">
 				<!-- Cloudflare Pages Analytics -->	
 			<div id="calendar" class="shadow-sm p-3 mb-5 bg-body rounded"></div>
 				<!-- Cloudflare Pages Analytics -->

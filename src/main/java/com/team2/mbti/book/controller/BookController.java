@@ -1,5 +1,6 @@
 package com.team2.mbti.book.controller;
 
+
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -22,7 +23,6 @@ import com.team2.mbti.book.model.StockBookVO;
 import com.team2.mbti.book.model.StockBookVOList;
 import com.team2.mbti.common.ConstUtil;
 import com.team2.mbti.common.PaginationInfo;
-import com.team2.mbti.sales.model.SalesService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -35,7 +35,6 @@ public class BookController {
 
 	private static final Logger logger = LoggerFactory.getLogger(BookController.class);
 	private final BookService bookService;
-	private final SalesService salesService;
 	private final FileUploadUtil2 fileUploadUtil2;
 
 	/*
@@ -324,8 +323,10 @@ public class BookController {
 	@RequestMapping("/bookSummingUp")
 	public String bookSummingUp(Model model) {
 		logger.info("책관리 페이지 - 책 매출현황 페이지입니다.");
-
+		
+		String strSum =  bookService.showMainSum();
 		model.addAttribute("title", "책 매출현황 페이지");
+		model.addAttribute("strSum", strSum);
 
 		return "admin/book/bookSummingUp";
 	}
@@ -428,17 +429,15 @@ public class BookController {
 
 	@ResponseBody
 	@RequestMapping("/showDaySumPrice")
-	public String showDaySumPrice(@RequestParam(defaultValue = "0") String salesRegdate, @RequestParam(defaultValue = "0") String bookFlag,
-			Model model) {
+	public String showDaySumPrice2(@RequestParam(required = false) String salesRegdate,
+			@RequestParam(required = false)String bookFlag, Model model) {
 		logger.info("관리자 페이지 - 책 판매 통계 보기, 파라미터 salesRegdate={}, bookFlag={}", salesRegdate, bookFlag);
-		if (bookFlag == "0") {
-			model.addAttribute("url", "/admin/index");
-			model.addAttribute("msg", "잘못된 url입니다.");
-			return "common/message";
-		}
-		int sum = salesService.selectSalesSumbyDay(salesRegdate);
-
-		return sum+"";
+		
+		String sum = bookService.selectSalesSumbyDay(salesRegdate);
+		logger.info("sum=", sum);
+		
+		
+		return sum;
 	}
 	
 }//

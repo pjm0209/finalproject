@@ -1,5 +1,6 @@
 package com.team2.mbti.sales.model;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -37,10 +38,6 @@ public class SalesServiceImpl implements SalesService{
 		return salesDao.selectSalesRate();
 	}
 
-	@Override
-	public int selectSalesSumbyDay(String salesRegdate) {
-		return salesDao.selectSalesSumbyDay(salesRegdate);
-	}
 
 	
 
