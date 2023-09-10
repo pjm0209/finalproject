@@ -237,6 +237,7 @@
 	      select * from 
 	      book b join stock s
 	      on b.book_no = s.book_no
+	      order by b.book_regdate desc
   	</select>
 	
 </mapper>
