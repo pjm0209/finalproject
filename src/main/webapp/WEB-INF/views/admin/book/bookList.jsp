@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="../inc/top.jsp"%>
 <script type="text/javascript" src="<c:url value='/admin-css-js/js/book.js'/>"></script>
 <script type="text/javascript">
@@ -90,27 +90,32 @@
 		});//ajax
 	}
 	function deleteEach(originalBookNo){
-		if (confirm("상품번호 : " + originalBookNo+"을 삭제할까요?")) {
-			/* $('form[name=frmList]').submit(); */
-			$.ajax({
-			url:"<c:url value='/admin/book/bookAjaxDelete'/>",
-			type:"post",
-			data:{
-				bookNo: originalBookNo
-			},
-			success:function(cnt){
-				if(cnt > 0){
-					alert("상품번호 : " + originalBookNo + " 삭제 성공했습니다.");
-					ajaxFunc();
-				} else {
-					alert("상품번호 : " + originalBookNo + " 삭제 실패입니다. 다시 시도해주세요.");
-				} 
-			},
-			error:function(xhr, status, error){
-				alert(status + " : " + error);
-			}
-		});//ajax
+		$('#confirmModalBody').html("상품번호 : " + originalBookNo+"을 삭제할까요?");
+		$('#confirmOk').attr("onclick","deleteAjaxEach("+originalBookNo+")");
+		$('#confirmModalBtn').trigger('click');
+	}
+	
+	function deleteAjaxEach(originalBookNo){
+		$.ajax({
+		url:"<c:url value='/admin/book/bookAjaxDelete'/>",
+		type:"post",
+		data:{
+			bookNo: originalBookNo
+		},
+		success:function(cnt){
+			if(cnt > 0){
+				$('#alertModalBody').html("상품번호 : " + originalBookNo + " 삭제 성공했습니다.");
+				$('#alertModalBtn').trigger('click');
+				ajaxFunc();
+			} else {
+				$('#alertModalBody').html("상품번호 : " + originalBookNo + " 삭제 실패입니다. 다시 시도해주세요.");
+				$('#alertModalBtn').trigger('click');
+			} 
+		},
+		error:function(xhr, status, error){
+			alert(status + " : " + error);
 		}
+	});//ajax
 	}
 
 	function updateQtyEach(oBookNo, oQty, idx){
@@ -136,10 +141,12 @@
 			},
 			success:function(cnt){
 				if(cnt > 0){
-					alert(oQty + " → " + uQty + " 수정 성공했습니다.");
+					$('#alertModalBody').html(oQty + " → " + uQty + " 수정 성공했습니다.");
+					$('#alertModalBtn').trigger('click');
 					ajaxFunc();
 				} else {
-					alert("재고량 수정 실패했습니다...");
+					$('#alertModalBody').html("재고량 수정 실패했습니다...");
+					$('#alertModalBtn').trigger('click');
 				} 
 			},
 			error:function(xhr, status, error){
@@ -151,6 +158,7 @@
 	function openEdit(bookNo){
 		location.href="bookEdit?bookNo=" + bookNo;
 	}
+	
 	function makeListJson(list){
 		var htmlStr = "";
 		
@@ -255,6 +263,11 @@
 		/* $('form[id=frmPageId]').submit(); */
 	}
 	
+	function ExcelDownlad(){
+		
+		
+	}
+	
 </script>
 
 <!-- Begin Page Content -->
@@ -281,12 +294,11 @@
 <!--  -->
 <%-- <%@ include file="../book/bookSideBody.jsp"%> --%>
 <!--  -->
-
 <div class="board-body">
-
 	<div id="board-title">
 		<c:if test="${param.bookFlag != 'Inventory'}">
-			<h5>상품 리스트</h5>
+			<h5>상품 리스트</h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href= "<c:url value='/admin/book/Excel?bookNo=${param.bookNo}'/>">상품 리스트 다운로드</a>		
 			<button class="btn btn-warning bg-gradient-secondary book-button"
 				 id="bookRegisterBtn" onclick="location.href='bookRegister'">새 상품 등록</button>
 			<button class="btn btn-warning bg-gradient-secondary book-button"  
@@ -380,7 +392,7 @@
 				</tbody>
 				
 				
-			</table>
+			</table>				
 			<form id="frmDeleteMulti" name="frmDeleteMulti" method="post"  action="<c:url value='/admin/book/deleteMulti'/>">
 			<form id="frmUpdateQtyMulti" name="frmUpdateQtyMulti" method="post"  action="<c:url value='/admin/book/updateMulti'/>">
 			</form>
@@ -410,7 +422,7 @@
 					    </li>
 				    </c:if>
 				  </ul> --%>
-				</nav>
+				</nav>			
 			<!--  페이지 번호 끝 -->
 		</div>
 	</div>
@@ -432,6 +444,5 @@
 	</div>
 	
 </div>
-
 <!-- End of Main Content -->
 <%@ include file="../inc/bottom.jsp"%>

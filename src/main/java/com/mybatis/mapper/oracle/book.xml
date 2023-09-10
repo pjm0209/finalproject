@@ -186,4 +186,51 @@
 		on b.book_no = s.book_no
 		and b.book_no = #{bookNo}
 	</select>
+	<select id="selectSalesSumbyDay" parameterType="string" resultType="string">
+		select NVL(MAX(to_char(sum(sales_price))), 0) sum from sales
+		where sales_regdate>=#{salesRegdate}
+		<![CDATA[
+		and sales_regdate < to_date(#{salesRegdate})+1
+		and sales_category_no=1
+		and sales_price > 0]]>
+		GROUP by sales_category_no
+	</select>
+	
+	<select id="selectSalesRefundbyDay" parameterType="string" resultType="string">
+		select NVL(MAX(to_char(sum(sales_price))), 0) sum from sales
+		where sales_regdate>=#{salesRegdate}
+		<![CDATA[
+		and sales_regdate < to_date(#{salesRegdate})+1
+		and sales_category_no=1
+		and sales_price < 0]]>
+		GROUP by sales_category_no
+	</select>
+	<select id="selectSalesTotalbyDay" parameterType="string" resultType="string">
+		select NVL(MAX(to_char(sum(sales_price))), 0) sum from sales
+		where sales_regdate>=#{salesRegdate}
+		<![CDATA[
+		and sales_regdate < to_date(#{salesRegdate})+1]]>
+		and sales_category_no=1
+		GROUP by sales_category_no
+	</select>
+	
+	<select id="showTotal" resultType="string">
+		select NVL(MAX(to_char(sum(sales_price))), 0) sum from sales
+		where sales_category_no=1
+		GROUP by sales_category_no
+	</select>
+	<select id="showSum" resultType="string">
+		select NVL(MAX(to_char(sum(sales_price))), 0) sum from sales
+		where sales_category_no=1
+		and sales_price > 0
+		GROUP by sales_category_no
+	</select>
+	<select id="showRefund" resultType="string">
+		select NVL(MAX(to_char(sum(sales_price))), 0) sum from sales
+		where sales_category_no=1
+		<![CDATA[
+		and sales_price < 0]]>
+		GROUP by sales_category_no
+	</select>
+	
 </mapper>

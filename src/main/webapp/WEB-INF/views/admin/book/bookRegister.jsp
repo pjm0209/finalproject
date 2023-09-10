@@ -19,6 +19,11 @@
 		$('#imgLb').text("");
 		
 		$("#submitBtn").click(function(){
+			if($("#select1").val().length<1){
+				$('#alertModalBody').html("카테고리를 선택하세요");
+				$('#alertModalBtn').trigger('click');
+				return false;
+			}
 			if($("#bookTitle").val().length < 1){
 				$('#alertModalBody').html("제목을 입력하세요");
 				$('#alertModalBtn').trigger('click');
@@ -26,6 +31,11 @@
 			}
 			if($("#bookPrice").val().length < 1){
 				$('#alertModalBody').html("판매가를 입력하세요");
+				$('#alertModalBtn').trigger('click');
+				return false;
+			}
+			if($("#upfile").val().length < 1){
+				$('#alertModalBody').html("사진을 입력하세요");
 				$('#alertModalBtn').trigger('click');
 				return false;
 			}
@@ -39,11 +49,17 @@
 				$('#alertModalBtn').trigger('click');
 				return false;
 			}
+			if($("#stockQty").length < 1){
+				$('#alertModalBody').html("사용여부를 체크하세요");
+				$('#alertModalBtn').trigger('click');
+				return false;
+			}
 			if($("#bookUseflag:checked").length < 1){
 				$('#alertModalBody').html("사용여부를 체크하세요");
 				$('#alertModalBtn').trigger('click');
 				return false;
 			}
+			
 			
 		});
 		
@@ -179,18 +195,10 @@ function deleteImageAction(index){
 							>기타</option>
 						</select>
 					</div>
-					<<!-- div class="c2">
-						<select class="form-select red" aria-label="Default select example" id="select1">
-							<option selected>Open this select menu</option>
-							<option value="1">One</option>
-							<option value="2">Two</option>
-							<option value="3">Three</option>
-						</select>
-					</div> -->
 				</div>									
 			</div>
-			<div class="bookTitle red">
-				<label class="red" for="bookExplains">상품 이름</label>
+			<div class="bookTitle ">
+				<label class="" for="bookExplains">상품 이름</label>
 				<div class="inputBookTitle">
 					<input class="form-control" id="bookTitle" name="bookTitle" placeholder="책 이름" type="text" value="${vo.bookTitle}">
 				</div>
@@ -204,7 +212,7 @@ function deleteImageAction(index){
 			</div>
 			
 			<div class="bookPrice">
-				<label class="red" for="bookPrice">판매가</label>
+				<label class="" for="bookPrice">판매가</label>
 				<div class="inputBookPrice">
 					<input class="form-control" id="bookPrice" name="bookPrice" placeholder="판매가 예) 12000"
 					 type="number" value="${vo.bookPrice}">
@@ -236,7 +244,7 @@ function deleteImageAction(index){
 				</c:if>
 			</div>
 			<br>
-			<div class="bookWriter red" style="margin-top: 35px;">
+			<div class="bookWriter " style="margin-top: 35px;">
 				<label class="" for="bookWriter">저 자</label>
 				<div class="inputBookWriter">
 					<input class="form-control" id="bookWriter" name="bookWriter"
@@ -244,10 +252,10 @@ function deleteImageAction(index){
 				</div>
 			</div>
 			
-			<div class="bookPublisher red">
-				<label class="red" for="bookPublisher">출판 및 제조사</label>
+			<div class="bookPublisher ">
+				<label class="" for="bookPublisher">출판 및 제조사</label>
 				<div class="inputBookPublisher">
-					<input class="form-control red" id="bookPublisher" name="bookPublisher"
+					<input class="form-control " id="bookPublisher" name="bookPublisher"
 					 placeholder="제조사" type="text" value="${vo.bookPublisher}">
 				</div>
 			</div>
@@ -256,7 +264,7 @@ function deleteImageAction(index){
 			<div class="bookQTY">
 				<label class="" for="INTOSTOCK_QTY">재고</label>
 				<div class="inputBookQTY">
-					<input class="form-control" id="INTOSTOCK_QTY" name="stockQty" placeholder="재고"
+					<input class="form-control" id="stockQty" name="stockQty" placeholder="재고"
 					 type="number" value="${vo.stockQty}">
 				</div>
 			</div>
@@ -288,7 +296,7 @@ function deleteImageAction(index){
 				</div>
 			</div>
 	
-			<div class="bookFlag red">
+			<div class="bookFlag ">
 				<label class="" for="inputBookFlag">사용여부</label>
 				<div class="inputBookFlag">
 					<label class="radio-inline">

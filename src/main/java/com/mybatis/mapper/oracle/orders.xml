@@ -5,73 +5,72 @@
 	
 	<sql id="searchWhere">
 		<where>
-			<if test="keywordCategory!=null and keywordCategory!=''">
-				b.book_category like '%' || #{keywordCategory} || '%'
+			<if test="keywordPM!=null and keywordPM!=''">
+				PAYMENT_METHOD like '%' || #{keywordPM} || '%'
 			</if>
-			<if test="keywordNo!=null and keywordNo!=''">
-				and b.book_no like '%' || #{keywordNo} || '%'
+			<if test="keywordOrdersState!=null and keywordOrdersState!=''">
+				and ORDERS_STATE like '%' || #{keywordOrdersState} || '%'
 			</if>
-			<if test="keywordTitle!=null and keywordTitle!=''">
-				and b.book_title like '%' || #{keywordTitle} || '%'
+			<if test="keywordName!=null and keywordName!=''">
+				and NAME like '%' || #{keywordName!} || '%'
 			</if>
-			<if test="keywordPublisher!=null and keywordPublisher!=''">
-				and b.book_publisher like '%' || #{keywordPublisher} || '%'
+			<if test="keywordUserID!=null and keywordUserID!=''">
+				and USERID like '%' || #{keywordUserID} || '%'
 			</if>
-			<if test="keywordUseflag!=null and keywordUseflag!=''">
-				and b.book_useflag like '%' || #{keywordUseflag} || '%'
+			<if test="keywordOrdersNo!=null and keywordOrdersNo!=''">
+				and ORDERS_NO like '%' || #{keywordOrdersNo} || '%'
 			</if>
 			<if test="keywordRegdate!=null and keywordRegdate!=''">
-				and b.book_regdate >= #{keywordRegdate}
+				and ORDERS_REGDATE >= #{keywordRegdate}
 			</if>
 			<if test="keywordRegdate2!=null and keywordRegdate2!=''">
-				<![CDATA[and b.book_regdate <= to_date(#{keywordRegdate2})+1]]>
+				<![CDATA[and ORDERS_REGDATE <= to_date(#{keywordRegdate2})+1]]>
 			</if>
 		</where>
 	</sql>
 	
-	<select id="selectAllAjaxOrderList" parameterType="orderVo" resultType="map">
+	<select id="selectAllAjaxOrderList" parameterType="sortOrderViewVo" resultType="sortOrderViewVo">
 		SELECT *
 		FROM
 		(
 		    select rownum as RNUM, A.* from
 		    (
-			   select * from 
-			   orders
+				select * from sortorderview
 			   <include refid="searchWhere" />
 			   <if test="orderBy!=null and orderBy!=''">
-					<if test="orderBy=='book_title'">
-						order by b.book_title
+					<if test="orderBy=='regdate'">
+						order by orders_regdate
 					</if>
-					<if test="orderBy=='book_title_desc'">
-						order by b.book_title desc
+					<if test="orderBy=='regdate_desc'">
+						order by orders_regdate desc
 					</if>
-					<if test="orderBy=='book_regdate'">
-						order by b.book_regdate
+					<if test="orderBy=='id'">
+						order by userid
 					</if>
-					<if test="orderBy=='book_regdate_desc'">
-						order by b.book_regdate desc
+					<if test="orderBy=='id_desc'">
+						order by userid desc
 					</if>
-					<if test="orderBy=='book_no'">
-						order by b.book_no
+					<if test="orderBy=='nm'">
+						order by name
 					</if>
-					<if test="orderBy=='book_no_desc'">
-						order by b.book_no desc
+					<if test="orderBy=='nm_desc'">
+						order by name desc
 					</if>
 					<if test="orderBy=='book_price'">
-						order by b.book_price
+						order by sum_price
 					</if>
 					<if test="orderBy=='book_price_desc'">
-						order by b.book_price desc
+						order by sum_price desc
 					</if>
-					<!-- <if test="orderBy=='out_qty'">
-						order by s.outputQty
+					<if test="orderBy=='ono'">
+						order by orders_No
 					</if>
-					<if test="orderBy=='out_qty_desc'">
-						order by s.outputQty desc
-					</if> -->
+					<if test="orderBy=='ono_desc'">
+						order by orders_No desc
+					</if>
 				</if>
 				<if test="orderBy==null or orderBy==''">
-					order by b.book_no desc
+					order by orders_no desc
 				</if>
 		    )A
 		)
@@ -80,9 +79,29 @@
 		and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}]]>
 	</select>
 	
-	<select id="selectOrdersCnt" parameterType="orderVo" resultType="int">
-		select count(*) from orders
+	<select id="selectOrdersCnt" parameterType="sortOrderViewVo" resultType="int">
+		select count(*) from sortorderview
 		<include refid="searchWhere" />
 	</select>
 
+	<update id="updateAjaxState" parameterType="ordersDetailVo">
+		update orders_detail
+		set orders_state = #{ordersState}
+		where orders_no = #{ordersNo}
+	</update>
+	
+	<update id="updateAjaxRecipient" parameterType="orderVo">
+		update orders
+		set recipient=#{recipient}, re_hp = #{reHp},
+		re_zipcode=#{reZipcode}, re_address=#{reAddress},
+		re_address_detail=#{reAddressDetail}
+		where orders_no = #{ordersNo}
+	</update>
+	
+	<select id="selectOrdersByNo" parameterType="int" resultType="map">
+		select * from viewdetails
+		where orders_no=#{orders_no}
+		order by book_no
+	</select>
+	
 </mapper>

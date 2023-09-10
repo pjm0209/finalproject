@@ -15,17 +15,22 @@ public class MbtiResultServiceImpl implements MbtiResultService {
 	public int insertMbtiResultList(MbtiResultListVO mbtiResultListVo,int no) {
 		int cnt=0;
 		MbtiResultVO resultVo=new MbtiResultVO();
-		resultVo.setNo(no);
 		resultVo.setQuestionTypeNo(mbtiResultListVo.getMbtiResultItem().get(0).getQuestionTypeNo());
 		
-		int count=mbtiResultDao.getMbtiResultCount(resultVo);
+		if(no!=0) {
+			resultVo.setNo(no);
 		
-		if(count>0) {
-			cnt=mbtiResultDao.deleteMbtiResultByQuestionTypeNo(resultVo);
+			int count=mbtiResultDao.getMbtiResultCount(resultVo);
+			
+			if(count>0) {
+				cnt=mbtiResultDao.deleteMbtiResultByQuestionTypeNo(resultVo);
+			}
 		}
 		
 		for(MbtiResultVO vo : mbtiResultListVo.getMbtiResultItem()) {
-			vo.setNo(no);
+			if(no!=0) {
+				vo.setNo(no);
+			}
 			cnt=mbtiResultDao.insertMbtiResult(vo);
 		}
 		
@@ -37,6 +42,11 @@ public class MbtiResultServiceImpl implements MbtiResultService {
 		return mbtiResultDao.getResultVal(no);
 	}
 
+	@Override
+	public int deleteNonMemberMbtiResult() {
+		return mbtiResultDao.deleteNonMemberMbtiResult();
+	}
 
+	
 
 }

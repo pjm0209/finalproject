@@ -4,8 +4,12 @@ import java.util.List;
 import java.util.Map;
 
 public interface OrdersService {
-	List<Map<String, Object>> selectAllAjaxOrderList(OrderVO vo);
-	int selectOrdersCnt(OrderVO vo);
+	List<SortOrderViewVO> selectAllAjaxOrderList(SortOrderViewVO vo);	
+	int selectOrdersCnt(SortOrderViewVO vo);
 	
+	int updateAjaxState(OrdersDetailVO vo);
 	
+	List<Map<String, Object>> selectOrdersByNo(int ordersNo);
+	int updateAjaxRecipient(OrderVO vo);
+	int updateStateMulti(List<SortOrderViewVO> list, String ordersState);
 }//

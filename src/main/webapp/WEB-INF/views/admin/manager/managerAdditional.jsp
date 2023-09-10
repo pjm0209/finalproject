@@ -15,7 +15,7 @@
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1)
   border-radius: 5px;
   margin-top: 80px;
-  margin-bottom: 90px;
+  margin-bottom: 160px;
 }
 
 table {
@@ -26,6 +26,13 @@ table {
 
 h4{
 	font-width: bold;
+	font-weight: 700;
+}
+
+h6{
+	color:black;
+	font-weight: 700;
+	
 }
 
 th, td {
@@ -41,7 +48,7 @@ input[type="text"], input[type="password"], input[type="email"] {
   width: 50%;
   padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 3px;
+  border-radius: 5px;
   margin: 5px 0;
   box-sizing: border-box;
   float: left;

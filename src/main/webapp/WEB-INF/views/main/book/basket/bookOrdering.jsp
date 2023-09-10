@@ -33,21 +33,16 @@ $(function(){
     });
 	
 	var deli = $("input[name=DELIVERY]").val();
-	alert("deli = " + deli);
 	var limit = $("input[name=limit]").val();
-	alert("limit = " + limit);
 	var notDeliTotal = $(".notDeliTotal").text();
-	alert("notDeliTotal = " + notDeliTotal);
 	
 	if(parseInt(notDeliTotal) < parseInt(limit)){
 		$(".booklist_area #deli").text(deli);
 	}
 	
-	alert("결과 deli = " + $("#deli").text());
 	$(".booklist_area ul:eq(0) li:eq(0)").find('p span').text(notDeliTotal);
 	var realDeli = parseInt($("#deli").text());
 	$(".booklist_area ul:eq(1) li p span").text(parseInt(notDeliTotal) + realDeli);
-	alert($(".booklist_area ul:eq(1) li p span").text());
 	
 	$('input[name=sumPrice]').val($(".booklist_area ul:eq(1) li p span").text());
 	

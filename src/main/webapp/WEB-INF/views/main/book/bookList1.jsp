@@ -25,15 +25,15 @@ function sendSearchKeyword(){
 	var searchKeyword = $("input[name=inputKeyword]").val();
 	if(searchKeyword == null || searchKeyword == ''){
 		$("#searchKeyword").val("");
-		alert("검색어를 입력하세요");
+		$('#alertModalBody').html("검색어를 입력하세요.");
+		$('#alertModalBtn').trigger('click');
 		return false;
 	}
 	$("#searchKeyword").val(searchKeyword);
 	$("#frmPageId").submit();
 }
-function ajaxInsertCart(element){
+function ajaxInsertCart(element, mode){
 	var bookNo = $(element).parent().find('input[type=hidden]').val();
-	alert(bookNo);
 	$.ajax({
 		url: contextPath + "/main/book/basket/mainAjaxInsertBasket",
 		type:"post",
@@ -43,9 +43,13 @@ function ajaxInsertCart(element){
 		},
 		success:function(result){
 			if(result > 0){
-				$('#confirmModalBody').html("장바구니에 넣었습니다.장바구니로 이동할까요?");
-				$('#confirmOk').attr("onclick","location.href='"+contextPath+"/main/mypage/mypageBasket'");
-				$('#confirmModalBtn').trigger('click');
+				if(mode == 'cart'){
+					$('#confirmModalBody').html("장바구니에 넣었습니다.장바구니로 이동할까요?");
+					$('#confirmOk').attr("onclick","location.href='"+contextPath+"/main/mypage/mypageBasket?mode='"+mode+"");
+					$('#confirmModalBtn').trigger('click');
+				}else if(mode == 'order'){
+					location.href = "/mbti/main/book/basket/bookOrdering";
+				}
 			} else {
 				$('#alertModalBody').html("오류로 인해 장바구니에 넣기 실패했습니다.나중에 다시 시도해주세요.");
 				$('#alertModalBtn').trigger('click');
@@ -128,8 +132,8 @@ function ajaxInsertCart(element){
 							</div>
 							<form name="frmBuy" method="post">
 								<div class="btn">
-									<button class="cartBtn" type="button" onclick="ajaxInsertCart(this)">장바구니</button>
-									<button class="orderBtn" type="button" onclick="ajaxInsertCart(this)">바로구매</button>
+									<button class="cartBtn" type="button" onclick="ajaxInsertCart(this, 'cart')">장바구니</button>
+									<button class="orderBtn" type="button" onclick="ajaxInsertCart(this, 'order')">바로구매</button>
 									<input type="hidden" name="bookNo" value="${vo.bookNo}">
 									<input type="hidden" name="basketQty" value="1">
 								</div>

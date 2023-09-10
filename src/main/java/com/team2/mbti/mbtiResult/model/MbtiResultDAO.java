@@ -10,4 +10,5 @@ public interface MbtiResultDAO {
 	int deleteMbtiResultByQuestionTypeNo(MbtiResultVO mbtiResultVo);
 	int getMbtiResultCount(MbtiResultVO mbtiResultVo);
 	List<MbtiResultVO> getResultVal(int no);
+	int deleteNonMemberMbtiResult();
 }

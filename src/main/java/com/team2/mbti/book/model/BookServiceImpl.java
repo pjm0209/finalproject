@@ -11,6 +11,7 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.team2.mbti.intoStock.model.IntoStockDAO;
 import com.team2.mbti.intoStock.model.IntoStockVO;
+import com.team2.mbti.sales.model.SalesDAO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -162,5 +163,28 @@ public class BookServiceImpl implements BookService {
 
 		return cnt;
 	}
+
+	@Override
+	public String selectSalesSumbyDay(String salesRegdate) {
+		logger.info("salesRegdate={}", salesRegdate);
+		String sum = bookDao.selectSalesSumbyDay(salesRegdate);
+		logger.info("sum={}", sum);
+		String refund = bookDao.selectSalesRefundbyDay(salesRegdate);
+		String total =  bookDao.selectSalesTotalbyDay(salesRegdate);
+		return sum+"^"+refund+"^"+total;
+	}
+
+	@Override
+	public String showMainSum() {
+		logger.info("bookserviceimpl showMainSum 시작!");
+		String sum = bookDao.showSum();
+		logger.info("sum={}", sum);
+		String refund = bookDao.showRefund();
+		logger.info("refund={}", refund);
+		String total =  bookDao.showTotal();
+		logger.info("total={}", total);
+		return sum+"^"+refund+"^"+total;
+	}
+
 
 }//

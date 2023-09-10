@@ -1,22 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@include file="../inc/top.jsp" %>
 
- 
-<!DOCTYPE html>
-    <html lang="ko">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title> Responsive Login and Signup Form </title>
-        <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-
-        <!-- CSS -->
-        <link rel="stylesheet" href="css/style.css">
-                
-        <!-- Boxicons CSS -->
-        <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 <style>
 *{
     margin: 0;
@@ -24,14 +10,15 @@
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
-.container{
+section{
     height: 100vh;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #FFA500;
     column-gap: 30px;
+    margin-top: 40px;
+    background-color: orange;
 }
 .form{
     position: absolute;
@@ -141,6 +128,11 @@ form{
 	background: #eb5d1e;
 }
 
+.searchButton{
+	text-align: center; 
+    margin-top: 10px;
+}
+
 .images-row {
     display: flex;
     align-items: center;
@@ -155,6 +147,20 @@ form{
     margin-top: 10px;
 }
 
+.hr-sect {
+    color: #232836; 
+    font-size: 14px; 
+    font-weight: 400; 
+    text-align: center; 
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+
+
+.snsBt{
+	width: 370px;
+}
 </style>
 
 <script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>     
@@ -195,55 +201,51 @@ $(function() {
 });
 </script>
 
-</head>
-<body>
-    <section class="container forms">    
-        <div class="form login">
-            <div class="form-content">
-                <h1><img src="../../images/로고이미지.png"/></h1>
-                
-                <form class="form-memberLogin" method="post" id="memberLogin-form" action="<c:url value='/main/member/memberLogin'/>">
-                    <div class="field input-field">
-                        <input type="text" name="userid" placeholder="아이디를 입력하세요."value="${cookie.ck_userid.value }">                       
-                    </div>
+<section class="container forms">    
+      <div class="form login">
+          <div class="form-content">
+              <h1><img src="../../images/로고이미지.png"/></h1>
+              
+              <form class="form-memberLogin" method="post" id="memberLogin-form" action="<c:url value='/main/member/memberLogin'/>">
+                  <div class="field input-field">
+                      <input type="text" name="userid" placeholder="아이디를 입력하세요."value="${cookie.ck_userid.value }">                       
+                  </div>
 
-                    <div class="field input-field">
-                        <input type="password" name="pwd" placeholder="비밀번호를 입력하세요." class="password">                    
-                        <i class='bx bx-hide eye-icon' id="show-hide-password"></i>
-                    </div><br>
-                    
-                    <div class="remember-check">
-                		<input type="checkbox" name="chkSave" id="remember-check"
-                			<c:if test="${!empty cookie.ck_userid }">  
-                				    checked="checked"   
-                			</c:if>>&nbsp; 아이디 저장하기              			  
-                		<a class="forgot-id" href="<c:url value='/main/member/forgot-id'/>">아이디 찾기</a>
-                			<span style="color:blue;">|</span>
-                		<a class="forgot-password" href="<c:url value='/main/member/forgot-pwd'/>">비밀번호 찾기</a>
-            		</div>
+                  <div class="field input-field">
+                      <input type="password" name="pwd" placeholder="비밀번호를 입력하세요." class="password">                    
+                      <i class='bx bx-hide eye-icon' id="show-hide-password"></i>
+                  </div><br>
                   
-                    <div class="field button-field">
-                        <input type="submit" value="로그인" id="memberLogin-button">     
-                    </div>
-                    <span class="centered-span">또는</span><br>
-                    <hr><br>
-
-			      	<div class="Login" id="kakaoLogin" >
-				     	<a href="#" >
-							<img src="<c:url value='../../images/kakao_login_large_narrow.png'/>" alt="카카오로그인" class="snsBt" />
-						</a>
-			      	</div>						                 		               
-			      	</div>						
-
-                    <div class="field button-field">
-                    	<span >계정이 없으신가요?</span>
-                    	<input type="button" value="회원가입" id="memberRegister-button">  
-                    </div>  
-                    
-                    <div id="naver_id_login"></div>                 
-                </form>                 
-            </div>
-        </div>
-    </section>  
-</body>
-</html>
+                  <div class="remember-check">
+              		<input type="checkbox" name="chkSave" id="remember-check"
+              			<c:if test="${!empty cookie.ck_userid }">  
+              				    checked="checked"   
+              			</c:if>>&nbsp;아이디 저장			  
+          		  </div>
+                
+                  <div class="searchButton">
+                  <div class="field button-field">
+                      <input type="submit" value="로그인" id="memberLogin-button"><br><br>   
+                  	  <a class="forgot-id" href="<c:url value='/main/member/forgot-id'/>"><strong>아이디 찾기</strong></a>
+              		  <span style="color:blue;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              		  <a class="forgot-password" href="<c:url value='/main/member/forgot-pwd'/>"><strong>비밀번호 찾기</strong></a>  
+                  </div><br><br>
+                  </div>
+                  
+				  <hr>
+				  
+                  <div class="field button-field">
+                  	<span style="font-weight: bold";>ESSENTIAL MBTI 계정이 없으신가요?</span><br><br>              	
+                  	<input type="button" value="회원가입" id="memberRegister-button">  
+                  </div><br>   
+                  
+                  <div class="hr-sect" style="font-weight: bold";>소셜 로그인</div>
+	      		  <div class="Login" id="kakaoLogin" >
+		     	  <a href="#" >
+					<img src="<c:url value='../../images/카카오 로그인.png'/>" alt="카카오로그인" class="snsBt" />
+				 </a>
+	      	</div>						                 		               
+	      	</div>	                                             
+              </form>                 
+          </div>
+</section>  

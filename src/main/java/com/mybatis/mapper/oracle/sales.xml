@@ -12,7 +12,7 @@
 	<select id="selectRegdateSalesView" parameterType="string" resultType="map">
 		select a.sales_category_no , sum(a.sumprice) sumprice, a.regdate regdate
 		from (
-			select sales_category_no,
+			select distinct sales_category_no,
 			<if test='regdate.length()=="10"'>
 				to_char(sales_regdate,'yyyy-MM-dd') regdate
 			</if>
@@ -28,7 +28,7 @@
 		)a
 		where a.regdate=#{regdate}
 		group by a.sales_category_no, a.regdate
-		order by a.sales_category_no, a.regdate desc
+		order by a.regdate desc
 	</select>
 	
 	<resultMap type="salesAllVo" id="salesResultMap">
@@ -41,7 +41,7 @@
 	</resultMap>
 	
 	<select id="selectSalesRegdate" parameterType="string" resultMap="salesResultMap">
-		select
+		select distinct
 		<if test="date=='day'">
 			to_char(sales_regdate,'yyyy-MM-dd') regdate
 		</if> 
@@ -61,7 +61,17 @@
 		</if> 
 		<if test="date=='year'">
 			to_char(sales_regdate,'yyyy')
+		</if>
+		order by
+		<if test="date=='day'">
+			to_char(sales_regdate,'yyyy-MM-dd')
 		</if> 
+		<if test="date=='month'">
+			to_char(sales_regdate,'yyyy-MM')
+		</if> 
+		<if test="date=='year'">
+			to_char(sales_regdate,'yyyy')
+		</if>
 	</select>
 	
 	<select id="selectSalesRate" resultType="map">
