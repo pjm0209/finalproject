@@ -8,23 +8,15 @@ var flagInput = $("input[name=flagInput]").val();
 
 $(function(){
 	
-	var result = '';
-	$("table input[type='checkbox']:checked:not(#check-All)").each(function(idx, item) {
-		result += "<input type='hidden' name='sortOrderViewItems[" + idx + "].ordersNo' value='" + $(this).val() + "'>";
-		result += "<input type='hidden' name='sortOrderViewItems[" + idx + "].ordersState' value='" + $(this).after('td').find('input').val() + "'>";
-		alert($(this).parent().parent().find('#bookImgName2').val());
-		$('#frmOrders').html(result);
+	$('#allCheck').click(function(){
+	     var checked = $('#allCheck').is(':checked');
+	     
+	     if(checked){
+	        $('input:checkbox').prop('checked',true);
+	       } else{
+	           $('input:checkbox').prop('checked',false);
+	       }
 	});
-	
-	 $('#allCheck').click(function(){
-	      var checked = $('#allCheck').is(':checked');
-	      
-	      if(checked){
-	         $('input:checkbox').prop('checked',true);
-	        } else{
-	            $('input:checkbox').prop('checked',false);
-	        }
-	   });
 	
 	$('#perRecord').change(function(){
 		$('input[name=perRecord]').val($('#perRecord').val());
@@ -33,6 +25,7 @@ $(function(){
 	ajaxFunc(); // ajax 함수 
 	
 	$('#searchByKeywordBtn').click(function(){
+		$('form[name=frmOrders]').html("");
 		var kos = $("select[name=keywordOrdersState]").val();
 		$("#copy").val(kos);
 		
@@ -127,11 +120,11 @@ function makeListJson(list){
 		}
 		
 		makeHtml += "<tr>";
-		makeHtml += "<td scope='row'><input type='checkbox' class='book-checkbox' name='sortOrderViewItems["+idx+"].ordersNo' value='"+this.ordersNo+"'></td>";
+		makeHtml += "<td scope='row'><input type='checkbox' class='book-checkbox' name='sortOrderViewItems["+idx+"].ordersNo' value='"+this.ordersNo+"' onclick='makeFormVal(this)'></td>";
 		makeHtml += "<td style='display:none'><input type='hidden' name='sortOrderViewItems["+idx+"].ordersState' class='goalState'></td>";
 		makeHtml += "<td style='vertical-align: middle;'>"+this.ordersNo+"</td>";
 		makeHtml += "<td>"+bookTitle+"</td>";
-		makeHtml += "<td style='vertical-align: middle;'>"+this.userid+"</td>";
+		makeHtml += "<td style='vertical-align: middle;'>"+this.name+"("+this.userid+")</td>";
 		makeHtml += "<td>"+sumPrice+"원</td>";
 		makeHtml += "<td>"+this.recipient+"</td>";
 		makeHtml += "<td>"+this.paymentMethod+"</td>";
@@ -185,6 +178,19 @@ function makeListJson(list){
 	});
 	
 	return makeHtml;
+}
+
+var i = 0;
+function makeFormVal(element){
+	var result = "";
+	if($('form[name=frmOrders]').find('.fos2').val() == $(element).val()){
+		result+="";
+	}else{
+		result += "<input type='hidden' class='fos2' name='sortOrderViewItems[" + i + "].ordersNo' value='" + $(element).val() + "'>";
+		result += "<input type='hidden' class='fOs' name='sortOrderViewItems[" + (i++) + "].ordersState'>";	
+	}
+	
+	$('form[name=frmOrders]').append(result);
 }
 
 function updateStateAjax(ordersNo, element){
@@ -285,6 +291,7 @@ function makeBtn(kos){
 	return text;
 }
 function orderListPage(curPage){
+	$('form[name=frmOrders]').html("");
 	$("#allCheck").prop("checked", false);
 	$('input[name=currentPage]').val(curPage);
 	$('input[name=perRecord]').val($('#perRecord').val());
@@ -292,11 +299,9 @@ function orderListPage(curPage){
 }
 
 function updateStateMuti(element){
-	alert("updateStateMuti 시작");
 	var cnt = $("table input[type='checkbox']:checked").length;
-	alert(cnt);
 	var ordersState = $(element).text();
-	alert(ordersState);
+	$('.fOs').val(ordersState);
 	$(".goalState").val(ordersState);
 	$("#os").val(ordersState);
 	if(cnt < 1) {
@@ -312,7 +317,6 @@ function updateStateMuti(element){
 }
 
 function updateStateAjax(ordersState){
-	alert("updateStateAjax 시작");
 	$.ajax({
 		url:"<c:url value='/admin/order/orderAjaxUpdateMulti'/>",
 		type:"post",
@@ -320,9 +324,9 @@ function updateStateAjax(ordersState){
 		data: $('form[name=frmOrders]').serializeArray(), 
 		success:function(result){
 			if(result > 0){
-				$('#alertModalBody').html("주문상태"+ordersState+"으로 수정 성공");
+				$('#alertModalBody').html("주문상태 수정 성공");
 				$('#alertModalBtn').trigger('click');
-				document.location.reload();
+				$("#searchByKeywordBtn").trigger('click');
 			} else {
 				$('#alertModalBody').html("수정 실패");
 				$('#alertModalBtn').trigger('click');
@@ -631,7 +635,7 @@ function submitFunc(){
 				<th scope="col"><input type="checkbox" id="allCheck" class="book-checkbox"></th>
 				<th scope="col" class="orderNo">주문번호</th>
 				<th scope="col" class="orderProduct">주문상품</th>
-				<th scope="col" class="orderUserid">회원아이디</th>
+				<th scope="col" class="orderUserid">이름/아이디</th>
 				<th scope="col" class="orderPrice">결제금액</th>
 				<th scope="col" class="orderRecipient">수령자</th>
 				<th scope="col" class="orderMethod">결제수단</th>
