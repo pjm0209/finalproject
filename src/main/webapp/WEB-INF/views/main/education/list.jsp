@@ -4,6 +4,69 @@
 
 <script type="text/javascript">
 	var contextPath = "/mbti";
+	
+	$(function(){
+		var no = $('input[name=no]').val();		
+		
+		if(no.length > 0) {
+			$('.list-class li').each(function(){
+				var eduNo = $(this).find('input[name=eduNo]').val();
+				
+				var result = likeCheck(eduNo, no);
+				console.log("result: " + result);
+				if(result > 0) {
+					$(this).find('.u_icon').addClass('like');
+				}
+			});
+		}
+		
+		$('.u_icon').click(function(){
+			var eduNo = $(this).parents('article').find('input[name=eduNo]').val();			
+			
+			if(no.length > 0) {
+				if($(this).hasClass('like')){
+					eduLikeDel(eduNo);
+					
+					$(this).removeClass('like');
+				} else {
+					eduLikeIns(eduNo, no);
+					
+					$(this).addClass('like');
+				}
+			} else {
+				$('#alertModalBody').html("먼저 로그인하세요.");
+				$('#alertModalBtn').trigger('click');
+				$('#btnClose').click(function(){
+					location.href="<c:url value='/main/member/memberLogin'/>";
+					return false;
+				})
+			}
+		});
+	});
+	
+	function likeCheck(eduNo, no) {
+		var result = 0;
+		
+		$.ajax({
+			url: contextPath + "/educationLike/eduLikeSel",
+			type: "POST",
+			data: {
+				eduNo:eduNo,
+				no:no
+			},
+			async: false,
+			success:function(cnt) {
+				console.log("cnt: " + cnt);	
+				
+				result = cnt;
+			},
+			error:function(xhr, status, error) {
+				alert(status + ": " + error);
+			}
+		});
+		
+		return result;
+	}
 
 	//신청하기 버튼을 눌렀을 때 로그인 체크
 	function logincheck(eduNo){
@@ -21,7 +84,7 @@
 		}
 	}
 	
-	//찜하기 버튼을 눌렀을 때 로그인 체크
+	/* //찜하기 버튼을 눌렀을 때 로그인 체크
 	function logincheckLike(eduNo){
 		var signIn = "${sessionScope.userid}";
 		
@@ -35,7 +98,7 @@
 		}else {
 			educationLikeAjax(eduNo)
 		}
-	}
+	} */
 	
 	//교육 중복 신청 막기
 	function educationAjax(eduNo) {
@@ -144,7 +207,7 @@
 						  <div class="btnGroup">
 						  	<div class="edu_like">
 						  		<em class="u_txt" style="font-size:17px; font-style:normal;">찜하기</em>
-							  	<span class="u_icon" style="width:23px; height:23px;" onclick='logincheckLike(${educationVo.eduNo})'></span>
+							  	<span class="u_icon" style="width:23px; height:23px;"></span>
 						  	</div>
 						  	<input type="button" id="applyBtn" value="신청하기" onclick='logincheck(${educationVo.eduNo})'/>
 						  </div>
