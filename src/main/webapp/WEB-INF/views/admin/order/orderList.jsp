@@ -8,6 +8,24 @@ var flagInput = $("input[name=flagInput]").val();
 
 $(function(){
 	
+	var result = '';
+	$("table input[type='checkbox']:checked:not(#check-All)").each(function(idx, item) {
+		result += "<input type='hidden' name='sortOrderViewItems[" + idx + "].ordersNo' value='" + $(this).val() + "'>";
+		result += "<input type='hidden' name='sortOrderViewItems[" + idx + "].ordersState' value='" + $(this).after('td').find('input').val() + "'>";
+		alert($(this).parent().parent().find('#bookImgName2').val());
+		$('#frmOrders').html(result);
+	});
+	
+	 $('#allCheck').click(function(){
+	      var checked = $('#allCheck').is(':checked');
+	      
+	      if(checked){
+	         $('input:checkbox').prop('checked',true);
+	        } else{
+	            $('input:checkbox').prop('checked',false);
+	        }
+	   });
+	
 	$('#perRecord').change(function(){
 		$('input[name=perRecord]').val($('#perRecord').val());
 	});
@@ -40,13 +58,6 @@ $(function(){
 	});
 	
 });
-
-function checkAll(evt){
-	
-	var checked=$(evt).prop("checked");
-	$('input[type=checkbox]').prop("checked",checked);
-	
-}
 
 function ajaxFunc (){
 	var result='';
@@ -116,10 +127,9 @@ function makeListJson(list){
 		}
 		
 		makeHtml += "<tr>";
-		makeHtml += "<th scope='row'><input type='checkbox' class='book-checkbox'></th>";
-		makeHtml += "<input type='checkbox' name='sortOrderViewItems["+idx+"].ordersNo' value='"+this.ordersNo+"'>";
-		makeHtml += "<input type='hidden' name='sortOrderViewItems["+idx+"].ordersState' value='"+this.ordersState+"'>";
-		makeHtml += "<td>"+this.ordersNo+"</td>";
+		makeHtml += "<td scope='row'><input type='checkbox' class='book-checkbox' name='sortOrderViewItems["+idx+"].ordersNo' value='"+this.ordersNo+"'></td>";
+		makeHtml += "<td style='display:none'><input type='hidden' name='sortOrderViewItems["+idx+"].ordersState' class='goalState'></td>";
+		makeHtml += "<td style='vertical-align: middle;'>"+this.ordersNo+"</td>";
 		makeHtml += "<td>"+bookTitle+"</td>";
 		makeHtml += "<td style='vertical-align: middle;'>"+this.userid+"</td>";
 		makeHtml += "<td>"+sumPrice+"원</td>";
@@ -275,28 +285,56 @@ function makeBtn(kos){
 	return text;
 }
 function orderListPage(curPage){
-	$("#check-All").prop("checked", false);
+	$("#allCheck").prop("checked", false);
 	$('input[name=currentPage]').val(curPage);
 	$('input[name=perRecord]').val($('#perRecord').val());
 	ajaxFunc();
 }
 
 function updateStateMuti(element){
+	alert("updateStateMuti 시작");
 	var cnt = $("table input[type='checkbox']:checked").length;
+	alert(cnt);
 	var ordersState = $(element).text();
+	alert(ordersState);
+	$(".goalState").val(ordersState);
 	$("#os").val(ordersState);
 	if(cnt < 1) {
 		$('#alertModalBody').html("주문을 선택하세요.");
 		$('#alertModalBtn').trigger('click');
 		return false;
     } else {	
-		$('form[name=serach]').prop('action', "<c:url value='/admin/order/updateStateMulti'/>");
 		$('#confirmModalBody').html(ordersState+"로 주문"+cnt+"개를 수정할까요?");
-		$('#confirmOk').attr("onclick","submitFunc(" + ordersState+")");
+		$('#confirmOk').attr("onclick","updateStateAjax('+ordersState+')");
 		$('#confirmModalBtn').trigger('click');
 		
 	}
 }
+
+function updateStateAjax(ordersState){
+	alert("updateStateAjax 시작");
+	$.ajax({
+		url:"<c:url value='/admin/order/orderAjaxUpdateMulti'/>",
+		type:"post",
+		dataType:"json",
+		data: $('form[name=frmOrders]').serializeArray(), 
+		success:function(result){
+			if(result > 0){
+				$('#alertModalBody').html("주문상태"+ordersState+"으로 수정 성공");
+				$('#alertModalBtn').trigger('click');
+				document.location.reload();
+			} else {
+				$('#alertModalBody').html("수정 실패");
+				$('#alertModalBtn').trigger('click');
+			}
+		},
+		error:function(xhr, status, error){
+			$('#alertModalBody').html(xhr + status + error);
+			$('#alertModalBtn').trigger('click');
+		}
+	});//ajax
+}
+
 
 function submitFunc(){
 	$("form[name=serach]").submit();
@@ -590,7 +628,7 @@ function submitFunc(){
 		</colgroup>
 		<thead>
 			<tr class="book-table-colum">
-				<th scope="col"><input type="checkbox" id="check-All" class="book-checkbox"></th>
+				<th scope="col"><input type="checkbox" id="allCheck" class="book-checkbox"></th>
 				<th scope="col" class="orderNo">주문번호</th>
 				<th scope="col" class="orderProduct">주문상품</th>
 				<th scope="col" class="orderUserid">회원아이디</th>
@@ -603,11 +641,14 @@ function submitFunc(){
 				<th scope="col" class="orderManage">관 리</th>
 			</tr>
 		</thead>
+		
 		<tbody id="orderTbody">
 			
 			
 		</tbody>
 	</table>
+	<form name="frmOrders">
+	</form>
 	<nav id="orderPaging" class="bookPaging" aria-label="Page navigation example">
 
 	</nav>

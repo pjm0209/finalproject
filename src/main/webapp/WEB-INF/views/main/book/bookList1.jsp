@@ -45,7 +45,7 @@ function ajaxInsertCart(element, mode){
 			if(result > 0){
 				if(mode == 'cart'){
 					$('#confirmModalBody').html("장바구니에 넣었습니다.장바구니로 이동할까요?");
-					$('#confirmOk').attr("onclick","location.href='"+contextPath+"/main/mypage/mypageBasket?mode='"+mode+"");
+					$('#confirmOk').attr("onclick","location.href='"+contextPath+"/main/mypage/mypageBasket?mode="+mode+"'");
 					$('#confirmModalBtn').trigger('click');
 				}else if(mode == 'order'){
 					location.href = "/mbti/main/book/basket/bookOrdering";

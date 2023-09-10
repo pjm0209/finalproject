@@ -45,7 +45,7 @@ public class OrdersServiceImpl implements OrdersService {
 
 	@Override
 	@Transactional
-	public int updateStateMulti(List<SortOrderViewVO> list, String ordersState) {
+	public int updateStateMulti(List<SortOrderViewVO> list) {
 		
 		int cnt = 0;
 		
@@ -56,10 +56,9 @@ public class OrdersServiceImpl implements OrdersService {
 				if(ordersNo!=0) { //체크한 상품들만 등록
 					OrdersDetailVO od = new OrdersDetailVO();
 					od.setOrdersNo(ordersNo);
-					od.setOrdersState(ordersState);
+					od.setOrdersState(vo.getOrdersState());
 					
-						//등록되어 있지 않은 경우
-				cnt = ordersDao.updateAjaxState(od);
+					cnt = ordersDao.updateAjaxState(od);
 				}
 			}
 		} catch (RuntimeException e) {
@@ -71,5 +70,4 @@ public class OrdersServiceImpl implements OrdersService {
 		return cnt;
 	}
 	
-}
-//
+}//
