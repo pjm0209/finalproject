@@ -9,31 +9,18 @@
 	font-size:15px;
 }
 
-h1{
-	margin-top: 30px;
-	margin-bottom: 30px;
+.title{
+	margin-top: 120px;
+	margin-bottom: 50px;
 	text-align: center;
 	font-size: 30px;
 	font-weight: bold;
 }
 
-p{
-	margin-bottom: 30px;
+.p{
+	margin-bottom: 50px;
 	text-align: center;
 	font-size: 15px;
-}
-
-html {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    padding-top: 300px;
-    padding-bottom: 20px;
-}
-
-body {
-    width: 30%;
-    border: 1px solid black;
 }
 
 input{
@@ -53,116 +40,66 @@ div {
 
 label{
 	font-weight: bold;
-	margin-left: 80px;
+	margin-left: 750px;
 }
 
-.btnSearch1 {
+.btnSearch {
     text-align: center;	
     justify-content: space-between; 
+    margin-bottom: 30px;
 }
 
-.btnSearch2 {
-    text-align: center;	
-    justify-content: space-between; 
-}
-
-button[type="submit"]{
+#btnSearch{
   	width: 180px;
  	height: 50px;
 	font-weight: bold;	
 	color: white;
 }
 
-button[type="button"]{
+#btnCancel{
 	width: 180px;
  	height: 50px;
 	font-weight: bold;	
 	color: white;
 }
-
-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.tab {
-    display: flex;
-    justify-content: center;
-    margin-top: 30px;
-    margin-bottom: 20px;
-}
-
-.tab-button {
-    cursor: pointer;
-    padding: 15px 50px;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    border-radius: 5px 5px 0 0;
-    font-size: 18px;
-}
-
-.tab-button.active {
-    background-color: darkorange;
-    border-bottom: none;
-}
-
-.tab-content {
-    display: none;
-    width: 100%;
-    padding: 20px;
-}
-
-.tab-content.active {
-    display: block;
-}
-
 </style>
 
 <script type="text/javascript">
     $(function() { 
-        $('.tab-button').click(function() {
-            $('.tab-button').removeClass('active');
-            $(this).addClass('active');
-
-            var tabIndex = $(this).index();
-            $('.tab-content').removeClass('active');
-            $('.tab-content').eq(tabIndex).addClass('active');
-        });
         
-        $('#btnCancel1').click(function(){
+        $('#btnCancel').click(function(){
             var confirmed = confirm("메인 화면으로 돌아가시겠습니까?");
             if (confirmed) {
                 window.location.href = '<c:url value="/main/index"/>';
             }
         }); 
         
-        $('#btnCancel2').click(function(){
+        $('#btnCancel').click(function(){
             var confirmed = confirm("메인 화면으로 돌아가시겠습니까?");
             if (confirmed) {
                 window.location.href = '<c:url value="/main/index"/>';
             }
         }); 
             	
-        $('#btnSearch1').click(function(e) {
+        $('#btnSearch').click(function(e) {
             e.preventDefault(); 
 
-            var name = $('#name1').val();
-            var tel = $('#tel').val();
+            var name = $('#name2').val();
+            var email = $('#email').val();
 
             if (name.trim() === '') {
                 //alert("이름을 입력하세요");
                 $('#alertModalBody').html("이름을 입력하세요");
     			$('#alertModal').modal('show');                
-                $('#name1').focus();
+                $('#name2').focus();
                 return false;
             }
 
-            if (tel.trim() === '') {
+            if (email.trim() === '') {
                 //alert("전화번호를 입력하세요");
-                $('#alertModalBody').html("전화번호를 입력하세요");
+                $('#alertModalBody').html("이메일을 입력하세요");
     			$('#alertModal').modal('show');     
-                $('#tel').focus();
+                $('#email').focus();
                 return false;
             }
             
@@ -189,37 +126,10 @@ form {
     });   
 </script>
 
-</head>
-<body>
-<h1>아이디 찾기</h1>	
-	<div class="tab">
-        <div class="tab-button active">휴대폰번호로 찾기</div>
-        <div class="tab-button">이메일로 찾기</div>
-    </div>
-    
-	<form name = "form-find-id-tel" method="post" action="<c:url value='/main/member/forgot-id'/>">	
-		<div class="tab-content active">
-			<p>회원가입 시 입력한 휴대폰 번호를 입력하시면 아이디를 찾을 수 있습니다.</p>			
-				<div class="findTel-name1">
-					<label>*&nbsp;이름 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-						<input type="text" name="name" id="name1" placeholder="이름을 입력하세요">
-				</div><br>													
-				
-				<div class="findTel-tel">
-					<label>*&nbsp;휴대폰 : &nbsp;</label>
-						<input type="text" name="hp" id="tel" placeholder="휴대폰번호를 입력하세요">		
-				</div><br>	
-				
-				<div class="btnSearch1"><br>
-					<button class="btn btn-primary" type="submit" id="btnSearch1">찾기</button>	
-					<button class="btn btn-info" type="button" id="btnCancel1">취소</button>				
-				</div>
-		</div>	
-		</form>
-		
-		<form name = "form-find-id-" method="post" action="<c:url value='/main/member/findIdResult'/>">		
-		<div class="tab-content">
-			<p>회원가입 시 입력한 이메일을 입력하시면 아이디를 찾을 수 있습니다.</p>	
+<div class="content">
+<h1 class="title">아이디 찾기</h1>	
+		<form name = "form-find-id" method="get" action="<c:url value='/main/member/findIdResult'/>">		
+			<p class="p">회원가입 시 입력한 이메일을 입력하시면 아이디를 찾을 수 있습니다.</p>	
 				<div class="findEmail-name2">
 					<label>*&nbsp;이름 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 						<input type="text" name="name" id="name2" placeholder="이름을 입력하세요">	
@@ -230,14 +140,32 @@ form {
 						<input type="email" name="email" id="email" placeholder="이메일을 입력하세요">		
 				</div><br>
 													
-				<div class="btnSearch2"><br>
-					<button class="btn btn-primary" type="submit" id="btnSearch2">찾기</button>	
-					<button class="btn btn-info" type="button" id="btnCancel2">취소</button>					
-				</div>
-		</div>				
+				<div class="btnSearch"><br>
+					<button class="btn btn-primary" type="submit" id="btnSearch">찾기</button>	
+					<button class="btn btn-info" type="button" id="btnCancel">취소</button>					
+				</div>			
 	</form>    
-</body>
+</div>
 
+    <button type="button" style="display: none" id="alertModalBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#alertModal"></button>
+    
+    <div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h1 class="modal-title fs-5" id="alertModalLabel">알림</h1>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	        <p id="alertModalBody"></p>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn bg-orange-primary" data-bs-dismiss="modal">확인</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
     <button type="button" style="display: none" id="alertModalBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#alertModal"></button>
     
     <div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">

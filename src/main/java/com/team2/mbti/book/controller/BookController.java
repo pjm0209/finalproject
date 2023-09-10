@@ -3,10 +3,15 @@ package com.team2.mbti.book.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.poi.sl.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -19,17 +24,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team2.mbti.book.model.BookService;
+import com.team2.mbti.book.model.BookVO;
 import com.team2.mbti.book.model.StockBookVO;
 import com.team2.mbti.book.model.StockBookVOList;
 import com.team2.mbti.common.ConstUtil;
 import com.team2.mbti.common.PaginationInfo;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/admin/book")
+@RequestMapping("/admin/book")	
 
 public class BookController {
 
@@ -426,7 +433,48 @@ public class BookController {
 
 		return cnt;
 	}
+	
+  @GetMapping("/Excel")
+   public void Excel(HttpServletResponse response, @RequestParam("bookNo") int bookNo) throws IOException {
 
+      logger.info("엑셀로 저장 파라미터, bookNo={}", bookNo);
+
+      List<BookVO> bookList = (List<BookVO>) bookService.selectBookByNo(bookNo);
+
+      // Create a new Excel workbook and sheet
+      Workbook workbook = new XSSFWorkbook();
+      Sheet sheet = (Sheet) workbook.createSheet("상품별");
+
+      // 컬럼 셋팅
+      Row headerRow = ((org.apache.poi.ss.usermodel.Sheet) sheet).createRow(0);
+      headerRow.createCell(0).setCellValue("상품 코드");
+      headerRow.createCell(1).setCellValue("상품명");
+      headerRow.createCell(2).setCellValue("카테고리");
+      headerRow.createCell(3).setCellValue("판매가");
+      headerRow.createCell(4).setCellValue("등록일");
+
+      // Populate data rows
+      int rowNum = 1;
+      for (BookVO book : bookList) {
+         Row row = ((org.apache.poi.ss.usermodel.Sheet) sheet).createRow(rowNum++);
+         row.createCell(0).setCellValue(book.getBookNo());
+         row.createCell(1).setCellValue(book.getBookTitle());
+         row.createCell(2).setCellValue(book.getBookCategory());        
+         row.createCell(3).setCellValue(book.getBookPrice());          
+         row.createCell(4).setCellValue(book.getBookRegdate()); 
+      }
+
+      // Set response headers
+      response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+      response.setHeader("Content-Disposition", "attachment; filename=" + bookNo + "_book_data.xlsx");
+
+      // Write workbook data to response output stream
+      OutputStream outputStream = response.getOutputStream();
+      workbook.write(outputStream);
+      workbook.close();
+      outputStream.close();
+   }
+  
 	@ResponseBody
 	@RequestMapping("/showDaySumPrice")
 	public String showDaySumPrice2(@RequestParam(required = false) String salesRegdate,

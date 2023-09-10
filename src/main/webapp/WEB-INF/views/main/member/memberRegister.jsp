@@ -1,16 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@include file="../inc/top.jsp" %>
 <style>
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f5f5f5;
 }
 
 .form-memberRegister {
@@ -19,7 +15,10 @@ body {
   padding: 20px;
   background-color: #fff;
   border-radius: 5px;
+  border: 1px solid #ccc;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 100px;
+  margin-bottom: 50px;
 }
 
 .form-memberRegister h1 {
@@ -154,14 +153,18 @@ function validate_hp(ph) {
 		$('#btnChkId').click(function(){
 			//아이디 입력
 	        if ($('#memberId').val().length < 1) {
-	            alert("먼저 아이디를 입력하세요");
+	            //alert("먼저 아이디를 입력하세요");
+                $('#alertModalBody').html("먼저 아이디를 입력하세요");
+    			$('#alertModal').modal('show');   	            
 	            $('#memberId').focus();
 	            return false;
 	        }
 						
 			//아이디 조건
 			if (!validate_userid($('#userid').val())) {
-				alert("아이디는 영문, 숫자, _(밑줄문자)만 가능합니다");
+				//alert("아이디는 영문, 숫자, _(밑줄문자)만 가능합니다");
+                $('#alertModalBody').html("아이디는 영문, 숫자, _(밑줄문자)만 가능합니다");
+    			$('#alertModal').modal('show');   					
 				$('#memberId').focus();
 				return false;
 			}
@@ -223,28 +226,36 @@ function validate_hp(ph) {
 			
 			//이름 입력
 			if($('#memberName').val().length < 1){
-				alert("이름을 입력하세요");
+				//alert("이름을 입력하세요");
+                $('#alertModalBody').html("이름을 입력하세요");
+    			$('#alertModal').modal('show');				
 				$('#memberName').focus();				
 				return false;				
 			}
 			
 			//아이디 입력
 	        if ($('#memberId').val().length < 1) {
-	            alert("아이디를 입력하세요");
+	            //alert("아이디를 입력하세요");
+                $('#alertModalBody').html("아이디를 입력하세요");
+    			$('#alertModal').modal('show');			            
 	            $('#memberId').focus();
 	            return false;
 	        }
 			
 	        //아이디 중복확인
 			if($('#btnChkId').val()!='Y'){
-		         alert('아이디 중복확인을 해주세요.');
+		         //alert('아이디 중복확인을 해주세요.');
+                 $('#alertModalBody').html("아이디 중복확인을 해주세요.");
+    			 $('#alertModal').modal('show');				         
 		         $('#btnChkId').focus();
 		         return false;
 		    }
 	      
 			//비밀번호 입력
 			if ($('#memberPwd').val().length < 1) {
-				alert("비밀번호를 입력하세요");
+				//alert("비밀번호를 입력하세요");
+                $('#alertModalBody').html("비밀번호를 입력하세요");
+    			$('#alertModal').modal('show');						
 				$('#memberPwd').focus();
 				return false;
 			}
@@ -262,14 +273,18 @@ function validate_hp(ph) {
 	        
 	        //이메일 입력
 	        if ($('#memberEmail1').val().length < 1) {
-	            alert("이메일을 입력하세요");
+	            //alert("이메일을 입력하세요");
+                $('#alertModalBody').html("이메일을 입력하세요");
+    			$('#alertModal').modal('show');		            
 	            $('#memberEmail1').focus();
 	            return false;
 	        }
 	        	 	        
 	        //전화번호 조건
 	        if (telNumber.length !== 13) {
-	            alert("전화번호는 (-)포함 13자리로 입력해주세요");
+	            //alert("전화번호는 (-)포함 13자리로 입력해주세요");
+                $('#alertModalBody').html("전화번호는 (-)포함 13자리로 입력해주세요");
+    			$('#alertModal').modal('show');		            
 	            $("#memberTel").focus();
 	            return false;
 	        }
@@ -298,13 +313,17 @@ function validate_hp(ph) {
 	        
 	        //주소 입력
 		    if ($('#memberPostalCode').val().length < 1) {
-		        alert("우편번호를 입력하세요");
+		        //alert("우편번호를 입력하세요");
+                $('#alertModalBody').html("우편번호를 입력하세요");
+    			$('#alertModal').modal('show');				        
 		        $('#memberPostalCode').focus();
 		        return false;
 		    }
 	        
 		    if ($('#memberAddressDetail').val().length < 1) {
-		        alert("상세주소를 입력하세요");
+		        //alert("상세주소를 입력하세요");
+                $('#alertModalBody').html("상세주소를 입력하세요");
+    			$('#alertModal').modal('show');				        
 		        $('#memberAddressDetail').focus();
 		        return false;
 		    }
@@ -393,3 +412,4 @@ function validate_hp(ph) {
         </div>					
 	</form>		
 </div>	
+<%@include file="../inc/bottom.jsp" %>

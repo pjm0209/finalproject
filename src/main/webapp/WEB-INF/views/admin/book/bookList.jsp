@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="../inc/top.jsp"%>
 <script type="text/javascript" src="<c:url value='/admin-css-js/js/book.js'/>"></script>
 <script type="text/javascript">
@@ -158,6 +158,7 @@
 	function openEdit(bookNo){
 		location.href="bookEdit?bookNo=" + bookNo;
 	}
+	
 	function makeListJson(list){
 		var htmlStr = "";
 		
@@ -262,6 +263,11 @@
 		/* $('form[id=frmPageId]').submit(); */
 	}
 	
+	function ExcelDownlad(){
+		
+		
+	}
+	
 </script>
 
 <!-- Begin Page Content -->
@@ -288,12 +294,11 @@
 <!--  -->
 <%-- <%@ include file="../book/bookSideBody.jsp"%> --%>
 <!--  -->
-
 <div class="board-body">
-
 	<div id="board-title">
 		<c:if test="${param.bookFlag != 'Inventory'}">
-			<h5>상품 리스트</h5>
+			<h5>상품 리스트</h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href= "<c:url value='/admin/book/Excel?bookNo=${param.bookNo}'/>">상품 리스트 다운로드</a>		
 			<button class="btn btn-warning bg-gradient-secondary book-button"
 				 id="bookRegisterBtn" onclick="location.href='bookRegister'">새 상품 등록</button>
 			<button class="btn btn-warning bg-gradient-secondary book-button"  
@@ -387,7 +392,7 @@
 				</tbody>
 				
 				
-			</table>
+			</table>				
 			<form id="frmDeleteMulti" name="frmDeleteMulti" method="post"  action="<c:url value='/admin/book/deleteMulti'/>">
 			<form id="frmUpdateQtyMulti" name="frmUpdateQtyMulti" method="post"  action="<c:url value='/admin/book/updateMulti'/>">
 			</form>
@@ -417,7 +422,7 @@
 					    </li>
 				    </c:if>
 				  </ul> --%>
-				</nav>
+				</nav>			
 			<!--  페이지 번호 끝 -->
 		</div>
 	</div>
@@ -439,6 +444,5 @@
 	</div>
 	
 </div>
-
 <!-- End of Main Content -->
 <%@ include file="../inc/bottom.jsp"%>
