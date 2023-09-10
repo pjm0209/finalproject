@@ -298,7 +298,7 @@
 	<div id="board-title">
 		<c:if test="${param.bookFlag != 'Inventory'}">
 			<h5>상품 리스트</h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href= "<c:url value='/admin/book/Excel?bookNo=${param.bookNo}'/>">상품 리스트 다운로드</a>		
+			<a href= "<c:url value='/admin/book/Excel'/>">상품 리스트 다운로드</a>		
 			<button class="btn btn-warning bg-gradient-secondary book-button"
 				 id="bookRegisterBtn" onclick="location.href='bookRegister'">새 상품 등록</button>
 			<button class="btn btn-warning bg-gradient-secondary book-button"  
