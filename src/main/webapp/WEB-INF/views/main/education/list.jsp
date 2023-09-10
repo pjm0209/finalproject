@@ -21,6 +21,23 @@
 		}
 	}
 	
+	//찜하기 버튼을 눌렀을 때 로그인 체크
+	function logincheckLike(eduNo){
+		var signIn = "${sessionScope.userid}";
+		
+		if(signIn == null || signIn == ""){
+			$('#alertModalBody').html("먼저 로그인하세요.");
+			$('#alertModalBtn').trigger('click');
+			$('#btnClose').click(function(){
+				location.href="<c:url value='/main/member/memberLogin'/>";
+				return false;
+			})
+		}else {
+			educationLikeAjax(eduNo)
+		}
+	}
+	
+	//교육 중복 신청 막기
 	function educationAjax(eduNo) {
 		$.ajax({
 			url: contextPath + "/main/education/apply",
@@ -42,6 +59,31 @@
 			}
 		});
 	}
+	
+	//교육 중복 찜하기 막기
+	function educationLikeAjax(eduNo) {
+		$.ajax({
+			url: contextPath + "/main//educationLike/eduLikeIns",
+			type: "POST",
+			data: {eduNo:eduNo},
+			success:function(result) {
+				console.log("result: " + result);	
+				
+				if(result == 2) {
+					$('#alertModalBody').html("이미 찜한 교육입니다.");
+					$('#alertModalBtn').trigger('click');
+				} else {
+					$('#alertModalBody').html("찜하기가 완료되었습니다.");
+					$('#alertModalBtn').trigger('click');					
+				}
+			},
+			error:function(xhr, status, error) {
+				alert(status + ": " + error);
+			}
+		});
+	}
+	
+	
 </script>
 
 <section class="education-info-main">
@@ -102,7 +144,7 @@
 						  <div class="btnGroup">
 						  	<div class="edu_like">
 						  		<em class="u_txt" style="font-size:17px; font-style:normal;">찜하기</em>
-							  	<span class="u_icon" style="width:23px; height:23px;"></span>
+							  	<span class="u_icon" style="width:23px; height:23px;" onclick='logincheckLike(${educationVo.eduNo})'></span>
 						  	</div>
 						  	<input type="button" id="applyBtn" value="신청하기" onclick='logincheck(${educationVo.eduNo})'/>
 						  </div>
