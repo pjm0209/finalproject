@@ -37,7 +37,7 @@
 					<th scope="col">번호</th>
 					<th scope="col">교육 이름</th>
 					<th scope="col">강사명</th>
-					<th scope="col">교육 기간</th>
+					<th scope="col">교육 날짜</th>
 					<th scope="col">현재 인원</th>
 					<th scope="col">최대 인원</th>
 					<th scope="col">교육비</th>

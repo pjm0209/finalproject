@@ -55,7 +55,7 @@
 							</select>
 						</div>
 					</dd>
-					<dt>교육 기간</dt>
+					<dt>교육 날짜</dt>
 					<dd>
 						<div class="input_group v2">
 							<input type="date" id="getEduCom" name="eduCom" value="${vo.eduCom }" class="form-control">${educationVo.eduCom}
