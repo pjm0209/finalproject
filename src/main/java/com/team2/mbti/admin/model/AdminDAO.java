@@ -19,5 +19,8 @@ public interface AdminDAO {
 	int selectAdminNo(String adminId);
 	
 	int deleteMultiAdmin(int adminNo);
+	int updateAdmin(AdminVO adminvo);
+	String selectPwd(int adminNo); 
+	AdminVO selectByAdminNo(int adminNo);
 	
 }

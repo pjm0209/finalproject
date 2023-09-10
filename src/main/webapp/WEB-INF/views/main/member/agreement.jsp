@@ -42,6 +42,16 @@ label{
     margin: 10px 0;    
 }
 
+#btnChk, #btnCac{
+    border: 0;
+    border-radius: 5px;
+    padding: 6px 41px;
+    margin-top: -6px;
+    margin-right: 9px;
+    color: white;
+    background-color: #eb5d1e;
+}
+
 </style>
 
 <script type="text/javascript" src="<c:url value='/js/jquery-3.7.0.min.js'/>"></script>    
@@ -54,11 +64,15 @@ $(function() {
     
     $('#btnChk').click(function() {
         if (!$('#agree1_check').is(':checked')) {
-            alert("이용약관 동의 약관에 동의를 해야합니다.");
+            //alert("이용약관 동의 약관에 동의를 해야합니다.");
+            $('#alertModalBody').html("이용약관 동의 약관에 동의를 해야합니다");
+			$('#alertModal').modal('show');
             $('#agree1_check').focus();
             event.preventDefault();
         } else if (!$('#agree2_check').is(':checked')) {
-            alert("개인정보 수집 및 이용 동의 약관에 동의를 해야합니다.");
+            //alert("개인정보 수집 및 이용 동의 약관에 동의를 해야합니다.");
+            $('#alertModalBody').html("개인정보 수집 및 이용 동의 약관에 동의를 해야합니다.");
+			$('#alertModal').modal('show');            
             $('#agree2_check').focus();
             event.preventDefault();
         } else {
@@ -111,5 +125,25 @@ $(function() {
 		</fieldset>
 	</form>
 	</div>
-</div>	
+</div>
+
+    <button type="button" style="display: none" id="confirmModalBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirmModal"></button>
+    
+    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h1 class="modal-title fs-5" id="confirmModalLabel">알림</h1>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	        <p id="confirmModalBody"></p>
+	      </div>
+	      <div class="modal-footer">
+	      	<button class="btn btn-secondary" type="button" data-bs-dismiss="modal">취소</button>
+	        <button type="button" class="btn bg-orange-primary" id="confirmOk" data-bs-dismiss="modal">확인</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>		
 <%@ include file="../inc/bottom.jsp" %>

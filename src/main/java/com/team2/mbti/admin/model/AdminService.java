@@ -24,4 +24,9 @@ public interface AdminService {
 	int selectAdminNo(String adminId);
 	
 	int deleteMultiAdmin(List<AdminVO> list);
+	int updateAdmin(AdminVO adminvo);
+	String selectPwd(int adminNo);
+	boolean checkPwd(int no, String pwd);
+	AdminVO selectByAdminNo(int adminNo);
+	
 }
