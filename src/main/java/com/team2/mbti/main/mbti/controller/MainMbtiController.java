@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.team2.mbti.mbtiResult.model.MbtiResultDAO;
 import com.team2.mbti.mbtiResult.model.MbtiResultListVO;
 import com.team2.mbti.mbtiResult.model.MbtiResultService;
 import com.team2.mbti.mbtiResult.model.MbtiResultVO;
@@ -73,7 +74,7 @@ public class MainMbtiController {
 		}
 		int cnt=mbtiResultService.insertMbtiResultList(mbtiResultListVo,no);
 		logger.info("mbti 검사 결과, cnt={}",cnt);
-		
+
 		double questionCategory1Val=0.0;
 		double questionCategory2Val=0.0;
 		double questionCategory3Val=0.0;
@@ -201,12 +202,19 @@ public class MainMbtiController {
 		MbtiVO mbtiVo=mbtiSurveyService.selectMbti(resultMbti);
 		logger.info("MBTI 검사한 결과 조회, mbtiVo={}",mbtiVo);
 		
-		MemberVO memberVo= new MemberVO();
-		memberVo.setNo(no);
-		memberVo.setMbtiNo(mbtiVo.getMbtiNo());
+		if(no!=0) {
+			MemberVO memberVo= new MemberVO();
+			memberVo.setNo(no);
+			memberVo.setMbtiNo(mbtiVo.getMbtiNo());
 		
-		int cnt2=mbtiSurveyService.updateMemberMbtiNoByNo(memberVo);
-		logger.info("MBTI 결과 회원정보 입력(수정) 결과 cnt2={}",cnt2);
+			int cnt2=mbtiSurveyService.updateMemberMbtiNoByNo(memberVo);
+			logger.info("MBTI 결과 회원정보 입력(수정) 결과 cnt2={}",cnt2);
+		}
+		
+		if(no==0) {
+			int cnt3=mbtiResultService.deleteNonMemberMbtiResult();
+			logger.info("비회원일시 결과테이블 DB 삭제 결과, cnt3={}",cnt3);
+		}
 		
 		model.addAttribute("resultMbti", resultMbti);
 		model.addAttribute("resultI", resultI);
