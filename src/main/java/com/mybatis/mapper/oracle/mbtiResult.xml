@@ -31,7 +31,7 @@
 		<if test="no!=0">
 			where no=#{no}
 		</if>
-		<if test="no!=0">
+		<if test="no==0">
 			where no is null
 		</if>
 		group by question_type_no, question_category_no
