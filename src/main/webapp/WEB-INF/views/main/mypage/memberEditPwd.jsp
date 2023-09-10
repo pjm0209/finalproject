@@ -8,7 +8,7 @@
   text-align: center;
   position: relative;
   top: 50%;
-  left: 50%;
+  left: 53%;
   transform: translate(-50%, -50%);
   width: 800px; 
   height: 500px;
