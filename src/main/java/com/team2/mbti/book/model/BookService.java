@@ -21,5 +21,5 @@ public interface BookService {
 	String selectSalesSumbyDay(String salesRegdate);
 	String showMainSum();
 	
-	
+	List<Map<String, Object>> selectBookByNo2();
 }//

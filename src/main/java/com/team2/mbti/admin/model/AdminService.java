@@ -28,5 +28,6 @@ public interface AdminService {
 	String selectPwd(int adminNo);
 	boolean checkPwd(int no, String pwd);
 	AdminVO selectByAdminNo(int adminNo);
+
 	
 }

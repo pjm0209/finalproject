@@ -233,4 +233,10 @@
 		GROUP by sales_category_no
 	</select>
 	
+	<select id="selectBookByNo2" resultType="map">
+	      select * from 
+	      book b join stock s
+	      on b.book_no = s.book_no
+  	</select>
+	
 </mapper>

@@ -13,7 +13,6 @@
 	margin-top: 7%;
 	margin-left: 32%;
 	width: 40%;
-    border: 1px solid black;
 }
 
 h1{
@@ -26,7 +25,12 @@ h1{
 p{
 	margin-bottom: 30px;
 	text-align: center;
-	font-size: 20px;
+	font-size: 25px;
+}
+
+strong{
+	font-size: 25px;
+	color: orange;
 }
 
 
@@ -51,23 +55,25 @@ label{
 
 .btnSearch {
     text-align: center;	
-    justify-content: space-between; 
+    justify-content: space-between;
+    margin-top: 30px;
 }
 
-input[type="button"]{
-  	width: 180px;
- 	height: 50px;
-	background-color: #ff7f00;
-	font-weight: bold;	
-	color: white;
+.btnSearch input[type="button"] {
+    width: 180px;
+    height: 50px;
+    margin-right: 10px; 
+    background-color: #ff7f00;
+    font-weight: bold;	
+    color: white;
 }
 
 form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 150px;
-    margin-bottom: 140px;
+    margin-top: 80px;
+    margin-bottom: 50px;
 }
 </style>
 
@@ -94,9 +100,17 @@ $(function() {
 <h1>아이디 찾기 결과</h1>	   
 	<form name = "form-findIdResult" method="post" action="<c:url value='main/member/findIdResult'/>">	
 		<div class="tab-content active">
-			<p>회원님의 아이디는 ${id} 입니다.</p>									
+            <c:choose>
+                <c:when test="${empty id}">
+                    <p>조회된 아이디가 없습니다.</p>
+                </c:when>
+                <c:otherwise>
+                    <p>회원님의 아이디는<strong>&nbsp;${id}&nbsp;</strong> 입니다.</p>
+                </c:otherwise>
+            </c:choose>
+								
 				<div class="btnSearch"><br>
-					<input type="button" id="btnLogin" value="로그인">	
+					<input type="button" id="btnLogin" value="로그인화면으로">	
 					<input type="button" id="btnFindPwd" value="비밀번호 찾기">						
 				</div>
 		</div>				
