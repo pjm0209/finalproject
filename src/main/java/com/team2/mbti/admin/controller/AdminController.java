@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.team2.mbti.admin.model.AdminListVO;
 import com.team2.mbti.admin.model.AdminService;
 import com.team2.mbti.admin.model.AdminVO;
+import com.team2.mbti.board.model.BoardFormVO;
 import com.team2.mbti.common.ConstUtil;
 import com.team2.mbti.common.PaginationInfo;
 import com.team2.mbti.common.SearchVO;
@@ -244,41 +245,36 @@ public class AdminController {
    }
    
 	@GetMapping("/manager/managerEdit")
-	public String managerEdit_get(@RequestParam(defaultValue = "0") int adminNo, Model model) {
-		//1
-		logger.info("관리자 수정 페이지, 파라미터 adminNo={}", adminNo);
-		if(adminNo==0) {
-			model.addAttribute("msg", "잘못된 URL입니다.");
-			model.addAttribute("url", "/manager/managerList");
-
-			return "common/message";
-		}
-
+	public String managerEdit_get(@RequestParam int adminNo, Model model) {
+		logger.info("관리자 수정 화면 보여주기 파라미터 adminNo={}", adminNo);
+		
 		AdminVO adminvo = adminService.selectByAdminNo(adminNo);
-		logger.info("관리자 번호로 조회 결과, adminvo={}", adminvo);
-
+		logger.info("관리자 설정 불러오기 결과 vo={}", adminvo);
+				
+		model.addAttribute("title", "관리자 수정");
 		model.addAttribute("adminvo", adminvo);
-
-		return "admin/manager/managerEdit?adminNo";
+		
+		return "admin/manager/managerEdit";
 	}
    
 	   
-	@PostMapping("/manager/managerEdit")   
+	@PostMapping("/manager/managerEdit")
 	public String managerEdit_post(@ModelAttribute AdminVO adminvo, Model model) {
-		logger.info("관리자 수정 처리, 파라미터 adminvo={}", adminvo);
+		logger.info("관리자 수정 처리 파라미터 adminvo={}", adminvo);
 		
-		String msg = "관리자 수정 실패!", url = "/manager/managerEdit?adminNo=" + adminvo.getAdminNo();
-		if(adminService.checkPwd(adminvo.getAdminNo(), adminvo.getAdminPwd())) {
-			int cnt = adminService.updateAdmin(adminvo);
-			if(cnt>0) {
-				msg = "글 수정 성공!";
-				url = "/manager/managerList?adminNo=" + adminvo.getAdminNo();
-			}
+		int cnt = adminService.updateAdmin(adminvo);
+		logger.info("관리자 수정 처리 결과 cnt={}", cnt);
+		
+		String msg = "관리자 수정 실패!", url = "/admin/manager/managerEdit?adminNo=" + adminvo.getAdminNo();
+		if(cnt > 0) {
+			msg = "관리자 수정 성공!";
+			url = "/admin/manager/managerList?adminNo=" + adminvo.getAdminNo();
+		}
+		
 		model.addAttribute("msg", msg);
-		model.addAttribute("url", url);	
-	}
-		return "common/message";
+		model.addAttribute("url", url);
 		
+		return "common/message";
 	}
 	
 	@RequestMapping("/manager/managerDelete")

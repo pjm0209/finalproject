@@ -439,8 +439,9 @@ public class BookController {
 
       logger.info("엑셀로 저장 파라미터, bookNo={}", bookNo);
 
-      List<BookVO> bookList = (List<BookVO>) bookService.selectBookByNo(bookNo);
-
+      List<Map<String, Object>> bookList = bookService.selectBookByNo2();
+      
+    	    
       // Create a new Excel workbook and sheet
       Workbook workbook = new XSSFWorkbook();
       Sheet sheet = (Sheet) workbook.createSheet("상품별");
@@ -455,13 +456,13 @@ public class BookController {
 
       // Populate data rows
       int rowNum = 1;
-      for (BookVO book : bookList) {
+      for (Map<String, Object> book : bookList) {
          Row row = ((org.apache.poi.ss.usermodel.Sheet) sheet).createRow(rowNum++);
-         row.createCell(0).setCellValue(book.getBookNo());
-         row.createCell(1).setCellValue(book.getBookTitle());
-         row.createCell(2).setCellValue(book.getBookCategory());        
-         row.createCell(3).setCellValue(book.getBookPrice());          
-         row.createCell(4).setCellValue(book.getBookRegdate()); 
+         row.createCell(0).setCellValue(((BookVO) book).getBookNo());
+         row.createCell(1).setCellValue(((BookVO) book).getBookTitle());
+         row.createCell(2).setCellValue(((BookVO) book).getBookCategory());        
+         row.createCell(3).setCellValue(((BookVO) book).getBookPrice());          
+         row.createCell(4).setCellValue(((BookVO) book).getBookRegdate()); 
       }
 
       // Set response headers

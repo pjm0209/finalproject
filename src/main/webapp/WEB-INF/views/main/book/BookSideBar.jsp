@@ -33,7 +33,7 @@
 }
 	
 </style>
-<nav class="sideBarBestBook3" style="top:835px;">
+<nav class="sideBarBestBook3" style="top:140px;">
 	<div id="sidebar" class="" style="">
 		<div class="sidebar__inner shadow-sm bg-body rounded" style="position: relative;">
 			<div>

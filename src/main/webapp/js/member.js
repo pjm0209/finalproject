@@ -42,7 +42,7 @@
 
 	}
 	//회원가입 - 우편번호 찾기
-    function sample4_execDaumPostcode() {
+    function sample4_execDaumPostcode1() {
         new daum.Postcode({
             oncomplete: function(data) {
 

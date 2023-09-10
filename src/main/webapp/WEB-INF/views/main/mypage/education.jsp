@@ -4,6 +4,12 @@
 <%@include file="../inc/mypage.jsp" %>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script type="text/javascript">
+	$(function(){
+		$("eduLikeDelBtn").click(function(){
+			
+		});
+	});
+	
 	//결제하기 버튼
 	var id=0;
 	
@@ -114,7 +120,6 @@
 					<th scope="col">교육 기간</th>
 					<th scope="col">교육비</th>
 					<th scope="col">교육장</th>
-					<th scope="col">신청 현황</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -127,27 +132,23 @@
 				<c:if test="${!empty likeList }">
 					<c:set var="idx" value="0"/>
 					<c:forEach var="map" items="${likeList}">
-						<c:set var="i" value="${fn:length(likeList) / 2 }"/>
-						<c:if test="${idx < i }">
 							<c:set var="educationNo" value="${educationLikeVo.eduNo}"/>
 							<tr>
 								<th scope="row">
-									<input type="checkbox" class="board-checkbox" name="eduNo" value="${educationLikeVo.eduNo }">
+									<input type="checkbox" class="board-checkbox" name="educationItems[${idx}].eduNo" value="${educationLikeVo.eduNo }">
 								</th>
 								<td>${map.EDU_NAME }</td>
 								<td>${map.EDU_TEA_NAME }</td>
 								<td>${map.EDU_COM }</td>
 								<td><fmt:formatNumber value="${map.EDU_PRICE }" pattern="#,###"/>
 								<td>${map.EP_NAME }</td>
-								<td>${map.EDU_APP_FLAG }</td>
 							</tr>
 							<c:set var="idx" value="${idx + 1 }" />
-						</c:if>
 					</c:forEach>
 				</c:if>
 			</tbody>
 		</table>
-		<input type="button" id="applyDelBtn" value="취소하기" onclick='applyCancel(this)'/>
+		<input type="button" id="eduLikeDelBtn" value="취소하기" />
 	</form>	
 	<!-- 신청 현황 -->
 	<form name="frmDelete" method="post" id="myAppDelFrm" action="<c:url value='/main/mypage/applyCan'/>">

@@ -186,9 +186,10 @@ var contextPath = "/mbti";
 			<c:forEach var="map" items="${mapList}">
 				<li class="flex BookInBasket">
 					<div class="flex box1">
+					<c:set var="idx" value="0"/>
 						<input type="checkbox">
 						<div class="flex">
-							<input name="basketNo" type="hidden" value="${map['BASKET_NO']}">
+							<input name="bookItem[${idx}].basketNo" type="hidden" value="${map['BASKET_NO']}">
 							<input type="hidden" value="${map['NO']}">
 							<img src="<c:url value='/images/bookProduct/upload_img/${map["BOOK_IMG_NAME"]}'/>" alt="${map['BOOK_IMG_ORIGINALNAME']}" width="140px;"
 							style="vertical-align: middle;">
@@ -209,6 +210,7 @@ var contextPath = "/mbti";
 						</div>
 					</div>
 				</li>
+				<c:set var="idx" value="${idx+1}"/>
 			</c:forEach> 
 		</ul>
 	</c:if>
