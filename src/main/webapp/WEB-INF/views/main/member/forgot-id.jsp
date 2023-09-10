@@ -128,7 +128,7 @@ label{
 
 <div class="content">
 <h1 class="title">아이디 찾기</h1>	
-		<form name = "form-find-id-" method="post" action="<c:url value='/main/member/findIdResult'/>">		
+		<form name = "form-find-id" method="get" action="<c:url value='/main/member/findIdResult'/>">		
 			<p class="p">회원가입 시 입력한 이메일을 입력하시면 아이디를 찾을 수 있습니다.</p>	
 				<div class="findEmail-name2">
 					<label>*&nbsp;이름 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
