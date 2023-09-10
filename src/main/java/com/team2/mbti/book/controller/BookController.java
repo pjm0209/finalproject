@@ -4,12 +4,15 @@ package com.team2.mbti.book.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.math.BigDecimal;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.poi.sl.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
@@ -24,7 +27,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team2.mbti.book.model.BookService;
-import com.team2.mbti.book.model.BookVO;
 import com.team2.mbti.book.model.StockBookVO;
 import com.team2.mbti.book.model.StockBookVOList;
 import com.team2.mbti.common.ConstUtil;
@@ -435,38 +437,49 @@ public class BookController {
 	}
 	
   @GetMapping("/Excel")
-   public void Excel(HttpServletResponse response, @RequestParam("bookNo") int bookNo) throws IOException {
+   public void Excel(HttpServletResponse response)throws IOException {
+	  logger.info("상품 전체 리스트 엑셀로 저장 처리");
 
-      logger.info("엑셀로 저장 파라미터, bookNo={}", bookNo);
-
-      List<BookVO> bookList = (List<BookVO>) bookService.selectBookByNo(bookNo);
-
-      // Create a new Excel workbook and sheet
+      List<Map<String, Object>> bookList = bookService.selectBookByNo2();
+      
       Workbook workbook = new XSSFWorkbook();
-      Sheet sheet = (Sheet) workbook.createSheet("상품별");
-
+      Sheet sheet = workbook.createSheet("Sheet1"); // 엑셀 sheet 이름
+      
       // 컬럼 셋팅
       Row headerRow = ((org.apache.poi.ss.usermodel.Sheet) sheet).createRow(0);
-      headerRow.createCell(0).setCellValue("상품 코드");
-      headerRow.createCell(1).setCellValue("상품명");
-      headerRow.createCell(2).setCellValue("카테고리");
-      headerRow.createCell(3).setCellValue("판매가");
-      headerRow.createCell(4).setCellValue("등록일");
-
+      headerRow.createCell(4).setCellValue("상품 코드");
+      headerRow.createCell(5).setCellValue("상품명");
+      headerRow.createCell(6).setCellValue("카테고리");
+      headerRow.createCell(7).setCellValue("판매가");
+      headerRow.createCell(8).setCellValue("등록일");
       // Populate data rows
       int rowNum = 1;
-      for (BookVO book : bookList) {
-         Row row = ((org.apache.poi.ss.usermodel.Sheet) sheet).createRow(rowNum++);
-         row.createCell(0).setCellValue(book.getBookNo());
-         row.createCell(1).setCellValue(book.getBookTitle());
-         row.createCell(2).setCellValue(book.getBookCategory());        
-         row.createCell(3).setCellValue(book.getBookPrice());          
-         row.createCell(4).setCellValue(book.getBookRegdate()); 
+      
+      SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd [HH:mm]");
+      for (Map<String, Object> map : bookList) {
+    	 BigDecimal bigdecimal = (BigDecimal)map.get("BOOK_NO");
+         Row row = sheet.createRow(rowNum++);
+         
+         //컬럼 폭 조절
+         sheet.setColumnWidth(4, 10 * 256);
+         sheet.setColumnWidth(5, 50 * 256);
+         sheet.setColumnWidth(6, 10 * 256);
+         sheet.setColumnWidth(7, 10 * 256);
+         sheet.setColumnWidth(8, 20 * 256);
+         
+         //값 세팅
+         row.createCell(4).setCellValue(bigdecimal.doubleValue());
+         row.createCell(5).setCellValue((String)map.get("BOOK_TITLE"));
+         row.createCell(6).setCellValue((String)map.get("BOOK_CATEGORY"));
+         bigdecimal=(BigDecimal)map.get("BOOK_PRICE");
+         row.createCell(7).setCellValue(bigdecimal.doubleValue());
+         Date date=(Date)map.get("BOOK_REGDATE");
+         row.createCell(8).setCellValue(dateFormat.format(date));
       }
-
+      
       // Set response headers
       response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-      response.setHeader("Content-Disposition", "attachment; filename=" + bookNo + "_book_data.xlsx");
+      response.setHeader("Content-Disposition", "attachment; filename=book_data.xlsx");
 
       // Write workbook data to response output stream
       OutputStream outputStream = response.getOutputStream();
@@ -483,7 +496,6 @@ public class BookController {
 		
 		String sum = bookService.selectSalesSumbyDay(salesRegdate);
 		logger.info("sum=", sum);
-		
 		
 		return sum;
 	}

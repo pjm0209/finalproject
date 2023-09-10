@@ -10,6 +10,10 @@
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
+
+body{
+	background-color: orange;
+}
 section{
     height: 100vh;
     width: 100%;
@@ -156,8 +160,6 @@ form{
     margin-bottom: 20px;
 }
 
-
-
 .snsBt{
 	width: 370px;
 }
@@ -201,6 +203,7 @@ $(function() {
 });
 </script>
 
+<body>
 <section class="container forms">    
       <div class="form login">
           <div class="form-content">
@@ -249,3 +252,4 @@ $(function() {
               </form>                 
           </div>
 </section>  
+</body>

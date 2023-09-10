@@ -143,6 +143,7 @@
 		str += "<div class='listItem'>";
 		for(var i = 0; i < result.length; i++) {
 			var map = result[i];			
+			var boardSecreate = map.BOARD_SECREATE;
 			
 			if(result.length == 1) {
 				if(map.BOARD_NO > boardNo) {
@@ -150,9 +151,9 @@
 				}
 			}
 			if(boardNo > map.BOARD_NO) {
-				str += "<a class='boardlink' href='<c:url value='/main/board/boardDetail?boardNo=" + map.BOARD_NO + "'/>'><i class='bi bi-arrow-left'></i></a>";
+				str += "<a class='boardlink' onclick='boardDetailMove(" + map.BOARD_NO + ", \"" + boardSecreate + "\", \"" + map.USERID + "\")'><i class='bi bi-arrow-left'></i></a>";
 			} else {
-				str += "<a class='boardlink' href='<c:url value='/main/board/boardDetail?boardNo=" + map.BOARD_NO + "'/>'><i class='bi bi-arrow-right'></i></a>";
+				str += "<a class='boardlink' onclick='boardDetailMove(" + map.BOARD_NO + ", \"" + boardSecreate + "\", \"" + map.USERID + "\")'><i class='bi bi-arrow-right'></i></a>";
 			}
 
 			if(result.length == 1) {
@@ -164,6 +165,21 @@
 		str += "</div>";
 		
 		$('.boardNextPrevList').html(str);
+	}
+	
+	function boardDetailMove(boardNo, boardSecreate, userId) {
+		var userid = $('.session-userId').val();
+		
+		if(boardSecreate === 'Y') {
+			if(userId == userid) {
+				location.href= contextPath + "/main/board/boardDetail?boardNo=" + boardNo;
+			} else {
+				$('#alertModalBody').html('비밀글입니다.');
+				$('#alertModalBtn').trigger('click');
+			}
+		} else {
+			location.href= contextPath + "/main/board/boardDetail?boardNo=" + boardNo;
+		}		
 	}
 </script>
 

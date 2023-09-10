@@ -24,4 +24,6 @@ public interface BookDAO {
 	String showTotal();
 	String showSum();
 	String showRefund();
+	
+	List<Map<String, Object>> selectBookByNo2();
 }//

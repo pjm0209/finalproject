@@ -124,16 +124,144 @@ var contextPath = "/mbti"
 		
 		//교육 등록 유효성검사
 		$('#save-educationWrite').click(function(){
+			var name = $('#education_name').val();
 			var teaNo = $('#getTeaName').val();
+			var com = $('#getEduCom').val();
+			var people = $('#education_people').val();
+			var price = $('#education_price').val();
+			var place = $('#selectPlace').val();
 			
+			if(name == 0){
+				$('#alertModalBody').html('교육 이름을 입력하세요.');
+				$('#alertModalBtn').trigger('click');
+				$('#education_name').focus();
+				return false;
+			}
 			if(teaNo == 0){
 				$('#alertModalBody').html('강사명을 선택하세요.');
 				$('#alertModalBtn').trigger('click');
 				$('#getTeaName').focus();
 				return false;
 			}
+			if(com == 0){
+				$('#alertModalBody').html('교육 날짜를 선택하세요.');
+				$('#alertModalBtn').trigger('click');
+				$('#getEduCom').focus();
+				return false;
+			}
+			if(people == 0){
+				$('#alertModalBody').html('최대 인원을 입력하세요.');
+				$('#alertModalBtn').trigger('click');
+				$('#education_people').focus();
+				return false;
+			}
+			if(price == 0){
+				$('#alertModalBody').html('교육비를 입력하세요.');
+				$('#alertModalBtn').trigger('click');
+				$('#education_price').focus();
+				return false;
+			}
+			if(place == 0){
+				$('#alertModalBody').html('교육장을 입력하세요.');
+				$('#alertModalBtn').trigger('click');
+				$('#selectPlace').focus();
+				return false;
+			}
 			
 			$('form[name=educationWrite-frm]').submit();
+		});	
+		
+		
+		//강사 등록 유효성검사
+		$('#save-teacherWrite').click(function(){
+			var name = $('#teacher_name').val();
+			var id = $('#teacher_id').val();
+			var pwd = $('#teacher_pwd').val();
+			var email = $('#teacher_email').val();
+			var tel = $('#teacher_tel').val();
+			var img = $('#teacher_img').val();
+			
+			if(name == 0){
+				$('#alertModalBody').html('이름을 입력하세요.');
+				$('#alertModalBtn').trigger('click');
+				$('#teacher_name').focus();
+				return false;
+			}
+			if(id == 0){
+				$('#alertModalBody').html('아이디를 입력하세요.');
+				$('#alertModalBtn').trigger('click');
+				$('#teacher_id').focus();
+				return false;
+			}
+			if(pwd == 0){
+				$('#alertModalBody').html('비밀번호를 입력하세요.');
+				$('#alertModalBtn').trigger('click');
+				$('#teacher_pwd').focus();
+				return false;
+			}
+			if(email == 0){
+				$('#alertModalBody').html('이메일을 입력하세요.');
+				$('#alertModalBtn').trigger('click');
+				$('#teacher_email').focus();
+				return false;
+			}
+			if(tel == 0){
+				$('#alertModalBody').html('전화번호를 입력하세요.');
+				$('#alertModalBtn').trigger('click');
+				$('#teacher_tel').focus();
+				return false;
+			}
+			if(img == 0){
+				$('#alertModalBody').html('사진을 업로드하세요.');
+				$('#alertModalBtn').trigger('click');
+				$('#teacher_img').focus();
+				return false;
+			}
+			
+			$('form[name=teacherWrite-frm]').submit();
+		});	
+		
+		
+		//교육장 등록 유효성검사
+		$('#save-locationWrite').click(function(){
+			var name = $('#location_name').val();
+			var zipcode = $('#zipcodePostalCode').val();
+			var latitude = $('#locationLatitude').val();
+			var longitude = $('#locationLongitude').val();
+			var tel = $('#location_tel').val();
+			
+			if(name == 0){
+				$('#alertModalBody').html('교육장 이름을 입력하세요.');
+				$('#alertModalBtn').trigger('click');
+				$('#location_name').focus();
+				return false;
+			}
+			if(zipcode == 0){
+				$('#alertModalBody').html('우편번호를 입력하세요.');
+				$('#alertModalBtn').trigger('click');
+				$('#zipcodePostalCode').focus();
+				return false;
+			}
+			if(latitude == 0){
+				$('#alertModalBody').html('경도를 입력하세요.');
+				$('#alertModalBtn').trigger('click');
+				$('#locationLatitude').focus();
+				return false;
+			}
+			if(longitude == 0){
+				$('#alertModalBody').html('위도를 입력하세요.');
+				$('#alertModalBtn').trigger('click');
+				$('#locationLongitude').focus();
+				return false;
+			}
+			if(tel == 0){
+				$('#alertModalBody').html('전화번호를 입력하세요.');
+				$('#alertModalBtn').trigger('click');
+				$('#location_tel').focus();
+				return false;
+			}
+			
+			$('form[name=locationWrite-frm]').submit();
 		});	
 		
 		
@@ -170,7 +298,7 @@ var contextPath = "/mbti"
 
 		});
 		
-		//교육 찜하기 클릭 이벤트
+		/*//교육 찜하기 클릭 이벤트
 		$('div.edu_like').click(function() {
 			var a = $(this).find('.u_icon');
 			
@@ -179,7 +307,7 @@ var contextPath = "/mbti"
 			} else {
 				eduLikeIns($(a));
 			}
-		});
+		});*/
 		
 	});
 	
@@ -214,17 +342,14 @@ var contextPath = "/mbti"
 	}
 	
 	//교육 찜하기 처리
-	function eduLikeIns(a){
-		var eduNo = $('input[name=eduNo]').val();
-		var no = $('input[name=no]').val();
-		
+	function eduLikeIns(eduNo, no){				
 		$.ajax({
 			url:contextPath + '/educationLike/eduLikeIns',
 			type:'POST',
 			data:{eduNo:eduNo,
 				  no:no},
 			success:function(result) {			
-				$(a).addClass('like');
+				console.log(result);
 			},
 			error:function(xhr, status, error) {
 				alert(status + ": " + error);
@@ -233,17 +358,13 @@ var contextPath = "/mbti"
 	}
 	
 	//교육 찜하기 취소
-	function eduLikeDel(a) {
-		var eduNo = $('input[name=eduNo').val();
-		var no = $('input[name=no]').val();
-		
+	function eduLikeDel(eduNo) {		
 		$.ajax({
 			url:contextPath + '/educationLike/eduLikeDel',
 			type:'POST',
-			data:{eduNo:eduNo,
-				  no:no},
+			data:{eduNo:eduNo},
 			success:function(result) {			
-				$(a).removeClass('like');
+				console.log(result);
 			},
 			error:function(xhr, status, error) {
 				alert(status + ": " + error);

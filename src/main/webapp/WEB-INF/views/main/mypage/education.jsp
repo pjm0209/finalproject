@@ -4,6 +4,21 @@
 <%@include file="../inc/mypage.jsp" %>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script type="text/javascript">
+	$(function(){
+		$("#eduLikeDelBtn").click(function(){
+			$('.eduLike').find('tbody tr').each(function(){
+				var result = $(this).find('input[type=checkbox]').is(':checked');
+				var eduNo = $(this).find('input[name=eduNo]').val();
+				
+				if(result) {
+					eduLikeDel(eduNo);
+					
+					$(this).remove();
+				}
+			});
+		});
+	});
+	
 	//결제하기 버튼
 	var id=0;
 	
@@ -104,17 +119,16 @@
 		<h4>찜하기 목록</h4>
 	</div>
 	<!-- 찜하기 목록 -->
-	<form name="frmDelete" method="post" id="myAppDelFrm" action="<c:url value='/main/mypage/applyCan'/>">
+	<form name="frmDelete" method="post" class="eduLike" id="myAppDelFrm" action="<c:url value='/main/mypage/applyCan'/>">
 		<table class="table" id="educationtb" style="margin-top:30px;">
 			<thead>
 				<tr class="board-table-colum">
 					<th scope="col"><input type="checkbox" id="check-All" class="board-checkbox"></th>
 					<th scope="col">교육 이름</th>
 					<th scope="col">강사명</th>
-					<th scope="col">교육 기간</th>
+					<th scope="col">교육 날짜</th>
 					<th scope="col">교육비</th>
 					<th scope="col">교육장</th>
-					<th scope="col">신청 현황</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -127,27 +141,22 @@
 				<c:if test="${!empty likeList }">
 					<c:set var="idx" value="0"/>
 					<c:forEach var="map" items="${likeList}">
-						<c:set var="i" value="${fn:length(likeList) / 2 }"/>
-						<c:if test="${idx < i }">
-							<c:set var="educationNo" value="${educationLikeVo.eduNo}"/>
 							<tr>
 								<th scope="row">
-									<input type="checkbox" class="board-checkbox" name="eduNo" value="${educationLikeVo.eduNo }">
+									<input type="checkbox" class="board-checkbox" name="eduNo" value="${map.EDU_NO }">
 								</th>
 								<td>${map.EDU_NAME }</td>
 								<td>${map.EDU_TEA_NAME }</td>
 								<td>${map.EDU_COM }</td>
 								<td><fmt:formatNumber value="${map.EDU_PRICE }" pattern="#,###"/>
 								<td>${map.EP_NAME }</td>
-								<td>${map.EDU_APP_FLAG }</td>
 							</tr>
 							<c:set var="idx" value="${idx + 1 }" />
-						</c:if>
 					</c:forEach>
 				</c:if>
 			</tbody>
 		</table>
-		<input type="button" id="applyDelBtn" value="취소하기" onclick='applyCancel(this)'/>
+		<input type="button" id="eduLikeDelBtn" value="취소하기" class="myPageBtn"/>
 	</form>	
 	<!-- 신청 현황 -->
 	<form name="frmDelete" method="post" id="myAppDelFrm" action="<c:url value='/main/mypage/applyCan'/>">
@@ -160,7 +169,7 @@
 					<th scope="col"><input type="checkbox" id="check-All" class="board-checkbox"></th>
 					<th scope="col">교육 이름</th>
 					<th scope="col">강사명</th>
-					<th scope="col">교육 기간</th>
+					<th scope="col">교육 날짜</th>
 					<th scope="col">교육비</th>
 					<th scope="col">교육장</th>
 					<th scope="col">신청 현황</th>
@@ -205,7 +214,7 @@
 					<th scope="col"><input type="checkbox" id="check-All-my"></th>
 					<th scope="col">교육 이름</th>
 					<th scope="col">강사명</th>
-					<th scope="col">교육 기간</th>
+					<th scope="col">교육 날짜</th>
 					<th scope="col">교육비</th>
 					<th scope="col">교육장</th>
 					<th scope="col">결제 상태</th>
@@ -246,7 +255,7 @@
 				<tr class="board-table-colum">
 					<th scope="col">교육 이름</th>
 					<th scope="col">강사명</th>
-					<th scope="col">교육 기간</th>
+					<th scope="col">교육 날짜</th>
 					<th scope="col">교육비</th>
 					<th scope="col">교육장</th>
 					<th scope="col">결제 상태</th>

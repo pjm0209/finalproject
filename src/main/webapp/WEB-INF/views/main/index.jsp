@@ -19,7 +19,6 @@ button.main-button1 {
 
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex align-items-center">
-
     <div class="container">
       <div class="row gy-4">
       <form name="frm-mbti1" id="frm-mbti1" method="post" action="<c:url value='/main/mbti/mbti'/>">

@@ -186,5 +186,10 @@ public class BookServiceImpl implements BookService {
 		return sum+"^"+refund+"^"+total;
 	}
 
+	@Override
+	public List<Map<String, Object>> selectBookByNo2() {
+		return bookDao.selectBookByNo2();
+	}
+
 
 }//

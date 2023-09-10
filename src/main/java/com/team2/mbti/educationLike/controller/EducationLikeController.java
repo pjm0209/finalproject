@@ -42,4 +42,11 @@ public class EducationLikeController {
 		return cnt;
 	}
 	
+	@ResponseBody
+	@RequestMapping("/eduLikeSel")
+	public int eduLikeSel(@ModelAttribute EducationLikeVO vo) {
+		int cnt = educationLikeService.selectEduLikeByNo(vo);
+		
+		return cnt;
+	}
 }
