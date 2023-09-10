@@ -11,4 +11,5 @@ public class SalesVO {
     private String salesName; /* 이름 */
     private int SALES_PRICE; /* 금액 */
     private Timestamp salesRegdate; /* 판매 날짜 */
+    
 }

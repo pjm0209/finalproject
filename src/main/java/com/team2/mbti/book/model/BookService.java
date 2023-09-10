@@ -18,4 +18,8 @@ public interface BookService {
 	int deleteMulti(List<StockBookVO> list);
 	
 	int updateMulti(List<StockBookVO> list);
-}
+	String selectSalesSumbyDay(String salesRegdate);
+	String showMainSum();
+	
+	
+}//

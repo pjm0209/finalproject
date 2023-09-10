@@ -1,5 +1,6 @@
 package com.team2.mbti.sales.model;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -10,4 +11,5 @@ public interface SalesService {
 	
 	List<SalesAllVO> selectSalesRegdate(String date);
 	List<Map<String, Object>> selectSalesRate();
+	
 }

@@ -1,5 +1,6 @@
 package com.team2.mbti.sales.model;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -36,6 +37,7 @@ public class SalesServiceImpl implements SalesService{
 	public List<Map<String, Object>> selectSalesRate() {
 		return salesDao.selectSalesRate();
 	}
+
 
 	
 

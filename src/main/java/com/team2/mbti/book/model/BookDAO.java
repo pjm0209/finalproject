@@ -18,6 +18,10 @@ public interface BookDAO {
 	int deleteBook(int bookNo);
 	
 	int selectIntoStockQty(int bookNo);
-	
-	
+	String selectSalesSumbyDay(String salesRegdate);
+	String selectSalesRefundbyDay(String salesRegdate);
+	String selectSalesTotalbyDay(String salesRegdate);
+	String showTotal();
+	String showSum();
+	String showRefund();
 }//

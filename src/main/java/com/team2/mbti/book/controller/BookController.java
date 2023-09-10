@@ -1,5 +1,6 @@
 package com.team2.mbti.book.controller;
 
+
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -31,12 +32,11 @@ import com.team2.mbti.common.PaginationInfo;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/admin/book")
+@RequestMapping("/admin/book")	
 
 public class BookController {
 
@@ -330,8 +330,10 @@ public class BookController {
 	@RequestMapping("/bookSummingUp")
 	public String bookSummingUp(Model model) {
 		logger.info("책관리 페이지 - 책 매출현황 페이지입니다.");
-
+		
+		String strSum =  bookService.showMainSum();
 		model.addAttribute("title", "책 매출현황 페이지");
+		model.addAttribute("strSum", strSum);
 
 		return "admin/book/bookSummingUp";
 	}
@@ -473,4 +475,17 @@ public class BookController {
       outputStream.close();
    }
   
+	@ResponseBody
+	@RequestMapping("/showDaySumPrice")
+	public String showDaySumPrice2(@RequestParam(required = false) String salesRegdate,
+			@RequestParam(required = false)String bookFlag, Model model) {
+		logger.info("관리자 페이지 - 책 판매 통계 보기, 파라미터 salesRegdate={}, bookFlag={}", salesRegdate, bookFlag);
+		
+		String sum = bookService.selectSalesSumbyDay(salesRegdate);
+		logger.info("sum=", sum);
+		
+		
+		return sum;
+	}
+	
 }//
