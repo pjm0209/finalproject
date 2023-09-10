@@ -75,6 +75,7 @@ function ajaxInsertCart(element){
 			<li><img src="<c:url value='/images/bookProduct/bookMain1.jpg'/>"></li>
 			<li><img src="<c:url value='/images/bookProduct/bookMain2.jpg'/>"></li>
 			<li><img src="<c:url value='/images/bookProduct/bookMain3.jpg'/>"></li>
+			<li><img src="<c:url value='/images/bookProduct/bookMain2.jpg'/>"></li>
 			<!--  -->
 		</ul>
 	</div>

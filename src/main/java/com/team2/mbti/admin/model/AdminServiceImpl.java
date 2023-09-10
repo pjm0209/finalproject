@@ -126,4 +126,5 @@ public class AdminServiceImpl implements AdminService {
 	public AdminVO selectByAdminNo(int adminNo) {
 		return adminDao.selectByAdminNo(adminNo);
 	}
+
 }

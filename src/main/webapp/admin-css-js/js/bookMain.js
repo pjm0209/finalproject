@@ -5,7 +5,7 @@
 /*bookMain.jsp의 사진 슬라이드 부분*/
 $(function(){
 	
-	$(window).scroll(function(){
+	/*$(window).scroll(function(){
 		var sc = $(this).scrollTop();
 		
 		if( sc >= 500){
@@ -23,7 +23,7 @@ $(function(){
 		}else{
 			$('.sideBarBestBook3').css({position:'absolute', top:825,})
 		} 
-	});
+	});*/
 	
 	function slideImg(){
 		$('.gallery').animate({left:'-100%'},1000,function(){
@@ -43,7 +43,7 @@ $(function(){
 		var sc = $(this).scrollTop();
 		
 		
-		if( sc >= $('#detail').offset().top){
+		if( sc >= $('#detail').offset().top ){
 			$("#q").show();
 			$('#detail_ul').hide();
 		}

@@ -14,8 +14,8 @@
 }
 
 .content h1{
-	margin-top: 180px;
-	margin-bottom: 10px;
+	margin-top: 150px;
+	margin-bottom: 30px;
 	text-align: center;
 	font-size: 30px;
 	font-weight: bold;
@@ -58,6 +58,7 @@
  	height: 50px;
 	font-weight: bold;	
 	color: white;
+	
 }
 
 .btnSearch button[type="button"]{
@@ -71,37 +72,6 @@ form {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.tab {
-    display: flex;
-    justify-content: center;
-    margin-top: 30px;
-    margin-bottom: 20px;
-}
-
-.tab-button {
-    cursor: pointer;
-    padding: 15px 50px;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    border-radius: 5px 5px 0 0;
-    font-size: 18px;
-}
-
-.tab-button.active {
-    background-color: darkorange;
-    border-bottom: none;
-}
-
-.tab-content {
-    display: none;
-    width: 100%;
-    padding: 20px;
-}
-
-.tab-content.active {
-    display: block;
 }
 </style>
 

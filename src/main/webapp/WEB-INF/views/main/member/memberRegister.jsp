@@ -40,14 +40,14 @@
 }
 
 .div-register input[type="text"] {
-  width: 80%;
+  width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 3px;
 }
 
 .div-register #memberId{
-  width: 60%;
+  width: 80%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 3px;
@@ -59,7 +59,7 @@
     border: none;
     border-radius: 3px;
     cursor: pointer;
-    padding: 10px 15px;
+    padding: 0px 15px;
 }
 
 .div-register input[type="password"] {
@@ -74,8 +74,8 @@
 }
 
 #memberEmail2{
-	width:100px;
-	height:35px;
+	width:130px;
+	height:45px;
 }
 
 #memberEmail3{
@@ -394,7 +394,7 @@ function validate_hp(ph) {
 		<label>우편번호</label>			
 		<div class="div-register">
 			<input type="text" class="postalCode" id="memberPostalCode" name="zipcode" placeholder="우편번호를 검색하세요">&nbsp;	
-			<input type="Button" value="우편번호 찾기" id="btnZipcode" title="새창열림" onclick="sample4_execDaumPostcode()">	
+			<input type="Button" value="우편번호 찾기" id="btnZipcode" title="새창열림" onclick="sample4_execDaumPostcode1()">	
 		</div>
 		
 		<label>주소</label>
