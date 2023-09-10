@@ -31,8 +31,7 @@
 	}
 	function cancleOrder(){
 		var ordersNo = $('.modal-footer input[name=hiddenOrdersNo]').val();
-		if(confirm("ordersNo = " + ordersNo))
-			location.href="<c:url value='/main/mypage/mypageOrderCancle?ordersNo=" +ordersNo+ "'/>";
+		location.href="<c:url value='/main/mypage/mypageOrderCancle?ordersNo=" +ordersNo+ "'/>";
 	}
 </script>
 <section id="mypadge_orderlist">
@@ -108,7 +107,7 @@
 						<div class="flex cancel_box">
 							<p><span>가격 : </span><fmt:formatNumber value="${list.mainOrderVo.sumPrice}" pattern="#,###"/>원</p>
 							<p>${list.orderDetailList[0].ORDERS_STATE}</p>
-							<c:if test="${list.orderDetailList[0].ORDERS_STATE != '구매 확정' and list.orderDetailList[0].ORDERS_STATE  != '취소 신청'}">
+							<c:if test="${list.orderDetailList[0].ORDERS_STATE != '구매 확정' and list.orderDetailList[0].ORDERS_STATE  != '취소 완료' and list.orderDetailList[0].ORDERS_STATE  != '취소 신청'}">
 								<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap"
 									onclick="ordersInput(this)"
 								>취소 신청</button>

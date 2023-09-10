@@ -33,7 +33,6 @@ function sendSearchKeyword(){
 	$("#frmPageId").submit();
 }
 function ajaxInsertCart(element, mode){
-	alert(mode);
 	var bookNo = $(element).parent().find('input[type=hidden]').val();
 	$.ajax({
 		url: contextPath + "/main/book/basket/mainAjaxInsertBasket",

@@ -284,16 +284,22 @@ function orderListPage(curPage){
 function updateStateMuti(element){
 	var cnt = $("table input[type='checkbox']:checked").length;
 	var ordersState = $(element).text();
+	$("#os").val(ordersState);
 	if(cnt < 1) {
 		$('#alertModalBody').html("주문을 선택하세요.");
 		$('#alertModalBtn').trigger('click');
 		return false;
     } else {	
 		$('form[name=serach]').prop('action', "<c:url value='/admin/order/updateStateMulti'/>");
-		if(confirm(ordersState+","+cnt+"개를 수정할까요?")) {
-			$('form[name=serach]').submit();
-		} 
+		$('#confirmModalBody').html(ordersState+"로 주문"+cnt+"개를 수정할까요?");
+		$('#confirmOk').attr("onclick","submitFunc(" + ordersState+")");
+		$('#confirmModalBtn').trigger('click');
+		
 	}
+}
+
+function submitFunc(){
+	$("form[name=serach]").submit();
 }
 
 </script>
@@ -318,8 +324,9 @@ function updateStateMuti(element){
 	<!--  -->
 	<div>
 	<div class="collapse" id="collapseExample">
-	<input type="text" id="copy">
+	<input type="hidden" id="copy">
 	<form name="serach">
+		<input id="os" name="ordersState" type="hidden">
 	 	<input id="searchFlag" name="flag"  type="hidden"
 		 <c:if test="${param.flag == 'order' or param.flag == 'orderByKeyword'}"> value='orderByKeyword'</c:if>
 	 	>
