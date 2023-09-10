@@ -10,13 +10,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team2.mbti.book.controller.BookController;
+import com.team2.mbti.book.model.StockBookVO;
+import com.team2.mbti.book.model.StockBookVOList;
 import com.team2.mbti.common.ConstUtil;
 import com.team2.mbti.common.PaginationInfo;
+import com.team2.mbti.order.model.OrderVO;
+import com.team2.mbti.order.model.OrdersDetailVO;
 import com.team2.mbti.order.model.OrdersService;
 import com.team2.mbti.order.model.SortOrderViewVO;
+import com.team2.mbti.order.model.SortOrderViewVOList;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -107,22 +113,70 @@ public class OrderController {
 		return "admin/order/orderList";
 	}
 	
-	@RequestMapping("/orderCancleList")
-	public String orderCancleList(Model model) {
-		logger.info("주문관리 페이지 - 주문 취소 리스트 페이지입니다.");
+	@ResponseBody
+	@RequestMapping("/orderAjaxUpdateState")
+	public int orderAjaxUpdateState(@ModelAttribute OrdersDetailVO vo) {
+		logger.info("주문관리 페이지 - orderAjaxUpdateState 처리하기, 파라미터 OrdersDetailVO={}", vo);
+		int cnt = 0;
 		
-		model.addAttribute("title", "주문 취소 리스트 페이지");
+		cnt = ordersService.updateAjaxState(vo);
 		
-		return "admin/order/orderCancleList";
+		return cnt;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/orderAjaxRecipient")
+	public int orderAjaxRecipient(@ModelAttribute OrderVO vo) {
+		logger.info("주문관리 페이지 - orderAjaxRecipient 처리하기, 파라미터 OrderVO={}" ,vo);
+		int cnt = 0;
+		
+		cnt = ordersService.updateAjaxRecipient(vo);
+		
+		return cnt;
 	}
 	
 	@RequestMapping("/orderDetail")
-	public String orderDetail(Model model) {
-		logger.info("주문관리 페이지 - 주문 상세보기 페이지입니다.");
+	public String orderDetail(@RequestParam(defaultValue = "0")int ordersNo, Model model) {
+		logger.info("주문관리 페이지 - 주문 상세보기 페이지입니다. 파라미터 ordersNo={}", ordersNo);
+		if(ordersNo == 0) {
+			model.addAttribute("msg", "잘못된 url입니다.");
+			model.addAttribute("url", "/admin/index");
+
+			return "common/message";
+		}
+		List<Map<String, Object>> mapList = ordersService.selectOrdersByNo(ordersNo);
+		logger.info("주문관리 페이지 - 검색 결과 mapList.size()={}", mapList.size());
 		
 		model.addAttribute("title", "주문 상세보기 페이지");
+		model.addAttribute("list", mapList);
+		model.addAttribute("DELIVERY", ConstUtil.DELIVERY);
+		model.addAttribute("TOTAL_PRICE", ConstUtil.TOTAL_PRICE);
 		
 		return "admin/order/orderDetail";
 	}
 	
-}
+	@RequestMapping("/updateStateMulti")
+	public String updateStateMulti(@ModelAttribute SortOrderViewVOList listvo, @RequestParam(defaultValue = "")String ordersState,
+			HttpServletRequest request, Model model) {
+		logger.info("선택한 주문 상태 수정, 파라미터 listvo={}", listvo);
+		logger.info("파라미터 ordersState={}", ordersState);
+		
+		List<SortOrderViewVO> list = listvo.getSortOrderViewItems();
+		int cnt = ordersService.updateStateMulti(list, ordersState);
+		logger.info("선택한 주문 상태 수정 결과, cnt={}", cnt);
+		String msg = "", url = "/admin/order/orderList?flag=order";
+
+		if (cnt > 0) {
+			msg = "선택한 주문들의 주문상태를 수정했습니다";
+
+		} else {
+			msg = "선택한 주문들의 주문상태 수정 중 에러가 발생했습니다...";
+		}
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+
+		return "common/message";
+	}
+	
+	
+}///

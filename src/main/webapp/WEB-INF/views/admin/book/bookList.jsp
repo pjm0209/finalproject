@@ -90,27 +90,32 @@
 		});//ajax
 	}
 	function deleteEach(originalBookNo){
-		if (confirm("상품번호 : " + originalBookNo+"을 삭제할까요?")) {
-			/* $('form[name=frmList]').submit(); */
-			$.ajax({
-			url:"<c:url value='/admin/book/bookAjaxDelete'/>",
-			type:"post",
-			data:{
-				bookNo: originalBookNo
-			},
-			success:function(cnt){
-				if(cnt > 0){
-					alert("상품번호 : " + originalBookNo + " 삭제 성공했습니다.");
-					ajaxFunc();
-				} else {
-					alert("상품번호 : " + originalBookNo + " 삭제 실패입니다. 다시 시도해주세요.");
-				} 
-			},
-			error:function(xhr, status, error){
-				alert(status + " : " + error);
-			}
-		});//ajax
+		$('#confirmModalBody').html("상품번호 : " + originalBookNo+"을 삭제할까요?");
+		$('#confirmOk').attr("onclick","deleteAjaxEach("+originalBookNo+")");
+		$('#confirmModalBtn').trigger('click');
+	}
+	
+	function deleteAjaxEach(originalBookNo){
+		$.ajax({
+		url:"<c:url value='/admin/book/bookAjaxDelete'/>",
+		type:"post",
+		data:{
+			bookNo: originalBookNo
+		},
+		success:function(cnt){
+			if(cnt > 0){
+				$('#alertModalBody').html("상품번호 : " + originalBookNo + " 삭제 성공했습니다.");
+				$('#alertModalBtn').trigger('click');
+				ajaxFunc();
+			} else {
+				$('#alertModalBody').html("상품번호 : " + originalBookNo + " 삭제 실패입니다. 다시 시도해주세요.");
+				$('#alertModalBtn').trigger('click');
+			} 
+		},
+		error:function(xhr, status, error){
+			alert(status + " : " + error);
 		}
+	});//ajax
 	}
 
 	function updateQtyEach(oBookNo, oQty, idx){
@@ -136,10 +141,12 @@
 			},
 			success:function(cnt){
 				if(cnt > 0){
-					alert(oQty + " → " + uQty + " 수정 성공했습니다.");
+					$('#alertModalBody').html(oQty + " → " + uQty + " 수정 성공했습니다.");
+					$('#alertModalBtn').trigger('click');
 					ajaxFunc();
 				} else {
-					alert("재고량 수정 실패했습니다...");
+					$('#alertModalBody').html("재고량 수정 실패했습니다...");
+					$('#alertModalBtn').trigger('click');
 				} 
 			},
 			error:function(xhr, status, error){

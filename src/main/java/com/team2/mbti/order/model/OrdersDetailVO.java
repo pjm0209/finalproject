@@ -8,15 +8,18 @@ import lombok.Setter;
 @Getter
 @Setter
 public class OrdersDetailVO extends BookVO{
+	private int ordersNo;//ORDERS_QTY	NUMBER
 	private int ordersQty;//ORDERS_QTY	NUMBER
 	private String invoiceNumber;//INVOICE_NUMBER	VARCHAR2(50 BYTE)
 	private String ordersState;//ORDERS_STATE	VARCHAR2(20 BYTE)
 	
+	
+	
 	@Override
 	public String toString() {
-		return "OrdersDetailVO [ordersQty=" + ordersQty + ", invoiceNumber=" + invoiceNumber + ", ordersState="
-				+ ordersState + ", toString()=" + super.toString() + "]";
+		return "OrdersDetailVO [ordersNo=" + ordersNo + ", ordersQty=" + ordersQty + ", invoiceNumber=" + invoiceNumber
+				+ ", ordersState=" + ordersState + ", toString()=" + super.toString() + "]";
 	}
 	
 	
-}
+}//

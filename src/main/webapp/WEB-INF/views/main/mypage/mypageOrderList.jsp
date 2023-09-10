@@ -49,7 +49,7 @@
             </li>
             <li>
                 <p>${cnt4}</p>
-                <p>배송완료</p>
+                <p>배송 완료</p>
             </li>
             <li>
                 <p>${cnt1}</p>
@@ -80,28 +80,39 @@
 					
 					<li class="flex">
 						<div class="title" style="padding-left: 0;">
-						<a class="shadow-sm rounded" style="background: #00FF40;" href="<c:url value='/main/book/basket/bookOrderComplete?flag=mypage'/>">주문번호 : <strong>${list.mainOrderVo.ordersNo}</strong>상세보기</a>
+						<a class="shadow-sm rounded" style="background: #00FF40;" href="<c:url value='/main/mypage/myOrdersDetail?ordersNo=${list.mainOrderVo.ordersNo}'/>">주문번호 : <strong>${list.mainOrderVo.ordersNo}</strong>상세보기</a>
 							<c:forEach var="map" items="${list.orderDetailList }">
 								<div class="orderItems flex" style="display: flex;justify-content: flex-start;">
 									<a href="<c:url value='/main/book/bookDetail?bookNo=${map.BOOK_NO}&bookCategory=${map.BOOK_CATEGORY}'/>">
-										<img class="shadow-sm bg-body rounded" alt="1" src="<c:url value='/images/bookProduct/${map.BOOK_NO }.jpg'/>" style="width: 120px;">
+										<img class="shadow-sm bg-body rounded" alt="${map.BOOK_IMG_ORIGINALNAME}" src="<c:url value='/images/bookProduct/upload_img/${map.BOOK_IMG_NAME}'/>" style="width: 120px;">
 									</a>
 									<div>
 										<p class="box">${map.BOOK_CATEGORY}</p>
-										<a href="<c:url value='/main/book/bookDetail?bookNo=${map.BOOK_NO}&bookCategory=${map.BOOK_CATEGORY}'/>">${map.BOOK_TITLE}</a>
+										<c:set var="title" value="${map.BOOK_TITLE}"/>
+										<c:set var="len" value="${fn:length(title)}"/>
+										<c:if test="${len > 23}">
+											<c:set var="part" value="${fn:substring(title, 23, len)}"/>
+											<c:set var="part2" value="${fn:substring(title, 0, 23)}"/>
+											<a href="<c:url value='/main/book/bookDetail?bookNo=${map.BOOK_NO}&bookCategory=${map.BOOK_CATEGORY}'/>">${part2}<br>${part}</a>
+										</c:if>
+										<c:if test="${len <= 23}">
+											<a href="<c:url value='/main/book/bookDetail?bookNo=${map.BOOK_NO}&bookCategory=${map.BOOK_CATEGORY}'/>">${title}</a>
+										</c:if>
 										<p><span>작가 : ${map.BOOK_WRITER}</span> | <span style="padding-left:5px">출판사 : ${map.BOOK_PUBLISHER}</span></p>
 										<br>
-										<p><span>가격 : <fmt:formatNumber value="${map.BOOK_PRICE }" pattern="#,###"/>원</span> | <span> 수량 : ${map.ORDERS_QTY }개</span></p>
+										<p><span>가격 : <fmt:formatNumber value="${map.BOOK_PRICE}" pattern="#,###"/>원</span> | <span> 수량 : ${map.ORDERS_QTY}개</span></p>
 									</div>								
 								</div><br>
 							</c:forEach>							
 						</div>
 						<div class="flex cancel_box">
 							<p><span>가격 : </span><fmt:formatNumber value="${list.mainOrderVo.sumPrice}" pattern="#,###"/>원</p>
-							<p>${list.orderDetailList[0].ORDERS_STATE }</p>
-							<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap"
-								onclick="ordersInput(this)"
-							>취소 신청</button>
+							<p>${list.orderDetailList[0].ORDERS_STATE}</p>
+							<c:if test="${list.orderDetailList[0].ORDERS_STATE != '구매 확정' and list.orderDetailList[0].ORDERS_STATE  != '취소 신청'}">
+								<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap"
+									onclick="ordersInput(this)"
+								>취소 신청</button>
+							</c:if>
 						</div>
 					</li>
 				</c:forEach>
@@ -128,8 +139,8 @@
             <p> </p>
           </div>
           <div class="mb-3">
-            <label for="message-text" class="col-form-label">주의사항</label>
-            <p>주문을 정말로 취소하시겠습니까?<br>취소 후에는 주문내역에서 전부 사라집니다.</p>
+            <label for="message-text" class="col-form-label">주의사항<br>취소 후에는 주문내역에서 전부 사라집니다.</label>
+            <p><br>주문을 정말로 취소하시겠습니까?</p>
           </div>
         </form>
       </div>

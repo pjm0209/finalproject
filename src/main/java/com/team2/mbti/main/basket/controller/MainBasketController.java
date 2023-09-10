@@ -126,8 +126,15 @@ public class MainBasketController {
 	
 	
 	@RequestMapping("/bookOrderComplete")
-	public String bookOrderComplete(@ModelAttribute MainOrderVO orderVo,
+	public String bookOrderComplete(@ModelAttribute MainOrderVO orderVo, @RequestParam(defaultValue = "0") int ordersNo,
 			@ModelAttribute MainBookVOList bookListVo, Model model, HttpSession session) {
+		if(ordersNo == 0) {
+			model.addAttribute("msg", "잘못된 url입니다.");
+			model.addAttribute("url", "/main/index");
+
+			return "common/message";
+		}
+		
 		logger.info("책 주문 페이지 3단계(결제 내역 확인) - bookOrderComplete, 파라미터 orderVo={}", orderVo);
 		logger.info("파라미터 bookListVo={}", bookListVo);
 		int no = (int)session.getAttribute("no");
@@ -175,9 +182,9 @@ public class MainBasketController {
 	
 	@ResponseBody
 	@RequestMapping("/mainAjaxInsertBasket")
-	public int mainAjaxInsertBasket(HttpSession session, @ModelAttribute MainBasketVO vo) {
+	public int mainAjaxInsertBasket(@RequestParam(defaultValue = "") String mode, HttpSession session, @ModelAttribute MainBasketVO vo) {
 		int no = (int)session.getAttribute("no");
-		logger.info("바탕화면에서 인가상품을 장바구니에 넣기 처리하기, 회원 번호 no={}", no);
+		logger.info("바탕화면에서 인가상품을 장바구니에 넣기 처리하기, 회원 번호 no={}, 파라미터 mode={}", no, mode);
 		vo.setNo(no);
 		
 		logger.info("바탕화면에서 인가상품을 장바구니에 넣기 처리하기, 파라미터 vo={}", vo);

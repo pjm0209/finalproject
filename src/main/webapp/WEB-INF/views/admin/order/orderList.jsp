@@ -15,6 +15,9 @@ $(function(){
 	ajaxFunc(); // ajax 함수 
 	
 	$('#searchByKeywordBtn').click(function(){
+		var kos = $("select[name=keywordOrdersState]").val();
+		$("#copy").val(kos);
+		
 		var bf = $('#searchflag').val();
 		if(bf === 'orderByKeyword'){
 			$("#frmPageIdflag").val(bf);
@@ -74,7 +77,9 @@ function ajaxFunc (){
 				str += "</tr>";
 				$("#orderTbody").html(str);
 				$("#orderPaging").html("");
-			} 
+			}
+			var btns = makeBtn($("#copy").val());
+			$("#buttonDiv").html(btns);
 		},
 		error:function(xhr, status, error){
 			alert(status + " : " + error);
@@ -93,56 +98,70 @@ function makeListJson(list){
 		var b = this.ordersRegdate;
 		var ordersRegdate = b.substring(0, 10);
 		
+		var bookTitle = this.bookTitle;
+		var check = bookTitle.indexOf("^");
+		
+		if(check>0){
+			var sC = bookTitle.split("^");
+			var len = sC[0].length;
+			if(len > 14){
+				sC[0] = sC[0].replace(sC[0].substring(14, len), "...");
+			}
+			var scLen = sC.length;
+			bookTitle = sC[0] + " <br>외 " +(scLen-1)+ "개";
+		}else{
+			if(bookTitle.length > 14){
+				bookTitle = bookTitle.replace(bookTitle.substring(14, bookTitle.length), "...");
+			}
+		}
+		
 		makeHtml += "<tr>";
 		makeHtml += "<th scope='row'><input type='checkbox' class='book-checkbox'></th>";
+		makeHtml += "<input type='checkbox' name='sortOrderViewItems["+idx+"].ordersNo' value='"+this.ordersNo+"'>";
+		makeHtml += "<input type='hidden' name='sortOrderViewItems["+idx+"].ordersState' value='"+this.ordersState+"'>";
 		makeHtml += "<td>"+this.ordersNo+"</td>";
-		makeHtml += "<td>"+this.bookTitle+"</td>";
-		makeHtml += "<td>"+this.userid+"</td>";
+		makeHtml += "<td>"+bookTitle+"</td>";
+		makeHtml += "<td style='vertical-align: middle;'>"+this.userid+"</td>";
 		makeHtml += "<td>"+sumPrice+"원</td>";
 		makeHtml += "<td>"+this.recipient+"</td>";
 		makeHtml += "<td>"+this.paymentMethod+"</td>";
 		makeHtml += "<td>"+this.ordersState+"</td>";
 		makeHtml += "<td>"+ordersRegdate+"</td>";
 		makeHtml += "<td>";
-		if(${param.orderFlag == 'moneyNotYet'}){
-			makeHtml += "<a class='green' href='#'>결제 완료</a><br>";
+		/* if(this.ordersState == '결제 완료'}){
 			makeHtml += "<a class='red' href='#'>주문 취소</a>";				
 		}
-		else if(${param.orderFlag == 'moneyDone'}){
-			makeHtml += "<a class='green' href='#'>배송 준비</a><br>";
-			makeHtml += "<a class='red' href='#'>주문 취소</a>";		
+		else */
+		if(this.ordersState == '결제 완료'){
+			makeHtml += "<a class='green' href='javascript:void(0)' onclick='updateStateAjax("+this.ordersNo+", this)'>배송 준비</a><br>";
+			makeHtml += "<a class='red' href='javascript:void(0)' onclick='updateStateAjax("+this.ordersNo+", this)'>취소 완료</a>";		
 		}
-		else if(${param.orderFlag == 'shippingNotYet'}){
-			makeHtml += "<a class='green' href='#'>배송 중</a><br>";
-			makeHtml += "<a class='red' href='#'>주문 취소</a>";		
+		else if(this.ordersState == '배송 준비'){
+			makeHtml += "<a class='green' href='javascript:void(0)' onclick='updateStateAjax("+this.ordersNo+", this)'>배송중</a><br>";
 		}
-		else if(${param.orderFlag == 'shipping'}){
-			makeHtml += "<a class='green' href='#'>배송 완료</a><br>";
-			makeHtml += "<a class='red' href='#'>주문 취소</a>";		
+		else if(this.ordersState == '배송중'){
+			makeHtml += "<a class='green' href='javascript:void(0)' onclick='updateStateAjax("+this.ordersNo+", this)'>배송 완료</a><br>";
 		}
-		else if(${param.orderFlag == 'shippingDone'}){
-			makeHtml += "<a class='green' href='#'>구매 확정</a><br>";
-			makeHtml += "<a class='red' href='#'>주문 취소</a>";		
-		}
-		else if(${param.orderFlag eq 'orderCancle'}){
-			makeHtml += "<a class='green' href='#'>취소 완료</a><br>";
-			makeHtml += "<a class='red' href='#'>주문 취소</a>";
-		}else if(${param.orderFlag eq 'orderCancleDone'}){
+		else if(this.ordersState == '배송 완료'){
+			makeHtml += "<a class='red' href='javascript:void(0)' onclick='updateStateAjax("+this.ordersNo+", this)'>취소 완료</a>";		
+		}else if(this.ordersState == '취소 신청'){
+			makeHtml += "<a class='red' href='javascript:void(0)' onclick='updateStateAjax("+this.ordersNo+", this)'>취소 완료</a><br>";
+		}else if(this.ordersState == '취소 완료'){
 			makeHtml += "&nbsp;";
-		}else if(${param.orderFlag eq 'returnNotYet'}){
-			makeHtml += "<a class='green' href='#'>반품 완료</a><br>";
-			makeHtml += "<a class='red' href='#'>주문 취소</a>";
-		}else if(${param.orderFlag eq 'returnDone'}){
+		}else if(this.ordersState == '반품 신청'){
+			makeHtml += "<a class='green' href='javascript:void(0)' onclick='updateStateAjax("+this.ordersNo+", this)'>반품 완료</a><br>";
+			makeHtml += "<a class='red' href=javascript:void(0)#' onclick='updateStateAjax("+this.ordersNo+", this)'>취소 완료</a>";
+		}else if(this.ordersState == '반품 완료'){
 			makeHtml += "&nbsp;";
-		}else if(${param.orderFlag eq 'exchangeNotYet'}){
-			makeHtml += "<a class='green' href='#'>교환 완료</a><br>";
-			makeHtml += "<a class='red' href='#'>주문 취소</a>";
-		}else if(${param.orderFlag eq 'exchangeDone'}){
+		}else if(this.ordersState == '교환 신청'){
+			makeHtml += "<a class='green' href='javascript:void(0)' onclick='updateStateAjax("+this.ordersNo+", this)'>교환 완료</a><br>";
+			makeHtml += "<a class='red' href='javascript:void(0)' onclick='updateStateAjax("+this.ordersNo+", this)'>취소 완료</a>";
+		}else if(this.ordersState == '교환 완료'){
 			makeHtml += "&nbsp;";
-		}else if(${param.orderFlag eq 'refundNotYet'}){
-			makeHtml += "<a class='green' href='#'>환불 완료</a><br>";
-			makeHtml += "<a class='red' href='#'>주문 취소</a>";
-		}else if(${param.orderFlag eq 'refundDone'}){
+		}else if(this.ordersState == '환불 신청'){
+			makeHtml += "<a class='green' href='javascript:void(0)' onclick='updateStateAjax("+this.ordersNo+", this)'>환불 완료</a><br>";
+			makeHtml += "<a class='red' href='javascript:void(0)' onclick='updateStateAjax("+this.ordersNo+", this)'>취소 완료</a>";
+		}else if(this.ordersState == '환불 완료'){
 			makeHtml += "&nbsp;";
 		}else {
 			makeHtml += "&nbsp;";
@@ -158,8 +177,41 @@ function makeListJson(list){
 	return makeHtml;
 }
 
+function updateStateAjax(ordersNo, element){
+	var state = $(element).text();
+	console.log("ordersNo : " + ordersNo, "ordersState : " + state);
+	$('#confirmModalBody').html("ordersNo : " + ordersNo + "의 주문 상태를 \"" +state+ "\" (으)로 바꾸시겠습니까?");
+	$('#confirmOk').attr("onclick","ajaxUpdateOrdersState(" + ordersNo+", " + "'"+state+"'" + ")");
+	$('#confirmModalBtn').trigger('click');
+}
+
+function ajaxUpdateOrdersState(ordersNo, state){
+	$.ajax({		
+		url:"<c:url value='/admin/order/orderAjaxUpdateState'/>",
+		type:'POST',
+		data:{
+			ordersNo: ordersNo,
+			ordersState: state
+		},
+		success:function(cnt){
+			if(cnt > 0){
+				$('#alertModalBody').html("\"" + state+"\" (으)로 주문 상태 수정 성공했습니다.");
+				$('#alertModalBtn').trigger('click');
+				ajaxFunc();
+			} else {
+				$('#alertModalBody').html("주문 상태 수정 실패했습니다...");
+				$('#alertModalBtn').trigger('click');
+			} 
+		},
+		error:function(xhr, status, error){
+			alert(status + " : " + error);
+		}
+	})
+}
+
 function openDetail(ordersNo){
-	location.href="orderDetail?orderNo="+ordersNo+"?orderFlag="+flagInput;
+	var flagInput = $("#flagInput").val();
+	location.href="orderDetail?ordersNo="+ordersNo+"&orderFlag="+flagInput;
 }
 function makePage(pageInfo){
 	var pageHtmlStr = "";
@@ -195,12 +247,53 @@ function makePage(pageInfo){
 	
 	return pageHtmlStr;
 }
-
+function makeBtn(kos){
+	var text = "";
+	
+	if (kos == '결제 완료'){
+		text+="<button class='btn btn-warning bg-gradient-secondary book-button' onclick='updateStateMuti(this)'>배송 준비</button>";
+		text+="<button class='btn btn-warning bg-gradient-secondary book-button' onclick='updateStateMuti(this)'>취소 완료</button>";
+	}else if(kos == '배송 준비'){
+		text+="<button class='btn btn-warning bg-gradient-secondary book-button' onclick='updateStateMuti(this)'>배송중</button>";		
+		text+="<button class='btn btn-warning bg-gradient-secondary book-button' onclick='updateStateMuti(this)'>취소 완료</button>";
+	}else if(kos == '배송중'){
+		text+="<button class='btn btn-warning bg-gradient-secondary book-button' onclick='updateStateMuti(this)'>배송완료</button>";
+	}else if(kos == '배송 완료'){
+		text+="<button class='btn btn-warning bg-gradient-secondary book-button' onclick='updateStateMuti(this)'>취소 완료</button>";
+	}else if(kos == '반품 신청'){
+		text+="<button class='btn btn-warning bg-gradient-secondary book-button' onclick='updateStateMuti(this)'>반품 완료</button>";
+	}else if(kos == '교환 신청'){
+		text+="<button class='btn btn-warning bg-gradient-secondary book-button' onclick='updateStateMuti(this)'>교환 완료</button>";
+	}else if(kos == '환불 신청'){
+		text+="<button class='btn btn-warning bg-gradient-secondary book-button' onclick='updateStateMuti(this)'>환불 완료</button>";
+	}else if(kos == '취소 신청'){
+		text+="<button class='btn btn-warning bg-gradient-secondary book-button' onclick='updateStateMuti(this)'>취소 완료</button>";
+	}else {
+		text+="";
+	}
+	
+	return text;
+}
 function orderListPage(curPage){
 	$("#check-All").prop("checked", false);
 	$('input[name=currentPage]').val(curPage);
 	$('input[name=perRecord]').val($('#perRecord').val());
 	ajaxFunc();
+}
+
+function updateStateMuti(element){
+	var cnt = $("table input[type='checkbox']:checked").length;
+	var ordersState = $(element).text();
+	if(cnt < 1) {
+		$('#alertModalBody').html("주문을 선택하세요.");
+		$('#alertModalBtn').trigger('click');
+		return false;
+    } else {	
+		$('form[name=serach]').prop('action', "<c:url value='/admin/order/updateStateMulti'/>");
+		if(confirm(ordersState+","+cnt+"개를 수정할까요?")) {
+			$('form[name=serach]').submit();
+		} 
+	}
 }
 
 </script>
@@ -215,32 +308,6 @@ function orderListPage(curPage){
 <!--  -->
 <div class="board-body">
 	<div id="board-title">
-		<%-- <c:choose> 
-			<c:when test="${param.orderFlag eq 'moneyNotYet'}">
-				<h5>입금 대기 관리</h5>
-			</c:when> 
-			<c:when test="${param.orderFlag eq 'moneyDone'}">
-				<h5>결재 완료 관리</h5>
-			</c:when> 
-			<c:when test="${param.orderFlag eq 'shippingNotYet'}">
-				<h5>배송 준비 관리</h5>
-			</c:when> 
-			<c:when test="${param.orderFlag eq 'shipping'}">
-				<h5>배송 중 관리</h5>
-			</c:when> 
-			<c:when test="${param.orderFlag eq 'shippingDone'}">
-				<h5>배송 완료 관리</h5>
-			</c:when> 
-			<c:when test="${param.orderFlag eq 'confirmed'}">
-				<h5>구매 확정 관리</h5>
-			</c:when> 
-			<c:when test="${param.orderFlag eq 'BASKET'}">
-				<h5>장바구니 관리</h5>
-			</c:when>
-			<c:otherwise>
-				<h5>전체 주문 내역</h5>
-			</c:otherwise> 
-		</c:choose> --%>
 		<h5>전체 주문 내역</h5>
 		<button id="toggleBtn" class="btn btn-warning bg-gradient-secondary book-button"
 			 type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
@@ -251,6 +318,7 @@ function orderListPage(curPage){
 	<!--  -->
 	<div>
 	<div class="collapse" id="collapseExample">
+	<input type="text" id="copy">
 	<form name="serach">
 	 	<input id="searchFlag" name="flag"  type="hidden"
 		 <c:if test="${param.flag == 'order' or param.flag == 'orderByKeyword'}"> value='orderByKeyword'</c:if>
@@ -289,80 +357,70 @@ function orderListPage(curPage){
 				<div>
 					<select class="form-control" name="keywordOrdersState">
 						<option 
-							<c:if test="${param.orderBy eq 'book_regdate'}">
+							<c:if test="${param.orderBy eq ''}">
 						 		selected="selected"
 							</c:if>
-						 value="">선택</option>
+						 value="">all</option>
 						<option
-							<c:if test="${param.orderBy eq 'book_regdate'}">
+							<c:if test="${param.orderBy eq '결제 완료'}">
 						 		selected="selected"
 							</c:if>
-						value="입금대기">입금대기</option>
+						 value="결제 완료">결제 완료</option>
 						<option
-							<c:if test="${param.orderBy eq 'book_regdate'}">
-						 		selected="selected"
-							</c:if>
-						 value="결제완료">결제완료</option>
-						<option
-							<c:if test="${param.orderBy eq 'book_regdate'}">
+							<c:if test="${param.orderBy eq '배송 준비'}">
 								selected="selected"
 							</c:if>
-						 value="배송준비">배송준비</option>
+						 value="배송 준비">배송 준비</option>
 						<option
-							<c:if test="${param.orderBy eq 'book_regdate'}">
+							<c:if test="${param.orderBy eq '배송중'}">
 					 			selected="selected"
 							</c:if>
 						 value="배송중">배송중</option>
 						<option
-							<c:if test="${param.orderBy eq 'book_regdate'}">
+							<c:if test="${param.orderBy eq '배송 완료'}">
 						 		selected="selected"
 							</c:if>
-						 value="배송완료">배송완료</option>
+						 value="배송 완료">배송 완료</option>
 						<option
-							<c:if test="${param.orderBy eq 'book_regdate'}">
-							 		selected="selected"
-							</c:if>
-						 value="구매확정">구매확정</option>
-						<option
-							<c:if test="${param.orderBy eq 'book_regdate'}">
+							<c:if test="${param.orderBy eq '취소 신청'}">
 						 		selected="selected"
 							</c:if>
 						 value="취소 신청">취소 신청</option>
 						<option
-							<c:if test="${param.orderBy eq 'book_regdate'}">
+							<c:if test="${param.orderBy eq '취소 완료'}">
 						 		selected="selected"
 							</c:if>
-						 value="취소완료">취소완료</option>
+						 value="취소 완료">취소 완료</option>
 						<option
-							<c:if test="${param.orderBy eq 'book_regdate'}">
+							<c:if test="${param.orderBy eq '반품 신청'}">
 						 		selected="selected"
 							</c:if>
-						 value="반품신청">반품신청</option>
+						 value="반품 신청">반품 신청</option>
 						<option
-							<c:if test="${param.orderBy eq 'book_regdate'}">
+							<c:if test="${param.orderBy eq '반품 완료'}">
 						 		selected="selected"
 							</c:if>
-						 value="반품완료">반품완료</option>
+						 value="반품 완료">반품 완료</option>
 						<option
-							<c:if test="${param.orderBy eq 'book_regdate'}">
+							<c:if test="${param.orderBy eq '교환 신청'}">
 						 		selected="selected"
 							</c:if>
-						 value="교환신청">교환신청</option>
+						 value="교환 신청">교환 신청</option>
 						<option
-							<c:if test="${param.orderBy eq 'book_regdate'}">
+							<c:if test="${param.orderBy eq '교환 완료'}">
 						 		selected="selected"
 							</c:if>
-						 value="교환완료">교환완료</option>
+						 value="교환 완료">교환 완료</option>
 						<option
-							<c:if test="${param.orderBy eq 'book_regdate'}">
+							<c:if test="${param.orderBy eq '환불 신청'}">
 						 		selected="selected"
 							</c:if>
-						 value="환불신청">환불신청</option>
+						 value="환불 신청">환불 신청</option>
 						<option
-							<c:if test="${param.orderBy eq 'book_regdate'}">
+							<c:if test="${param.orderBy eq '환불 완료'}">
 						 		selected="selected"
 							</c:if>
-						 value="환불완료">환불완료</option>
+						 value="환불 완료">환불 완료</option>
 					</select>
 				</div>
 			</div>
@@ -513,7 +571,7 @@ function orderListPage(curPage){
 		<colgroup>
 			<col style="width:1%;" />
 			<col style="width:9%;" />
-			<col style="width:9%;" />
+			<col style="width:13%;" />
 			<col style="width:9%;" />
 			<col style="width:9%;" />
 			<col style="width:9%;" />
@@ -521,7 +579,7 @@ function orderListPage(curPage){
 			<col style="width:9%;" />	
 			<col style="width:9%;" />
 			<col style="width:9%;" />
-			<col style="width:14%;" />			
+			<col style="width:9%;" />			
 		</colgroup>
 		<thead>
 			<tr class="book-table-colum">
@@ -545,7 +603,10 @@ function orderListPage(curPage){
 	</table>
 	<nav id="orderPaging" class="bookPaging" aria-label="Page navigation example">
 
-	</nav>		
+	</nav>
+	<div id="buttonDiv">
+	
+	</div>
 	</div>
 </div>
 

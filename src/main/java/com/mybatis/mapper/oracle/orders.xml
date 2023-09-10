@@ -84,4 +84,24 @@
 		<include refid="searchWhere" />
 	</select>
 
+	<update id="updateAjaxState" parameterType="ordersDetailVo">
+		update orders_detail
+		set orders_state = #{ordersState}
+		where orders_no = #{ordersNo}
+	</update>
+	
+	<update id="updateAjaxRecipient" parameterType="orderVo">
+		update orders
+		set recipient=#{recipient}, re_hp = #{reHp},
+		re_zipcode=#{reZipcode}, re_address=#{reAddress},
+		re_address_detail=#{reAddressDetail}
+		where orders_no = #{ordersNo}
+	</update>
+	
+	<select id="selectOrdersByNo" parameterType="int" resultType="map">
+		select * from viewdetails
+		where orders_no=#{orders_no}
+		order by book_no
+	</select>
+	
 </mapper>

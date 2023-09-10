@@ -13,6 +13,10 @@ public class SortOrderViewVO extends SearchVO{
 	private String name; //NAME	VARCHAR2(30)
 	private String userid;//userid
 	private String recipient;//RECIPIENT	VARCHAR2(30)
+	private String reZipcode;
+	private String reAddress;
+	private String reAddressDetail;
+	private String reHp;
 	private int sumPrice;//SUM_PRICE	NUMBER
 	private String paymentMethod;//PAYMENT_METHOD	VARCHAR2(20)
 	private String ordersRegdate;//ORDERS_REGDATE	DATE
