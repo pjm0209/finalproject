@@ -13,10 +13,14 @@
   width: 800px; 
   height: 500px;
   padding: 40px;
-  border: 2px solid #3498db;
+  border: 2px solid #ee7843;
   background-color: #f9f9f9;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
   margin-bottom: 300px;
+}
+
+.container2{
+	margin-top: 80px;
 }
 
 h2 {
@@ -41,7 +45,7 @@ input {
 button {
   width: 100%;
   padding: 10px;
-  background-color: #007bff;
+  background-color: #ee7843;
   color: white;
   border: none;
   border-radius: 3px;
@@ -71,7 +75,7 @@ $(function() {
 	});
 </script>
 <section class="memberEditPwd">
-<div class="container">
+<div class="container2">
   <h2>비밀번호 확인</h2>
   <form name="form-memberEditPwd" method="post" action="<c:url value='/main/mypage/memberEditPwd'/>">
     <label for="currentPassword">비밀번호</label>

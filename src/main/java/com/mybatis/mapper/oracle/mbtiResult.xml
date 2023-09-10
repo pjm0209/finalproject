@@ -28,9 +28,18 @@
 	
 	<select id="getResultVal" parameterType="int" resultType="mbtiResultVo">
 		select question_type_no, question_category_no, sum(mbti_val) mbti_val from mbti_result
-		where no=#{no}
+		<if test="no!=0">
+			where no=#{no}
+		</if>
+		<if test="no==0">
+			where no is null
+		</if>
 		group by question_type_no, question_category_no
 		order by question_type_no desc, question_category_no
 	</select>
 	
+	<delete id="deleteNonMemberMbtiResult">
+		delete from mbti_result
+		where no is null
+	</delete>
 </mapper>

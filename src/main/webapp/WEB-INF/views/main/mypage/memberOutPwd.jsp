@@ -12,7 +12,7 @@
 	width: 800px; 
 	height: 500px;
 	padding: 40px;
-	border: 2px solid #3498db;
+	border: 2px solid #ee7843;
 	background-color: #f9f9f9;
 	box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
 	margin-bottom: 300px;

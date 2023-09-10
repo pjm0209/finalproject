@@ -98,7 +98,25 @@ select#manager-search-select {
 		 $('#confirmOk').attr('onclick', 'managerDel()');	 		 
          $('#confirmModalBtn').trigger('click');
 	});
-			
+	
+    $('#manager-edit-button').click(function(){
+        var count2 = $('input[type=checkbox]:checked').length;
+
+        if(count2 < 1) {
+            $('#alertModalBody').html('수정할 관리자를 선택하세요.');
+            $('#alertModalBtn').trigger('click');
+            return false;
+        }
+
+        if(count2 === 1) {
+            var selectedAdminNo = $('input[type=checkbox]:checked').val();
+            
+            var editURL = 'managerEdit?adminNo=' + selectedAdminNo;
+            
+            window.location.href = editURL;
+        } 
+    });	
+				
 	});	
 	function managerDel() {
 		$('#selectManagerDelete').attr('action', contextPath + '/admin/manager/managerDelete');
@@ -119,6 +137,7 @@ select#manager-search-select {
 	<div id="board-title">
 		<h5>관리자 리스트</h5>		
 		<button class="manager-button" id="manager-delete-button">삭제</button>
+		<button class="manager-button" id="manager-edit-button">수정</button>
 	</div>
 	<div class="board">
 		<div class="board-head">

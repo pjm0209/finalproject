@@ -67,6 +67,21 @@
 		where admin_no=#{adminNo}
 	</delete>	
 	
+	<update id="updateAdmin" parameterType="adminVo">
+		update admin
+		set admin_email=#{adminEmail}, admin_tel=#{adminTel}
+		where admin_id=#{adminId}	
+	</update>
+	
+	<select id="selectPwd" parameterType="int" resultType="string">
+		select admin_pwd
+		from admin where admin_no=#{adminNo}	
+	</select>
+	
+	<select id="selectByAdminNo" parameterType="int" resultType="adminVo">
+		select *
+		from admin where admin_no=#{adminNo}
+	</select>
 	
 </mapper>
 

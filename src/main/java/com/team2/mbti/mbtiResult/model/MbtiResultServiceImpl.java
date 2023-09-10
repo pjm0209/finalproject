@@ -14,7 +14,6 @@ public class MbtiResultServiceImpl implements MbtiResultService {
 	@Override
 	public int insertMbtiResultList(MbtiResultListVO mbtiResultListVo,int no) {
 		int cnt=0;
-		System.out.println("비회원 no="+no);
 		MbtiResultVO resultVo=new MbtiResultVO();
 		resultVo.setQuestionTypeNo(mbtiResultListVo.getMbtiResultItem().get(0).getQuestionTypeNo());
 		
@@ -28,16 +27,13 @@ public class MbtiResultServiceImpl implements MbtiResultService {
 			}
 		}
 		
-		System.out.println("비회원 no="+no);
 		for(MbtiResultVO vo : mbtiResultListVo.getMbtiResultItem()) {
 			if(no!=0) {
 				vo.setNo(no);
 			}
-			System.out.println("비회원 vo="+vo);
 			cnt=mbtiResultDao.insertMbtiResult(vo);
 		}
 		
-		System.out.println("비회원 no="+no);
 		return cnt;
 	}
 
@@ -46,6 +42,11 @@ public class MbtiResultServiceImpl implements MbtiResultService {
 		return mbtiResultDao.getResultVal(no);
 	}
 
+	@Override
+	public int deleteNonMemberMbtiResult() {
+		return mbtiResultDao.deleteNonMemberMbtiResult();
+	}
 
+	
 
 }
