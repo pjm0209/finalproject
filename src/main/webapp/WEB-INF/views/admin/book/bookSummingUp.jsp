@@ -128,6 +128,27 @@ $(function() {
 		
 });
 
+function ajaxSumByDay(salesRegdate){
+	$.ajax({		
+		url:"<c:url value='/admin/book/showDaySumPrice?bookFlag=statistic'/>",
+		type:'POST',
+		data:{
+			salesRegdate: salesRegdate
+		},
+		success:function(sum){
+			if(cnt > 0){
+				$('#payment .no').html(sum);
+				ajaxFunc();
+			} else {
+				$('#alertModalBody').html("주문 상태 수정 실패했습니다...");
+				$('#alertModalBtn').trigger('click');
+			} 
+		},
+		error:function(xhr, status, error){
+			alert(status + " : " + error);
+		}
+	})
+}
 
 </script>
 <style>
@@ -154,7 +175,7 @@ $(function() {
 	                        <i class="fas fa-fw fa-database greenF"></i>
 	                        <span class="greenF align-right">결제 금액</span>
 	                    </dt>
-	                    <dd id="payment" class="price"><span class="no">${as}</span><span class="unit">원</span></dd>
+	                    <dd id="payment" class="price"><span class="no"></span><span class="unit">원</span></dd>
 	                </dl>
 	            </li>
 	            <li class="list-group-item">

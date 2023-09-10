@@ -186,4 +186,5 @@
 		on b.book_no = s.book_no
 		and b.book_no = #{bookNo}
 	</select>
+	
 </mapper>

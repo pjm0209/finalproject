@@ -11,6 +11,7 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.team2.mbti.intoStock.model.IntoStockDAO;
 import com.team2.mbti.intoStock.model.IntoStockVO;
+import com.team2.mbti.sales.model.SalesDAO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -21,6 +22,7 @@ public class BookServiceImpl implements BookService {
 	private static final Logger logger = LoggerFactory.getLogger(BookServiceImpl.class);
 	private final BookDAO bookDao;
 	private final IntoStockDAO intoStockDao;
+	private final SalesDAO salesDao;
 
 	@Override
 	public List<Map<String, Object>> selectBookAll(StockBookVO vo) {
@@ -162,5 +164,6 @@ public class BookServiceImpl implements BookService {
 
 		return cnt;
 	}
+
 
 }//

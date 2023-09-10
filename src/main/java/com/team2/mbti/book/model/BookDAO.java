@@ -19,5 +19,4 @@ public interface BookDAO {
 	
 	int selectIntoStockQty(int bookNo);
 	
-	
 }//

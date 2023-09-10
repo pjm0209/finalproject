@@ -10,4 +10,6 @@ public interface SalesService {
 	
 	List<SalesAllVO> selectSalesRegdate(String date);
 	List<Map<String, Object>> selectSalesRate();
+	
+	int selectSalesSumbyDay(String salesRegdate);
 }

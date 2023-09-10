@@ -37,6 +37,11 @@ public class SalesServiceImpl implements SalesService{
 		return salesDao.selectSalesRate();
 	}
 
+	@Override
+	public int selectSalesSumbyDay(String salesRegdate) {
+		return salesDao.selectSalesSumbyDay(salesRegdate);
+	}
+
 	
 
 }
