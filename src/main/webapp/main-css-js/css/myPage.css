@@ -1,0 +1,13 @@
+@charset "UTF-8";
+
+.myPageBtn {
+    width: 109px;
+    margin: 0 auto;
+    display: block;
+    background-color: #eb5d1e;
+    border: none;
+    color: white;
+    border-radius: 50px;
+    height: 40px;
+    margin-bottom: 35px;
+}

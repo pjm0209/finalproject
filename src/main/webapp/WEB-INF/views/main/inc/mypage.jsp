@@ -9,6 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- <link rel="stylesheet" href="style.css"> -->
 <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+<link href="<c:url value='/main-css-js/css/myPage.css'/>" rel='stylesheet'>
 <!-- <script src="script.js"></script>	 -->
 <style type="text/css">
 @import url('https://fonts.googleapis.com/css2?fmaily=Poppins:wght@300;400;500;600;700&display=swap');

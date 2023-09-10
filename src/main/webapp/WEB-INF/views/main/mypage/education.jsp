@@ -156,7 +156,7 @@
 				</c:if>
 			</tbody>
 		</table>
-		<input type="button" id="eduLikeDelBtn" value="취소하기" />
+		<input type="button" id="eduLikeDelBtn" value="취소하기" class="myPageBtn"/>
 	</form>	
 	<!-- 신청 현황 -->
 	<form name="frmDelete" method="post" id="myAppDelFrm" action="<c:url value='/main/mypage/applyCan'/>">
