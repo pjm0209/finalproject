@@ -479,7 +479,7 @@ public class BookController {
       
       // Set response headers
       response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-      response.setHeader("Content-Disposition", "attachment; filename=_book_data.xlsx");
+      response.setHeader("Content-Disposition", "attachment; filename=book_data.xlsx");
 
       // Write workbook data to response output stream
       OutputStream outputStream = response.getOutputStream();
