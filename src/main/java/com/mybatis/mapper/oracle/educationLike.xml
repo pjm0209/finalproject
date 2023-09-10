@@ -17,7 +17,12 @@
 	</delete>
 	
 	<select id="selectByNoEduLike" parameterType="int" resultType="map">
-		select * from edu_like_view where no = #{no}
+		select e.*,h.edu_hea_no, h.no, p.ep_name
+		from mbti_education e right join education_heart h
+		on e.edu_no=h.edu_no
+		join education_place p
+		on e.ep_no = p.ep_no
+		where no = #{no}
 	</select>
 	
 	<select id="selectEduLikeByNo" parameterType="educationLikeVo" resultType="int">
