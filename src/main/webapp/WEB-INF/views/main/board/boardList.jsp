@@ -95,6 +95,9 @@
 											</c:if>
 											<a class="boardDetailA"> ${map['BOARD_TITLE']}</a>	
 											<input type="hidden" value="${map.BOARD_NO }" name="boardNo">
+											<c:if test="${fn:contains(map.BOARD_BODY, '<img alt') }">
+												<i class="bi bi-image"></i>
+											</c:if>
 											<c:if test="${map['FILECOUNT'] != 0 and map['BOARD_FILE_ADD_FLAG'] == 'Y'}">
 												<img alt="파일이미지" src="<c:url value='/images/file.gif'/>">
 											</c:if>	

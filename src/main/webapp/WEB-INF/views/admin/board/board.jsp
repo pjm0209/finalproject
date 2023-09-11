@@ -93,6 +93,9 @@
 											<img alt="파일이미지" src="<c:url value='/images/file.gif'/>">
 										</c:if>
 										<a href="<c:url value='/admin/board/boardDetail?boardNo=${map["BOARD_NO"] }'/>"> ${map['BOARD_TITLE']}</a>	
+										<c:if test="${fn:contains(map.BOARD_BODY, '<img alt') }">
+											<i class="bi bi-image"></i>
+										</c:if>
 										<c:if test="${map['COMMENTCOUNT'] != 0 and map['COMMENT_FLAG'] == 'Y'}">
 											<span>[${map['COMMENTCOUNT'] }]</span>
 										</c:if>		
