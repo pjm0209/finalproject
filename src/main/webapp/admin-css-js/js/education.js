@@ -2,14 +2,9 @@ var contextPath = "/mbti"
 	
 	$(function(){
 		//전체 선택
-		$('#check-All').click(function(){
-			$('.board-checkbox').prop('checked', this.checked);
-		});	
-
-		$('#check-All-my').click(function(){
-			$('.board-checkbox-my').prop('checked', this.checked);
-		});	
-		
+		$('.edu-check-All').click(function(){
+			$(this).parents('thead').next('tbody').find('input[type=checkbox]').prop('checked', this.checked);			
+		});		
 		
 		//교육 삭제 유효성 검사
 		$('#education-delete-button').click(function(){

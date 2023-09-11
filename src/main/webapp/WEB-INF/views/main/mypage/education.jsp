@@ -123,7 +123,7 @@
 		<table class="table" id="educationtb" style="margin-top:30px;">
 			<thead>
 				<tr class="board-table-colum">
-					<th scope="col"><input type="checkbox" id="check-All" class="board-checkbox"></th>
+					<th scope="col"><input type="checkbox" id="like-check-All" class="board-checkbox edu-check-All"></th>
 					<th scope="col">교육 이름</th>
 					<th scope="col">강사명</th>
 					<th scope="col">교육 날짜</th>
@@ -143,7 +143,7 @@
 					<c:forEach var="map" items="${likeList}">
 							<tr>
 								<th scope="row">
-									<input type="checkbox" class="board-checkbox" name="eduNo" value="${map.EDU_NO }">
+									<input type="checkbox" class="edu-like-checkbox board-checkbox" name="eduNo" value="${map.EDU_NO }">
 								</th>
 								<td>${map.EDU_NAME }</td>
 								<td>${map.EDU_TEA_NAME }</td>
@@ -166,7 +166,7 @@
 		<table class="table" id="educationtb" style="margin-top:30px;">
 			<thead>
 				<tr class="board-table-colum">
-					<th scope="col"><input type="checkbox" id="check-All" class="board-checkbox"></th>
+					<th scope="col"><input type="checkbox" id="edu-check-All" class="board-checkbox edu-check-All"></th>
 					<th scope="col">교육 이름</th>
 					<th scope="col">강사명</th>
 					<th scope="col">교육 날짜</th>
@@ -187,7 +187,7 @@
 						<c:set var="educationNo" value="${educationVo.eduAppNo}"/>
 						<tr>
 							<th scope="row">
-								<input type="checkbox" class="board-checkbox" name="eduAppNo" value="${educationVo.eduAppNo }">
+								<input type="checkbox" class="edu-checkbox board-checkbox" name="eduAppNo" value="${educationVo.eduAppNo }">
 							</th>
 							<td>${educationVo.eduName }</td>
 							<td>${educationVo.eduTeaName }</td>
@@ -230,7 +230,7 @@
 					<c:forEach var="educationVo" items="${payList}">
 						<c:set var="educationNo" value="${educationVo.eduAppNo}"/>
 						<tr>
-							<th scope="row"><input type="checkbox" class="board-checkbox-my" name="eduAppNo" value="${educationVo.eduAppNo }"></th>
+							<th scope="row"><input type="checkbox" class="edu-checkbox-my" name="eduAppNo" value="${educationVo.eduAppNo }"></th>
 							<td id="eduName">${educationVo.eduName }</td>
 							<td>${educationVo.eduTeaName }</td>
 							<td>${educationVo.eduCom }</td>
