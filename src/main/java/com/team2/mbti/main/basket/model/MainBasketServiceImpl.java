@@ -147,7 +147,25 @@ public class MainBasketServiceImpl implements MainBasketService {
 		return mainOrderDao.selectMyCurrentOrder(ordersNo);
 	}
 
+	@Override
+	public int deleteMultiBasket(List<MainBasketVO> list) {
+		int cnt = 0;
 
+		try {
+			for (MainBasketVO vo : list) {
+				int basketNo = vo.getBasketNo();
+				if (basketNo != 0) { // 체크된 상품만 삭제
+					cnt = mainBasketDao.deleteByBasketNo(basketNo);
+				}
+			} // for
+		} catch (RuntimeException e) {
+			// 선언적 트랜잭션에서는 런타임 예외가 발생하면 롤백한다
+			e.printStackTrace();
+			cnt = -1;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly(); // 롤백하기
+		}
+		return cnt;
+	}
 	
 
 };

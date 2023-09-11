@@ -155,27 +155,17 @@ public class OrderController {
 		return "admin/order/orderDetail";
 	}
 	
-	@RequestMapping("/updateStateMulti")
-	public String updateStateMulti(@ModelAttribute SortOrderViewVOList listvo, @RequestParam(defaultValue = "")String ordersState,
+	@ResponseBody
+	@RequestMapping("/orderAjaxUpdateMulti")
+	public int orderAjaxUpdateMulti(@ModelAttribute SortOrderViewVOList listvo,
 			HttpServletRequest request, Model model) {
 		logger.info("선택한 주문 상태 수정, 파라미터 listvo={}", listvo);
-		logger.info("파라미터 ordersState={}", ordersState);
 		
 		List<SortOrderViewVO> list = listvo.getSortOrderViewItems();
-		int cnt = ordersService.updateStateMulti(list, ordersState);
+		int cnt = ordersService.updateStateMulti(list);
 		logger.info("선택한 주문 상태 수정 결과, cnt={}", cnt);
-		String msg = "", url = "/admin/order/orderList?flag=order";
 
-		if (cnt > 0) {
-			msg = "선택한 주문들의 주문상태를 수정했습니다";
-
-		} else {
-			msg = "선택한 주문들의 주문상태 수정 중 에러가 발생했습니다...";
-		}
-		model.addAttribute("msg", msg);
-		model.addAttribute("url", url);
-
-		return "common/message";
+		return cnt;
 	}
 	
 	

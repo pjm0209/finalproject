@@ -12,7 +12,7 @@
 				and ORDERS_STATE like '%' || #{keywordOrdersState} || '%'
 			</if>
 			<if test="keywordName!=null and keywordName!=''">
-				and NAME like '%' || #{keywordName!} || '%'
+				and NAME like '%' || #{keywordName} || '%'
 			</if>
 			<if test="keywordUserID!=null and keywordUserID!=''">
 				and USERID like '%' || #{keywordUserID} || '%'

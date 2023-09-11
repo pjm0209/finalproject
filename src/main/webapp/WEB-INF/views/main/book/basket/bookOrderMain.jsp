@@ -9,6 +9,24 @@
 var contextPath = "/mbti";
 	$(function(){
 		
+	 $('#allCheck').click(function(){
+	      var checked = $('#allCheck').is(':checked');
+	      
+	      if(checked){
+	         $('input:checkbox').prop('checked',true);
+	        } else{
+	            $('input:checkbox').prop('checked',false);
+	        }
+	   });
+	 $('#basket .box1 input').click(function(){
+		 var checked01 = $(this).is(':checked');
+		 if(checked01){
+			 
+		 } else{
+			 $('#allCheck').prop('checked',false);
+		 }
+	 });
+		
 		var total = 0;
 		$(".middleVal").each(function(){
 			total += parseInt($(this).text()); 
@@ -109,7 +127,6 @@ var contextPath = "/mbti";
 	});
 	
 	function qtyUpdate(basketNo, qty){
-		alert(basketNo);
 		$.ajax({
 			url: contextPath + "/main/book/basket/bookAjaxQty",
 			type:"post",
@@ -119,9 +136,10 @@ var contextPath = "/mbti";
 			},
 			success:function(result){
 				if(result > 0){
-					alert("수정 성공");	
+					console.log("삭제 성공");	
 				} else {
-					alert("수정 실패 ㅠ");
+					$('#alertModalBody').html("삭제 실패");
+					$('#alertModalBtn').trigger('click');
 				}
 			},
 			error:function(xhr, status, error){
@@ -139,10 +157,10 @@ var contextPath = "/mbti";
 			},
 			success:function(result){
 				if(result > 0){
-					alert("삭제 성공");
 					document.location.reload();
 				} else {
-					alert("삭제 실패 ㅠ");
+					$('#alertModalBody').html("삭제 실패");
+					$('#alertModalBtn').trigger('click');
 				}
 			},
 			error:function(xhr, status, error){
@@ -151,18 +169,52 @@ var contextPath = "/mbti";
 		});	
 	}
 	
+	function deleteMulti(){
+		var cnt = $('.BookInBasket input[type=checkbox]:checked').length;
+		if(cnt>=1){
+			$('#confirmModalBody').html("선택한 " + cnt + "개 목록들을 삭제할까요?");
+			$('#confirmOk').attr("onclick","deleteMultiBasket()");
+			$('#confirmModalBtn').trigger('click');	
+		} else {
+			$('#alertModalBody').html("삭제할 목록을 체크하세요.");
+			$('#alertModalBtn').trigger('click');
+		}
+		
+	}
 	
+	function deleteMultiBasket(){
+		$.ajax({
+			url:"<c:url value='/main/book/basket/bookAjaxDeleteMulti'/>",
+			type:"post",
+			dataType:"json",
+			data: $('form[name=frmBasket]').serializeArray(), // 입력 양식의 내용을 객체로 만든다
+			success:function(result){
+				if(result > 0){
+					$('#alertModalBody').html("삭제 성공");
+					$('#alertModalBtn').trigger('click');
+					document.location.reload();
+				} else {
+					$('#alertModalBody').html("삭제 실패");
+					$('#alertModalBtn').trigger('click');
+				}
+			},
+			error:function(xhr, status, error){
+				$('#alertModalBody').html(xhr + status + error);
+				$('#alertModalBtn').trigger('click');
+			}
+		});//ajax
+	}
 </script>
 
 <div style="background: white;margin: 0 30px;" class="">
 <div class="check_box flex">
 	<div class="inner flex">
 		<div class="check_all flex">
-			<input type="checkbox" id="check">
+			<input type="checkbox" id="allCheck">
 			<label for="check"> 전체선택 </label>
 		</div>
 		<div class="check_remove">
-			<a href="javascript:void(0);">전체삭제</a>
+			<a href="javascript:void(0);" onclick="deleteMulti()">선택 삭제</a>
 		</div>
 	</div>
 </div>
@@ -183,14 +235,25 @@ var contextPath = "/mbti";
 	</c:if>
 	<c:if test="${!empty mapList }">
 		<ul class="list">
+			<form name="frmBasket">
+			<c:set var="i" value="0"/>
 			<c:forEach var="map" items="${mapList}">
 				<li class="flex BookInBasket">
 					<div class="flex box1">
+<<<<<<< HEAD
+						<input type="checkbox" name="mainBasketItems[${i}].basketNo" value="${map['BASKET_NO']}">
+=======
 					<c:set var="idx" value="0"/>
 						<input type="checkbox">
+>>>>>>> branch 'main' of https://github.com/pjm0209/finalproject.git
 						<div class="flex">
+<<<<<<< HEAD
+							<input name="basketNo" type="hidden" value="${map['BASKET_NO']}">
+							<input type="hidden" name="no" value="${map['NO']}">
+=======
 							<input name="bookItem[${idx}].basketNo" type="hidden" value="${map['BASKET_NO']}">
 							<input type="hidden" value="${map['NO']}">
+>>>>>>> branch 'main' of https://github.com/pjm0209/finalproject.git
 							<img src="<c:url value='/images/bookProduct/upload_img/${map["BOOK_IMG_NAME"]}'/>" alt="${map['BOOK_IMG_ORIGINALNAME']}" width="140px;"
 							style="vertical-align: middle;">
 							<P class="bookPrice">${map['BOOK_TITLE']}<span>${map['BOOK_PRICE']}원</span></P>
@@ -210,8 +273,14 @@ var contextPath = "/mbti";
 						</div>
 					</div>
 				</li>
+<<<<<<< HEAD
+				<c:set var="i" value="${i+1}"/>
+			</c:forEach>
+			</form> 
+=======
 				<c:set var="idx" value="${idx+1}"/>
 			</c:forEach> 
+>>>>>>> branch 'main' of https://github.com/pjm0209/finalproject.git
 		</ul>
 	</c:if>
 </section>
@@ -232,32 +301,31 @@ var contextPath = "/mbti";
 		</li>
 	</ul>
 	<div class="booklist_area">
+		<ul>
+			<li class="flex">
+				<p>상품금액</p>
+				<p ><span  id="totalPriceSpan">0</span>원</p>
+			</li>
+			<li class="flex">
+				<p>배송비</p>
+				<INPUT name="delivery" type="hidden" value="${DELIVERY}"/>
+				<INPUT name="limit" type="hidden" value="${TOTAL_PRICE}"/>
+				<p><span id="delTax">0</span>원</p>
+			</li>
+		</ul>
+		<hr>
+		<ul>
+			<li class="flex">
+				<p>총 금액</p>
+				<p><span id="totalPrice">0</span>원</p>
+			</li>
 			
-				<ul>
-					<li class="flex">
-						<p>상품금액</p>
-						<p ><span  id="totalPriceSpan">0</span>원</p>
-					</li>
-					<li class="flex">
-						<p>배송비</p>
-						<INPUT name="delivery" type="hidden" value="${DELIVERY}"/>
-						<INPUT name="limit" type="hidden" value="${TOTAL_PRICE}"/>
-						<p><span id="delTax">0</span>원</p>
-					</li>
-				</ul>
-				<hr>
-				<ul>
-					<li class="flex">
-						<p>총 금액</p>
-						<p><span id="totalPrice">0</span>원</p>
-					</li>
-					
-				</ul>
-				
-				<button type="buttom" 
-					onclick="location.href='<c:url value="/main/book/basket/bookOrdering"/>'">
-				주문하기</button>
-		</div>
+		</ul>
+		
+		<button type="buttom" 
+			onclick="location.href='<c:url value="/main/book/basket/bookOrdering"/>'">
+		주문하기</button>
+	</div>
 </section>
 
 </div>

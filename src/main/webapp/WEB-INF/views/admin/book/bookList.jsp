@@ -308,7 +308,7 @@
 		<button id="toggleBtn" class="btn btn-warning bg-gradient-secondary book-button"
 			 type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
 			  aria-expanded="false" aria-controls="collapseExample">검색창 열기</button>
-		<c:if test="${param.bookFlag == 'Inventory' or param.bookFlag == 'InventoryByKeyword'}">
+		<%-- <c:if test="${param.bookFlag == 'Inventory' or param.bookFlag == 'InventoryByKeyword'}">
 			<h5>상품 재고 관리</h5>
 			<button class="btn btn-warning bg-gradient-secondary book-button"  
 			 id="bookQtyBatchInit" onclick="qtyUpdate()" data-bs-toggle="modal" data-bs-target="#exampleModal">재고 일괄 초기화</button>
@@ -337,7 +337,7 @@
 			    </div>
 			  </div>
 			</div>
-		</c:if>
+		</c:if> --%>
 			
 	</div>
 	<!--  -->

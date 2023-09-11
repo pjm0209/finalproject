@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team2.mbti.common.ConstUtil;
+import com.team2.mbti.main.basket.model.MainBasketListVO;
 import com.team2.mbti.main.basket.model.MainBasketService;
 import com.team2.mbti.main.basket.model.MainBasketVO;
 import com.team2.mbti.main.book.model.MainBookVO;
@@ -84,6 +85,27 @@ public class MainBasketController {
 		logger.info("장바구니 삭제 처리 결과, cnt={}", cnt);
 		//3
 		//4
+		return cnt;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/bookAjaxDeleteMulti")
+	public int bookAjaxDeleteMulti(@ModelAttribute MainBasketListVO mblistvo,
+			 Model model) {
+		// 1
+		logger.info("장바구니 책 삭제, 파라미터 mblistvo={}", mblistvo);
+		
+		// 2. db
+		List<MainBasketVO> list = mblistvo.getMainBasketItems();
+		int cnt = mainBasketService.deleteMultiBasket(list);
+		logger.info("선택한 상품 삭제 결과, cnt={}", cnt);
+		String msg = "", url = "/admin/book/bookList?bookFlag=bookList";
+
+		// 3
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+
+		// 4
 		return cnt;
 	}
 	
