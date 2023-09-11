@@ -19,3 +19,7 @@ button {
 button * {
 	cursor: pointer;
 }
+
+input[type=password] {
+	cursor: initial;
+}
