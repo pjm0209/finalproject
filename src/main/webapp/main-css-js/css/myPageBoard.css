@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+th {
+    text-align: center;
+}
+
 .background {
     background: white;
     margin: 10px 10px 0 250px;
