@@ -57,7 +57,7 @@
 							</select>
 						</c:if>
 						<c:if test="${!empty param.boardFormNo and param.boardFormNo != 1 and param.boardFormNo != 2 }">
-							<button type="button" class="boardWriteBtn">
+							<button type="button" class="boardWriteBtn bg-orange-primary">
 								<span class="boardWrite">게시글작성</span>
 							</button>
 						</c:if>

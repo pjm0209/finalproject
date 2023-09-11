@@ -49,9 +49,9 @@
 	<!-- Custom styles for this template-->
 	<link href="<c:url value='/admin-css-js/css/board.css'/>" rel="stylesheet" type="text/css">
 	<link href="<c:url value='/admin-css-js/css/boardCreate.css'/>" rel="stylesheet" type="text/css">
+	<link href="<c:url value='/admin-css-js/css/sb-admin-2.css'/>" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="<c:url value='/main-css-js/css/board.css'/>">
 	<link href="<c:url value='/main-css-js/css/main.css'/>" rel="stylesheet" type="text/css">
-	<link href="<c:url value='/admin-css-js/css/sb-admin-2.css'/>" rel="stylesheet">
 	<link href="<c:url value='/admin-css-js/css/mbti.css'/>" rel="stylesheet">
 	<link href="<c:url value='/admin-css-js/css/education.css'/>" rel="stylesheet" type="text/css">
 	<link href="<c:url value='/admin-css-js/css/book-order.css'/>" rel="stylesheet" type="text/css">
