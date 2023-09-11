@@ -24,4 +24,5 @@ public interface MainBasketService {
 	int insertOrdersAndEditOthers(List<Map<String, Object>> list);
 	
 	List<Map<String, Object>> selectMyCurrentOrder(int ordersNo);
+	int deleteMultiBasket(List<MainBasketVO> list);
 }//

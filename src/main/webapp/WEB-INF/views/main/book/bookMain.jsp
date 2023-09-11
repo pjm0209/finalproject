@@ -27,7 +27,8 @@ function sendSearchKeyword(){
 	var searchKeyword = $("input[name=inputKeyword]").val();
 	if(searchKeyword == null || searchKeyword == ''){
 		$("#searchKeyword").val("");
-		alert("검색어를 입력하세요");
+		$('#alertModalBody').html("검색어를 입력하세요.");
+		$('#alertModalBtn').trigger('click');
 		return false;
 	}
 	$("#searchKeyword").val(searchKeyword);
@@ -38,7 +39,6 @@ var contextPath = "/mbti";
 
 function ajaxInsertCart(element){
 	var bookNo = $(element).parent().find('input[type=hidden]').val();
-	alert(bookNo);
 	$.ajax({
 		url: contextPath + "/main/book/basket/mainAjaxInsertBasket",
 		type:"post",

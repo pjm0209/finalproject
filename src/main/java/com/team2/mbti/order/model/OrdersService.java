@@ -11,5 +11,5 @@ public interface OrdersService {
 	
 	List<Map<String, Object>> selectOrdersByNo(int ordersNo);
 	int updateAjaxRecipient(OrderVO vo);
-	int updateStateMulti(List<SortOrderViewVO> list, String ordersState);
+	int updateStateMulti(List<SortOrderViewVO> list);
 }//
