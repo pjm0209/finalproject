@@ -18,20 +18,20 @@
 			});
 		});
 	});
-	
+
 	//결제하기 버튼
 	var id=0;
-	
+
 	function requestPay() {
 	    // IMP.request_pay(param, callback) 결제창 호출
 	    var login= "${sessionScope.userid}";
 	    var name=$('input[type=checkbox]:checked:not(#check-All-my)').parent().parent().find('#eduName').html();
 	    var price=$('input[type=checkbox]:checked:not(#check-All-my)').parent().parent().parent().find('input[name=eduPrice]').val();
-	    
+
 	    var eduAppNo = $('#edu-pay-tb').find('input[type=checkbox]:checked').val();
-	    
+
 		var count = $('input[type=checkbox]:checked').length;
-		
+
 		if($('input[type=checkbox]:checked').length>1){
 			$('#alertModalBody').html("결제할 교육을 하나만 선택하세요.");
 			$('#alertModalBtn').trigger('click');
@@ -58,7 +58,7 @@
 		        buyer_name : "이름",
 		        buyer_tel : "전화번호",
 		    }, function (rsp) { // callback
-		    	
+
 		    	if(rsp.success) {
 		    		$.ajax({
 		    			url:"/mbti/main/mypage/payAjax",
@@ -123,7 +123,7 @@
 		<table class="table" id="educationtb" style="margin-top:30px;">
 			<thead>
 				<tr class="board-table-colum">
-					<th scope="col"><input type="checkbox" id="check-All" class="board-checkbox"></th>
+					<th scope="col"><input type="checkbox" id="check-All2" class="board-checkbox"></th>
 					<th scope="col">교육 이름</th>
 					<th scope="col">강사명</th>
 					<th scope="col">교육 날짜</th>
@@ -142,7 +142,7 @@
 					<c:set var="idx" value="0"/>
 					<c:forEach var="map" items="${likeList}">
 							<tr>
-								<th scope="row">
+								<th scope="row" class="check">
 									<input type="checkbox" class="board-checkbox" name="eduNo" value="${map.EDU_NO }">
 								</th>
 								<td>${map.EDU_NAME }</td>
@@ -166,7 +166,7 @@
 		<table class="table" id="educationtb" style="margin-top:30px;">
 			<thead>
 				<tr class="board-table-colum">
-					<th scope="col"><input type="checkbox" id="check-All" class="board-checkbox"></th>
+					<th scope="col"><input type="checkbox"  id="check-All" class="board-checkbox"></th>
 					<th scope="col">교육 이름</th>
 					<th scope="col">강사명</th>
 					<th scope="col">교육 날짜</th>
@@ -186,7 +186,7 @@
 					<c:forEach var="educationVo" items="${list}">
 						<c:set var="educationNo" value="${educationVo.eduAppNo}"/>
 						<tr>
-							<th scope="row">
+							<th scope="row" class="check">
 								<input type="checkbox" class="board-checkbox" name="eduAppNo" value="${educationVo.eduAppNo }">
 							</th>
 							<td>${educationVo.eduName }</td>
@@ -230,7 +230,7 @@
 					<c:forEach var="educationVo" items="${payList}">
 						<c:set var="educationNo" value="${educationVo.eduAppNo}"/>
 						<tr>
-							<th scope="row"><input type="checkbox" class="board-checkbox-my" name="eduAppNo" value="${educationVo.eduAppNo }"></th>
+							<th scope="row" class="check"><input type="checkbox" class="board-checkbox-my" name="eduAppNo" value="${educationVo.eduAppNo }"></th>
 							<td id="eduName">${educationVo.eduName }</td>
 							<td>${educationVo.eduTeaName }</td>
 							<td>${educationVo.eduCom }</td>

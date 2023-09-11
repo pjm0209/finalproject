@@ -398,6 +398,10 @@ section#myEduPage {
     height: 20px;
 }
 
+th.check{
+	text-align: center;
+}
+
 .board-checkbox-my {
 	width: 20px;
     height: 20px;
