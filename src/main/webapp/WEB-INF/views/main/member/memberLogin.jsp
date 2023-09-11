@@ -24,13 +24,15 @@ section{
     margin-top: 40px;
     background-color: orange;
 }
-.form{
+.form {
     position: absolute;
     max-width: 430px;
     width: 100%;
     padding: 30px;
     border-radius: 6px;
     background: #FFF;
+    margin-top: 180px;
+    margin-bottom: 150px;
 }
 .form.signup{
     opacity: 0;
