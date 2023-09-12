@@ -240,20 +240,9 @@ var contextPath = "/mbti";
 			<c:forEach var="map" items="${mapList}">
 				<li class="flex BookInBasket">
 					<div class="flex box1">
-<<<<<<< HEAD
 						<input type="checkbox" name="mainBasketItems[${i}].basketNo" value="${map['BASKET_NO']}">
-=======
 					<c:set var="idx" value="0"/>
 						<input type="checkbox">
->>>>>>> branch 'main' of https://github.com/pjm0209/finalproject.git
-						<div class="flex">
-<<<<<<< HEAD
-							<input name="basketNo" type="hidden" value="${map['BASKET_NO']}">
-							<input type="hidden" name="no" value="${map['NO']}">
-=======
-							<input name="bookItem[${idx}].basketNo" type="hidden" value="${map['BASKET_NO']}">
-							<input type="hidden" value="${map['NO']}">
->>>>>>> branch 'main' of https://github.com/pjm0209/finalproject.git
 							<img src="<c:url value='/images/bookProduct/upload_img/${map["BOOK_IMG_NAME"]}'/>" alt="${map['BOOK_IMG_ORIGINALNAME']}" width="140px;"
 							style="vertical-align: middle;">
 							<P class="bookPrice">${map['BOOK_TITLE']}<span>${map['BOOK_PRICE']}원</span></P>
@@ -273,14 +262,9 @@ var contextPath = "/mbti";
 						</div>
 					</div>
 				</li>
-<<<<<<< HEAD
 				<c:set var="i" value="${i+1}"/>
 			</c:forEach>
 			</form> 
-=======
-				<c:set var="idx" value="${idx+1}"/>
-			</c:forEach> 
->>>>>>> branch 'main' of https://github.com/pjm0209/finalproject.git
 		</ul>
 	</c:if>
 </section>

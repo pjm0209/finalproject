@@ -53,7 +53,7 @@
 			<ul>
 				<c:forEach var="map" items="${list}">
 					<li class="flex list">
-						<img alt="${map.BOOK_IMG_ORIGINALNAME}" src="http://localhost:9091/mbti/images/bookProduct/upload_img/${map.BOOK_IMG_NAME}">
+						<img alt="${map.BOOK_IMG_ORIGINALNAME}" src="<c: value='/mbti/images/bookProduct/upload_img/${map.BOOK_IMG_NAME}'/> ">
 						<div class="text_box">
 						<p><span>${map.BOOK_PRICE}</span>원</p>
 						<p><span>${map.BOOK_TITLE}</span> &middot; <span>${map.ORDERS_QTY}</span>개</p>

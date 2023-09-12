@@ -52,7 +52,8 @@ public class MainBasketController {
 
 		String resultPage = "";
 		if (mode.equals("cart")) { // 장바구니 담기
-			resultPage = "redirect:/main/book/basket/bookOrderMain";
+			/* resultPage = "redirect:/main/book/basket/bookOrderMain"; */
+			resultPage = "redirect:/mbti/main/mypage/mypageBasket";
 		} else if (mode.equals("order")) { // 바로 구매
 			resultPage = "redirect:/main/book/basket/bookOrdering";
 		}

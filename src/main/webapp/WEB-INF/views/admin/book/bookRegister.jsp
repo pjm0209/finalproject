@@ -227,7 +227,7 @@ function deleteImageAction(index){
 					<p id="output"></p> -->
 					<!-- <input id="myfiles" type="file" style="margin-bottom: 1em;" multiple="multiple" onchange="readURL(this);"> -->
 					<!-- <a href="javascript:" onclick="fileUploadAction();" class="my_button">파일업로드</a> -->
-					<input class="form-control" type="file" id="upfile" name="upfile" multiple="multiple" onclick="deleteImageAction(-1)">
+					<input class="form-control" type="file" id="upfile" name="upfile" multiple="multiple" onclick="deleteImageAction(-1)" value="${vo.bookImgName}">
 					<p id="output"></p>
 					<div class="imgs_wrap">
 						<label id="imgLb" class="" for="preview" style="margin-left: -240px">
