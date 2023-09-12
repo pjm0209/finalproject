@@ -97,7 +97,7 @@ $('#managerTel').on('input', function() {
              <td style="width:100px;" colspan="2" class="td1"><h6>관리자 번호</h6></td>
              <td>
                  <div style="display: flex;">
-                    <span>${adminvo.adminNo }</span> 
+                    <input type="text" name="adminNo" value="${adminvo.adminNo }" readonly="readonly"/>
                  </div>                      
              </td>
          </tr>      
@@ -105,7 +105,7 @@ $('#managerTel').on('input', function() {
              <td style="width:100px;" colspan="2" class="td1"><h6>아이디</h6></td>
              <td>
                  <div style="display: flex;">
-                    <span>${adminvo.adminId }</span> 
+                 	<input type="text" name="adminId" value="${adminvo.adminId }" readonly="readonly"/>
                  </div>                      
              </td>
          </tr>

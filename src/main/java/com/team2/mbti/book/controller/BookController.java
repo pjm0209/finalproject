@@ -442,11 +442,12 @@ public class BookController {
 
       List<Map<String, Object>> bookList = bookService.selectBookByNo2();
       
-      Workbook workbook = new XSSFWorkbook();
+      Workbook workbook= new XSSFWorkbook();
+      logger.info("뭐야 왜안돼2");
       Sheet sheet = workbook.createSheet("Sheet1"); // 엑셀 sheet 이름
-      
+      logger.info("뭐야 왜안돼3");
       // 컬럼 셋팅
-      Row headerRow = ((org.apache.poi.ss.usermodel.Sheet) sheet).createRow(0);
+      Row headerRow = sheet.createRow(0);
       headerRow.createCell(4).setCellValue("상품 코드");
       headerRow.createCell(5).setCellValue("상품명");
       headerRow.createCell(6).setCellValue("카테고리");

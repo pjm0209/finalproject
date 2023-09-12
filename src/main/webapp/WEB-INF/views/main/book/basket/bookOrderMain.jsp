@@ -241,8 +241,9 @@ var contextPath = "/mbti";
 				<li class="flex BookInBasket">
 					<div class="flex box1">
 						<input type="checkbox" name="mainBasketItems[${i}].basketNo" value="${map['BASKET_NO']}">
-					<c:set var="idx" value="0"/>
-						<input type="checkbox">
+					<div class="flex">
+							<input name="basketNo" type="hidden" value="${map['BASKET_NO']}">
+							<input type="hidden" name="no" value="${map['NO']}">
 							<img src="<c:url value='/images/bookProduct/upload_img/${map["BOOK_IMG_NAME"]}'/>" alt="${map['BOOK_IMG_ORIGINALNAME']}" width="140px;"
 							style="vertical-align: middle;">
 							<P class="bookPrice">${map['BOOK_TITLE']}<span>${map['BOOK_PRICE']}원</span></P>

@@ -49,7 +49,7 @@ label{
     margin-bottom: 30px;
 }
 
-#btnSearch2{
+#btnSearch{
   	width: 180px;
  	height: 50px;
 	font-weight: bold;	
@@ -75,9 +75,8 @@ label{
         }); 
              	
         $('#btnSearch').click(function(e) {
-            e.preventDefault(); 
 
-            var name = $('#name2').val();
+            var name = $('#name').val();
             var email = $('#email').val();
 
             if (name.trim() === '') {
@@ -95,35 +94,16 @@ label{
                 $('#email').focus();
                 return false;
             }
-            
-            window.location.href = '<c:url value="/main/member/findIdResult"/>';
         });
         
-        // 서버로 데이터 전송
-        $.ajax({
-            type: "POST",
-            url: "<c:url value='main/member/forgot-id'/>",
-            data: {
-                name: name,
-                tel: tel
-            },
-            success: function(response) {
-                // 서버로부터의 응답 처리
-                console.log("데이터 전송 성공:", response);
-                // 원하는 처리를 여기에 추가
-            },
-            error: function(xhr, status, error) {
-                console.log("데이터 전송 실패:", error);
-            }
-        });
     });   
 </script>
 
 <div class="content">
 <h1 class="title">아이디 찾기</h1>	  
-	<form name = "form-find-id-tel" method="post" action="<c:url value='/main/member/forgot-id'/>">	
-		<div class="tab-content active">													
-		</div>	
+		<form name = "form-find-id-tel" method="post" action="<c:url value='/main/member/forgot-id'/>">	
+			<div class="tab-content active">													
+			</div>	
 		</form>		
 		<form name = "form-find-id" method="post" action="<c:url value='/main/member/findIdResult'/>">		
 			<p class='p'>회원가입 시 입력한 이메일을 입력하시면 아이디를 찾을 수 있습니다.</p>	
@@ -138,10 +118,10 @@ label{
 				</div><br>
 													
 				<div class="btnSearch2"><br>
-					<button class="btn btn-primary" type="submit" id="btnSearch2">찾기</button>	
+					<button class="btn btn-primary" type="submit" id="btnSearch">찾기</button>	
 					<button class="btn btn-info" type="button" id="btnCancel2">취소</button>					
 				</div>
-	</form>    
+		</form>    
 </div>				
 
     <button type="button" style="display: none" id="alertModalBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#alertModal"></button>

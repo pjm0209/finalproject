@@ -512,6 +512,11 @@ ALTER TABLE QUESTION_TYPE
 		PRIMARY KEY (
 			QUESTION_TYPE_NO
 		);
+create table education_heart(
+    edu_hea_no number PRIMARY key,
+    edu_no number,
+    no number
+)
 
 /* 장바구니 */
 CREATE TABLE BASKET (
@@ -594,6 +599,26 @@ ALTER TABLE MBTI_EDUCATION
 		REFERENCES EDUCATION_TEACHER (
 			EDU_TEA_NO
 		)ON DELETE CASCADE;
+
+
+alter table education_heart
+    add
+        CONSTRAINT fk_education_heart_to_member
+        FOREIGN key (
+            no
+        )
+        REFERENCES member(
+            no
+        )ON DELETE CASCADE;
+
+alter table education_heart
+    add CONSTRAINT fk_education_heart_to_mbti_education
+    FOREIGN key (
+        edu_no
+    )
+    REFERENCES mbti_education(
+     edu_no
+    )ON DELETE CASCADE;
         
 ALTER TABLE SALES
 	ADD

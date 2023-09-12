@@ -37,30 +37,30 @@ public class MainBasketController {
 	private final MainOrderService mainOrderService;
 
 	@RequestMapping("/basketInsert")
-	public String basketInsert(@ModelAttribute MainBasketVO basketVo,
-			@RequestParam String mode,HttpServletRequest request) {
+	   public String basketInsert(@ModelAttribute MainBasketVO basketVo,
+	         @RequestParam String mode,HttpServletRequest request) {
 
-		//String no = (String) session.getAttribute("no");
-		int no = (int)request.getSession().getAttribute("no");		
-		basketVo.setNo(no);
+	      //String no = (String) session.getAttribute("no");
+	      int no = (int)request.getSession().getAttribute("no");      
+	      basketVo.setNo(no);
 
-		logger.info("책 메인 페이지 - 장바구니 insert 처리하기");
-		logger.info("장바구니 담기, 파라미터 basketVo={}, mode={}", basketVo, mode);
+	      logger.info("책 메인 페이지 - 장바구니 insert 처리하기");
+	      logger.info("장바구니 담기, 파라미터 basketVo={}, mode={}", basketVo, mode);
 
-		int cnt = mainBasketService.insertBasket(basketVo);
-		logger.info("장바구니 담기 결과, cnt={}", cnt);
+	      int cnt = mainBasketService.insertBasket(basketVo);
+	      logger.info("장바구니 담기 결과, cnt={}", cnt);
 
-		String resultPage = "";
-		if (mode.equals("cart")) { // 장바구니 담기
-			/* resultPage = "redirect:/main/book/basket/bookOrderMain"; */
-			resultPage = "redirect:/mbti/main/mypage/mypageBasket";
-		} else if (mode.equals("order")) { // 바로 구매
-			resultPage = "redirect:/main/book/basket/bookOrdering";
-		}
+	      String resultPage = "";
+	      if (mode.equals("cart")) { // 장바구니 담기
+	         /* resultPage = "redirect:/main/book/basket/bookOrderMain"; */
+	         resultPage = "redirect:/main/mypage/mypageBasket";
+	      } else if (mode.equals("order")) { // 바로 구매
+	         resultPage = "redirect:/main/book/basket/bookOrdering";
+	      }
 
-		return resultPage;
+	      return resultPage;
 
-	}
+	   }
 
 
 	@ResponseBody

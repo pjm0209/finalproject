@@ -3,14 +3,18 @@ var contextPath = "/mbti"
 	$(function(){
 		//전체 선택
 		$('#check-All').click(function(){
-			$('.board-checkbox').prop('checked', this.checked);
+			$(this).parent().parent().parent().parent().find('input[type=checkbox]').prop('checked', this.checked);
 		});	
+		
+		$('#check-All2').click(function(){
+			$(this).parent().parent().parent().parent().find('input[type=checkbox]').prop('checked', this.checked);
+		});	
+		
 
 		$('#check-All-my').click(function(){
 			$('.board-checkbox-my').prop('checked', this.checked);
 		});	
-		
-		
+
 		//교육 삭제 유효성 검사
 		$('#education-delete-button').click(function(){
 			var count = $('input[type=checkbox]:checked').length;
@@ -79,7 +83,6 @@ var contextPath = "/mbti"
 			
 		});	
 		
-		
 		//교육 수정
 		$('#education-edit-button').click(function(){
 			if($('input[type=checkbox]:checked').length>1){
@@ -93,7 +96,7 @@ var contextPath = "/mbti"
 				$('#alertModalBtn').trigger('click');
 				return false;
 			}
-			
+
 			var no = $('input[type=checkbox]:checked').val();
 						
 			location.href= contextPath + "/admin/education/educationEdit?eduNo=" + no;
